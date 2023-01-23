@@ -57,12 +57,12 @@ jobs:
         run: |
           choco install OpenCppCoverage -y
           echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
-    
+
       - name: Generate Report
-          id: generate_test_report
-          shell: cmd
-          run: OpenCppCoverage.exe --sources SPA --export_type cobertura:SPA.xml -- "vstest.console.exe" /Platform:X86 Team18\Code18\Release\UnitTesting.dll Team18\Code18\Release\IntegrationTesting.dll
-        
+        id: generate_test_report
+        shell: cmd
+        run: OpenCppCoverage.exe --sources SPA --export_type cobertura:SPA.xml -- "vstest.console.exe" /Platform:X86 Team18\Code18\Release\UnitTesting.dll Team18\Code18\Release\IntegrationTesting.dll
+
       - name: Upload Report to Codecov
         uses: codecov/codecov-action@v2
         with:
