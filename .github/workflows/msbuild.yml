@@ -38,7 +38,7 @@ jobs:
         uses: darenm/Setup-VSTest@v1
 
       - name: Run Unit Test
-        run: vstest.console.exe /Platform:Win32 .\Team18\Code18\Debug\UnitTesting.dll
+        run: vstest.console.exe /Platform:X86 Team18\Code18\Release\UnitTesting.dll
 
       - name: Run Integration Test
-        run: vstest.console.exe /Platform:Win32 .\Team18\Code18\Debug\IntegrationTesting.dll
+        run: vstest.console.exe /Platform:X86 Team18\Code18\Release\IntegrationTesting.dll
