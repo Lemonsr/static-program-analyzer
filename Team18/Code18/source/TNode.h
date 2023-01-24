@@ -3,4 +3,4 @@
 class TNode {
  public:
 };
-#endif // TEAM18_CODE18_SOURCE_TNODE_H_
+#endif  // TEAM18_CODE18_SOURCE_TNODE_H_
