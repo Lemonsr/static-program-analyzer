@@ -23,6 +23,9 @@ jobs:
 
       - name: Super-Linter
         uses: github/super-linter@v4.10.1
+        env:
+          VALIDATE_CPP: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     runs-on: windows-latest
