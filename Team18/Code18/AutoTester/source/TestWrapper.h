@@ -15,12 +15,12 @@ class TestWrapper : public AbstractWrapper {
 
   // destructor
   ~TestWrapper();
- 
+
   // method for parsing the SIMPLE source
   virtual void parse(std::string filename);
- 
+
   // method for evaluating a query
   virtual void evaluate(std::string query, std::list<std::string>& results);
 };
 
-#endif
+#endif  // TEAM18_CODE18_AUTOTESTER_SOURCE_TESTWRAPPER_H_

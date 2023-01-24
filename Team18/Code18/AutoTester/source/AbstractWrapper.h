@@ -28,4 +28,4 @@ class WrapperFactory {
   static AbstractWrapper* wrapper;
 };
 
-#endif
+#endif  // TEAM18_CODE18_AUTOTESTER_SOURCE_ABSTRACTWRAPPER_H_
