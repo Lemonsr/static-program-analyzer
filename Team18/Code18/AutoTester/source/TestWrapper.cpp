@@ -17,12 +17,12 @@ TestWrapper::TestWrapper() {
 
 // method for parsing the SIMPLE source
 void TestWrapper::parse(std::string filename) {
-	// call your parser to do the parsing
+  // call your parser to do the parsing
   // ...rest of your code...
 }
 
 // method to evaluating a query
-void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
+void TestWrapper::evaluate(std::string query, std::list<std::string>& results) {
 // call your evaluator to evaluate the query here
   // ...code to evaluate query...
 
