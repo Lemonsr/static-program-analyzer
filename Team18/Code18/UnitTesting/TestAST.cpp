@@ -4,7 +4,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace UnitTesting {		
+namespace UnitTesting {
   TEST_CLASS(TestAST) {
   public:
     TEST_METHOD(TestMethod1) {
