@@ -53,7 +53,7 @@ struct PqlToken {
 
 class PqlTokenizer {
  public:
-  PqlTokenizer(std::string query);
+  explicit PqlTokenizer(std::string query);
   std::vector<PqlToken> tokenize();
 
  private:

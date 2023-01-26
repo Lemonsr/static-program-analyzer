@@ -9,7 +9,7 @@ struct QueryObject {
 
 class PqlParser {
  public:
-  PqlParser(std::vector<PqlToken> tokens);
+  explicit PqlParser(std::vector<PqlToken> tokens);
   QueryObject parse();
  private:
   std::vector<PqlToken> tokens;

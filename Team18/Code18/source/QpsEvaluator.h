@@ -7,7 +7,7 @@ struct QueryResult {
 
 class QpsEvaluator {
  public:
-  QpsEvaluator(QueryObject queryObject);
+  explicit QpsEvaluator(QueryObject queryObject);
   QueryResult evaluate();
  private:
   QueryObject queryObject;
