@@ -1,24 +1,24 @@
-#ifndef ABSTRACTWRAPPER_H
-#define ABSTRACTWRAPPER_H
+#ifndef TEAM18_CODE18_AUTOTESTER_SOURCE_ABSTRACTWRAPPER_H_
+#define TEAM18_CODE18_AUTOTESTER_SOURCE_ABSTRACTWRAPPER_H_
 
 #include <string>
 #include <iostream>
 #include <list>
 
 class AbstractWrapper {
-public:
+ public:
   static volatile bool GlobalStop;
   // method for parsing the SIMPLE source
   virtual void parse(std::string filename) = 0;
   // method for evaluating a query
-  virtual void evaluate(std::string query, std::list<std::string>& results) =0;
+  virtual void evaluate(std::string query, std::list<std::string>& results) = 0;
 };
 
 class WrapperFactory {
-public:
+ public:
   // static method for creating a wrapper
   static AbstractWrapper* createWrapper();
-private:
+ private:
   // the following three will prevent the creation of WrapperFactory objects
   WrapperFactory();
   WrapperFactory(const WrapperFactory&);
@@ -28,4 +28,4 @@ private:
   static AbstractWrapper* wrapper;
 };
 
-#endif
+#endif  // TEAM18_CODE18_AUTOTESTER_SOURCE_ABSTRACTWRAPPER_H_
