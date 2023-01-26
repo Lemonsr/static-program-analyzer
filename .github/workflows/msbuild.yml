@@ -20,12 +20,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Super-Linter
-        uses: github/super-linter@v4.10.1
-        env:
-          VALIDATE_CPP: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v3
+      - run: pip install cpplint
+      - run: cpplint --recursive --filter=-legal/copyright,-readability/todo,-runtime/references,-build/include_subdir .
 
   build:
     runs-on: windows-latest
