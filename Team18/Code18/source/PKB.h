@@ -19,31 +19,18 @@ class PKB {
   static TNode* getRootAST(PROC p);
 
   const VarTable& getVarTable() const;
-
   const ConstTable& getConstTable() const;
-
   const ProcTable& getProcTable() const;
-
   const FollowsTable& getFollowsTable() const;
-
   const FollowsStarTable& getFollowsStarTable() const;
-
   const ParentTable& getParentTable() const;
-
   const ParentStarTable& getParentStarTable() const;
-
   const ModifiesTable& getModifiesTable() const;
-
   const ModifiesProcTable& getModifiesProcTable() const;
-
   const UsesTable& getUsesTable() const;
-
   const UsesProcTable& getUsesProcTable() const;
-
   const AssignTable& getAssignTable() const;
-
   const StatementTypeTable& getStatementTypeTable() const;
-
   const StatementProcTable& getStatementProcTable() const;
 
   // Follows methods
