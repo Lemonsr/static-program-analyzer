@@ -1,19 +1,20 @@
 #pragma once
 
-#include<stdio.h>
+#include <stdio.h>
 #include <iostream>
 #include <string>
 #include <vector>
+#include "PKBTables.h"
 
 typedef int16_t PROC;
 
-class TNode;
+namespace spa {
+	class TNode;
 
-class VarTable;  // no need to #include "VarTable.h" as all I need is pointer
-
-class PKB {
- public:
-  static VarTable* varTable;
-  static int setProcToAST(PROC p, TNode* r);
-  static TNode* getRootAST(PROC p);
-};
+	class PKB {
+	public:
+		static VarTable* varTable;
+		static int setProcToAST(PROC p, TNode* r);
+		static TNode* getRootAST(PROC p);
+	};
+}
