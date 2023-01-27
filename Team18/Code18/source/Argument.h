@@ -7,4 +7,4 @@ namespace spa {
     VARIABLE_NAME,
     LINE_NO
   };
-} // namespace spa
+}  // namespace spa

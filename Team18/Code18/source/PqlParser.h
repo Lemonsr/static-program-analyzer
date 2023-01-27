@@ -21,7 +21,7 @@ class SuchThatClause {
 };
 
 class PatternClause {
-private:
+ private:
   PqlArgument synonym;
   PqlArgument firstArg;
   Pattern secondArg;
@@ -29,8 +29,8 @@ private:
 
 class ParsedQuery {
  public:
-   ParsedQuery();
-   void addDeclaration(std::string synonym, DesignEntityType designEntity);
+  ParsedQuery();
+  void addDeclaration(std::string synonym, DesignEntityType designEntity);
  private:
   PatternClause patternClause;
   SuchThatClause suchThatClause;
@@ -38,11 +38,11 @@ class ParsedQuery {
 };
 
 class PqlParser {
-public:
+ public:
   explicit PqlParser(Stream<Token> tokens);
   ParsedQuery parse();
-private:
+ private:
   Stream<Token> tokens;
 };
-}
+}  // namespace spa
 

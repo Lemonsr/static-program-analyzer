@@ -17,5 +17,4 @@ class QpsEvaluator {
  private:
   ParsedQuery queryObject;
 };
-}
-
+}  // namespace spa
