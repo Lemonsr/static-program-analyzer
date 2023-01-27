@@ -1,11 +1,19 @@
 #include <iostream>
 
 #include "PqlParser.h"
+#include "Token.h"
 
-PqlParser::PqlParser(std::vector<PqlToken> tokens) : tokens(tokens) {
+spa::PqlParser::PqlParser(Stream<Token> tokens) : tokens(tokens) {
 }
 
-QueryObject PqlParser::parse() {
+spa::ParsedQuery spa::PqlParser::parse() {
   std::cout << "parse" << std::endl;
-  return QueryObject{};
+  return ParsedQuery{};
+}
+
+void spa::ParsedQuery::addDeclaration(std::string synonym, DesignEntityType designEntity) {
+  if (declarations.find(synonym) != declarations.end()) {
+    throw std::runtime_error("Synonym has already been declared");
+  }
+  declarations.insert({ synonym, designEntity });
 }

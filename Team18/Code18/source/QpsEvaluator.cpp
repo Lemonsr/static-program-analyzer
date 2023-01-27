@@ -2,10 +2,10 @@
 
 #include "QpsEvaluator.h"
 
-QpsEvaluator::QpsEvaluator(QueryObject queryObject) : queryObject(queryObject) {
+spa::QpsEvaluator::QpsEvaluator(ParsedQuery queryObject) : queryObject(queryObject) {
 }
 
-QueryResult QpsEvaluator::evaluate() {
+spa::QueryResult spa::QpsEvaluator::evaluate() {
   std::cout << "evaluate" << std::endl;
   return QueryResult{};
 }

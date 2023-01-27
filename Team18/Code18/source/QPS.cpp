@@ -2,11 +2,11 @@
 
 #include "QPS.h"
 
-std::string QPS::evaluate(std::string query) {
-  QpsPreprocessor* preprocessor = new QpsPreprocessor();
-  QueryObject queryObject = preprocessor->preprocess(query);
+std::string spa::QPS::evaluate(std::string query) {
+  QpsPreprocessor* preprocessor = new spa::QpsPreprocessor();
+  ParsedQuery parsedQuery = preprocessor->preprocess(query);
 
-  QpsEvaluator* evaluator = new QpsEvaluator(queryObject);
+  QpsEvaluator* evaluator = new QpsEvaluator(parsedQuery);
   QueryResult queryResult = evaluator->evaluate();
   return "";
 }
