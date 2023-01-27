@@ -1,10 +1,9 @@
-#include "stdafx.h"
-#include "CppUnitTest.h"
-
-#include "Tokenizer.h"
-
 #include <iostream>
 #include <sstream>
+
+#include "stdafx.h"
+#include "CppUnitTest.h"
+#include "Tokenizer.h"
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
@@ -13,7 +12,8 @@ namespace UnitTesting {
         public:
         TEST_METHOD(TestTokenizerTokenize) {
             std::stringstream srcStream;
-            srcStream << "assign a;\nSelect a pattern a(\"normSq\", _\"cenX * cenX\"_)";
+            srcStream << "assign a;\n";
+            srcStream << "Select a pattern a(\"normSq\", _\"cenX * cenX\"_)";
             spa::Tokenizer tokenizer;
             spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
             bool matchResult = tokenStream.match({
@@ -41,4 +41,4 @@ namespace UnitTesting {
             Assert::IsTrue(matchResult);
         }
     };
-}
+}  // namespace UnitTesting
