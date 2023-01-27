@@ -1,15 +1,74 @@
-#include<stdio.h>
+#include "PKB.h"
+#include "PKBTypes.h"
+#include "PKBQueryTypes.h"
+#include "TNode.h"
+
+#include <stdio.h>
 #include <iostream>
 #include <string>
 #include <vector>
 
-#include "PKB.h"
-#include "TNode.h"
 
-int PKB::setProcToAST(PROC p, TNode* r) {
+int spa::PKB::setProcToAST(PROC p, TNode* r) {
   return 0;
 }
 
-TNode* PKB::getRootAST(PROC p) {
+spa::TNode* spa::PKB::getRootAST(PROC p) {
   return nullptr;
+}
+
+const spa::VarTable& spa::PKB::getVarTable() const {
+  return varTable;
+}
+
+const spa::ConstTable& spa::PKB::getConstTable() const {
+  return constTable;
+}
+
+const spa::ProcTable& spa::PKB::getProcTable() const {
+  return procTable;
+}
+
+const spa::FollowsTable& spa::PKB::getFollowsTable() const {
+  return followsTable;
+}
+
+const spa::FollowsStarTable& spa::PKB::getFollowsStarTable() const {
+  return followsStarTable;
+}
+
+const spa::ParentTable& spa::PKB::getParentTable() const {
+  return parentTable;
+}
+
+const spa::ParentStarTable& spa::PKB::getParentStarTable() const {
+  return parentStarTable;
+}
+
+const spa::ModifiesTable& spa::PKB::getModifiesTable() const {
+  return modifiesTable;
+}
+
+const spa::ModifiesProcTable& spa::PKB::getModifiesProcTable() const {
+  return modifiesProcTable;
+}
+
+const spa::UsesTable& spa::PKB::getUsesTable() const {
+  return usesTable;
+}
+
+const spa::UsesProcTable& spa::PKB::getUsesProcTable() const {
+    return usesProcTable;
+}
+
+const spa::AssignTable& spa::PKB::getAssignTable() const {
+  return assignTable;
+}
+
+const spa::StatementTypeTable& spa::PKB::getStatementTypeTable() const {
+    return statementTypeTable;
+}
+
+const spa::StatementProcTable& spa::PKB::getStatementProcTable() const {
+    return statementProcTable;
 }
