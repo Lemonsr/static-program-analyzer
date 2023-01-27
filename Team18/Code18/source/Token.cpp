@@ -1,8 +1,9 @@
-#include "token.h"
+#include "Token.h"
 
 #include <string>
 
-spa::Token::Token(TokenType type, std::string value) : type(type), value(value) {
+spa::Token::Token(TokenType type, std::string value) : type(type),
+                                                       value(value) {
 }
 
 spa::Token::Token(TokenType type, char c) : type(type), value(1, c) {
