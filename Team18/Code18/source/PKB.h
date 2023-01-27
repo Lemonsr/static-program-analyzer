@@ -9,12 +9,12 @@
 typedef int16_t PROC;
 
 namespace spa {
-	class TNode;
+class TNode;
 
-	class PKB {
-	public:
-		static VarTable* varTable;
-		static int setProcToAST(PROC p, TNode* r);
-		static TNode* getRootAST(PROC p);
-	};
-}
+class PKB {
+ public:
+    static VarTable* varTable;
+    static int setProcToAST(PROC p, TNode* r);
+    static TNode* getRootAST(PROC p);
+};
+} // namespace spa
