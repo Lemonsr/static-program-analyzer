@@ -6,25 +6,25 @@
 
 namespace spa {
 struct Variable {
-    VarName varName;
+  VarName varName;
 };
 
 struct Statement {
-    StatementType statementType;
+  StatementType statementType;
 };
 
 struct Procedure {
-    ProcName procName;
+  ProcName procName;
 };
 
 struct LineNumber {
-    LineNo lineNo;
+  LineNo lineNo;
 };
 
 // Procedure / Variable name
 struct Name {
-    std::string name;
+  std::string name;
 };
 
 struct Underscore { };
-} // namespace spa
+}  // namespace spa

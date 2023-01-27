@@ -13,8 +13,8 @@ class TNode;
 
 class PKB {
  public:
-    static VarTable* varTable;
-    static int setProcToAST(PROC p, TNode* r);
-    static TNode* getRootAST(PROC p);
+  static VarTable* varTable;
+  static int setProcToAST(PROC p, TNode* r);
+  static TNode* getRootAST(PROC p);
 };
-} // namespace spa
+}  // namespace spa

@@ -42,4 +42,4 @@ using UsesProcTable = std::vector<std::pair<ProcName, VarName>>;
 using AssignTable = std::vector<std::pair<LineNo, Assignment>>;
 using StatementTypeTable = std::vector<std::pair<LineNo, StatementType>>;
 using StatementProcTable = std::vector<std::pair<LineNo, ProcName>>;
-} // namespace spa
+}  // namespace spa
