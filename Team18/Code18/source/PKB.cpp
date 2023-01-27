@@ -1,7 +1,6 @@
 #include "PKB.h"
 #include "PKBTypes.h"
 #include "PKBQueryTypes.h"
-#include "PKBTables.h"
 #include "TNode.h"
 
 #include <stdio.h>
@@ -18,61 +17,58 @@ spa::TNode* spa::PKB::getRootAST(PROC p) {
   return nullptr;
 }
 
-class Pkb : public spa::PKBTables {
- public:
-  const spa::VarTable& Pkb::getVarTable() const {
-    return this->varTable;
-  }
+const spa::VarTable& spa::PKB::getVarTable() const {
+  return varTable;
+}
 
-  const spa::ConstTable& Pkb::getConstTable() const {
-    return this->constTable;
-  }
+const spa::ConstTable& spa::PKB::getConstTable() const {
+  return constTable;
+}
 
-  const spa::ProcTable& Pkb::getProcTable() const {
-    return this->procTable;
-  }
+const spa::ProcTable& spa::PKB::getProcTable() const {
+  return procTable;
+}
 
-  const spa::FollowsTable& Pkb::getFollowsTable() const {
-    return this->followsTable;
-  }
+const spa::FollowsTable& spa::PKB::getFollowsTable() const {
+  return followsTable;
+}
 
-  const spa::FollowsStarTable& Pkb::getFollowsStarTable() const {
-    return this->followsStarTable;
-  }
+const spa::FollowsStarTable& spa::PKB::getFollowsStarTable() const {
+  return followsStarTable;
+}
 
-  const spa::ParentTable& Pkb::getParentTable() const {
-    return this->parentTable;
-  }
+const spa::ParentTable& spa::PKB::getParentTable() const {
+  return parentTable;
+}
 
-  const spa::ParentStarTable& Pkb::getParentStarTable() const {
-    return this->parentStarTable;
-  }
+const spa::ParentStarTable& spa::PKB::getParentStarTable() const {
+  return parentStarTable;
+}
 
-  const spa::ModifiesTable& Pkb::getModifiesTable() const {
-    return this->modifiesTable;
-  }
+const spa::ModifiesTable& spa::PKB::getModifiesTable() const {
+  return modifiesTable;
+}
 
-  const spa::ModifiesProcTable& Pkb::getModifiesProcTable() const {
-    return this->modifiesProcTable;
-  }
+const spa::ModifiesProcTable& spa::PKB::getModifiesProcTable() const {
+  return modifiesProcTable;
+}
 
-  const spa::UsesTable& Pkb::getUsesTable() const {
-    return this->usesTable;
-  }
+const spa::UsesTable& spa::PKB::getUsesTable() const {
+  return usesTable;
+}
 
-  const spa::UsesProcTable& Pkb::getUsesProcTable() const {
-     return this->usesProcTable;
-  }
+const spa::UsesProcTable& spa::PKB::getUsesProcTable() const {
+    return usesProcTable;
+}
 
-  const spa::AssignTable& Pkb::getAssignTable() const {
-    return this->assignTable;
-  }
+const spa::AssignTable& spa::PKB::getAssignTable() const {
+  return assignTable;
+}
 
-  const spa::StatementTypeTable& Pkb::getStatementTypeTable() const {
-     return this->statementTypeTable;
-  }
+const spa::StatementTypeTable& spa::PKB::getStatementTypeTable() const {
+    return statementTypeTable;
+}
 
-  const spa::StatementProcTable& Pkb::getStatementProcTable() const {
-     return this->statementProcTable;
-  }
-};
+const spa::StatementProcTable& spa::PKB::getStatementProcTable() const {
+    return statementProcTable;
+}

@@ -3,23 +3,18 @@
 #include "PKBTypes.h"
 
 #include <string>
+#include <optional>
 
 namespace spa {
-struct Variable {
-  VarName varName;
-};
+struct Variable { };
 
 struct Statement {
-  StatementType statementType;
+  std::optional<StatementType> statementType;
 };
 
-struct Procedure {
-  ProcName procName;
-};
+struct Procedure { };
 
-struct LineNumber {
-  LineNo lineNo;
-};
+struct LineNumber { };
 
 // Procedure / Variable name
 struct Name {
