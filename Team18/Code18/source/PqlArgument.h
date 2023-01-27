@@ -11,7 +11,7 @@ class PqlArgument {
   std::string value;
  public:
   PqlArgument(ArgumentType type, std::string value);
-  const PqlArgument& getType();
+  const ArgumentType& getType();
   const std::string& getValue();
 
   friend bool operator==(const PqlArgument& p1, const PqlArgument& p2);
