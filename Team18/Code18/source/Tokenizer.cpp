@@ -32,7 +32,7 @@ std::unordered_map<std::string, spa::TokenType> tokenTypes {
     {"||", spa::TOKEN_BOOL_OR},
     {",", spa::TOKEN_COMMA},
     {"_", spa::TOKEN_UNDERSCORE},
-    {"\"", spa::TOKEN_INVERTED_COMMA}
+    {"\"", spa::TOKEN_DOUBLE_QUOTES}
 };
 
 void pushWordToken(spa::Stream<spa::Token>& tokens, std::string& word) {

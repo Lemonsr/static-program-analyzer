@@ -28,7 +28,7 @@ namespace spa {
         TOKEN_BOOL_OR,
         TOKEN_COMMA,
         TOKEN_UNDERSCORE,
-        TOKEN_INVERTED_COMMA
+        TOKEN_DOUBLE_QUOTES
     };
 
     class Token;
