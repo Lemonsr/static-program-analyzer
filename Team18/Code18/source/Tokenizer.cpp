@@ -35,14 +35,14 @@ const std::unordered_map<std::string, spa::TokenType> tokenTypes {
     {"\"", spa::TOKEN_DOUBLE_QUOTES}
 };
 
-void spa::Tokenizer::pushWordToken(spa::Stream<spa::Token>& tokens, std::string& word) {
+void spa::Tokenizer::pushWordToken(spa::Stream<spa::Token>& tokens,
+                                   std::string& word) {
     if (word.empty()) {
         return;
     }
     if (std::isalpha(word[0])) {
         tokens.pushBack({ spa::TOKEN_NAME, word });
-    }
-    else {
+    } else {
         for (char c : word) {
             if (!std::isdigit(c)) {
                 throw std::runtime_error("Invalid name in SIMPLE code");
@@ -53,11 +53,13 @@ void spa::Tokenizer::pushWordToken(spa::Stream<spa::Token>& tokens, std::string&
     word.clear();
 }
 
-void spa::Tokenizer::pushSymbolToken(std::stringstream& srcStream, spa::Stream<spa::Token>& tokens, char c) {
+void spa::Tokenizer::pushSymbolToken(std::stringstream& srcStream,
+                                     spa::Stream<spa::Token>& tokens,
+                                     char c) {
     std::string s(1, c);
     int next = srcStream.peek();
     if (next != EOF) {
-        s.push_back((char)next);
+        s.push_back(static_cast<char>(next));
         auto it = tokenTypes.find(s);
         if (it != tokenTypes.end()) {
             tokens.pushBack({ it->second, it->first });
@@ -80,11 +82,9 @@ spa::Stream<spa::Token> spa::Tokenizer::tokenize(std::stringstream& srcStream) {
     while (!srcStream.get(c).eof()) {
         if (std::isspace(c)) {
             pushWordToken(tokens, word);
-        }
-        else if (std::isalnum(c)) {
+        } else if (std::isalnum(c)) {
             word.push_back(c);
-        }
-        else {
+        } else {
             pushWordToken(tokens, word);
             pushSymbolToken(srcStream, tokens, c);
         }
