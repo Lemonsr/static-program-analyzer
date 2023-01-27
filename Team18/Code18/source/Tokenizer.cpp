@@ -9,7 +9,7 @@
 #include <cctype>
 #include <unordered_map>
 
-std::unordered_map<std::string, spa::TokenType> tokenTypes {
+const std::unordered_map<std::string, spa::TokenType> tokenTypes {
     {"{", spa::TOKEN_OPEN_BRACE},
     {"}", spa::TOKEN_CLOSE_BRACE},
     {"(", spa::TOKEN_OPEN_BRACKET},
@@ -35,7 +35,7 @@ std::unordered_map<std::string, spa::TokenType> tokenTypes {
     {"\"", spa::TOKEN_DOUBLE_QUOTES}
 };
 
-void pushWordToken(spa::Stream<spa::Token>& tokens, std::string& word) {
+void spa::Tokenizer::pushWordToken(spa::Stream<spa::Token>& tokens, std::string& word) {
     if (word.empty()) {
         return;
     }
@@ -53,7 +53,7 @@ void pushWordToken(spa::Stream<spa::Token>& tokens, std::string& word) {
     word.clear();
 }
 
-void pushSymbolToken(std::stringstream& srcStream, spa::Stream<spa::Token>& tokens, char c) {
+void spa::Tokenizer::pushSymbolToken(std::stringstream& srcStream, spa::Stream<spa::Token>& tokens, char c) {
     std::string s(1, c);
     int next = srcStream.peek();
     if (next != EOF) {

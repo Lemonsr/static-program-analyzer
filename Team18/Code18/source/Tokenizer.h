@@ -7,6 +7,9 @@
 
 namespace spa {
     class Tokenizer {
+    private:
+        void pushWordToken(spa::Stream<spa::Token>& tokens, std::string& word);
+        void pushSymbolToken(std::stringstream& srcStream, spa::Stream<spa::Token>& tokens, char c);
     public:
         spa::Stream<Token> tokenize(std::stringstream& srcStream);
     };
