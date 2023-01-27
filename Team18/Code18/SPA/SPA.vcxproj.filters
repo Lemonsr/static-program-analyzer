@@ -42,6 +42,12 @@
 	<ClCompile Include="..\source\QpsPreprocessor.cpp">
 	  <Filter>Source Files</Filter>
 	</ClCompile>
+    <ClCompile Include="..\source\Token.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Tokenizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
 </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PKB.h">
@@ -68,5 +74,14 @@
 	<ClCompile Include="..\source\QpsPreprocessor.h">
 	  <Filter>Header Files</Filter>
 	</ClCompile>
+    <ClInclude Include="..\source\Stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Tokenizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

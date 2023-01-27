@@ -20,16 +20,21 @@
 	<ClCompile Include="..\source\QPS.cpp" />
 	<ClCompile Include="..\source\QpsEvaluator.cpp" />
 	<ClCompile Include="..\source\QpsPreprocessor.cpp" />
+    <ClCompile Include="..\source\Token.cpp" />
+    <ClCompile Include="..\source\Tokenizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\Parser.h" />
     <ClInclude Include="..\source\PKB.h" />
+    <ClInclude Include="..\source\Stream.h" />
     <ClInclude Include="..\source\TNode.h" />
 	<ClCompile Include="..\source\PqlParser.h" />
 	<ClCompile Include="..\source\PqlTokenizer.h" />
 	<ClCompile Include="..\source\QPS.h" />
 	<ClCompile Include="..\source\QpsEvaluator.h" />
 	<ClCompile Include="..\source\QpsPreprocessor.h" />
+    <ClInclude Include="..\source\Token.h" />
+    <ClInclude Include="..\source\Tokenizer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
