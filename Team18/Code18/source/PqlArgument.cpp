@@ -1,4 +1,5 @@
 #include "PqlArgument.h"
+#include "DesignEntity.h"
 
 spa::PqlArgument::PqlArgument(ArgumentType type, std::string value,
   std::optional<DesignEntityType> designEntity) : type(type), value(value),
@@ -13,7 +14,7 @@ const std::string& spa::PqlArgument::getValue() {
   return value;
 }
 
-const std::optional<DesignEntityType>& spa::PqlArgument::getDesignEntity() {
+const std::optional<spa::DesignEntityType>& spa::PqlArgument::getDesignEntity() {
   return designEntity;
 }
 

@@ -12,6 +12,20 @@ bool spa::ParsedQuery::addDeclaration(std::string synonym,
   return true;
 }
 
+int spa::ParsedQuery::getDeclarationsCount() {
+  return declarations.size();
+}
+
+std::optional<spa::DesignEntityType> spa::ParsedQuery::getType(
+  std::string synonym
+) {
+  auto it = declarations.find(synonym);
+  if (it == declarations.end()) {
+    return {};
+  }
+  return { it->second };
+}
+
 bool spa::ParsedQuery::setSelectSynonym(std::string synonym) {
   if (declarations.find(synonym) == declarations.end()) {
     return false;

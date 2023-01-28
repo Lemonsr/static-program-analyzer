@@ -48,6 +48,8 @@ class ParsedQuery {
   std::unordered_map<std::string, DesignEntityType> declarations;
  public:
   bool addDeclaration(std::string synonym, DesignEntityType designEntity);
+  int getDeclarationsCount();
+  std::optional<DesignEntityType> getType(std::string synonym);
   bool setSelectSynonym(std::string synonym);
 };
 }  // namespace spa
