@@ -13,7 +13,7 @@ enum PqlParseStatus {
 
 class PqlParser {
  public:
-   virtual PqlParseStatus parse(Stream<Token>& tokens) = 0;
+  virtual PqlParseStatus parse(Stream<Token>& tokens) = 0;
 };
 }  // namespace spa
 
