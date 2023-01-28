@@ -18,3 +18,14 @@ void spa::ParsedQuery::addDeclaration(std::string synonym,
   }
   declarations.insert({ synonym, designEntity });
 }
+
+spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
+  PqlArgument firstArg, PqlArgument secondArg)
+  : designAbstraction(designAbstraction), firstArg(firstArg),
+  secondArg(secondArg) {
+}
+
+spa::PatternClause::PatternClause(PqlArgument synonym, PqlArgument firstArg,
+  Pattern secondArg) : synonym(synonym), firstArg(firstArg),
+  secondArg(secondArg) {
+}

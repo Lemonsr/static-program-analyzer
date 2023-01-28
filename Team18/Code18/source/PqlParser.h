@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <optional>
 
 #include "Relationship.h"
 #include "PqlArgument.h"
@@ -14,6 +15,9 @@
 namespace spa {
 
 class SuchThatClause {
+ public:
+  SuchThatClause(RelationshipType designAbstraction, PqlArgument firstArg,
+    PqlArgument secondArg);
  private:
   RelationshipType designAbstraction;
   PqlArgument firstArg;
@@ -21,6 +25,8 @@ class SuchThatClause {
 };
 
 class PatternClause {
+ public:
+  PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern secondArg);
  private:
   PqlArgument synonym;
   PqlArgument firstArg;
@@ -32,8 +38,9 @@ class ParsedQuery {
   ParsedQuery();
   void addDeclaration(std::string synonym, DesignEntityType designEntity);
  private:
-  PatternClause patternClause;
-  SuchThatClause suchThatClause;
+  DesignEntityType selectSynonym;
+  std::optional<PatternClause> patternClause;
+  std::optional<SuchThatClause> suchThatClause;
   std::unordered_map<std::string, DesignEntityType> declarations;
 };
 
