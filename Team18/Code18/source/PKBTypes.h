@@ -19,6 +19,12 @@ using LineNos = std::unordered_set<LineNo>;
 using LineNo_Var_Pairs = std::unordered_set<std::pair<LineNo, VarName>>;
 using PostfixString = std::string;
 using Assignment = std::pair<VarName, PostfixString>;
+using Follow = LineNo;
+using Follows = std::unordered_set<Follow>;
+using Parent = LineNo;
+using Parents = std::unordered_set<Parent>;
+using Child = LineNo;
+using Children = std::unordered_set<Child>;
 
 enum class StatementType {
 READ,
@@ -33,9 +39,9 @@ using VarTable = VarNames;
 using ConstTable = ConstNames;
 using ProcTable = ProcNames;
 using FollowsTable = std::unordered_map<LineNo, LineNo>;
-using FollowsStarTable = std::unordered_map<LineNo, LineNo>;
-using ParentTable = std::unordered_map<LineNo, LineNo>;
-using ParentStarTable = std::unordered_map<LineNo, LineNo>;
+using FollowsStarTable = std::unordered_map<LineNo, Follow>;
+using ParentTable = std::unordered_map<Child, Parent>;
+using ParentStarTable = std::unordered_map<Child, Parents>;
 using ModifiesTable = std::unordered_map<LineNo, VarName>;
 using ModifiesProcTable = std::unordered_map<ProcName, VarName>;
 using UsesTable = std::unordered_map<LineNo, VarName>;

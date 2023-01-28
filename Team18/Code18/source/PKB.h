@@ -35,9 +35,11 @@ class PKB {
 
   // Follows methods
   void addFollows(LineNo lineNo1, LineNo lineNo2);
+  void addFollowsStar(LineNo lineNo1, Follow follow);
 
   // Parent methods
-  void addParent(LineNo lineNo1, LineNo lineNo2);
+  void addParent(Child child, Parent parent);
+  void addParentStar(Child child, Parents parents);
 
   // Modifies methods
   void addModifies(LineNo lineNo, Name varName);
