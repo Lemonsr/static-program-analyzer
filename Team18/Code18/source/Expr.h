@@ -15,4 +15,3 @@ public:
 	const Expr* getRightExpr();
 	spa::Token getToken();
 };
-

@@ -6,6 +6,7 @@ class ContainerStatement : public Statement
 {
 protected:
 	std::vector<Statement*> statementList;
+
 public:
 	std::vector<Statement*> getStatementList();
 };
@@ -27,4 +28,3 @@ class InnerBlockStatement : public ContainerStatement
 public:
 	InnerBlockStatement(std::string parentProcedureVal, int statementLineNum, std::vector<Statement*> statementList);
 };
-

@@ -1,12 +1,13 @@
 #include "NonContainerStatement.h"
 
-std::string OneVarNonContainerStatement::getVariableName()
-{
+std::string OneVarNonContainerStatement::getVariableName() {
 	return variableName;
 }
 
 //Constructor for ReadStatement
-ReadStatement::ReadStatement(std::string parentProcedureVal, std::string variableName, std::unordered_set<int>whileStmtAncestors, std::unordered_set<int> ifStmtAncestors, int statementLineNum) {
+ReadStatement::ReadStatement(std::string parentProcedureVal, std::string variableName,
+                             std::unordered_set<int> whileStmtAncestors, std::unordered_set<int> ifStmtAncestors,
+                             int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->variableName = variableName;
 	this->whileStmtAncestors = whileStmtAncestors;
@@ -15,7 +16,9 @@ ReadStatement::ReadStatement(std::string parentProcedureVal, std::string variabl
 };
 
 //Constructor for PrintStatement
-PrintStatement::PrintStatement(std::string parentProcedureVal, std::string variableName, std::unordered_set<int>whileStmtAncestors, std::unordered_set<int> ifStmtAncestors, int statementLineNum) {
+PrintStatement::PrintStatement(std::string parentProcedureVal, std::string variableName,
+                               std::unordered_set<int> whileStmtAncestors, std::unordered_set<int> ifStmtAncestors,
+                               int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->variableName = variableName;
 	this->whileStmtAncestors = whileStmtAncestors;
@@ -24,7 +27,9 @@ PrintStatement::PrintStatement(std::string parentProcedureVal, std::string varia
 };
 
 //Constructor for CallStatement
-CallStatement::CallStatement(std::string parentProcedureVal, std::string variableName, std::unordered_set<int>whileStmtAncestors, std::unordered_set<int> ifStmtAncestors, int statementLineNum) {
+CallStatement::CallStatement(std::string parentProcedureVal, std::string variableName,
+                             std::unordered_set<int> whileStmtAncestors, std::unordered_set<int> ifStmtAncestors,
+                             int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->variableName = variableName;
 	this->whileStmtAncestors = whileStmtAncestors;
@@ -33,7 +38,8 @@ CallStatement::CallStatement(std::string parentProcedureVal, std::string variabl
 };
 
 //Constructor for AssignStatement
-AssignStatement::AssignStatement(std::string parentProcedureVal, Expr* expr, std::unordered_set<int>whileStmtAncestors, std::unordered_set<int> ifStmtAncestors, int statementLineNum) {
+AssignStatement::AssignStatement(std::string parentProcedureVal, Expr* expr, std::unordered_set<int> whileStmtAncestors,
+                                 std::unordered_set<int> ifStmtAncestors, int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->expr = expr;
 	this->whileStmtAncestors = whileStmtAncestors;
@@ -42,7 +48,9 @@ AssignStatement::AssignStatement(std::string parentProcedureVal, Expr* expr, std
 };
 
 //Constructor for ifConditionStatement
-ifConditionStatement::ifConditionStatement(std::string parentProcedureVal, Expr* expr, std::unordered_set<int>whileStmtAncestors, std::unordered_set<int> ifStmtAncestors, int statementLineNum) {
+ifConditionStatement::ifConditionStatement(std::string parentProcedureVal, Expr* expr,
+                                           std::unordered_set<int> whileStmtAncestors,
+                                           std::unordered_set<int> ifStmtAncestors, int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->expr = expr;
 	this->whileStmtAncestors = whileStmtAncestors;
@@ -51,7 +59,9 @@ ifConditionStatement::ifConditionStatement(std::string parentProcedureVal, Expr*
 };
 
 //Constructor for whileConditionStatement
-whileConditionStatement::whileConditionStatement(std::string parentProcedureVal, Expr* expr, std::unordered_set<int>whileStmtAncestors, std::unordered_set<int> ifStmtAncestors, int statementLineNum) {
+whileConditionStatement::whileConditionStatement(std::string parentProcedureVal, Expr* expr,
+                                                 std::unordered_set<int> whileStmtAncestors,
+                                                 std::unordered_set<int> ifStmtAncestors, int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->expr = expr;
 	this->whileStmtAncestors = whileStmtAncestors;
