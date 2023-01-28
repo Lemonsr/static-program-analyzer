@@ -75,12 +75,12 @@ const spa::StatementProcTable& spa::PKB::getStatementProcTable() const {
 }
 
 // Follows methods
-void spa::PKB::addFollows(LineNo lineNo1, LineNo lineNo2) {
-  followsTable.insert({ lineNo1, lineNo2 });  // s2 -follows-> s1
+void spa::PKB::addFollows(LineNo lineNo, Follow follow) {
+  followsTable.insert({ lineNo, follow });  // s2 -follows-> s1
 }
 
-void spa::PKB::addFollowsStar(LineNo lineNo, Follow follow) {
-  followsStarTable.insert({ lineNo, follow });  // s2 -follows*-> s1
+void spa::PKB::addFollowsStar(LineNo lineNo, Follows follows) {
+  followsStarTable.insert({ lineNo, follows });  // s2 -follows*-> s1
 }
 
 // Parent methods

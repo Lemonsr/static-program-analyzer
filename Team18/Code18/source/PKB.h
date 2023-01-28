@@ -14,6 +14,22 @@ namespace spa {
 class TNode;
 
 class PKB {
+ private:
+  VarTable varTable;
+  ConstTable constTable;
+  ProcTable procTable;
+  FollowsTable followsTable;
+  FollowsStarTable followsStarTable;
+  ParentTable parentTable;
+  ParentStarTable parentStarTable;
+  ModifiesTable modifiesTable;
+  ModifiesProcTable modifiesProcTable;
+  UsesTable usesTable;
+  UsesProcTable usesProcTable;
+  AssignTable assignTable;
+  StatementTypeTable statementTypeTable;
+  StatementProcTable statementProcTable;
+
  public:
   static int setProcToAST(PROC p, TNode* r);
   static TNode* getRootAST(PROC p);
@@ -34,8 +50,8 @@ class PKB {
   const StatementProcTable& getStatementProcTable() const;
 
   // Follows methods
-  void addFollows(LineNo lineNo1, LineNo lineNo2);
-  void addFollowsStar(LineNo lineNo1, Follow follow);
+  void addFollows(LineNo lineNo, Follow follow);
+  void addFollowsStar(LineNo lineNo, Follows follows);
 
   // Parent methods
   void addParent(Child child, Parent parent);
@@ -67,21 +83,5 @@ class PKB {
   // Statement Type methods
   void addStatementType(LineNo lineNo,
     StatementType statementType);
-
- private:
-  VarTable varTable;
-  ConstTable constTable;
-  ProcTable procTable;
-  FollowsTable followsTable;
-  FollowsStarTable followsStarTable;
-  ParentTable parentTable;
-  ParentStarTable parentStarTable;
-  ModifiesTable modifiesTable;
-  ModifiesProcTable modifiesProcTable;
-  UsesTable usesTable;
-  UsesProcTable usesProcTable;
-  AssignTable assignTable;
-  StatementTypeTable statementTypeTable;
-  StatementProcTable statementProcTable;
 };
 }  // namespace spa

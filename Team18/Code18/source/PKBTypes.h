@@ -38,8 +38,8 @@ IF
 using VarTable = VarNames;
 using ConstTable = ConstNames;
 using ProcTable = ProcNames;
-using FollowsTable = std::unordered_map<LineNo, LineNo>;
-using FollowsStarTable = std::unordered_map<LineNo, Follow>;
+using FollowsTable = std::unordered_map<LineNo, Follow>;
+using FollowsStarTable = std::unordered_map<LineNo, Follows>;
 using ParentTable = std::unordered_map<Child, Parent>;
 using ParentStarTable = std::unordered_map<Child, Parents>;
 using ModifiesTable = std::unordered_map<LineNo, VarName>;
