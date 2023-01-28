@@ -9,8 +9,8 @@
 spa::ParsedQuery spa::QpsPreprocessor::preprocess(std::string query) {
   std::stringstream ss;
   ss.str(query);
-  Tokenizer* tokenizer;
-  Stream<Token> tokens = tokenizer->tokenize(ss);
+  Tokenizer tokenizer;
+  Stream<Token> tokens = tokenizer.tokenize(ss);
 
   return ParsedQuery{};
 }
