@@ -1,7 +1,8 @@
 #include "PqlArgument.h"
 
-spa::PqlArgument::PqlArgument(ArgumentType type, std::string value)
-  : type(type), value(value) {
+spa::PqlArgument::PqlArgument(ArgumentType type, std::string value,
+  std::optional<DesignEntityType> designEntity) : type(type), value(value),
+  designEntity(designEntity) {
 }
 
 const spa::ArgumentType& spa::PqlArgument::getType() {
@@ -10,6 +11,10 @@ const spa::ArgumentType& spa::PqlArgument::getType() {
 
 const std::string& spa::PqlArgument::getValue() {
   return value;
+}
+
+const std::optional<DesignEntityType>& spa::PqlArgument::getDesignEntity() {
+  return designEntity;
 }
 
 bool spa::operator==(const PqlArgument& p1, const PqlArgument& p2) {

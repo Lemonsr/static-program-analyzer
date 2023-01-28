@@ -31,12 +31,10 @@ enum PatternType {
 
 class Pattern {
  private:
-  PatternType type;
-  std::string value;
+  const PatternType type;
+  const std::string value;
  public:
-  explicit Pattern(PatternType type) :type(type) {
-  }
-  Pattern(PatternType type, std::string value) : type(type), value(value) {
-  }
+  explicit Pattern(PatternType type);
+  Pattern(PatternType type, std::string value);
 };
 }  // namespace spa

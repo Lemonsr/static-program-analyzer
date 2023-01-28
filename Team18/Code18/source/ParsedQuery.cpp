@@ -1,15 +1,7 @@
 #include <iostream>
 
-#include "PqlParser.h"
+#include "ParsedQuery.h"
 #include "Token.h"
-
-spa::PqlParser::PqlParser(Stream<Token> tokens) : tokens(tokens) {
-}
-
-spa::ParsedQuery spa::PqlParser::parse() {
-  std::cout << "parse" << std::endl;
-  return ParsedQuery{};
-}
 
 void spa::ParsedQuery::addDeclaration(std::string synonym,
   DesignEntityType designEntity) {

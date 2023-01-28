@@ -1,6 +1,7 @@
 #include <string>
 
 #include "QPS.h"
+#include "ParsedQuery.h"
 
 std::string spa::QPS::evaluate(std::string query) {
   QpsPreprocessor* preprocessor = new spa::QpsPreprocessor();

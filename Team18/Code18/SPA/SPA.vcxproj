@@ -12,11 +12,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp" />
+    <ClCompile Include="..\source\ParsedQuery.cpp" />
     <ClCompile Include="..\source\Parser.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
+    <ClCompile Include="..\source\PKBQueryTypes.cpp" />
     <ClCompile Include="..\source\PqlArgument.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
-    <ClCompile Include="..\source\PqlParser.cpp" />
     <ClCompile Include="..\source\QPS.cpp" />
     <ClCompile Include="..\source\QpsEvaluator.cpp" />
     <ClCompile Include="..\source\QpsPreprocessor.cpp" />
@@ -26,12 +27,12 @@
   <ItemGroup>
     <ClInclude Include="..\source\Argument.h" />
     <ClInclude Include="..\source\DesignEntity.h" />
+    <ClInclude Include="..\source\ParsedQuery.h" />
     <ClInclude Include="..\source\Parser.h" />
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\PKBQueryTypes.h" />
     <ClInclude Include="..\source\PKBTypes.h" />
     <ClInclude Include="..\source\PqlArgument.h" />
-    <ClInclude Include="..\source\Relationship.h" />
     <ClInclude Include="..\source\Stream.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClCompile Include="..\source\PqlParser.h" />

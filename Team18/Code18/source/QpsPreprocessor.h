@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "PqlParser.h"
+#include "ParsedQuery.h"
 
 namespace spa {
 class QpsPreprocessor {
