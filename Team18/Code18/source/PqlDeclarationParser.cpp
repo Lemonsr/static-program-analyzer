@@ -31,13 +31,14 @@ spa::PqlParseStatus spa::PqlDeclarationParser::addDeclarations(
     if (!query.addDeclaration(tokens[0].getValue(), type)) {
       return PQL_PARSE_ERROR;
     }
-    if (tokens[1].getType() == TOKEN_SEMICOLON) {
-      return PQL_PARSE_SUCCESS;
-    }
-    if (tokens[1].getType() != TOKEN_COMMA) {
+    TokenType tokenType = tokens[1].getType();
+    if (tokenType != TOKEN_SEMICOLON && tokenType != TOKEN_COMMA) {
       return PQL_PARSE_ERROR;
     }
     tokens.seek(2);
+    if (tokenType == TOKEN_SEMICOLON) {
+      return PQL_PARSE_SUCCESS;
+    }
   }
   return PQL_PARSE_ERROR;
 }

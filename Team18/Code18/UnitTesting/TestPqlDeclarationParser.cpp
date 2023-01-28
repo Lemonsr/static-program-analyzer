@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <optional>
 #include <string>
 #include <vector>
@@ -29,6 +30,7 @@ namespace UnitTesting {
         std::optional<spa::DesignEntityType> type = query.getType("a");
         Assert::IsTrue(type.has_value());
         Assert::IsTrue(spa::ASSIGN == type.value());
+        Assert::AreEqual(int64_t(0), tokens.remaining());
       }
 
       TEST_METHOD(TestMultiDeclaration) {
@@ -51,6 +53,7 @@ namespace UnitTesting {
           Assert::IsTrue(type.has_value());
           Assert::IsTrue(spa::READ == type.value());
         }
+        Assert::AreEqual(int64_t(0), tokens.remaining());
       }
 
       TEST_METHOD(TestMismatch) {
