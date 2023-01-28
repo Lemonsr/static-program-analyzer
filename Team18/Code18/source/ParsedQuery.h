@@ -51,6 +51,8 @@ class ParsedQuery {
   int getDeclarationsCount();
   std::optional<DesignEntityType> getType(std::string synonym);
   bool setSelectSynonym(std::string synonym);
+  void setSuchThatClause(SuchThatClause clause);
+  void setPatternClause(PatternClause clause);
 };
 }  // namespace spa
 

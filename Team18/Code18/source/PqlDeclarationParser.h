@@ -3,7 +3,7 @@
 #include "PqlParser.h"
 
 namespace spa {
-class PqlDeclarationParser {
+class PqlDeclarationParser : public PqlParser {
  private:
   PqlParseStatus addDeclarations(DesignEntityType type,
                                   Stream<Token>& tokens,

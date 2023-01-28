@@ -34,6 +34,14 @@ bool spa::ParsedQuery::setSelectSynonym(std::string synonym) {
   return true;
 }
 
+void spa::ParsedQuery::setSuchThatClause(SuchThatClause clause) {
+  suchThatClause = clause;
+}
+
+void spa::ParsedQuery::setPatternClause(PatternClause clause) {
+  patternClause = clause;
+}
+
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
   PqlArgument firstArg, PqlArgument secondArg)
   : designAbstraction(designAbstraction), firstArg(firstArg),

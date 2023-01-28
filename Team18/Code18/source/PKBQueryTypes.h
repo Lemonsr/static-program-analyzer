@@ -31,8 +31,8 @@ enum PatternType {
 
 class Pattern {
  private:
-  const PatternType type;
-  const std::string value;
+  PatternType type;
+  std::string value;
  public:
   explicit Pattern(PatternType type);
   Pattern(PatternType type, std::string value);
