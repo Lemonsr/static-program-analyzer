@@ -1,3 +1,7 @@
+#include <optional>
+#include <string>
+#include <vector>
+
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "DesignEntity.h"
@@ -6,10 +10,6 @@
 #include "PqlDeclarationParser.h"
 #include "Stream.h"
 #include "Token.h"
-
-#include <optional>
-#include <string>
-#include <vector>
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
