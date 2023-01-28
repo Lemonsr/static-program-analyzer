@@ -47,8 +47,8 @@ class ParsedQuery {
   std::optional<SuchThatClause> suchThatClause;
   std::unordered_map<std::string, DesignEntityType> declarations;
  public:
-  void addDeclaration(std::string synonym, DesignEntityType designEntity);
-  void setSelectSynonym(std::string synonym);
+  bool addDeclaration(std::string synonym, DesignEntityType designEntity);
+  bool setSelectSynonym(std::string synonym);
 };
 }  // namespace spa
 

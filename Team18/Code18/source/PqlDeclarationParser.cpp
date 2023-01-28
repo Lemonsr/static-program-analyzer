@@ -28,7 +28,9 @@ spa::PqlParseStatus spa::PqlDeclarationParser::addDeclarations(
     if (tokens[0].getType() != TOKEN_NAME) {
       return PQL_PARSE_ERROR;
     }
-    query.addDeclaration(tokens[0].getValue(), type);
+    if (!query.addDeclaration(tokens[0].getValue(), type)) {
+      return PQL_PARSE_ERROR;
+    }
     if (tokens[1].getType() == TOKEN_SEMICOLON) {
       return PQL_PARSE_SUCCESS;
     }

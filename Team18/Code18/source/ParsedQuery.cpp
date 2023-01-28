@@ -3,19 +3,21 @@
 #include "ParsedQuery.h"
 #include "Token.h"
 
-void spa::ParsedQuery::addDeclaration(std::string synonym,
+bool spa::ParsedQuery::addDeclaration(std::string synonym,
   DesignEntityType designEntity) {
   if (declarations.find(synonym) != declarations.end()) {
-    throw std::runtime_error("Synonym has already been declared");
+    return false;
   }
   declarations.insert({ synonym, designEntity });
+  return true;
 }
 
-void spa::ParsedQuery::setSelectSynonym(std::string synonym) {
+bool spa::ParsedQuery::setSelectSynonym(std::string synonym) {
   if (declarations.find(synonym) == declarations.end()) {
-    throw std::runtime_error("Synonym cannot be found");
+    return false;
   }
   this->selectSynonym = synonym;
+  return true;
 }
 
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
