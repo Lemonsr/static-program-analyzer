@@ -1,6 +1,5 @@
-#ifndef TEAM18_CODE18_SOURCE_TNODE_H_
-#define TEAM18_CODE18_SOURCE_TNODE_H_
+#pragma once
+
 class TNode {
  public:
 };
-#endif  // TEAM18_CODE18_SOURCE_TNODE_H_

@@ -1,13 +1,16 @@
 #include <vector>
+#include <sstream>
 
 #include "QpsPreprocessor.h"
+#include "Tokenizer.h"
+#include "Token.h"
+#include "Stream.h"
 
-QueryObject QpsPreprocessor::preprocess(std::string query) {
-  PqlTokenizer* tokenizer = new PqlTokenizer(query);
-  std::vector<PqlToken> tokens = tokenizer->tokenize();
+spa::ParsedQuery spa::QpsPreprocessor::preprocess(std::string query) {
+  std::stringstream ss;
+  ss.str(query);
+  Tokenizer tokenizer;
+  Stream<Token> tokens = tokenizer.tokenize(ss);
 
-  PqlParser* parser = new PqlParser(tokens);
-  QueryObject queryObject = parser->parse();
-
-  return queryObject;
+  return ParsedQuery{};
 }

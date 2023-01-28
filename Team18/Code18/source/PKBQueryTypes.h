@@ -22,4 +22,19 @@ struct Name {
 };
 
 struct Underscore { };
+
+enum PatternType {
+  EXACT,
+  PARTIAL,
+  ANY
+};
+
+class Pattern {
+ private:
+  const PatternType type;
+  const std::string value;
+ public:
+  explicit Pattern(PatternType type);
+  Pattern(PatternType type, std::string value);
+};
 }  // namespace spa

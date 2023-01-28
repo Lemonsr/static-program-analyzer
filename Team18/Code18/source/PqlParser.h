@@ -1,16 +1,19 @@
 #pragma once
 
-#include <vector>
+#include "Token.h"
+#include "Stream.h"
 
-#include "PqlTokenizer.h"
+namespace spa {
 
-struct QueryObject {
+enum PqlParseStatus {
+  PQL_PARSE_SUCCESS,
+  PQL_PARSE_ERROR,
+  PQL_PARSE_MISMATCH
 };
 
 class PqlParser {
  public:
-  explicit PqlParser(std::vector<PqlToken> tokens);
-  QueryObject parse();
- private:
-  std::vector<PqlToken> tokens;
+  virtual PqlParseStatus parse(Stream<Token>& tokens) = 0;
 };
+}  // namespace spa
+
