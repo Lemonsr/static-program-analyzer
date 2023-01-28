@@ -1,14 +1,17 @@
 #pragma once
 
 #include <string>
+#include <optional>
 
 #include "Argument.h"
+#include "DesignEntity.h"
 
 namespace spa {
 class PqlArgument {
  private:
   ArgumentType type;
   std::string value;
+  std::optional<DesignEntityType> designEntity;
  public:
   PqlArgument(ArgumentType type, std::string value);
   const ArgumentType& getType();
