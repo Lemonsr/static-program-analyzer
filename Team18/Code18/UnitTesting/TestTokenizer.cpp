@@ -68,7 +68,8 @@ namespace UnitTesting {
         TEST_METHOD(TestTokenizerTokenizeSuchThatAndPattern) {
           std::stringstream srcStream;
           srcStream << "assign a; while w;\n";
-          srcStream << "Select w such that Parent* (w, a) pattern a (\"count\", _)";
+          srcStream << "Select w such that Parent* (w, a)"
+            "pattern a (\"count\", _)";
           spa::Tokenizer tokenizer;
           spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
           bool matchResult = tokenStream.match({
