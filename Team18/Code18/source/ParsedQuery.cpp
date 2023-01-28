@@ -11,6 +11,13 @@ void spa::ParsedQuery::addDeclaration(std::string synonym,
   declarations.insert({ synonym, designEntity });
 }
 
+void spa::ParsedQuery::setSelectSynonym(std::string synonym) {
+  if (declarations.find(synonym) == declarations.end()) {
+    throw std::runtime_error("Synonym cannot be found");
+  }
+  this->selectSynonym = synonym;
+}
+
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
   PqlArgument firstArg, PqlArgument secondArg)
   : designAbstraction(designAbstraction), firstArg(firstArg),

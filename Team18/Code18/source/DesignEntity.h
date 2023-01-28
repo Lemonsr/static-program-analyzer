@@ -1,5 +1,6 @@
 #pragma once
 
+namespace spa {
 enum DesignEntityType {
   PROCEDURE,
   STMT,
@@ -12,3 +13,4 @@ enum DesignEntityType {
   VARIABLE,
   CONSTANT
 };
+}  // namespace spa

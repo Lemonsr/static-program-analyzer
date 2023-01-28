@@ -42,13 +42,13 @@ class PatternClause {
 
 class ParsedQuery {
  private:
-  DesignEntityType selectSynonym;
+  std::string selectSynonym;
   std::optional<PatternClause> patternClause;
   std::optional<SuchThatClause> suchThatClause;
   std::unordered_map<std::string, DesignEntityType> declarations;
  public:
-  ParsedQuery();
   void addDeclaration(std::string synonym, DesignEntityType designEntity);
+  void setSelectSynonym(std::string synonym);
 };
 }  // namespace spa
 
