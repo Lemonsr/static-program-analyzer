@@ -17,6 +17,7 @@ spa::TNode* spa::PKB::getRootAST(PROC p) {
   return nullptr;
 }
 
+// Get table methods
 const spa::VarTable& spa::PKB::getVarTable() const {
   return varTable;
 }
@@ -71,4 +72,22 @@ const spa::StatementTypeTable& spa::PKB::getStatementTypeTable() const {
 
 const spa::StatementProcTable& spa::PKB::getStatementProcTable() const {
     return statementProcTable;
+}
+
+// Follows methods
+void spa::PKB::addFollows(LineNo lineNo, Follow follow) {
+  followsTable.insert({ lineNo, follow });  // s2 -follows-> s1
+}
+
+void spa::PKB::addFollowsStar(LineNo lineNo, Follows follows) {
+  followsStarTable.insert({ lineNo, follows });  // s2 -follows*-> s1
+}
+
+// Parent methods
+void spa::PKB::addParent(Child child, Parent parent) {
+  parentTable.insert({ child, parent });  // s2 -parent-> s1
+}
+
+void spa::PKB::addParentStar(Child child, Parents parents) {
+  parentStarTable.insert({ child, parents });  // s2 -parent*-> s1
 }
