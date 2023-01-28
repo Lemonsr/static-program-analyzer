@@ -3,7 +3,7 @@
 #include "Stream.h"
 
 #include <iostream>
-#include <sstream>
+#include <istream>
 #include <string>
 #include <stdexcept>
 #include <cctype>
@@ -53,7 +53,7 @@ void spa::Tokenizer::pushWordToken(spa::Stream<spa::Token>& tokens,
     word.clear();
 }
 
-void spa::Tokenizer::pushSymbolToken(std::stringstream& srcStream,
+void spa::Tokenizer::pushSymbolToken(std::istream& srcStream,
                                      spa::Stream<spa::Token>& tokens,
                                      char c) {
     std::string s(1, c);
@@ -75,7 +75,7 @@ void spa::Tokenizer::pushSymbolToken(std::stringstream& srcStream,
     tokens.pushBack({ it->second, it->first });
 }
 
-spa::Stream<spa::Token> spa::Tokenizer::tokenize(std::stringstream& srcStream) {
+spa::Stream<spa::Token> spa::Tokenizer::tokenize(std::istream& srcStream) {
     std::string word;
     Stream<Token> tokens;
     char c;
