@@ -173,6 +173,7 @@
     <ClCompile Include="TestAST.cpp" />
     <ClCompile Include="TestPqlArgumentParser.cpp" />
     <ClCompile Include="TestPqlDeclarationParser.cpp" />
+    <ClCompile Include="TestPqlPatternParser.cpp" />
     <ClCompile Include="TestPqlSuchThatParser.cpp" />
     <ClCompile Include="TestTokenizer.cpp" />
   </ItemGroup>

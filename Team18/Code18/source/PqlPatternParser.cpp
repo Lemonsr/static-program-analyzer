@@ -77,10 +77,6 @@ std::optional<spa::Pattern> spa::PqlPatternParser::parsePattern(
     Stream<Token>& tokens,
     ParsedQuery& query
 ) {
-  std::optional<Pattern> wOptional = parseWildcard(tokens, query);
-  if (wOptional) {
-    return wOptional;
-  }
   std::optional<Pattern> eOptional = parseExact(tokens, query);
   if (eOptional) {
     return eOptional;
@@ -88,6 +84,10 @@ std::optional<spa::Pattern> spa::PqlPatternParser::parsePattern(
   std::optional<Pattern> pOptional = parsePartial(tokens, query);
   if (pOptional) {
     return pOptional;
+  }
+  std::optional<Pattern> wOptional = parseWildcard(tokens, query);
+  if (wOptional) {
+    return wOptional;
   }
   return {};
 }

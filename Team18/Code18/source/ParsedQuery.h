@@ -37,9 +37,11 @@ class PatternClause {
  private:
   PqlArgument synonym;
   PqlArgument firstArg;
-  Pattern secondArg;
+  Pattern pattern;
  public:
-  PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern secondArg);
+  PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern);
+  friend bool operator==(const PatternClause& p1, const PatternClause& p2);
+  friend bool operator!=(const PatternClause& p1, const PatternClause& p2);
 };
 
 class ParsedQuery {

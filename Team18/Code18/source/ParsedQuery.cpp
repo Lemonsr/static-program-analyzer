@@ -69,8 +69,18 @@ bool spa::operator!=(const SuchThatClause& s1, const SuchThatClause& s2) {
   return !(s1 == s2);
 }
 
-
 spa::PatternClause::PatternClause(PqlArgument synonym, PqlArgument firstArg,
-  Pattern secondArg) : synonym(synonym), firstArg(firstArg),
-  secondArg(secondArg) {
+  Pattern pattern) : synonym(synonym), firstArg(firstArg),
+                     pattern(pattern) {
+}
+
+bool spa::operator==(const PatternClause& p1, const PatternClause& p2) {
+  bool synonymMatch = p1.synonym == p2.synonym;
+  bool firstArgMatch = p1.firstArg == p2.firstArg;
+  bool patternMatch = p1.pattern == p2.pattern;
+  return synonymMatch && firstArgMatch && patternMatch;
+}
+
+bool spa::operator!=(const PatternClause& p1, const PatternClause& p2) {
+  return !(p1 == p2);
 }

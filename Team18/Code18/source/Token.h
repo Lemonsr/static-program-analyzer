@@ -38,8 +38,8 @@ bool operator!=(const Token& t1, const Token& t2);
 
 class Token {
  private:
-    const TokenType type;
-    const std::string value;
+    TokenType type;
+    std::string value;
  public:
     Token(TokenType type, std::string value);
     Token(TokenType type, char c);

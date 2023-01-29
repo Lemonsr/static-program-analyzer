@@ -38,5 +38,7 @@ class Pattern {
  public:
   explicit Pattern(PatternType type);
   Pattern(PatternType type, std::vector<Token> value);
+  friend bool operator==(const Pattern& p1, const Pattern& p2);
+  friend bool operator!=(const Pattern& p1, const Pattern& p2);
 };
 }  // namespace spa
