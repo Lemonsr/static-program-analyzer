@@ -56,6 +56,7 @@ class ParsedQuery {
   void setSuchThatClause(SuchThatClause clause);
   void setPatternClause(PatternClause clause);
   const std::optional<SuchThatClause>& getSuchThatClause();
+  const std::optional<PatternClause>& getPatternClause();
 };
 }  // namespace spa
 

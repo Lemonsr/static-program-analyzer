@@ -47,6 +47,10 @@ const std::optional<spa::SuchThatClause>&
   return suchThatClause;
 }
 
+const std::optional<spa::PatternClause>& spa::ParsedQuery::getPatternClause() {
+  return patternClause;
+}
+
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
   PqlArgument firstArg, PqlArgument secondArg)
   : designAbstraction(designAbstraction), firstArg(firstArg),
