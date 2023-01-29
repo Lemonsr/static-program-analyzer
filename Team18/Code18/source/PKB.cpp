@@ -265,7 +265,8 @@ void spa::PKB::addAssign(LineNo lineNo, VarName varName,
  * @param pattern Pattern struct.
  * @return A set of SIMPLE source line numbers.
  */
-spa::LineNos spa::PKB::getAssignCommonLogic(Pattern pattern, std::optional<Name> name) {
+spa::LineNos spa::PKB::getAssignCommonLogic(Pattern pattern,
+                                            std::optional<Name> name) {
   spa::LineNos result;
 
   for (auto& [lineNo, assignment] : spa::PKB::assignTable) {
