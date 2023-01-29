@@ -34,6 +34,10 @@ bool spa::ParsedQuery::setSelectSynonym(std::string synonym) {
   return true;
 }
 
+const std::string& spa::ParsedQuery::getSelectSynonym() {
+  return selectSynonym;
+}
+
 void spa::ParsedQuery::setSuchThatClause(SuchThatClause clause) {
   suchThatClause = clause;
 }

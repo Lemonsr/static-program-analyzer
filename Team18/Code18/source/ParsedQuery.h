@@ -57,6 +57,7 @@ class ParsedQuery {
   bool setSelectSynonym(std::string synonym);
   void setSuchThatClause(SuchThatClause clause);
   void setPatternClause(PatternClause clause);
+  const std::string& getSelectSynonym();
   const std::optional<SuchThatClause>& getSuchThatClause();
   const std::optional<PatternClause>& getPatternClause();
 };
