@@ -30,7 +30,7 @@ class PKB {
   StatementTypeTable statementTypeTable;
   StatementProcTable statementProcTable;
 
-  LineNos getAssignCommonLogic(Pattern pattern);
+  LineNos getAssignCommonLogic(Pattern pattern, std::optional<Name> name);
 
  public:
   static int setProcToAST(PROC p, TNode* r);
