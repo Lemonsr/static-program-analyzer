@@ -62,10 +62,10 @@ class PKB {
   bool getModifies(LineNumber lineNumber, Name varName);
   bool getModifies(LineNumber lineNumber, Underscore underscore);
   VarNames getModifies(LineNumber lineNumber, Variable var);
-  LineNos getModifies(Statement stmt, Name varName); 
+  LineNos getModifies(Statement stmt, Name varName);
   LineNos getModifies(Statement stmt, Underscore underscore);
   LineNo_Var_Pairs getModifies(Statement stmt, Variable var);
-  
+ 
   // TODO: ModifiesProc methods
 
   // Uses methods
@@ -76,9 +76,9 @@ class PKB {
   LineNos getUses(Statement stmt, Name varName);
   LineNos getUses(Statement stmt, Underscore underscore);
   LineNo_Var_Pairs getUses(Statement stmt, Variable var);
-  
+ 
   // TODO: UsesProc methods
-  
+ 
   // Assign methods
   void addAssign(LineNo lineNo, PostfixString postfixString);
 
