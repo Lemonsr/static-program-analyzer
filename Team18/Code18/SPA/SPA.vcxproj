@@ -27,6 +27,7 @@
     <ClCompile Include="..\source\ContainerStatement.cpp" />
     <ClCompile Include="..\source\NonContainerStatement.cpp" />
     <ClCompile Include="..\source\Expr.cpp" />
+    <ClCompile Include="..\source\UtilsFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\Parser.h" />
@@ -45,6 +46,7 @@
     <ClInclude Include="..\source\ContainerStatement.h" />
     <ClInclude Include="..\source\NonContainerStatement.h" />
     <ClInclude Include="..\source\Expr.h" />
+    <ClInclude Include="..\source\UtilsFunction.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>

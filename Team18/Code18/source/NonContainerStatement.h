@@ -8,8 +8,8 @@
 class NonContainerStatement : public Statement
 {
 protected:
-	std::unordered_set<int> whileStmtAncestors;
-	std::unordered_set<int> ifStmtAncestors;
+	std::unordered_set<int> whileStmtParents;
+	std::unordered_set<int> ifStmtParents;
 };
 
 class OneVarNonContainerStatement : public NonContainerStatement
@@ -24,49 +24,54 @@ public:
 class ReadStatement : public OneVarNonContainerStatement
 {
 public:
-	ReadStatement(std::string parentProcedureVal, std::string variableName, std::unordered_set<int> whileStmtAncestors,
-	              std::unordered_set<int> ifStmtAncestors, int statementLineNum);
+	ReadStatement(std::string parentProcedureVal, std::string variableName, std::unordered_set<int> whileStmtParents,
+	              std::unordered_set<int> ifStmtParents, int statementLineNum);
 };
 
 class PrintStatement : public OneVarNonContainerStatement
 {
 public:
-	PrintStatement(std::string parentProcedureVal, std::string variableName, std::unordered_set<int> whileStmtAncestors,
-	               std::unordered_set<int> ifStmtAncestors, int statementLineNum);
+	PrintStatement(std::string parentProcedureVal, std::string variableName, std::unordered_set<int> whileStmtParents,
+	               std::unordered_set<int> ifStmtParents, int statementLineNum);
 };
 
 class CallStatement : public OneVarNonContainerStatement
 {
 public:
-	CallStatement(std::string parentProcedureVal, std::string variableName, std::unordered_set<int> whileStmtAncestors,
-	              std::unordered_set<int> ifStmtAncestors, int statementLineNum);
+	CallStatement(std::string parentProcedureVal, std::string variableName, std::unordered_set<int> whileStmtParents,
+	              std::unordered_set<int> ifStmtParents, int statementLineNum);
 };
 
 class MultiVarNonContainerStatement : public NonContainerStatement
 {
 protected:
-	std::string assignVar;
-	std::string rightPostfixExpr;
+	std::string postfixExpr;
 	Expr* expr;
 };
 
 class AssignStatement : public MultiVarNonContainerStatement
 {
+private:
+	std::string assignVar;
+
 public:
-	AssignStatement(std::string parentProcedureVal, Expr* expr, std::unordered_set<int> whileStmtAncestors,
-	                std::unordered_set<int> ifStmtAncestors, int statementLineNum);
+	AssignStatement(std::string parentProcedureVal, std::string assignVar, std::string postfixExpr,
+	                std::unordered_set<int> whileStmtParents,
+	                std::unordered_set<int> ifStmtParents, int statementLineNum);
 };
 
-class ifConditionStatement : public MultiVarNonContainerStatement
+class IfConditionStatement : public MultiVarNonContainerStatement
 {
 public:
-	ifConditionStatement(std::string parentProcedureVal, Expr* expr, std::unordered_set<int> whileStmtAncestors,
-	                     std::unordered_set<int> ifStmtAncestors, int statementLineNum);
+	IfConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
+	                     std::unordered_set<int> whileStmtParents,
+	                     std::unordered_set<int> ifStmtParents, int statementLineNum);
 };
 
-class whileConditionStatement : public MultiVarNonContainerStatement
+class WhileConditionStatement : public MultiVarNonContainerStatement
 {
 public:
-	whileConditionStatement(std::string parentProcedureVal, Expr* expr, std::unordered_set<int> whileStmtAncestors,
-	                        std::unordered_set<int> ifStmtAncestors, int statementLineNum);
+	WhileConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
+	                        std::unordered_set<int> whileStmtParents,
+	                        std::unordered_set<int> ifStmtParents, int statementLineNum);
 };
