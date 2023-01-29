@@ -27,7 +27,7 @@ bool spa::operator==(const PqlArgument& p1, const PqlArgument& p2) {
   } else if (!p1.designEntity) {
     return typeMatch && valueMatch;
   } else {
-    bool designEntityMatch = (p1.designEntity.value() == 
+    bool designEntityMatch = (p1.designEntity.value() ==
                               p2.designEntity.value());
     return typeMatch && valueMatch && designEntityMatch;
   }

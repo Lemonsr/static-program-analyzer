@@ -1,5 +1,7 @@
 #include "PqlArgumentParser.h"
 
+#include <string>
+
 std::optional<spa::PqlArgument> spa::PqlArgumentParser::getSynonym(
     Stream<Token>& tokens,
     ParsedQuery& query

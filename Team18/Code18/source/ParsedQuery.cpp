@@ -42,7 +42,7 @@ void spa::ParsedQuery::setPatternClause(PatternClause clause) {
   patternClause = clause;
 }
 
-const std::optional<spa::SuchThatClause>& 
+const std::optional<spa::SuchThatClause>&
     spa::ParsedQuery::getSuchThatClause() {
   return suchThatClause;
 }

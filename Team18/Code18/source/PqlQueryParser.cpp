@@ -1,6 +1,6 @@
 #include "PqlQueryParser.h"
 
-#include <unordered_map> 
+#include <unordered_map>
 
 spa::PqlParseStatus spa::PqlQueryParser::parseDeclarations(
     Stream<Token>& tokens,
@@ -51,8 +51,7 @@ spa::PqlParseStatus spa::PqlQueryParser::parseClauses(Stream<Token>& tokens,
       PqlParseStatus status = parser->parse(tokens, query);
       if (status == PQL_PARSE_ERROR) {
         return PQL_PARSE_ERROR;
-      }
-      else if (status == PQL_PARSE_SUCCESS) {
+      } else if (status == PQL_PARSE_SUCCESS) {
         it->second = true;
         parserUsed = true;
       }

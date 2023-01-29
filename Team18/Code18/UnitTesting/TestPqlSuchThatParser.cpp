@@ -37,10 +37,9 @@ public:
     Assert::IsTrue(opt.has_value());
     spa::SuchThatClause& clause = opt.value();
     spa::SuchThatClause compare(
-      spa::MODIFIES, 
+      spa::MODIFIES,
       spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
-      spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE })
-    );
+      spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
   }
@@ -68,8 +67,7 @@ public:
     spa::SuchThatClause compare(
       spa::PARENT_STAR,
       spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
-      spa::PqlArgument(spa::SYNONYM, "s1", { spa::STMT })
-    );
+      spa::PqlArgument(spa::SYNONYM, "s1", { spa::STMT }));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
   }

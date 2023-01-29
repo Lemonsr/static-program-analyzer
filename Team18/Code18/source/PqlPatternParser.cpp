@@ -49,7 +49,7 @@ std::optional<spa::Pattern> spa::PqlPatternParser::parsePartial(
   bool matchResult = tokens.match({
     { TOKEN_UNDERSCORE, "_" },
     { TOKEN_DOUBLE_QUOTES, "\"" }
-   });
+  });
   if (!matchResult) {
     return {};
   }
@@ -126,7 +126,6 @@ spa::PqlParseStatus spa::PqlPatternParser::parse(Stream<Token>& tokens,
   }
   tokens.seek(1);
   query.setPatternClause(
-    { assignSynonym, firstOpt.value(), patternOpt.value() }
-  );
+    { assignSynonym, firstOpt.value(), patternOpt.value() });
   return PQL_PARSE_SUCCESS;
 }
