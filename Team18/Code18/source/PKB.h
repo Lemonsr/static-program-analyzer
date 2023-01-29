@@ -30,6 +30,8 @@ class PKB {
   StatementTypeTable statementTypeTable;
   StatementProcTable statementProcTable;
 
+  LineNos getAssignCommonLogic(Pattern pattern);
+
  public:
   static int setProcToAST(PROC p, TNode* r);
   static TNode* getRootAST(PROC p);
@@ -80,7 +82,7 @@ class PKB {
   // TODO: UsesProc methods
 
   // Assign methods
-  void addAssign(LineNo lineNo, PostfixString postfixString);
+  void addAssign(LineNo lineNo, VarName varName, PostfixString postfixString);
   LineNos getAssign(Underscore underscore, Pattern pattern);
   LineNos getAssign(Variable variable, Pattern pattern);
   LineNos getAssign(Name name, Pattern pattern);

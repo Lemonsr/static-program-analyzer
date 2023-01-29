@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <optional>
 
 int spa::PKB::setProcToAST(PROC p, TNode* r) {
   return 0;
@@ -249,12 +249,49 @@ spa::LineNo_Var_Pairs spa::PKB::getUses(Statement stmt, Variable var) {
 // Assign methods
 
 /**
- * @brief Adds {lineNo, postfixString} to the assignTable if
+ * @brief Adds {lineNo, Assignment} to the assignTable if
  * lineNo is not in assignTable.
  * @param lineNo Integer line number in the SIMPLE code.
- * @param postfixString Assignment statement string in postfix notation.
+ * @param varName Variable on the LHS of the assignment statement.
+ * @param postfixString RHS of assignment statement string in postfix notation.
  */
-void spa::PKB::addAssign(LineNo lineNo, PostfixString postfixString) {
+void spa::PKB::addAssign(LineNo lineNo, VarName varName,
+                         PostfixString postfixString) {
+  assignTable.insert({ lineNo, Assignment({varName, postfixString}) });
+}
+
+/**
+ * @brief Method to factorize out common code from getAssign methods.
+ * @param pattern Pattern struct.
+ * @return A set of SIMPLE source line numbers.
+ */
+spa::LineNos spa::PKB::getAssignCommonLogic(Pattern pattern, std::optional<Name> name) {
+  spa::LineNos result;
+
+  for (auto& [lineNo, assignment] : spa::PKB::assignTable) {
+    if (name.has_value() && name.value().name == assignment.first) {
+      continue;
+    }
+    const std::string postfix = assignment.second;
+    const std::string patternValue = pattern.getValue();
+
+    switch (pattern.getType()) {
+    case EXACT:
+      if (postfix == patternValue) {
+        result.insert(lineNo);
+      }
+      break;
+    case PARTIAL:
+      if (postfix.find(patternValue) != std::string::npos) {
+        result.insert(lineNo);
+      }
+      break;
+    case ANY:
+      result.insert(lineNo);
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -265,7 +302,7 @@ void spa::PKB::addAssign(LineNo lineNo, PostfixString postfixString) {
  * @return A set of SIMPLE source line numbers.
  */
 spa::LineNos spa::PKB::getAssign(Underscore underscore, Pattern pattern) {
-  return LineNos();
+  return getAssignCommonLogic(pattern, std::nullopt);
 }
 
 /**
@@ -276,7 +313,7 @@ spa::LineNos spa::PKB::getAssign(Underscore underscore, Pattern pattern) {
  * @return A set of SIMPLE source line numbers.
  */
 spa::LineNos spa::PKB::getAssign(Variable variable, Pattern pattern) {
-  return LineNos();
+  return getAssignCommonLogic(pattern, std::nullopt);
 }
 
 /**
@@ -287,5 +324,5 @@ spa::LineNos spa::PKB::getAssign(Variable variable, Pattern pattern) {
  * @return A set of SIMPLE source line numbers.
  */
 spa::LineNos spa::PKB::getAssign(Name name, Pattern pattern) {
-  return LineNos();
+  return getAssignCommonLogic(pattern, name);
 }

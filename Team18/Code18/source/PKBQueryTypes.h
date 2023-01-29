@@ -57,5 +57,13 @@ class Pattern {
  public:
   explicit Pattern(PatternType type);
   Pattern(PatternType type, std::string value);
+
+  const PatternType& getType() {
+    return this->type;
+  }
+
+  const std::string getValue() {
+    return this->value;
+  }
 };
 }  // namespace spa

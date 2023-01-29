@@ -28,7 +28,7 @@ using Children = std::unordered_set<Child>;
 using Modifies = VarNames;
 using Uses = VarNames;
 
-enum class StatementType {
+enum StatementType {
 READ,
 PRINT,
 ASSIGN,
