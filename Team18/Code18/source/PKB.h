@@ -81,11 +81,11 @@ class PKB {
 
   // Assign methods
   void addAssign(LineNo lineNo, PostfixString postfixString);
-
-  // TODO: add getAssign methods.
+  LineNos getAssign(Underscore underscore, Pattern pattern);
+  LineNos getAssign(Variable variable, Pattern pattern);
+  LineNos getAssign(Name name, Pattern pattern);
 
   // Statement Type methods
-  void addStatementType(LineNo lineNo,
-    StatementType statementType);
+  void addStatementType(LineNo lineNo, StatementType statementType);
 };
 }  // namespace spa
