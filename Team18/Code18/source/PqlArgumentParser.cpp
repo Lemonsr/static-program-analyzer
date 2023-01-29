@@ -57,21 +57,21 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::parse(
     Stream<Token>& tokens,
     ParsedQuery& query
 ) {
-  std::optional<spa::PqlArgument> result = getSynonym(tokens, query);
-  if (result) {
-    return result;
+  std::optional<spa::PqlArgument> sResult = getSynonym(tokens, query);
+  if (sResult) {
+    return sResult;
   }
-  std::optional<spa::PqlArgument> result = getWildcard(tokens);
-  if (result) {
-    return result;
+  std::optional<spa::PqlArgument> wResult = getWildcard(tokens);
+  if (wResult) {
+    return wResult;
   }
-  std::optional<spa::PqlArgument> result = getLineNo(tokens);
-  if (result) {
-    return result;
+  std::optional<spa::PqlArgument> lResult = getLineNo(tokens);
+  if (lResult) {
+    return lResult;
   }
-  std::optional<spa::PqlArgument> result = getVariableName(tokens);
-  if (result) {
-    return result;
+  std::optional<spa::PqlArgument> vResult = getVariableName(tokens);
+  if (vResult) {
+    return vResult;
   }
   return {};
 }

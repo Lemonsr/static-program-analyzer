@@ -22,7 +22,15 @@ const std::optional<spa::DesignEntityType>&
 bool spa::operator==(const PqlArgument& p1, const PqlArgument& p2) {
   bool typeMatch = p1.type == p2.type;
   bool valueMatch = p1.value == p2.value;
-  return typeMatch && valueMatch;
+  if (p1.designEntity.has_value() != p2.designEntity.has_value()) {
+    return false;
+  } else if (!p1.designEntity) {
+    return typeMatch && valueMatch;
+  } else {
+    bool designEntityMatch = (p1.designEntity.value() == 
+                              p2.designEntity.value());
+    return typeMatch && valueMatch && designEntityMatch;
+  }
 }
 
 bool spa::operator!=(const PqlArgument& p1, const PqlArgument& p2) {

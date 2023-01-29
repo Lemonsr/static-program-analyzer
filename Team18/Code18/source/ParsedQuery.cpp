@@ -42,11 +42,29 @@ void spa::ParsedQuery::setPatternClause(PatternClause clause) {
   patternClause = clause;
 }
 
+const std::optional<spa::SuchThatClause>& 
+    spa::ParsedQuery::getSuchThatClause() {
+  return suchThatClause;
+}
+
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
   PqlArgument firstArg, PqlArgument secondArg)
   : designAbstraction(designAbstraction), firstArg(firstArg),
   secondArg(secondArg) {
 }
+
+
+bool spa::operator==(const SuchThatClause& s1, const SuchThatClause& s2) {
+  bool typeMatch = s1.designAbstraction == s2.designAbstraction;
+  bool firstArgMatch = s1.firstArg == s2.firstArg;
+  bool secondArgMatch = s1.secondArg == s2.secondArg;
+  return typeMatch && firstArgMatch && secondArgMatch;
+}
+
+bool spa::operator!=(const SuchThatClause& s1, const SuchThatClause& s2) {
+  return !(s1 == s2);
+}
+
 
 spa::PatternClause::PatternClause(PqlArgument synonym, PqlArgument firstArg,
   Pattern secondArg) : synonym(synonym), firstArg(firstArg),

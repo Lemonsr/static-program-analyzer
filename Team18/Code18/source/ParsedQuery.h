@@ -29,6 +29,8 @@ class SuchThatClause {
  public:
   SuchThatClause(RelationshipType designAbstraction, PqlArgument firstArg,
     PqlArgument secondArg);
+  friend bool operator==(const SuchThatClause& s1, const SuchThatClause& s2);
+  friend bool operator!=(const SuchThatClause& s1, const SuchThatClause& s2);
 };
 
 class PatternClause {
@@ -53,6 +55,7 @@ class ParsedQuery {
   bool setSelectSynonym(std::string synonym);
   void setSuchThatClause(SuchThatClause clause);
   void setPatternClause(PatternClause clause);
+  const std::optional<SuchThatClause>& getSuchThatClause();
 };
 }  // namespace spa
 
