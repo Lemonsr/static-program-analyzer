@@ -58,23 +58,27 @@ class PKB {
   void addParentStar(Child child, Parents parents);
 
   // Modifies methods
-  void addModifies(LineNo lineNo, Name varName);
+  void addModifies(LineNo lineNo, Modifies modifies);
   bool getModifies(LineNumber lineNumber, Name varName);
-  VarNames getModifies(LineNumber lineNumber, Variable var);
   bool getModifies(LineNumber lineNumber, Underscore underscore);
-  LineNos getModifies(Statement stmt, Name varName);
-  LineNo_Var_Pairs getModifies(LineNo lineNo, Name varName);
+  VarNames getModifies(LineNumber lineNumber, Variable var);
+  LineNos getModifies(Statement stmt, Name varName); 
   LineNos getModifies(Statement stmt, Underscore underscore);
+  LineNo_Var_Pairs getModifies(Statement stmt, Variable var);
+  
+  // TODO: ModifiesProc methods
 
   // Uses methods
-  void addUses(LineNo lineNo, Name var);
+  void addUses(LineNo lineNo, Uses uses);
   bool getUses(LineNumber lineNumber, Name varName);
-  VarNames getUses(LineNumber lineNumber, Variable var);
   bool getUses(LineNumber lineNumber, Underscore underscore);
+  VarNames getUses(LineNumber lineNumber, Variable var);
   LineNos getUses(Statement stmt, Name varName);
-  LineNo_Var_Pairs getUses(LineNo lineNo, Name varName);
   LineNos getUses(Statement stmt, Underscore underscore);
-
+  LineNo_Var_Pairs getUses(Statement stmt, Variable var);
+  
+  // TODO: UsesProc methods
+  
   // Assign methods
   void addAssign(LineNo lineNo, PostfixString postfixString);
 
