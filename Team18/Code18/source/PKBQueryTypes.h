@@ -1,9 +1,11 @@
 #pragma once
 
 #include "PKBTypes.h"
+#include "Token.h"
 
 #include <string>
 #include <optional>
+#include <vector>
 
 namespace spa {
 struct Variable { };
@@ -32,9 +34,9 @@ enum PatternType {
 class Pattern {
  private:
   PatternType type;
-  std::string value;
+  std::vector<Token> value;
  public:
   explicit Pattern(PatternType type);
-  Pattern(PatternType type, std::string value);
+  Pattern(PatternType type, std::vector<Token> value);
 };
 }  // namespace spa
