@@ -173,6 +173,7 @@
     <ClCompile Include="TestAST.cpp" />
     <ClCompile Include="TestTokenizer.cpp" />
     <ClCompile Include="TestPKB.cpp" />
+    <ClCompile Include="TestUtilsFunction.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
