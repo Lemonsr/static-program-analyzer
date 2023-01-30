@@ -1,9 +1,9 @@
-#include "stdafx.h"
-
 #include <iostream>
 #include <vector>
 
+#include "stdafx.h"
 #include "UtilsFunction.h"
+
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
@@ -219,4 +219,4 @@ namespace UnitTesting {
       Assert::IsTrue(expectedResult == testResults);
     }
   };
-} // namespace UnitTesting
+}  // namespace UnitTesting
