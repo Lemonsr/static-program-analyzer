@@ -1,14 +1,19 @@
 #pragma once
 
 #include "QpsPreprocessor.h"
+#include "Token.h"
+#include "PqlArgument.h"
+#include "PKBQueryTypes.h"
 
-struct QueryResult {
+namespace spa {
+class QueryResult {
 };
 
 class QpsEvaluator {
- public:
-  explicit QpsEvaluator(QueryObject queryObject);
-  QueryResult evaluate();
  private:
-  QueryObject queryObject;
+  ParsedQuery queryObject;
+ public:
+  explicit QpsEvaluator(ParsedQuery queryObject);
+  QueryResult evaluate();
 };
+}  // namespace spa

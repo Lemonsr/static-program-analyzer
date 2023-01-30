@@ -1,12 +1,16 @@
 #include <string>
+#include <optional>
 
 #include "QPS.h"
+#include "ParsedQuery.h"
 
-std::string QPS::evaluate(std::string query) {
-  QpsPreprocessor* preprocessor = new QpsPreprocessor();
-  QueryObject queryObject = preprocessor->preprocess(query);
-
-  QpsEvaluator* evaluator = new QpsEvaluator(queryObject);
-  QueryResult queryResult = evaluator->evaluate();
+std::string spa::QPS::evaluate(std::string query) {
+  QpsPreprocessor preprocessor;
+  std::optional<ParsedQuery> queryOpt = preprocessor.preprocess(query);
+  if (!queryOpt) {
+    return "Syntax error in query";
+  }
+  QpsEvaluator evaluator(queryOpt.value());
+  QueryResult queryResult = evaluator.evaluate();
   return "";
 }

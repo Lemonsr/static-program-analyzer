@@ -27,12 +27,6 @@
     <ClCompile Include="..\source\TNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\PqlParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\PqlTokenizer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\QPS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,12 +57,42 @@
     <ClCompile Include="..\source\Expr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\PqlArgument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\PKBQueryTypes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ParsedQuery.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\source\UtilsFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\PqlDeclarationParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\PqlSuchThatParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\PqlArgumentParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\PqlPatternParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\PqlQueryParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PKB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PKBTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PKBQueryTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\TNode.h">
@@ -77,21 +101,15 @@
     <ClInclude Include="..\source\Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClCompile Include="..\source\PqlParser.h">
+    <ClInclude Include="..\source\QPS.h">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\PqlTokenizer.h">
+    </ClInclude>
+    <ClInclude Include="..\source\QpsEvaluator.h">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\QPS.h">
+    </ClInclude>
+    <ClInclude Include="..\source\QpsPreprocessor.h">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\QpsEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\QpsPreprocessor.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClInclude Include="..\source\Stream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -116,7 +134,40 @@
     <ClInclude Include="..\source\Expr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\Argument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\DesignEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PKBQueryTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PKBTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PqlArgument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ParsedQuery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\source\UtilsFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PqlDeclarationParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PqlSuchThatParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PqlArgumentParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PqlPatternParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PqlQueryParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

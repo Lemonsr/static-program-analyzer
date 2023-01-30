@@ -1,10 +1,14 @@
 #pragma once
 
 #include <string>
-#include "PqlTokenizer.h"
-#include "PqlParser.h"
+#include <optional>
 
+#include "ParsedQuery.h"
+
+namespace spa {
 class QpsPreprocessor {
  public:
-  QueryObject preprocess(std::string query);
+  std::optional<ParsedQuery> preprocess(std::string query);
 };
+}
+
