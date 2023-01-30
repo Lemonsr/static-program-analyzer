@@ -37,7 +37,7 @@ struct Procedure { };
 /**
  * A struct for a line number in a PQL query.
  */
-struct LineNumber { 
+struct LineNumber {
   LineNo lineNo;
 };
 

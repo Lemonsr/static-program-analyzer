@@ -6,7 +6,7 @@
 
 #include "PqlArgument.h"
 
-std::unordered_map<spa::DesignEntityType, 
+std::unordered_map<spa::DesignEntityType,
                          std::optional<spa::StatementType>> typeMap {
   { spa::STMT, {} },
   { spa::READ, {spa::StatementType::READ} },
@@ -19,34 +19,42 @@ std::unordered_map<spa::DesignEntityType,
 
 spa::PkbQueryArg::PkbQueryArg(PqlArgument& pqlArg) {
   switch (pqlArg.getType()) {
-    case SYNONYM:
-      auto designEntity = pqlArg.getDesignEntity().value();
-      if (designEntity == PROCEDURE) {
-        type = PkbQueryArgType::PROCEDURE;
-        procedureOpt = {};
-      } else if (designEntity == VARIABLE) {
-        type = PkbQueryArgType::VARIABLE;
-        variableOpt = {};
-      } else if (designEntity == CONSTANT) {
-        type = PkbQueryArgType::CONSTANT;
-        constantOpt = {};
-      } else {
-        type = PkbQueryArgType::STATEMENT;
-        statementOpt = { typeMap[designEntity] };
-      }
-      break;
-    case WILDCARD:
-      type = PkbQueryArgType::UNDERSCORE;
-      underscoreOpt = {};
-      break;
-    case VARIABLE_NAME:
-      type = PkbQueryArgType::NAME;
-      nameOpt = { pqlArg.getValue() };
-      break;
-    case LINE_NO:
-      type = PkbQueryArgType::LINE_NUMBER;
-      lineNumberOpt = { static_cast<size_t>(std::stoi(pqlArg.getValue())) };
+  case SYNONYM: {
+    auto designEntity = pqlArg.getDesignEntity().value();
+    if (designEntity == PROCEDURE) {
+      type = PkbQueryArgType::PROCEDURE;
+      procedureOpt = {};
+    } else if (designEntity == VARIABLE) {
+      type = PkbQueryArgType::VARIABLE;
+      variableOpt = {};
+    } else if (designEntity == CONSTANT) {
+      type = PkbQueryArgType::CONSTANT;
+      constantOpt = {};
+    } else {
+      type = PkbQueryArgType::STATEMENT;
+      statementOpt = { typeMap[designEntity] };
+    }
+    break;
   }
+  case WILDCARD: {
+    type = PkbQueryArgType::UNDERSCORE;
+    underscoreOpt = {};
+    break;
+  }
+  case VARIABLE_NAME: {
+    type = PkbQueryArgType::NAME;
+    nameOpt = { pqlArg.getValue() };
+    break;
+  }
+  case LINE_NO: {
+    type = PkbQueryArgType::LINE_NUMBER;
+    lineNumberOpt = { static_cast<size_t>(std::stoi(pqlArg.getValue())) };
+  }
+  }
+}
+
+const spa::PkbQueryArgType& spa::PkbQueryArg::getType() {
+  return type;
 }
 
 const spa::Constant& spa::PkbQueryArg::getConstant() {
