@@ -21,9 +21,8 @@ WhileContainerStatement::WhileContainerStatement(std::string parentProcedureVal,
 }
 
 //Constructor for IfContainerStatement
-InnerBlockStatement::InnerBlockStatement(std::string parentProcedureVal, int statementLineNum,
+InnerBlockStatement::InnerBlockStatement(std::string parentProcedureVal,
                                          std::vector<Statement*> statementList) {
 	this->parentProcedureVal = parentProcedureVal;
-	this->statementLineNum = statementLineNum;
 	this->statementList = statementList;
 }

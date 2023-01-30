@@ -26,5 +26,5 @@ public:
 class InnerBlockStatement : public ContainerStatement
 {
 public:
-	InnerBlockStatement(std::string parentProcedureVal, int statementLineNum, std::vector<Statement*> statementList);
+	InnerBlockStatement(std::string parentProcedureVal, std::vector<Statement*> statementList);
 };
