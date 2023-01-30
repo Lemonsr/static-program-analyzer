@@ -42,24 +42,23 @@ namespace UnitTesting {
     std::vector<spa::Token> infixTokens = {};
     std::string expectedResult = "";
     std::string testResults = "";
-    UtilsFunction utils;
 
   public:
     TEST_METHOD(TestUtilsFunctionLTrim) {
       std::string stringToTest = "     abc";
-      utils.ltrim(stringToTest);
+      UtilsFunction::ltrim(stringToTest);
       Assert::IsTrue(stringToTest == "abc");
     }
 
     TEST_METHOD(TestUtilsFunctionRTrim) {
       std::string stringToTest = "abc     ";
-      utils.rtrim(stringToTest);
+      UtilsFunction::rtrim(stringToTest);
       Assert::IsTrue(stringToTest == "abc");
     }
 
     TEST_METHOD(TestUtilsFunctionTrimString) {
       std::string stringToTest = "     abc     ";
-      utils.trimString(stringToTest);
+      UtilsFunction::trimString(stringToTest);
       Assert::IsTrue(stringToTest == "abc");
     }
 
@@ -69,7 +68,7 @@ namespace UnitTesting {
         tokenA, tokenMinusOp, tokenB,
         tokenPlusOp, tokenC, tokenMinusOp, tokenD
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + minusOp + " " + varC +
         " " + plusOp + " " + varD + " " + minusOp;
       Assert::IsTrue(expectedResult == testResults);
@@ -79,7 +78,7 @@ namespace UnitTesting {
         tokenA, tokenDivideOp, tokenB,
         tokenMultiplyOp, tokenC, tokenDivideOp, tokenD
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + divideOp + " " + varC +
         " " + multiplyOp + " " + varD + " " + divideOp;
       Assert::IsTrue(expectedResult == testResults);
@@ -89,7 +88,7 @@ namespace UnitTesting {
         tokenA, tokenDivideOp, tokenB, tokenMultiplyOp, tokenC,
         tokenDivideOp, tokenConstant
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + divideOp + " " + varC +
         " " + multiplyOp + " " + constant + " " +
         divideOp;
@@ -102,7 +101,7 @@ namespace UnitTesting {
         tokenA, tokenPlusOp, tokenB,
         tokenMultiplyOp, tokenC, tokenPlusOp, tokenD
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + varC + " " + multiplyOp +
         " " + plusOp + " " + varD + " " + plusOp;
       Assert::IsTrue(expectedResult == testResults);
@@ -112,7 +111,7 @@ namespace UnitTesting {
         tokenA, tokenMultiplyOp, tokenB, tokenMultiplyOp, tokenC,
         tokenMinusOp, tokenD
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + multiplyOp + " " + varC +
         " " + multiplyOp + " " + varD + " " +
         minusOp;
@@ -123,7 +122,7 @@ namespace UnitTesting {
         tokenA, tokenMultiplyOp, tokenConstant, tokenMultiplyOp, tokenC,
         tokenMinusOp, tokenD
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + constant + " " + multiplyOp + " " + varC +
         " " + multiplyOp + " " + varD + " " +
         minusOp;
@@ -136,7 +135,7 @@ namespace UnitTesting {
         tokenA, tokenPlusOp, tokenB, tokenMinusOp, tokenLeftBracket, tokenC,
         tokenPlusOp, tokenD, tokenRightBracket
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + plusOp + " " + varC + " " +
         varD + " " + plusOp + " " + minusOp;
       Assert::IsTrue(expectedResult == testResults);
@@ -147,7 +146,7 @@ namespace UnitTesting {
         tokenC, tokenDivideOp, tokenD,
         tokenRightBracket
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + varC + " " + multiplyOp +
         " " + varD + " " + divideOp + " " +
         multiplyOp;
@@ -158,7 +157,7 @@ namespace UnitTesting {
         tokenA, tokenMultiplyOp, tokenLeftBracket, tokenB, tokenMultiplyOp,
         tokenConstant, tokenDivideOp, tokenD, tokenRightBracket
       };
-      testResults = utils.infixToPostfix(thirdCase);
+      testResults = UtilsFunction::infixToPostfix(thirdCase);
       expectedResult = varA + " " + varB + " " + constant + " " + multiplyOp +
         " " + varD + " " + divideOp + " " +
         multiplyOp;
@@ -171,7 +170,7 @@ namespace UnitTesting {
         tokenA, tokenMultiplyOp, tokenLeftBracket, tokenB, tokenMinusOp,
         tokenC, tokenRightBracket, tokenPlusOp, tokenD
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + varC + " " + minusOp + " " +
         multiplyOp + " " + varD + " " + plusOp;
       Assert::IsTrue(expectedResult == testResults);
@@ -182,7 +181,7 @@ namespace UnitTesting {
         tokenLeftBracket, tokenB, tokenPlusOp, tokenC,
         tokenDivideOp, tokenD, tokenRightBracket
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + varC + " " + varD + " " +
         divideOp + " " + plusOp + " " + multiplyOp;
       Assert::IsTrue(expectedResult == testResults);
@@ -193,7 +192,7 @@ namespace UnitTesting {
         tokenLeftBracket, tokenB, tokenPlusOp,
         tokenC, tokenDivideOp, tokenConstant, tokenRightBracket
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = constant + " " + varB + " " + varC + " " + constant +
         " " + divideOp + " " + plusOp + " " +
         multiplyOp;
@@ -203,7 +202,7 @@ namespace UnitTesting {
     TEST_METHOD(TestUtilsFunctionInfixToPostfixWithMultiCharOperator) {
       // Test, Expected: "a>=b", "ab>="
       infixTokens = {tokenA, tokenGreaterEqual, tokenB};
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + greaterEqOp;
       Assert::IsTrue(expectedResult == testResults);
 
@@ -212,7 +211,7 @@ namespace UnitTesting {
         tokenA, tokenGreaterEqual, tokenB, tokenLogicalAnd, tokenC,
         tokenGreaterEqual, tokenD
       };
-      testResults = utils.infixToPostfix(infixTokens);
+      testResults = UtilsFunction::infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + greaterEqOp + " " + varC +
         " " + varD + " " + greaterEqOp + " " +
         logicalAnd;
