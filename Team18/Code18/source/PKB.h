@@ -30,6 +30,8 @@ class PKB {
   StatementTypeTable statementTypeTable;
   StatementProcTable statementProcTable;
 
+  LineNos getAssignCommonLogic(std::optional<Name> name, Pattern pattern);
+
  public:
   static int setProcToAST(PROC p, TNode* r);
   static TNode* getRootAST(PROC p);
@@ -58,30 +60,34 @@ class PKB {
   void addParentStar(Child child, Parents parents);
 
   // Modifies methods
-  void addModifies(LineNo lineNo, Name varName);
+  void addModifies(LineNo lineNo, Modifies modifies);
   bool getModifies(LineNumber lineNumber, Name varName);
-  VarNames getModifies(LineNumber lineNumber, Variable var);
   bool getModifies(LineNumber lineNumber, Underscore underscore);
+  VarNames getModifies(LineNumber lineNumber, Variable var);
   LineNos getModifies(Statement stmt, Name varName);
-  LineNo_Var_Pairs getModifies(LineNo lineNo, Name varName);
   LineNos getModifies(Statement stmt, Underscore underscore);
+  LineNo_Var_Pairs getModifies(Statement stmt, Variable var);
+
+  // TODO: ModifiesProc methods
 
   // Uses methods
-  void addUses(LineNo lineNo, Name var);
+  void addUses(LineNo lineNo, Uses uses);
   bool getUses(LineNumber lineNumber, Name varName);
-  VarNames getUses(LineNumber lineNumber, Variable var);
   bool getUses(LineNumber lineNumber, Underscore underscore);
+  VarNames getUses(LineNumber lineNumber, Variable var);
   LineNos getUses(Statement stmt, Name varName);
-  LineNo_Var_Pairs getUses(LineNo lineNo, Name varName);
   LineNos getUses(Statement stmt, Underscore underscore);
+  LineNo_Var_Pairs getUses(Statement stmt, Variable var);
+
+  // TODO: UsesProc methods
 
   // Assign methods
-  void addAssign(LineNo lineNo, PostfixString postfixString);
-
-  // TODO: add getAssign methods.
+  void addAssign(LineNo lineNo, VarName varName, PostfixString postfixString);
+  LineNos getAssign(Underscore underscore, Pattern pattern);
+  LineNos getAssign(Variable variable, Pattern pattern);
+  LineNos getAssign(Name name, Pattern pattern);
 
   // Statement Type methods
-  void addStatementType(LineNo lineNo,
-    StatementType statementType);
+  void addStatementType(LineNo lineNo, StatementType statementType);
 };
 }  // namespace spa
