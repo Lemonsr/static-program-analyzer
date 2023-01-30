@@ -9,9 +9,9 @@
 namespace spa {
 class PqlArgument {
  private:
-  const ArgumentType type;
-  const std::string value;
-  const std::optional<DesignEntityType> designEntity;
+  ArgumentType type;
+  std::string value;
+  std::optional<DesignEntityType> designEntity;
  public:
   PqlArgument(ArgumentType type, std::string value,
     std::optional<DesignEntityType> designEntity);
