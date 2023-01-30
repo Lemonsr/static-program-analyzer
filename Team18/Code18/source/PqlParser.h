@@ -2,6 +2,7 @@
 
 #include "Token.h"
 #include "Stream.h"
+#include "ParsedQuery.h"
 
 namespace spa {
 
@@ -13,7 +14,7 @@ enum PqlParseStatus {
 
 class PqlParser {
  public:
-  virtual PqlParseStatus parse(Stream<Token>& tokens) = 0;
+  virtual PqlParseStatus parse(Stream<Token>& tokens, ParsedQuery& query) = 0;
 };
 }  // namespace spa
 

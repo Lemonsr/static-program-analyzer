@@ -260,6 +260,10 @@ void spa::PKB::addAssign(LineNo lineNo, VarName varName,
   assignTable.insert({ lineNo, Assignment({varName, postfixString}) });
 }
 
+std::string convertToPostfix(const std::vector<spa::Token>& tokens) {
+  return "";
+}
+
 /**
  * @brief Method to factorize out common code from getAssign methods.
  * @param pattern Pattern struct.
@@ -274,7 +278,7 @@ spa::LineNos spa::PKB::getAssignCommonLogic(std::optional<Name> name,
       continue;
     }
     const std::string postfix = assignment.second;
-    const std::string patternValue = pattern.getValue();
+    const std::string patternValue = convertToPostfix(pattern.getValue());
 
     switch (pattern.getType()) {
     case EXACT:

@@ -1,9 +1,11 @@
 #pragma once
 
 #include "PKBTypes.h"
+#include "Token.h"
 
 #include <string>
 #include <optional>
+#include <vector>
 
 namespace spa {
 
@@ -52,18 +54,19 @@ enum PatternType {
 
 class Pattern {
  private:
-  const PatternType type;
-  const std::string value;
+  PatternType type;
+  std::vector<Token> value;
  public:
   explicit Pattern(PatternType type);
-  Pattern(PatternType type, std::string value);
-
+  Pattern(PatternType type, std::vector<Token> value);
   const PatternType& getType() {
     return this->type;
   }
 
-  const std::string getValue() {
+  const std::vector<Token>& getValue() {
     return this->value;
   }
+  friend bool operator==(const Pattern& p1, const Pattern& p2);
+  friend bool operator!=(const Pattern& p1, const Pattern& p2);
 };
 }  // namespace spa

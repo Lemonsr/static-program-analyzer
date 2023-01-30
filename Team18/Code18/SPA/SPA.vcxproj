@@ -17,6 +17,11 @@
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\PKBQueryTypes.cpp" />
     <ClCompile Include="..\source\PqlArgument.cpp" />
+    <ClCompile Include="..\source\PqlArgumentParser.cpp" />
+    <ClCompile Include="..\source\PqlDeclarationParser.cpp" />
+    <ClCompile Include="..\source\PqlPatternParser.cpp" />
+    <ClCompile Include="..\source\PqlQueryParser.cpp" />
+    <ClCompile Include="..\source\PqlSuchThatParser.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="..\source\QPS.cpp" />
     <ClCompile Include="..\source\QpsEvaluator.cpp" />
@@ -34,6 +39,11 @@
     <ClInclude Include="..\source\PKBQueryTypes.h" />
     <ClInclude Include="..\source\PKBTypes.h" />
     <ClInclude Include="..\source\PqlArgument.h" />
+    <ClInclude Include="..\source\PqlArgumentParser.h" />
+    <ClInclude Include="..\source\PqlDeclarationParser.h" />
+    <ClInclude Include="..\source\PqlPatternParser.h" />
+    <ClInclude Include="..\source\PqlQueryParser.h" />
+    <ClInclude Include="..\source\PqlSuchThatParser.h" />
     <ClInclude Include="..\source\Stream.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClCompile Include="..\source\PqlParser.h" />
