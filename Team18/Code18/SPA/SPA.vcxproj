@@ -15,6 +15,7 @@
     <ClCompile Include="..\source\ParsedQuery.cpp" />
     <ClCompile Include="..\source\Parser.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
+    <ClCompile Include="..\source\PkbQueryArg.cpp" />
     <ClCompile Include="..\source\PKBQueryTypes.cpp" />
     <ClCompile Include="..\source\PqlArgument.cpp" />
     <ClCompile Include="..\source\PqlArgumentParser.cpp" />
@@ -35,6 +36,7 @@
     <ClInclude Include="..\source\ParsedQuery.h" />
     <ClInclude Include="..\source\Parser.h" />
     <ClInclude Include="..\source\PKB.h" />
+    <ClInclude Include="..\source\PkbQueryArg.h" />
     <ClInclude Include="..\source\PKBQueryTypes.h" />
     <ClInclude Include="..\source\PKBTypes.h" />
     <ClInclude Include="..\source\PqlArgument.h" />
