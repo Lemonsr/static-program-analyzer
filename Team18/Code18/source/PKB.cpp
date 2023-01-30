@@ -265,8 +265,8 @@ void spa::PKB::addAssign(LineNo lineNo, VarName varName,
  * @param pattern Pattern struct.
  * @return A set of SIMPLE source line numbers.
  */
-spa::LineNos spa::PKB::getAssignCommonLogic(Pattern pattern,
-                                            std::optional<Name> name) {
+spa::LineNos spa::PKB::getAssignCommonLogic(std::optional<Name> name,
+                                            Pattern pattern) {
   spa::LineNos result;
 
   for (auto& [lineNo, assignment] : spa::PKB::assignTable) {
@@ -303,7 +303,7 @@ spa::LineNos spa::PKB::getAssignCommonLogic(Pattern pattern,
  * @return A set of SIMPLE source line numbers.
  */
 spa::LineNos spa::PKB::getAssign(Underscore underscore, Pattern pattern) {
-  return getAssignCommonLogic(pattern, std::nullopt);
+  return getAssignCommonLogic(std::nullopt, pattern);
 }
 
 /**
@@ -314,7 +314,7 @@ spa::LineNos spa::PKB::getAssign(Underscore underscore, Pattern pattern) {
  * @return A set of SIMPLE source line numbers.
  */
 spa::LineNos spa::PKB::getAssign(Variable variable, Pattern pattern) {
-  return getAssignCommonLogic(pattern, std::nullopt);
+  return getAssignCommonLogic(std::nullopt, pattern);
 }
 
 /**
@@ -325,5 +325,5 @@ spa::LineNos spa::PKB::getAssign(Variable variable, Pattern pattern) {
  * @return A set of SIMPLE source line numbers.
  */
 spa::LineNos spa::PKB::getAssign(Name name, Pattern pattern) {
-  return getAssignCommonLogic(pattern, name);
+  return getAssignCommonLogic(name, pattern);
 }

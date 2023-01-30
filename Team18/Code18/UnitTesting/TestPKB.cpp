@@ -18,10 +18,10 @@ TEST_CLASS(TestPKB) {
 
     bool isKeyExist = assignTable.find(6) != assignTable.end();
     Assert::IsTrue(isKeyExist);
-    bool isFirstValueEquals = assignTable.at(6).first == "x";
-    Assert::IsTrue(isFirstValueEquals);
-    bool isSecondValueEquals = assignTable.at(6).second == "1 2 +";
-    Assert::IsTrue(isSecondValueEquals);
+    bool isMatchLHS = assignTable.at(6).first == "x";
+    Assert::IsTrue(isMatchLHS);
+    bool isMatchRHS = assignTable.at(6).second == "1 2 +";
+    Assert::IsTrue(isMatchRHS);
   }
 };
 }  // namespace UnitTesting
