@@ -270,7 +270,7 @@ spa::LineNos spa::PKB::getAssignCommonLogic(Pattern pattern,
   spa::LineNos result;
 
   for (auto& [lineNo, assignment] : spa::PKB::assignTable) {
-    if (name.has_value() && name.value().name == assignment.first) {
+    if (name.has_value() && name.value().name != assignment.first) {
       continue;
     }
     const std::string postfix = assignment.second;
