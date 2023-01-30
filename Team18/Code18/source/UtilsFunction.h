@@ -5,10 +5,10 @@
 #include "Token.h"
 
 class UtilsFunction {
-  private:
+ private:
   static int getPrecedence(std::string op);
 
-  public:
+ public:
   static void ltrim(std::string& s);
   static void rtrim(std::string& s);
   static void trimString(std::string& s);

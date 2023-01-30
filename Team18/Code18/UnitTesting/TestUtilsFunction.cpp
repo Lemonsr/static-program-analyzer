@@ -7,10 +7,8 @@
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
-namespace UnitTesting
-{
-  TEST_CLASS(TestUtilsFunction)
-  {
+namespace UnitTesting {
+  TEST_CLASS(TestUtilsFunction) {
     std::string varA = "a";
     std::string varB = "b";
     std::string varC = "c";
@@ -221,6 +219,4 @@ namespace UnitTesting
       Assert::IsTrue(expectedResult == testResults);
     }
   };
-}
-
-// namespace UnitTesting
+} // namespace UnitTesting
