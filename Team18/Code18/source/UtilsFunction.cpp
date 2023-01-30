@@ -43,20 +43,16 @@ std::string UtilsFunction::infixToPostfix(std::vector<spa::Token> tokens) {
     std::string tokenValue = token.getValue();
     if (std::all_of(tokenValue.begin(), tokenValue.end(), ::isalnum)) {
       postfix += tokenValue + " ";
-    }
-    else if (operators.count(tokenValue)) {
-      while (!operatorStack.empty() &&
-        operatorStack.top() != "(" &&
+    } else if (operators.count(tokenValue)) {
+      while (!operatorStack.empty() && operatorStack.top() != "(" &&
         getPrecedence(operatorStack.top()) >= getPrecedence(tokenValue)) {
         postfix += operatorStack.top() + " ";
         operatorStack.pop();
       }
       operatorStack.push(tokenValue);
-    }
-    else if (tokenValue == "(") {
+    } else if (tokenValue == "(") {
       operatorStack.push(tokenValue);
-    }
-    else if (tokenValue == ")") {
+    } else if (tokenValue == ")") {
       while (!operatorStack.empty() && operatorStack.top() != "(") {
         postfix += operatorStack.top() + " ";
         operatorStack.pop();
