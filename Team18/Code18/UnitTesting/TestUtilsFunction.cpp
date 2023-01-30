@@ -39,7 +39,7 @@ namespace UnitTesting {
     spa::Token tokenLogicalOr = spa::Token(spa::TOKEN_NAME, logicalOr);
     spa::Token tokenLogicalAnd = spa::Token(spa::TOKEN_NAME, logicalAnd);
 
-
+    std::vector<spa::Token> infixTokens = {};
     std::string expectedResult = "";
     std::string testResults = "";
     UtilsFunction utils;
@@ -65,31 +65,31 @@ namespace UnitTesting {
 
     TEST_METHOD(TestUtilsFunctionInfixToPostfixSamePrecedence) {
       // Test, Expected: "a-b+c-d", "ab-c+d-"
-      std::vector<spa::Token> firstCase{
+      infixTokens = {
         tokenA, tokenMinusOp, tokenB,
         tokenPlusOp, tokenC, tokenMinusOp, tokenD
       };
-      testResults = utils.infixToPostfix(firstCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + minusOp + " " + varC +
         " " + plusOp + " " + varD + " " + minusOp;
       Assert::IsTrue(expectedResult == testResults);
 
       // Test, Expected: "a/b*c/d", "ab/c*d/"
-      std::vector<spa::Token> secondCase{
+      infixTokens = {
         tokenA, tokenDivideOp, tokenB,
         tokenMultiplyOp, tokenC, tokenDivideOp, tokenD
       };
-      testResults = utils.infixToPostfix(secondCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + divideOp + " " + varC +
         " " + multiplyOp + " " + varD + " " + divideOp;
       Assert::IsTrue(expectedResult == testResults);
 
       // Test, Expected: "a/b*c/1", "ab/c*1/"
-      std::vector<spa::Token> thirdCase{
+      infixTokens = {
         tokenA, tokenDivideOp, tokenB, tokenMultiplyOp, tokenC,
         tokenDivideOp, tokenConstant
       };
-      testResults = utils.infixToPostfix(thirdCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + divideOp + " " + varC +
         " " + multiplyOp + " " + constant + " " +
         divideOp;
@@ -98,32 +98,32 @@ namespace UnitTesting {
 
     TEST_METHOD(TestUtilsFunctionInfixToPostfixDifferentPrecedence) {
       // Test, Expected: "a+b*c+d", "abc*+d+"
-      std::vector<spa::Token> firstCase{
+      infixTokens = {
         tokenA, tokenPlusOp, tokenB,
         tokenMultiplyOp, tokenC, tokenPlusOp, tokenD
       };
-      testResults = utils.infixToPostfix(firstCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + varC + " " + multiplyOp +
         " " + plusOp + " " + varD + " " + plusOp;
       Assert::IsTrue(expectedResult == testResults);
 
       // Test, Expected: "a*b*c-d", "ab*c*d-"
-      std::vector<spa::Token> secondCase{
+      infixTokens = {
         tokenA, tokenMultiplyOp, tokenB, tokenMultiplyOp, tokenC,
         tokenMinusOp, tokenD
       };
-      testResults = utils.infixToPostfix(secondCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + multiplyOp + " " + varC +
         " " + multiplyOp + " " + varD + " " +
         minusOp;
       Assert::IsTrue(expectedResult == testResults);
 
       // Test, Expected: "a*1*c-d", "a1*c*d-"
-      std::vector<spa::Token> thirdCase{
+      infixTokens = {
         tokenA, tokenMultiplyOp, tokenConstant, tokenMultiplyOp, tokenC,
         tokenMinusOp, tokenD
       };
-      testResults = utils.infixToPostfix(thirdCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + constant + " " + multiplyOp + " " + varC +
         " " + multiplyOp + " " + varD + " " +
         minusOp;
@@ -132,22 +132,22 @@ namespace UnitTesting {
 
     TEST_METHOD(TestUtilsFunctionInfixToPostfixSamePrecedenceWithBrackets) {
       // Test, Expected: "a+b-(c+d)", "ab+cd+-"
-      std::vector<spa::Token> firstCase{
+      infixTokens = {
         tokenA, tokenPlusOp, tokenB, tokenMinusOp, tokenLeftBracket, tokenC,
         tokenPlusOp, tokenD, tokenRightBracket
       };
-      testResults = utils.infixToPostfix(firstCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + plusOp + " " + varC + " " +
         varD + " " + plusOp + " " + minusOp;
       Assert::IsTrue(expectedResult == testResults);
 
       // Test, Expected: "a*(b*c/d)", "abc*d/*"
-      std::vector<spa::Token> secondCase{
+      infixTokens = {
         tokenA, tokenMultiplyOp, tokenLeftBracket, tokenB, tokenMultiplyOp,
         tokenC, tokenDivideOp, tokenD,
         tokenRightBracket
       };
-      testResults = utils.infixToPostfix(secondCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + varC + " " + multiplyOp +
         " " + varD + " " + divideOp + " " +
         multiplyOp;
@@ -167,33 +167,33 @@ namespace UnitTesting {
 
     TEST_METHOD(TestUtilsFunctionInfixToPostfixDiffPrecedenceWithBrackets) {
       // Test, Expected: "a*(b-c)+d", "abc-*d+"
-      std::vector<spa::Token> firstCase{
+      infixTokens = {
         tokenA, tokenMultiplyOp, tokenLeftBracket, tokenB, tokenMinusOp,
         tokenC, tokenRightBracket, tokenPlusOp, tokenD
       };
-      testResults = utils.infixToPostfix(firstCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + varC + " " + minusOp + " " +
         multiplyOp + " " + varD + " " + plusOp;
       Assert::IsTrue(expectedResult == testResults);
 
       // Test, Expected: "(a)*(b+c/d)", "abcd/+*"
-      std::vector<spa::Token> secondCase{
+      infixTokens = {
         tokenLeftBracket, tokenA, tokenRightBracket, tokenMultiplyOp,
         tokenLeftBracket, tokenB, tokenPlusOp, tokenC,
         tokenDivideOp, tokenD, tokenRightBracket
       };
-      testResults = utils.infixToPostfix(secondCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + varC + " " + varD + " " +
         divideOp + " " + plusOp + " " + multiplyOp;
       Assert::IsTrue(expectedResult == testResults);
 
       // Test, Expected: "(1)*(b+c/1)", "1bc1/+*"
-      std::vector<spa::Token> thirdCase{
+      infixTokens = {
         tokenLeftBracket, tokenConstant, tokenRightBracket, tokenMultiplyOp,
         tokenLeftBracket, tokenB, tokenPlusOp,
         tokenC, tokenDivideOp, tokenConstant, tokenRightBracket
       };
-      testResults = utils.infixToPostfix(thirdCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = constant + " " + varB + " " + varC + " " + constant +
         " " + divideOp + " " + plusOp + " " +
         multiplyOp;
@@ -202,17 +202,17 @@ namespace UnitTesting {
 
     TEST_METHOD(TestUtilsFunctionInfixToPostfixWithMultiCharOperator) {
       // Test, Expected: "a>=b", "ab>="
-      std::vector<spa::Token> firstCase{tokenA, tokenGreaterEqual, tokenB};
-      testResults = utils.infixToPostfix(firstCase);
+      infixTokens = {tokenA, tokenGreaterEqual, tokenB};
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + greaterEqOp;
       Assert::IsTrue(expectedResult == testResults);
 
       // Test, Expected: "a>=b&&c>=d", "ab>=cd>=&&"
-      std::vector<spa::Token> secondCase{
+      infixTokens = {
         tokenA, tokenGreaterEqual, tokenB, tokenLogicalAnd, tokenC,
         tokenGreaterEqual, tokenD
       };
-      testResults = utils.infixToPostfix(secondCase);
+      testResults = utils.infixToPostfix(infixTokens);
       expectedResult = varA + " " + varB + " " + greaterEqOp + " " + varC +
         " " + varD + " " + greaterEqOp + " " +
         logicalAnd;
