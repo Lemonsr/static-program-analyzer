@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
       - run: pip install cpplint
-      - run: cpplint --recursive --filter=-legal/copyright,-readability/todo,-runtime/references,-build/include_subdir .
+      - run: cpplint --recursive --linelength=100 --filter=-legal/copyright,-readability/todo,-runtime/references,-build/include_subdir .
 
   build:
     runs-on: windows-latest

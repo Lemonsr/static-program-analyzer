@@ -4,11 +4,9 @@
 #include "Token.h"
 #include "PqlArgument.h"
 #include "PKBQueryTypes.h"
+#include "QueryResult.h"
 
 namespace spa {
-class QueryResult {
-};
-
 class QpsEvaluator {
  private:
   ParsedQuery queryObject;
