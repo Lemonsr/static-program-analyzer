@@ -1,12 +1,10 @@
-#include <vector>
-#include <sstream>
-
 #include "SourceProcessor.h"
+#include "Stream.h"
 #include "Tokenizer.h"
 #include "Token.h"
-#include "Stream.h"
-#include <string>
 #include "Validator.h"
+#include <sstream>
+#include <string>
 
 void spa::SourceProcessor::processSource(const std::string source) {
     std::stringstream ss;

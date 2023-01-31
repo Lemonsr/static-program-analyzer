@@ -33,4 +33,4 @@ class Validator {
         static bool isValidWhile();
         static bool isValidif();
     };
-} // namespace spa
+    }  // namespace spa
