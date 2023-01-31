@@ -5,6 +5,7 @@
 #include "Tokenizer.h"
 #include "Token.h"
 #include "Stream.h"
+#include <string>
 #include "Validator.h"
 
 void spa::SourceProcessor::processSource(const std::string source) {

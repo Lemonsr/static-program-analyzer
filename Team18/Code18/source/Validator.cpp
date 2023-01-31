@@ -1,4 +1,4 @@
-#include "Tokenizer.cpp"
+#include "Tokenizer.h"
 #include "Validator.h";
 #include "Stream.h";
 #include "PKB.h";
@@ -57,7 +57,7 @@ spa::Validator::Validator(spa::Stream<spa::Token> t) : tokens(t) {}
 bool spa::Validator::validateProgram() {
     // Checks the program
     for (int64_t i = 0; i < tokens.remaining(); i++) {
-        //tokens[i].getType() == TokenType[TOKEN_MULTIPLY]
+        // tokens[i].getType() == TokenType[TOKEN_MULTIPLY]
         std::cout << "Type: " << tokens[i].getType() << ", Value: " << tokens[i].getValue() <<
             std::endl;
     }

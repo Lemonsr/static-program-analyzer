@@ -9,6 +9,6 @@
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
-    TEST_CLASS (TestValidator) {
+    TEST_CLASS (TestValidator){
     };
 } // namespace UnitTesting
