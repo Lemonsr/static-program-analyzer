@@ -23,6 +23,7 @@
     <ClCompile Include="..\source\PqlPatternParser.cpp" />
     <ClCompile Include="..\source\PqlQueryParser.cpp" />
     <ClCompile Include="..\source\PqlSuchThatParser.cpp" />
+	<ClCompile Include="..\source\SourceProcessor.cpp" />
     <ClCompile Include="..\source\QueryResult.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="..\source\QPS.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="..\source\Token.cpp" />
     <ClCompile Include="..\source\Tokenizer.cpp" />
     <ClCompile Include="..\source\UtilsFunction.cpp" />
+    <ClCompile Include="..\source\Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\Argument.h" />
@@ -48,6 +50,7 @@
     <ClInclude Include="..\source\PqlQueryParser.h" />
     <ClInclude Include="..\source\PqlSuchThatParser.h" />
     <ClInclude Include="..\source\QueryResult.h" />
+	<ClInclude Include="..\source\SourceProcessor.h" />
     <ClInclude Include="..\source\Stream.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClCompile Include="..\source\PqlParser.h" />
@@ -57,6 +60,7 @@
     <ClInclude Include="..\source\Token.h" />
     <ClInclude Include="..\source\Tokenizer.h" />
     <ClInclude Include="..\source\UtilsFunction.h" />
+    <ClInclude Include="..\source\Validator.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
