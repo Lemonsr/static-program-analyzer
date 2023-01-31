@@ -11,4 +11,4 @@ namespace spa {
     int getStatementLineNum();
     const std::string getParentProcedureVal();
   };
-}
+}  // namespace spa

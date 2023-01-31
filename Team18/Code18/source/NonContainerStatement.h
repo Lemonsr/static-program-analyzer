@@ -1,7 +1,6 @@
 #pragma once
 #include <unordered_set>
 
-#include "Expr.h"
 #include "Statement.h"
 #include "Token.h"
 
@@ -41,7 +40,6 @@ namespace spa {
   class MultiVarNonContainerStatement : public NonContainerStatement {
   protected:
     std::string postfixExpr;
-    Expr* expr;
   };
 
   class AssignStatement : public MultiVarNonContainerStatement {
@@ -67,4 +65,4 @@ namespace spa {
                             std::unordered_set<int> whileStmtParents,
                             std::unordered_set<int> ifStmtParents, int statementLineNum);
   };
-}
+}  // namespace spa

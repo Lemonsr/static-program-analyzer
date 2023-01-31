@@ -15,4 +15,4 @@ namespace spa {
     spa::Token getToken();
     std::vector<Statement*> getStatementLst();
   };
-}
+}  // namespace spa

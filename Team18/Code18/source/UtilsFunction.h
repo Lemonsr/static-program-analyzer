@@ -15,4 +15,4 @@ namespace spa {
     static void trimString(std::string& s);
     static std::string infixToPostfix(std::vector<spa::Token> tokens);
   };
-}
+}  // namespace spa

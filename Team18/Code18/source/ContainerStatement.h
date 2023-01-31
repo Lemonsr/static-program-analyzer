@@ -26,4 +26,4 @@ namespace spa {
   public:
     InnerBlockStatement(std::string parentProcedureVal, std::vector<Statement*> statementList);
   };
-}
+}    // namespace spa

@@ -51,4 +51,4 @@ namespace spa {
 
     std::vector<Procedure> parse();
   };
-}
+}  // namespace spa
