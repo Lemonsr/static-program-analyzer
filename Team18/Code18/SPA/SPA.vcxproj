@@ -38,6 +38,7 @@
     <ClInclude Include="..\source\EntityStorage.h" />
     <ClInclude Include="..\source\ParsedQuery.h" />
     <ClInclude Include="..\source\Parser.h" />
+    <ClInclude Include="..\source\PatternStorage.h" />
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\PkbQueryArg.h" />
     <ClInclude Include="..\source\PKBQueryTypes.h" />
