@@ -9,5 +9,5 @@ namespace spa {
 class SourceProcessor {
  public:
         void processSource(std::string);
-    };
+};
 }  // namespace spa
