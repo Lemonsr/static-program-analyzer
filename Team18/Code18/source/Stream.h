@@ -11,6 +11,10 @@ class Stream {
     int64_t start = 0;
 
  public:
+    void resetStartPosition() {
+      start = 0;
+    }
+
     void pushBack(T item) {
       items.push_back(item);
     }
