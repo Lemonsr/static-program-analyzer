@@ -18,7 +18,7 @@ enum class PkbQueryArgType {
   ASSIGN,
   CALL,
   WHILE,
-  IF,
+  IF
 };
 
 class PqlArgument;
