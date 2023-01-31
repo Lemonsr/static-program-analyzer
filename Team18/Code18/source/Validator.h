@@ -32,5 +32,5 @@ class Validator {
         static bool isValidReadPrint();
         static bool isValidWhile();
         static bool isValidif();
-};
+    };
 }  // namespace spa
