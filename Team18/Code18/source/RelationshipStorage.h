@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <string>
 #include <optional>
+#include <unordered_set>
 
 #include "QueryResult.h"
 #include "PKBQueryArg.h"

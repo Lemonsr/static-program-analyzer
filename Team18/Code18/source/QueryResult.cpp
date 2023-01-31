@@ -16,7 +16,8 @@ const std::vector<std::pair<int, std::string>>& spa::QueryResult::getLineNumberV
   return lineNumberVariablePairs.value();
 }
 
-const std::vector<std::pair<int, std::unordered_set<std::string>>> spa::QueryResult::getLineNumberVariableSetPairs() {
+const std::vector<std::pair<int, std::unordered_set<std::string>>>
+spa::QueryResult::getLineNumberVariableSetPairs() {
   return lineNumberVariableSetPairs.value();
 }
 

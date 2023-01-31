@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <unordered_set>
 
 #include "PKBQueryTypes.h"
 
@@ -36,13 +37,15 @@ bool spa::RelationshipStorage::addModifies(std::string lineNo, std::string varNa
   return true;
 }
 
-spa::QueryResult spa::RelationshipStorage::getModifiesLineVarName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getModifiesLineVarName(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   int lineNumber = firstArg.getLineNumber().lineNo;
   std::string varName = secondArg.getName().name;
   QueryResult queryResult;
   queryResult.setQueryResultType(BOOL);
 
-  if (modifiesTable.find(lineNumber) == modifiesTable.end() || modifiesTable[lineNumber] != varName) {
+  if (modifiesTable.find(lineNumber) == modifiesTable.end()
+    || modifiesTable[lineNumber] != varName) {
     queryResult.setIsTrue(false);
     return queryResult;
   }
@@ -51,7 +54,8 @@ spa::QueryResult spa::RelationshipStorage::getModifiesLineVarName(PKBQueryArg fi
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getModifiesLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getModifiesLineUnderscore(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   int lineNumber = firstArg.getLineNumber().lineNo;
   QueryResult queryResult;
   queryResult.setQueryResultType(BOOL);
@@ -65,7 +69,8 @@ spa::QueryResult spa::RelationshipStorage::getModifiesLineUnderscore(PKBQueryArg
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getModifiesLineVar(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getModifiesLineVar(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   int lineNumber = firstArg.getLineNumber().lineNo;
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
@@ -79,7 +84,8 @@ spa::QueryResult spa::RelationshipStorage::getModifiesLineVar(PKBQueryArg firstA
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getModifiesStmtVarName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getModifiesStmtVarName(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   Statement stmt = firstArg.getStatement();
   std::string varName = secondArg.getName().name;
   QueryResult queryResult;
@@ -87,7 +93,8 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVarName(PKBQueryArg fi
 
   std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
   for (auto itr = modifiesTable.begin(); itr != modifiesTable.end(); itr++) {
-    if (itr->second != varName || (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType)) {
+    if (itr->second != varName
+      || (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType)) {
       continue;
     }
     lineNumberVariablePairs.push_back({ itr->first, itr->second });
@@ -97,7 +104,8 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVarName(PKBQueryArg fi
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getModifiesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getModifiesStmtUnderscore(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   Statement stmt = firstArg.getStatement();
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
@@ -114,7 +122,8 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtUnderscore(PKBQueryArg
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getModifiesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getModifiesStmtVar(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   Statement stmt = firstArg.getStatement();
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
@@ -126,7 +135,7 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVar(PKBQueryArg firstA
     }
     lineNumberVariablePairs.push_back({ itr->first, itr->second });
   }
-  
+
   queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
   return queryResult;
 }
@@ -141,13 +150,15 @@ bool spa::RelationshipStorage::addUses(std::string lineNo, std::string varName) 
   return true;
 }
 
-spa::QueryResult spa::RelationshipStorage::getUsesLineVarName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getUsesLineVarName(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   int lineNumber = firstArg.getLineNumber().lineNo;
   std::string varName = secondArg.getName().name;
   QueryResult queryResult;
   queryResult.setQueryResultType(BOOL);
 
-  if (usesTable.find(lineNumber) == usesTable.end() || usesTable[lineNumber].find(varName) == usesTable[lineNumber].end()) {
+  if (usesTable.find(lineNumber) == usesTable.end()
+    || usesTable[lineNumber].find(varName) == usesTable[lineNumber].end()) {
     queryResult.setIsTrue(false);
     return queryResult;
   }
@@ -156,7 +167,8 @@ spa::QueryResult spa::RelationshipStorage::getUsesLineVarName(PKBQueryArg firstA
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getUsesLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getUsesLineUnderscore(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   int lineNumber = firstArg.getLineNumber().lineNo;
   QueryResult queryResult;
   queryResult.setQueryResultType(BOOL);
@@ -170,7 +182,8 @@ spa::QueryResult spa::RelationshipStorage::getUsesLineUnderscore(PKBQueryArg fir
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getUsesLineVar(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getUsesLineVar(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   int lineNumber = firstArg.getLineNumber().lineNo;
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
@@ -184,7 +197,8 @@ spa::QueryResult spa::RelationshipStorage::getUsesLineVar(PKBQueryArg firstArg, 
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   Statement stmt = firstArg.getStatement();
   std::string varName = secondArg.getName().name;
   QueryResult queryResult;
@@ -192,7 +206,8 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PKBQueryArg firstA
 
   std::vector<std::pair<int, std::unordered_set<std::string>>> lineNumberVariableSetPairs;
   for (auto itr = usesTable.begin(); itr != usesTable.end(); itr++) {
-    if (itr->second.find(varName) != itr->second.end() || (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType)) {
+    if (itr->second.find(varName) != itr->second.end()
+      || (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType)) {
       continue;
     }
     lineNumberVariableSetPairs.push_back({ itr->first, itr->second });
@@ -202,7 +217,8 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PKBQueryArg firstA
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getUsesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getUsesStmtUnderscore(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   Statement stmt = firstArg.getStatement();
   std::string varName = secondArg.getName().name;
   QueryResult queryResult;
@@ -220,7 +236,8 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtUnderscore(PKBQueryArg fir
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getUsesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getUsesStmtVar(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
   Statement stmt = firstArg.getStatement();
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);

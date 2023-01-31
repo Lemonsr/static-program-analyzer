@@ -18,14 +18,17 @@ class QueryResult {
   std::optional<std::vector<std::string>> variableNames;
   std::optional<std::vector<int>> lineNumbers;
   std::optional<std::vector<std::pair<int, std::string>>> lineNumberVariablePairs;
-  std::optional<std::vector<std::pair<int, std::unordered_set<std::string>>>> lineNumberVariableSetPairs;
+  std::optional<std::vector<std::pair<int, std::unordered_set<std::string>>>>
+    lineNumberVariableSetPairs;
   std::optional<bool> isTrue;
+
  public:
   const QueryResultType& getQueryResultType();
   const std::vector<std::string>& getVariableNames();
   const std::vector<int>& getLineNumbers();
   const std::vector<std::pair<int, std::string>>& getLineNumberVariablePairs();
-  const std::vector<std::pair<int, std::unordered_set<std::string>>> getLineNumberVariableSetPairs();
+  const std::vector<std::pair<int, std::unordered_set<std::string>>>
+    getLineNumberVariableSetPairs();
   const bool& getIsTrue();
 
   void setQueryResultType(QueryResultType queryResultType);
