@@ -35,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="..\source\Argument.h" />
     <ClInclude Include="..\source\DesignEntity.h" />
+    <ClInclude Include="..\source\EntityStorage.h" />
     <ClInclude Include="..\source\ParsedQuery.h" />
     <ClInclude Include="..\source\Parser.h" />
     <ClInclude Include="..\source\PKB.h" />
