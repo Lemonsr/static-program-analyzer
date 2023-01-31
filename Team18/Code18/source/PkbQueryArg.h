@@ -5,7 +5,7 @@
 #include "PKBQueryTypes.h"
 
 namespace spa {
-enum class PkbQueryArgType {
+enum class PKBQueryArgType {
   CONSTANT,
   VARIABLE,
   STATEMENT,
@@ -23,9 +23,9 @@ enum class PkbQueryArgType {
 
 class PqlArgument;
 
-class PkbQueryArg {
+class PKBQueryArg {
  private:
-  PkbQueryArgType type;
+  PKBQueryArgType type;
   std::optional<Constant> constantOpt;
   std::optional<Variable> variableOpt;
   std::optional<Statement> statementOpt;
@@ -34,8 +34,8 @@ class PkbQueryArg {
   std::optional<Name> nameOpt;
   std::optional<Underscore> underscoreOpt;
  public:
-  explicit PkbQueryArg(PqlArgument& pqlArg);
-  const PkbQueryArgType& getType();
+  explicit PKBQueryArg(PqlArgument& pqlArg);
+  const PKBQueryArgType& getType();
   const Constant& getConstant();
   const Variable& getVariable();
   const Statement& getStatement();

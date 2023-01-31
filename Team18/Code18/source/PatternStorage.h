@@ -5,7 +5,7 @@
 #include <string>
 
 #include "QueryResult.h"
-#include "PkbQueryArg.h"
+#include "PKBQueryArg.h"
 
 namespace spa {
 class PatternStorage {
@@ -14,8 +14,8 @@ class PatternStorage {
 
  public:
   bool addAssign(std::string lineNo, std::string varName, std::string postfixString);
-  QueryResult getAssign(PkbQueryArg lhs, Pattern rhs);
-  QueryResult getAssign(PkbQueryArg lhs, Pattern rhs);
-  QueryResult getAssign(PkbQueryArg lhs, Pattern rhs);
+  QueryResult getAssign(PKBQueryArg lhs, Pattern rhs);
+  QueryResult getAssign(PKBQueryArg lhs, Pattern rhs);
+  QueryResult getAssign(PKBQueryArg lhs, Pattern rhs);
 };
 }  // namespace spa

@@ -5,7 +5,7 @@
 #include <optional>
 
 #include "QueryResult.h"
-#include "PkbQueryArg.h"
+#include "PKBQueryArg.h"
 
 namespace spa {
 class RelationshipStorage {
@@ -27,63 +27,63 @@ class RelationshipStorage {
   QueryResult getStatements(std::optional<StatementType> statementType);
 
   bool addModifies(std::string lineNo, std::string varName);
-  QueryResult getModifiesLineVarName(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getModifiesLineUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getModifiesLineVar(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getModifiesStmtVarName(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getModifiesStmtUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getModifiesStmtVar(PkbQueryArg firstArg, PkbQueryArg secondArg);
+  QueryResult getModifiesLineVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesLineVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesStmtVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   bool addUses(std::string lineNo, std::string varName);
-  QueryResult getUsesLineVarName(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getUsesLineUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getUsesLineVar(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getUsesStmtVarName(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getUsesStmtUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getUsesStmtVar(PkbQueryArg firstArg, PkbQueryArg secondArg);
+  QueryResult getUsesLineVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesLineVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesStmtVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   bool addFollows(std::string firstLineNo, std::string secondLineNo);
-  QueryResult getFollowsLineLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsLineStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStatementLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsLineUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsUnderscoreLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStatementStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStatementUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsUnderscoreStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsUnderscoreUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
+  QueryResult getFollowsLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   bool addFollowsStar(std::string firstLineNo, std::string secondLineNo);
-  QueryResult getFollowsStarLineLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStarLineStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStarStatementLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStarLineUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStarUnderscoreLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStarStatementStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStarStatementUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStarUnderscoreStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getFollowsStarUnderscoreUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
+  QueryResult getFollowsStarLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStarLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStarStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStarLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStarUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStarStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStarStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStarUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getFollowsStarUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   bool addParent(std::string firstLineNo, std::string secondLineNo);
-  QueryResult getParentLineLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentLineStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStatementLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentLineUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentUnderscoreLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStatementStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStatementUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentUnderscoreStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentUnderscoreUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
+  QueryResult getParentLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   bool addParentStar(std::string firstLineNo, std::string secondLineNo);
-  QueryResult getParentStarLineLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStarLineStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStarStatementLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStarLineUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStarUnderscoreLine(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStarStatementStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStarStatementUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStarUnderscoreStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
-  QueryResult getParentStarUnderscoreUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
+  QueryResult getParentStarLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStarLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStarStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStarLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStarUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStarStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStarStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStarUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getParentStarUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
 };
 }  // namespace spa
