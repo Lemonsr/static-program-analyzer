@@ -12,11 +12,10 @@
 //Constructor for Parser
 spa::Parser::Parser(spa::Stream<spa::Token>& tokenStream) : tokenStream(tokenStream) {}
 
-//TODO to replace TOKEN_SEMICOLON with TOKEN_PROCEDURE
 std::vector<spa::Procedure> spa::Parser::parse() {
   std::vector<Procedure> procedureList;
   while (!isEndOfProgram()) {
-    if (matchToken(spa::TOKEN_SEMICOLON)) {
+    if (matchToken(spa::TOKEN_PROCEDURE)) {
       procedureList.push_back(processProcedure());
     }
   }
@@ -51,18 +50,18 @@ spa::Statement* spa::Parser::handleStatements(std::string parentProcedureVal, st
                                               std::unordered_set<int> ifStmtParents) {
   spa::TokenType currentTokenType = getCurrTokenAndAdvance().getType();
   switch (currentTokenType) {
-    case spa::TOKEN_OPEN_BRACE:
+    case spa::TOKEN_READ:
       return processReadStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
-    case spa::TOKEN_BOOL_AND:
+    case spa::TOKEN_PRINT:
       return processPrintStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
-    case spa::TOKEN_BOOL_OR:
+    case spa::TOKEN_CALL:
       return processCallStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
-    //case spa::TOKEN_BOOL_NOT:
-    //return processWhileStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
-    //case spa::TOKEN_COND_LT:
-    //return processIfStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
-    //default:
-    //return processAssignStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
+    case spa::TOKEN_WHILE:
+      return processWhileStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
+    case spa::TOKEN_IF:
+      return processIfStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
+    default:
+      return processAssignStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
   }
 }
 
@@ -151,11 +150,10 @@ spa::Statement* spa::Parser::processIfStatement(std::string parentProcedureVal, 
 }
 
 
-//TODO: Replace TOKEN_BOOL_AND with TOKEN_THEN
 spa::Statement* spa::Parser::processIfConditionStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                                          std::unordered_set<int> ifStmtParents) {
   std::vector<spa::Token> rawConditionExpression{};
-  while (getCurrToken().getType() != spa::TOKEN_BOOL_AND) {
+  while (getCurrToken().getType() != spa::TOKEN_THEN) {
     spa::Token currToken = getCurrTokenAndAdvance();
     rawConditionExpression.push_back(currToken);
   }
@@ -204,11 +202,11 @@ bool spa::Parser::matchToken(spa::TokenType tokenType) {
 
 
 spa::Token spa::Parser::getCurrToken() {
-  return tokenStream[0];
+  return tokenStream[static_cast<int64_t>(0)];
 }
 
 spa::Token spa::Parser::getPrevToken() {
-  return tokenStream[-1];
+  return tokenStream[static_cast<int64_t>(-1)];
 }
 
 
@@ -218,10 +216,8 @@ spa::Token spa::Parser::getCurrTokenAndAdvance() {
   return currToken;
 }
 
-//TODO to change to suitable tokenType in the future to check for end of program or add in function in stream to check for eof
 bool spa::Parser::isEndOfProgram() {
-  spa::TokenType nextTokenType = getCurrToken().getType();
-  if (nextTokenType == 1) {
+  if (tokenStream.remaining() == 0) {
     return true;
   }
   return false;
