@@ -17,7 +17,8 @@ public:
     spa::PqlArgument pqlArg(spa::SYNONYM, "s", { spa::ASSIGN });
     spa::PkbQueryArg queryArg(pqlArg);
     Assert::IsTrue(queryArg.getType() == spa::PkbQueryArgType::ASSIGN);
-    Assert::IsTrue(queryArg.getStatement().statementType == spa::StatementType::ASSIGN);
+    Assert::IsTrue(queryArg.getStatement().statementType ==
+                   spa::StatementType::ASSIGN);
   }
 
   TEST_METHOD(TestProcedureSynonym) {
