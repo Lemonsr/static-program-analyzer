@@ -16,10 +16,10 @@ class TNode;
 
 class PKB : public PKBManager {
  private:
-  RelationshipStorage RelationshipStorage;
+  RelationshipStorage relationshipStorage;
   EntityStorage entityStorage;
   PatternStorage patternStorage;
-  std::unordered_map<std::tuple<PKBQueryArgType, PKBQueryArgType, RelationshipType>, std::any> argToFunctionMap;
+  std::unordered_map<std::tuple<spa::RelationshipType, spa::PKBQueryArgType, spa::PKBQueryArgType>, std::any> argToFunctionMap;
   std::unordered_map<PKBQueryArgType, std::any> patternMap;
 
 public:

@@ -7,7 +7,7 @@
 
 #include "PqlArgument.h"
 
-std::unordered_map<spa::DesignEntityType, spa::PKBQueryArgType> queryArgMap{
+std::unordered_map<spa::DesignEntityType, spa::PKBQueryArgType> queryArgMap {
   { spa::STMT, spa::PKBQueryArgType::STATEMENT },
   { spa::READ, spa::PKBQueryArgType::READ },
   { spa::PRINT, spa::PKBQueryArgType::PRINT },
