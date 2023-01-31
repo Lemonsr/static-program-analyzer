@@ -18,7 +18,7 @@
     <ClCompile Include="..\source\DesignExtractor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Parser.cpp">
+    <ClCompile Include="..\source\SPParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\PKB.cpp">
@@ -95,7 +95,7 @@
     <ClInclude Include="..\source\TNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Parser.h">
+    <ClInclude Include="..\source\SPParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\QPS.h">
