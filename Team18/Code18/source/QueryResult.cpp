@@ -16,6 +16,10 @@ const std::vector<std::pair<int, std::string>>& spa::QueryResult::getLineNumberV
   return lineNumberVariablePairs.value();
 }
 
+const std::vector<std::pair<int, std::unordered_set<std::string>>> spa::QueryResult::getLineNumberVariableSetPairs() {
+  return lineNumberVariableSetPairs.value();
+}
+
 const bool& spa::QueryResult::getIsTrue() {
   return isTrue.value();
 }
@@ -32,9 +36,14 @@ void spa::QueryResult::setLineNumbers(std::vector<int> lineNumbers) {
   this->lineNumbers = lineNumbers;
 }
 
-void spa::QueryResult::setLineNumberVariablePairs(std::vector<std::pair<int, std::string>>
-  lineNumberVariablePairs) {
+void spa::QueryResult::setLineNumberVariablePairs(
+  std::vector<std::pair<int, std::string>> lineNumberVariablePairs) {
   this->lineNumberVariablePairs = lineNumberVariablePairs;
+}
+
+void spa::QueryResult::setLineNumberVariableSetPairs(
+  std::vector<std::pair<int, std::unordered_set<std::string>>> lineNumberVariableSetPairs) {
+  this->lineNumberVariableSetPairs = lineNumberVariableSetPairs;
 }
 
 void spa::QueryResult::setIsTrue(bool isTrue) {

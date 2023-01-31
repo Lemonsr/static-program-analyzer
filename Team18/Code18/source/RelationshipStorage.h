@@ -16,7 +16,7 @@ class RelationshipStorage {
   std::unordered_map<int, int> parentStarTable;
   std::unordered_map<int, std::string> modifiesTable;
   std::unordered_map<int, std::string> modifiesProcTable;
-  std::unordered_map<int, std::string> usesTable;
+  std::unordered_map<int, std::unordered_set<std::string>> usesTable;
   std::unordered_map<int, std::string> usesProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;

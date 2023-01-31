@@ -132,29 +132,107 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVar(PkbQueryArg firstA
 }
 
 bool spa::RelationshipStorage::addUses(std::string lineNo, std::string varName) {
-  return false;
+  int lineNumber = std::stoi(lineNo);
+  if (usesTable.find(lineNumber) == usesTable.end()) {
+    usesTable[lineNumber] = {};
+  }
+
+  usesTable[lineNumber].insert(varName);
+  return true;
 }
 
 spa::QueryResult spa::RelationshipStorage::getUsesLineVarName(PkbQueryArg firstArg, PkbQueryArg secondArg) {
-  return spa::QueryResult();
+  int lineNumber = firstArg.getLineNumber().lineNo;
+  std::string varName = secondArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  if (usesTable.find(lineNumber) == usesTable.end() || usesTable[lineNumber].find(varName) == usesTable[lineNumber].end()) {
+    queryResult.setIsTrue(false);
+    return queryResult;
+  }
+
+  queryResult.setIsTrue(true);
+  return queryResult;
 }
 
 spa::QueryResult spa::RelationshipStorage::getUsesLineUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg) {
-  return spa::QueryResult();
+  int lineNumber = firstArg.getLineNumber().lineNo;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  if (usesTable.find(lineNumber) == usesTable.end()) {
+    queryResult.setIsTrue(false);
+    return queryResult;
+  }
+
+  queryResult.setIsTrue(true);
+  return queryResult;
 }
 
 spa::QueryResult spa::RelationshipStorage::getUsesLineVar(PkbQueryArg firstArg, PkbQueryArg secondArg) {
-  return spa::QueryResult();
+  int lineNumber = firstArg.getLineNumber().lineNo;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<int, std::unordered_set<std::string>>> lineNumberVariableSetPairs;
+  if (usesTable.find(lineNumber) != usesTable.end()) {
+    lineNumberVariableSetPairs.push_back({ lineNumber, usesTable[lineNumber] });
+  }
+
+  queryResult.setLineNumberVariableSetPairs(lineNumberVariableSetPairs);
+  return queryResult;
 }
 
 spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PkbQueryArg firstArg, PkbQueryArg secondArg) {
-  return spa::QueryResult();
+  Statement stmt = firstArg.getStatement();
+  std::string varName = secondArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<int, std::unordered_set<std::string>>> lineNumberVariableSetPairs;
+  for (auto itr = usesTable.begin(); itr != usesTable.end(); itr++) {
+    if (itr->second.find(varName) != itr->second.end() || (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType)) {
+      continue;
+    }
+    lineNumberVariableSetPairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setLineNumberVariableSetPairs(lineNumberVariableSetPairs);
+  return queryResult;
 }
 
 spa::QueryResult spa::RelationshipStorage::getUsesStmtUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg) {
-  return spa::QueryResult();
+  Statement stmt = firstArg.getStatement();
+  std::string varName = secondArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<int, std::unordered_set<std::string>>> lineNumberVariableSetPairs;
+  for (auto itr = usesTable.begin(); itr != usesTable.end(); itr++) {
+    if (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) {
+      continue;
+    }
+    lineNumberVariableSetPairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setLineNumberVariableSetPairs(lineNumberVariableSetPairs);
+  return queryResult;
 }
 
 spa::QueryResult spa::RelationshipStorage::getUsesStmtVar(PkbQueryArg firstArg, PkbQueryArg secondArg) {
-  return spa::QueryResult();
+  Statement stmt = firstArg.getStatement();
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<int, std::unordered_set<std::string>>> lineNumberVariableSetPairs;
+  for (auto itr = usesTable.begin(); itr != usesTable.end(); itr++) {
+    if (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) {
+      continue;
+    }
+    lineNumberVariableSetPairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setLineNumberVariableSetPairs(lineNumberVariableSetPairs);
+  return queryResult;
 }
