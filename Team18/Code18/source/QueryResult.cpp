@@ -32,7 +32,8 @@ void spa::QueryResult::setLineNumbers(std::vector<int> lineNumbers) {
   this->lineNumbers = lineNumbers;
 }
 
-void spa::QueryResult::setLineNumberVariablePairs(std::vector<std::pair<int, std::string>> lineNumberVariablePairs) {
+void spa::QueryResult::setLineNumberVariablePairs(std::vector<std::pair<int, std::string>>
+  lineNumberVariablePairs) {
   this->lineNumberVariablePairs = lineNumberVariablePairs;
 }
 
