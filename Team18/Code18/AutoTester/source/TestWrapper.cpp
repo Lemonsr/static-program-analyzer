@@ -5,10 +5,12 @@
 
 // implementation code of WrapperFactory - do NOT modify the next 5 lines
 AbstractWrapper* WrapperFactory::wrapper = 0;
+
 AbstractWrapper* WrapperFactory::createWrapper() {
     if (wrapper == 0) wrapper = new TestWrapper;
     return wrapper;
 }
+
 // Do not modify the following line
 volatile bool TestWrapper::GlobalStop = false;
 
@@ -23,13 +25,13 @@ void TestWrapper::parse(std::string filename) {
     // call your parser to do the parsing
     // ...rest of your code...
     std::ifstream sourceFile(filename);
-    std::string source = std::string((std::istreambuf_iterator<char>(sourceFile)), 
-                                        std::istreambuf_iterator<char>());;
+    std::string source = std::string((
+            std::istreambuf_iterator<char>(sourceFile)),
+        std::istreambuf_iterator<char>());;
     spa::SourceProcessor sp;
     try {
         sp.processSource(source.c_str());
-    }
-    catch (std::exception e) {
+    } catch (std::exception e) {
         std::cerr << e.what() << std::endl << std::endl;
     }
 }
@@ -37,8 +39,8 @@ void TestWrapper::parse(std::string filename) {
 // method to evaluating a query
 void TestWrapper::evaluate(std::string query, std::list<std::string>& results) {
     // call your evaluator to evaluate the query here
-      // ...code to evaluate query...
+    // ...code to evaluate query...
 
-      // store the answers to the query in the results list (it is initially empty)
-      // each result must be a string.
+    // store the answers to the query in the results list (it is initially empty)
+    // each result must be a string.
 }

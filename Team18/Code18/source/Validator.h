@@ -3,9 +3,9 @@
 #include "Token.h"
 #include "Stream.h"
 #include "PKB.h"
+
 namespace spa {
     class Validator {
-
     public:
         spa::Stream<spa::Token> tokens;
         int offset = 0;
@@ -32,5 +32,5 @@ namespace spa {
         static bool isValidReadPrint();
         static bool isValidWhile();
         static bool isValidif();
-        };
+    };
 }
