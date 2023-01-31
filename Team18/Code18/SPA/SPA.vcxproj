@@ -48,6 +48,7 @@
     <ClInclude Include="..\source\PqlQueryParser.h" />
     <ClInclude Include="..\source\PqlSuchThatParser.h" />
     <ClInclude Include="..\source\QueryResult.h" />
+    <ClInclude Include="..\source\RelationshipStorage.h" />
     <ClInclude Include="..\source\Stream.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClCompile Include="..\source\PqlParser.h" />
