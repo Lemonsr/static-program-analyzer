@@ -23,7 +23,8 @@ void TestWrapper::parse(std::string filename) {
     // call your parser to do the parsing
     // ...rest of your code...
     std::ifstream sourceFile(filename);
-    std::string source = std::string((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());;
+    std::string source = std::string((std::istreambuf_iterator<char>(sourceFile)), 
+                                        std::istreambuf_iterator<char>());;
     spa::SourceProcessor sp;
     try {
         sp.processSource(source.c_str());

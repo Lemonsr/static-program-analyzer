@@ -31,5 +31,5 @@ public:
         spa::Validator validator = spa::Validator();
         Assert::IsTrue(validator.isValidTermToken(token));
     }
-    };  // namespace UnitTesting
-}
+    }; 
+} // namespace UnitTesting

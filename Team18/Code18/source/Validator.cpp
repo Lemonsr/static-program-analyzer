@@ -41,9 +41,6 @@ bool spa::Validator::isValidTermToken(spa::Token token) {
     return false;
 }
 
-spa::Validator::Validator() {
-
-}
 
 spa::Validator::Validator(spa::Stream<spa::Token> t) : tokens(t) {
 

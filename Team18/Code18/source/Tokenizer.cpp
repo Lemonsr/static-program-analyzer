@@ -33,7 +33,6 @@ const std::unordered_map<std::string, spa::TokenType> tokenTypes {
     {",", spa::TOKEN_COMMA},
     {"_", spa::TOKEN_UNDERSCORE},
     {"\"", spa::TOKEN_DOUBLE_QUOTES},
-    {"\n", spa::TOKEN_NEW_LINE},
     {"procedure", spa::TOKEN_PROCEDURE},
     {"read", spa::TOKEN_READ},
     {"call", spa::TOKEN_CALL},

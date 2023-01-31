@@ -9,7 +9,6 @@ namespace spa {
     public:
         spa::Stream<spa::Token> tokens;
         int offset = 0;
-        Validator();
         Validator(spa::Stream<spa::Token> tokens);
         bool validateProgram();
         bool setStream(spa::Stream<spa::Token> stream);
@@ -33,8 +32,5 @@ namespace spa {
         static bool isValidReadPrint();
         static bool isValidWhile();
         static bool isValidif();
-
-    };
-}
-}
+        };
 }

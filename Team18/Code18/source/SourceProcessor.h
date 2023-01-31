@@ -4,8 +4,8 @@
 #include "Stream.h"
 #include "PKB.h"
 namespace spa {
-	class SourceProcessor {
-	public:
-		void processSource(const char*);
-	};
+    class SourceProcessor {
+    public:
+        void processSource(std::string);
+    };
 }
