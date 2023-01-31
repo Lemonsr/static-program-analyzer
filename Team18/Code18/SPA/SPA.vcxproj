@@ -32,7 +32,6 @@
     <ClCompile Include="..\source\Statement.cpp" />
     <ClCompile Include="..\source\ContainerStatement.cpp" />
     <ClCompile Include="..\source\NonContainerStatement.cpp" />
-    <ClCompile Include="..\source\Expr.cpp" />
     <ClCompile Include="..\source\UtilsFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +60,6 @@
     <ClInclude Include="..\source\Statement.h" />
     <ClInclude Include="..\source\ContainerStatement.h" />
     <ClInclude Include="..\source\NonContainerStatement.h" />
-    <ClInclude Include="..\source\Expr.h" />
     <ClInclude Include="..\source\UtilsFunction.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
