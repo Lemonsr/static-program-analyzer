@@ -35,8 +35,10 @@
   <ItemGroup>
     <ClInclude Include="..\source\Argument.h" />
     <ClInclude Include="..\source\DesignEntity.h" />
+    <ClInclude Include="..\source\EntityStorage.h" />
     <ClInclude Include="..\source\ParsedQuery.h" />
     <ClInclude Include="..\source\Parser.h" />
+    <ClInclude Include="..\source\PatternStorage.h" />
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\PKBManager.h" />
     <ClInclude Include="..\source\PKBQueryArg.h" />
@@ -49,6 +51,7 @@
     <ClInclude Include="..\source\PqlQueryParser.h" />
     <ClInclude Include="..\source\PqlSuchThatParser.h" />
     <ClInclude Include="..\source\QueryResult.h" />
+    <ClInclude Include="..\source\RelationshipStorage.h" />
     <ClInclude Include="..\source\Stream.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClCompile Include="..\source\PqlParser.h" />
