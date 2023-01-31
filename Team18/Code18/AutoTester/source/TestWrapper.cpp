@@ -1,4 +1,7 @@
 #include "TestWrapper.h"
+#include <iostream>
+#include <fstream>
+#include "SourceProcessor.h"
 
 // implementation code of WrapperFactory - do NOT modify the next 5 lines
 AbstractWrapper* WrapperFactory::wrapper = 0;
@@ -17,8 +20,17 @@ TestWrapper::TestWrapper() {
 
 // method for parsing the SIMPLE source
 void TestWrapper::parse(std::string filename) {
-  // call your parser to do the parsing
-  // ...rest of your code...
+	// call your parser to do the parsing
+	// ...rest of your code...
+	std::ifstream sourceFile(filename);
+	std::string source = std::string((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());;
+	spa::SourceProcessor sp;
+	try {
+		sp.processSource(source.c_str());
+	}
+	catch (std::exception e) {
+		std::cerr << e.what() << std::endl << std::endl;
+	}
 }
 
 // method to evaluating a query
