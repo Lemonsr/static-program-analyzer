@@ -13,10 +13,11 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 namespace UnitTesting {
   TEST_CLASS(TestPkbQueryArg) {
 public:
-  TEST_METHOD(TestStmtSynonym) {
-    spa::PqlArgument pqlArg(spa::SYNONYM, "s", { spa::STMT });
+  TEST_METHOD(TestAssignSynonym) {
+    spa::PqlArgument pqlArg(spa::SYNONYM, "s", { spa::ASSIGN });
     spa::PkbQueryArg queryArg(pqlArg);
-    Assert::IsTrue(queryArg.getType() == spa::PkbQueryArgType::STATEMENT);
+    Assert::IsTrue(queryArg.getType() == spa::PkbQueryArgType::ASSIGN);
+    Assert::IsTrue(queryArg.getStatement().statementType == spa::StatementType::ASSIGN);
   }
 
   TEST_METHOD(TestProcedureSynonym) {

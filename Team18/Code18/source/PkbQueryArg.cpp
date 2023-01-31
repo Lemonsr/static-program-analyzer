@@ -1,13 +1,24 @@
 #include "PkbQueryArg.h"
 
 #include <optional>
+#include <utility>
 #include <string>
 #include <unordered_map>
 
 #include "PqlArgument.h"
 
+std::unordered_map<spa::DesignEntityType, spa::PkbQueryArgType> queryArgMap{
+  { spa::STMT, spa::PkbQueryArgType::STATEMENT },
+  { spa::READ, spa::PkbQueryArgType::READ },
+  { spa::PRINT, spa::PkbQueryArgType::PRINT },
+  { spa::ASSIGN, spa::PkbQueryArgType::ASSIGN },
+  { spa::CALL, spa::PkbQueryArgType::CALL },
+  { spa::WHILE, spa::PkbQueryArgType::WHILE },
+  { spa::IF, spa::PkbQueryArgType::IF }
+};
+
 std::unordered_map<spa::DesignEntityType,
-                         std::optional<spa::StatementType>> typeMap {
+                   std::optional<spa::StatementType>> statementTypeMap {
   { spa::STMT, {} },
   { spa::READ, {spa::StatementType::READ} },
   { spa::PRINT, {spa::StatementType::PRINT} },
@@ -31,8 +42,8 @@ spa::PkbQueryArg::PkbQueryArg(PqlArgument& pqlArg) {
       type = PkbQueryArgType::CONSTANT;
       constantOpt = {};
     } else {
-      type = PkbQueryArgType::STATEMENT;
-      statementOpt = { typeMap[designEntity] };
+      type = queryArgMap[designEntity];
+      statementOpt = { statementTypeMap[designEntity] };
     }
     break;
   }

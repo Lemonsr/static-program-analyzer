@@ -12,7 +12,13 @@ enum class PkbQueryArgType {
   PROCEDURE,
   LINE_NUMBER,
   NAME,
-  UNDERSCORE
+  UNDERSCORE,
+  READ,
+  PRINT,
+  ASSIGN,
+  CALL,
+  WHILE,
+  IF,
 };
 
 class PqlArgument;
