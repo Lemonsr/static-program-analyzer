@@ -155,5 +155,14 @@
     <ClInclude Include="..\source\QueryResult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\RelationshipStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\EntityStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PatternStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
