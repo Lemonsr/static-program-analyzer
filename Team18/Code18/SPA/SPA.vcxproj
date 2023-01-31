@@ -23,7 +23,7 @@
     <ClCompile Include="..\source\PqlPatternParser.cpp" />
     <ClCompile Include="..\source\PqlQueryParser.cpp" />
     <ClCompile Include="..\source\PqlSuchThatParser.cpp" />
-	<ClCompile Include="..\source\SourceProcessor.cpp" />
+    <ClCompile Include="..\source\SourceProcessor.cpp" />
     <ClCompile Include="..\source\QueryResult.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="..\source\QPS.cpp" />
@@ -50,7 +50,7 @@
     <ClInclude Include="..\source\PqlQueryParser.h" />
     <ClInclude Include="..\source\PqlSuchThatParser.h" />
     <ClInclude Include="..\source\QueryResult.h" />
-	<ClInclude Include="..\source\SourceProcessor.h" />
+    <ClInclude Include="..\source\SourceProcessor.h" />
     <ClInclude Include="..\source\Stream.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClCompile Include="..\source\PqlParser.h" />
