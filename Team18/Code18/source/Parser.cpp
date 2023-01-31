@@ -10,12 +10,10 @@
 #include "UtilsFunction.h"
 
 //Constructor for Parser
-Parser::Parser(spa::Stream<spa::Token>& tokenStream) : tokenStream(tokenStream) {}
-
-UtilsFunction utils;
+spa::Parser::Parser(spa::Stream<spa::Token>& tokenStream) : tokenStream(tokenStream) {}
 
 //TODO to replace TOKEN_SEMICOLON with TOKEN_PROCEDURE
-std::vector<Procedure> Parser::parse() {
+std::vector<spa::Procedure> spa::Parser::parse() {
   std::vector<Procedure> procedureList;
   while (!isEndOfProgram()) {
     if (matchToken(spa::TOKEN_SEMICOLON)) {
@@ -25,7 +23,7 @@ std::vector<Procedure> Parser::parse() {
   return procedureList;
 }
 
-Procedure Parser::processProcedure() {
+spa::Procedure spa::Parser::processProcedure() {
   skipCurrToken(); // To skip over the procedure token
   spa::Token procedureVarToken = getCurrTokenAndAdvance();
   skipCurrToken(); // Skip over open brace token
@@ -37,9 +35,9 @@ Procedure Parser::processProcedure() {
   return procedure;
 }
 
-std::vector<Statement*> Parser::processStmtList(std::string parentProcedureVal,
-                                                std::unordered_set<int> whileStmtParents,
-                                                std::unordered_set<int> ifStmtParents) {
+std::vector<spa::Statement*> spa::Parser::processStmtList(std::string parentProcedureVal,
+                                                          std::unordered_set<int> whileStmtParents,
+                                                          std::unordered_set<int> ifStmtParents) {
   std::vector<Statement*> statements;
   while (!matchToken(spa::TOKEN_CLOSE_BRACE) && !isEndOfProgram()) {
     statements.push_back(handleStatements(parentProcedureVal, whileStmtParents, ifStmtParents));
@@ -49,8 +47,8 @@ std::vector<Statement*> Parser::processStmtList(std::string parentProcedureVal,
 }
 
 //TODO To replace all the TOKEN_OPEN_BRACE with if, while, call, read, print, assign stmt tokens
-Statement* Parser::handleStatements(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
-                                    std::unordered_set<int> ifStmtParents) {
+spa::Statement* spa::Parser::handleStatements(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+                                              std::unordered_set<int> ifStmtParents) {
   spa::TokenType currentTokenType = getCurrTokenAndAdvance().getType();
   switch (currentTokenType) {
     case spa::TOKEN_OPEN_BRACE:
@@ -69,8 +67,8 @@ Statement* Parser::handleStatements(std::string parentProcedureVal, std::unorder
 }
 
 
-Statement* Parser::processReadStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
-                                        std::unordered_set<int> ifStmtParents) {
+spa::Statement* spa::Parser::processReadStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+                                                  std::unordered_set<int> ifStmtParents) {
   spa::Token readVariable = getCurrTokenAndAdvance();
   skipCurrToken(); // Skip over semi colon token
   Statement* readStatement = new ReadStatement(parentProcedureVal, readVariable.getValue(), whileStmtParents,
@@ -79,8 +77,8 @@ Statement* Parser::processReadStatement(std::string parentProcedureVal, std::uno
   return readStatement;
 }
 
-Statement* Parser::processPrintStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
-                                         std::unordered_set<int> ifStmtParents) {
+spa::Statement* spa::Parser::processPrintStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+                                                   std::unordered_set<int> ifStmtParents) {
   spa::Token printVariable = getCurrTokenAndAdvance();
   skipCurrToken(); // Skip over semi colon token
   Statement* printStatement = new PrintStatement(parentProcedureVal, printVariable.getValue(), whileStmtParents,
@@ -89,8 +87,8 @@ Statement* Parser::processPrintStatement(std::string parentProcedureVal, std::un
   return printStatement;
 }
 
-Statement* Parser::processCallStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
-                                        std::unordered_set<int> ifStmtParents) {
+spa::Statement* spa::Parser::processCallStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+                                                  std::unordered_set<int> ifStmtParents) {
   spa::Token callVariable = getCurrTokenAndAdvance();
   skipCurrToken(); // Skip over semi colon token
   Statement* callStatement = new CallStatement(parentProcedureVal, callVariable.getValue(), whileStmtParents,
@@ -99,8 +97,8 @@ Statement* Parser::processCallStatement(std::string parentProcedureVal, std::uno
   return callStatement;
 }
 
-Statement* Parser::processWhileStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
-                                         std::unordered_set<int> ifStmtParents) {
+spa::Statement* spa::Parser::processWhileStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+                                                   std::unordered_set<int> ifStmtParents) {
   int currentLineNum = statementLineNum;
   whileStmtParents.insert(currentLineNum);
   std::vector<Statement*> whileStatementBlock{};
@@ -116,9 +114,9 @@ Statement* Parser::processWhileStatement(std::string parentProcedureVal, std::un
   return whileContainerStatement;
 }
 
-Statement* Parser::processWhileConditionStatement(std::string parentProcedureVal,
-                                                  std::unordered_set<int> whileStmtParents,
-                                                  std::unordered_set<int> ifStmtParents) {
+spa::Statement* spa::Parser::processWhileConditionStatement(std::string parentProcedureVal,
+                                                            std::unordered_set<int> whileStmtParents,
+                                                            std::unordered_set<int> ifStmtParents) {
   std::vector<spa::Token> rawConditionExpression{};
   while (getCurrToken().getType() != spa::TOKEN_OPEN_BRACE) {
     spa::Token currToken = getCurrTokenAndAdvance();
@@ -131,8 +129,8 @@ Statement* Parser::processWhileConditionStatement(std::string parentProcedureVal
   return whileConditionStatement;
 }
 
-Statement* Parser::processIfStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
-                                      std::unordered_set<int> ifStmtParents) {
+spa::Statement* spa::Parser::processIfStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+                                                std::unordered_set<int> ifStmtParents) {
   int currentLineNum = statementLineNum;
   ifStmtParents.insert(currentLineNum);
   std::vector<Statement*> ifStatementBlock{};
@@ -154,8 +152,8 @@ Statement* Parser::processIfStatement(std::string parentProcedureVal, std::unord
 
 
 //TODO: Replace TOKEN_BOOL_AND with TOKEN_THEN
-Statement* Parser::processIfConditionStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
-                                               std::unordered_set<int> ifStmtParents) {
+spa::Statement* spa::Parser::processIfConditionStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+                                                         std::unordered_set<int> ifStmtParents) {
   std::vector<spa::Token> rawConditionExpression{};
   while (getCurrToken().getType() != spa::TOKEN_BOOL_AND) {
     spa::Token currToken = getCurrTokenAndAdvance();
@@ -169,8 +167,8 @@ Statement* Parser::processIfConditionStatement(std::string parentProcedureVal, s
   return ifConditionStatement;
 }
 
-Statement* Parser::processAssignStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
-                                          std::unordered_set<int> ifStmtParents) {
+spa::Statement* spa::Parser::processAssignStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+                                                    std::unordered_set<int> ifStmtParents) {
   std::string assignmentVar = getPrevToken().getValue();
   skipCurrToken(); // Skip over equal token
   std::vector<spa::Token> rawAssignExpression = {};
@@ -188,15 +186,15 @@ Statement* Parser::processAssignStatement(std::string parentProcedureVal, std::u
 
 
 // Private functions to traverse the stream of tokens
-void Parser::advanceStream(int64_t offset) {
+void spa::Parser::advanceStream(int64_t offset) {
   tokenStream.seek(offset);
 }
 
-void Parser::skipCurrToken() {
+void spa::Parser::skipCurrToken() {
   advanceStream(1);
 }
 
-bool Parser::matchToken(spa::TokenType tokenType) {
+bool spa::Parser::matchToken(spa::TokenType tokenType) {
   if (isEndOfProgram()) {
     return false;
   }
@@ -205,23 +203,23 @@ bool Parser::matchToken(spa::TokenType tokenType) {
 }
 
 
-spa::Token Parser::getCurrToken() {
+spa::Token spa::Parser::getCurrToken() {
   return tokenStream[0];
 }
 
-spa::Token Parser::getPrevToken() {
+spa::Token spa::Parser::getPrevToken() {
   return tokenStream[-1];
 }
 
 
-spa::Token Parser::getCurrTokenAndAdvance() {
+spa::Token spa::Parser::getCurrTokenAndAdvance() {
   spa::Token currToken = getCurrToken();
   advanceStream(1);
   return currToken;
 }
 
 //TODO to change to suitable tokenType in the future to check for end of program or add in function in stream to check for eof
-bool Parser::isEndOfProgram() {
+bool spa::Parser::isEndOfProgram() {
   spa::TokenType nextTokenType = getCurrToken().getType();
   if (nextTokenType == 1) {
     return true;
@@ -229,6 +227,6 @@ bool Parser::isEndOfProgram() {
   return false;
 }
 
-void Parser::increaseStatementLineNum() {
+void spa::Parser::increaseStatementLineNum() {
   statementLineNum++;
 }

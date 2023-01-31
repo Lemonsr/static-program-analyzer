@@ -1,9 +1,9 @@
 #include "Statement.h"
 
-int Statement::getStatementLineNum() {
+int spa::Statement::getStatementLineNum() {
 	return statementLineNum;
 }
 
-const std::string Statement::getParentProcedureVal() {
+const std::string spa::Statement::getParentProcedureVal() {
 	return parentProcedureVal;
 }

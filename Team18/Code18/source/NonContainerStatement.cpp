@@ -1,13 +1,13 @@
 #include "NonContainerStatement.h"
 
-std::string OneVarNonContainerStatement::getVariableName() {
+std::string spa::OneVarNonContainerStatement::getVariableName() {
 	return variableName;
 }
 
 //Constructor for ReadStatement
-ReadStatement::ReadStatement(std::string parentProcedureVal, std::string variableName,
-                             std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents,
-                             int statementLineNum) {
+spa::ReadStatement::ReadStatement(std::string parentProcedureVal, std::string variableName,
+                                  std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents,
+                                  int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->variableName = variableName;
 	this->whileStmtParents = whileStmtParents;
@@ -16,9 +16,9 @@ ReadStatement::ReadStatement(std::string parentProcedureVal, std::string variabl
 };
 
 //Constructor for PrintStatement
-PrintStatement::PrintStatement(std::string parentProcedureVal, std::string variableName,
-                               std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents,
-                               int statementLineNum) {
+spa::PrintStatement::PrintStatement(std::string parentProcedureVal, std::string variableName,
+                                    std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents,
+                                    int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->variableName = variableName;
 	this->whileStmtParents = whileStmtParents;
@@ -27,9 +27,9 @@ PrintStatement::PrintStatement(std::string parentProcedureVal, std::string varia
 };
 
 //Constructor for CallStatement
-CallStatement::CallStatement(std::string parentProcedureVal, std::string variableName,
-                             std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents,
-                             int statementLineNum) {
+spa::CallStatement::CallStatement(std::string parentProcedureVal, std::string variableName,
+                                  std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents,
+                                  int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->variableName = variableName;
 	this->whileStmtParents = whileStmtParents;
@@ -38,9 +38,9 @@ CallStatement::CallStatement(std::string parentProcedureVal, std::string variabl
 };
 
 //Constructor for ifConditionStatement
-AssignStatement::AssignStatement(std::string parentProcedureVal, std::string assignVar, std::string postfixExpr,
-                                 std::unordered_set<int> whileStmtParents,
-                                 std::unordered_set<int> ifStmtParents, int statementLineNum) {
+spa::AssignStatement::AssignStatement(std::string parentProcedureVal, std::string assignVar, std::string postfixExpr,
+                                      std::unordered_set<int> whileStmtParents,
+                                      std::unordered_set<int> ifStmtParents, int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->assignVar = assignVar;
 	this->postfixExpr = postfixExpr;
@@ -50,9 +50,9 @@ AssignStatement::AssignStatement(std::string parentProcedureVal, std::string ass
 };
 
 //Constructor for AssignStatement
-IfConditionStatement::IfConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
-                                           std::unordered_set<int> whileStmtParents,
-                                           std::unordered_set<int> ifStmtParents, int statementLineNum) {
+spa::IfConditionStatement::IfConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
+                                                std::unordered_set<int> whileStmtParents,
+                                                std::unordered_set<int> ifStmtParents, int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->postfixExpr = postfixExpr;
 	this->whileStmtParents = whileStmtParents;
@@ -62,9 +62,9 @@ IfConditionStatement::IfConditionStatement(std::string parentProcedureVal, std::
 
 
 //Constructor for whileConditionStatement
-WhileConditionStatement::WhileConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
-                                                 std::unordered_set<int> whileStmtParents,
-                                                 std::unordered_set<int> ifStmtParents, int statementLineNum) {
+spa::WhileConditionStatement::WhileConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
+                                                      std::unordered_set<int> whileStmtParents,
+                                                      std::unordered_set<int> ifStmtParents, int statementLineNum) {
 	this->parentProcedureVal = parentProcedureVal;
 	this->postfixExpr = postfixExpr;
 	this->whileStmtParents = whileStmtParents;
