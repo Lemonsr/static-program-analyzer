@@ -10,6 +10,11 @@
 namespace spa {
 
 /**
+  * A struct for a declared constant in a PQL query. E.g. constant c.
+  */
+struct Constant {};
+
+/**
  * A struct for a declared variable in a PQL query. E.g. variable v.
  */
 struct Variable { };
@@ -32,7 +37,9 @@ struct Procedure { };
 /**
  * A struct for a line number in a PQL query.
  */
-struct LineNumber { };
+struct LineNumber {
+  LineNo lineNo;
+};
 
 /**
  * A struct for a procedure or variable name in a PQL query. E.g. "x", "main".
