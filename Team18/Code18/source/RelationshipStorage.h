@@ -20,6 +20,7 @@ class RelationshipStorage {
   std::unordered_map<int, std::string> usesProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;
+
  public:
   bool addStatementType(std::string lineNo, StatementType statementType);
   bool addStatementProc(std::string lineNo, std::string procName);
@@ -85,4 +86,4 @@ class RelationshipStorage {
   QueryResult getParentStarUnderscoreStatement(PkbQueryArg firstArg, PkbQueryArg secondArg);
   QueryResult getParentStarUnderscoreUnderscore(PkbQueryArg firstArg, PkbQueryArg secondArg);
 };
-}
+}  // namespace spa

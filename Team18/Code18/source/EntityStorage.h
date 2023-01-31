@@ -17,9 +17,9 @@ class EntityStorage {
   bool addVar(std::string varName);
   bool addConst(std::string constName);
   bool addProc(std::string procName);
- 
+
   QueryResult getVars();
   QueryResult getConst();
   QueryResult getProc();
 };
-}
+}  // namespace spa
