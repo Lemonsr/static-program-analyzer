@@ -27,6 +27,30 @@ bool spa::RelationshipStorage::addStatementProc(std::string lineNo, std::string 
   return true;
 }
 
+spa::QueryResult spa::RelationshipStorage::getStatements(
+  std::optional<StatementType> statementType) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<int> lineNumbers;
+  if (!statementType) {
+    for (auto& itr = statementTypeTable.begin(); itr != statementTypeTable.end(); itr++) {
+      lineNumbers.push_back(itr->first);
+    }
+    queryResult.setLineNumbers(lineNumbers);
+    return queryResult;
+  }
+
+  StatementType stmtType = statementType.value();
+  for (auto& itr = statementTypeTable.begin(); itr != statementTypeTable.end(); itr++) {
+    if (itr->second == stmtType) {
+      lineNumbers.push_back(itr->first);
+    }
+  }
+  queryResult.setLineNumbers(lineNumbers);
+  return queryResult;
+}
+
 bool spa::RelationshipStorage::addModifies(std::string lineNo, std::string varName) {
   int lineNumber = std::stoi(lineNo);
   if (modifiesTable.find(lineNumber) != modifiesTable.end()) {
