@@ -86,7 +86,7 @@ namespace UnitTesting {
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
       Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
 
-      tokens = { 
+      tokens = {
         spa::Token(spa::TokenType::TOKEN_NAME, "v"),
         spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
         spa::Token(spa::TokenType::TOKEN_NAME, "x"),
@@ -129,7 +129,8 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::EXACT, tokens);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "_", spa::DesignEntityType::VARIABLE));
+      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "_",
+                                                               spa::DesignEntityType::VARIABLE));
       spa::QueryResult queryResult = patternStorage.getAssignVar(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -150,7 +151,8 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::PARTIAL, tokens);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", spa::DesignEntityType::VARIABLE));
+      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_",
+                                                               spa::DesignEntityType::VARIABLE));
       spa::QueryResult queryResult = patternStorage.getAssignVar(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -175,7 +177,8 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::ANY);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", spa::DesignEntityType::VARIABLE));
+      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_",
+                                                               spa::DesignEntityType::VARIABLE));
       spa::QueryResult queryResult = patternStorage.getAssignVar(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
