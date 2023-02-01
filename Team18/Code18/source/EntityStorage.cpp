@@ -42,7 +42,7 @@ spa::QueryResult spa::EntityStorage::getVars() {
   return queryResult;
 }
 
-spa::QueryResult spa::EntityStorage::getConst() {
+spa::QueryResult spa::EntityStorage::getConsts() {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
@@ -55,7 +55,7 @@ spa::QueryResult spa::EntityStorage::getConst() {
   return queryResult;
 }
 
-spa::QueryResult spa::EntityStorage::getProc() {
+spa::QueryResult spa::EntityStorage::getProcs() {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
@@ -66,4 +66,16 @@ spa::QueryResult spa::EntityStorage::getProc() {
 
   queryResult.setNames(procNames);
   return queryResult;
+}
+
+void spa::EntityStorage::setVarTable(std::unordered_set<std::string> varTable) {
+  this->varTable = varTable;
+}
+
+void spa::EntityStorage::setConstTable(std::unordered_set<std::string> constTable) {
+  this->constTable = constTable;
+}
+
+void spa::EntityStorage::setProcTable(std::unordered_set<std::string> procTable) {
+  this->procTable = procTable;
 }
