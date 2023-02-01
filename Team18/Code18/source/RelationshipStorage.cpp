@@ -288,3 +288,15 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVar(PKBQueryArg firstArg,
   queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
   return queryResult;
 }
+
+void spa::RelationshipStorage::setModifiesTable(std::unordered_map<int, std::string> modifiesTable) {
+  this->modifiesTable = modifiesTable;
+}
+
+void spa::RelationshipStorage::setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable) {
+  this->usesTable = usesTable;
+}
+
+void spa::RelationshipStorage::setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable) {
+  this->statementTypeTable = statementTypeTable;
+}

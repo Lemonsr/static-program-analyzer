@@ -86,5 +86,9 @@ class RelationshipStorage {
   QueryResult getParentStarStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getParentStarUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getParentStarUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+
+  void setModifiesTable(std::unordered_map<int, std::string> modifiesTable);
+  void setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable);
+  void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
 };
 }  // namespace spa
