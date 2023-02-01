@@ -14,6 +14,7 @@
     <ClCompile Include="..\source\DesignExtractor.cpp" />
     <ClCompile Include="..\source\ParsedQuery.cpp" />
     <ClCompile Include="..\source\Parser.cpp" />
+    <ClCompile Include="..\source\PatternStorage.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\PkbQueryArg.cpp" />
     <ClCompile Include="..\source\PKBQueryTypes.cpp" />
