@@ -1,11 +1,12 @@
 #pragma once
 #include <unordered_set>
 
-#include "Statement.h"
+#include "ProgramStatement.h"
 #include "Token.h"
 
 namespace spa {
-  class NonContainerStatement : public Statement {
+  class NonContainerStatement : public ProgramStatement
+  {
   protected:
     std::unordered_set<int> whileStmtParents;
     std::unordered_set<int> ifStmtParents;

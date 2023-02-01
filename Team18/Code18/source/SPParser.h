@@ -1,7 +1,8 @@
 #pragma once
 #include <unordered_set>
 
-#include "Procedure.h"
+#include "ProcedureStatement.h"
+#include "ProgramStatement.h"
 #include "vector"
 #include "Stream.h"
 #include "Token.h"
@@ -12,27 +13,27 @@ namespace spa {
     spa::Stream<spa::Token>& tokenStream;
     int statementLineNum = 1;
 
-    Procedure processProcedure();
-    std::vector<Statement*> processStmtList(std::string parentProcedureVal,
+    ProcedureStatement processProcedure();
+    std::vector<ProgramStatement*> processStmtList(std::string parentProcedureVal,
                                             std::unordered_set<int> whileStmtParents,
                                             std::unordered_set<int> ifStmtParents);
-    Statement* handleStatements(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+    ProgramStatement* handleStatements(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                 std::unordered_set<int> ifStmtParents);
-    Statement* processReadStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+    ProgramStatement* processReadStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                     std::unordered_set<int> ifStmtParents);
-    Statement* processPrintStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+    ProgramStatement* processPrintStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                      std::unordered_set<int> ifStmtParents);
-    Statement* processCallStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+    ProgramStatement* processCallStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                     std::unordered_set<int> ifStmtParents);
-    Statement* processWhileStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+    ProgramStatement* processWhileStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                      std::unordered_set<int> ifStmtParents);
-    Statement* processWhileConditionStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+    ProgramStatement* processWhileConditionStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                               std::unordered_set<int> ifStmtParents);
-    Statement* processIfStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+    ProgramStatement* processIfStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                   std::unordered_set<int> ifStmtParents);
-    Statement* processIfConditionStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+    ProgramStatement* processIfConditionStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                            std::unordered_set<int> ifStmtParents);
-    Statement* processAssignStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
+    ProgramStatement* processAssignStatement(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                       std::unordered_set<int> ifStmtParents);
 
     //Functions to traverse the stream of tokens
@@ -49,6 +50,6 @@ namespace spa {
   public:
     explicit SPParser(spa::Stream<spa::Token>& tokenStream);
 
-    std::vector<Procedure> parse();
+    std::vector<ProcedureStatement> parse();
   };
 }  // namespace spa
