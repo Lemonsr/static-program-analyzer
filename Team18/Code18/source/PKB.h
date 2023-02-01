@@ -35,13 +35,13 @@ class PKB : public PKBManager {
 
 public:
   PKB();
-  const bool addRelationship(RelationshipType relationshipType, std::string arg1, std::string arg2);
+  const bool addRelationship(RelationshipType relationshipType, std::string firstArg, std::string secondArg);
   const bool addEntity(DesignEntityType entityType, std::string arg);
   const bool addPattern(std::string lineNo, std::string lhs, std::string rhs);
   const bool addStatementType(std::string lineNo, StatementType statementType);
   const bool addStatementProc(std::string lineNo, std::string procedure);
-  const QueryResult getRelationship(RelationshipType relationshipType, PKBQueryArg arg1, PKBQueryArg arg2);
+  const QueryResult getRelationship(RelationshipType relationshipType, PKBQueryArg firstArg, PKBQueryArg secondArg);
   const QueryResult getEntity(DesignEntityType entityType);  // if stmtTypes/stmtProcs, shld route to RelStorage
-  const QueryResult getPattern(PKBQueryArg lhs);
+  const QueryResult getPattern(PKBQueryArg lhs, Pattern rhs);
 };
 }  // namespace spa

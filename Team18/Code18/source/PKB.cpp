@@ -4,6 +4,7 @@
 #include "EntityStorage.h"
 #include "PatternStorage.h"
 #include "QueryResult.h"
+#include "PkbQueryArg.cpp"
 
 #include <string>
 #include <vector>
@@ -93,29 +94,30 @@ void spa::PKB::createPatternQueryFunctionMap() {
 
 spa::PKB::PKB() {
   createRelationshipQueryFunctionMap();
+  createEntityQueryFunctionMap();
   createPatternQueryFunctionMap();
 }
 
 const bool spa::PKB::addRelationship(RelationshipType relationshipType,
-                                     std::string arg1, std::string arg2) {
+                                     std::string firstArg, std::string secondArg) {
   switch (relationshipType) {
   case FOLLOWS: {
-    return relationshipStorage.addFollows(arg1, arg2);
+    return relationshipStorage.addFollows(firstArg, secondArg);
   }
   case FOLLOWS_STAR: {
-    return relationshipStorage.addFollowsStar(arg1, arg2);
+    return relationshipStorage.addFollowsStar(firstArg, secondArg);
   }
   case PARENT: {
-    return relationshipStorage.addParent(arg1, arg2);
+    return relationshipStorage.addParent(firstArg, secondArg);
   }
   case PARENT_STAR: {
-    return relationshipStorage.addParentStar(arg1, arg2);
+    return relationshipStorage.addParentStar(firstArg, secondArg);
   }
   case MODIFIES: {
-    return relationshipStorage.addModifies(arg1, arg2);
+    return relationshipStorage.addModifies(firstArg, secondArg);
   }
   case USES: {
-    return relationshipStorage.addUses(arg1, arg2);
+    return relationshipStorage.addUses(firstArg, secondArg);
   }
   default: {
     return false;
@@ -155,14 +157,22 @@ const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure)
 }
 
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
-                                                 PKBQueryArg arg1, PKBQueryArg arg2) {
-  return QueryResult();
+                                                 PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  auto mapIter = relationshipQueryFunctionMap.find({ relationshipType, firstArg.getType(), secondArg.getType() });
+  return (mapIter->second)(relationshipStorage, firstArg, secondArg);
 }
 
 const spa::QueryResult spa::PKB::getEntity(DesignEntityType entityType) {
-  return QueryResult();
+  if (entityType != DesignEntityType::VARIABLE && entityType != DesignEntityType::PROCEDURE && entityType != DesignEntityType::CONSTANT) {
+    auto mapIter = statementTypeMap.find(entityType);
+    return relationshipStorage.getStatements(mapIter->second);
+  }
+
+  auto mapIter = entityQueryFunctionMap.find(entityType);
+  return (mapIter->second)(entityStorage);
 }
 
-const spa::QueryResult spa::PKB::getPattern(PKBQueryArg lhs) {
-  return QueryResult();
+const spa::QueryResult spa::PKB::getPattern(PKBQueryArg lhs, Pattern rhs) {
+  auto mapIter = patternQueryFunctionMap.find(lhs.getType());
+  return (mapIter->second)(patternStorage, lhs, rhs);
 }
