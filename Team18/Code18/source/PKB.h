@@ -4,6 +4,7 @@
 #include "RelationshipStorage.h"
 #include "EntityStorage.h"
 #include "PatternStorage.h"
+#include "HashTuple.h"
 
 #include <string>
 #include <vector>
@@ -22,8 +23,11 @@ class PKB : public PKBManager {
   PatternStorage patternStorage;
 
   // Storage Maps
-  std::unordered_map<std::tuple<RelationshipType, PKBQueryArgType, PKBQueryArgType>,
-    std::function<QueryResult(RelationshipStorage& relationshipStorage, PKBQueryArg, PKBQueryArg)>> relationshipQueryFunctionMap;
+  std::unordered_map<
+    std::tuple<RelationshipType, PKBQueryArgType, PKBQueryArgType>,
+    std::function<QueryResult(RelationshipStorage& relationshipStorage, PKBQueryArg, PKBQueryArg)>,
+    TupleHash,
+    TupleEquality> relationshipQueryFunctionMap;
   std::unordered_map<DesignEntityType,
     std::function<QueryResult(EntityStorage& entityStorage)>> entityQueryFunctionMap;
   std::unordered_map<PKBQueryArgType,

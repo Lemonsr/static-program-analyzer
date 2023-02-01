@@ -1,11 +1,11 @@
 #include "PKBQueryArg.h"
+#include "PKBQueryTypes.h"
+#include "PqlArgument.h"
 
 #include <optional>
 #include <utility>
 #include <string>
 #include <unordered_map>
-
-#include "PqlArgument.h"
 
 std::unordered_map<spa::DesignEntityType, spa::PKBQueryArgType> queryArgMap {
   { spa::STMT, spa::PKBQueryArgType::STATEMENT },
@@ -15,17 +15,6 @@ std::unordered_map<spa::DesignEntityType, spa::PKBQueryArgType> queryArgMap {
   { spa::CALL, spa::PKBQueryArgType::CALL },
   { spa::WHILE, spa::PKBQueryArgType::WHILE },
   { spa::IF, spa::PKBQueryArgType::IF }
-};
-
-std::unordered_map<spa::DesignEntityType,
-                   std::optional<spa::StatementType>> statementTypeMap {
-  { spa::STMT, {} },
-  { spa::READ, {spa::StatementType::READ} },
-  { spa::PRINT, {spa::StatementType::PRINT} },
-  { spa::ASSIGN, {spa::StatementType::ASSIGN} },
-  { spa::CALL, {spa::StatementType::CALL} },
-  { spa::WHILE, {spa::StatementType::WHILE} },
-  { spa::IF, {spa::StatementType::IF} }
 };
 
 spa::PKBQueryArg::PKBQueryArg(PqlArgument& pqlArg) {

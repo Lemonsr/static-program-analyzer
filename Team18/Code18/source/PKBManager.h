@@ -8,7 +8,7 @@
 
 namespace spa {
 class PKBManager {
-public:
+ public:
   virtual const bool addRelationship(RelationshipType relationshipType, std::string firstArg, std::string secondArg) = 0;
   virtual const bool addEntity(DesignEntityType entityType, std::string arg) = 0;
   virtual const bool addPattern(std::string lineNo, std::string lhs, std::string rhs) = 0;
