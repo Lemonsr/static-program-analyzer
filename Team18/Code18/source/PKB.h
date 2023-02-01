@@ -33,7 +33,7 @@ class PKB : public PKBManager {
   void createEntityQueryFunctionMap();
   void createPatternQueryFunctionMap();
 
-public:
+ public:
   PKB();
   const bool addRelationship(RelationshipType relationshipType, std::string firstArg, std::string secondArg);
   const bool addEntity(DesignEntityType entityType, std::string arg);
