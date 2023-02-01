@@ -53,7 +53,7 @@
     <ClCompile Include="TestUtilsFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestPkbQueryArg.cpp">
+    <ClCompile Include="TestPKBQueryArg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPKBPatternStorage.cpp">

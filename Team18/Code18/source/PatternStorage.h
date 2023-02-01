@@ -5,7 +5,7 @@
 #include <string>
 
 #include "QueryResult.h"
-#include "PkbQueryArg.h"
+#include "PKBQueryArg.h"
 
 namespace spa {
 class PatternStorage {
@@ -14,9 +14,9 @@ class PatternStorage {
 
  public:
   bool addAssign(std::string lineNo, std::string varName, std::string postfixString);
-  QueryResult getAssignUnderscore(PkbQueryArg lhs, Pattern rhs);
-  QueryResult getAssignVar(PkbQueryArg lhs, Pattern rhs);
-  QueryResult getAssignVarName(PkbQueryArg lhs, Pattern rhs);
+  QueryResult getAssignUnderscore(PKBQueryArg lhs, Pattern rhs);
+  QueryResult getAssignVar(PKBQueryArg lhs, Pattern rhs);
+  QueryResult getAssignVarName(PKBQueryArg lhs, Pattern rhs);
 
   void setAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> assignTable);
 };

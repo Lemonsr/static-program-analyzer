@@ -15,7 +15,7 @@ bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName,
   return true;
 }
 
-spa::QueryResult spa::PatternStorage::getAssignUnderscore(PkbQueryArg lhs, Pattern rhs) {
+spa::QueryResult spa::PatternStorage::getAssignUnderscore(PKBQueryArg lhs, Pattern rhs) {
   PatternType type = rhs.getType();
   std::string queryPattern = UtilsFunction::infixToPostfix(rhs.getValue());
   QueryResult queryResult;
@@ -41,7 +41,7 @@ spa::QueryResult spa::PatternStorage::getAssignUnderscore(PkbQueryArg lhs, Patte
   return queryResult;
 }
 
-spa::QueryResult spa::PatternStorage::getAssignVar(PkbQueryArg lhs, Pattern rhs) {
+spa::QueryResult spa::PatternStorage::getAssignVar(PKBQueryArg lhs, Pattern rhs) {
   PatternType type = rhs.getType();
   std::string queryPattern = UtilsFunction::infixToPostfix(rhs.getValue());
   QueryResult queryResult;
@@ -67,7 +67,7 @@ spa::QueryResult spa::PatternStorage::getAssignVar(PkbQueryArg lhs, Pattern rhs)
   return queryResult;
 }
 
-spa::QueryResult spa::PatternStorage::getAssignVarName(PkbQueryArg lhs, Pattern rhs) {
+spa::QueryResult spa::PatternStorage::getAssignVarName(PKBQueryArg lhs, Pattern rhs) {
   PatternType type = rhs.getType();
   std::string queryPattern = UtilsFunction::infixToPostfix(rhs.getValue());
   std::string varName = lhs.getName().name;

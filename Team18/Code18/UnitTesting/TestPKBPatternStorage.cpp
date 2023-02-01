@@ -10,7 +10,7 @@
 #include "CppUnitTest.h"
 #include "PatternStorage.h"
 #include "PqlArgument.h"
-#include "PkbQueryArg.h"
+#include "PKBQueryArg.h"
 #include "Argument.h"
 #include "Token.h"
 
@@ -59,7 +59,7 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::EXACT, tokens);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
       spa::QueryResult queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -80,7 +80,7 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::PARTIAL, tokens);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
       spa::QueryResult queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -105,7 +105,7 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::ANY);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
       spa::QueryResult queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -129,7 +129,7 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::EXACT, tokens);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "_",
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "_",
                                                                spa::DesignEntityType::VARIABLE));
       spa::QueryResult queryResult = patternStorage.getAssignVar(lhs, pattern);
 
@@ -151,7 +151,7 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::PARTIAL, tokens);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_",
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_",
                                                                spa::DesignEntityType::VARIABLE));
       spa::QueryResult queryResult = patternStorage.getAssignVar(lhs, pattern);
 
@@ -177,7 +177,7 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::ANY);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_",
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_",
                                                                spa::DesignEntityType::VARIABLE));
       spa::QueryResult queryResult = patternStorage.getAssignVar(lhs, pattern);
 
@@ -202,13 +202,13 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::EXACT, tokens);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
       spa::QueryResult queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
       Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
 
-      lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "b", {}));
+      lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "b", {}));
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -216,7 +216,7 @@ namespace UnitTesting {
 
       tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       pattern = spa::Pattern(spa::PatternType::EXACT, tokens);
-      lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
+      lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -230,13 +230,13 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::PARTIAL, tokens);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
       spa::QueryResult queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
       Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
 
-      lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "b", {}));
+      lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "b", {}));
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -248,7 +248,7 @@ namespace UnitTesting {
         spa::Token(spa::TokenType::TOKEN_NAME, "x"),
       };
       pattern = spa::Pattern(spa::PatternType::PARTIAL, tokens);
-      lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
+      lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -262,13 +262,13 @@ namespace UnitTesting {
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
       spa::Pattern pattern(spa::PatternType::ANY);
-      spa::PkbQueryArg lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
       spa::QueryResult queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
       Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
 
-      lhs = spa::PkbQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "b", {}));
+      lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "b", {}));
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
