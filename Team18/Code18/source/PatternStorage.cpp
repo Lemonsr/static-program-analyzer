@@ -1,9 +1,8 @@
 #include "PatternStorage.h"
+#include "UtilsFunction.h"
 
 #include <string>
 #include <vector>
-
-#include "UtilsFunction.h"
 
 bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName,
   std::string postfixString) {
