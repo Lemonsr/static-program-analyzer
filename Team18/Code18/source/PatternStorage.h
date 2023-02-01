@@ -17,5 +17,7 @@ class PatternStorage {
   QueryResult getAssignUnderscore(PkbQueryArg lhs, Pattern rhs);
   QueryResult getAssignVar(PkbQueryArg lhs, Pattern rhs);
   QueryResult getAssignVarName(PkbQueryArg lhs, Pattern rhs);
+
+  void setAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> assignTable);
 };
 }  // namespace spa

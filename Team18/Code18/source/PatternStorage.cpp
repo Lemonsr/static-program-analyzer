@@ -96,3 +96,7 @@ spa::QueryResult spa::PatternStorage::getAssignVarName(PkbQueryArg lhs, Pattern 
   queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
   return queryResult;
 }
+
+void spa::PatternStorage::setAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> assignTable) {
+  this->assignTable = assignTable;
+}

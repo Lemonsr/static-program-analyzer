@@ -56,5 +56,8 @@
     <ClCompile Include="TestPkbQueryArg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestPKBPatternStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
