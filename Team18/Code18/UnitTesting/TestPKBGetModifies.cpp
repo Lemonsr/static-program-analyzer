@@ -152,7 +152,7 @@ namespace UnitTesting {
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
       }
-      
+
       TEST_METHOD(TestGetModifiesStmtVar) {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setModifiesTable(modifiesTable);
@@ -176,4 +176,4 @@ namespace UnitTesting {
         Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
       }
   };
-}
+}  // namespace UnitTesting
