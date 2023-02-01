@@ -1,10 +1,12 @@
 #include "PatternStorage.h"
 
 #include <string>
+#include <vector>
 
 #include "UtilsFunction.h"
 
-bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName, std::string postfixString) {
+bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName,
+  std::string postfixString) {
   int lineNumber = std::stoi(lineNo);
   if (assignTable.find(lineNumber) != assignTable.end()) {
     return false;
@@ -27,13 +29,11 @@ spa::QueryResult spa::PatternStorage::getAssignUnderscore(PkbQueryArg lhs, Patte
       if (queryPattern == postfixString) {
         lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
       }
-    }
-    else if (type == PARTIAL) {
+    } else if (type == PARTIAL) {
       if (postfixString.find(queryPattern) != std::string::npos) {
         lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
       }
-    }
-    else if (type == ANY) {
+    } else if (type == ANY) {
       lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
     }
   }
@@ -55,14 +55,11 @@ spa::QueryResult spa::PatternStorage::getAssignVar(PkbQueryArg lhs, Pattern rhs)
       if (queryPattern == postfixString) {
         lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
       }
-    }
-    else if (type == PARTIAL) {
+    } else if (type == PARTIAL) {
       if (postfixString.find(queryPattern) != std::string::npos) {
         lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
-
       }
-    }
-    else if (type == ANY) {
+    } else if (type == ANY) {
       lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
     }
   }
@@ -88,13 +85,11 @@ spa::QueryResult spa::PatternStorage::getAssignVarName(PkbQueryArg lhs, Pattern 
       if (queryPattern == postfixString) {
         lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
       }
-    }
-    else if (type == PARTIAL) {
+    } else if (type == PARTIAL) {
       if (postfixString.find(queryPattern) != std::string::npos) {
         lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
       }
-    }
-    else if (type == ANY) {
+    } else if (type == ANY) {
       lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
     }
   }
