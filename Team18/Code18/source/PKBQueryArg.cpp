@@ -1,5 +1,3 @@
-
-
 #include "PKBQueryArg.h"
 
 #include <optional>
