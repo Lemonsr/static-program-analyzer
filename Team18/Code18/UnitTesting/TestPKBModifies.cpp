@@ -1,20 +1,19 @@
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <vector>
-#include <utility>
-
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "RelationshipStorage.h"
 #include "PqlArgument.h"
 #include "Argument.h"
 
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+#include <utility>
+
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
-  TEST_CLASS(TestRelationshipStorage) {
+  TEST_CLASS(TestPKBModifies) {
     std::unordered_map<int, std::string> modifiesTable = {
       {1, "a"},
       {2, "b"},
@@ -88,7 +87,7 @@ namespace UnitTesting {
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LINE_NO, "1", {}));
         spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "v",
-                                                                      {spa::DesignEntityType::VARIABLE}));
+                                                                       spa::DesignEntityType::VARIABLE));
         spa::QueryResult queryResult = relationshipStorage.getModifiesLineVar(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);

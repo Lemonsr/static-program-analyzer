@@ -56,7 +56,10 @@
     <ClCompile Include="TestPKBQueryArg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestPKBGetModifies.cpp">
+    <ClCompile Include="TestPKBModifies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBUses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
