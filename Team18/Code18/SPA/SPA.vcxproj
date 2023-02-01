@@ -61,6 +61,7 @@
     <ClInclude Include="..\source\ProgramStatement.h" />
     <ClInclude Include="..\source\ContainerStatement.h" />
     <ClInclude Include="..\source\NonContainerStatement.h" />
+    <ClInclude Include="..\source\UtilsFunction.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>

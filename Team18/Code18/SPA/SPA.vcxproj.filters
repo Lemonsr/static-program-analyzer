@@ -146,6 +146,9 @@
     <ClInclude Include="..\source\ParsedQuery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\UtilsFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\source\PqlDeclarationParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
