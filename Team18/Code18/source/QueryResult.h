@@ -26,7 +26,7 @@ class QueryResult {
   const bool& getIsTrue();
 
   void setQueryResultType(QueryResultType queryResultType);
-  void setNames(std::vector<std::string> variableNames);
+  void setNames(std::vector<std::string> names);
   void setLineNumbers(std::vector<int> lineNumbers);
   void setLineNumberVariablePairs(std::vector<std::pair<int, std::string>> lineNumberVariablePairs);
   void setIsTrue(bool isTrue);
