@@ -7,12 +7,12 @@
 namespace spa {
   class ProcedureStatement {
   private:
-    Token token;
+    Token procedureVarToken;
     std::vector<ProgramStatement*> statementLst;
 
   public:
-    ProcedureStatement(Token token, std::vector<ProgramStatement*> statementLst);
-    Token getToken();
+    ProcedureStatement(Token procedureVarToken, std::vector<ProgramStatement*> statementLst);
+    Token getProcedureVarToken();
     std::vector<ProgramStatement*> getStatementLst();
   };
 }  // namespace spa
