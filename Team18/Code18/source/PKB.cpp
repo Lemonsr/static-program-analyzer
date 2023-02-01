@@ -2,17 +2,6 @@
 
 #include "PKBQueryTypes.h"
 
-std::unordered_map<spa::DesignEntityType,
-  std::optional<spa::StatementType>> statementTypeMap{
-{ spa::STMT, {} },
-{ spa::READ, {spa::StatementType::READ} },
-{ spa::PRINT, {spa::StatementType::PRINT} },
-{ spa::ASSIGN, {spa::StatementType::ASSIGN} },
-{ spa::CALL, {spa::StatementType::CALL} },
-{ spa::WHILE, {spa::StatementType::WHILE} },
-{ spa::IF, {spa::StatementType::IF} }
-};
-
 void spa::PKB::createRelationshipQueryFunctionMap() {
   relationshipQueryFunctionMap = {
     // Follows

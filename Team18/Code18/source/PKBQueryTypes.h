@@ -78,14 +78,14 @@ class Pattern {
   friend bool operator!=(const Pattern& p1, const Pattern& p2);
 };
 
-//std::unordered_map<DesignEntityType,
-//                   std::optional<StatementType>> statementTypeMap {
-//  { STMT, {} },
-//  { READ, {StatementType::READ} },
-//  { PRINT, {StatementType::PRINT} },
-//  { ASSIGN, {StatementType::ASSIGN} },
-//  { CALL, {StatementType::CALL} },
-//  { WHILE, {StatementType::WHILE} },
-//  { IF, {StatementType::IF} }
-//};
+inline std::unordered_map<DesignEntityType,
+                          std::optional<StatementType>> statementTypeMap {
+  { STMT, {} },
+  { READ, {StatementType::READ} },
+  { PRINT, {StatementType::PRINT} },
+  { ASSIGN, {StatementType::ASSIGN} },
+  { CALL, {StatementType::CALL} },
+  { WHILE, {StatementType::WHILE} },
+  { IF, {StatementType::IF} }
+};
 }  // namespace spa
