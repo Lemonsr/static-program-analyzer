@@ -1,14 +1,17 @@
 #pragma once
 #include <string>
 
+#include "PKB.h"
+
 namespace spa {
   class ProgramStatement {
   protected:
-    int statementLineNum;
+    int statementLineNum = -1;
     std::string parentProcedureVal;
 
   public:
     int getStatementLineNum();
     const std::string getParentProcedureVal();
+    virtual void processStatement(PKB& pkb);
   };
 }  // namespace spa
