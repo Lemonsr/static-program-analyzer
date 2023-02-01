@@ -1,5 +1,4 @@
 #include "PKB.h"
-
 #include "PKBQueryTypes.h"
 
 void spa::PKB::createRelationshipQueryFunctionMap() {

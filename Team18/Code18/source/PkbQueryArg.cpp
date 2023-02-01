@@ -49,6 +49,10 @@ spa::PKBQueryArg::PKBQueryArg(PqlArgument& pqlArg) {
   case LINE_NO: {
     type = PKBQueryArgType::LINE_NUMBER;
     lineNumberOpt = { static_cast<size_t>(std::stoi(pqlArg.getValue())) };
+    break;
+  }
+  default: {
+    break;
   }
   }
 }

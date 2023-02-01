@@ -28,10 +28,12 @@ class PKB : public PKBManager {
     std::function<QueryResult(RelationshipStorage& relationshipStorage, PKBQueryArg, PKBQueryArg)>,
     TupleHash,
     TupleEquality> relationshipQueryFunctionMap;
-  std::unordered_map<DesignEntityType,
+  std::unordered_map<
+    DesignEntityType,
     std::function<QueryResult(EntityStorage& entityStorage)>> entityQueryFunctionMap;
-  std::unordered_map<PKBQueryArgType,
-    std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg, Pattern)>> patternQueryFunctionMap;
+  std::unordered_map<PKBQueryArgType, std::function<QueryResult(PatternStorage& patternStorage,
+                                                                PKBQueryArg,
+                                                                Pattern)>> patternQueryFunctionMap;
 
   void createRelationshipQueryFunctionMap();
   void createEntityQueryFunctionMap();
@@ -45,7 +47,7 @@ class PKB : public PKBManager {
   const bool addStatementType(std::string lineNo, StatementType statementType);
   const bool addStatementProc(std::string lineNo, std::string procedure);
   const QueryResult getRelationship(RelationshipType relationshipType, PKBQueryArg firstArg, PKBQueryArg secondArg);
-  const QueryResult getEntity(DesignEntityType entityType);  // if stmtTypes/stmtProcs, shld route to RelStorage
+  const QueryResult getEntity(DesignEntityType entityType);
   const QueryResult getPattern(PKBQueryArg lhs, Pattern rhs);
 };
 }  // namespace spa
