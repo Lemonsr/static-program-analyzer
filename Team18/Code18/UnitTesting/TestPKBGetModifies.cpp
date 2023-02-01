@@ -87,7 +87,8 @@ namespace UnitTesting {
         std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LINE_NO, "1", {}));
-        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}));
+        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "v",
+                                                                      {spa::DesignEntityType::VARIABLE}));
         spa::QueryResult queryResult = relationshipStorage.getModifiesLineVar(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -106,7 +107,8 @@ namespace UnitTesting {
         relationshipStorage.setStatementTypeTable(statementTypeTable);
         std::vector<std::pair<int, std::string>> expected = { {1, "a"}, {6, "a"} };
 
-        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s", spa::DesignEntityType::STMT));
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
+                                                                      spa::DesignEntityType::STMT));
         spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
         spa::QueryResult queryResult = relationshipStorage.getModifiesStmtVarName(firstArg, secondArg);
 
@@ -135,7 +137,8 @@ namespace UnitTesting {
         std::vector<std::pair<int, std::string>> expected(modifiesTable.size());
         std::copy(modifiesTable.begin(), modifiesTable.end(), expected.begin());
 
-        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s", spa::DesignEntityType::STMT));
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
+                                                                      spa::DesignEntityType::STMT));
         spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
         spa::QueryResult queryResult = relationshipStorage.getModifiesStmtUnderscore(firstArg, secondArg);
 
@@ -157,7 +160,8 @@ namespace UnitTesting {
         std::vector<std::pair<int, std::string>> expected(modifiesTable.size());
         std::copy(modifiesTable.begin(), modifiesTable.end(), expected.begin());
 
-        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s", spa::DesignEntityType::STMT));
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
+                                                                      spa::DesignEntityType::STMT));
         spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
         spa::QueryResult queryResult = relationshipStorage.getModifiesStmtVar(firstArg, secondArg);
 
