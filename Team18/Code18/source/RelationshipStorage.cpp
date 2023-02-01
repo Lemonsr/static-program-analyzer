@@ -188,7 +188,7 @@ spa::QueryResult spa::RelationshipStorage::getUsesLineVar(PKBQueryArg firstArg,
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int,std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
   if (usesTable.find(lineNumber) != usesTable.end()) {
     for (auto& varName : usesTable[lineNumber]) {
       lineNumberVariablePairs.push_back({ lineNumber, varName });
