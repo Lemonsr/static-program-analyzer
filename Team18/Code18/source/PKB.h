@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 #include <tuple>
-#include <any>
+#include <functional>
 #include <unordered_map>
 
 namespace spa {
@@ -16,12 +16,21 @@ class TNode;
 
 class PKB : public PKBManager {
  private:
+  // Storage Tables
   RelationshipStorage relationshipStorage;
   EntityStorage entityStorage;
   PatternStorage patternStorage;
-  std::unordered_map<std::tuple<spa::RelationshipType, spa::PKBQueryArgType, spa::PKBQueryArgType>, std::any> relationshipQueryFunctionMap;
-  std::unordered_map<PKBQueryArgType, std::any> patternQueryFunctionMap;
+
+  // Storage Maps
+  std::unordered_map<std::tuple<RelationshipType, PKBQueryArgType, PKBQueryArgType>,
+    std::function<QueryResult(RelationshipStorage& relationshipStorage, PKBQueryArg, PKBQueryArg)>> relationshipQueryFunctionMap;
+  std::unordered_map<DesignEntityType,
+    std::function<QueryResult(EntityStorage& entityStorage)>> entityQueryFunctionMap;
+  std::unordered_map<PKBQueryArgType,
+    std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg, Pattern)>> patternQueryFunctionMap;
+
   void createRelationshipQueryFunctionMap();
+  void createEntityQueryFunctionMap();
   void createPatternQueryFunctionMap();
 
 public:
