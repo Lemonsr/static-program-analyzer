@@ -166,8 +166,9 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVar(PKBQueryArg firstA
 
 bool spa::RelationshipStorage::addUses(std::string lineNo, std::string varName) {
   int lineNumber = std::stoi(lineNo);
-  if (usesTable.find(lineNumber) == usesTable.end()) {
-    usesTable[lineNumber] = {};
+  if (usesTable.find(lineNumber) != usesTable.end() &&
+    usesTable[lineNumber].find(varName) != usesTable[lineNumber].end()) {
+    return false;
   }
 
   usesTable[lineNumber].insert(varName);
@@ -232,7 +233,7 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PKBQueryArg firstA
 
   std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
   for (auto itr = usesTable.begin(); itr != usesTable.end(); itr++) {
-    if (itr->second.find(varName) != itr->second.end() ||
+    if (itr->second.find(varName) == itr->second.end() ||
       (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType)) {
       continue;
     }
@@ -249,7 +250,6 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PKBQueryArg firstA
 spa::QueryResult spa::RelationshipStorage::getUsesStmtUnderscore(PKBQueryArg firstArg,
                                                                  PKBQueryArg secondArg) {
   Statement stmt = firstArg.getStatement();
-  std::string varName = secondArg.getName().name;
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
