@@ -19,10 +19,13 @@ class PKB : public PKBManager {
   RelationshipStorage relationshipStorage;
   EntityStorage entityStorage;
   PatternStorage patternStorage;
-  std::unordered_map<std::tuple<spa::RelationshipType, spa::PKBQueryArgType, spa::PKBQueryArgType>, std::any> argToFunctionMap;
-  std::unordered_map<PKBQueryArgType, std::any> patternMap;
+  std::unordered_map<std::tuple<spa::RelationshipType, spa::PKBQueryArgType, spa::PKBQueryArgType>, std::any> relationshipQueryFunctionMap;
+  std::unordered_map<PKBQueryArgType, std::any> patternQueryFunctionMap;
+  void createRelationshipQueryFunctionMap();
+  void createPatternQueryFunctionMap();
 
 public:
+  PKB();
   const bool addRelationship(RelationshipType relationshipType, std::string arg1, std::string arg2);
   const bool addEntity(DesignEntityType entityType, std::string arg);
   const bool addPattern(std::string lineNo, std::string lhs, std::string rhs);

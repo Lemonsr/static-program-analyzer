@@ -11,8 +11,29 @@
 #include <any>
 #include <unordered_map>
 
-/** Maps argument type combinations to its respective patterns. */
-std::unordered_map<spa::PKBQueryArgType, std::any> patternMap;
+void spa::PKB::createRelationshipQueryFunctionMap() {
+  relationshipQueryFunctionMap = {
+    {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::NAME}, {&RelationshipStorage::getModifiesLineVarName}},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE}, {&RelationshipStorage::getModifiesLineUnderscore}},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::VARIABLE}, {&RelationshipStorage::getModifiesLineVar}},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::NAME}, {&RelationshipStorage::getModifiesStmtVarName}},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE}, {&RelationshipStorage::getModifiesStmtUnderscore}},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE}, {&RelationshipStorage::getModifiesStmtVar}},
+  };
+}
+
+void spa::PKB::createPatternQueryFunctionMap() {
+  patternQueryFunctionMap = {
+    {{PKBQueryArgType::UNDERSCORE}, {&PatternStorage::getAssignUnderscore}},
+    {{PKBQueryArgType::VARIABLE}, {&PatternStorage::getAssignVar}},
+    {{PKBQueryArgType::NAME}, {&PatternStorage::getAssignVarName}},
+  };
+}
+
+spa::PKB::PKB() {
+  createRelationshipQueryFunctionMap();
+  createPatternQueryFunctionMap();
+}
 
 const bool spa::PKB::addRelationship(RelationshipType relationshipType,
                                      std::string arg1, std::string arg2) {
