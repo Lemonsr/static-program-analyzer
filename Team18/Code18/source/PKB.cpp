@@ -1,333 +1,218 @@
 #include "PKB.h"
-#include "PKBTypes.h"
 #include "PKBQueryTypes.h"
-#include "TNode.h"
 
-#include <stdio.h>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <optional>
+void spa::PKB::createRelationshipQueryFunctionMap() {
+  relationshipQueryFunctionMap = {
+    // Follows
+    {{RelationshipType::FOLLOWS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsLineLine},
+    {{RelationshipType::FOLLOWS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsLineStatement},
+    {{RelationshipType::FOLLOWS, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsStatementLine},
+    {{RelationshipType::FOLLOWS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsLineUnderscore},
+    {{RelationshipType::FOLLOWS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsUnderscoreLine},
+    {{RelationshipType::FOLLOWS, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsStatementStatement},
+    {{RelationshipType::FOLLOWS, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsStatementUnderscore},
+    {{RelationshipType::FOLLOWS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsUnderscoreStatement},
+    {{RelationshipType::FOLLOWS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsUnderscoreUnderscore},
 
-int spa::PKB::setProcToAST(PROC p, TNode* r) {
-  return 0;
+    // Follows Star
+    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsStarLineLine},
+    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsStarLineStatement},
+    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsStarStatementLine},
+    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsStarLineUnderscore},
+    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsStarUnderscoreLine},
+    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsStarStatementStatement},
+    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsStarStatementUnderscore},
+    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsStarUnderscoreStatement},
+    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsStarUnderscoreUnderscore},
+
+    // Parent
+    {{RelationshipType::PARENT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentLineLine},
+    {{RelationshipType::PARENT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentLineStatement},
+    {{RelationshipType::PARENT, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentStatementLine},
+    {{RelationshipType::PARENT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentLineUnderscore},
+    {{RelationshipType::PARENT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentUnderscoreLine},
+    {{RelationshipType::PARENT, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentStatementStatement},
+    {{RelationshipType::PARENT, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentStatementUnderscore},
+    {{RelationshipType::PARENT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentUnderscoreStatement},
+    {{RelationshipType::PARENT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentUnderscoreUnderscore},
+
+    // Parent Star
+    {{RelationshipType::PARENT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentStarLineLine},
+    {{RelationshipType::PARENT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentStarLineStatement},
+    {{RelationshipType::PARENT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentStarStatementLine},
+    {{RelationshipType::PARENT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentStarLineUnderscore},
+    {{RelationshipType::PARENT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentStarUnderscoreLine},
+    {{RelationshipType::PARENT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentStarStatementStatement},
+    {{RelationshipType::PARENT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentStarStatementUnderscore},
+    {{RelationshipType::PARENT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentStarUnderscoreStatement},
+    {{RelationshipType::PARENT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentStarUnderscoreUnderscore},
+
+    // Uses
+    {{RelationshipType::USES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::NAME},
+      &RelationshipStorage::getUsesLineVarName},
+    {{RelationshipType::USES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getUsesLineUnderscore},
+    {{RelationshipType::USES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getUsesLineVar},
+    {{RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::NAME},
+      &RelationshipStorage::getUsesStmtVarName},
+    {{RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getUsesStmtUnderscore},
+    {{RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getUsesStmtVar},
+
+    // Modifies
+    {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesLineVarName},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesLineUnderscore},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesLineVar},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesStmtVarName},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesStmtUnderscore},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesStmtVar}
+  };
 }
 
-spa::TNode* spa::PKB::getRootAST(PROC p) {
-  return nullptr;
+void spa::PKB::createEntityQueryFunctionMap() {
+  entityQueryFunctionMap = {
+    {DesignEntityType::VARIABLE, &EntityStorage::getVars},
+    {DesignEntityType::CONSTANT, &EntityStorage::getConst},
+    {DesignEntityType::PROCEDURE, &EntityStorage::getProc}
+  };
 }
 
-// Get table methods
-const spa::VarTable& spa::PKB::getVarTable() const {
-  return varTable;
+void spa::PKB::createPatternQueryFunctionMap() {
+  patternQueryFunctionMap = {
+    {PKBQueryArgType::UNDERSCORE, &PatternStorage::getAssignUnderscore},
+    {PKBQueryArgType::VARIABLE, &PatternStorage::getAssignVar},
+    {PKBQueryArgType::NAME, &PatternStorage::getAssignVarName}
+  };
 }
 
-const spa::ConstTable& spa::PKB::getConstTable() const {
-  return constTable;
+spa::PKB::PKB() {
+  createRelationshipQueryFunctionMap();
+  createEntityQueryFunctionMap();
+  createPatternQueryFunctionMap();
 }
 
-const spa::ProcTable& spa::PKB::getProcTable() const {
-  return procTable;
-}
-
-const spa::FollowsTable& spa::PKB::getFollowsTable() const {
-  return followsTable;
-}
-
-const spa::FollowsStarTable& spa::PKB::getFollowsStarTable() const {
-  return followsStarTable;
-}
-
-const spa::ParentTable& spa::PKB::getParentTable() const {
-  return parentTable;
-}
-
-const spa::ParentStarTable& spa::PKB::getParentStarTable() const {
-  return parentStarTable;
-}
-
-const spa::ModifiesTable& spa::PKB::getModifiesTable() const {
-  return modifiesTable;
-}
-
-const spa::ModifiesProcTable& spa::PKB::getModifiesProcTable() const {
-  return modifiesProcTable;
-}
-
-const spa::UsesTable& spa::PKB::getUsesTable() const {
-  return usesTable;
-}
-
-const spa::UsesProcTable& spa::PKB::getUsesProcTable() const {
-    return usesProcTable;
-}
-
-const spa::AssignTable& spa::PKB::getAssignTable() const {
-  return assignTable;
-}
-
-const spa::StatementTypeTable& spa::PKB::getStatementTypeTable() const {
-    return statementTypeTable;
-}
-
-const spa::StatementProcTable& spa::PKB::getStatementProcTable() const {
-    return statementProcTable;
-}
-
-// Follows methods
-void spa::PKB::addFollows(LineNo lineNo, Follow follow) {
-  followsTable.insert({ lineNo, follow });  // s2 -follows-> s1
-}
-
-void spa::PKB::addFollowsStar(LineNo lineNo, Follows follows) {
-  followsStarTable.insert({ lineNo, follows });  // s2 -follows*-> s1
-}
-
-// Parent methods
-void spa::PKB::addParent(Child child, Parent parent) {
-  parentTable.insert({ child, parent });  // s2 -parent-> s1
-}
-
-void spa::PKB::addParentStar(Child child, Parents parents) {
-  parentStarTable.insert({ child, parents });  // s2 -parent*-> s1
-}
-
-// Modifies methods
-
-/**
- * @brief Adds {lineNo, modifies} to the modifiesTable if 
- * lineNo is not in modifiesTable. 
- * @param lineNo Integer line number in the SIMPLE code.
- * @param modifies Set of varNames modified in the line number.
- */
-void spa::PKB::addModifies(LineNo lineNo, Modifies modifies) {
-}
-
-/**
- * @brief Checks whether the specified line number modifies 
- * the specified variable. E.g. Modifies(6, "x")
- * @param lineNumber Struct of the line number in the SIMPLE code.
- * @param varName String of the specified variable name.
- * @return boolean.
- */
-bool spa::PKB::getModifies(LineNumber lineNumber, Name varName) {
+const bool spa::PKB::addRelationship(RelationshipType relationshipType,
+  std::string firstArg, std::string secondArg) {
+  switch (relationshipType) {
+  case FOLLOWS: {
+    return relationshipStorage.addFollows(firstArg, secondArg);
+  }
+  case FOLLOWS_STAR: {
+    return relationshipStorage.addFollowsStar(firstArg, secondArg);
+  }
+  case PARENT: {
+    return relationshipStorage.addParent(firstArg, secondArg);
+  }
+  case PARENT_STAR: {
+    return relationshipStorage.addParentStar(firstArg, secondArg);
+  }
+  case MODIFIES: {
+    return relationshipStorage.addModifies(firstArg, secondArg);
+  }
+  case USES: {
+    return relationshipStorage.addUses(firstArg, secondArg);
+  }
+  default: {
+    return false;
+  }
+  }
   return false;
 }
 
-/**
- * @brief Checks whether the specified line number modifies
- * any variables. E.g. Modifies(6, _)
- * @param lineNumber Struct of the line number in the SIMPLE code.
- * @param underscore Empty Underscore struct.
- * @return boolean.
- */
-bool spa::PKB::getModifies(LineNumber lineNumber, Underscore underscore) {
+const bool spa::PKB::addEntity(DesignEntityType entityType, std::string arg) {
+  switch (entityType) {
+  case VARIABLE: {
+    return entityStorage.addVar(arg);
+  }
+  case CONSTANT: {
+    return entityStorage.addConst(arg);
+  }
+  case PROCEDURE: {
+    return entityStorage.addProc(arg);
+  }
+  default: {
+    return false;
+  }
+  }
   return false;
 }
 
-/**
- * @brief Retrieves variables modified by the specified line number.
- * E.g. Modifies(6, v)
- * @param lineNumber Struct of the line number in the SIMPLE code.
- * @param variable Empty Variable struct.
- * @return A set of variable names.
- */
-spa::VarNames spa::PKB::getModifies(LineNumber lineNumber, Variable var) {
-  return VarNames();
+const bool spa::PKB::addPattern(std::string lineNo, std::string lhs, std::string rhs) {
+  return patternStorage.addAssign(lineNo, lhs, rhs);
 }
 
-/**
- * @brief Retrieves line numbers of statements of the specified statement type
- * that modifies the specified variable. E.g. Modifies(s, "x")
- * @param stmt Statement with a specified type.
- * @param varName String of the specified variable name.
- * @return A set of SIMPLE source line numbers.
- */
-spa::LineNos spa::PKB::getModifies(Statement stmt, Name varName) {
-  return LineNos();
+const bool spa::PKB::addStatementType(std::string lineNo, StatementType statementType) {
+  return relationshipStorage.addStatementType(lineNo, statementType);
 }
 
-/**
- * @brief Retrieves line numbers of statements of the specified statement type
- * that modifies any variables. E.g. Modifies(s, _)
- * @param stmt Statement with a specified type.
- * @param underscore Empty Underscore struct.
- * @return A set of SIMPLE source line numbers.
- */
-spa::LineNos spa::PKB::getModifies(Statement stmt, Underscore underscore) {
-  return LineNos();
+const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure) {
+  return relationshipStorage.addStatementProc(lineNo, procedure);
 }
 
-/**
- * @brief Retrieves line numbers of statements of the specified statement type
- * and the variables modified in those statements. E.g. Modifies(s, v)
- * @param stmt Statement with a specified type.
- * @param variable Empty Variable struct.
- * @return A pair of vectors containing line numbers and variable names.
- */
-spa::LineNo_Var_Pairs spa::PKB::getModifies(Statement stmt, Variable var) {
-  return LineNo_Var_Pairs();
+const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
+  PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  auto mapIter = relationshipQueryFunctionMap.find({ relationshipType,
+                                                     firstArg.getType(), secondArg.getType() });
+  return (mapIter->second)(relationshipStorage, firstArg, secondArg);
 }
 
-// Uses methods
-
-/**
- * @brief Adds {lineNo, modifies} to the usesTable if 
- * lineNo is not in usesTable. 
- * @param lineNo Integer line number in the SIMPLE code.
- * @param uses Set of varNames used in the line number.
- */
-void spa::PKB::addUses(LineNo lineNo, Uses uses) {
-}
-
-/**
- * @brief Checks whether the specified line number uses
- * the specified variable. E.g. Uses(6, "x")
- * @param lineNumber Struct of the line number in the SIMPLE code.
- * @param varName String of the specified variable name.
- * @return boolean.
- */
-bool spa::PKB::getUses(LineNumber lineNumber, Name varName) {
-  return false;
-}
-
-/**
- * @brief Checks whether the specified line number uses
- * any variables. E.g. Uses(6, _)
- * @param lineNumber Struct of the line number in the SIMPLE code.
- * @param underscore Empty Underscore struct.
- * @return boolean.
- */
-bool spa::PKB::getUses(LineNumber lineNumber, Underscore underscore) {
-  return false;
-}
-
-/**
- * @brief Retrieves variables used by the specified line number.
- * E.g. Uses(6, v)
- * @param lineNumber Struct of the line number in the SIMPLE code.
- * @param variable Empty Variable struct.
- * @return A set of variable names.
- */
-spa::VarNames spa::PKB::getUses(LineNumber lineNumber, Variable var) {
-  return VarNames();
-}
-
-/**
- * @brief Retrieves line numbers of statements of the specified statement type
- * that uses the specified variable. E.g. Uses(s, "x")
- * @param stmt Statement with a specified type.
- * @param varName String of the specified variable name.
- * @return A set of SIMPLE source line numbers.
- */
-spa::LineNos spa::PKB::getUses(Statement stmt, Name varName) {
-  return LineNos();
-}
-
-/**
- * @brief Retrieves line numbers of statements of the specified statement type
- * that uses any variables. E.g. Uses(s, _)
- * @param stmt Statement with a specified type.
- * @param underscore Empty Underscore struct.
- * @return A set of SIMPLE source line numbers.
- */
-spa::LineNos spa::PKB::getUses(Statement stmt, Underscore underscore) {
-  return LineNos();
-}
-
-/**
- * @brief Retrieves line numbers of statements of the specified statement type
- * and the variables used in those statements. E.g. Uses(s, v)
- * @param stmt Statement with a specified type.
- * @param variable Empty Variable struct.
- * @return A pair of vectors containing line numbers and variable names.
- */
-spa::LineNo_Var_Pairs spa::PKB::getUses(Statement stmt, Variable var) {
-  return LineNo_Var_Pairs();
-}
-
-// Assign methods
-
-/**
- * @brief Adds {lineNo, Assignment} to the assignTable if
- * lineNo is not in assignTable.
- * @param lineNo Integer line number in the SIMPLE code.
- * @param varName Variable on the LHS of the assignment statement.
- * @param postfixString RHS of assignment statement string in postfix notation.
- */
-void spa::PKB::addAssign(LineNo lineNo, VarName varName,
-                         PostfixString postfixString) {
-  assignTable.insert({ lineNo, Assignment({varName, postfixString}) });
-}
-
-std::string convertToPostfix(const std::vector<spa::Token>& tokens) {
-  return "";
-}
-
-/**
- * @brief Method to factorize out common code from getAssign methods.
- * @param pattern Pattern struct.
- * @return A set of SIMPLE source line numbers.
- */
-spa::LineNos spa::PKB::getAssignCommonLogic(std::optional<Name> name,
-                                            Pattern pattern) {
-  spa::LineNos result;
-
-  for (auto& [lineNo, assignment] : spa::PKB::assignTable) {
-    if (name.has_value() && name.value().name != assignment.first) {
-      continue;
-    }
-    const std::string postfix = assignment.second;
-    const std::string patternValue = convertToPostfix(pattern.getValue());
-
-    switch (pattern.getType()) {
-    case EXACT:
-      if (postfix == patternValue) {
-        result.insert(lineNo);
-      }
-      break;
-    case PARTIAL:
-      if (postfix.find(patternValue) != std::string::npos) {
-        result.insert(lineNo);
-      }
-      break;
-    case ANY:
-      result.insert(lineNo);
-    }
+const spa::QueryResult spa::PKB::getEntity(DesignEntityType entityType) {
+  if (entityType != DesignEntityType::VARIABLE &&
+    entityType != DesignEntityType::PROCEDURE &&
+    entityType != DesignEntityType::CONSTANT) {
+    auto mapIter = statementTypeMap.find(entityType);
+    return relationshipStorage.getStatements(mapIter->second);
   }
 
-  return result;
+  auto mapIter = entityQueryFunctionMap.find(entityType);
+  return (mapIter->second)(entityStorage);
 }
 
-/**
- * @brief Retrieves line numbers that are assignment statements where any
- * variable is on the LHS and the specified pattern matches the RHS.
- * @param underscore Empty Underscore struct.
- * @param pattern Pattern struct.
- * @return A set of SIMPLE source line numbers.
- */
-spa::LineNos spa::PKB::getAssign(Underscore underscore, Pattern pattern) {
-  return getAssignCommonLogic(std::nullopt, pattern);
-}
-
-/**
- * @brief Retrieves line numbers that are assignment statements where the
- * specified variable is on the LHS and the specified pattern matches the RHS.
- * @param variable Empty Variable struct.
- * @param pattern Pattern struct.
- * @return A set of SIMPLE source line numbers.
- */
-spa::LineNos spa::PKB::getAssign(Variable variable, Pattern pattern) {
-  return getAssignCommonLogic(std::nullopt, pattern);
-}
-
-/**
- * @brief Retrieves line numbers that are assignment statements where the
- * specified name is on the LHS and the specified pattern matches the RHS.
- * @param name Empty variable Name struct.
- * @param pattern Pattern struct.
- * @return A set of SIMPLE source line numbers.
- */
-spa::LineNos spa::PKB::getAssign(Name name, Pattern pattern) {
-  return getAssignCommonLogic(name, pattern);
+const spa::QueryResult spa::PKB::getPattern(PKBQueryArg lhs, Pattern rhs) {
+  auto mapIter = patternQueryFunctionMap.find(lhs.getType());
+  return (mapIter->second)(patternStorage, lhs, rhs);
 }

@@ -14,8 +14,8 @@ class PatternStorage {
 
  public:
   bool addAssign(std::string lineNo, std::string varName, std::string postfixString);
-  QueryResult getAssign(PKBQueryArg lhs, Pattern rhs);
-  QueryResult getAssign(PKBQueryArg lhs, Pattern rhs);
-  QueryResult getAssign(PKBQueryArg lhs, Pattern rhs);
+  QueryResult getAssignUnderscore(PKBQueryArg lhs, Pattern rhs);
+  QueryResult getAssignVar(PKBQueryArg lhs, Pattern rhs);
+  QueryResult getAssignVarName(PKBQueryArg lhs, Pattern rhs);
 };
 }  // namespace spa
