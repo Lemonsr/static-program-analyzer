@@ -8,6 +8,9 @@
 namespace spa {
 class SourceProcessor {
  public:
-        void processSource(std::string);
+    SourceProcessor(std::string);
+    void processSource();
+private:
+    std::string sourceCode;
 };
 }  // namespace spa
