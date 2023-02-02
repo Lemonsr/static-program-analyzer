@@ -4,8 +4,8 @@ const spa::QueryResultType& spa::QueryResult::getQueryResultType() {
   return queryResultType;
 }
 
-const std::vector<std::string>& spa::QueryResult::getVariableNames() {
-  return variableNames.value();
+const std::vector<std::string>& spa::QueryResult::getNames() {
+  return names.value();
 }
 
 const std::vector<int>& spa::QueryResult::getLineNumbers() {
@@ -24,8 +24,8 @@ void spa::QueryResult::setQueryResultType(QueryResultType queryResultType) {
   this->queryResultType = queryResultType;
 }
 
-void spa::QueryResult::setVariableNames(std::vector<std::string> variableNames) {
-  this->variableNames = variableNames;
+void spa::QueryResult::setNames(std::vector<std::string> names) {
+  this->names = names;
 }
 
 void spa::QueryResult::setLineNumbers(std::vector<int> lineNumbers) {
