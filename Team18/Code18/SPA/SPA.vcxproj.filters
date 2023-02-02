@@ -73,6 +73,9 @@
     <ClCompile Include="..\source\UtilsFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\PatternStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\source\EntityStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
