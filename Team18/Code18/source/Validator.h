@@ -5,8 +5,8 @@
 #include "PKB.h"
 
 namespace spa {
-class Validator {
- public:
+    class Validator {
+    public:
         spa::Stream<spa::Token> tokens;
         int offset = 0;
         explicit Validator(spa::Stream<spa::Token> tokens);
@@ -16,12 +16,12 @@ class Validator {
         spa::Token& get();
         spa::Token& next(int offset);
         spa::Token& next();
-        bool isValidRelExprToken(spa::Token token);
-        bool isValidStmtToken(spa::Token token);
-        bool isValidCondExprToken(spa::Token token);
-        bool isValidTermToken(spa::Token token);
 
- private:
+    private:
+        static bool isValidRelExprToken(spa::Token token);
+        static bool isValidStmtToken(spa::Token token);
+        static bool isValidCondExprToken(spa::Token token);
+        static bool isValidTermToken(spa::Token token);
         static bool isValidProgram(spa::Stream<spa::Token> tokens);
         static bool isValidGrammar();
         static bool isValidProcedure();
@@ -32,5 +32,5 @@ class Validator {
         static bool isValidReadPrint();
         static bool isValidWhile();
         static bool isValidif();
-};
-}  // namespace spa
+    };
+} // namespace spa

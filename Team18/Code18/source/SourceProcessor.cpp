@@ -6,12 +6,13 @@
 #include <sstream>
 #include <string>
 
-void spa::SourceProcessor::processSource(const std::string source) {
+void spa::SourceProcessor::processSource(std::string source) {
     std::stringstream ss;
     ss.str(source);
     Tokenizer tokenizer;
     Stream<Token> tokens = tokenizer.tokenize(ss);
 
+    /** For testing tokenizer and validator
     std::cout << "TESTING TOKENIZER" << std::endl;
     for (int64_t i = 0; i < tokens.remaining(); i++) {
         std::cout <<
@@ -19,6 +20,7 @@ void spa::SourceProcessor::processSource(const std::string source) {
             << tokens[i].getValue() << std::endl;
     }
     std::cout << "END OF TESTING" << std::endl;
+    */
 
     spa::Validator validator = spa::Validator(tokens);
     validator.validateProgram();
