@@ -1,4 +1,7 @@
 #include "SourceProcessor.h"
+
+#include <iostream>
+
 #include "Stream.h"
 #include "Tokenizer.h"
 #include "Token.h"

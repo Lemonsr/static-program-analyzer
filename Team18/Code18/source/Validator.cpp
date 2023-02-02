@@ -1,5 +1,8 @@
 #include "Tokenizer.h"
 #include "Validator.h";
+
+#include <iostream>
+
 #include "Stream.h";
 #include "PKB.h";
 #include <unordered_set>;
