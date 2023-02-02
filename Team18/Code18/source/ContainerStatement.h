@@ -16,19 +16,19 @@ namespace spa {
   class IfContainerStatement : public ContainerStatement {
   public:
     IfContainerStatement(std::string parentProcedureVal, int statementLineNum, std::vector<ProgramStatement*> statementList);
-    void processStatement(PKB& pkb) override;
+    void processStatement(PKBManager& pkbManager) override;
   };
 
   class WhileContainerStatement : public ContainerStatement {
   public:
     WhileContainerStatement(std::string parentProcedureVal, int statementLineNum,
                             std::vector<ProgramStatement*> statementList);
-    void processStatement(PKB& pkb) override;
+    void processStatement(PKBManager& pkbManager) override;
   };
 
   class InnerBlockStatement : public ContainerStatement {
   public:
     InnerBlockStatement(std::string parentProcedureVal, std::vector<ProgramStatement*> statementList);
-    void processStatement(PKB& pkb) override;
+    void processStatement(PKBManager& pkbManager) override;
   };
 }    // namespace spa

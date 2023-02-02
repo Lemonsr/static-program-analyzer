@@ -12,6 +12,6 @@ namespace spa {
   public:
     int getStatementLineNum();
     const std::string getParentProcedureVal();
-    virtual void processStatement(PKB& pkb);
+    virtual void processStatement(PKBManager& pkbManager);
   };
 }  // namespace spa

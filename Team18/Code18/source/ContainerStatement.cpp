@@ -27,25 +27,25 @@ spa::InnerBlockStatement::InnerBlockStatement(std::string parentProcedureVal,
 	this->statementList = statementList;
 }
 
-void spa::IfContainerStatement::processStatement(PKB& pkb) {
+void spa::IfContainerStatement::processStatement(PKBManager& pkbManager) {
   ProgramStatement* ifConditionStatement = statementList[0];
 	ProgramStatement* thenStatement = statementList[1];
 	ProgramStatement* elseStatement = statementList[2];
-	ifConditionStatement->processStatement(pkb);
-	thenStatement->processStatement(pkb);
-	elseStatement->processStatement(pkb);
+	ifConditionStatement->processStatement(pkbManager);
+	thenStatement->processStatement(pkbManager);
+	elseStatement->processStatement(pkbManager);
 }
 
-void spa::WhileContainerStatement::processStatement(PKB& pkb) {
+void spa::WhileContainerStatement::processStatement(PKBManager& pkbManager) {
 	ProgramStatement* whileConditionStatement = statementList[0];
 	ProgramStatement* innerWhileBlockStatements = statementList[1];
-	whileConditionStatement->processStatement(pkb);
-	innerWhileBlockStatements->processStatement(pkb);
+	whileConditionStatement->processStatement(pkbManager);
+	innerWhileBlockStatements->processStatement(pkbManager);
 }
 
-void spa::InnerBlockStatement::processStatement(PKB& pkb) {
+void spa::InnerBlockStatement::processStatement(PKBManager& pkbManager) {
   for (auto statement: statementList) {
-    statement->processStatement(pkb);
+    statement->processStatement(pkbManager);
   }
 }
 

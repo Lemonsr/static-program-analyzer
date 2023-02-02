@@ -6,10 +6,10 @@
 namespace spa {
   class DesignExtractor {
   private:
-    PKB& pkb;
+    PKBManager& pkbManager;
     std::vector<ProcedureStatement>& procedureList;
   public:
-    DesignExtractor(PKB& pkb, std::vector<ProcedureStatement> procedureList);
+    DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement*> procedureList);
 
     void extractRelationship();
     void extractDesignAbstraction(std::vector<ProgramStatement*> statementList);

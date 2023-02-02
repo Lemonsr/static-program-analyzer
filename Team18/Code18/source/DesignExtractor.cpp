@@ -5,12 +5,12 @@
 #include "ContainerStatement.h"
 #include "ProcedureStatement.h"
 
-spa::DesignExtractor::DesignExtractor(PKB& pkb, std::vector<ProcedureStatement> procedureList) :
-  pkb(pkb), procedureList((procedureList)) {}
+spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement>& procedureList) :
+  pkbManager(pkbManager), procedureList(procedureList) {}
 
 void spa::DesignExtractor::extractRelationship() {
   for (ProcedureStatement& procedure : procedureList) {
-    pkb.addEntity(PROCEDURE, procedure.getProcedureVarToken().getValue());
+    pkbManager.addEntity(PROCEDURE, procedure.getProcedureVarToken().getValue());
     std::vector<ProgramStatement*> statementList = procedure.getStatementLst();
     extractDesignAbstraction(statementList);
   }
@@ -44,7 +44,7 @@ void spa::DesignExtractor::extractFollows(std::vector<ProgramStatement*> stateme
     }
     std::string followStmtOne = std::to_string(statementList[i]->getStatementLineNum());
     std::string followStmtTwo = std::to_string(statementList[i + 1]->getStatementLineNum());
-    pkb.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
+    pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
   }
 }
 
@@ -56,7 +56,7 @@ void spa::DesignExtractor::extractFollowsStar(std::vector<ProgramStatement*> sta
       if (firstStatementLineNum != -1 && secondStatementLineNum != -1) {
         std::string followStarStmtOne = std::to_string(statementList[i]->getStatementLineNum());
         std::string followStarStmtTwo = std::to_string(statementList[j]->getStatementLineNum());
-        pkb.addRelationship(FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
+        pkbManager.addRelationship(FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
       }
       if (dynamic_cast<ContainerStatement*>(statementList[i])) {
         ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[
@@ -76,14 +76,14 @@ void spa::DesignExtractor::extractParent(ContainerStatement* containerStatement)
     }
     if (statement->getStatementLineNum() != -1) {
       std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
-      pkb.addRelationship(PARENT, parentStmtOne, parentStmtTwo);
+      pkbManager.addRelationship(PARENT, parentStmtOne, parentStmtTwo);
       continue;
     }
     auto innerBlockStatements = dynamic_cast<ContainerStatement*>(statement);
     std::vector<ProgramStatement*> innerBlockStmtList = innerBlockStatements->getStatementList();
     for (ProgramStatement* childStatement : innerBlockStmtList) {
       std::string parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
-      pkb.addRelationship(PARENT, parentStmtOne, parentStmtTwo);
+      pkbManager.addRelationship(PARENT, parentStmtOne, parentStmtTwo);
       if (dynamic_cast<ContainerStatement*>(childStatement)) {
         auto childContainerStmt = dynamic_cast<ContainerStatement*>(childStatement);
         extractParent(childContainerStmt);
@@ -102,14 +102,14 @@ void spa::DesignExtractor::extractParentStar(ContainerStatement* containerStatem
     }
     if (statement->getStatementLineNum() != -1) {
       std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
-      pkb.addRelationship(PARENT_STAR, parentStmtOne, parentStmtTwo);
+      pkbManager.addRelationship(PARENT_STAR, parentStmtOne, parentStmtTwo);
       continue;
     }
     auto innerBlockStatements = dynamic_cast<ContainerStatement*>(statement);
     std::vector<ProgramStatement*> innerBlockStmtList = innerBlockStatements->getStatementList();
     for (ProgramStatement* childStatement : innerBlockStmtList) {
       std::string parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
-      pkb.addRelationship(PARENT_STAR, parentStmtOne, parentStmtTwo);
+      pkbManager.addRelationship(PARENT_STAR, parentStmtOne, parentStmtTwo);
       if (dynamic_cast<ContainerStatement*>(childStatement)) {
         auto childContainerStmt = dynamic_cast<ContainerStatement*>(childStatement);
         extractParentStar(childContainerStmt, ancestorLineNum);
@@ -121,6 +121,6 @@ void spa::DesignExtractor::extractParentStar(ContainerStatement* containerStatem
 
 void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*> statementList) {
   for (auto statement : statementList) {
-    statement->processStatement(pkb);
+    statement->processStatement(pkbManager);
   }
 }
