@@ -116,8 +116,8 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
 void spa::PKB::createEntityQueryFunctionMap() {
   entityQueryFunctionMap = {
     {DesignEntityType::VARIABLE, &EntityStorage::getVars},
-    {DesignEntityType::CONSTANT, &EntityStorage::getConst},
-    {DesignEntityType::PROCEDURE, &EntityStorage::getProc}
+    {DesignEntityType::CONSTANT, &EntityStorage::getConsts},
+    {DesignEntityType::PROCEDURE, &EntityStorage::getProcs}
   };
 }
 

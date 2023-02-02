@@ -172,7 +172,10 @@
     </ClCompile>
     <ClCompile Include="TestAST.cpp" />
     <ClCompile Include="TestPKBPatternStorage.cpp" />
+    <ClCompile Include="TestPKBEntityStorage.cpp" />
+    <ClCompile Include="TestPKBModifies.cpp" />
     <ClCompile Include="TestPkbQueryArg.cpp" />
+    <ClCompile Include="TestPKBUses.cpp" />
     <ClCompile Include="TestPqlArgumentParser.cpp" />
     <ClCompile Include="TestPqlDeclarationParser.cpp" />
     <ClCompile Include="TestPqlPatternParser.cpp" />

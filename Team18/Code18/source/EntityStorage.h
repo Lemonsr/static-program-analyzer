@@ -19,7 +19,11 @@ class EntityStorage {
   bool addProc(std::string procName);
 
   QueryResult getVars();
-  QueryResult getConst();
-  QueryResult getProc();
+  QueryResult getConsts();
+  QueryResult getProcs();
+
+  void setVarTable(std::unordered_set<std::string> varTable);
+  void setConstTable(std::unordered_set<std::string> constTable);
+  void setProcTable(std::unordered_set<std::string> procTable);
 };
 }  // namespace spa

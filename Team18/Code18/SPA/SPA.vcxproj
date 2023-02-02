@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp" />
+    <ClCompile Include="..\source\EntityStorage.cpp" />
     <ClCompile Include="..\source\ParsedQuery.cpp" />
     <ClCompile Include="..\source\Parser.cpp" />
     <ClCompile Include="..\source\PatternStorage.cpp" />
@@ -25,6 +26,7 @@
     <ClCompile Include="..\source\PqlQueryParser.cpp" />
     <ClCompile Include="..\source\PqlSuchThatParser.cpp" />
     <ClCompile Include="..\source\QueryResult.cpp" />
+    <ClCompile Include="..\source\RelationshipStorage.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="..\source\QPS.cpp" />
     <ClCompile Include="..\source\QpsEvaluator.cpp" />
