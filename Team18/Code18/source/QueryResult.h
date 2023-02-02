@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <unordered_set>
 
 namespace spa {
 enum QueryResultType {
@@ -18,6 +19,7 @@ class QueryResult {
   std::optional<std::vector<int>> lineNumbers;
   std::optional<std::vector<std::pair<int, std::string>>> lineNumberVariablePairs;
   std::optional<bool> isTrue;
+
  public:
   const QueryResultType& getQueryResultType();
   const std::vector<std::string>& getVariableNames();
