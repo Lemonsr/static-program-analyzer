@@ -6,8 +6,7 @@
 #include <sstream>
 #include <string>
 
-spa::SourceProcessor::SourceProcessor(std::string source) : sourceCode(source) {
-}
+spa::SourceProcessor::SourceProcessor(std::string source) : sourceCode(source) {}
 
 void spa::SourceProcessor::processSource() {
     std::stringstream ss(sourceCode);
@@ -16,7 +15,8 @@ void spa::SourceProcessor::processSource() {
 
     std::cout << "TESTING TOKENIZER" << std::endl;
     for (int64_t i = 0; i < tokens.remaining(); i++) {
-        std::cout << "Type: " << tokens[i].getType() << ", Value: " << tokens[i].getValue() << std::endl;
+        std::cout << "Type: " << tokens[i].getType() <<
+            ", Value: " << tokens[i].getValue() << std::endl;
     }
     std::cout << "END OF TESTING" << std::endl;
 
