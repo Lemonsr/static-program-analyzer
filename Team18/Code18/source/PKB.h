@@ -1,93 +1,55 @@
 #pragma once
 
-#include "PKBTypes.h"
-#include "PKBQueryTypes.h"
+#include "PKBManager.h"
+#include "RelationshipStorage.h"
+#include "EntityStorage.h"
+#include "PatternStorage.h"
+#include "HashTuple.h"
 
-#include <stdio.h>
-#include <iostream>
 #include <string>
 #include <vector>
-
-typedef int16_t PROC;
+#include <tuple>
+#include <functional>
+#include <unordered_map>
 
 namespace spa {
 class TNode;
 
-class PKB {
+class PKB : public PKBManager {
  private:
-  VarTable varTable;
-  ConstTable constTable;
-  ProcTable procTable;
-  FollowsTable followsTable;
-  FollowsStarTable followsStarTable;
-  ParentTable parentTable;
-  ParentStarTable parentStarTable;
-  ModifiesTable modifiesTable;
-  ModifiesProcTable modifiesProcTable;
-  UsesTable usesTable;
-  UsesProcTable usesProcTable;
-  AssignTable assignTable;
-  StatementTypeTable statementTypeTable;
-  StatementProcTable statementProcTable;
+  // Storage Tables
+  RelationshipStorage relationshipStorage;
+  EntityStorage entityStorage;
+  PatternStorage patternStorage;
 
-  LineNos getAssignCommonLogic(std::optional<Name> name, Pattern pattern);
+  // Storage Maps
+  std::unordered_map<
+    std::tuple<RelationshipType, PKBQueryArgType, PKBQueryArgType>,
+    std::function<QueryResult(RelationshipStorage& relationshipStorage, PKBQueryArg, PKBQueryArg)>,
+    TupleHash,
+    TupleEquality> relationshipQueryFunctionMap;
+  std::unordered_map<
+    DesignEntityType,
+    std::function<QueryResult(EntityStorage& entityStorage)>> entityQueryFunctionMap;
+  std::unordered_map<PKBQueryArgType, std::function<QueryResult(PatternStorage& patternStorage,
+                                                                PKBQueryArg,
+                                                                Pattern)>> patternQueryFunctionMap;
+
+  void createRelationshipQueryFunctionMap();
+  void createEntityQueryFunctionMap();
+  void createPatternQueryFunctionMap();
 
  public:
-  static int setProcToAST(PROC p, TNode* r);
-  static TNode* getRootAST(PROC p);
-
-  const VarTable& getVarTable() const;
-  const ConstTable& getConstTable() const;
-  const ProcTable& getProcTable() const;
-  const FollowsTable& getFollowsTable() const;
-  const FollowsStarTable& getFollowsStarTable() const;
-  const ParentTable& getParentTable() const;
-  const ParentStarTable& getParentStarTable() const;
-  const ModifiesTable& getModifiesTable() const;
-  const ModifiesProcTable& getModifiesProcTable() const;
-  const UsesTable& getUsesTable() const;
-  const UsesProcTable& getUsesProcTable() const;
-  const AssignTable& getAssignTable() const;
-  const StatementTypeTable& getStatementTypeTable() const;
-  const StatementProcTable& getStatementProcTable() const;
-
-  // Follows methods
-  void addFollows(LineNo lineNo, Follow follow);
-  void addFollowsStar(LineNo lineNo, Follows follows);
-
-  // Parent methods
-  void addParent(Child child, Parent parent);
-  void addParentStar(Child child, Parents parents);
-
-  // Modifies methods
-  void addModifies(LineNo lineNo, Modifies modifies);
-  bool getModifies(LineNumber lineNumber, Name varName);
-  bool getModifies(LineNumber lineNumber, Underscore underscore);
-  VarNames getModifies(LineNumber lineNumber, Variable var);
-  LineNos getModifies(Statement stmt, Name varName);
-  LineNos getModifies(Statement stmt, Underscore underscore);
-  LineNo_Var_Pairs getModifies(Statement stmt, Variable var);
-
-  // TODO: ModifiesProc methods
-
-  // Uses methods
-  void addUses(LineNo lineNo, Uses uses);
-  bool getUses(LineNumber lineNumber, Name varName);
-  bool getUses(LineNumber lineNumber, Underscore underscore);
-  VarNames getUses(LineNumber lineNumber, Variable var);
-  LineNos getUses(Statement stmt, Name varName);
-  LineNos getUses(Statement stmt, Underscore underscore);
-  LineNo_Var_Pairs getUses(Statement stmt, Variable var);
-
-  // TODO: UsesProc methods
-
-  // Assign methods
-  void addAssign(LineNo lineNo, VarName varName, PostfixString postfixString);
-  LineNos getAssign(Underscore underscore, Pattern pattern);
-  LineNos getAssign(Variable variable, Pattern pattern);
-  LineNos getAssign(Name name, Pattern pattern);
-
-  // Statement Type methods
-  void addStatementType(LineNo lineNo, StatementType statementType);
+  PKB();
+  const bool addRelationship(RelationshipType relationshipType,
+                             std::string firstArg, std::string secondArg);
+  const bool addEntity(DesignEntityType entityType, std::string arg);
+  const bool addPattern(std::string lineNo, std::string lhs, std::string rhs);
+  const bool addStatementType(std::string lineNo, StatementType statementType);
+  const bool addStatementProc(std::string lineNo, std::string procedure);
+  const QueryResult getRelationship(RelationshipType relationshipType,
+                                    PKBQueryArg firstArg, PKBQueryArg secondArg);
+  const QueryResult getEntity(DesignEntityType entityType);
+  const QueryResult getPattern(PKBQueryArg lhs, Pattern rhs);
 };
 }  // namespace spa
