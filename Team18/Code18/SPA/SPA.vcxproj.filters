@@ -94,6 +94,12 @@
     <ClCompile Include="..\source\RelationshipStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\SourceProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Validator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\Argument.h">
@@ -199,6 +205,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\DesignExtractor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+	 <ClInclude Include="..\source\SourceProcessor.h">
+	  <Filter>Header Files</Filter>
+	</ClInclude>
+    <ClInclude Include="..\source\Validator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
