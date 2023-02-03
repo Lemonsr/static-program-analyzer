@@ -13,6 +13,11 @@
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp" />
     <ClCompile Include="..\source\EntityStorage.cpp" />
+    <ClCompile Include="..\source\FollowsEvaluator.cpp" />
+    <ClCompile Include="..\source\FollowsStarEvaluator.cpp" />
+    <ClCompile Include="..\source\ModifiesEvaluator.cpp" />
+    <ClCompile Include="..\source\ParentEvaluator.cpp" />
+    <ClCompile Include="..\source\ParentStarEvaluator.cpp" />
     <ClCompile Include="..\source\ParsedQuery.cpp" />
     <ClCompile Include="..\source\Parser.cpp" />
     <ClCompile Include="..\source\PatternStorage.cpp" />
@@ -25,6 +30,9 @@
     <ClCompile Include="..\source\PqlPatternParser.cpp" />
     <ClCompile Include="..\source\PqlQueryParser.cpp" />
     <ClCompile Include="..\source\PqlSuchThatParser.cpp" />
+    <ClCompile Include="..\source\PatternEvaluator.cpp" />
+    <ClCompile Include="..\source\QpsQueryEvaluator.cpp" />
+    <ClCompile Include="..\source\SimpleEvaluator.cpp" />
     <ClCompile Include="..\source\QpsResultTable.cpp" />
     <ClCompile Include="..\source\QpsValue.cpp" />
     <ClCompile Include="..\source\SourceProcessor.cpp" />
@@ -35,6 +43,7 @@
     <ClCompile Include="..\source\QpsPreprocessor.cpp" />
     <ClCompile Include="..\source\Token.cpp" />
     <ClCompile Include="..\source\Tokenizer.cpp" />
+    <ClCompile Include="..\source\UsesEvaluator.cpp" />
     <ClCompile Include="..\source\UtilsFunction.cpp" />
     <ClCompile Include="..\source\Validator.cpp" />
   </ItemGroup>
@@ -42,9 +51,15 @@
     <ClInclude Include="..\source\Argument.h" />
     <ClInclude Include="..\source\DesignEntity.h" />
     <ClInclude Include="..\source\EntityStorage.h" />
+    <ClInclude Include="..\source\FollowsEvaluator.h" />
+    <ClInclude Include="..\source\FollowsStarEvaluator.h" />
     <ClInclude Include="..\source\HashTuple.h" />
+    <ClInclude Include="..\source\ModifiesEvaluator.h" />
+    <ClInclude Include="..\source\ParentEvaluator.h" />
+    <ClInclude Include="..\source\ParentStarEvaluator.h" />
     <ClInclude Include="..\source\ParsedQuery.h" />
     <ClInclude Include="..\source\Parser.h" />
+    <ClInclude Include="..\source\PatternEvaluator.h" />
     <ClInclude Include="..\source\PatternStorage.h" />
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\PKBManager.h" />
@@ -57,12 +72,15 @@
     <ClInclude Include="..\source\PqlPatternParser.h" />
     <ClInclude Include="..\source\PqlQueryParser.h" />
     <ClInclude Include="..\source\PqlSuchThatParser.h" />
+    <ClInclude Include="..\source\QpsQueryEvaluator.h" />
     <ClInclude Include="..\source\QpsResultTable.h" />
     <ClInclude Include="..\source\QpsValue.h" />
     <ClInclude Include="..\source\QueryResult.h" />
     <ClInclude Include="..\source\RelationshipStorage.h" />
+    <ClInclude Include="..\source\SimpleEvaluator.h" />
     <ClInclude Include="..\source\SourceProcessor.h" />
     <ClInclude Include="..\source\Stream.h" />
+    <ClInclude Include="..\source\SuchThatEvaluator.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClCompile Include="..\source\PqlParser.h" />
     <ClCompile Include="..\source\QPS.h" />
@@ -70,6 +88,7 @@
     <ClCompile Include="..\source\QpsPreprocessor.h" />
     <ClInclude Include="..\source\Token.h" />
     <ClInclude Include="..\source\Tokenizer.h" />
+    <ClInclude Include="..\source\UsesEvaluator.h" />
     <ClInclude Include="..\source\UtilsFunction.h" />
     <ClInclude Include="..\source\Validator.h" />
   </ItemGroup>
