@@ -1,10 +1,17 @@
 #include <iostream>
 #include <memory>
+#include <stdexcept>
 
 #include "ParsedQuery.h"
 #include "Token.h"
-#include "ModifiesEvaluator.h"
 #include "QpsEvaluator.h"
+#include "ModifiesEvaluator.h"
+#include "UsesEvaluator.h"
+#include "FollowsEvaluator.h"
+#include "FollowsStarEvaluator.h"
+#include "ParentEvaluator.h"
+#include "ParentStarEvaluator.h"
+#include "PatternEvaluator.h"
 
 bool spa::ParsedQuery::addDeclaration(std::string synonym,
   DesignEntityType designEntity) {
@@ -64,8 +71,31 @@ spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
   secondArg(secondArg) {
 }
 
-std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getManager() {
-  return std::make_unique<ModifiesEvaluator>(firstArg, secondArg);
+std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
+  switch (designAbstraction) {
+  case MODIFIES: {
+    return std::make_unique<ModifiesEvaluator>(firstArg, secondArg);
+  }
+  case USES: {
+    return std::make_unique<UsesEvaluator>(firstArg, secondArg);
+  }
+  case FOLLOWS: {
+    return std::make_unique<FollowsEvaluator>(firstArg, secondArg);
+  }
+  case FOLLOWS_STAR: {
+    return std::make_unique<FollowsStarEvaluator>(firstArg, secondArg);
+  }
+  case PARENT: {
+    return std::make_unique<ParentEvaluator>(firstArg, secondArg);
+  }
+  case PARENT_STAR: {
+    return std::make_unique<ParentStarEvaluator>(firstArg, secondArg);
+  }
+  default: {
+    throw std::runtime_error("Unable to find evaluator");
+  }
+  }
+
 }
 
 
@@ -83,6 +113,10 @@ bool spa::operator!=(const SuchThatClause& s1, const SuchThatClause& s2) {
 spa::PatternClause::PatternClause(PqlArgument synonym, PqlArgument firstArg,
   Pattern pattern) : synonym(synonym), firstArg(firstArg),
                      pattern(pattern) {
+}
+
+std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
+  return std::make_unique<spa::PatternEvaluator>(synonym, firstArg, pattern);
 }
 
 bool spa::operator==(const PatternClause& p1, const PatternClause& p2) {

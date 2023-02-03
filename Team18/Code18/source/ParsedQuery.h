@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 
 #include <vector>
 #include <unordered_map>
@@ -31,7 +31,7 @@ class SuchThatClause {
  public:
   SuchThatClause(RelationshipType designAbstraction, PqlArgument firstArg,
     PqlArgument secondArg);
-  std::unique_ptr<spa::QpsEvaluator> getManager();
+  std::unique_ptr<spa::QpsEvaluator> getEvaluator();
   friend bool operator==(const SuchThatClause& s1, const SuchThatClause& s2);
   friend bool operator!=(const SuchThatClause& s1, const SuchThatClause& s2);
 };
@@ -43,6 +43,7 @@ class PatternClause {
   Pattern pattern;
  public:
   PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern);
+  std::unique_ptr<spa::QpsEvaluator> getEvaluator();
   friend bool operator==(const PatternClause& p1, const PatternClause& p2);
   friend bool operator!=(const PatternClause& p1, const PatternClause& p2);
 };
