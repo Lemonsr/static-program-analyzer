@@ -5,6 +5,8 @@
 
 #include "Stream.h";
 #include "PKB.h";
+#include <string>
+#include <unordered_map>;
 #include <unordered_set>;
 
 const std::unordered_map<std::string, spa::TokenType> stmtToken{
@@ -40,15 +42,13 @@ spa::Stream<spa::Token> spa::Validator::convertToken(spa::Stream<spa::Token>& to
     for (int64_t i = 0; i < tokens.remaining(); i++) {
         if (tokens[i].getType() == spa::TOKEN_NAME &&
             stmtToken.count(tokens[i].getValue())) {
-            newStream.pushBack({ stmtToken.at(tokens[i].getValue()), tokens[i].getValue() });
-        }
-        else {
+            newStream.pushBack({stmtToken.at(tokens[i].getValue()), tokens[i].getValue()});
+        } else {
             newStream.pushBack(tokens[i]);
         }
     }
     return newStream;
 }
-
 
 
 bool spa::Validator::isValidCondExprToken(spa::Token token) {
@@ -75,12 +75,11 @@ bool spa::Validator::isValidTermToken(spa::Token token) {
 
 bool spa::Validator::validateProgram() {
     spa::Validator::newToken = convertToken(tokens);
-        // Checks the program
-        for (int64_t i = 0; i < newToken.remaining(); i++) {
-            // tokens[i].getType() == TokenType[TOKEN_MULTIPLY]
-            std::cout << "Type: " << newToken[i].getType() << ", Value: " << newToken[i].getValue() <<
-                std::endl;
-        }
-        return true;
+    // Checks the program
+    for (int64_t i = 0; i < newToken.remaining(); i++) {
+        // tokens[i].getType() == TokenType[TOKEN_MULTIPLY]
+        std::cout << "Type: " << newToken[i].getType() << ", Value: " << newToken[i].getValue() <<
+            std::endl;
     }
-
+    return true;
+}

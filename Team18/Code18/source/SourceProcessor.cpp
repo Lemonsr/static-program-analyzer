@@ -16,7 +16,7 @@ void spa::SourceProcessor::processSource() {
     Tokenizer tokenizer;
     auto tokens = tokenizer.tokenize(ss);
     spa::Validator validator(tokens);
-    auto newTokens =validator.convertToken(tokens);
+    auto newTokens = validator.convertToken(tokens);
     std::cout << "TESTING VALIDATOR" << std::endl;
     for (int64_t i = 0; i < newTokens.remaining(); i++) {
         std::cout << "Type: " << newTokens[i].getType() <<
@@ -24,5 +24,4 @@ void spa::SourceProcessor::processSource() {
     }
     std::cout << "END OF TESTING" << std::endl;
     validator.validateProgram();
-
 }
