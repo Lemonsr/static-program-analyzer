@@ -5,6 +5,11 @@
 #include <unordered_set>
 #include <unordered_map>
 
+spa::QpsResultTable::QpsResultTable(const std::vector<std::string>& headers,
+                                    const std::vector<std::vector<QpsValue>>& rows)
+  : headers(headers), rows(rows) {
+}
+
 void spa::QpsResultTable::addHeader(std::string header) {
   headers.push_back(header);
 }
@@ -75,12 +80,7 @@ std::optional<std::vector<spa::QpsValue>>
   return { result };
 }
 
-void spa::QpsResultTable::innerJoin(QpsResultTable& other) {
-  if ((this->headers).size() == 0 || other.headers.size() == 0) {
-    this->headers = {};
-    this->rows = {};
-    return;
-  }
+spa::QpsResultTable spa::QpsResultTable::innerJoin(QpsResultTable& other) {
   std::vector<std::string> resultHeaders;
   for (auto& s : headers) {
     resultHeaders.push_back(s);
@@ -98,6 +98,5 @@ void spa::QpsResultTable::innerJoin(QpsResultTable& other) {
       }
     }
   }
-  this->headers = resultHeaders;
-  this->rows = resultRows;
+  return QpsResultTable(resultHeaders, resultRows);
 }
