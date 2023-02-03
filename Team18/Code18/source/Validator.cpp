@@ -38,17 +38,14 @@ spa::Validator::Validator(spa::Stream<spa::Token> t) : tokens(t) {}
 
 
 spa::Stream<spa::Token> spa::Validator::convertToken(spa::Stream<spa::Token>& tokens) {
-    spa::Stream<spa::Token> newStream;
     for (int64_t i = 0; i < tokens.remaining(); i++) {
         if (tokens[i].getType() == spa::TOKEN_NAME &&
             stmtToken.count(tokens[i].getValue())) {
-            newStream.pushBack({stmtToken.at(tokens[i].getValue()), tokens[i].getValue()});
-        } else {
-            newStream.pushBack(tokens[i]);
+            tokens[i] =  Token(stmtToken.at(tokens[i].getValue()), tokens[i].getValue());
+            }
         }
+    return tokens;
     }
-    return newStream;
-}
 
 
 bool spa::Validator::isValidCondExprToken(spa::Token token) {
@@ -74,11 +71,10 @@ bool spa::Validator::isValidTermToken(spa::Token token) {
 
 
 bool spa::Validator::validateProgram() {
-    spa::Validator::newToken = convertToken(tokens);
     // Checks the program
-    for (int64_t i = 0; i < newToken.remaining(); i++) {
+    for (int64_t i = 0; i < tokens.remaining(); i++) {
         // tokens[i].getType() == TokenType[TOKEN_MULTIPLY]
-        std::cout << "Type: " << newToken[i].getType() << ", Value: " << newToken[i].getValue() <<
+        std::cout << "Type: " << tokens[i].getType() << ", Value: " << tokens[i].getValue() <<
             std::endl;
     }
     return true;
