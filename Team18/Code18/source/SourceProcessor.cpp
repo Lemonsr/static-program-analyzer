@@ -15,14 +15,14 @@ void spa::SourceProcessor::processSource() {
     std::stringstream ss(sourceCode);
     Tokenizer tokenizer;
     auto tokens = tokenizer.tokenize(ss);
-
-    std::cout << "TESTING TOKENIZER" << std::endl;
-    for (int64_t i = 0; i < tokens.remaining(); i++) {
-        std::cout << "Type: " << tokens[i].getType() <<
-            ", Value: " << tokens[i].getValue() << std::endl;
+    spa::Validator validator(tokens);
+    auto newTokens =validator.convertToken(tokens);
+    std::cout << "TESTING VALIDATOR" << std::endl;
+    for (int64_t i = 0; i < newTokens.remaining(); i++) {
+        std::cout << "Type: " << newTokens[i].getType() <<
+            ", Value: " << newTokens[i].getValue() << std::endl;
     }
     std::cout << "END OF TESTING" << std::endl;
-
-    spa::Validator validator(tokens);
     validator.validateProgram();
+
 }
