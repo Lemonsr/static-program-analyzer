@@ -3,14 +3,12 @@
 
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "PKB.h"
+#include "Tokenizer.h"
+#include "validator.h"
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
-TEST_CLASS(TestPKB) {
- public:
-  TEST_METHOD(TestPKBAddAssign) {
-  }
-};
+    TEST_CLASS(TestValidator){
+    };
 }  // namespace UnitTesting

@@ -171,6 +171,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestAST.cpp" />
+    <ClCompile Include="TestPKBPatternStorage.cpp" />
+    <ClCompile Include="TestPKBEntityStorage.cpp" />
+    <ClCompile Include="TestPKBModifies.cpp" />
+    <ClCompile Include="TestPkbQueryArg.cpp" />
+    <ClCompile Include="TestPKBUses.cpp" />
+    <ClCompile Include="TestQpsResultTable.cpp" />
+    <ClCompile Include="TestQpsValue.cpp" />
     <ClCompile Include="TestPqlArgumentParser.cpp" />
     <ClCompile Include="TestPqlDeclarationParser.cpp" />
     <ClCompile Include="TestPqlPatternParser.cpp" />
@@ -179,6 +186,7 @@
     <ClCompile Include="TestTokenizer.cpp" />
     <ClCompile Include="TestPKB.cpp" />
     <ClCompile Include="TestUtilsFunction.cpp" />
+	<ClCompile Include="TestValidator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

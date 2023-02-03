@@ -12,9 +12,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp" />
+    <ClCompile Include="..\source\EntityStorage.cpp" />
+    <ClCompile Include="..\source\FollowsEvaluator.cpp" />
+    <ClCompile Include="..\source\FollowsStarEvaluator.cpp" />
+    <ClCompile Include="..\source\ModifiesEvaluator.cpp" />
+    <ClCompile Include="..\source\ParentEvaluator.cpp" />
+    <ClCompile Include="..\source\ParentStarEvaluator.cpp" />
     <ClCompile Include="..\source\ParsedQuery.cpp" />
     <ClCompile Include="..\source\SPParser.cpp" />
+    <ClCompile Include="..\source\PatternStorage.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
+    <ClCompile Include="..\source\PKBQueryArg.cpp" />
     <ClCompile Include="..\source\PKBQueryTypes.cpp" />
     <ClCompile Include="..\source\PqlArgument.cpp" />
     <ClCompile Include="..\source\PqlArgumentParser.cpp" />
@@ -22,9 +30,16 @@
     <ClCompile Include="..\source\PqlPatternParser.cpp" />
     <ClCompile Include="..\source\PqlQueryParser.cpp" />
     <ClCompile Include="..\source\PqlSuchThatParser.cpp" />
+    <ClCompile Include="..\source\PatternEvaluator.cpp" />
+    <ClCompile Include="..\source\QpsQueryEvaluator.cpp" />
+    <ClCompile Include="..\source\SimpleEvaluator.cpp" />
+    <ClCompile Include="..\source\QpsResultTable.cpp" />
+    <ClCompile Include="..\source\QpsValue.cpp" />
+    <ClCompile Include="..\source\SourceProcessor.cpp" />
+    <ClCompile Include="..\source\QueryResult.cpp" />
+    <ClCompile Include="..\source\RelationshipStorage.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
     <ClCompile Include="..\source\QPS.cpp" />
-    <ClCompile Include="..\source\QpsEvaluator.cpp" />
     <ClCompile Include="..\source\QpsPreprocessor.cpp" />
     <ClCompile Include="..\source\Token.cpp" />
     <ClCompile Include="..\source\Tokenizer.cpp" />
@@ -32,14 +47,27 @@
     <ClCompile Include="..\source\Statement.cpp" />
     <ClCompile Include="..\source\ContainerStatement.cpp" />
     <ClCompile Include="..\source\NonContainerStatement.cpp" />
+    <ClCompile Include="..\source\UsesEvaluator.cpp" />
     <ClCompile Include="..\source\UtilsFunction.cpp" />
+    <ClCompile Include="..\source\Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\Argument.h" />
     <ClInclude Include="..\source\DesignEntity.h" />
+    <ClInclude Include="..\source\EntityStorage.h" />
+    <ClInclude Include="..\source\FollowsEvaluator.h" />
+    <ClInclude Include="..\source\FollowsStarEvaluator.h" />
+    <ClInclude Include="..\source\HashTuple.h" />
+    <ClInclude Include="..\source\ModifiesEvaluator.h" />
+    <ClInclude Include="..\source\ParentEvaluator.h" />
+    <ClInclude Include="..\source\ParentStarEvaluator.h" />
     <ClInclude Include="..\source\ParsedQuery.h" />
     <ClInclude Include="..\source\SPParser.h" />
+    <ClInclude Include="..\source\PatternEvaluator.h" />
+    <ClInclude Include="..\source\PatternStorage.h" />
     <ClInclude Include="..\source\PKB.h" />
+    <ClInclude Include="..\source\PKBManager.h" />
+    <ClInclude Include="..\source\PKBQueryArg.h" />
     <ClInclude Include="..\source\PKBQueryTypes.h" />
     <ClInclude Include="..\source\PKBTypes.h" />
     <ClInclude Include="..\source\PqlArgument.h" />
@@ -48,7 +76,15 @@
     <ClInclude Include="..\source\PqlPatternParser.h" />
     <ClInclude Include="..\source\PqlQueryParser.h" />
     <ClInclude Include="..\source\PqlSuchThatParser.h" />
+    <ClInclude Include="..\source\QpsQueryEvaluator.h" />
+    <ClInclude Include="..\source\QpsResultTable.h" />
+    <ClInclude Include="..\source\QpsValue.h" />
+    <ClInclude Include="..\source\QueryResult.h" />
+    <ClInclude Include="..\source\RelationshipStorage.h" />
+    <ClInclude Include="..\source\SimpleEvaluator.h" />
+    <ClInclude Include="..\source\SourceProcessor.h" />
     <ClInclude Include="..\source\Stream.h" />
+    <ClInclude Include="..\source\SuchThatEvaluator.h" />
     <ClInclude Include="..\source\TNode.h" />
     <ClInclude Include="..\source\PqlParser.h" />
     <ClInclude Include="..\source\QPS.h" />
@@ -60,7 +96,9 @@
     <ClInclude Include="..\source\Statement.h" />
     <ClInclude Include="..\source\ContainerStatement.h" />
     <ClInclude Include="..\source\NonContainerStatement.h" />
+    <ClInclude Include="..\source\UsesEvaluator.h" />
     <ClInclude Include="..\source\UtilsFunction.h" />
+    <ClInclude Include="..\source\Validator.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>

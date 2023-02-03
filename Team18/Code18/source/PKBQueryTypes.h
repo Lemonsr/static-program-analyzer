@@ -2,12 +2,19 @@
 
 #include "PKBTypes.h"
 #include "Token.h"
+#include "DesignEntity.h"
 
 #include <string>
 #include <optional>
 #include <vector>
+#include <unordered_map>
 
 namespace spa {
+
+/**
+  * A struct for a declared constant in a PQL query. E.g. constant c.
+  */
+struct Constant {};
 
 /**
  * A struct for a declared variable in a PQL query. E.g. variable v.
@@ -32,7 +39,9 @@ struct Procedure { };
 /**
  * A struct for a line number in a PQL query.
  */
-struct LineNumber { };
+struct LineNumber {
+  LineNo lineNo;
+};
 
 /**
  * A struct for a procedure or variable name in a PQL query. E.g. "x", "main".
@@ -68,5 +77,16 @@ class Pattern {
   }
   friend bool operator==(const Pattern& p1, const Pattern& p2);
   friend bool operator!=(const Pattern& p1, const Pattern& p2);
+};
+
+inline std::unordered_map<DesignEntityType,
+                          std::optional<StatementType>> statementTypeMap {
+  { STMT, {} },
+  { READ, {StatementType::READ} },
+  { PRINT, {StatementType::PRINT} },
+  { ASSIGN, {StatementType::ASSIGN} },
+  { CALL, {StatementType::CALL} },
+  { WHILE, {StatementType::WHILE} },
+  { IF, {StatementType::IF} }
 };
 }  // namespace spa
