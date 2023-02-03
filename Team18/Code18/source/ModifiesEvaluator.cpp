@@ -5,5 +5,5 @@ spa::ModifiesEvaluator::ModifiesEvaluator(PqlArgument& firstArg, PqlArgument& se
 }
 
 spa::QpsResultTable spa::ModifiesEvaluator::evaluate(PKBManager& pkbManager) {
-    return QpsResultTable();
+  return QpsResultTable();
 }
