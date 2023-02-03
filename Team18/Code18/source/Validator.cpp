@@ -5,13 +5,21 @@
 
 #include "Stream.h";
 #include "PKB.h";
+#include <string>
+#include <unordered_map>;
 #include <unordered_set>;
 
-std::unordered_set<spa::TokenType> stmtToken = {
-    spa::TokenType::TOKEN_READ, spa::TokenType::TOKEN_CALL, spa::TokenType::TOKEN_PRINT,
-    spa::TokenType::TOKEN_WHILE, spa::TokenType::TOKEN_IF,
-    spa::TokenType::TOKEN_THEN, spa::TokenType::TOKEN_ELSE
+const std::unordered_map<std::string, spa::TokenType> stmtToken{
+    {"procedure", spa::TOKEN_PROCEDURE},
+    {"read", spa::TOKEN_READ},
+    {"call", spa::TOKEN_CALL},
+    {"print", spa::TOKEN_PRINT},
+    {"while", spa::TOKEN_WHILE},
+    {"if", spa::TOKEN_IF},
+    {"then", spa::TOKEN_THEN},
+    {"else", spa::TOKEN_ELSE},
 };
+
 std::unordered_set<spa::TokenType> condExprToken = {
     spa::TokenType::TOKEN_BOOL_NOT, spa::TokenType::TOKEN_BOOL_AND, spa::TokenType::TOKEN_BOOL_OR
 };
@@ -26,12 +34,19 @@ std::unordered_set<spa::TokenType> termToken = {
     spa::TokenType::TOKEN_DIVIDE, spa::TokenType::TOKEN_MULTIPLY, spa::TokenType::TOKEN_MODULO
 };
 
-bool spa::Validator::isValidStmtToken(spa::Token token) {
-    if (stmtToken.count(token.getType())) {
-        return true;
+spa::Validator::Validator(spa::Stream<spa::Token> t) : tokens(t) {}
+
+
+spa::Stream<spa::Token> spa::Validator::convertToken(spa::Stream<spa::Token>& tokens) {
+    for (int64_t i = 0; i < tokens.remaining(); i++) {
+        if (tokens[i].getType() == spa::TOKEN_NAME &&
+            stmtToken.count(tokens[i].getValue())) {
+            tokens[i] =  Token(stmtToken.at(tokens[i].getValue()), tokens[i].getValue());
+            }
+        }
+    return tokens;
     }
-    return false;
-}
+
 
 bool spa::Validator::isValidCondExprToken(spa::Token token) {
     if (condExprToken.count(token.getType())) {
@@ -54,8 +69,6 @@ bool spa::Validator::isValidTermToken(spa::Token token) {
     return false;
 }
 
-
-spa::Validator::Validator(spa::Stream<spa::Token> t) : tokens(t) {}
 
 bool spa::Validator::validateProgram() {
     // Checks the program
