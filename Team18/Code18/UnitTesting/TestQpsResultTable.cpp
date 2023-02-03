@@ -48,7 +48,7 @@ public:
     table1.addRow({ spa::QpsValue(13), spa::QpsValue("y")});
     table1.addRow({ spa::QpsValue(14), spa::QpsValue("z") });
     table1.addRow({ spa::QpsValue(15), spa::QpsValue("w") });
-    
+
     spa::QpsResultTable table2;
     table2.addHeader(spa::PqlArgument(spa::SYNONYM, "a", { spa::ASSIGN }));
     table2.addRow({ spa::QpsValue(12) });
