@@ -5,7 +5,7 @@
 #include "QpsResultTable.h"
 
 namespace spa {
-class SuchThatEvaluator {
+class SuchThatEvaluator : QpsEvaluator {
   virtual QueryResult evaluate() = 0;
 };
 }

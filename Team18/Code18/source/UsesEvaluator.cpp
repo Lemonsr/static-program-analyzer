@@ -1,9 +1,9 @@
 #include "UsesEvaluator.h"
 
-spa::UsesEvaluator::UsesEvaluator(SuchThatClause& suchThatClause, PKBManager& pkbManager) :
-  suchThatClause(suchThatClause), pkbManager(pkbManager) {
+spa::UsesEvaluator::UsesEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
+  firstArg(firstArg), secondArg(secondArg) {
 }
 
-spa::QueryResult spa::UsesEvaluator::evaluate() {
-  return QueryResult();
+spa::QpsResultTable spa::UsesEvaluator::evaluate(PKBManager& pkbManager) {
+  return QpsResultTable();
 }

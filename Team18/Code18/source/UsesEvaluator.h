@@ -2,16 +2,15 @@
 
 #include "PKBManager.h"
 #include "QpsEvaluator.h"
-#include "QueryResult.h"
-#include "SuchThatEvaluator.h"
+#include "QpsResultTable.h"
 
 namespace spa {
-class UsesEvaluator : SuchThatEvaluator {
-private:
-  SuchThatClause& suchThatClause;
-  PKBManager& pkbManager;
-public:
-  UsesEvaluator(SuchThatClause& suchThatClause, PKBManager& pkbManager);
-  QueryResult evaluate();
+class UsesEvaluator : public QpsEvaluator {
+ private:
+  PqlArgument& firstArg;
+  PqlArgument& secondArg;
+ public:
+  UsesEvaluator(PqlArgument& firstArg, PqlArgument& secondArg);
+  QpsResultTable evaluate(PKBManager& pkbManager);
 };
 }  // namespace spa

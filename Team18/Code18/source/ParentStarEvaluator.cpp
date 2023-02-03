@@ -1,9 +1,9 @@
 #include "ParentStarEvaluator.h"
 
-spa::ParentStarEvaluator::ParentStarEvaluator(SuchThatClause& suchThatClause, PKBManager& pkbManager) :
-  suchThatClause(suchThatClause), pkbManager(pkbManager) {
+spa::ParentStarEvaluator::ParentStarEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
+  firstArg(firstArg), secondArg(secondArg) {
 }
 
-spa::QueryResult spa::ParentStarEvaluator::evaluate() {
-  return QueryResult();
+spa::QpsResultTable spa::ParentStarEvaluator::evaluate(PKBManager& pkbManager) {
+  return QpsResultTable();
 }

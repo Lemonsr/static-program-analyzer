@@ -1,9 +1,9 @@
 #include "ModifiesEvaluator.h"
 
-spa::ModifiesEvaluator::ModifiesEvaluator(SuchThatClause& suchThatClause, PKBManager& pkbManager) :
-  suchThatClause(suchThatClause), pkbManager(pkbManager) {
+spa::ModifiesEvaluator::ModifiesEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
+  firstArg(firstArg), secondArg(secondArg) {
 }
 
-spa::QueryResult spa::ModifiesEvaluator::evaluate() {
-  return QueryResult();
+spa::QpsResultTable spa::ModifiesEvaluator::evaluate(PKBManager& pkbManager) {
+    return QpsResultTable();
 }

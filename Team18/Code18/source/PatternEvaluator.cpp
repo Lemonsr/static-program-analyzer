@@ -1,10 +1,10 @@
 #include "PatternEvaluator.h"
 
-spa::PatternEvaluator::PatternEvaluator(PatternClause& patternClause, PKBManager& pkbManager) :
-  patternClause(patternClause), pkbManager(pkbManager) {
-
+spa::PatternEvaluator::PatternEvaluator(PqlArgument& assignSynonym, PqlArgument& firstArg, Pattern& pattern) :
+  assignSynonym(assignSynonym), firstArg(firstArg), pattern(pattern) {
 }
 
-spa::QueryResult spa::PatternEvaluator::evaluate() {
-  return QueryResult();
+spa::QpsResultTable spa::PatternEvaluator::evaluate(PKBManager& pkbManager)
+{
+  return QpsResultTable();
 }

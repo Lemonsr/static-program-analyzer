@@ -5,11 +5,11 @@
 #include "QpsResultTable.h"
 
 namespace spa {
-class SimpleEvaluator {
+class SimpleEvaluator : public QpsEvaluator {
 private:
   DesignEntityType designEntityType;
 public:
   SimpleEvaluator(DesignEntityType designEntityType);
-  QueryResult evaluate();
+  QpsResultTable evaluate(PKBManager& pkbManager);
 };
 }  // namespace spa

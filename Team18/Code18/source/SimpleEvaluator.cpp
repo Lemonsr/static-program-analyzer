@@ -3,6 +3,6 @@
 spa::SimpleEvaluator::SimpleEvaluator(DesignEntityType designEntityType) : designEntityType(designEntityType) {
 }
 
-spa::QueryResult spa::SimpleEvaluator::evaluate() {
-  return QueryResult();
+spa::QpsResultTable spa::SimpleEvaluator::evaluate(PKBManager& pkbManager) {
+  return QpsResultTable();
 }

@@ -4,12 +4,14 @@
 #include <unordered_map>
 #include <string>
 #include <optional>
+#include <memory>
 
 #include "PqlArgument.h"
 #include "Token.h"
 #include "DesignEntity.h"
 #include "Stream.h"
 #include "PKBQueryTypes.h"
+#include "QpsEvaluator.h"
 
 namespace spa {
 enum RelationshipType {
@@ -29,6 +31,7 @@ class SuchThatClause {
  public:
   SuchThatClause(RelationshipType designAbstraction, PqlArgument firstArg,
     PqlArgument secondArg);
+  std::unique_ptr<spa::QpsEvaluator> getManager();
   friend bool operator==(const SuchThatClause& s1, const SuchThatClause& s2);
   friend bool operator!=(const SuchThatClause& s1, const SuchThatClause& s2);
 };

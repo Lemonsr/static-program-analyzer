@@ -1,17 +1,12 @@
 #pragma once
 
-#include "QpsPreprocessor.h"
-#include "Token.h"
-#include "PqlArgument.h"
-#include "PKBQueryTypes.h"
-#include "QueryResult.h"
+#include "QpsResultTable.h"
 
 namespace spa {
+class PKBManager;
+
 class QpsEvaluator {
- private:
-  ParsedQuery queryObject;
  public:
-  explicit QpsEvaluator(ParsedQuery queryObject);
-  QueryResult evaluate();
+  virtual QpsResultTable evaluate(PKBManager& pkbManager) = 0;
 };
 }  // namespace spa

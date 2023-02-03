@@ -1,7 +1,10 @@
 #include <iostream>
+#include <memory>
 
 #include "ParsedQuery.h"
 #include "Token.h"
+#include "ModifiesEvaluator.h"
+#include "QpsEvaluator.h"
 
 bool spa::ParsedQuery::addDeclaration(std::string synonym,
   DesignEntityType designEntity) {
@@ -59,6 +62,10 @@ spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
   PqlArgument firstArg, PqlArgument secondArg)
   : designAbstraction(designAbstraction), firstArg(firstArg),
   secondArg(secondArg) {
+}
+
+std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getManager() {
+  return std::make_unique<ModifiesEvaluator>(firstArg, secondArg);
 }
 
 

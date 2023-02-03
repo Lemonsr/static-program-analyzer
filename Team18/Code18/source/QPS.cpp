@@ -10,7 +10,5 @@ std::string spa::QPS::evaluate(std::string query) {
   if (!queryOpt) {
     return "Syntax error in query";
   }
-  QpsEvaluator evaluator(queryOpt.value());
-  QueryResult queryResult = evaluator.evaluate();
   return "";
 }

@@ -5,12 +5,13 @@
 #include "QpsResultTable.h"
 
 namespace spa {
-class PatternEvaluator {
+class PatternEvaluator : public QpsEvaluator {
 private:
-  PatternClause& patternClause;
-  PKBManager& pkbManager;
+  PqlArgument& assignSynonym;
+  PqlArgument& firstArg;
+  Pattern& pattern;
 public:
-  PatternEvaluator(PatternClause& patternClause, PKBManager& pkbManager);
-  QueryResult evaluate();
+  PatternEvaluator(PqlArgument& assignSynonym, PqlArgument& firstArg, Pattern& pattern);
+  QpsResultTable evaluate(PKBManager& pkbManager);
 };
 }  // namespace spa

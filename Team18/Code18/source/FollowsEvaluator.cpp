@@ -1,9 +1,10 @@
 #include "FollowsEvaluator.h"
 
-spa::FollowsEvaluator::FollowsEvaluator(SuchThatClause& suchThatClause, PKBManager& pkbManager) :
-  suchThatClause(suchThatClause), pkbManager(pkbManager) {
+spa::FollowsEvaluator::FollowsEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
+  firstArg(firstArg), secondArg(secondArg) {
 }
 
-spa::QueryResult spa::FollowsEvaluator::evaluate() {
-  return QueryResult();
+spa::QpsResultTable spa::FollowsEvaluator::evaluate(PKBManager& pkbManager)
+{
+  return QpsResultTable();
 }
