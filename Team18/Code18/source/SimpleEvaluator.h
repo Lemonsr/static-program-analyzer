@@ -6,10 +6,10 @@
 
 namespace spa {
 class SimpleEvaluator : public QpsEvaluator {
-private:
+ private:
   DesignEntityType designEntityType;
-public:
-  SimpleEvaluator(DesignEntityType designEntityType);
+ public:
+  explicit SimpleEvaluator(DesignEntityType designEntityType);
   QpsResultTable evaluate(PKBManager& pkbManager);
 };
 }  // namespace spa

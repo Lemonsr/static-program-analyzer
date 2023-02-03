@@ -4,7 +4,6 @@ spa::FollowsEvaluator::FollowsEvaluator(PqlArgument& firstArg, PqlArgument& seco
   firstArg(firstArg), secondArg(secondArg) {
 }
 
-spa::QpsResultTable spa::FollowsEvaluator::evaluate(PKBManager& pkbManager)
-{
+spa::QpsResultTable spa::FollowsEvaluator::evaluate(PKBManager& pkbManager) {
   return QpsResultTable();
 }

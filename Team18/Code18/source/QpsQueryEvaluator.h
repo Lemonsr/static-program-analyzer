@@ -7,9 +7,9 @@
 namespace spa {
 class QpsQueryEvaluator : public QpsEvaluator {
  private:
-   ParsedQuery& parsedQuery;
+  ParsedQuery& parsedQuery;
  public:
-   QpsQueryEvaluator(ParsedQuery& parsedQuery);
-   QpsResultTable evaluate(PKBManager& pkbManager);
+  explicit QpsQueryEvaluator(ParsedQuery& parsedQuery);
+  QpsResultTable evaluate(PKBManager& pkbManager);
 };
 }  // namespace spa

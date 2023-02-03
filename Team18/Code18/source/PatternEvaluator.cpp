@@ -4,7 +4,6 @@ spa::PatternEvaluator::PatternEvaluator(PqlArgument& assignSynonym, PqlArgument&
   assignSynonym(assignSynonym), firstArg(firstArg), pattern(pattern) {
 }
 
-spa::QpsResultTable spa::PatternEvaluator::evaluate(PKBManager& pkbManager)
-{
+spa::QpsResultTable spa::PatternEvaluator::evaluate(PKBManager& pkbManager) {
   return QpsResultTable();
 }

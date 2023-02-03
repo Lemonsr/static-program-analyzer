@@ -6,11 +6,11 @@
 
 namespace spa {
 class PatternEvaluator : public QpsEvaluator {
-private:
+ private:
   PqlArgument& assignSynonym;
   PqlArgument& firstArg;
   Pattern& pattern;
-public:
+ public:
   PatternEvaluator(PqlArgument& assignSynonym, PqlArgument& firstArg, Pattern& pattern);
   QpsResultTable evaluate(PKBManager& pkbManager);
 };
