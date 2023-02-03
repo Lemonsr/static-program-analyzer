@@ -2,10 +2,10 @@
 #include <unordered_set>
 #include <string>
 
-#include "Statement.h"
+#include "ProgramStatement.h"
 
 namespace spa {
-  class NonContainerStatement : public Statement {
+  class NonContainerStatement : public ProgramStatement {
    protected:
     std::unordered_set<int> whileStmtParents;
     std::unordered_set<int> ifStmtParents;

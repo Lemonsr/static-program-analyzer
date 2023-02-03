@@ -7,18 +7,6 @@
     <ClCompile Include="..\source\ParsedQuery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\PqlParser.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\QPS.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\QpsEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\QpsPreprocessor.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\SPParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -67,10 +55,10 @@
     <ClCompile Include="..\source\Tokenizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Procedure.cpp">
+    <ClCompile Include="..\source\ProcedureStatement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Statement.cpp">
+    <ClCompile Include="..\source\ProgramStatement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\ContainerStatement.cpp">
@@ -80,7 +68,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\PqlArgument.cpp">
-        <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\UtilsFunction.cpp">
       <Filter>Source Files</Filter>
@@ -216,10 +204,10 @@
     <ClInclude Include="..\source\Tokenizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Procedure.h">
+    <ClInclude Include="..\source\ProcedureStatement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Statement.h">
+    <ClInclude Include="..\source\ProgramStatement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\ContainerStatement.h">
@@ -229,7 +217,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\Argument.h">
-        <Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\UtilsFunction.h">
       <Filter>Header Files</Filter>

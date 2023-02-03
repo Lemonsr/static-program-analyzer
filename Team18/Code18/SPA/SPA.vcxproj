@@ -43,8 +43,8 @@
     <ClCompile Include="..\source\QpsPreprocessor.cpp" />
     <ClCompile Include="..\source\Token.cpp" />
     <ClCompile Include="..\source\Tokenizer.cpp" />
-    <ClCompile Include="..\source\Procedure.cpp" />
-    <ClCompile Include="..\source\Statement.cpp" />
+    <ClCompile Include="..\source\ProcedureStatement.cpp" />
+    <ClCompile Include="..\source\ProgramStatement.cpp" />
     <ClCompile Include="..\source\ContainerStatement.cpp" />
     <ClCompile Include="..\source\NonContainerStatement.cpp" />
     <ClCompile Include="..\source\UsesEvaluator.cpp" />
@@ -92,8 +92,8 @@
     <ClInclude Include="..\source\QpsPreprocessor.h" />
     <ClInclude Include="..\source\Token.h" />
     <ClInclude Include="..\source\Tokenizer.h" />
-    <ClInclude Include="..\source\Procedure.h" />
-    <ClInclude Include="..\source\Statement.h" />
+    <ClInclude Include="..\source\ProcedureStatement.h" />
+    <ClInclude Include="..\source\ProgramStatement.h" />
     <ClInclude Include="..\source\ContainerStatement.h" />
     <ClInclude Include="..\source\NonContainerStatement.h" />
     <ClInclude Include="..\source\UsesEvaluator.h" />

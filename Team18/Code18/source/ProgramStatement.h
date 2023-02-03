@@ -2,7 +2,7 @@
 #include <string>
 
 namespace spa {
-  class Statement {
+  class ProgramStatement {
    protected:
     int statementLineNum;
     std::string parentProcedureVal;
