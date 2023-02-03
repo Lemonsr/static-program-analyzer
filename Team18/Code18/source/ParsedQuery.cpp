@@ -65,6 +65,10 @@ const std::optional<spa::PatternClause>& spa::ParsedQuery::getPatternClause() {
   return patternClause;
 }
 
+const spa::DesignEntityType & spa::ParsedQuery::getSelectSynonymType() {
+  return declarations[selectSynonym];
+}
+
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
   PqlArgument firstArg, PqlArgument secondArg)
   : designAbstraction(designAbstraction), firstArg(firstArg),
@@ -95,9 +99,7 @@ std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
     throw std::runtime_error("Unable to find evaluator");
   }
   }
-
 }
-
 
 bool spa::operator==(const SuchThatClause& s1, const SuchThatClause& s2) {
   bool typeMatch = s1.designAbstraction == s2.designAbstraction;

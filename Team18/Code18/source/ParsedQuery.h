@@ -64,6 +64,7 @@ class ParsedQuery {
   const std::string& getSelectSynonym();
   const std::optional<SuchThatClause>& getSuchThatClause();
   const std::optional<PatternClause>& getPatternClause();
+  const DesignEntityType& getSelectSynonymType();
 };
 }  // namespace spa
 
