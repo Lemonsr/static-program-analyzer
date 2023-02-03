@@ -2,12 +2,13 @@
 
 //Constructor
 spa::Procedure::Procedure(spa::Token token,
-                          std::vector<Statement*> statementLst): token(token), statementLst(statementLst) {}
+                          std::vector<Statement*> statementLst): token(token),
+                                                                 statementLst(statementLst) {}
 
 spa::Token spa::Procedure::getToken() {
-	return token;
+  return token;
 }
 
 std::vector<spa::Statement*> spa::Procedure::getStatementLst() {
-	return statementLst;
+  return statementLst;
 }

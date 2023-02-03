@@ -3,11 +3,11 @@
 
 namespace spa {
   class Statement {
-  protected:
+   protected:
     int statementLineNum;
     std::string parentProcedureVal;
 
-  public:
+   public:
     int getStatementLineNum();
     const std::string getParentProcedureVal();
   };
