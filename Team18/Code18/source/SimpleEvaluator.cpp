@@ -19,5 +19,5 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluate(PKBManager& pkbManager) {
   for (auto& lineNumber : result.getLineNumbers()) {
     resultTable.addRow({ QpsValue(lineNumber) });
   }
-  return QpsResultTable();
+  return resultTable;
 }
