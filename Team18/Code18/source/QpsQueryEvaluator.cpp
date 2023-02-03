@@ -8,7 +8,7 @@ spa::QpsQueryEvaluator::QpsQueryEvaluator(ParsedQuery& parsedQuery) : parsedQuer
 
 spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   std::unique_ptr<QpsEvaluator> simpleEvaluator =
-    std::make_unique<SimpleEvaluator>(parsedQuery.getSelectSynonymType());
+    std::make_unique<SimpleEvaluator>(parsedQuery.getSelectSynonym(), parsedQuery.getSelectSynonymType());
   QpsResultTable simpleResultTable = simpleEvaluator->evaluate(pkbManager);
 
   QpsResultTable suchThatResultTable;
