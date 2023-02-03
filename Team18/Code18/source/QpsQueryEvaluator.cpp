@@ -23,7 +23,7 @@ spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
     patternResultTable = patternClause.getEvaluator()->evaluate(pkbManager);
   }
 
-  simpleResultTable.innerJoin(suchThatResultTable);
-  simpleResultTable.innerJoin(patternResultTable);
-  return simpleResultTable;
+  QpsResultTable finalResultTable = simpleResultTable.innerJoin(suchThatResultTable);
+  finalResultTable = finalResultTable.innerJoin(patternResultTable);
+  return finalResultTable;
 }

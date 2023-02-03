@@ -41,6 +41,7 @@ public:
   }
 
   TEST_METHOD(TestInnerJoin) {
+    spa::QpsResultTable resultTable;
     spa::QpsResultTable table1;
     table1.addHeader(spa::PqlArgument(spa::SYNONYM, "a", { spa::ASSIGN }));
     table1.addHeader(spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }));
@@ -53,16 +54,16 @@ public:
     table2.addHeader(spa::PqlArgument(spa::SYNONYM, "a", { spa::ASSIGN }));
     table2.addRow({ spa::QpsValue(12) });
     table2.addRow({ spa::QpsValue(14) });
-    table1.innerJoin(table2);
+    resultTable = table1.innerJoin(table2);
 
-    auto dim = table1.getDimension();
+    auto dim = resultTable.getDimension();
     Assert::AreEqual(dim.first, 3);
     Assert::AreEqual(dim.second, 2);
-    auto columnVals = table1.getColumn("a");
+    auto columnVals = resultTable.getColumn("a");
     Assert::AreEqual(columnVals.size(), size_t(2));
     Assert::IsTrue(columnVals.find(spa::QpsValue(12)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(14)) != columnVals.end());
-    columnVals = table1.getColumn("v");
+    columnVals = resultTable.getColumn("v");
     Assert::AreEqual(columnVals.size(), size_t(2));
     Assert::IsTrue(columnVals.find(spa::QpsValue("x")) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue("z")) != columnVals.end());
@@ -70,15 +71,15 @@ public:
     spa::QpsResultTable table3;
     table3.addHeader(spa::PqlArgument(spa::SYNONYM, "v", { spa::ASSIGN }));
     table3.addRow({ spa::QpsValue("x") });
-    table1.innerJoin(table3);
+    resultTable = resultTable.innerJoin(table3);
 
-    dim = table1.getDimension();
+    dim = resultTable.getDimension();
     Assert::AreEqual(dim.first, 4);
     Assert::AreEqual(dim.second, 1);
-    columnVals = table1.getColumn("a");
+    columnVals = resultTable.getColumn("a");
     Assert::AreEqual(columnVals.size(), size_t(1));
     Assert::IsTrue(columnVals.find(spa::QpsValue(12)) != columnVals.end());
-    columnVals = table1.getColumn("v");
+    columnVals = resultTable.getColumn("v");
     Assert::AreEqual(columnVals.size(), size_t(1));
     Assert::IsTrue(columnVals.find(spa::QpsValue("x")) != columnVals.end());
   }

@@ -19,11 +19,14 @@ class QpsResultTable {
                                                     std::vector<QpsValue>& row,
                                                     std::vector<QpsValue>& other);
  public:
+  QpsResultTable() = default;
+  QpsResultTable(const std::vector<std::string>& headers,
+                 const std::vector<std::vector<QpsValue>>& rows);
   void addHeader(std::string header);
   void addHeader(PqlArgument header);
   std::pair<int, int> getDimension();
   void addRow(std::vector<QpsValue> row);
   std::unordered_set<QpsValue, QpsValueHash, QpsValueEquality> getColumn(std::string header);
-  void innerJoin(QpsResultTable& other);
+  QpsResultTable innerJoin(QpsResultTable& other);
 };
 }  // namespace spa
