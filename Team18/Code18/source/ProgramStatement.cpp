@@ -8,3 +8,8 @@ int spa::ProgramStatement::getStatementLineNum() {
 const std::string spa::ProgramStatement::getParentProcedureVal() {
 	return parentProcedureVal;
 }
+
+void spa::ProgramStatement::processStatement(PKBManager& pkbManager) {
+  
+}
+

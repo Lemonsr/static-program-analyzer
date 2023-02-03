@@ -8,10 +8,7 @@ namespace spa {
   private:
     PKBManager& pkbManager;
     std::vector<ProcedureStatement>& procedureList;
-  public:
-    DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement*> procedureList);
 
-    void extractRelationship();
     void extractDesignAbstraction(std::vector<ProgramStatement*> statementList);
     void extractParentAbstraction(std::vector<ProgramStatement*> statementList);
     void extractFollows(std::vector<ProgramStatement*> statementList);
@@ -19,5 +16,9 @@ namespace spa {
     void extractParent(ContainerStatement* containerStatement);
     void extractParentStar(ContainerStatement* containerStatement, int ancestorLineNum);
     void extractUsesAndModifies(std::vector<ProgramStatement*> statementList);
+
+  public:
+    DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement>& procedureList);
+    void extractRelationship();
   };
 }  // namespace spa

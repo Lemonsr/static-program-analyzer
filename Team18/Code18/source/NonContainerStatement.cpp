@@ -74,57 +74,57 @@ spa::WhileConditionStatement::WhileConditionStatement(std::string parentProcedur
 	this->statementLineNum = statementLineNum;
 };
 
-void spa::ReadStatement::processStatement(spa::PKB& pkb) {
+void spa::ReadStatement::processStatement(spa::PKBManager& pkbManager) {
 	std::string stringStmtLineNum = std::to_string(statementLineNum);
-	pkb.addEntity(VARIABLE, variableName);
-	pkb.addStatementProc(stringStmtLineNum, parentProcedureVal);
-  pkb.addStatementType(stringStmtLineNum, StatementType::READ);
-	pkb.addRelationship(MODIFIES, stringStmtLineNum, variableName);
-	addParentModifies(pkb, variableName, whileStmtParents, ifStmtParents);
+	pkbManager.addEntity(VARIABLE, variableName);
+	pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
+  pkbManager.addStatementType(stringStmtLineNum, StatementType::READ);
+	pkbManager.addRelationship(MODIFIES, stringStmtLineNum, variableName);
+	addParentModifies(pkbManager, variableName, whileStmtParents, ifStmtParents);
 }
 
-void spa::PrintStatement::processStatement(spa::PKB& pkb) {
+void spa::PrintStatement::processStatement(spa::PKBManager& pkbManager) {
 	std::string stringStmtLineNum = std::to_string(statementLineNum);
-	pkb.addEntity(VARIABLE, variableName);
-	pkb.addStatementProc(stringStmtLineNum, parentProcedureVal);
-	pkb.addStatementType(stringStmtLineNum, StatementType::PRINT);
-	pkb.addRelationship(USES, stringStmtLineNum, variableName);
-	addParentUses(pkb, variableName, whileStmtParents, ifStmtParents);
+	pkbManager.addEntity(VARIABLE, variableName);
+	pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
+	pkbManager.addStatementType(stringStmtLineNum, StatementType::PRINT);
+	pkbManager.addRelationship(USES, stringStmtLineNum, variableName);
+	addParentUses(pkbManager, variableName, whileStmtParents, ifStmtParents);
 }
 
-void spa::CallStatement::processStatement(spa::PKB& pkb) {
+void spa::CallStatement::processStatement(spa::PKBManager& pkbManager) {
 	std::string stringStmtLineNum = std::to_string(statementLineNum);
-	pkb.addEntity(VARIABLE, variableName);
-	pkb.addStatementProc(stringStmtLineNum, parentProcedureVal);
-	pkb.addStatementType(stringStmtLineNum, StatementType::CALL);
-	pkb.addRelationship(MODIFIES, stringStmtLineNum, variableName);
+	pkbManager.addEntity(VARIABLE, variableName);
+	pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
+	pkbManager.addStatementType(stringStmtLineNum, StatementType::CALL);
+	pkbManager.addRelationship(MODIFIES, stringStmtLineNum, variableName);
 }
 
-void spa::AssignStatement::processStatement(spa::PKB& pkb) {
+void spa::AssignStatement::processStatement(spa::PKBManager& pkbManager) {
 	std::string stringStmtLineNum = std::to_string(statementLineNum);
-	pkb.addEntity(VARIABLE, assignVar);
-	pkb.addStatementType(stringStmtLineNum, StatementType::ASSIGN);
-	pkb.addStatementProc(stringStmtLineNum, parentProcedureVal);
-	addParentModifies(pkb, assignVar, whileStmtParents, ifStmtParents);
-	extractUsesFromPostfix(pkb, postfixExpr);
-	pkb.addPattern(stringStmtLineNum, assignVar, postfixExpr);
+	pkbManager.addEntity(VARIABLE, assignVar);
+	pkbManager.addStatementType(stringStmtLineNum, StatementType::ASSIGN);
+	pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
+	addParentModifies(pkbManager, assignVar, whileStmtParents, ifStmtParents);
+	extractUsesFromPostfix(pkbManager, postfixExpr);
+	pkbManager.addPattern(stringStmtLineNum, assignVar, postfixExpr);
 }
 
-void spa::IfConditionStatement::processStatement(PKB& pkb) {
+void spa::IfConditionStatement::processStatement(PKBManager& pkbManager) {
 	std::string stringStmtLineNum = std::to_string(statementLineNum);
-	pkb.addStatementProc(stringStmtLineNum, parentProcedureVal);
-	pkb.addStatementType(stringStmtLineNum, StatementType::IF);
-	extractUsesFromPostfix(pkb, postfixExpr);
+	pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
+	pkbManager.addStatementType(stringStmtLineNum, StatementType::IF);
+	extractUsesFromPostfix(pkbManager, postfixExpr);
 }
 
-void spa::WhileConditionStatement::processStatement(PKB& pkb) {
+void spa::WhileConditionStatement::processStatement(PKBManager& pkbManager) {
 	std::string stringStmtLineNum = std::to_string(statementLineNum);
-	pkb.addStatementProc(stringStmtLineNum, parentProcedureVal);
-	pkb.addStatementType(stringStmtLineNum, StatementType::WHILE);
-	extractUsesFromPostfix(pkb, postfixExpr);
+	pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
+	pkbManager.addStatementType(stringStmtLineNum, StatementType::WHILE);
+	extractUsesFromPostfix(pkbManager, postfixExpr);
 }
 
-void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(PKB& pkb, std::string postfix) {
+void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(PKBManager& pkbManager, std::string postfix) {
 	std::string stringStmtLineNum = std::to_string(statementLineNum);
 	postfix += " ";
 	std::string expr = "";
@@ -134,34 +134,34 @@ void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(PKB& pkb, std::s
 			continue;
 		}
 		if (std::all_of(expr.begin(), expr.end(), ::isdigit)) {
-			pkb.addEntity(CONSTANT, expr);
+			pkbManager.addEntity(CONSTANT, expr);
 		} else if (std::all_of(expr.begin(), expr.end(), ::isalnum)) {
-			pkb.addEntity(VARIABLE, expr);
-			pkb.addRelationship(USES, stringStmtLineNum, expr);
-			addParentUses(pkb, expr, whileStmtParents, ifStmtParents);
+			pkbManager.addEntity(VARIABLE, expr);
+			pkbManager.addRelationship(USES, stringStmtLineNum, expr);
+			addParentUses(pkbManager, expr, whileStmtParents, ifStmtParents);
 		}
 		expr = "";
 	}
 }
 
-void spa::NonContainerStatement::addParentUses(PKB& pkb, std::string variableName, std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents) {
+void spa::NonContainerStatement::addParentUses(PKBManager& pkbManager, std::string variableName, std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents) {
   for (int parent : whileStmtParents) {
 		std::string stringParentStmtNum = std::to_string(parent);
-		pkb.addRelationship(USES, stringParentStmtNum, variableName);
+		pkbManager.addRelationship(USES, stringParentStmtNum, variableName);
 	}
   for (int parent : ifStmtParents) {
 		std::string stringParentStmtNum = std::to_string(parent);
-		pkb.addRelationship(USES, stringParentStmtNum, variableName);
+		pkbManager.addRelationship(USES, stringParentStmtNum, variableName);
 	}
 }
 
-void spa::NonContainerStatement::addParentModifies(PKB& pkb, std::string variableName, std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents) {
+void spa::NonContainerStatement::addParentModifies(PKBManager& pkbManager, std::string variableName, std::unordered_set<int> whileStmtParents, std::unordered_set<int> ifStmtParents) {
 	for (int parent : whileStmtParents) {
 		std::string stringParentStmtNum = std::to_string(parent);
-		pkb.addRelationship(MODIFIES, stringParentStmtNum, variableName);
+		pkbManager.addRelationship(MODIFIES, stringParentStmtNum, variableName);
 	}
 	for (int parent : ifStmtParents) {
 		std::string stringParentStmtNum = std::to_string(parent);
-		pkb.addRelationship(MODIFIES, stringParentStmtNum, variableName);
+		pkbManager.addRelationship(MODIFIES, stringParentStmtNum, variableName);
 	}
 }

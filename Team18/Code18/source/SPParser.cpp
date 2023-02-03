@@ -45,7 +45,6 @@ std::vector<spa::ProgramStatement*> spa::SPParser::processStmtList(std::string p
   return statements;
 }
 
-//TODO To replace all the TOKEN_OPEN_BRACE with if, while, call, read, print, assign stmt tokens
 spa::ProgramStatement* spa::SPParser::handleStatements(std::string parentProcedureVal, std::unordered_set<int> whileStmtParents,
                                               std::unordered_set<int> ifStmtParents) {
   TokenType currentTokenType = getCurrTokenAndAdvance().getType();
