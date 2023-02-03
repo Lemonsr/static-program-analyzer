@@ -51,7 +51,7 @@ spa::AssignStatement::AssignStatement(std::string parentProcedureVal, std::strin
   this->whileStmtParents = whileStmtParents;
   this->ifStmtParents = ifStmtParents;
   this->statementLineNum = statementLineNum;
-};
+}
 
 // Constructor for AssignStatement
 spa::IfConditionStatement::IfConditionStatement(std::string parentProcedureVal,

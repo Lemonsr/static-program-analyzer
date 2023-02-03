@@ -1,6 +1,6 @@
 #include "ProcedureStatement.h"
 
-//Constructor
+// Constructor
 spa::ProcedureStatement::ProcedureStatement(spa::Token token,
                           std::vector<ProgramStatement*> statementLst): token(token),
                                                                  statementLst(statementLst) {}

@@ -5,14 +5,14 @@
 #include "Token.h"
 
 namespace spa {
-  class ProcedureStatement {
-  private:
-    spa::Token token;
-    std::vector<ProgramStatement*> statementLst;
+class ProcedureStatement {
+ private:
+  spa::Token token;
+  std::vector<ProgramStatement*> statementLst;
 
-  public:
-    ProcedureStatement(spa::Token token, std::vector<ProgramStatement*> statementLst);
-    spa::Token getToken();
-    std::vector<ProgramStatement*> getStatementLst();
-  };
+ public:
+  ProcedureStatement(spa::Token token, std::vector<ProgramStatement*> statementLst);
+  spa::Token getToken();
+  std::vector<ProgramStatement*> getStatementLst();
+};
 }  // namespace spa

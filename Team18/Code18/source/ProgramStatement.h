@@ -2,13 +2,13 @@
 #include <string>
 
 namespace spa {
-  class ProgramStatement {
-   protected:
-    int statementLineNum;
-    std::string parentProcedureVal;
+class ProgramStatement {
+ protected:
+  int statementLineNum;
+  std::string parentProcedureVal;
 
-   public:
-    int getStatementLineNum();
-    const std::string getParentProcedureVal();
-  };
+ public:
+  int getStatementLineNum();
+  const std::string getParentProcedureVal();
+};
 }  // namespace spa
