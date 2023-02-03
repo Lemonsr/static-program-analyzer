@@ -15,7 +15,6 @@ class QpsValue {
   std::optional<std::string> strValue;
   std::optional<int> numValue;
  public:
-  QpsValue() = default;
   explicit QpsValue(std::string val);
   explicit QpsValue(int val);
   QpsValue(const QpsValue& other);

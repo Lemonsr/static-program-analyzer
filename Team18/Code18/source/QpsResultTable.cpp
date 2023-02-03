@@ -58,7 +58,7 @@ std::optional<std::vector<spa::QpsValue>>
     QpsValue& val = row[i];
     result.push_back(val);
     if (!header.empty()) {
-      valueMap[header] = val;
+      valueMap.insert({header, val});
     }
   }
   for (int i = 0; i < otherRow.size(); ++i) {
