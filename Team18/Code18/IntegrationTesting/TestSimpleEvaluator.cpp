@@ -8,6 +8,7 @@
 #include "PKB.h"
 #include "QpsPreprocessor.h"
 #include "QpsQueryEvaluator.h"
+#include "SimpleEvaluator.h"
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
@@ -25,7 +26,8 @@ namespace IntegrationTesting {
       
       Assert::IsTrue(parsedQuery.has_value());
 
-      spa::QpsEvaluator* qpsEvaluator = new spa::QpsQueryEvaluator(parsedQuery.value());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -51,7 +53,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::QpsQueryEvaluator>(parsedQuery.value());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -74,10 +77,10 @@ namespace IntegrationTesting {
       spa::QpsPreprocessor qpsPreprocessor;
 
       std::optional<spa::ParsedQuery> parsedQuery = qpsPreprocessor.preprocess(query);
-
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::QpsQueryEvaluator>(parsedQuery.value());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -91,7 +94,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(rows[2][0].getString() == "3");
     }
 
-    TEST_METHOD(TestGetStatements) {
+    TEST_METHOD(TestGetAllStatements) {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::READ, "1"));
       Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::ASSIGN, "2"));
@@ -103,7 +106,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::QpsQueryEvaluator>(parsedQuery.value());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -115,6 +119,138 @@ namespace IntegrationTesting {
       Assert::IsTrue(rows[0][0].getInteger() == 1);
       Assert::IsTrue(rows[1][0].getInteger() == 2);
       Assert::IsTrue(rows[2][0].getInteger() == 3);
+    }
+
+    TEST_METHOD(TestGetReadStatements) {
+      std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::READ, "1"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::ASSIGN, "2"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::PRINT, "3"));
+      std::string query = "read re;\n Select re";
+      spa::QpsPreprocessor qpsPreprocessor;
+
+      std::optional<spa::ParsedQuery> parsedQuery = qpsPreprocessor.preprocess(query);
+
+      Assert::IsTrue(parsedQuery.has_value());
+
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+
+      Assert::IsTrue(rows.size() == 1);
+      Assert::IsTrue(rows[0][0].getType() == spa::QpsValueType::INTEGER);
+      Assert::IsTrue(rows[0][0].getInteger() == 1);
+    }
+
+    TEST_METHOD(TestGetAssignStatements) {
+      std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::READ, "1"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::ASSIGN, "2"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::PRINT, "3"));
+      std::string query = "assign a;\n Select a";
+      spa::QpsPreprocessor qpsPreprocessor;
+
+      std::optional<spa::ParsedQuery> parsedQuery = qpsPreprocessor.preprocess(query);
+
+      Assert::IsTrue(parsedQuery.has_value());
+
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+
+      Assert::IsTrue(rows.size() == 1);
+      Assert::IsTrue(rows[0][0].getType() == spa::QpsValueType::INTEGER);
+      Assert::IsTrue(rows[0][0].getInteger() == 2);
+    }
+
+    TEST_METHOD(TestGetPrintStatements) {
+      std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::READ, "1"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::ASSIGN, "2"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::PRINT, "3"));
+      std::string query = "print p;\n Select p";
+      spa::QpsPreprocessor qpsPreprocessor;
+
+      std::optional<spa::ParsedQuery> parsedQuery = qpsPreprocessor.preprocess(query);
+
+      Assert::IsTrue(parsedQuery.has_value());
+
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+
+      Assert::IsTrue(rows.size() == 1);
+      Assert::IsTrue(rows[0][0].getType() == spa::QpsValueType::INTEGER);
+      Assert::IsTrue(rows[0][0].getInteger() == 3);
+    }
+
+    TEST_METHOD(TestGetIfStatements) {
+      std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::IF, "1"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::WHILE, "2"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::CALL, "3"));
+      std::string query = "if i;\n Select i";
+      spa::QpsPreprocessor qpsPreprocessor;
+
+      std::optional<spa::ParsedQuery> parsedQuery = qpsPreprocessor.preprocess(query);
+
+      Assert::IsTrue(parsedQuery.has_value());
+
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+
+      Assert::IsTrue(rows.size() == 1);
+      Assert::IsTrue(rows[0][0].getType() == spa::QpsValueType::INTEGER);
+      Assert::IsTrue(rows[0][0].getInteger() == 1);
+    }
+
+    TEST_METHOD(TestGetWhileStatements) {
+      std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::IF, "1"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::WHILE, "2"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::CALL, "3"));
+      std::string query = "while w;\n Select w";
+      spa::QpsPreprocessor qpsPreprocessor;
+
+      std::optional<spa::ParsedQuery> parsedQuery = qpsPreprocessor.preprocess(query);
+
+      Assert::IsTrue(parsedQuery.has_value());
+
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+
+      Assert::IsTrue(rows.size() == 1);
+      Assert::IsTrue(rows[0][0].getType() == spa::QpsValueType::INTEGER);
+      Assert::IsTrue(rows[0][0].getInteger() == 2);
+    }
+
+    TEST_METHOD(TestGetCallStatements) {
+      std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::IF, "1"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::WHILE, "2"));
+      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::CALL, "3"));
+      std::string query = "call c;\n Select c";
+      spa::QpsPreprocessor qpsPreprocessor;
+
+      std::optional<spa::ParsedQuery> parsedQuery = qpsPreprocessor.preprocess(query);
+
+      Assert::IsTrue(parsedQuery.has_value());
+
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
+        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+
+      Assert::IsTrue(rows.size() == 1);
+      Assert::IsTrue(rows[0][0].getType() == spa::QpsValueType::INTEGER);
+      Assert::IsTrue(rows[0][0].getInteger() == 3);
     }
   };
 }  // namespace IntegrationTesting

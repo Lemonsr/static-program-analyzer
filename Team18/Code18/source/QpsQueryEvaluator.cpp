@@ -9,21 +9,21 @@ spa::QpsQueryEvaluator::QpsQueryEvaluator(ParsedQuery& parsedQuery) : parsedQuer
 spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   std::unique_ptr<QpsEvaluator> simpleEvaluator =
     std::make_unique<SimpleEvaluator>(parsedQuery.getSelectSynonym(), parsedQuery.getSelectSynonymType());
-  QpsResultTable finalResultTable = simpleEvaluator->evaluate(pkbManager);
+  QpsResultTable simpleResultTable = simpleEvaluator->evaluate(pkbManager);
 
   QpsResultTable suchThatResultTable;
   if (parsedQuery.getSuchThatClause()) {
     SuchThatClause suchThatClause = parsedQuery.getSuchThatClause().value();
     suchThatResultTable = suchThatClause.getEvaluator()->evaluate(pkbManager);
-    finalResultTable = finalResultTable.innerJoin(suchThatResultTable);
   }
 
   QpsResultTable patternResultTable;
   if (parsedQuery.getPatternClause()) {
     PatternClause patternClause = parsedQuery.getPatternClause().value();
     patternResultTable = patternClause.getEvaluator()->evaluate(pkbManager);
-    finalResultTable = finalResultTable.innerJoin(patternResultTable);
   }
 
+  QpsResultTable finalResultTable = simpleResultTable.innerJoin(suchThatResultTable);
+  finalResultTable = finalResultTable.innerJoin(patternResultTable);
   return finalResultTable;
 }
