@@ -17,15 +17,16 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "assign a;\n Select a pattern a(_, \"x + 1\")";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN});
+      spa::PqlArgument lhs(spa::ArgumentType::WILDCARD, "_", {});
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_NAME, "x"},
+        {spa::TokenType::TOKEN_PLUS, "+"},
+        {spa::TokenType::TOKEN_INTEGER, "1"},
+      };
+      spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -41,15 +42,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "assign a;\n Select a pattern a(_, _\"x\"_)";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::WILDCARD, "_", {});
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_NAME, "x"},
+      };
+      spa::Pattern pattern(spa::PatternType::PARTIAL, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -65,15 +65,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "assign a;\n Select a pattern a(_, _)";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::WILDCARD, "_", {});
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_UNDERSCORE, "_"},
+      };
+      spa::Pattern pattern(spa::PatternType::ANY, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -89,15 +88,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "assign a;\n Select a pattern a(_, \"x\")";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::WILDCARD, "_", {});
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_NAME, "x"},
+      };
+      spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -109,15 +107,16 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "variable v;assign a;\n Select a pattern a(v, \"x + 1\")";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE});
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_NAME, "x"},
+        {spa::TokenType::TOKEN_PLUS, "+"},
+        {spa::TokenType::TOKEN_INTEGER, "1"},
+      };
+      spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -133,15 +132,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "variable v;assign a;\n Select a pattern a(v, _\"x\"_)";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::SYNONYM, "v", { spa::DesignEntityType::VARIABLE });
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_NAME, "x"},
+      };
+      spa::Pattern pattern(spa::PatternType::PARTIAL, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -157,15 +155,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "variable v;assign a;\n Select a pattern a(v, _)";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::SYNONYM, "v", { spa::DesignEntityType::VARIABLE });
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_UNDERSCORE, "_"},
+      };
+      spa::Pattern pattern(spa::PatternType::ANY, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -181,15 +178,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "variable v;assign a;\n Select a pattern a(v, \"x\")";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::SYNONYM, "v", { spa::DesignEntityType::VARIABLE });
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_NAME, "x"},
+      };
+      spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -201,15 +197,16 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "assign a;\n Select a pattern a(\"x\", \"x + 1\")";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::VARIABLE_NAME, "x", {});
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_NAME, "x"},
+        {spa::TokenType::TOKEN_PLUS, "+"},
+        {spa::TokenType::TOKEN_INTEGER, "1"},
+      };
+      spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -225,15 +222,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "assign a;\n Select a pattern a(\"x\", _\"x\"_)";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::VARIABLE_NAME, "x", {});
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_NAME, "x"},
+      };
+      spa::Pattern pattern(spa::PatternType::PARTIAL, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -249,15 +245,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "assign a;\n Select a pattern a(\"x\", _)";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::VARIABLE_NAME, "x", {});
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_UNDERSCORE, "_"},
+      };
+      spa::Pattern pattern(spa::PatternType::ANY, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -273,15 +268,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
-      std::string query = "assign a;\n Select a pattern a(\"x\", \"x\")";
-      spa::QpsPreprocessor qpsPreprocessor;
-      std::optional<spa::ParsedQuery> parsedQueryOpt = qpsPreprocessor.preprocess(query);
-      Assert::IsTrue(parsedQueryOpt.has_value());
+      spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
+      spa::PqlArgument lhs(spa::ArgumentType::VARIABLE_NAME, "x", {});
+      std::vector<spa::Token> patternTokens = {
+        {spa::TokenType::TOKEN_NAME, "x"},
+      };
+      spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
-      Assert::IsTrue(patternClauseOpt.has_value());
-
-      spa::PatternClause patternClause = patternClauseOpt.value();
+      spa::PatternClause patternClause(synonym, lhs, pattern);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
