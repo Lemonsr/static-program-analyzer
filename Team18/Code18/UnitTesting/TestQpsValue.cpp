@@ -40,5 +40,12 @@ public:
     spa::QpsValue num2(1);
     Assert::IsTrue(num1 != num2);
   }
+
+  TEST_METHOD(TestToString) {
+    spa::QpsValue str("hello");
+    Assert::IsTrue(str.toString() == "hello");
+    spa::QpsValue num(1);
+    Assert::IsTrue(num.toString() == "1");
+  }
   };
 }  // namespace UnitTesting

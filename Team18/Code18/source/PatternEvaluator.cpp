@@ -5,5 +5,14 @@ spa::PatternEvaluator::PatternEvaluator(PqlArgument& assignSynonym, PqlArgument&
 }
 
 spa::QpsResultTable spa::PatternEvaluator::evaluate(PKBManager& pkbManager) {
-  return QpsResultTable();
+  QueryResult result = pkbManager.getPattern(PKBQueryArg(firstArg), pattern);
+
+  QpsResultTable resultTable;
+  resultTable.addHeader(assignSynonym);
+  resultTable.addHeader(firstArg);
+
+  for (auto& [lineNumber, varName] : result.getLineNumberVariablePairs()) {
+    resultTable.addRow({ QpsValue(lineNumber), QpsValue(varName) });
+  }
+  return resultTable;
 }

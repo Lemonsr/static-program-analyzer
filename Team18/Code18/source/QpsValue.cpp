@@ -1,5 +1,7 @@
 #include "QpsValue.h"
 
+#include <string>
+
 spa::QpsValue::QpsValue(std::string val) {
   this->type = QpsValueType::STRING;
   this->strValue = val;
@@ -39,6 +41,14 @@ const std::string& spa::QpsValue::getString() const {
 
 const int& spa::QpsValue::getInteger() const {
   return numValue.value();
+}
+
+const std::string spa::QpsValue::toString() const {
+  if (strValue) {
+    return getString();
+  }
+
+  return std::to_string(getInteger());
 }
 
 bool spa::operator==(const QpsValue& v1, const QpsValue& v2) {
