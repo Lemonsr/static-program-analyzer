@@ -101,6 +101,18 @@ std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
   }
 }
 
+const spa::RelationshipType& spa::SuchThatClause::getDesignAbstraction() {
+  return designAbstraction;
+}
+
+const spa::PqlArgument& spa::SuchThatClause::getFirstArg() {
+  return firstArg;
+}
+
+const spa::PqlArgument& spa::SuchThatClause::getSecondArg() {
+  return secondArg;
+}
+
 bool spa::operator==(const SuchThatClause& s1, const SuchThatClause& s2) {
   bool typeMatch = s1.designAbstraction == s2.designAbstraction;
   bool firstArgMatch = s1.firstArg == s2.firstArg;
@@ -119,6 +131,10 @@ spa::PatternClause::PatternClause(PqlArgument synonym, PqlArgument firstArg,
 
 std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
   return std::make_unique<spa::PatternEvaluator>(synonym, firstArg, pattern);
+}
+
+const spa::PqlArgument& spa::PatternClause::getFirstArg() {
+  return firstArg;
 }
 
 bool spa::operator==(const PatternClause& p1, const PatternClause& p2) {

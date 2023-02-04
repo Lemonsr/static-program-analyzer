@@ -29,6 +29,7 @@
     <ClCompile Include="..\source\PqlDeclarationParser.cpp" />
     <ClCompile Include="..\source\PqlPatternParser.cpp" />
     <ClCompile Include="..\source\PqlQueryParser.cpp" />
+    <ClCompile Include="..\source\PqlSemanticChecker.cpp" />
     <ClCompile Include="..\source\PqlSuchThatParser.cpp" />
     <ClCompile Include="..\source\PatternEvaluator.cpp" />
     <ClCompile Include="..\source\QpsQueryEvaluator.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="..\source\PqlDeclarationParser.h" />
     <ClInclude Include="..\source\PqlPatternParser.h" />
     <ClInclude Include="..\source\PqlQueryParser.h" />
+    <ClInclude Include="..\source\PqlSemanticChecker.h" />
     <ClInclude Include="..\source\PqlSuchThatParser.h" />
     <ClInclude Include="..\source\QpsQueryEvaluator.h" />
     <ClInclude Include="..\source\QpsResultTable.h" />
