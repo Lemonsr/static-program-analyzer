@@ -28,5 +28,6 @@ class QpsResultTable {
   void addRow(std::vector<QpsValue> row);
   std::unordered_set<QpsValue, QpsValueHash, QpsValueEquality> getColumn(std::string header);
   QpsResultTable innerJoin(QpsResultTable& other);
+  std::vector<std::vector<QpsValue>> getRows();
 };
 }  // namespace spa

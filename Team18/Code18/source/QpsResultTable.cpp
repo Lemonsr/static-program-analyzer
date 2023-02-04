@@ -100,3 +100,7 @@ spa::QpsResultTable spa::QpsResultTable::innerJoin(QpsResultTable& other) {
   }
   return QpsResultTable(resultHeaders, resultRows);
 }
+
+std::vector<std::vector<spa::QpsValue>> spa::QpsResultTable::getRows() {
+  return rows;
+}
