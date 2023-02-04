@@ -23,11 +23,11 @@ namespace IntegrationTesting {
       spa::QpsPreprocessor qpsPreprocessor;
 
       std::optional<spa::ParsedQuery> parsedQuery = qpsPreprocessor.preprocess(query);
-      
+
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -53,8 +53,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -79,8 +79,8 @@ namespace IntegrationTesting {
       std::optional<spa::ParsedQuery> parsedQuery = qpsPreprocessor.preprocess(query);
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -106,8 +106,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -133,8 +133,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -155,8 +155,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -177,8 +177,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -199,8 +199,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -221,8 +221,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
@@ -243,8 +243,8 @@ namespace IntegrationTesting {
 
       Assert::IsTrue(parsedQuery.has_value());
 
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::SimpleEvaluator>(parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
+        parsedQuery.value().getSelectSynonym(), parsedQuery.value().getSelectSynonymType());
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
