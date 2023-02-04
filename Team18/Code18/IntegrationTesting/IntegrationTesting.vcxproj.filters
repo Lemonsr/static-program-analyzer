@@ -29,6 +29,9 @@
     <ClCompile Include="TestFrontEnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestSimpleEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TestModifiesEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
