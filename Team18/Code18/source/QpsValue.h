@@ -22,6 +22,7 @@ class QpsValue {
   QpsValueType getType() const;
   const std::string& getString() const;
   const int& getInteger() const;
+  const std::string toString() const;
 
   friend bool operator==(const QpsValue& v1, const QpsValue& v2);
   friend bool operator!=(const QpsValue& v1, const QpsValue& v2);
