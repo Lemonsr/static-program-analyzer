@@ -174,6 +174,16 @@ const bool spa::PKB::addEntity(DesignEntityType entityType, std::string arg) {
   case PROCEDURE: {
     return entityStorage.addProc(arg);
   }
+  case STMT:
+  case READ:
+  case PRINT:
+  case ASSIGN:
+  case CALL:
+  case WHILE:
+  case IF: {
+    auto statementTypeItr = statementTypeMap.find(entityType);
+    return addStatementType(arg, statementTypeItr->second.value());
+  }
   default: {
     return false;
   }
@@ -195,24 +205,24 @@ const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure)
 
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
   PKBQueryArg firstArg, PKBQueryArg secondArg) {
-  auto mapIter = relationshipQueryFunctionMap.find({ relationshipType,
+  auto relationshipFunctionItr = relationshipQueryFunctionMap.find({ relationshipType,
                                                      firstArg.getType(), secondArg.getType() });
-  return (mapIter->second)(relationshipStorage, firstArg, secondArg);
+  return (relationshipFunctionItr->second)(relationshipStorage, firstArg, secondArg);
 }
 
 const spa::QueryResult spa::PKB::getEntity(DesignEntityType entityType) {
   if (entityType != DesignEntityType::VARIABLE &&
     entityType != DesignEntityType::PROCEDURE &&
     entityType != DesignEntityType::CONSTANT) {
-    auto mapIter = statementTypeMap.find(entityType);
-    return relationshipStorage.getStatements(mapIter->second);
+    auto statementTypeItr = statementTypeMap.find(entityType);
+    return relationshipStorage.getStatements(statementTypeItr->second);
   }
 
-  auto mapIter = entityQueryFunctionMap.find(entityType);
-  return (mapIter->second)(entityStorage);
+  auto entityFunctionItr = entityQueryFunctionMap.find(entityType);
+  return (entityFunctionItr->second)(entityStorage);
 }
 
 const spa::QueryResult spa::PKB::getPattern(PKBQueryArg lhs, Pattern rhs) {
-  auto mapIter = patternQueryFunctionMap.find(lhs.getType());
-  return (mapIter->second)(patternStorage, lhs, rhs);
+  auto patternFunctionItr = patternQueryFunctionMap.find(lhs.getType());
+  return (patternFunctionItr->second)(patternStorage, lhs, rhs);
 }
