@@ -51,6 +51,175 @@ spa::QueryResult spa::RelationshipStorage::getStatements(
   return queryResult;
 }
 
+bool spa::RelationshipStorage::addFollows(std::string firstLineNo, std::string secondLineNo) {
+  return false;
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreUnderscore(PKBQueryArg firstArg,
+                                                                          PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+bool spa::RelationshipStorage::addFollowsStar(std::string firstLineNo, std::string secondLineNo) {
+  return false;
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStarLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStarLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStarStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStarLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStarUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStarStatementStatement(PKBQueryArg firstArg,
+                                                                            PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStarStatementUnderscore(PKBQueryArg firstArg,
+                                                                             PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStarUnderscoreStatement(PKBQueryArg firstArg,
+                                                                             PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getFollowsStarUnderscoreUnderscore(PKBQueryArg firstArg,
+                                                                              PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+bool spa::RelationshipStorage::addParent(std::string firstLineNo, std::string secondLineNo) {
+  return false;
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+bool spa::RelationshipStorage::addParentStar(std::string firstLineNo, std::string secondLineNo) {
+  return false;
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStarLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStarLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStarStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStarLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStarUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStarStatementStatement(PKBQueryArg firstArg,
+                                                                           PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStarStatementUnderscore(PKBQueryArg firstArg,
+                                                                            PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStarUnderscoreStatement(PKBQueryArg firstArg,
+                                                                            PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getParentStarUnderscoreUnderscore(PKBQueryArg firstArg,
+                                                                             PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
 bool spa::RelationshipStorage::addModifies(std::string lineNo, std::string varName) {
   int lineNumber = std::stoi(lineNo);
   if (modifiesTable.find(lineNumber) != modifiesTable.end()) {
