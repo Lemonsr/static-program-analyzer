@@ -110,7 +110,7 @@ public:
     try {
       std::stringstream srcStream;
       srcStream << "stmt s;\n";
-      srcStream << "Select s such that Uses* (w, Åè)";
+      srcStream << "Select s such that Uses* (w, &)";
       spa::Tokenizer tokenizer;
       spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
       matchResult = tokenStream.match({
@@ -126,7 +126,7 @@ public:
         { spa::TOKEN_OPEN_BRACKET, "(" },
         { spa::TOKEN_NAME, "w" },
         { spa::TOKEN_COMMA, "," },
-        { spa::TOKEN_NAME, "Åè" },
+        { spa::TOKEN_BOOL_AND, "&" },
         { spa::TOKEN_CLOSE_BRACKET, ")" },
         });
     }
