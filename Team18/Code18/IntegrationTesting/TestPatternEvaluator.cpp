@@ -24,7 +24,7 @@ namespace IntegrationTesting {
 
       std::optional<spa::PatternClause> patternClauseOpt = parsedQueryOpt.value().getPatternClause();
       Assert::IsTrue(patternClauseOpt.has_value());
-      
+
       spa::PatternClause patternClause = patternClauseOpt.value();
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
