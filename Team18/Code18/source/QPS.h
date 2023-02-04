@@ -1,14 +1,16 @@
 #pragma once
 
 #include <string>
+#include <list>
 
 #include "QpsPreprocessor.h"
 #include "QpsEvaluator.h"
+#include "QpsResult.h"
 
 namespace spa {
 class QPS {
  public:
-  std::string evaluate(std::string query);
+  QpsResult evaluate(std::string query, PKBManager& pkbManager);
 };
 }
 
