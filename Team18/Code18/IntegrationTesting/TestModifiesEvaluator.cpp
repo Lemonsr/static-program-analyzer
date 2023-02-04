@@ -15,7 +15,6 @@ namespace IntegrationTesting {
   TEST_CLASS(TestModifiesEvaluator) {
 public:
   TEST_METHOD(TestLineVarNameExists) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::LINE_NO, "10", {}),
                                spa::PqlArgument(spa::VARIABLE_NAME, "x", {}));
@@ -32,7 +31,6 @@ public:
   }
 
   TEST_METHOD(TestLineVarNameNotExists) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::LINE_NO, "10", {}),
                                spa::PqlArgument(spa::VARIABLE_NAME, "x", {}));
@@ -49,7 +47,6 @@ public:
   }
 
   TEST_METHOD(TestLineUnderscoreExists) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::LINE_NO, "10", {}),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
@@ -66,7 +63,6 @@ public:
   }
 
   TEST_METHOD(TestLineUnderscoreNotExists) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::LINE_NO, "10", {}),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
@@ -82,7 +78,6 @@ public:
   }
 
   TEST_METHOD(TestLineVarExists) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::LINE_NO, "10", {}),
                                spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }));
@@ -102,7 +97,6 @@ public:
   }
 
   TEST_METHOD(TestLineVarNotExists) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::LINE_NO, "10", {}),
                                spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }));
@@ -118,7 +112,6 @@ public:
   }
 
   TEST_METHOD(TestStmtVarNameExists) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
                                spa::PqlArgument(spa::VARIABLE_NAME, "y", {}));
@@ -139,7 +132,6 @@ public:
   }
 
   TEST_METHOD(TestStmtVarNameNotExists) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
                                spa::PqlArgument(spa::VARIABLE_NAME, "val", {}));
@@ -156,7 +148,6 @@ public:
   }
 
   TEST_METHOD(TestAssignStmtUnderscore) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::SYNONYM, "a", { spa::ASSIGN }),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
@@ -180,7 +171,6 @@ public:
     Assert::IsTrue(columnVals.find(spa::QpsValue(12)) != columnVals.end());
   }
   TEST_METHOD(TestReadStmtVar) {
-    // TODO: Your test code here
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::SYNONYM, "r", { spa::READ }),
                                spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }));
