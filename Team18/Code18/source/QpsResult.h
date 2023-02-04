@@ -6,10 +6,10 @@
 
 namespace spa {
 class QpsResult {
-private:
+ private:
   std::list<std::string> results;
   std::optional<std::string> errorMessage;
-public:
+ public:
   const std::list<std::string>& getResults() const;
   const std::optional<std::string>& getErrorMessage() const;
   void setResults(std::list<std::string>& results);

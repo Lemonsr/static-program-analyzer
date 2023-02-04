@@ -10,7 +10,7 @@ class QpsTranslator {
  private:
   QpsResultTable& result;
  public:
-  QpsTranslator(QpsResultTable& result);
+  explicit QpsTranslator(QpsResultTable& result);
   std::list<std::string> translate(std::string selectSynonym);
 };
 }  // namespace spa

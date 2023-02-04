@@ -1,5 +1,6 @@
 #include <string>
 #include <optional>
+#include <memory>
 
 #include "QPS.h"
 #include "ParsedQuery.h"

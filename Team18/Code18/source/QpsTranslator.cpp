@@ -1,5 +1,7 @@
 #include "QpsTranslator.h"
 
+#include <unordered_set>
+
 spa::QpsTranslator::QpsTranslator(QpsResultTable& result) : result(result) {
 }
 
