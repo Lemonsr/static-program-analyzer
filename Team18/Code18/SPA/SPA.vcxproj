@@ -53,6 +53,7 @@
     <ClCompile Include="..\source\Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\DesignExtractor.h" />
     <ClInclude Include="..\source\Argument.h" />
     <ClInclude Include="..\source\DesignEntity.h" />
     <ClInclude Include="..\source\EntityStorage.h" />

@@ -31,6 +31,18 @@
     <ClCompile Include="..\source\PqlPatternParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\ProcedureStatement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ProgramStatement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ContainerStatement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\NonContainerStatement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\source\PqlQueryParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -47,13 +59,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\TNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Token.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Tokenizer.cpp">
-      <Filter>Source Files</Filter>
+        <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\ProcedureStatement.cpp">
       <Filter>Source Files</Filter>
@@ -61,13 +67,10 @@
     <ClCompile Include="..\source\ProgramStatement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\ContainerStatement.cpp">
+    <ClCompile Include="..\source\Token.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\NonContainerStatement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\PqlArgument.cpp">
+    <ClCompile Include="..\source\Tokenizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\UtilsFunction.cpp">
@@ -141,6 +144,21 @@
     <ClInclude Include="..\source\ParsedQuery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\SpParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QpsEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QpsPreprocessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\source\PatternStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -159,19 +177,19 @@
     <ClInclude Include="..\source\PKBTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SpParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QpsEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QpsPreprocessor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\PqlArgument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ProcedureStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ProgramStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ContainerStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\NonContainerStatement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\PqlArgumentParser.h">
@@ -207,6 +225,9 @@
     <ClInclude Include="..\source\Tokenizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\UtilsFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\source\ProcedureStatement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -216,13 +237,10 @@
     <ClInclude Include="..\source\ContainerStatement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\NonContainerStatement.h">
+    <ClInclude Include="..\source\PqlParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\Argument.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\UtilsFunction.h">
+    <ClInclude Include="..\source\DesignExtractor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\SourceProcessor.h">
