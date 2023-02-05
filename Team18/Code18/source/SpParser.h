@@ -1,5 +1,6 @@
 #pragma once
 #include <unordered_set>
+#include <string>
 
 #include "ProcedureStatement.h"
 #include "ProgramStatement.h"
@@ -45,7 +46,7 @@ class SpParser {
                                            std::unordered_set<int> whileStmtParents,
                                            std::unordered_set<int> ifStmtParents);
 
-  //Functions to traverse the stream of tokens
+  // Functions to traverse the stream of tokens
   void advanceStream(int64_t offset);
   void skipCurrToken();
   bool matchToken(spa::TokenType tokenType);

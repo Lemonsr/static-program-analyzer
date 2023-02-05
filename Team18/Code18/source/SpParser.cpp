@@ -68,7 +68,6 @@ spa::ProgramStatement* spa::SpParser::handleStatements(std::string parentProcedu
   }
 }
 
-
 spa::ProgramStatement* spa::SpParser::processReadStatement(std::string parentProcedureVal,
                                                            std::unordered_set<int> whileStmtParents,
                                                            std::unordered_set<int> ifStmtParents) {
