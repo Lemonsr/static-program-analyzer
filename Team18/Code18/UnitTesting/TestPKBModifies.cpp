@@ -106,11 +106,11 @@ namespace UnitTesting {
         Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
       }
 
-      TEST_METHOD(TestGetModifiesStatementVarName) {
+      TEST_METHOD(TestGetModifiesStmtVarName) {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setModifiesTable(modifiesTable);
         relationshipStorage.setStatementTypeTable(statementTypeTable);
-        std::vector<std::pair<int, std::string>> expected = { {1, "a"}, {6, "a"} };
+        std::vector<std::pair<int, std::string>> expected = { {1, "a"}, {6, "a"}, {7, "a"}, {8, "a"}};
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
                                                                       spa::DesignEntityType::STMT));
@@ -156,7 +156,7 @@ namespace UnitTesting {
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
 
-        expected = { {3, "c"}, {6, "a"} };
+        expected = { {3, "c"}, {6, "a"}, {8, "a"}};
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "a", spa::DesignEntityType::ASSIGN));
         queryResult = relationshipStorage.getModifiesStmtUnderscore(firstArg, secondArg);
 
