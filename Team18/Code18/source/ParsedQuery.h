@@ -32,6 +32,9 @@ class SuchThatClause {
   SuchThatClause(RelationshipType designAbstraction, PqlArgument firstArg,
     PqlArgument secondArg);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
+  const RelationshipType& getDesignAbstraction();
+  const PqlArgument& getFirstArg();
+  const PqlArgument& getSecondArg();
   friend bool operator==(const SuchThatClause& s1, const SuchThatClause& s2);
   friend bool operator!=(const SuchThatClause& s1, const SuchThatClause& s2);
 };
@@ -44,6 +47,7 @@ class PatternClause {
  public:
   PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
+  const PqlArgument& getFirstArg();
   friend bool operator==(const PatternClause& p1, const PatternClause& p2);
   friend bool operator!=(const PatternClause& p1, const PatternClause& p2);
 };

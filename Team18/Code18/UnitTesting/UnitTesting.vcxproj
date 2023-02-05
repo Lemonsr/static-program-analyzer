@@ -185,6 +185,7 @@
     <ClCompile Include="TestPqlPatternParser.cpp" />
     <ClCompile Include="TestPqlQueryParser.cpp" />
     <ClCompile Include="TestPqlSuchThatParser.cpp" />
+    <ClCompile Include="TestPqlSemanticChecker.cpp" />
     <ClCompile Include="TestTokenizer.cpp" />
     <ClCompile Include="TestPKB.cpp" />
     <ClCompile Include="TestUtilsFunction.cpp" />

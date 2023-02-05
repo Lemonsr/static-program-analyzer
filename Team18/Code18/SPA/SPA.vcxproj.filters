@@ -127,6 +127,9 @@
     <ClCompile Include="..\source\QpsTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\PqlSemanticChecker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\source\QpsResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -298,6 +301,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\QpsTranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PqlSemanticChecker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\QpsResult.h">
