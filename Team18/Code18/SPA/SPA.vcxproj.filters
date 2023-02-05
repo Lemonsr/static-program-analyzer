@@ -4,22 +4,10 @@
     <ClCompile Include="..\source\DesignExtractor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\SPParser.cpp">
-        <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\ParsedQuery.cpp">
+    <ClCompile Include="..\source\test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\PqlParser.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\QPS.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\QpsEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\QpsPreprocessor.h">
+    <ClCompile Include="..\source\ParsedQuery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\PKB.cpp">
@@ -150,7 +138,7 @@
     <ClInclude Include="..\source\ParsedQuery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SPParser.h">
+    <ClInclude Include="..\source\test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\QPS.h">
@@ -163,7 +151,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\Stream.h">
-        <Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\PatternStorage.h">
       <Filter>Header Files</Filter>
@@ -240,9 +228,9 @@
     <ClInclude Include="..\source\DesignExtractor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-	 <ClInclude Include="..\source\SourceProcessor.h">
-	  <Filter>Header Files</Filter>
-	</ClInclude>
+    <ClInclude Include="..\source\SourceProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\source\QpsResultTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
