@@ -24,6 +24,5 @@ class SP {
     {"then", spa::TOKEN_THEN},
     {"else", spa::TOKEN_ELSE},
     };
-
 };
 }  // namespace spa

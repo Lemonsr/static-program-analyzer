@@ -2,7 +2,7 @@
 #include "Token.h"
 #include "Stream.h"
 #include <unordered_set>
-#include <string> 
+#include <string>
 #include <vector>
 
 namespace spa {
@@ -25,7 +25,7 @@ class SpValidator {
         };
         std::unordered_set<TokenType> relFactorToken = {TOKEN_NAME, TOKEN_INTEGER};
 
-        int64_t idx = 0; // Track the current token position
+        int64_t idx = 0;  // Track the current token position
         Stream<Token> tokens;
         std::unordered_set<std::string> procNames;
         bool hasRemaining();
@@ -67,5 +67,5 @@ class SpValidator {
         void validateRelExpr();
         void validateBracketExpr();
         void validateFactor();
-    };
+};
 }  // namespace spa
