@@ -220,6 +220,10 @@ namespace UnitTesting {
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
         Assert::IsTrue(queryResult.getIsTrue());
+
+        relationshipStorage.setFollowsTable({});
+        queryResult = relationshipStorage.getFollowsUnderscoreUnderscore(firstArg, secondArg);
+        Assert::IsFalse(queryResult.getIsTrue());
       }
   };
 }  // namespace UnitTesting
