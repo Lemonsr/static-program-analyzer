@@ -4,10 +4,10 @@
     <ClCompile Include="..\source\DesignExtractor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\SpParser.cpp">
+    <ClCompile Include="..\source\ParsedQuery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\ParsedQuery.cpp">
+    <ClCompile Include="..\source\SpParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\PKB.cpp">
@@ -59,6 +59,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\TNode.cpp">
+        <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ProcedureStatement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ProgramStatement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\Token.cpp">
@@ -222,6 +228,15 @@
     <ClInclude Include="..\source\UtilsFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\ProcedureStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ProgramStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ContainerStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\source\PqlParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -262,6 +277,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\SimpleEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PqlParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\SuchThatEvaluator.h">
