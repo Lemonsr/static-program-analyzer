@@ -14,12 +14,10 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
   TEST_CLASS(TestPKBParent) {
-    std::unordered_map<int, int> parentTable = {
-      {1, 2},
-      {4, 5},
-      {4, 6},
-      {4, 7},
-      {7, 8}
+    std::unordered_map<int, std::unordered_set<int>> parentTable = {
+      {1, {2}},
+      {4, {5, 6, 7}},
+      {7, {8}}
     };
 
     std::unordered_map<int, spa::StatementType> statementTypeTable = {
