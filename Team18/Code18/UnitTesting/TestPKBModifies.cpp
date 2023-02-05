@@ -14,13 +14,16 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
   TEST_CLASS(TestPKBModifies) {
-    std::unordered_map<int, std::string> modifiesTable = {
-      {1, "a"},
-      {2, "b"},
-      {3, "c"},
-      {4, "d"},
-      {5, "e"},
-      {6, "a"},
+    std::unordered_map<int, std::unordered_set<std::string>> modifiesTable = {
+      {1, {"a"}},
+      {2, {"b"}},
+      {3, {"c"}},
+      {4, {"d"}},
+      {5, {"e"}},
+      {6, {"a"}},
+      {7, {"a", "b"}},
+      {8, {"a"}},
+      {9, {"b"}},
     };
 
     std::unordered_map<int, spa::StatementType> statementTypeTable = {
@@ -30,6 +33,9 @@ namespace UnitTesting {
       {4, spa::StatementType::CALL},
       {5, spa::StatementType::CALL},
       {6, spa::StatementType::ASSIGN},
+      {7, spa::StatementType::WHILE},
+      {8, spa::StatementType::ASSIGN},
+      {6, spa::StatementType::ASSIGN},
     };
     public:
       TEST_METHOD(TestAddModifies) {
@@ -37,8 +43,8 @@ namespace UnitTesting {
         relationshipStorage.setModifiesTable(modifiesTable);
         relationshipStorage.setStatementTypeTable(statementTypeTable);
 
-        Assert::IsTrue(relationshipStorage.addModifies("7", "b"));
-        Assert::IsFalse(relationshipStorage.addModifies("7", "b"));
+        Assert::IsTrue(relationshipStorage.addModifies("10", "z"));
+        Assert::IsFalse(relationshipStorage.addModifies("10", "z"));
       }
 
       TEST_METHOD(TestGetModifiesLineVarName) {
@@ -78,7 +84,7 @@ namespace UnitTesting {
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
         Assert::IsFalse(queryResult.getIsTrue());
       }
-
+      
       TEST_METHOD(TestGetModifiesLineVar) {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setModifiesTable(modifiesTable);
@@ -133,8 +139,14 @@ namespace UnitTesting {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setModifiesTable(modifiesTable);
         relationshipStorage.setStatementTypeTable(statementTypeTable);
-        std::vector<std::pair<int, std::string>> expected(modifiesTable.size());
-        std::copy(modifiesTable.begin(), modifiesTable.end(), expected.begin());
+        std::vector<std::pair<int, std::string>> expected;
+        for (auto& itr = modifiesTable.begin(); itr != modifiesTable.end(); itr++) {
+          int lineNumber = itr->first;
+          std::unordered_set<std::string> varNames = itr->second;
+          for (auto& itr2 = varNames.begin(); itr2 != varNames.end(); itr2++) {
+            expected.push_back({ lineNumber, *itr2 });
+          }
+        }
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
                                                                       spa::DesignEntityType::STMT));
@@ -156,8 +168,14 @@ namespace UnitTesting {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setModifiesTable(modifiesTable);
         relationshipStorage.setStatementTypeTable(statementTypeTable);
-        std::vector<std::pair<int, std::string>> expected(modifiesTable.size());
-        std::copy(modifiesTable.begin(), modifiesTable.end(), expected.begin());
+        std::vector<std::pair<int, std::string>> expected;
+        for (auto& itr = modifiesTable.begin(); itr != modifiesTable.end(); itr++) {
+          int lineNumber = itr->first;
+          std::unordered_set<std::string> varNames = itr->second;
+          for (auto& itr2 = varNames.begin(); itr2 != varNames.end(); itr2++) {
+            expected.push_back({ lineNumber, *itr2 });
+          }
+        }
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
                                                                       spa::DesignEntityType::STMT));
@@ -170,6 +188,22 @@ namespace UnitTesting {
         expected = { {4, "d"}, {5, "e"} };
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "c", spa::DesignEntityType::CALL));
         queryResult = relationshipStorage.getModifiesStmtVar(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
+      }
+
+      TEST_METHOD(TestGetModifiesNested) {
+        spa::RelationshipStorage relationshipStorage;
+        relationshipStorage.setModifiesTable(modifiesTable);
+        relationshipStorage.setStatementTypeTable(statementTypeTable);
+        std::vector<std::pair<int, std::string>> expected = { {7, "a"}, {7, "b"} };
+
+
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "w",
+          spa::DesignEntityType::WHILE));
+        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+        spa::QueryResult queryResult = relationshipStorage.getModifiesStmtVar(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
