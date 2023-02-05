@@ -4,6 +4,7 @@
 #include "Stream.h"
 #include "PKB.h"
 #include <string>
+#include <unordered_map>
 
 namespace spa {
 class SP {

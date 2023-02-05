@@ -1,6 +1,7 @@
 #include <string>
 #include <unordered_set>
 #include <iostream>
+#include <vector>
 #include "SpValidator.h"
 #include "Stream.h"
 #include "PKB.h"
@@ -31,7 +32,7 @@ bool spa::SpValidator::isValidTermToken(Token token) const {
     return termToken.count(token.getType());
 }
 
-//rel_factor: var_name | const_value | tokensToCheck
+// rel_factor: var_name | const_value | tokensToCheck
 bool spa::SpValidator::isValidRelFactorToken(Token token) const {
     return relFactorToken.count(token.getType());
 }
@@ -79,7 +80,7 @@ spa::Token spa::SpValidator::peekNextToken(int64_t offset) {
 }
 
 
-//procedure: 'procedure' proc_name '{' stmtLst '}'
+// procedure: 'procedure' proc_name '{' stmtLst '}'
 void spa::SpValidator::validateProcedure() {
     Token currToken = getToken();
     TokenType currTokenType = currToken.getType();
@@ -106,9 +107,9 @@ void spa::SpValidator::validateProcedure() {
     }
 }
 
-//call not working yet
-//stmtLst: stmt +
-//stmt : read | print | call | while | if | assign
+// call not working  
+// stmtLst: stmt +
+// stmt : read | print | call | while | if | assign
 void spa::SpValidator::validateStmtLst() {
     while (hasRemaining()) {
         Token token = peekNextToken();
@@ -118,8 +119,8 @@ void spa::SpValidator::validateStmtLst() {
         }
 
         if (!nameToken.count(tokenType)) {
-            std::cout << token.getValue() << std::endl;
-            std::cout << token.getType() << std::endl;
+            // std::cout << token.getValue() << std::endl;
+            // std::cout << token.getType() << std::endl;
             throw std::exception("Unknown stmt");
         }
 
@@ -150,9 +151,9 @@ void spa::SpValidator::validateStmt() {
     }
 }
 
-//assign: var_name '=' tokensToCheck ';'
+// assign: var_name '=' tokensToCheck ';'
 void spa::SpValidator::validateEqual() {
-    next(2); // Already checked NAME + EQUAL
+    next(2);  // Already checked NAME + EQUAL
     std::vector<Token> tokensToCheck = std::vector<Token>();
     while (hasRemaining()) {
         const bool isSemiColon = peekNextToken().getType() == TOKEN_SEMICOLON;
@@ -173,8 +174,8 @@ void spa::SpValidator::validateEqual() {
     }
 }
 
-//print: 'print' var_name';'
-//read: 'read' var_name';'
+// print: 'print' var_name';'
+// read: 'read' var_name';'
 void spa::SpValidator::validateReadPrint() {
     Token currToken = getToken();
     TokenType currTokenType = currToken.getType();
@@ -203,7 +204,7 @@ void spa::SpValidator::validateWhileIf() {
     }
 }
 
-//while: 'while' '(' cond_expr ')' '{' stmtLst '}'
+// while: 'while' '(' cond_expr ')' '{' stmtLst '}'
 void spa::SpValidator::validateWhile() {
     next(2); // Already checked WHILE + (
 
@@ -224,7 +225,7 @@ void spa::SpValidator::validateWhile() {
     }
 }
 
-//if: 'if' '(' cond_expr ')' 'then' '{' stmtLst '}' 'else' '{' stmtLst '}'
+// if: 'if' '(' cond_expr ')' 'then' '{' stmtLst '}' 'else' '{' stmtLst '}'
 void spa::SpValidator::validateIf() {
     next(2); // Already checked IF + (
 
@@ -304,9 +305,9 @@ void spa::SpValidator::validateBraceStmtLst() {
     }
 }
 
-//cond_expr: rel_expr | '!' '(' cond_expr ')' |
-//'(' cond_expr ')' '&&' '(' cond_expr ')' |
-//'(' cond_expr ')' '||' '(' cond_expr ')'
+// cond_expr: rel_expr | '!' '(' cond_expr ')' |
+// '(' cond_expr ')' '&&' '(' cond_expr ')' |
+// '(' cond_expr ')' '||' '(' cond_expr ')'
 void spa::SpValidator::validateCondExpr() {
     std::vector<Token> tokensToCheck = std::vector<Token>();
     int unclosedBracketCount = 0;
@@ -443,10 +444,10 @@ bool spa::SpValidator::isCondExpr(std::vector<Token> tokensToCheck) {
     // CASE 2 : | '(' cond_expr ')' '||&&' '(' cond_expr ')'
     if (!(tokensToCheck.size() >= 5 && isValidOpenBracket(tokensToCheck.front()) &&
         isValidCloseBracket(tokensToCheck.back()))) {
-        return isRelExpr(tokensToCheck); // else CASE 3 : rel_expr
+        return isRelExpr(tokensToCheck);  // else CASE 3 : rel_expr
     }
 
-    // Find outermost ||&& 
+    // Find outermost || && 
     int unclosedBracketCount = 0;
     auto tokenItr = tokensToCheck.begin();
     for (; tokenItr < tokensToCheck.end(); tokenItr++) {
