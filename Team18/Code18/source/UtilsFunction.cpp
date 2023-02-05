@@ -4,7 +4,7 @@
 #include <stack>
 #include <unordered_set>
 
-int UtilsFunction::getPrecedence(std::string op) {
+int spa::UtilsFunction::getPrecedence(std::string op) {
   if (op == "!") return 6;
   if (op == "*" || op == "/" || op == "%") return 5;
   if (op == "+" || op == "-") return 4;
@@ -15,24 +15,25 @@ int UtilsFunction::getPrecedence(std::string op) {
   return -1;
 }
 
-void UtilsFunction::ltrim(std::string& s) {
-  s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
-    return !std::isspace(ch);
-  }));
+void spa::UtilsFunction::ltrim(std::string& s) {
+  s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+    [](unsigned char ch) {
+      return !std::isspace(ch);
+    }));
 }
 
-void UtilsFunction::rtrim(std::string& s) {
+void spa::UtilsFunction::rtrim(std::string& s) {
   s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
     return !std::isspace(ch);
   }).base(), s.end());
 }
 
-void UtilsFunction::trimString(std::string& s) {
+void spa::UtilsFunction::trimString(std::string& s) {
   rtrim(s);
   ltrim(s);
 }
 
-std::string UtilsFunction::infixToPostfix(std::vector<spa::Token> tokens) {
+std::string spa::UtilsFunction::infixToPostfix(std::vector<spa::Token> tokens) {
   std::unordered_set<std::string> operators = {
     "!", "&&", "||", "*", "/", "%", "+", "-", "<", ">", "<=", ">=", "==", "!="
   };

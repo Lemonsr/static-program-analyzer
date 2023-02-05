@@ -79,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="TestPqlSemanticChecker.cpp">
       <Filter>Source Files</Filter>
+	  </ClCompile>
+    <ClCompile Include="TestDesignExtractor.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
