@@ -6,6 +6,7 @@
 #include "ParsedQuery.h"
 #include "QpsQueryEvaluator.h"
 #include "QpsTranslator.h"
+#include "PqlSemanticChecker.h"
 
 spa::QpsResult spa::QPS::evaluate(std::string query, PKBManager& pkbManager) {
   QpsPreprocessor preprocessor;
@@ -13,6 +14,13 @@ spa::QpsResult spa::QPS::evaluate(std::string query, PKBManager& pkbManager) {
   QpsResult result;
   if (!queryOpt) {
     result.setErrorMessage("Syntax error in query");
+    return result;
+  }
+
+  PqlSemanticChecker pqlSemanticChecker;
+  bool isValid = pqlSemanticChecker.isSemanticallyValid(queryOpt.value());
+  if (!isValid) {
+    result.setErrorMessage("Semantic error in query");
     return result;
   }
 
