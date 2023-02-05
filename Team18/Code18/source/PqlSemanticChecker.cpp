@@ -142,4 +142,3 @@ bool spa::PqlSemanticChecker::checkFollowsArguments(PqlArgument firstArg, PqlArg
 
   return true;
 }
-

@@ -11,7 +11,7 @@ class PqlSemanticChecker {
   bool checkUsesArguments(PqlArgument firstArg, PqlArgument secondArg);
   bool checkParentArguments(PqlArgument firstArg, PqlArgument secondArg);
   bool checkFollowsArguments(PqlArgument firstArg, PqlArgument secondArg);
-public:
+ public:
   bool isSemanticallyValid(ParsedQuery parsedQuery);
 };
-}
+}  // namespace spa

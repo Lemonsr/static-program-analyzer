@@ -74,8 +74,11 @@
     <ClCompile Include="TestQpsResultTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-	<ClCompile Include="TestValidator.cpp">
+    <ClCompile Include="TestValidator.cpp">
       <Filter>Source Files</Filter>
-	</ClCompile>
+    </ClCompile>
+    <ClCompile Include="TestSemanticChecker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
