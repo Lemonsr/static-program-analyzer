@@ -260,8 +260,7 @@
     <ClInclude Include="..\source\QpsValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    </ClInclude>
-    <ClInclude Include="..\source\FollowsEvaluator.h">
+      <ClInclude Include="..\source\FollowsEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\FollowsStarEvaluator.h">

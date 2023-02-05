@@ -9,10 +9,11 @@
 namespace spa {
 class SP {
  public:
-    explicit SP(std::string);
+    explicit SP(std::string, PKBManager& pkbManager);
     void processSource();
  private:
     std::string sourceCode;
+    PKBManager& pkbManager;
     Stream<Token> convertToken();
     const std::unordered_map<std::string, TokenType> stmtTokensMap{
     {"procedure", spa::TOKEN_PROCEDURE},
