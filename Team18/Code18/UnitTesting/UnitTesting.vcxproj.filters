@@ -74,10 +74,13 @@
     <ClCompile Include="TestQpsResultTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-	<ClCompile Include="TestValidator.cpp">
+    <ClCompile Include="TestValidator.cpp">
       <Filter>Source Files</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="TestDesignExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBFollows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

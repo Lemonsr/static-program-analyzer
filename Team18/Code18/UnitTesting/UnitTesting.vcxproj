@@ -172,6 +172,7 @@
     </ClCompile>
     <ClCompile Include="TestAST.cpp" />
     <ClCompile Include="TestDesignExtractor.cpp" />
+    <ClCompile Include="TestPKBFollows.cpp" />
     <ClCompile Include="TestPKBPatternStorage.cpp" />
     <ClCompile Include="TestPKBEntityStorage.cpp" />
     <ClCompile Include="TestPKBModifies.cpp" />
@@ -187,7 +188,7 @@
     <ClCompile Include="TestTokenizer.cpp" />
     <ClCompile Include="TestPKB.cpp" />
     <ClCompile Include="TestUtilsFunction.cpp" />
-	<ClCompile Include="TestValidator.cpp" />
+    <ClCompile Include="TestValidator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
