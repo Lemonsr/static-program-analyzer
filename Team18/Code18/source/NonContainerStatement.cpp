@@ -112,7 +112,7 @@ void spa::AssignStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addEntity(VARIABLE, assignVar);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::ASSIGN);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
-  pkbManager.addRelationship(USES, stringStmtLineNum, assignVar);
+  pkbManager.addRelationship(MODIFIES, stringStmtLineNum, assignVar);
   addParentModifies(pkbManager, assignVar, whileStmtParents, ifStmtParents);
   extractUsesFromPostfix(pkbManager, postfixExpr);
   pkbManager.addPattern(stringStmtLineNum, assignVar, postfixExpr);

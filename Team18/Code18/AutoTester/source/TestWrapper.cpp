@@ -1,7 +1,11 @@
 #include "TestWrapper.h"
+#include "SourceProcessor.h"
+#include "QPS.h"
+
 #include <iostream>
 #include <fstream>
-#include "SourceProcessor.h"
+#include <memory>
+
 
 // implementation code of WrapperFactory - do NOT modify the next 5 lines
 AbstractWrapper* WrapperFactory::wrapper = 0;
@@ -25,13 +29,13 @@ void TestWrapper::parse(std::string filename) {
     // call your parser to do the parsing
     // ...rest of your code...
     std::ifstream sourceFile(filename);
-    std::string source = std::string((std::istreambuf_iterator<char>(sourceFile)),
-        std::istreambuf_iterator<char>());;
-    spa::SourceProcessor sp = spa::SourceProcessor(source);
+    std::string source = std::string(std::istreambuf_iterator<char>(sourceFile),
+        std::istreambuf_iterator<char>());
+    spa::SourceProcessor sp = spa::SourceProcessor(source, *pkbManager);
     try {
         sp.processSource();
-    } catch (std::exception e) {
-        std::cerr << e.what() << std::endl << std::endl;
+    } catch (std::runtime_error e) {
+      std::cerr << e.what() << std::endl << std::endl;
     }
 }
 
@@ -42,4 +46,12 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results) {
 
     // store the answers to the query in the results list (it is initially empty)
     // each result must be a string.
+  spa::QPS qps;
+  spa::QpsResult qpsResult = qps.evaluate(query, *pkbManager);
+  if (qpsResult.getErrorMessage().has_value()) {
+    std::cout << qpsResult.getErrorMessage().value() << std::endl;
+    return;
+  }
+
+  results = qpsResult.getResults();
 }
