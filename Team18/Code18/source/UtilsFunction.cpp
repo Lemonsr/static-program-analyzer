@@ -16,9 +16,10 @@ int spa::UtilsFunction::getPrecedence(std::string op) {
 }
 
 void spa::UtilsFunction::ltrim(std::string& s) {
-  s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
-    return !std::isspace(ch);
-  }));
+  s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+    [](unsigned char ch) {
+      return !std::isspace(ch);
+    }));
 }
 
 void spa::UtilsFunction::rtrim(std::string& s) {

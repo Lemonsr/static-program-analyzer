@@ -1,11 +1,13 @@
 #include "DesignExtractor.h"
 
 #include <vector>
+#include <string>
 
 #include "ContainerStatement.h"
 #include "ProcedureStatement.h"
 
-spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement>& procedureList) :
+spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
+                                      std::vector<ProcedureStatement>& procedureList) :
   pkbManager(pkbManager), procedureList(procedureList) {}
 
 void spa::DesignExtractor::extractRelationship() {

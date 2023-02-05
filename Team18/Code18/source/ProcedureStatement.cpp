@@ -2,14 +2,13 @@
 
 // Constructor
 spa::ProcedureStatement::ProcedureStatement(spa::Token procedureVarToken,
-                                            std::vector<ProgramStatement *> statementLst) : procedureVarToken(procedureVarToken), statementLst(statementLst) {}
+                                            std::vector<ProgramStatement*> statementLst) :
+  procedureVarToken(procedureVarToken), statementLst(statementLst) {}
 
-spa::Token spa::ProcedureStatement::getProcedureVarToken()
-{
-    return procedureVarToken;
+spa::Token spa::ProcedureStatement::getProcedureVarToken() {
+  return procedureVarToken;
 }
 
-std::vector<spa::ProgramStatement *> spa::ProcedureStatement::getStatementLst()
-{
-    return statementLst;
+std::vector<spa::ProgramStatement*> spa::ProcedureStatement::getStatementLst() {
+  return statementLst;
 }
