@@ -1,7 +1,10 @@
 #include "TestWrapper.h"
+#include "SourceProcessor.h"
+#include "QPS.h"
+#include "SP.h"
+
 #include <iostream>
 #include <fstream>
-#include "SP.h"
 
 // implementation code of WrapperFactory - do NOT modify the next 5 lines
 AbstractWrapper* WrapperFactory::wrapper = 0;
@@ -28,7 +31,7 @@ void TestWrapper::parse(std::string filename) {
     const std::string source = std::string((std::istreambuf_iterator<char>(sourceFile)),
         std::istreambuf_iterator<char>());
 
-    spa::SP sp = spa::SP(source);
+    spa::SP sp = spa::SP((source, *pkbManager);
     try {
         sp.processSource();
     } catch (std::exception e) {
@@ -44,4 +47,12 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results) {
 
     // store the answers to the query in the results list (it is initially empty)
     // each result must be a string.
+  spa::QPS qps;
+  spa::QpsResult qpsResult = qps.evaluate(query, *pkbManager);
+  if (qpsResult.getErrorMessage().has_value()) {
+    std::cout << qpsResult.getErrorMessage().value() << std::endl;
+    return;
+  }
+
+  results = qpsResult.getResults();
 }

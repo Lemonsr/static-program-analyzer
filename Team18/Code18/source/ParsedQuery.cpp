@@ -1,7 +1,17 @@
 #include <iostream>
+#include <memory>
+#include <stdexcept>
 
 #include "ParsedQuery.h"
 #include "Token.h"
+#include "QpsEvaluator.h"
+#include "ModifiesEvaluator.h"
+#include "UsesEvaluator.h"
+#include "FollowsEvaluator.h"
+#include "FollowsStarEvaluator.h"
+#include "ParentEvaluator.h"
+#include "ParentStarEvaluator.h"
+#include "PatternEvaluator.h"
 
 bool spa::ParsedQuery::addDeclaration(std::string synonym,
   DesignEntityType designEntity) {
@@ -55,12 +65,53 @@ const std::optional<spa::PatternClause>& spa::ParsedQuery::getPatternClause() {
   return patternClause;
 }
 
+const spa::DesignEntityType & spa::ParsedQuery::getSelectSynonymType() {
+  return declarations[selectSynonym];
+}
+
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
   PqlArgument firstArg, PqlArgument secondArg)
   : designAbstraction(designAbstraction), firstArg(firstArg),
   secondArg(secondArg) {
 }
 
+std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
+  switch (designAbstraction) {
+  case MODIFIES: {
+    return std::make_unique<ModifiesEvaluator>(firstArg, secondArg);
+  }
+  case USES: {
+    return std::make_unique<UsesEvaluator>(firstArg, secondArg);
+  }
+  case FOLLOWS: {
+    return std::make_unique<FollowsEvaluator>(firstArg, secondArg);
+  }
+  case FOLLOWS_STAR: {
+    return std::make_unique<FollowsStarEvaluator>(firstArg, secondArg);
+  }
+  case PARENT: {
+    return std::make_unique<ParentEvaluator>(firstArg, secondArg);
+  }
+  case PARENT_STAR: {
+    return std::make_unique<ParentStarEvaluator>(firstArg, secondArg);
+  }
+  default: {
+    throw std::runtime_error("Unable to find evaluator");
+  }
+  }
+}
+
+const spa::RelationshipType& spa::SuchThatClause::getDesignAbstraction() {
+  return designAbstraction;
+}
+
+const spa::PqlArgument& spa::SuchThatClause::getFirstArg() {
+  return firstArg;
+}
+
+const spa::PqlArgument& spa::SuchThatClause::getSecondArg() {
+  return secondArg;
+}
 
 bool spa::operator==(const SuchThatClause& s1, const SuchThatClause& s2) {
   bool typeMatch = s1.designAbstraction == s2.designAbstraction;
@@ -76,6 +127,14 @@ bool spa::operator!=(const SuchThatClause& s1, const SuchThatClause& s2) {
 spa::PatternClause::PatternClause(PqlArgument synonym, PqlArgument firstArg,
   Pattern pattern) : synonym(synonym), firstArg(firstArg),
                      pattern(pattern) {
+}
+
+std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
+  return std::make_unique<spa::PatternEvaluator>(synonym, firstArg, pattern);
+}
+
+const spa::PqlArgument& spa::PatternClause::getFirstArg() {
+  return firstArg;
 }
 
 bool spa::operator==(const PatternClause& p1, const PatternClause& p2) {

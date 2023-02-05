@@ -1,24 +1,24 @@
 #pragma once
 
+#include "QueryResult.h"
+#include "PKBQueryArg.h"
+
 #include <unordered_map>
 #include <string>
 #include <optional>
 #include <unordered_set>
 
-#include "QueryResult.h"
-#include "PKBQueryArg.h"
-
 namespace spa {
 class RelationshipStorage {
  private:
   std::unordered_map<int, int> followsTable;
-  std::unordered_map<int, int> followsStarTable;
+  std::unordered_map<int, std::unordered_set<int>> followsStarTable;
   std::unordered_map<int, int> parentTable;
-  std::unordered_map<int, int> parentStarTable;
-  std::unordered_map<int, std::string> modifiesTable;
-  std::unordered_map<int, std::string> modifiesProcTable;
+  std::unordered_map<int, std::unordered_set<int>> parentStarTable;
+  std::unordered_map<int, std::unordered_set<std::string>> modifiesTable;
+  std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable;
   std::unordered_map<int, std::unordered_set<std::string>> usesTable;
-  std::unordered_map<int, std::string> usesProcTable;
+  std::unordered_map<std::string, std::unordered_set<std::string>> usesProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;
 
@@ -26,22 +26,6 @@ class RelationshipStorage {
   bool addStatementType(std::string lineNo, StatementType statementType);
   bool addStatementProc(std::string lineNo, std::string procName);
   QueryResult getStatements(std::optional<StatementType> statementType);
-
-  bool addModifies(std::string lineNo, std::string varName);
-  QueryResult getModifiesLineVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getModifiesLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getModifiesLineVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getModifiesStmtVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getModifiesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getModifiesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
-
-  bool addUses(std::string lineNo, std::string varName);
-  QueryResult getUsesLineVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getUsesLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getUsesLineVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getUsesStmtVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getUsesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getUsesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   bool addFollows(std::string firstLineNo, std::string secondLineNo);
   QueryResult getFollowsLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
@@ -87,7 +71,24 @@ class RelationshipStorage {
   QueryResult getParentStarUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getParentStarUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
-  void setModifiesTable(std::unordered_map<int, std::string> modifiesTable);
+  bool addUses(std::string lineNo, std::string varName);
+  QueryResult getUsesLineVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesLineVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesStmtVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getUsesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
+
+  bool addModifies(std::string lineNo, std::string varName);
+  QueryResult getModifiesLineVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesLineVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesStmtVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getModifiesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
+
+  void setFollowsTable(std::unordered_map<int, int> followsTable);
+  void setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable);
   void setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
 };
