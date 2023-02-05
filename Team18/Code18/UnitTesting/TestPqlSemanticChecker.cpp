@@ -473,7 +473,7 @@ namespace UnitTesting {
 
       spa::Pattern pattern(spa::PatternType::EXACT, std::vector<spa::Token>());
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", spa::DesignEntityType::ASSIGN);
-      
+
       spa::ParsedQuery parsedQuery;
       for (auto& firstArg : validFirstArgs) {
         spa::PatternClause patternClause(synonym, firstArg, pattern);
