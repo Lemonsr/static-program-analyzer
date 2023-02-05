@@ -334,7 +334,8 @@ spa::QueryResult spa::RelationshipStorage::getParentStarUnderscoreUnderscore(PKB
 
 bool spa::RelationshipStorage::addModifies(std::string lineNo, std::string varName) {
   int lineNumber = std::stoi(lineNo);
-  if (modifiesTable.find(lineNumber) != modifiesTable.end()) {
+  if (modifiesTable.find(lineNumber) != modifiesTable.end() &&
+    modifiesTable[lineNumber].find(varName) != modifiesTable[lineNumber].end()) {
     return false;
   }
 
