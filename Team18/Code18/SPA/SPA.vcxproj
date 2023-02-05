@@ -39,7 +39,6 @@
     <ClCompile Include="..\source\QpsResultTable.cpp" />
     <ClCompile Include="..\source\QpsValue.cpp" />
     <ClCompile Include="..\source\SP.cpp" />
-    <ClCompile Include="..\source\SourceProcessor.cpp" />
     <ClCompile Include="..\source\SpValidator.cpp" />
     <ClCompile Include="..\source\QueryResult.cpp" />
     <ClCompile Include="..\source\RelationshipStorage.cpp" />
@@ -92,7 +91,6 @@
     <ClInclude Include="..\source\SP.h" />
     <ClInclude Include="..\source\SpValidator.h" />
     <ClInclude Include="..\source\SimpleEvaluator.h" />
-    <ClInclude Include="..\source\SourceProcessor.h" />
     <ClInclude Include="..\source\Stream.h" />
     <ClInclude Include="..\source\SuchThatEvaluator.h" />
     <ClInclude Include="..\source\TNode.h" />

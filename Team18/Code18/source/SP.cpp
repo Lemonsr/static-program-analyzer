@@ -1,28 +1,33 @@
+#include "DesignExtractor.h"
 #include "SP.h"
-
-#include <iostream>
-
 #include "Stream.h"
+#include "SpValidator.h"
+#include "SpParser.h"
 #include "Tokenizer.h"
 #include "Token.h"
-#include "SpValidator.h"
+
+#include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
 
-spa::SP::SP(std::string source) : sourceCode(source) {}
+spa::SP::SP(std::string source, PKBManager& pkbManager) :
+    sourceCode(source), pkbManager(pkbManager) {}
 
 void spa::SP::processSource() {
     Stream<Token> convertedTokens = convertToken();
     SpValidator validator(convertedTokens);
-
     // std::cout << "TESTING VALIDATOR" << std::endl;
     // for (int64_t i = 0; i < convertedTokens.remaining(); i++) {
     //    std::cout << "Type: " << convertedTokens[i].getType() <<
     //        ", Value: " << convertedTokens[i].getValue() << std::endl;
     //}
-    // std::cout << "END OF TESTING" << std::endl;
-
+     std::cout << "END OF TESTING" << std::endl;
     validator.validateGrammar();
+    SpParser parser = SpParser(convertedTokens);
+    std::vector<ProcedureStatement> procedureList = parser.parse();
+    DesignExtractor designExtractor = DesignExtractor(pkbManager, procedureList);
+    designExtractor.extractRelationship();
 }
 
 spa::Stream<spa::Token> spa::SP::convertToken() {
