@@ -10,6 +10,7 @@ class Validator {
         spa::Stream<spa::Token> tokens;
         int offset = 0;
         explicit Validator(spa::Stream<spa::Token> tokens);
+        spa::Stream<spa::Token> spa::Validator::convertToken(spa::Stream<spa::Token>& tokens);
         bool validateProgram();
         bool setStream(spa::Stream<spa::Token> stream);
         bool parseStream(spa::Stream<spa::Token> stream);

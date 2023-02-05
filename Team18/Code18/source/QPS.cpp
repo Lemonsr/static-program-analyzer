@@ -1,16 +1,26 @@
 #include <string>
 #include <optional>
+#include <memory>
 
 #include "QPS.h"
 #include "ParsedQuery.h"
+#include "QpsQueryEvaluator.h"
+#include "QpsTranslator.h"
 
-std::string spa::QPS::evaluate(std::string query) {
+spa::QpsResult spa::QPS::evaluate(std::string query, PKBManager& pkbManager) {
   QpsPreprocessor preprocessor;
   std::optional<ParsedQuery> queryOpt = preprocessor.preprocess(query);
+  QpsResult result;
   if (!queryOpt) {
-    return "Syntax error in query";
+    result.setErrorMessage("Syntax error in query");
+    return result;
   }
-  QpsEvaluator evaluator(queryOpt.value());
-  QueryResult queryResult = evaluator.evaluate();
-  return "";
+
+  std::unique_ptr<QpsEvaluator> qpsEvaluator = std::make_unique<QpsQueryEvaluator>(queryOpt.value());
+  QpsResultTable resultTable = qpsEvaluator->evaluate(pkbManager);
+
+  QpsTranslator translator(resultTable);
+  std::list<std::string> translatedResult = translator.translate(queryOpt.value().getSelectSynonym());
+  result.setResults(translatedResult);
+  return result;
 }

@@ -177,6 +177,8 @@
     <ClCompile Include="TestPKBModifies.cpp" />
     <ClCompile Include="TestPkbQueryArg.cpp" />
     <ClCompile Include="TestPKBUses.cpp" />
+    <ClCompile Include="TestQpsResultTable.cpp" />
+    <ClCompile Include="TestQpsValue.cpp" />
     <ClCompile Include="TestPqlArgumentParser.cpp" />
     <ClCompile Include="TestPqlDeclarationParser.cpp" />
     <ClCompile Include="TestPqlPatternParser.cpp" />

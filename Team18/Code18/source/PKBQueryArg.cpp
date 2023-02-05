@@ -7,16 +7,6 @@
 
 #include "PqlArgument.h"
 
-std::unordered_map<spa::DesignEntityType, spa::PKBQueryArgType> queryArgMap{
-  { spa::STMT, spa::PKBQueryArgType::STATEMENT },
-  { spa::READ, spa::PKBQueryArgType::READ },
-  { spa::PRINT, spa::PKBQueryArgType::PRINT },
-  { spa::ASSIGN, spa::PKBQueryArgType::ASSIGN },
-  { spa::CALL, spa::PKBQueryArgType::CALL },
-  { spa::WHILE, spa::PKBQueryArgType::WHILE },
-  { spa::IF, spa::PKBQueryArgType::IF }
-};
-
 std::unordered_map<spa::DesignEntityType,
                    std::optional<spa::StatementType>> statementTypeMap {
   { spa::STMT, {} },
@@ -42,7 +32,7 @@ spa::PKBQueryArg::PKBQueryArg(PqlArgument& pqlArg) {
       type = PKBQueryArgType::CONSTANT;
       constantOpt = {};
     } else {
-      type = queryArgMap[designEntity];
+      type = PKBQueryArgType::STATEMENT;
       statementOpt = { statementTypeMap[designEntity] };
     }
     break;
