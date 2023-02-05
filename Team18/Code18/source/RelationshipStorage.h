@@ -12,13 +12,13 @@ namespace spa {
 class RelationshipStorage {
  private:
   std::unordered_map<int, int> followsTable;
-  std::unordered_map<int, int> followsStarTable;
+  std::unordered_map<int, std::unordered_set<int>> followsStarTable;
   std::unordered_map<int, int> parentTable;
-  std::unordered_map<int, int> parentStarTable;
-  std::unordered_map<int, std::string> modifiesTable;
-  std::unordered_map<int, std::string> modifiesProcTable;
+  std::unordered_map<int, std::unordered_set<int>> parentStarTable;
+  std::unordered_map<int, std::unordered_set<std::string>> modifiesTable;
+  std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable;
   std::unordered_map<int, std::unordered_set<std::string>> usesTable;
-  std::unordered_map<int, std::string> usesProcTable;
+  std::unordered_map<std::string, std::unordered_set<std::string>> usesProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;
 
@@ -87,7 +87,7 @@ class RelationshipStorage {
   QueryResult getModifiesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getModifiesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
-  void setModifiesTable(std::unordered_map<int, std::string> modifiesTable);
+  void setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable);
   void setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
 };

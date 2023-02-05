@@ -13,12 +13,12 @@ spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
 
   if (parsedQuery.getSuchThatClause()) {
     SuchThatClause suchThatClause = parsedQuery.getSuchThatClause().value();
-    resultTable.innerJoin(suchThatClause.getEvaluator()->evaluate(pkbManager));
+    resultTable = resultTable.innerJoin(suchThatClause.getEvaluator()->evaluate(pkbManager));
   }
 
   if (parsedQuery.getPatternClause()) {
     PatternClause patternClause = parsedQuery.getPatternClause().value();
-    resultTable.innerJoin(patternClause.getEvaluator()->evaluate(pkbManager));
+    resultTable = resultTable.innerJoin(patternClause.getEvaluator()->evaluate(pkbManager));
   }
 
   return resultTable;

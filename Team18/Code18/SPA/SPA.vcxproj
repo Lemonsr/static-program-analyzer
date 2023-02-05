@@ -19,7 +19,8 @@
     <ClCompile Include="..\source\ParentEvaluator.cpp" />
     <ClCompile Include="..\source\ParentStarEvaluator.cpp" />
     <ClCompile Include="..\source\ParsedQuery.cpp" />
-    <ClCompile Include="..\source\Parser.cpp" />
+    <ClCompile Include="..\source\QpsResult.cpp" />
+    <ClCompile Include="..\source\SpParser.cpp" />
     <ClCompile Include="..\source\PatternStorage.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\PKBQueryArg.cpp" />
@@ -44,11 +45,16 @@
     <ClCompile Include="..\source\QpsPreprocessor.cpp" />
     <ClCompile Include="..\source\Token.cpp" />
     <ClCompile Include="..\source\Tokenizer.cpp" />
+    <ClCompile Include="..\source\ProcedureStatement.cpp" />
+    <ClCompile Include="..\source\ProgramStatement.cpp" />
+    <ClCompile Include="..\source\ContainerStatement.cpp" />
+    <ClCompile Include="..\source\NonContainerStatement.cpp" />
     <ClCompile Include="..\source\UsesEvaluator.cpp" />
     <ClCompile Include="..\source\UtilsFunction.cpp" />
     <ClCompile Include="..\source\Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\DesignExtractor.h" />
     <ClInclude Include="..\source\Argument.h" />
     <ClInclude Include="..\source\DesignEntity.h" />
     <ClInclude Include="..\source\EntityStorage.h" />
@@ -59,7 +65,8 @@
     <ClInclude Include="..\source\ParentEvaluator.h" />
     <ClInclude Include="..\source\ParentStarEvaluator.h" />
     <ClInclude Include="..\source\ParsedQuery.h" />
-    <ClInclude Include="..\source\Parser.h" />
+    <ClInclude Include="..\source\QpsResult.h" />
+    <ClInclude Include="..\source\SpParser.h" />
     <ClInclude Include="..\source\PatternEvaluator.h" />
     <ClInclude Include="..\source\PatternStorage.h" />
     <ClInclude Include="..\source\PKB.h" />
@@ -84,12 +91,16 @@
     <ClInclude Include="..\source\Stream.h" />
     <ClInclude Include="..\source\SuchThatEvaluator.h" />
     <ClInclude Include="..\source\TNode.h" />
-    <ClCompile Include="..\source\PqlParser.h" />
-    <ClCompile Include="..\source\QPS.h" />
-    <ClCompile Include="..\source\QpsEvaluator.h" />
-    <ClCompile Include="..\source\QpsPreprocessor.h" />
+    <ClInclude Include="..\source\PqlParser.h" />
+    <ClInclude Include="..\source\QPS.h" />
+    <ClInclude Include="..\source\QpsEvaluator.h" />
+    <ClInclude Include="..\source\QpsPreprocessor.h" />
     <ClInclude Include="..\source\Token.h" />
     <ClInclude Include="..\source\Tokenizer.h" />
+    <ClInclude Include="..\source\ProcedureStatement.h" />
+    <ClInclude Include="..\source\ProgramStatement.h" />
+    <ClInclude Include="..\source\ContainerStatement.h" />
+    <ClInclude Include="..\source\NonContainerStatement.h" />
     <ClInclude Include="..\source\UsesEvaluator.h" />
     <ClInclude Include="..\source\UtilsFunction.h" />
     <ClInclude Include="..\source\Validator.h" />
