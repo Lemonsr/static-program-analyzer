@@ -79,7 +79,7 @@ spa::WhileConditionStatement::WhileConditionStatement(std::string parentProcedur
   this->whileStmtParents = whileStmtParents;
   this->ifStmtParents = ifStmtParents;
   this->statementLineNum = statementLineNum;
-};
+}
 
 void spa::ReadStatement::processStatement(spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);

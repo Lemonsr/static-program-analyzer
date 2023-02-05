@@ -23,4 +23,4 @@ class DesignExtractor {
   DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement>& procedureList);
   void extractRelationship();
 };
-} // namespace spa
+}  // namespace spa
