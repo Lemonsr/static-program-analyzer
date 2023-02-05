@@ -166,7 +166,7 @@ spa::ProgramStatement* spa::SpParser::processIfStatement(std::string parentProce
   ProgramStatement* thenStatementInnerBlock = new InnerBlockStatement(parentProcedureVal,
     thenStatementList);
   ifStatementBlock.push_back(thenStatementInnerBlock);
-  skipCurrToken();  // Skip over else token 
+  skipCurrToken();  // Skip over else token
   skipCurrToken();  // Skip over open brace token
   std::vector<ProgramStatement*> elseStatementList = processStmtList(parentProcedureVal,
     whileStmtParents,
