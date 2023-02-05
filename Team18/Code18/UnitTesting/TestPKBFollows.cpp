@@ -137,7 +137,7 @@ namespace UnitTesting {
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
         Assert::IsTrue(queryResult.getIsTrue());
 
-        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LINE_NO, "5", {}));
+        secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LINE_NO, "5", {}));
         queryResult = relationshipStorage.getFollowsUnderscoreLine(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
@@ -148,7 +148,7 @@ namespace UnitTesting {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setFollowsTable(followsTable);
         relationshipStorage.setStatementTypeTable(statementTypeTable);
-        std::vector<std::pair<int, int>> expected = { {2, 3}, {5, 6}, {4, 8}, {8, 9} };
+        std::vector<std::pair<int, int>> expected = { {2, 3}, {4, 8}, {5, 6}, {8, 9} };
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
                                                                       spa::DesignEntityType::STMT));
@@ -202,7 +202,7 @@ namespace UnitTesting {
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
 
-        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "c", spa::DesignEntityType::CALL));
+        secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "c", spa::DesignEntityType::CALL));
         queryResult = relationshipStorage.getFollowsUnderscoreStatement(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
