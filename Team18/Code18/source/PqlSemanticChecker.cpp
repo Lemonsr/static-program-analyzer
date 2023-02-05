@@ -110,7 +110,7 @@ bool spa::PqlSemanticChecker::checkUsesArguments(PqlArgument firstArg, PqlArgume
 bool spa::PqlSemanticChecker::checkParentArguments(PqlArgument firstArg, PqlArgument secondArg) {
   for (PqlArgument arg : { firstArg, secondArg }) {
     ArgumentType argType = arg.getType();
-    if (argType == WILDCARD || argType == VARIABLE_NAME) {
+    if (argType == VARIABLE_NAME) {
       return false;
     }
 
@@ -128,7 +128,7 @@ bool spa::PqlSemanticChecker::checkParentArguments(PqlArgument firstArg, PqlArgu
 bool spa::PqlSemanticChecker::checkFollowsArguments(PqlArgument firstArg, PqlArgument secondArg) {
   for (PqlArgument arg : { firstArg, secondArg }) {
     ArgumentType argType = arg.getType();
-    if (argType == WILDCARD || argType == VARIABLE_NAME) {
+    if (argType == VARIABLE_NAME) {
       return false;
     }
 
