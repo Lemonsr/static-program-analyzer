@@ -87,6 +87,7 @@ class RelationshipStorage {
   QueryResult getModifiesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getModifiesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
+  void setFollowsTable(std::unordered_map<int, int> followsTable);
   void setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable);
   void setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
