@@ -699,13 +699,17 @@ void spa::RelationshipStorage::setFollowsTable(std::unordered_map<int, int> foll
   this->followsTable = followsTable;
 }
 
-void spa::RelationshipStorage::setModifiesTable(std::unordered_map<int,
-                                                std::unordered_set<std::string>> modifiesTable) {
-  this->modifiesTable = modifiesTable;
+void spa::RelationshipStorage::setParentTable(std::unordered_map<int, int> parentTable) {
+  this->parentTable = parentTable;
 }
 
 void spa::RelationshipStorage::setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable) {
   this->usesTable = usesTable;
+}
+
+void spa::RelationshipStorage::setModifiesTable(std::unordered_map<int,
+  std::unordered_set<std::string>> modifiesTable) {
+  this->modifiesTable = modifiesTable;
 }
 
 void spa::RelationshipStorage::setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable) {

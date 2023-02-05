@@ -88,8 +88,9 @@ class RelationshipStorage {
   QueryResult getModifiesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   void setFollowsTable(std::unordered_map<int, int> followsTable);
-  void setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable);
+  void setParentTable(std::unordered_map<int, int> parentTable);
   void setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable);
+  void setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
 };
 }  // namespace spa
