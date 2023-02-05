@@ -2,14 +2,14 @@
 #include "SP.h"
 #include "Stream.h"
 #include "SpValidator.h"
+#include "SpParser.h"
 #include "Tokenizer.h"
 #include "Token.h"
 
 #include <iostream>
 #include <sstream>
 #include <string>
-
-#include "SpParser.h"
+#include <vector>
 
 spa::SP::SP(std::string source, PKBManager& pkbManager) :
     sourceCode(source), pkbManager(pkbManager) {}
@@ -17,11 +17,11 @@ spa::SP::SP(std::string source, PKBManager& pkbManager) :
 void spa::SP::processSource() {
     Stream<Token> convertedTokens = convertToken();
     SpValidator validator(convertedTokens);
-     std::cout << "TESTING VALIDATOR" << std::endl;
-     for (int64_t i = 0; i < convertedTokens.remaining(); i++) {
-        std::cout << "Type: " << convertedTokens[i].getType() <<
-            ", Value: " << convertedTokens[i].getValue() << std::endl;
-    }
+    // std::cout << "TESTING VALIDATOR" << std::endl;
+    // for (int64_t i = 0; i < convertedTokens.remaining(); i++) {
+    //    std::cout << "Type: " << convertedTokens[i].getType() <<
+    //        ", Value: " << convertedTokens[i].getValue() << std::endl;
+    //}
      std::cout << "END OF TESTING" << std::endl;
     validator.validateGrammar();
     SpParser parser = SpParser(convertedTokens);

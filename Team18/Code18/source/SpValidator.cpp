@@ -121,7 +121,7 @@ void spa::SpValidator::validateStmtLst() {
         if (!nameToken.count(tokenType)) {
             // std::cout << token.getValue() << std::endl;
             // std::cout << token.getType() << std::endl;
-            //throw std::exception("Unknown stmt");
+            throw std::exception("Unknown stmt");
         }
 
         validateStmt();
