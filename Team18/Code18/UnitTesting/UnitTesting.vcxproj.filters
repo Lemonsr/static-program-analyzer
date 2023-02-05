@@ -68,8 +68,8 @@
     <ClCompile Include="TestPKBUses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-	<ClCompile Include="TestValidator.cpp">
+    <ClCompile Include="TestSpValidator.cpp">
       <Filter>Source Files</Filter>
-	</ClCompile>
+    </ClCompile>
   </ItemGroup>
 </Project>

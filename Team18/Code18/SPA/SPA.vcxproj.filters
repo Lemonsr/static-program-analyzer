@@ -82,10 +82,10 @@
     <ClCompile Include="..\source\RelationshipStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\SourceProcessor.cpp">
+    <ClCompile Include="..\source\SP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\Validator.cpp">
+    <ClCompile Include="..\source\SpValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -165,10 +165,10 @@
     <ClInclude Include="..\source\UtilsFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-	 <ClInclude Include="..\source\SourceProcessor.h">
-	  <Filter>Header Files</Filter>
-	</ClInclude>
-    <ClInclude Include="..\source\Validator.h">
+    <ClInclude Include="..\source\SP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SpValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
