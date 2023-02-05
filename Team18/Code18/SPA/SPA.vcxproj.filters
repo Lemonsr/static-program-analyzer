@@ -85,16 +85,15 @@
     <ClCompile Include="..\source\RelationshipStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\SP.cpp">
+    </ClCompile>
     <ClCompile Include="..\source\QpsResultTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\QpsValue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\SourceProcessor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\Validator.cpp">
+    <ClCompile Include="..\source\SpValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\FollowsEvaluator.cpp">
@@ -234,6 +233,12 @@
     <ClInclude Include="..\source\UtilsFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\SP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SpValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\source\ProcedureStatement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -249,20 +254,12 @@
     <ClInclude Include="..\source\DesignExtractor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SourceProcessor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\QpsResultTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\QpsValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SourceProcessor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\Validator.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\FollowsEvaluator.h">
       <Filter>Header Files</Filter>
