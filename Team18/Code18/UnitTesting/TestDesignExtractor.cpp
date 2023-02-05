@@ -5,7 +5,7 @@
 
 #include "DesignExtractor.h"
 #include "PKB.h"
-#include "SPParser.h"
+#include "SpParser.h"
 #include "Token.h"
 #include "UtilsFunction.h"
 
@@ -93,7 +93,7 @@ namespace UnitTesting {
         tokenStream.pushBack(token);
       }
       PKBManager* pkbManager = new PKB();
-      auto parser = SPParser(tokenStream);
+      auto parser = SpParser(tokenStream);
       vector<ProcedureStatement> procedureList = parser.parse();
       Assert::IsTrue(procedureList.size() == 1);
 
@@ -138,7 +138,7 @@ namespace UnitTesting {
         tokenStream.pushBack(token);
       }
       PKBManager* pkbManager = new PKB();
-      auto parser = SPParser(tokenStream);
+      auto parser = SpParser(tokenStream);
       vector<ProcedureStatement> procedureList = parser.parse();
       Assert::IsTrue(procedureList.size() == 1);
 
@@ -182,7 +182,7 @@ namespace UnitTesting {
         tokenStream.pushBack(token);
       }
       PKBManager* pkbManager = new PKB();
-      auto parser = SPParser(tokenStream);
+      auto parser = SpParser(tokenStream);
       vector<ProcedureStatement> procedureList = parser.parse();
       Assert::IsTrue(procedureList.size() == 1);
 
@@ -237,7 +237,7 @@ namespace UnitTesting {
         tokenStream.pushBack(token);
       }
       PKBManager* pkbManager = new PKB();
-      auto parser = SPParser(tokenStream);
+      auto parser = SpParser(tokenStream);
       vector<ProcedureStatement> procedureList = parser.parse();
       Assert::IsTrue(procedureList.size() == 1);
 
@@ -284,7 +284,7 @@ namespace UnitTesting {
         tokenStream.pushBack(token);
       }
       PKBManager* pkbManager = new PKB();
-      auto parser = SPParser(tokenStream);
+      auto parser = SpParser(tokenStream);
       vector<ProcedureStatement> procedureList = parser.parse();
       Assert::IsTrue(procedureList.size() == 1);
 
@@ -334,7 +334,7 @@ namespace UnitTesting {
         tokenStream.pushBack(token);
       }
       PKBManager* pkbManager = new PKB();
-      auto parser = SPParser(tokenStream);
+      auto parser = SpParser(tokenStream);
       vector<ProcedureStatement> procedureList = parser.parse();
       Assert::IsTrue(procedureList.size() == 1);
 
@@ -378,7 +378,7 @@ namespace UnitTesting {
         tokenStream.pushBack(token);
       }
       PKBManager* pkbManager = new PKB();
-      auto parser = SPParser(tokenStream);
+      auto parser = SpParser(tokenStream);
       vector<ProcedureStatement> procedureList = parser.parse();
       Assert::IsTrue(procedureList.size() == 1);
 
@@ -420,7 +420,7 @@ namespace UnitTesting {
         tokenStream.pushBack(token);
       }
       PKBManager* pkbManager = new PKB();
-      auto parser = SPParser(tokenStream);
+      auto parser = SpParser(tokenStream);
       vector<ProcedureStatement> procedureList = parser.parse();
       Assert::IsTrue(procedureList.size() == 1);
 
@@ -479,7 +479,7 @@ namespace UnitTesting {
     //}
 
     //PKBManager* pkbManager = new PKB();
-    //auto parser = SPParser(tokenStream);
+    //auto parser = SpParser(tokenStream);
     //vector<ProcedureStatement> procedureList = parser.parse();
     //Assert::IsTrue(procedureList.size() == 1);
     //optional<DesignEntityType> designEntity;
