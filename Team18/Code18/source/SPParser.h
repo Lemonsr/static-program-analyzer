@@ -9,7 +9,7 @@
 #include "Token.h"
 
 namespace spa {
-class SPParser {
+class SpParser {
  private:
   spa::Stream<spa::Token>& tokenStream;
   int statementLineNum = 1;
@@ -58,7 +58,7 @@ class SPParser {
   void increaseStatementLineNum();
 
  public:
-  explicit SPParser(spa::Stream<spa::Token>& tokenStream);
+  explicit SpParser(spa::Stream<spa::Token>& tokenStream);
 
   std::vector<ProcedureStatement> parse();
 };
