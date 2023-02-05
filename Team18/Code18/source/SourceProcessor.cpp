@@ -12,7 +12,7 @@
 #include "SpParser.h"
 #include "DesignExtractor.h"
 
-spa::SourceProcessor::SourceProcessor(std::string source, PKBManager& pkbManager) : 
+spa::SourceProcessor::SourceProcessor(std::string source, PKBManager& pkbManager) :
                                       sourceCode(source), pkbManager(pkbManager) {}
 
 void spa::SourceProcessor::processSource() {
