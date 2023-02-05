@@ -4,11 +4,16 @@
 #include <string>
 #include <iostream>
 #include <list>
+#include <memory>
 
 // include your other headers here
 #include "AbstractWrapper.h"
+#include "PKBManager.h"
+#include "PKB.h"
 
 class TestWrapper : public AbstractWrapper {
+ private:
+   std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
  public:
   // default constructor
   TestWrapper();
