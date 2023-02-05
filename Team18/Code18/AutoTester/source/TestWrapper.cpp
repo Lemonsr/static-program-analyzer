@@ -1,5 +1,5 @@
 #include "TestWrapper.h"
-#include "SourceProcessor.h"
+#include "SP.h"
 #include "QPS.h"
 #include "SP.h"
 
@@ -30,8 +30,7 @@ void TestWrapper::parse(std::string filename) {
     std::ifstream sourceFile(filename);
     const std::string source = std::string((std::istreambuf_iterator<char>(sourceFile)),
         std::istreambuf_iterator<char>());
-
-    spa::SP sp = spa::SP((source, *pkbManager);
+    spa::SP sp = spa::SP(source, *pkbManager);
     try {
         sp.processSource();
     } catch (std::exception e) {
