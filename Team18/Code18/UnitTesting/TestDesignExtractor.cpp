@@ -404,65 +404,54 @@ namespace UnitTesting {
       Assert::IsTrue(UtilsFunction::isOptionalVectorEqual(expectedWhileStmt, testIfStmt));
     }
 
-    //  TEST_METHOD(TestExtractReadStatementWithNoNesting) {
-    //  ///*
-    //  // *  procedure a {
-    //  // * 1. b = 1;
-    //  // * 2. while (b >= 1) {
-    //  // *    }
-    //  // * 3. print c;
-    //  // * 4. read d;
-    //  // * 5. call a;
-    //  // * 5. if (b >= 1) then {
-    //  // *    } else {}
-    //  // *  }
-    //  // */
-    //    tokenList = {
-    //      tokenProcedure, tokenA, tokenOpenBrace,
-    //      tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-    //      tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-    //      tokenCloseBracket, tokenOpenBrace, tokenCloseBrace,
-    //      tokenPrint, tokenC, tokenSemiColon,
-    //      tokenRead, tokenD, tokenSemiColon,
-    //      tokenCall, tokenA, tokenSemiColon,
-    //      tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-    //      tokenCloseBracket, tokenThen, tokenOpenBrace, tokenCloseBrace,
-    //      tokenElse, tokenOpenBrace, tokenCloseBrace,
-    //      tokenCloseBrace
-    //    };
-    //    Stream<Token> tokenStream = Stream<Token>();
-    //    for (auto token: tokenList) {
-    //      tokenStream.pushBack(token);
-    //    }
-    //    PKBManager* pkbManager = new PKB();
-    //    auto parser = SPParser(tokenStream);
-    //    vector<ProcedureStatement> procedureList = parser.parse();
-    //    Assert::IsTrue(procedureList.size() == 1);
+    TEST_METHOD(TestExtractUsesSingleAssignment) {
+      ///*
+      // *  procedure a {
+      // * 1. c = d - b;
+      // *  }
+      // */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenC, tokenAssign, tokenD, tokenMinusOp, tokenB, tokenSemiColon,
+        tokenCloseBrace
+      };
+      Stream<Token> tokenStream = Stream<Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      PKBManager* pkbManager = new PKB();
+      auto parser = SPParser(tokenStream);
+      vector<ProcedureStatement> procedureList = parser.parse();
+      Assert::IsTrue(procedureList.size() == 1);
 
-    //    DesignExtractor designExtractor = DesignExtractor(*pkbManager, procedureList);
-    //    designExtractor.extractRelationship();
-    //    QueryResult procedureRes = pkbManager->getEntity(PROCEDURE);
-    //    QueryResult variablesRes = pkbManager->getEntity(VARIABLE);
-    //    QueryResult constantRes = pkbManager->getEntity(CONSTANT);
-    //    QueryResult readStatement = pkbManager->getEntity(READ);
-    //    QueryResult callStatement = pkbManager->getEntity(CALL);
-    //    QueryResult printStatement = pkbManager->getEntity(PRINT);
-    //    QueryResult whileStatement = pkbManager->getEntity(WHILE);
-    //    QueryResult ifStatement = pkbManager->getEntity(IF);
-    //    optional<vector<string>> testProcedure = procedureRes.getNames();
-    //    optional<vector<string>> testVariable = variablesRes.getNames();
-    //    optional<vector<string>> testConstant = constantRes.getNames();
-    //    optional<vector<string>> test = constantRes.getNames();
-    //    optional<vector<string>> testConstant = constantRes.getNames();
-    //    optional<vector<string>> expectedProcedure = {{varA}};
-    //    optional<vector<string>> expectedVariable = {{varB, varC, varD}};
-    //    optional<vector<string>> expectedConstant = {{constant}};
-    //    Assert::IsTrue(isOptionalVectorEqual(expectedProcedure, testProcedure));
-    //    Assert::IsTrue(isOptionalVectorEqual(expectedVariable, testVariable));
-    //    Assert::IsTrue(isOptionalVectorEqual(expectedConstant, testConstant));
+      DesignExtractor designExtractor = DesignExtractor(*pkbManager, procedureList);
+      designExtractor.extractRelationship();
 
-    //    
-    //  }
+      PqlArgument lineNum(ArgumentType::LINE_NO, "1", {});
+      PqlArgument variable(ArgumentType::VARIABLE_NAME, varD, {});
+      QueryResult usesRes = pkbManager->getRelationship(USES, PKBQueryArg(lineNum), 
+      PKBQueryArg(variable));
+
+      Assert::IsTrue(usesRes.getQueryResultType() == BOOL);
+
+      bool testResult = usesRes.getIsTrue();
+      bool expectedResult = true;
+      Assert::IsTrue(expectedResult == testResult);
+
+      //optional<vector<string>> testProcedure = procedureRes.getNames();
+      //optional<vector<string>> testVariable = variablesRes.getNames();
+      //optional<vector<string>> testConstant = constantRes.getNames();
+      //optional<vector<int>> testIfStmt = whileStmtRes.getLineNumbers();
+
+      //optional<vector<string>> expectedProcedure = {{varA}};
+      //optional<vector<string>> expectedVariable = {{varB}};
+      //optional<vector<string>> expectedConstant = {{constant}};
+      //optional<vector<int>> expectedWhileStmt = {{1}};
+
+      //Assert::IsTrue(UtilsFunction::isOptionalVectorEqual(expectedProcedure, testProcedure));
+      //Assert::IsTrue(UtilsFunction::isOptionalVectorEqual(expectedVariable, testVariable));
+      //Assert::IsTrue(UtilsFunction::isOptionalVectorEqual(expectedWhileStmt, testIfStmt));
+    }
 
     //TEST_METHOD(TestExtractFollowsWithNoNesting) {
     ///*
