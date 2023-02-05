@@ -4,6 +4,7 @@
 
 #include "Token.h"
 
+namespace spa {
 class UtilsFunction {
  private:
   static int getPrecedence(std::string op);
@@ -14,3 +15,4 @@ class UtilsFunction {
   static void trimString(std::string& s);
   static std::string infixToPostfix(std::vector<spa::Token> tokens);
 };
+}  // namespace spa
