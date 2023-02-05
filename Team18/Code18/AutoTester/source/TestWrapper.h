@@ -13,7 +13,7 @@
 
 class TestWrapper : public AbstractWrapper {
  private:
-   std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+  std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
  public:
   // default constructor
   TestWrapper();
