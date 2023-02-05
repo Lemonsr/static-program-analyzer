@@ -19,7 +19,7 @@
     <ClCompile Include="..\source\ParentEvaluator.cpp" />
     <ClCompile Include="..\source\ParentStarEvaluator.cpp" />
     <ClCompile Include="..\source\ParsedQuery.cpp" />
-    <ClCompile Include="..\source\SpParser.cpp" />
+    <ClCompile Include="..\source\dummy.cpp" />
     <ClCompile Include="..\source\PatternStorage.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\PKBQueryArg.cpp" />
@@ -62,7 +62,7 @@
     <ClInclude Include="..\source\ParentEvaluator.h" />
     <ClInclude Include="..\source\ParentStarEvaluator.h" />
     <ClInclude Include="..\source\ParsedQuery.h" />
-    <ClInclude Include="..\source\SpParser.h" />
+    <ClInclude Include="..\source\dummy.h" />
     <ClInclude Include="..\source\PatternEvaluator.h" />
     <ClInclude Include="..\source\PatternStorage.h" />
     <ClInclude Include="..\source\PKB.h" />

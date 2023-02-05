@@ -7,7 +7,7 @@
     <ClCompile Include="..\source\ParsedQuery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\SpParser.cpp">
+    <ClCompile Include="..\source\dummy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\PKB.cpp">
@@ -156,7 +156,7 @@
     <ClInclude Include="..\source\PKBTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SpParser.h">
+    <ClInclude Include="..\source\dummy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\QPS.h">
