@@ -84,7 +84,7 @@ namespace UnitTesting {
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
         Assert::IsFalse(queryResult.getIsTrue());
       }
-      
+
       TEST_METHOD(TestGetModifiesLineVar) {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setModifiesTable(modifiesTable);

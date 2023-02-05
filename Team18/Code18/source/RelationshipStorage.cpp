@@ -467,7 +467,8 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVar(PKBQueryArg firstArg,
   return queryResult;
 }
 
-void spa::RelationshipStorage::setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable) {
+void spa::RelationshipStorage::setModifiesTable(std::unordered_map<int,
+                                                std::unordered_set<std::string>> modifiesTable) {
   this->modifiesTable = modifiesTable;
 }
 
