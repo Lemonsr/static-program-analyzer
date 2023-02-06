@@ -99,6 +99,12 @@ namespace UnitTesting {
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
+
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LINE_NO, "9", {}));
+        queryResult = relationshipStorage.getParentStarLineStatement(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(queryResult.getLineNumberLineNumberPairs().empty());
       }
 
       TEST_METHOD(TestGetParentStarStatementLine) {
@@ -121,6 +127,12 @@ namespace UnitTesting {
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
+
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "c", spa::DesignEntityType::CALL));
+        queryResult = relationshipStorage.getParentStarStatementLine(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(queryResult.getLineNumberLineNumberPairs().empty());
       }
 
       TEST_METHOD(TestGetParentStarLineUnderscore) {
