@@ -79,11 +79,14 @@
     </ClCompile>
     <ClCompile Include="TestPqlSemanticChecker.cpp">
       <Filter>Source Files</Filter>
-	  </ClCompile>
+    </ClCompile>
     <ClCompile Include="TestDesignExtractor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPKBFollows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBParent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
