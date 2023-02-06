@@ -564,11 +564,12 @@ spa::QueryResult spa::RelationshipStorage::getParentStarUnderscoreStatement(PKBQ
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
-  for (auto& itr : parentStarTable) {
-    for (auto& lineNumber : parentStarTable[itr.first]) {
-      if (secondStmt.statementType && statementTypeTable[lineNumber] == secondStmt.statementType) {
-        lineNumberLineNumberPairs.push_back({ itr.first, lineNumber });
+  for (auto itr = parentStarTable.begin(); itr != parentStarTable.end(); itr++) {
+    for (auto& lineNumber : parentStarTable[itr->first]) {
+      if (secondStmt.statementType && statementTypeTable[lineNumber] != secondStmt.statementType) {
+        continue;
       }
+      lineNumberLineNumberPairs.push_back({ itr->first, lineNumber });
     }
   }
 
@@ -844,6 +845,10 @@ void spa::RelationshipStorage::setFollowsTable(std::unordered_map<int, int> foll
 
 void spa::RelationshipStorage::setParentTable(std::unordered_map<int, std::unordered_set<int>> parentTable) {
   this->parentTable = parentTable;
+}
+
+void spa::RelationshipStorage::setParentStarTable(std::unordered_map<int, std::unordered_set<int>> parentStarTable) {
+  this->parentStarTable = parentStarTable;
 }
 
 void spa::RelationshipStorage::setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable) {
