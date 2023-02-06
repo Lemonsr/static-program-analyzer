@@ -16,7 +16,7 @@ spa::QpsResultTable spa::FollowsEvaluator::evaluate(PKBManager& pkbManager) {
       table.addRow({ QpsValue(0), QpsValue(0) });
     }
   } else {
-    for (auto& pair : result.getLineNumberVariablePairs()) {
+    for (auto& pair : result.getLineNumberLineNumberPairs()) {
       table.addRow({ QpsValue(pair.first), QpsValue(pair.second) });
     }
   }
