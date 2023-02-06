@@ -102,7 +102,7 @@ void spa::SpValidator::validateProcedure() {
 
     validateStmtLst();
 
-    if (!hasRemaining() || !isValidCloseBrace(currToken)) {
+    if (!hasRemaining() || !isValidCloseBrace(getToken())) {
         throw std::exception("Procedure needs to end with : '}'");
     }
 }
@@ -467,7 +467,7 @@ bool spa::SpValidator::isCondExpr(std::vector<Token> tokensToCheck) {
         return isRelExpr(tokensToCheck);
     }
 
-    if (!(tokenItr + 1)->getType() != TOKEN_OPEN_BRACKET) {
+    if ((tokenItr + 1)->getType() != TOKEN_OPEN_BRACKET) {
         throw std::exception("&&|| Missing an opening '('");
     }
 
