@@ -65,22 +65,5 @@ class UtilsFunction {
     }
     return false;
   }
-
-  // static void printOptionalVector(const std::optional<std::vector<int>>& optVec) {
-  //   if (optVec.has_value()) {
-  //     const std::vector<int>& vec = optVec.value();
-  //     std::cout << "Vector: [";
-  //     for (int i = 0; i < vec.size(); i++) {
-  //       std::cout << vec[i];
-  //       if (i < vec.size() - 1) {
-  //         std::cout << ", ";
-  //       }
-  //     }
-  //     std::cout << "]" << std::endl;
-  //   } else {
-  //     std::cout << "Vector is empty." << std::endl;
-  //   }
-  //   std::cout << std::flush;
-  // }
 };
 }  // namespace spa
