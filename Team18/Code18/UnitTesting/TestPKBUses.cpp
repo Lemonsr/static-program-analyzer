@@ -48,6 +48,7 @@ namespace UnitTesting {
 
         Assert::IsTrue(relationshipStorage.addUses("8", "u"));
         Assert::IsFalse(relationshipStorage.addUses("8", "u"));
+        Assert::IsTrue(relationshipStorage.addUses("8", "v"));
       }
 
       TEST_METHOD(TestGetUsesLineVarName) {

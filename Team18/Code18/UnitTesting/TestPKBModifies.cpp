@@ -45,6 +45,7 @@ namespace UnitTesting {
 
         Assert::IsTrue(relationshipStorage.addModifies("10", "z"));
         Assert::IsFalse(relationshipStorage.addModifies("10", "z"));
+        Assert::IsTrue(relationshipStorage.addModifies("10", "y"));
       }
 
       TEST_METHOD(TestGetModifiesLineVarName) {
