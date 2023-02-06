@@ -39,6 +39,7 @@ namespace UnitTesting {
 
         Assert::IsTrue(relationshipStorage.addParent("10", "11"));
         Assert::IsFalse(relationshipStorage.addParent("10", "11"));
+        Assert::IsTrue(relationshipStorage.addParent("10", "12"));
       }
 
       TEST_METHOD(TestGetParentLineLine) {
@@ -161,6 +162,12 @@ namespace UnitTesting {
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
+
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "a", spa::DesignEntityType::ASSIGN));
+        queryResult = relationshipStorage.getParentStatementStatement(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(queryResult.getLineNumberLineNumberPairs().empty());
       }
 
       TEST_METHOD(TestGetParentStatementUnderscore) {

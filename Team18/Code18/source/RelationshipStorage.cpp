@@ -251,7 +251,8 @@ spa::QueryResult spa::RelationshipStorage::getFollowsStarUnderscoreUnderscore(PK
 bool spa::RelationshipStorage::addParent(std::string firstLineNo, std::string secondLineNo) {
   int firstLineNumber = std::stoi(firstLineNo);
   int secondLineNumber = std::stoi(secondLineNo);
-  if (parentTable.find(firstLineNumber) != parentTable.end()) {
+  if (parentTable.find(firstLineNumber) != parentTable.end() &&
+      parentTable[firstLineNumber].find(secondLineNumber) != parentTable[firstLineNumber].end()) {
     return false;
   }
 
@@ -282,13 +283,15 @@ spa::QueryResult spa::RelationshipStorage::getParentLineStatement(PKBQueryArg fi
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
-  if (parentTable.find(firstLineNumber) != parentTable.end()) {
-    for (const auto& secondLineNumber : parentTable[firstLineNumber]) {
-      if (stmt.statementType && statementTypeTable[secondLineNumber] != stmt.statementType) {
-        continue;
-      }
-    lineNumberLineNumberPairs.push_back({ firstLineNumber, secondLineNumber });
+  queryResult.setLineNumberLineNumberPairs(lineNumberLineNumberPairs);
+  if (parentTable.find(firstLineNumber) == parentTable.end()) {
+    return queryResult;
+  }
+  for (const auto& secondLineNumber : parentTable[firstLineNumber]) {
+    if (stmt.statementType && statementTypeTable[secondLineNumber] != stmt.statementType) {
+      continue;
     }
+  lineNumberLineNumberPairs.push_back({ firstLineNumber, secondLineNumber });
   }
 
   queryResult.setLineNumberLineNumberPairs(lineNumberLineNumberPairs);
@@ -303,8 +306,8 @@ spa::QueryResult spa::RelationshipStorage::getParentStatementLine(PKBQueryArg fi
 
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
   for (auto itr = parentTable.begin(); itr != parentTable.end(); itr++) {
-    if (itr->second.find(lineNumber) == itr->second.end() ||
-        (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType)) {
+    if ((stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) ||
+        itr->second.find(lineNumber) == itr->second.end()) {
       continue;
     }
     lineNumberLineNumberPairs.push_back({ itr->first, lineNumber });
@@ -352,12 +355,14 @@ spa::QueryResult spa::RelationshipStorage::getParentStatementStatement(PKBQueryA
 
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
   for (auto itr = parentTable.begin(); itr != parentTable.end(); itr++) {
-    if (firstStmt.statementType && statementTypeTable[itr->first] == firstStmt.statementType) {
-      for (auto itr2 = parentTable[itr->first].begin(); itr2 != parentTable[itr->first].end(); itr2++) {
-        if (secondStmt.statementType && statementTypeTable[*itr2] == secondStmt.statementType) {
-          lineNumberLineNumberPairs.push_back({ itr->first, *itr2 });
-        }
+    if (firstStmt.statementType && statementTypeTable[itr->first] != firstStmt.statementType) {
+      continue;
+    }
+    for (auto itr2 = parentTable[itr->first].begin(); itr2 != parentTable[itr->first].end(); itr2++) {
+      if (secondStmt.statementType && statementTypeTable[*itr2] != secondStmt.statementType) {
+        continue;
       }
+      lineNumberLineNumberPairs.push_back({ itr->first, *itr2 });
     }
   }
 
@@ -372,10 +377,11 @@ spa::QueryResult spa::RelationshipStorage::getParentStatementUnderscore(PKBQuery
 
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
   for (auto itr = parentTable.begin(); itr != parentTable.end(); itr++) {
-    if (firstStmt.statementType && statementTypeTable[itr->first] == firstStmt.statementType) {
-      for (auto itr2 = parentTable[itr->first].begin(); itr2 != parentTable[itr->first].end(); itr2++) {
-        lineNumberLineNumberPairs.push_back({ itr->first, *itr2 });
-      }
+    if (firstStmt.statementType && statementTypeTable[itr->first] != firstStmt.statementType) {
+      continue;
+    }
+    for (auto itr2 = parentTable[itr->first].begin(); itr2 != parentTable[itr->first].end(); itr2++) {
+      lineNumberLineNumberPairs.push_back({ itr->first, *itr2 });
     }
   }
 
@@ -456,7 +462,7 @@ spa::QueryResult spa::RelationshipStorage::getParentStarUnderscoreUnderscore(PKB
 bool spa::RelationshipStorage::addModifies(std::string lineNo, std::string varName) {
   int lineNumber = std::stoi(lineNo);
   if (modifiesTable.find(lineNumber) != modifiesTable.end() &&
-    modifiesTable[lineNumber].find(varName) != modifiesTable[lineNumber].end()) {
+      modifiesTable[lineNumber].find(varName) != modifiesTable[lineNumber].end()) {
     return false;
   }
 
