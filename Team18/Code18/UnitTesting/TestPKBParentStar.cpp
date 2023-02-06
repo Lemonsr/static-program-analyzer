@@ -114,7 +114,7 @@ namespace UnitTesting {
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
-        
+
         expected = { {5, 9}, {8, 9} };
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s", spa::DesignEntityType::STMT));
         queryResult = relationshipStorage.getParentStarStatementLine(firstArg, secondArg);
@@ -278,7 +278,7 @@ namespace UnitTesting {
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
 
-        expected = { {2, 3}, {5, 6}, {5, 7}, {5, 8}, {5,9} };
+        expected = { {2, 3}, {5, 6}, {5, 7}, {5, 8}, {5, 9} };
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "w", spa::DesignEntityType::WHILE));
         queryResult = relationshipStorage.getParentStarStatementStatement(firstArg, secondArg);
 

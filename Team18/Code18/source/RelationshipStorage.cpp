@@ -516,7 +516,8 @@ spa::QueryResult spa::RelationshipStorage::getParentStarUnderscoreLine(PKBQueryA
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getParentStarStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getParentStarStatementStatement(PKBQueryArg firstArg,
+                                                                           PKBQueryArg secondArg) {
   Statement firstStmt = firstArg.getStatement();
   Statement secondStmt = secondArg.getStatement();
   QueryResult queryResult;
@@ -539,7 +540,8 @@ spa::QueryResult spa::RelationshipStorage::getParentStarStatementStatement(PKBQu
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getParentStarStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getParentStarStatementUnderscore(PKBQueryArg firstArg,
+                                                                            PKBQueryArg secondArg) {
   Statement firstStmt = firstArg.getStatement();
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
@@ -558,7 +560,8 @@ spa::QueryResult spa::RelationshipStorage::getParentStarStatementUnderscore(PKBQ
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getParentStarUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getParentStarUnderscoreStatement(PKBQueryArg firstArg,
+                                                                            PKBQueryArg secondArg) {
   Statement secondStmt = secondArg.getStatement();
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
