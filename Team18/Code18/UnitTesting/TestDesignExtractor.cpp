@@ -117,12 +117,12 @@ public:
       testConstant));
   }
 
-  TEST_METHOD(TestExtractEntitiesWithNesting) {
+  TEST_METHOD(TestExtractEntitiesWithWhileNesting) {
     ///*
     // *  procedure a {
     // * 1. while (d >= 1) {
-    // * 2. b = 1;
-    // * 3. c = b;
+    // * 2.   b = 1;
+    // * 3.   c = b;
     // *    }
     // *  }
     // */
@@ -132,6 +132,58 @@ public:
       tokenOpenBrace, tokenB, tokenAssign, tokenConstant, tokenSemiColon,
       tokenC, tokenAssign, tokenB, tokenSemiColon,
       tokenCloseBrace, tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto& token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    spa::QueryResult procedureRes = pkbManager->getEntity(spa::PROCEDURE);
+    spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
+    spa::QueryResult constantRes = pkbManager->getEntity(spa::CONSTANT);
+
+    std::optional<std::vector<std::string>> testProcedure = procedureRes.getNames();
+    std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
+    std::optional<std::vector<std::string>> testConstant = constantRes.getNames();
+
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
+    std::optional<std::vector<std::string>> expectedConstant = {{constant}};
+
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedProcedure,
+      testProcedure));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedVariable,
+      testVariable));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedConstant,
+      testConstant));
+  }
+
+  TEST_METHOD(TestExtractEntitiesWithIfNesting) {
+    ///*
+    // *  procedure a {
+    // * 1. if (b >= 1) then {
+    // * 2.   b = 1;
+    // * 3.   c = b;
+    // *    }
+    // *    else {
+    // * 4.   d = b;
+    // *    }
+    // *  }
+    // */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+      tokenThen, tokenOpenBrace, tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+      tokenC, tokenAssign, tokenB, tokenSemiColon,
+      tokenCloseBrace, tokenElse, tokenOpenBrace, tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
+      tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto& token : tokenList) {
@@ -221,7 +273,69 @@ public:
       testCallStmt));
   }
 
-  TEST_METHOD(TestExtractOneVarStatementWithNesting) {
+  TEST_METHOD(TestExtractMultipleOneVarStatementWithNoNesting) {
+    ///*
+    // *  procedure a {
+    // * 1. read b;
+    // * 2. print c;
+    // * 3. call d;
+    // * 4. read d;
+    // * 5. print b;
+    // * 6. call c;
+    // *  }
+    // */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenRead, tokenB, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCall, tokenD, tokenSemiColon,
+      tokenRead, tokenD, tokenSemiColon,
+      tokenPrint, tokenB, tokenSemiColon,
+      tokenCall, tokenC, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto& token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+    spa::QueryResult procedureRes = pkbManager->getEntity(spa::PROCEDURE);
+    spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
+    spa::QueryResult readStmtRes = pkbManager->getEntity(spa::READ);
+    spa::QueryResult printStmtRes = pkbManager->getEntity(spa::PRINT);
+    spa::QueryResult callStmtRes = pkbManager->getEntity(spa::CALL);
+
+    std::optional<std::vector<std::string>> testProcedure = procedureRes.getNames();
+    std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
+    std::optional<std::vector<int>> testReadStmt = readStmtRes.getLineNumbers();
+    std::optional<std::vector<int>> testPrintStmt = printStmtRes.getLineNumbers();
+    std::optional<std::vector<int>> testCallStmt = callStmtRes.getLineNumbers();
+
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
+    std::optional<std::vector<int>> expectedReadStmt = {{1, 4}};
+    std::optional<std::vector<int>> expectedPrintStmt = {{2, 5}};
+    std::optional<std::vector<int>> expectedCallStmt = {{3, 6}};
+
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedProcedure,
+      testProcedure));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedVariable,
+      testVariable));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedReadStmt,
+      testReadStmt));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedPrintStmt,
+      testPrintStmt));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedCallStmt,
+      testCallStmt));
+  }
+
+  TEST_METHOD(TestExtractOneVarStatementWithWhileNesting) {
     ///*
     // *  procedure a {
     // * 1. while (e >= 1) {
@@ -236,6 +350,69 @@ public:
       tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
       tokenOpenBrace,
       tokenRead, tokenB, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCall, tokenD, tokenSemiColon,
+      tokenCloseBrace, tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto& token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+    spa::QueryResult procedureRes = pkbManager->getEntity(spa::PROCEDURE);
+    spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
+    spa::QueryResult readStmtRes = pkbManager->getEntity(spa::READ);
+    spa::QueryResult printStmtRes = pkbManager->getEntity(spa::PRINT);
+    spa::QueryResult callStmtRes = pkbManager->getEntity(spa::CALL);
+
+    std::optional<std::vector<std::string>> testProcedure = procedureRes.getNames();
+    std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
+    std::optional<std::vector<int>> testReadStmt = readStmtRes.getLineNumbers();
+    std::optional<std::vector<int>> testPrintStmt = printStmtRes.getLineNumbers();
+    std::optional<std::vector<int>> testCallStmt = callStmtRes.getLineNumbers();
+
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE}};
+    std::optional<std::vector<int>> expectedReadStmt = {{2}};
+    std::optional<std::vector<int>> expectedPrintStmt = {{3}};
+    std::optional<std::vector<int>> expectedCallStmt = {{4}};
+
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedProcedure,
+      testProcedure));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedVariable,
+      testVariable));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedReadStmt,
+      testReadStmt));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedPrintStmt,
+      testPrintStmt));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedCallStmt,
+      testCallStmt));
+  }
+
+  TEST_METHOD(TestExtractOneVarStatementWithIfNesting) {
+    ///*
+    // *  procedure a {
+    // * 1. if (e >= 1) then {
+    // * 2.   read b;
+    // *    }
+    // *    else {
+    // * 3.   print c;
+    // * 4.   call d;
+    // *    }
+    // *  }
+    // */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+      tokenThen, tokenOpenBrace,
+      tokenRead, tokenB, tokenSemiColon,
+      tokenCloseBrace,tokenElse, tokenOpenBrace,
       tokenPrint, tokenC, tokenSemiColon,
       tokenCall, tokenD, tokenSemiColon,
       tokenCloseBrace, tokenCloseBrace
@@ -336,6 +513,142 @@ public:
       testPatternStmt));
   }
 
+  TEST_METHOD(TestExtractAssignStatementWithIfNesting) {
+    ///*
+    // *  procedure a {
+    // * 1. if (b >= c) then {
+    // * 2.   d = d - d * c;
+    // *    }
+    // *    else {
+    // * 3.   e = 1;
+    // *    }
+    // *  }
+    // */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket,
+      tokenThen,
+      tokenOpenBrace, tokenD, tokenAssign, tokenD, tokenMinusOp, tokenD, tokenMultiply, tokenC,
+      tokenSemiColon, tokenCloseBrace,
+      tokenElse, tokenOpenBrace,
+      tokenE, tokenAssign, tokenConstant,tokenSemiColon,
+      tokenCloseBrace, tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto& token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+    spa::QueryResult procedureRes = pkbManager->getEntity(spa::PROCEDURE);
+    spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
+    spa::QueryResult assignStmtRes = pkbManager->getEntity(spa::ASSIGN);
+
+    spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, varD, {});
+    std::vector<spa::Token> tokens = {tokenD, tokenMinusOp, tokenD, tokenMultiply, tokenC};
+    spa::Pattern pattern(spa::PatternType::EXACT, tokens);
+    spa::QueryResult firstPatternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
+      pattern);
+
+    firstArg = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
+    tokens = {tokenConstant};
+    pattern = spa::Pattern(spa::PatternType::EXACT, tokens);
+    spa::QueryResult secondPatternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
+      pattern);
+
+    Assert::IsTrue(firstPatternStatementRes.getQueryResultType() == spa::TUPLE);
+    Assert::IsTrue(secondPatternStatementRes.getQueryResultType() == spa::TUPLE);
+
+    std::optional<std::vector<std::string>> testProcedure = procedureRes.getNames();
+    std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
+    std::optional<std::vector<int>> testAssignStmt = assignStmtRes.getLineNumbers();
+    std::optional<std::vector<std::pair<int, std::string>>> testFirstPatternStmt =
+      firstPatternStatementRes.getLineNumberVariablePairs();
+    std::optional<std::vector<std::pair<int, std::string>>> testSecondPatternStmt =
+      secondPatternStatementRes.getLineNumberVariablePairs();
+
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE}};
+    std::optional<std::vector<int>> expectedAssignStmt = {{2, 3}};
+    std::optional<std::vector<std::pair<int, std::string>>> expectedFirstPatternStmt = {{{2, varD}}};
+    std::optional<std::vector<std::pair<int, std::string>>> expectedSecondPatternStmt = {{{3, varE}}};
+
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedProcedure,
+      testProcedure));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedVariable,
+      testVariable));
+    //Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedAssignStmt,
+    //  testAssignStmt));
+    //Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedFirstPatternStmt,
+    //                                                         testFirstPatternStmt));
+    //Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedSecondPatternStmt,
+    //                                                         testSecondPatternStmt));
+  }
+
+  TEST_METHOD(TestExtractAssignStatementWithWhileNesting) {
+    ///*
+    // *  procedure a {
+    // * 1. while (b >= c) {
+    // * 2.   d = d - d * c;
+    // *    }
+    // *  }
+    // */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
+      tokenD, tokenAssign, tokenD, tokenMinusOp, tokenD, tokenMultiply, tokenC,
+      tokenSemiColon, tokenCloseBrace,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto& token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+    spa::QueryResult procedureRes = pkbManager->getEntity(spa::PROCEDURE);
+    spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
+    spa::QueryResult assignStmtRes = pkbManager->getEntity(spa::ASSIGN);
+
+    spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, varD, {});
+    std::vector<spa::Token> tokens = {tokenD, tokenMinusOp, tokenD, tokenMultiply, tokenC};
+    spa::Pattern pattern(spa::PatternType::EXACT, tokens);
+    spa::QueryResult firstPatternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
+      pattern);
+
+    Assert::IsTrue(firstPatternStatementRes.getQueryResultType() == spa::TUPLE);
+
+    std::optional<std::vector<std::string>> testProcedure = procedureRes.getNames();
+    std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
+    std::optional<std::vector<int>> testAssignStmt = assignStmtRes.getLineNumbers();
+    std::optional<std::vector<std::pair<int, std::string>>> testFirstPatternStmt =
+      firstPatternStatementRes.getLineNumberVariablePairs();
+
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
+    std::optional<std::vector<int>> expectedAssignStmt = {{2}};
+    std::optional<std::vector<std::pair<int, std::string>>> expectedFirstPatternStmt = {{{2, varD}}};
+
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedProcedure,
+      testProcedure));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedVariable,
+      testVariable));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedAssignStmt,
+      testAssignStmt));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedFirstPatternStmt,
+                                                             testFirstPatternStmt));
+  }
+
   TEST_METHOD(TestExtractIfStatementWithNoNesting) {
     ///*
     // *  procedure a {
@@ -344,8 +657,9 @@ public:
     // */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
-      tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBrace,
-      tokenThen, tokenOpenBrace, tokenCloseBrace, tokenElse, tokenOpenBrace, tokenCloseBrace,
+      tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+      tokenCloseBrace,  tokenThen, tokenOpenBrace,
+      tokenCloseBrace, tokenElse, tokenOpenBrace, tokenCloseBrace,
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
@@ -375,11 +689,115 @@ public:
     std::optional<std::vector<int>> expectedIfStmt = {{1}};
 
     Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedProcedure,
+                                                             testProcedure));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedVariable,
+                                                             testVariable));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedConstant,
+                                                             testConstant));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedIfStmt,
+                                                             testIfStmt));
+  }
+  TEST_METHOD(TestExtractIfStatementWithIfNesting) {
+    ///*
+    // *  procedure a {
+    // * 1. if (b >= 1) then {
+    // * 2.   if (c >= 1) then { } else { }
+    // *    }
+    // *    else {
+    // * 3.   if (d >= 1) then { } else { }
+    // *    }
+    // *  }
+    // */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+      tokenThen, tokenOpenBrace, 
+      tokenIf, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+      tokenThen, tokenOpenBrace, tokenCloseBrace, tokenElse, tokenOpenBrace, tokenCloseBrace,
+      tokenCloseBrace, tokenElse, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+      tokenThen, tokenOpenBrace, tokenCloseBrace, tokenElse, tokenOpenBrace, tokenCloseBrace,
+      tokenCloseBrace, tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto& token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+    spa::QueryResult procedureRes = pkbManager->getEntity(spa::PROCEDURE);
+    spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
+    spa::QueryResult constantRes = pkbManager->getEntity(spa::CONSTANT);
+    spa::QueryResult ifStmtRes = pkbManager->getEntity(spa::IF);
+
+    std::optional<std::vector<std::string>> testProcedure = procedureRes.getNames();
+    std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
+    std::optional<std::vector<std::string>> testConstant = constantRes.getNames();
+    std::optional<std::vector<int>> testIfStmt = ifStmtRes.getLineNumbers();
+
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
+    std::optional<std::vector<std::string>> expectedConstant = {{constant}};
+    std::optional<std::vector<int>> expectedIfStmt = {{1, 2 ,3}};
+
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedProcedure,
       testProcedure));
     Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedVariable,
       testVariable));
     Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedConstant,
       testConstant));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedIfStmt,
+      testIfStmt));
+  }
+
+  TEST_METHOD(TestExtractIfStatementWithWhileNesting) {
+    ///*
+    // *  procedure a {
+    // * 1. while (1 >= 1) {
+    // * 2.  if (b >= c) then { } else { }
+    // *    }
+    // *  }
+    // */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+      tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket,
+      tokenThen, tokenOpenBrace, tokenCloseBrace, tokenElse, tokenOpenBrace, tokenCloseBrace,
+      tokenCloseBrace, tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto& token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+    spa::QueryResult procedureRes = pkbManager->getEntity(spa::PROCEDURE);
+    spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
+    spa::QueryResult ifStmtRes = pkbManager->getEntity(spa::IF);
+
+    std::optional<std::vector<std::string>> testProcedure = procedureRes.getNames();
+    std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
+    std::optional<std::vector<int>> testIfStmt = ifStmtRes.getLineNumbers();
+
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC}};
+    std::optional<std::vector<int>> expectedIfStmt = {{2}};
+
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedProcedure,
+      testProcedure));
+    Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedVariable,
+      testVariable));
     Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedIfStmt,
       testIfStmt));
   }
@@ -457,26 +875,23 @@ public:
     spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
     spa::QueryResult usesRes = pkbManager->getRelationship(spa::USES, spa::PKBQueryArg(lineNum),
       spa::PKBQueryArg(variable));
+    spa::QueryResult procedureRes = pkbManager->getEntity(spa::PROCEDURE);
+    spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
 
     Assert::IsTrue(usesRes.getQueryResultType() == spa::BOOL);
 
-    bool testResult = usesRes.getIsTrue();
-    bool expectedResult = true;
-    Assert::IsTrue(expectedResult == testResult);
 
-    // optional<vector<string>> testProcedure = procedureRes.getNames();
-    // optional<vector<string>> testVariable = variablesRes.getNames();
-    // optional<vector<string>> testConstant = constantRes.getNames();
-    // optional<vector<int>> testIfStmt = whileStmtRes.getLineNumbers();
+    std::optional<std::vector<std::string>> testProcedure = procedureRes.getNames();
+    std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
+    bool testUses = usesRes.getIsTrue();
 
-    // optional<vector<string>> expectedProcedure = {{varA}};
-    // optional<vector<string>> expectedVariable = {{varB}};
-    // optional<vector<string>> expectedConstant = {{constant}};
-    // optional<vector<int>> expectedWhileStmt = {{1}};
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
+    bool expectedUses = true;
 
-    // Assert::IsTrue(UtilsFunction::isOptionalVectorEqual(expectedProcedure, testProcedure));
-    // Assert::IsTrue(UtilsFunction::isOptionalVectorEqual(expectedVariable, testVariable));
-    // Assert::IsTrue(UtilsFunction::isOptionalVectorEqual(expectedWhileStmt, testIfStmt));
+     Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedProcedure, testProcedure));
+     Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedVariable, testVariable));
+     Assert::IsTrue(expectedUses == testUses);
   }
 
   // TEST_METHOD(TestExtractFollowsWithNoNesting) {
