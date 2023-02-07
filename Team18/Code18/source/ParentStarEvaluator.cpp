@@ -5,5 +5,19 @@ spa::ParentStarEvaluator::ParentStarEvaluator(PqlArgument& firstArg, PqlArgument
 }
 
 spa::QpsResultTable spa::ParentStarEvaluator::evaluate(PKBManager& pkbManager) {
-  return QpsResultTable();
+  QpsResultTable table;
+  table.addHeader(firstArg);
+  table.addHeader(secondArg);
+  QueryResult result = pkbManager.getRelationship(PARENT_STAR, PKBQueryArg(firstArg), PKBQueryArg(secondArg));
+
+  if (result.getQueryResultType() == BOOL) {
+    if (result.getIsTrue()) {
+      table.addRow({ QpsValue(0), QpsValue(0) });
+    }
+  } else {
+    for (auto& pair : result.getLineNumberLineNumberPairs()) {
+      table.addRow({ QpsValue(pair.first), QpsValue(pair.second) });
+    }
+  }
+  return table;
 }
