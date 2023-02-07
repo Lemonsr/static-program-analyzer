@@ -260,7 +260,7 @@
     <ClInclude Include="..\source\QpsValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-      <ClInclude Include="..\source\FollowsEvaluator.h">
+    <ClInclude Include="..\source\FollowsEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\FollowsStarEvaluator.h">
@@ -282,9 +282,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\PqlParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\SuchThatEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\UsesEvaluator.h">
