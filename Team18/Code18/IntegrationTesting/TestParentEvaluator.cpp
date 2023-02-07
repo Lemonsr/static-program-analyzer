@@ -446,7 +446,7 @@ public:
   TEST_METHOD(TestWhileAssign) {
     spa::SuchThatClause clause(spa::PARENT,
                                spa::PqlArgument(spa::SYNONYM, "s1", {spa::DesignEntityType::WHILE}),
-                               spa::PqlArgument(spa::SYNONYM, "s2", {spa::DesignEntityType::ASSIGN}));
+                               spa::PqlArgument(spa::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::PARENT, "1", "2");
     pkbManager->addRelationship(spa::PARENT, "4", "5");
@@ -470,7 +470,7 @@ public:
     auto columnVals = table.getColumn("s1");
     Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
 
-    columnVals = table.getColumn("s2");
+    columnVals = table.getColumn("a");
     Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
   }
 
@@ -510,7 +510,7 @@ public:
   TEST_METHOD(TestIfPrint) {
     spa::SuchThatClause clause(spa::PARENT,
                                spa::PqlArgument(spa::SYNONYM, "s1", {spa::DesignEntityType::IF}),
-                               spa::PqlArgument(spa::SYNONYM, "s2", {spa::DesignEntityType::PRINT}));
+                               spa::PqlArgument(spa::SYNONYM, "p", {spa::DesignEntityType::PRINT}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::PARENT, "1", "2");
     pkbManager->addRelationship(spa::PARENT, "4", "5");
@@ -534,7 +534,7 @@ public:
     auto columnVals = table.getColumn("s1");
     Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
 
-    columnVals = table.getColumn("s2");
+    columnVals = table.getColumn("p");
     Assert::IsTrue(columnVals.find(spa::QpsValue(8)) != columnVals.end());
   }
   };
