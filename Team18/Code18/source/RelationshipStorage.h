@@ -90,6 +90,7 @@ class RelationshipStorage {
   void setFollowsTable(std::unordered_map<int, int> followsTable);
   void setFollowsStarTable(std::unordered_map<int, std::unordered_set<int>> followsStarTable);
   void setParentTable(std::unordered_map<int, std::unordered_set<int>> parentTable);
+  void setParentStarTable(std::unordered_map<int, std::unordered_set<int>> parentStarTable);
   void setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable);
   void setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
