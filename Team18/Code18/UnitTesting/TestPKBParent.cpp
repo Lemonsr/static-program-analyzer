@@ -228,5 +228,42 @@ namespace UnitTesting {
         queryResult = relationshipStorage.getParentUnderscoreUnderscore(firstArg, secondArg);
         Assert::IsFalse(queryResult.getIsTrue());
       }
+
+      TEST_METHOD(TestGetParentGeneralStatementStatement) {
+        spa::RelationshipStorage relationshipStorage;
+        relationshipStorage.setParentTable(parentTable);
+        relationshipStorage.setStatementTypeTable(statementTypeTable);
+        std::vector<std::pair<int, int>> expected = { {1, 2}, {7, 8} };
+
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "if",
+                                                                      spa::DesignEntityType::IF));
+        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
+                                                                       spa::DesignEntityType::STMT));
+        spa::QueryResult queryResult = relationshipStorage.getParentStatementStatement(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
+
+        expected = { {4, 5}, {4, 6}, {4, 7} };
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "w", spa::DesignEntityType::WHILE));
+        queryResult = relationshipStorage.getParentStatementStatement(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
+
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s1", spa::DesignEntityType::STMT));
+        secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s2", spa::DesignEntityType::STMT));
+        queryResult = relationshipStorage.getParentStatementStatement(firstArg, secondArg);
+
+        expected = { {1, 2}, {4, 5}, {4, 6}, {4, 7}, {7, 8} };
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
+
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "a", spa::DesignEntityType::ASSIGN));
+        queryResult = relationshipStorage.getParentStatementStatement(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(queryResult.getLineNumberLineNumberPairs().empty());
+      }
   };
 }  // namespace UnitTesting

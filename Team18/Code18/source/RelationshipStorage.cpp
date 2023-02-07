@@ -397,11 +397,12 @@ spa::QueryResult spa::RelationshipStorage::getParentUnderscoreStatement(PKBQuery
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
-  for (auto &itr : parentTable) {
-    for (auto &lineNumber : parentTable[itr.first]) {
-      if (secondStmt.statementType && statementTypeTable[lineNumber] == secondStmt.statementType) {
-        lineNumberLineNumberPairs.push_back({ itr.first, lineNumber });
+  for (auto itr = parentTable.begin(); itr != parentTable.end(); itr++) {
+    for (auto &lineNumber : parentTable[itr->first]) {
+      if (secondStmt.statementType && statementTypeTable[lineNumber] != secondStmt.statementType) {
+        continue;
       }
+      lineNumberLineNumberPairs.push_back({ itr->first, lineNumber });
     }
   }
 
