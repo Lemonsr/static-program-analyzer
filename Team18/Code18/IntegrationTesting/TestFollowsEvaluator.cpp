@@ -171,13 +171,16 @@ public:
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 3);
-    auto& rows = table.getRows();
-    Assert::IsTrue(rows[0][0] == spa::QpsValue(10));
-    Assert::IsTrue(rows[0][1] == spa::QpsValue(11));
-    Assert::IsTrue(rows[1][0] == spa::QpsValue(11));
-    Assert::IsTrue(rows[1][1] == spa::QpsValue(12));
-    Assert::IsTrue(rows[2][0] == spa::QpsValue(12));
-    Assert::IsTrue(rows[2][1] == spa::QpsValue(13));
+    auto columnVals = table.getColumn("a1");
+    Assert::AreEqual(columnVals.size(), size_t(3));
+    Assert::IsTrue(columnVals.find(spa::QpsValue(10)) != columnVals.end());
+    Assert::IsTrue(columnVals.find(spa::QpsValue(11)) != columnVals.end());
+    Assert::IsTrue(columnVals.find(spa::QpsValue(12)) != columnVals.end());
+    columnVals = table.getColumn("a2");
+    Assert::AreEqual(columnVals.size(), size_t(3));
+    Assert::IsTrue(columnVals.find(spa::QpsValue(11)) != columnVals.end());
+    Assert::IsTrue(columnVals.find(spa::QpsValue(12)) != columnVals.end());
+    Assert::IsTrue(columnVals.find(spa::QpsValue(13)) != columnVals.end());
   }
 
   TEST_METHOD(TestStatementStatementNotExists) {
