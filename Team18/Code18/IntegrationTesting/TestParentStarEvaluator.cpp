@@ -24,7 +24,6 @@ public:
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 1);
-
   }
 
   TEST_METHOD(TestLineLineNotExists) {
@@ -307,7 +306,7 @@ public:
     Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(8)) != columnVals.end());
   }
-  
+
   TEST_METHOD(TestStatementUnderscoreNotExists) {
     spa::SuchThatClause clause(spa::PARENT_STAR,
                                spa::PqlArgument(spa::SYNONYM, "s", {spa::DesignEntityType::ASSIGN}),
