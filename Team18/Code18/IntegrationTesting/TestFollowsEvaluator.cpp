@@ -171,7 +171,6 @@ public:
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 3);
-    // checking values of a1 and a2
     auto columnVals = table.getColumn("a1");
     Assert::AreEqual(columnVals.size(), size_t(3));
     Assert::IsTrue(columnVals.find(spa::QpsValue(10)) != columnVals.end());
