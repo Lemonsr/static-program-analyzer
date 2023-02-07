@@ -9,8 +9,7 @@ namespace spa {
 class SpValidator {
  public:
         explicit SpValidator(Stream<Token> tokens);
-        void validateGrammar();
-
+        bool validateGrammar();
  private:
         std::unordered_set<TokenType> condExprToken = {TOKEN_BOOL_AND, TOKEN_BOOL_OR};
         std::unordered_set<TokenType> relExprToken = {
