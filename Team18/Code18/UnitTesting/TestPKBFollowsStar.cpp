@@ -100,6 +100,12 @@ namespace UnitTesting {
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
+
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LINE_NO, "9", {}));
+        queryResult = relationshipStorage.getFollowsStarLineStatement(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(queryResult.getLineNumberLineNumberPairs().empty());
       }
 
       TEST_METHOD(TestGetFollowsStarStatementLine) {
@@ -122,6 +128,12 @@ namespace UnitTesting {
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
+
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "if", spa::DesignEntityType::IF));
+        queryResult = relationshipStorage.getFollowsStarStatementLine(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(queryResult.getLineNumberLineNumberPairs().empty());
       }
 
       TEST_METHOD(TestGetFollowsStarLineUnderscore) {
@@ -296,6 +308,12 @@ namespace UnitTesting {
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
+
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "if", spa::DesignEntityType::IF));
+        queryResult = relationshipStorage.getFollowsStarStatementStatement(firstArg, secondArg);
+
+        Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+        Assert::IsTrue(queryResult.getLineNumberLineNumberPairs().empty());
       }
   };
 }  // namespace UnitTesting
