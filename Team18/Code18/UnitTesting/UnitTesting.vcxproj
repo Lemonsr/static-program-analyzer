@@ -173,6 +173,7 @@
     <ClCompile Include="TestAST.cpp" />
     <ClCompile Include="TestDesignExtractor.cpp" />
     <ClCompile Include="TestPKBFollows.cpp" />
+    <ClCompile Include="TestPKBFollowsStar.cpp" />
     <ClCompile Include="TestPKBParent.cpp" />
     <ClCompile Include="TestPKBParentStar.cpp" />
     <ClCompile Include="TestPKBPatternStorage.cpp" />
