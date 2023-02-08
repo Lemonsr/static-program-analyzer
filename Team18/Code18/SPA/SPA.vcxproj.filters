@@ -86,6 +86,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\SP.cpp">
+	  <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\QpsResultTable.cpp">
       <Filter>Source Files</Filter>
