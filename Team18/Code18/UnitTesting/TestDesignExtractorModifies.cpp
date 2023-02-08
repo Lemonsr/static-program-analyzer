@@ -12,7 +12,7 @@
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
-TEST_CLASS(TestDesignExtractor) {
+TEST_CLASS(TestDesignExtractorModifies) {
   std::string varA = "a";
   std::string varB = "b";
   std::string varC = "c";
@@ -72,6 +72,44 @@ TEST_CLASS(TestDesignExtractor) {
 
 public:
   TEST_METHOD(TestExtractModifiesSingleAssignment) {
+    ///*
+    // *  procedure a {
+    // * 1. c = d;
+    // *  }
+    // */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
+    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varC, {});
+    spa::QueryResult modifiesRes = pkbManager->getRelationship(spa::MODIFIES,
+      spa::PKBQueryArg(lineNum),
+      spa::PKBQueryArg(variable));
+
+    Assert::IsTrue(modifiesRes.getQueryResultType() == spa::BOOL);
+
+    bool testModifies = modifiesRes.getIsTrue();
+
+    bool expectedModifies = true;
+
+    Assert::IsTrue(expectedModifies == testModifies);
+  }
+
+  TEST_METHOD(TestExtractModifiesReadStatement) {
     ///*
     // *  procedure a {
     // * 1. c = d;
