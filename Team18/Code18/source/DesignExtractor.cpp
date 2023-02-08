@@ -45,17 +45,12 @@ void spa::DesignExtractor::extractFollows(std::vector<ProgramStatement*> stateme
         continue;
       }
       pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
-      if (dynamic_cast<ContainerStatement*>(statementList[i])) {
-        ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[
-          i]);
-        extractFollows(containerStatement->getStatementList());
       }
+    if (dynamic_cast<ContainerStatement*>(statementList[i])) {
+      ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[
+        i]);
+      extractFollows(containerStatement->getStatementList());
     }
-  }
-  if (dynamic_cast<ContainerStatement*>(statementList[statementList.size() - 1])) {
-    ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(
-      statementList[statementList.size() - 1]);
-    extractFollows(containerStatement->getStatementList());
   }
 }
 
