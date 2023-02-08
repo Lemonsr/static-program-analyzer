@@ -80,13 +80,22 @@
     <ClCompile Include="TestPqlSemanticChecker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestDesignExtractor.cpp">
+    <ClCompile Include="TestDesignExtractorEntities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPKBFollows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPKBParent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorStatements.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorUses.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorModifies.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPKBFollowsStar.cpp">
