@@ -72,11 +72,11 @@ TEST_CLASS(TestDesignExtractorModifies) {
 
 public:
   TEST_METHOD(TestExtractModifiesSingleAssignment) {
-    ///*
-    // *  procedure a {
-    // * 1. c = d;
-    // *  }
-    // */
+    /*
+     *  procedure a {
+     * 1. c = d;
+     *  }
+     */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenC, tokenAssign, tokenD, tokenSemiColon,
@@ -110,11 +110,11 @@ public:
   }
 
   TEST_METHOD(TestExtractModifiesReadStatement) {
-    ///*
-    // *  procedure a {
-    // * 1. c = d;
-    // *  }
-    // */
+    /*
+     *  procedure a {
+     * 1. c = d;
+     *  }
+     */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenC, tokenAssign, tokenD, tokenSemiColon,
@@ -148,15 +148,15 @@ public:
   }
 
   TEST_METHOD(TestExtractModifiesIfNestedAssignment) {
-    ///*
-    // *  procedure a {
-    // * 1. if (e >= 1) then {
-    // * 2.   c = d;
-    // *    } else {
-    // * 3.   b = d;
-    // *    }
-    // *  }
-    // */
+    /*
+     *  procedure a {
+     * 1. if (e >= 1) then {
+     * 2.   c = d;
+     *    } else {
+     * 3.   b = d;
+     *    }
+     *  }
+     */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenIf, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenConstant,
@@ -224,14 +224,14 @@ public:
   }
 
   TEST_METHOD(TestExtractModifiesWhileNestedAssignment) {
-    ///*
-    // *  procedure a {
-    // * 1. while (e >= 1) {
-    // * 2.   c = d;
-    // * 3.   b = d;
-    // *    }
-    // *  }
-    // */
+    /*
+     *  procedure a {
+     * 1. while (e >= 1) {
+     * 2.   c = d;
+     * 3.   b = d;
+     *    }
+     *  }
+     */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenConstant,

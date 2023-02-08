@@ -72,13 +72,13 @@ TEST_CLASS(TestDesignExtractorEntities) {
 
 public:
   TEST_METHOD(TestExtractEntitiesWithNoNesting) {
-    ///*
-    // *   procedure a {
-    // * 1. b = 1;
-    // * 2. c = b;
-    // * 3. c = d - b;
-    // *  }
-    // */
+    /*
+     *   procedure a {
+     * 1. b = 1;
+     * 2. c = b;
+     * 3. c = d - b;
+     *  }
+     */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenB, tokenAssign, tokenConstant, tokenSemiColon,
@@ -118,14 +118,14 @@ public:
   }
 
   TEST_METHOD(TestExtractEntitiesWithWhileNesting) {
-    ///*
-    // *  procedure a {
-    // * 1. while (d >= 1) {
-    // * 2.   b = 1;
-    // * 3.   c = b;
-    // *    }
-    // *  }
-    // */
+    /*
+     *  procedure a {
+     * 1. while (d >= 1) {
+     * 2.   b = 1;
+     * 3.   c = b;
+     *    }
+     *  }
+     */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenWhile, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
@@ -166,17 +166,17 @@ public:
   }
 
   TEST_METHOD(TestExtractEntitiesWithIfNesting) {
-    ///*
-    // *  procedure a {
-    // * 1. if (b >= 1) then {
-    // * 2.   b = 1;
-    // * 3.   c = b;
-    // *    }
-    // *    else {
-    // * 4.   d = b;
-    // *    }
-    // *  }
-    // */
+    /*
+     *  procedure a {
+     * 1. if (b >= 1) then {
+     * 2.   b = 1;
+     * 3.   c = b;
+     *    }
+     *    else {
+     * 4.   d = b;
+     *    }
+     *  }
+     */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
