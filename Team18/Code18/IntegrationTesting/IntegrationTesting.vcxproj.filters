@@ -38,8 +38,14 @@
     <ClCompile Include="TestModifiesEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-	<ClCompile Include="TestUsesEvaluator.cpp">
-	  <Filter>Source Files</Filter>
-	</ClCompile>
+    <ClCompile Include="TestUsesEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestParentEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFollowsEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
