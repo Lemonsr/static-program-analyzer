@@ -37,34 +37,45 @@ void spa::DesignExtractor::extractParentAbstraction(std::vector<ProgramStatement
 
 void spa::DesignExtractor::extractFollows(std::vector<ProgramStatement*> statementList) {
   for (unsigned i = 0; i < statementList.size(); i++) {
-    if (dynamic_cast<ContainerStatement*>(statementList[i])) {
-      ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[i]);
-      extractFollows(containerStatement->getStatementList());
+    if (i + 1 != statementList.size()) {
+      std::string followStmtOne = std::to_string(statementList[i]->getStatementLineNum());
+      std::string followStmtTwo = std::to_string(statementList[i + 1]->getStatementLineNum());
+
+      if (followStmtOne == "-1" || followStmtTwo == "-1") {
+        continue;
+      }
+      pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
+      if (dynamic_cast<ContainerStatement*>(statementList[i])) {
+        ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[
+          i]);
+        extractFollows(containerStatement->getStatementList());
+      }
     }
-    if (i == statementList.size() - 1) {
-      break;
-    }
-    std::string followStmtOne = std::to_string(statementList[i]->getStatementLineNum());
-    std::string followStmtTwo = std::to_string(statementList[i + 1]->getStatementLineNum());
-    pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
+  }
+  if (dynamic_cast<ContainerStatement*>(statementList[statementList.size() - 1])) {
+    ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(
+      statementList[statementList.size() - 1]);
+    extractFollows(containerStatement->getStatementList());
   }
 }
 
 void spa::DesignExtractor::extractFollowsStar(std::vector<ProgramStatement*> statementList) {
   for (unsigned i = 0; i < statementList.size(); i++) {
-    for (unsigned j = i + 1; j < statementList.size(); j++) {
-      int firstStatementLineNum = statementList[i]->getStatementLineNum();
-      int secondStatementLineNum = statementList[j]->getStatementLineNum();
-      if (firstStatementLineNum != -1 && secondStatementLineNum != -1) {
-        std::string followStarStmtOne = std::to_string(statementList[i]->getStatementLineNum());
-        std::string followStarStmtTwo = std::to_string(statementList[j]->getStatementLineNum());
-        pkbManager.addRelationship(FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
+    if (i + 1 != statementList.size()) {
+      for (unsigned j = i + 1; j < statementList.size(); j++) {
+        std::string followStarStmtOne = std::to_string(statementList[i]
+          ->getStatementLineNum());
+        std::string followStarStmtTwo = std::to_string(statementList[j]
+          ->getStatementLineNum());
+        if (followStarStmtOne != "-1" && followStarStmtTwo != "-1") {
+          pkbManager.addRelationship(FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
+        }
       }
-      if (dynamic_cast<ContainerStatement*>(statementList[i])) {
-        ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[
-          i]);
-        extractFollowsStar(containerStatement->getStatementList());
-      }
+    }
+    if (dynamic_cast<ContainerStatement*>(statementList[i])) {
+      ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[
+        i]);
+      extractFollowsStar(containerStatement->getStatementList());
     }
   }
 }
