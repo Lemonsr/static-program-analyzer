@@ -15,8 +15,7 @@ spa::QpsResultTable spa::FollowsStarEvaluator::evaluate(PKBManager& pkbManager) 
     if (result.getIsTrue()) {
       table.addRow({ QpsValue(0), QpsValue(0) });
     }
-  }
-  else {
+  } else {
     for (auto& pair : result.getLineNumberLineNumberPairs()) {
       table.addRow({ QpsValue(pair.first), QpsValue(pair.second) });
     }
