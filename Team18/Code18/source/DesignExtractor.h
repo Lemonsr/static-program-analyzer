@@ -16,7 +16,7 @@ class DesignExtractor {
   void extractFollows(std::vector<ProgramStatement*> statementList);
   void extractFollowsStar(std::vector<ProgramStatement*> statementList);
   void extractParent(ContainerStatement* containerStatement);
-  void extractParentStar(ContainerStatement* containerStatement, int ancestorLineNum);
+  void extractParentStar(ContainerStatement* containerStatement, std::string ancestorLineNum);
   void extractUsesAndModifies(std::vector<ProgramStatement*> statementList);
 
  public:
