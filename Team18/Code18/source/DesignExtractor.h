@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 #include "ContainerStatement.h"
 #include "PKB.h"
