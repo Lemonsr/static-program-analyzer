@@ -558,7 +558,7 @@ public:
     Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
   }
- 
+
   TEST_METHOD(TestIfStatementNotExists) {
     spa::SuchThatClause clause(spa::FOLLOWS_STAR,
                                spa::PqlArgument(spa::SYNONYM, "i", { spa::IF }),
