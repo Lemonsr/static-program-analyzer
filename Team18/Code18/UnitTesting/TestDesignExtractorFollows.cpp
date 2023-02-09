@@ -149,12 +149,12 @@ public:
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "2", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "3", {});
     spa::QueryResult secondRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "1", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "3", {});
     spa::QueryResult thirdRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     Assert::IsTrue(firstRes.getQueryResultType() == spa::BOOL);
     Assert::IsTrue(secondRes.getQueryResultType() == spa::BOOL);
@@ -214,12 +214,12 @@ public:
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "3", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "4", {});
     spa::QueryResult secondRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "1", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "3", {});
     spa::QueryResult thirdRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     Assert::IsTrue(firstRes.getQueryResultType() == spa::BOOL);
     Assert::IsTrue(secondRes.getQueryResultType() == spa::BOOL);
@@ -280,17 +280,17 @@ public:
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "2", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "3", {});
     spa::QueryResult secondRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "1", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "3", {});
     spa::QueryResult thirdRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "3", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "4", {});
     spa::QueryResult FourthRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     Assert::IsTrue(firstRes.getQueryResultType() == spa::BOOL);
     Assert::IsTrue(secondRes.getQueryResultType() == spa::BOOL);
@@ -360,27 +360,27 @@ public:
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "3", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "4", {});
     spa::QueryResult secondRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "5", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "6", {});
     spa::QueryResult thirdRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "1", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "3", {});
     spa::QueryResult fourthRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "1", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "5", {});
     spa::QueryResult fifthRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "3", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "5", {});
     spa::QueryResult sixthRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     Assert::IsTrue(firstRes.getQueryResultType() == spa::BOOL);
     Assert::IsTrue(secondRes.getQueryResultType() == spa::BOOL);
@@ -459,32 +459,32 @@ public:
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "2", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "3", {});
     spa::QueryResult secondRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "4", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "5", {});
     spa::QueryResult thirdRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "1", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "2", {});
     spa::QueryResult fourthRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "1", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "4", {});
     spa::QueryResult fifthRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "2", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "6", {});
     spa::QueryResult sixthRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     pqlArgOne = spa::PqlArgument(spa::LINE_NO, "5", {});
     pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "6", {});
     spa::QueryResult seventhRes = pkbManager->getRelationship(spa::FOLLOWS,
-                                                           spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     Assert::IsTrue(firstRes.getQueryResultType() == spa::BOOL);
     Assert::IsTrue(secondRes.getQueryResultType() == spa::BOOL);
