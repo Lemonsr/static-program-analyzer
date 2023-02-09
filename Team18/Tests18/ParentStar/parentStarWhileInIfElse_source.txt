@@ -1,0 +1,15 @@
+procedure whileInIfElse {
+  if (x == 1) then {
+    e = f;
+    print h;
+    read i;
+  } else {
+    c = d;
+    while (z < 0) {
+      z = x + 1;
+      print a;
+      read b;
+    }
+    x = z + x;
+  }
+}
