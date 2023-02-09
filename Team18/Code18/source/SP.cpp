@@ -48,7 +48,8 @@ spa::Stream<spa::Token> spa::SP::convertToken() {
             // e.g. [i-1] => "print", [i] => "print" => continue
             // e.g. [i-1] => "read", [i] => "print" => continue
             // [i] should remain as TOKEN_NAME
-            if (i > 0 && (tokens[i - 1].getValue() == currTokenValue || stmtTokensMap.count(tokens[i - 1].getValue()))) {
+            if (i > 0 && (tokens[i - 1].getValue() == currTokenValue ||
+                stmtTokensMap.count(tokens[i - 1].getValue()))) {
                 continue;
             }
             tokens[i] = Token(stmtTokensMap.at(currTokenValue), currTokenValue);

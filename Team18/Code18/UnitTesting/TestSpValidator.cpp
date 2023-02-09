@@ -1,8 +1,8 @@
-#include "stdafx.h"
-#include "SpValidator.h"
 #include <iostream>
 
+#include "stdafx.h"
 #include "CppUnitTest.h"
+#include "SpValidator.h"
 #include "PKB.h"
 #include "SP.h"
 #include "Token.h"
@@ -974,7 +974,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        //  while 
+        //  while
         //  procedure z { while(y >= 5){}}
         TEST_METHOD(TestSpValidatorValidWhileOne) {
             spa::Stream<spa::Token> tokens;
@@ -1981,4 +1981,4 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
     };
-}//  namespace UnitTesting
+}  //  namespace UnitTesting
