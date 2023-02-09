@@ -22,7 +22,7 @@ void spa::SP::processSource() {
     //    std::cout << "Type: " << convertedTokens[i].getType() <<
     //        ", Value: " << convertedTokens[i].getValue() << std::endl;
     //}
-     std::cout << "END OF TESTING" << std::endl;
+    std::cout << "END OF TESTING" << std::endl;
     validator.validateGrammar();
     SpParser parser = SpParser(convertedTokens);
     std::vector<ProcedureStatement> procedureList = parser.parse();
@@ -45,6 +45,12 @@ spa::Stream<spa::Token> spa::SP::convertToken() {
         std::string currTokenValue = currToken.getValue();
         bool isValidTokenName = stmtTokensMap.count(currTokenValue);
         if (isValidTokenName) {
+            // e.g. [i-1] => "print", [i] => "print" => continue
+            // e.g. [i-1] => "read", [i] => "print" => continue
+            // [i] should remain as TOKEN_NAME
+            if (i > 0 && (tokens[i - 1].getValue() == currTokenValue || stmtTokensMap.count(tokens[i - 1].getValue()))) {
+                continue;
+            }
             tokens[i] = Token(stmtTokensMap.at(currTokenValue), currTokenValue);
         }
     }
