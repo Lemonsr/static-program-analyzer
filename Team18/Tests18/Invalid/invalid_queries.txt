@@ -1,0 +1,85 @@
+1 - Syntax wrong
+variable v;
+Select v;
+none
+5000
+2 - Syntax wrong
+variable v;
+select v
+none
+5000
+3 - Syntax wrong
+variable v1; v2;
+Select v1
+none
+5000
+4 - Semantics wrong
+variable v;
+Select v such that Uses(_, v)
+none
+5000
+5 - Semantics wrong
+variable v;
+Select v such that Uses(_, _)
+none
+5000
+6 - Semantics wrong
+variable v;
+Select v such that Uses(_, "x")
+none
+5000
+7 - Semantics wrong
+variable v;
+Select v such that Modifies(_,v)
+none
+5000
+8 - Semantics wrong
+variable v;
+Select v such that Modifies(_, _)
+none
+5000
+9 - Semantics wrong
+variable v;
+Select v such that Modifies(_, "x")
+none
+5000
+10 - Semantics wrong
+stmt s;
+Select s pattern s(_, _)
+none
+5000
+11 - Test
+stmt s; assign s;
+Select s
+none
+5000
+12 - Test
+ssdaftmt s; assigasdfn a;
+Select s
+none
+5000
+13 - Test
+assign 1; stmt s;
+Select s
+none
+5000
+14 - Test
+stmt s;
+Select a
+none
+5000
+15 - Test
+variable v; assign a;
+Select a Such that Uses(a, v)
+none
+5000
+16 - Test
+variable v; assign a;
+Select a such that Uses(v, a)
+none
+5000
+17 - Test
+stmt s; assign a;
+Select a pattern a(s, _)
+none
+5000
