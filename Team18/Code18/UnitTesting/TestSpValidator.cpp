@@ -1,10 +1,10 @@
 #include "stdafx.h"
+#include "SpValidator.h"
 #include <iostream>
 
 #include "CppUnitTest.h"
 #include "PKB.h"
 #include "SP.h"
-#include "SpValidator.h"
 #include "Token.h"
 
 namespace spa {
@@ -47,7 +47,6 @@ namespace UnitTesting {
             spa::SpValidator validator(tokens);
             Assert::IsTrue(validator.validateGrammar());
         }
-
 
         // procedure proc123 {}
         TEST_METHOD(TestSpValidatorValidProcFour) {
@@ -733,7 +732,9 @@ namespace UnitTesting {
             Assert::IsTrue(validator.validateGrammar());
         }
 
-        //  procedure z { 1 + (8 % ((5)) + (10 * (((2)) / (9) + (2 / (4 + 8)))) + (((1)) + 7 + 10 + (2 / (7 - 1 + (((1) % 10)) + (7) + (100 / (1 + 1 + 9 * 10)))));}
+        //  procedure z { 1 + (8 % ((5)) + (10 * (((2)) / (9)
+        //  + (2 / (4 + 8)))) + (((1)) + 7 + 10 + (2 /
+        //  (7 - 1 + (((1) % 10)) + (7) + (100 / (1 + 1 + 9 * 10)))));}
         TEST_METHOD(TestSpValidatorValidExprTen) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -974,7 +975,6 @@ namespace UnitTesting {
         }
 
         //  while 
-
         //  procedure z { while(y >= 5){}}
         TEST_METHOD(TestSpValidatorValidWhileOne) {
             spa::Stream<spa::Token> tokens;
@@ -1981,4 +1981,4 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
     };
-}
+}//  namespace UnitTesting
