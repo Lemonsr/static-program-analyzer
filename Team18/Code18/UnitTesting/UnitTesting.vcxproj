@@ -173,6 +173,7 @@
     <ClCompile Include="TestAST.cpp" />
     <ClCompile Include="TestDesignExtractorEntities.cpp" />
     <ClCompile Include="TestDesignExtractorFollows.cpp" />
+    <ClCompile Include="TestDesignExtractorFollowsStar.cpp" />
     <ClCompile Include="TestDesignExtractorModifies.cpp" />
     <ClCompile Include="TestDesignExtractorStatements.cpp" />
     <ClCompile Include="TestDesignExtractorUses.cpp" />
