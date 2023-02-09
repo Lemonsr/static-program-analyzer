@@ -217,40 +217,5 @@ public:
     Assert::IsTrue(spa::UtilsFunction::isOptionalVectorEqual(expectedConstant,
       testConstant));
   }
-
-  // TEST_METHOD(TestExtractFollowsWithNoNesting) {
-  ///*
-  // *   procedure a {
-  // * 1. b = 1;
-  // * 2. c = b;
-  // * 3. while (b >= 1) {
-  // * 4.   d = b - c;
-  // * 5.   c = d - b;
-  // *    }
-  // *  }
-  // */
-  // tokenList = {
-  //  tokenProcedure, tokenA, tokenOpenBrace,
-  //  tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-  //  tokenC, tokenAssign, tokenB, tokenSemiColon,
-  //  tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
-  //  tokenOpenBrace, tokenD, tokenAssign, tokenB, tokenMinusOp, tokenC, tokenSemiColon,
-  //  tokenC, tokenAssign, tokenD, tokenMinusOp, tokenB, tokenSemiColon,
-  //  tokenCloseBrace, tokenCloseBrace
-  // };
-  // Stream<Token> tokenStream = Stream<Token>();
-  // for (auto token: tokenList) {
-  //  tokenStream.pushBack(token);
-  // }
-
-  // PKBManager* pkbManager = new PKB();
-  // auto parser = SpParser(tokenStream);
-  // vector<ProcedureStatement> procedureList = parser.parse();
-  // Assert::IsTrue(procedureList.size() == 1);
-  // optional<DesignEntityType> designEntity;
-  // PqlArgument pqlArgOne = PqlArgument(LINE_NO, "2", designEntity);
-  // PqlArgument pqlArgtwo = PqlArgument(LINE_NO, "3", designEntity);
-  // QueryResult results = pkbManager->getRelationship(FOLLOWS, PKBQueryArg(pqlArgOne), PKBQueryArg(pqlArgtwo));
-  // }
 };
 }  // namespace UnitTesting

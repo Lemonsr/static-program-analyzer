@@ -41,11 +41,10 @@ void spa::DesignExtractor::extractFollows(std::vector<ProgramStatement*> stateme
       std::string followStmtOne = std::to_string(statementList[i]->getStatementLineNum());
       std::string followStmtTwo = std::to_string(statementList[i + 1]->getStatementLineNum());
 
-      if (followStmtOne == "-1" || followStmtTwo == "-1") {
-        continue;
+      if (followStmtOne != "-1" && followStmtTwo != "-1") {
+        pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
       }
-      pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
-      }
+    }
     if (dynamic_cast<ContainerStatement*>(statementList[i])) {
       ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[
         i]);

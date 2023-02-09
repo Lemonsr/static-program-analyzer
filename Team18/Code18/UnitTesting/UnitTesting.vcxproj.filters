@@ -104,5 +104,8 @@
     <ClCompile Include="TestPKBParentStar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestDesignExtractorFollows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
