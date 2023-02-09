@@ -17,13 +17,14 @@ public:
   TEST_METHOD(TestLineLineExists) {
     spa::SuchThatClause clause(spa::FOLLOWS_STAR,
                                spa::PqlArgument(spa::LINE_NO, "2", {}),
-                               spa::PqlArgument(spa::LINE_NO, "7", {}));
+                               spa::PqlArgument(spa::LINE_NO, "5", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -39,8 +40,9 @@ public:
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -55,21 +57,16 @@ public:
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
-    Assert::AreEqual(dim.second, 5);
+    Assert::AreEqual(dim.second, 2);
     auto columnVals = table.getColumn("s");
-    Assert::AreEqual(columnVals.size(), size_t(5));
+    Assert::AreEqual(columnVals.size(), size_t(2));
     Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
   }
 
   TEST_METHOD(TestLineReadExists) {
@@ -80,18 +77,13 @@ public:
     pkbManager->addStatementType("2", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("3", spa::StatementType::READ);
     pkbManager->addStatementType("4", spa::StatementType::PRINT);
-    pkbManager->addStatementType("5", spa::StatementType::ASSIGN);
-    pkbManager->addStatementType("6", spa::StatementType::PRINT);
-    pkbManager->addStatementType("7", spa::StatementType::READ);
-    pkbManager->addStatementType("8", spa::StatementType::WHILE);
-    pkbManager->addStatementType("15", spa::StatementType::IF);
+    pkbManager->addStatementType("5", spa::StatementType::READ);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "15");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -100,7 +92,7 @@ public:
     auto columnVals = table.getColumn("re");
     Assert::AreEqual(columnVals.size(), size_t(2));
     Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
+    Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
   }
 
   TEST_METHOD(TestLineStatementNotExists) {
@@ -108,9 +100,8 @@ public:
                                spa::PqlArgument(spa::LINE_NO, "2", {}),
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "6");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "7");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
@@ -128,17 +119,12 @@ public:
     pkbManager->addStatementType("3", spa::StatementType::READ);
     pkbManager->addStatementType("4", spa::StatementType::PRINT);
     pkbManager->addStatementType("5", spa::StatementType::READ);
-    pkbManager->addStatementType("6", spa::StatementType::PRINT);
-    pkbManager->addStatementType("7", spa::StatementType::READ);
-    pkbManager->addStatementType("8", spa::StatementType::WHILE);
-    pkbManager->addStatementType("15", spa::StatementType::IF);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "15");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -149,78 +135,41 @@ public:
   TEST_METHOD(TestStatementLineExists) {
     spa::SuchThatClause clause(spa::FOLLOWS_STAR,
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
-                               spa::PqlArgument(spa::LINE_NO, "7", {}));
+                               spa::PqlArgument(spa::LINE_NO, "5", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "7");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
-    Assert::AreEqual(dim.second, 5);
+    Assert::AreEqual(dim.second, 3);
     auto columnVals = table.getColumn("s");
-    Assert::AreEqual(columnVals.size(), size_t(5));
+    Assert::AreEqual(columnVals.size(), size_t(3));
     Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
   }
 
   TEST_METHOD(TestPrintLineExists) {
     spa::SuchThatClause clause(spa::FOLLOWS_STAR,
                                spa::PqlArgument(spa::SYNONYM, "pn", { spa::PRINT }),
-                               spa::PqlArgument(spa::LINE_NO, "15", {}));
+                               spa::PqlArgument(spa::LINE_NO, "5", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addStatementType("2", spa::StatementType::ASSIGN);
+    pkbManager->addStatementType("2", spa::StatementType::PRINT);
     pkbManager->addStatementType("3", spa::StatementType::READ);
     pkbManager->addStatementType("4", spa::StatementType::PRINT);
     pkbManager->addStatementType("5", spa::StatementType::ASSIGN);
-    pkbManager->addStatementType("6", spa::StatementType::PRINT);
-    pkbManager->addStatementType("7", spa::StatementType::READ);
-    pkbManager->addStatementType("8", spa::StatementType::WHILE);
-    pkbManager->addStatementType("15", spa::StatementType::IF);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "15");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "15");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "7", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "7", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "8", "15");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -228,8 +177,8 @@ public:
     Assert::AreEqual(dim.second, 2);
     auto columnVals = table.getColumn("pn");
     Assert::AreEqual(columnVals.size(), size_t(2));
+    Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
   }
 
   TEST_METHOD(TestStatementLineNotExists) {
@@ -240,13 +189,9 @@ public:
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "6");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "6");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -257,63 +202,19 @@ public:
   TEST_METHOD(TestWhileLineNotExists) {
     spa::SuchThatClause clause(spa::FOLLOWS_STAR,
                                spa::PqlArgument(spa::SYNONYM, "w", { spa::WHILE }),
-                               spa::PqlArgument(spa::LINE_NO, "15", {}));
+                               spa::PqlArgument(spa::LINE_NO, "5", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addStatementType("2", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("3", spa::StatementType::READ);
     pkbManager->addStatementType("4", spa::StatementType::PRINT);
-    pkbManager->addStatementType("5", spa::StatementType::ASSIGN);
-    pkbManager->addStatementType("6", spa::StatementType::PRINT);
-    pkbManager->addStatementType("7", spa::StatementType::READ);
-    pkbManager->addStatementType("8", spa::StatementType::ASSIGN);
-    pkbManager->addStatementType("10", spa::StatementType::IF);
-    pkbManager->addStatementType("12", spa::StatementType::ASSIGN);
-    pkbManager->addStatementType("15", spa::StatementType::IF);
+    pkbManager->addStatementType("5", spa::StatementType::WHILE);
+    pkbManager->addStatementType("6", spa::StatementType::ASSIGN);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "10");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "12");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "15");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "10");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "12");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "15");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "10");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "12");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "10");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "12");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "10");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "12");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "7", "8");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "7", "10");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "7", "12");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "7", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "8", "10");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "8", "12");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "8", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "10", "12");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "10", "15");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "12", "15");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -328,9 +229,7 @@ public:
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -344,10 +243,8 @@ public:
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -361,19 +258,10 @@ public:
                                spa::PqlArgument(spa::LINE_NO, "7", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "6");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "7");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "7");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
@@ -390,18 +278,9 @@ public:
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "6");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "5", "7");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "6", "7");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -492,13 +371,14 @@ public:
     pkbManager->addStatementType("2", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("3", spa::StatementType::READ);
     pkbManager->addStatementType("4", spa::StatementType::IF);
-    pkbManager->addStatementType("5", spa::StatementType::IF);
+    pkbManager->addStatementType("7", spa::StatementType::IF);
+    pkbManager->addStatementType("8", spa::StatementType::WHILE);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "7");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -514,13 +394,10 @@ public:
     pkbManager->addStatementType("2", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("3", spa::StatementType::READ);
     pkbManager->addStatementType("4", spa::StatementType::WHILE);
-    pkbManager->addStatementType("5", spa::StatementType::WHILE);
+    pkbManager->addStatementType("5", spa::StatementType::IF);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -564,7 +441,9 @@ public:
                                spa::PqlArgument(spa::SYNONYM, "i", { spa::IF }),
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addStatementType("2", spa::StatementType::IF);
+    pkbManager->addStatementType("2", spa::StatementType::ASSIGN);
+    pkbManager->addStatementType("3", spa::StatementType::IF);
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -609,14 +488,11 @@ public:
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addStatementType("2", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("3", spa::StatementType::PRINT);
-    pkbManager->addStatementType("4", spa::StatementType::WHILE);
-    pkbManager->addStatementType("5", spa::StatementType::IF);
+    pkbManager->addStatementType("4", spa::StatementType::IF);
+    pkbManager->addStatementType("5", spa::StatementType::WHILE);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -629,10 +505,10 @@ public:
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addStatementType("2", spa::StatementType::WHILE);
-    pkbManager->addStatementType("3", spa::StatementType::IF);
+    pkbManager->addStatementType("2", spa::StatementType::READ);
+    pkbManager->addStatementType("3", spa::StatementType::READ);
     pkbManager->addStatementType("4", spa::StatementType::PRINT);
-    pkbManager->addStatementType("5", spa::StatementType::ASSIGN);
+    pkbManager->addStatementType("5", spa::StatementType::WHILE);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
@@ -656,8 +532,8 @@ public:
                                spa::PqlArgument(spa::SYNONYM, "pn", { spa::PRINT }),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addStatementType("2", spa::StatementType::WHILE);
-    pkbManager->addStatementType("3", spa::StatementType::IF);
+    pkbManager->addStatementType("2", spa::StatementType::READ);
+    pkbManager->addStatementType("3", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("4", spa::StatementType::PRINT);
     pkbManager->addStatementType("5", spa::StatementType::ASSIGN);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
@@ -681,10 +557,10 @@ public:
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addStatementType("2", spa::StatementType::WHILE);
-    pkbManager->addStatementType("3", spa::StatementType::IF);
+    pkbManager->addStatementType("2", spa::StatementType::READ);
+    pkbManager->addStatementType("3", spa::StatementType::READ);
     pkbManager->addStatementType("4", spa::StatementType::PRINT);
-    pkbManager->addStatementType("5", spa::StatementType::ASSIGN);
+    pkbManager->addStatementType("5", spa::StatementType::IF);
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -697,16 +573,13 @@ public:
                                spa::PqlArgument(spa::SYNONYM, "a", { spa::ASSIGN }),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addStatementType("2", spa::StatementType::WHILE);
+    pkbManager->addStatementType("2", spa::StatementType::READ);
     pkbManager->addStatementType("3", spa::StatementType::READ);
-    pkbManager->addStatementType("4", spa::StatementType::PRINT);
+    pkbManager->addStatementType("4", spa::StatementType::WHILE);
     pkbManager->addStatementType("5", spa::StatementType::ASSIGN);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -748,14 +621,14 @@ public:
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addStatementType("2", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("3", spa::StatementType::WHILE);
-    pkbManager->addStatementType("4", spa::StatementType::WHILE);
-    pkbManager->addStatementType("5", spa::StatementType::ASSIGN);
+    pkbManager->addStatementType("7", spa::StatementType::WHILE);
+    pkbManager->addStatementType("10", spa::StatementType::ASSIGN);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "10");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "10");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "7", "10");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -764,7 +637,7 @@ public:
     auto columnVals = table.getColumn("w");
     Assert::AreEqual(columnVals.size(), size_t(2));
     Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
+    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
   }
 
   TEST_METHOD(TestUnderscoreStatementNotExists) {
@@ -789,9 +662,9 @@ public:
                                spa::PqlArgument(spa::SYNONYM, "i", { spa::IF }));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addStatementType("2", spa::StatementType::IF);
-    pkbManager->addStatementType("3", spa::StatementType::READ);
-    pkbManager->addStatementType("4", spa::StatementType::ASSIGN);
-    pkbManager->addStatementType("5", spa::StatementType::WHILE);
+    pkbManager->addStatementType("5", spa::StatementType::READ);
+    pkbManager->addStatementType("6", spa::StatementType::ASSIGN);
+    pkbManager->addStatementType("7", spa::StatementType::WHILE);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
@@ -807,14 +680,14 @@ public:
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addStatementType("2", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("3", spa::StatementType::IF);
-    pkbManager->addStatementType("4", spa::StatementType::WHILE);
-    pkbManager->addStatementType("5", spa::StatementType::IF);
+    pkbManager->addStatementType("7", spa::StatementType::WHILE);
+    pkbManager->addStatementType("10", spa::StatementType::IF);
     pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "3");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "4");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "5");
-    pkbManager->addRelationship(spa::FOLLOWS_STAR, "4", "5");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "2", "10");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "7");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "3", "10");
+    pkbManager->addRelationship(spa::FOLLOWS_STAR, "7", "10");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
