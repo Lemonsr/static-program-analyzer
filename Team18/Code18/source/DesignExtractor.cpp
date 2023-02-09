@@ -30,7 +30,8 @@ void spa::DesignExtractor::extractParentAbstraction(std::vector<ProgramStatement
     if (dynamic_cast<ContainerStatement*>(statement)) {
       auto containerStatement = dynamic_cast<ContainerStatement*>(statement);
       extractParent(containerStatement);
-      extractParentStar(containerStatement, containerStatement->getStatementLineNum());
+      extractParentStar(containerStatement,
+        std::to_string(containerStatement->getStatementLineNum()));
     }
   }
 }
@@ -100,27 +101,32 @@ void spa::DesignExtractor::extractParent(ContainerStatement* containerStatement)
 }
 
 void spa::DesignExtractor::extractParentStar(ContainerStatement* containerStatement,
-                                             int ancestorLineNum) {
+                                             std::string ancestorLineNum) {
   std::vector<ProgramStatement*> statementList = containerStatement->getStatementList();
   for (ProgramStatement* statement : statementList) {
     std::string parentStmtOne = std::to_string(containerStatement->getStatementLineNum());
-    if (statement->getStatementLineNum() == containerStatement->getStatementLineNum()) {
+    std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
+
+    if (parentStmtOne == parentStmtTwo) {
       continue;
     }
-    if (statement->getStatementLineNum() != -1) {
-      std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
-      pkbManager.addRelationship(PARENT_STAR, parentStmtOne, parentStmtTwo);
+    if (parentStmtTwo != "-1") {
+      pkbManager.addRelationship(PARENT_STAR, ancestorLineNum, parentStmtTwo);
       continue;
     }
+
     auto innerBlockStatements = dynamic_cast<ContainerStatement*>(statement);
     std::vector<ProgramStatement*> innerBlockStmtList = innerBlockStatements->getStatementList();
+
     for (ProgramStatement* childStatement : innerBlockStmtList) {
-      std::string parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
-      pkbManager.addRelationship(PARENT_STAR, parentStmtOne, parentStmtTwo);
+      parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
+      pkbManager.addRelationship(PARENT_STAR, ancestorLineNum, parentStmtTwo);
+
       if (dynamic_cast<ContainerStatement*>(childStatement)) {
         auto childContainerStmt = dynamic_cast<ContainerStatement*>(childStatement);
         extractParentStar(childContainerStmt, ancestorLineNum);
-        extractParentStar(childContainerStmt, childStatement->getStatementLineNum());
+        extractParentStar(childContainerStmt,
+          std::to_string(childStatement->getStatementLineNum()));
       }
     }
   }

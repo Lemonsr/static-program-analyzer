@@ -12,7 +12,7 @@
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
-TEST_CLASS(TestDesignExtractorFollowsStar) {
+TEST_CLASS(TestDesignExtractorParentStar) {
   std::string varA = "a";
   std::string varB = "b";
   std::string varC = "c";
@@ -71,7 +71,7 @@ TEST_CLASS(TestDesignExtractorFollowsStar) {
   std::vector<spa::Token> tokenList{};
 
 public:
-  TEST_METHOD(TestExtractSingleFollowsStarWithNoNesting) {
+  TEST_METHOD(TestExtractParentStarNoNesting) {
     /*
      *   procedure a {
      * 1. b = 1;
@@ -100,62 +100,19 @@ public:
 
     spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, "1", {});
     spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, "2", {});
-    spa::QueryResult firstRes = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+    spa::QueryResult firstRes = pkbManager->getRelationship(spa::PARENT_STAR,
       spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
     Assert::IsTrue(firstRes.getQueryResultType() == spa::BOOL);
 
     bool testFirstFollows = firstRes.getIsTrue();
 
-    bool expectedFirstFollows = true;
+    bool expectedFirstFollows = false;
 
     Assert::IsTrue(expectedFirstFollows == testFirstFollows);
   }
 
-  TEST_METHOD(TestExtractMultipleFollowsStarWithNoNesting) {
-    /*
-     *   procedure a {
-     * 1. b = 1;
-     * 2. c = b;
-     * 3. d = b - c;
-     *  }
-     */
-    tokenList = {
-      tokenProcedure, tokenA, tokenOpenBrace,
-      tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-      tokenC, tokenAssign, tokenB, tokenSemiColon,
-      tokenD, tokenAssign, tokenB, tokenMinusOp, tokenC, tokenSemiColon,
-      tokenCloseBrace
-    };
-    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
-      tokenStream.pushBack(token);
-    }
-
-    spa::PKBManager* pkbManager = new spa::PKB();
-
-    auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 1);
-
-    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
-    designExtractor.extractRelationship();
-
-    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-      {"1", "2"}, {"2", "3"}, {"1", "3"}
-    };
-
-    for (auto pair : positiveResTestCases) {
-      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
-        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsTrue(testFollowStar);
-    }
-  }
-
-  TEST_METHOD(TestExtractFollowsStarWithWhileNesting) {
+  TEST_METHOD(TestExtractParentStarWithWhileNesting) {
     /*
      *   procedure a {
      * 1. b = 1;
@@ -192,33 +149,33 @@ public:
     designExtractor.extractRelationship();
 
     std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-      {"1", "2"}, {"3", "4"}, {"2", "5"}, {"1", "5"}
+      {"2", "3"}, {"2", "4"}
     };
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsTrue(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsTrue(testParentStar);
     }
 
     std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"2", "3"}, {"2", "4"}, {"3", "5"}, {"4", "5"}
+      {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1", "5"}, {"3", "4"}, {"3", "5"}, {"4", "5"}
     };
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsFalse(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsFalse(testParentStar);
     }
   }
 
-  TEST_METHOD(TestExtractFollowsStarWithIfNesting) {
+  TEST_METHOD(TestExtractParentStarWithIfNesting) {
     /*
      *   procedure a {
      * 1. b = 1;
@@ -261,59 +218,58 @@ public:
     designExtractor.extractRelationship();
 
     std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-      {"1", "2"}, {"3", "4"}, {"5", "6"}, {"1", "7"}, {"2", "7"},
+      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"2", "6"}
     };
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsTrue(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsTrue(testParentStar);
     }
 
     std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"2", "3"}, {"2", "4"}, {"3", "5"}, {"3", "6"}, {"4", "5"}, {"4", "6"},
-      {"3", "7"}, {"4", "7"}, {"5", "7"}, {"6", "7"}
+      {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"3", "4"},
+      {"3", "5"}, {"3", "6"}, {"3", "7"}, {"4", "5"}, {"4", "6"}, {"4", "7"}, {"5", "6"},
+      {"5", "7"}, {"6", "7"}
     };
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsFalse(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsFalse(testParentStar);
     }
   }
 
-  TEST_METHOD(TestExtractFollowsStarWhileNestedWhile) {
+  TEST_METHOD(TestExtractParentStarWhileNestedWhile) {
     /*
     *   procedure a {
-    * 1. d = b;
-    * 2. while (b >= 1) {
+    * 1. while (b >= 1) {
+    * 2.   d = b;
     * 3.   d = b;
     * 4.   while (b >= 1) {
     * 5.    d = b;
     * 6.    d = b;
     *      }
     *    }
-    * 7. d = b;
     *  }
     */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
       tokenCloseBracket, tokenOpenBrace,
+      tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
       tokenCloseBracket, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenCloseBrace, tokenCloseBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
@@ -331,69 +287,60 @@ public:
     designExtractor.extractRelationship();
 
     std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-      {"1", "2"}, {"1", "7"}, {"2", "7"}, {"3", "4"}, {"5", "6"}
+      {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"4", "5"}, {"4", "6"}
     };
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsTrue(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsTrue(testParentStar);
     }
 
     std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"2", "3"}, {"2", "4"}, {"2", "5"},
-      {"2", "6"}, {"3", "5"}, {"3", "6"}, {"4", "5"}, {"4", "6"}, {"5", "7"}, {"6", "7"}
+      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"2", "6"}, {"3", "4"}, {"3", "5"}, {"3", "6"}, {"5", "6"}
     };
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsFalse(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsFalse(testParentStar);
     }
   }
 
-  TEST_METHOD(TestExtractFollowsStarIfNestedThen) {
+  TEST_METHOD(TestExtractParentStarIfNestedThen) {
     /*
      *   procedure a {
-     * 1. b = 1;
-     * 2. if (b >= 1) then {
-     * 3.   d = b;
-     * 4.   if (b >= 1) then {
-     * 5.     d = b;
-     * 6.     d = b;
+     * 1. if (b >= 1) then {
+     * 2.   d = b;
+     * 3.   if (b >= 1) then {
+     * 4.     d = b;
      *      } else {
-     * 7.     d = b;
-     * 8.     d = b;
+     * 5.     d = b;
      *      }
      *    } else {
-     * 9.   d = b;
+     * 6.   d = b;
      *    }
-     * 10. d = b;
      *  }
      */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
-      tokenB, tokenAssign, tokenConstant, tokenSemiColon,
       tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
       tokenCloseBracket, tokenThen, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant, tokenThen,
-      tokenOpenBrace, tokenD, tokenAssign, tokenB, tokenSemiColon,
+      tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
       tokenElse, tokenOpenBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
       tokenCloseBrace, tokenElse, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace
+      tokenCloseBrace, tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto token : tokenList) {
@@ -410,73 +357,59 @@ public:
     designExtractor.extractRelationship();
 
     std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-      {"1", "2"}, {"1", "10"}, {"2", "10"}, {"3", "4"}, {"5", "6"}, {"7", "8"}
+      {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"3", "4"}, {"3", "5"}
     };
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsTrue(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsTrue(testParentStar);
     }
 
     std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"1", "8"}, {"1", "9"},
-      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"2", "6"}, {"2", "7"}, {"2", "8"}, {"2", "9"},
-      {"3", "5"}, {"3", "6"}, {"3", "7"}, {"3", "8"}, {"3", "9"}, {"3", "10"}, {"4", "5"},
-      {"4", "6"}, {"4", "7"}, {"4", "8"}, {"4", "9"}, {"4", "10"}, {"5", "7"}, {"5", "8"},
-      {"5", "9"}, {"5", "10"}, {"6", "7"}, {"6", "8"}, {"6", "9"}, {"6", "10"}, {"7", "9"},
-      {"7", "10"}, {"8", "9"}, {"8", "10"}, {"9", "10"}
+      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"2", "6"}, {"3", "6"}, {"4", "5"}, {"4", "6"}, {"5", "6"}
     };
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsFalse(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsFalse(testParentStar);
     }
   }
 
-  TEST_METHOD(TestExtractFollowsStarIfNestedElse) {
+  TEST_METHOD(TestExtractParentStarIfNestedElse) {
     /*
      *   procedure a {
-     * 1. b = 1;
-     * 2. if (b >= 1) then {
-     * 3.   d = b;
+     * 1. if (b >= 1) then {
+     * 2.   d = b;
      *    } else {
-     * 4.   if (b >= 1) then {
-     * 5.     d = b;
-     * 6.     d = b;
+     * 3.   if (b >= 1) then {
+     * 4.     d = b;
      *      } else {
-     * 7.     d = b;
-     * 8.     d = b;
+     * 5.     d = b;
      *      }
-     * 9.   d = b;
+     * 6.   d = b;
      *    }
-     * 10. d = b;
      *  }
      */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
-      tokenB, tokenAssign, tokenConstant, tokenSemiColon,
       tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
       tokenCloseBracket, tokenThen, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenCloseBrace, tokenElse, tokenOpenBrace,
       tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant, tokenThen,
-      tokenOpenBrace, tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
+      tokenOpenBrace, tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
       tokenElse, tokenOpenBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace
+      tokenCloseBrace, tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto token : tokenList) {
@@ -493,67 +426,55 @@ public:
     designExtractor.extractRelationship();
 
     std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-      {"1", "2"}, {"1", "10"}, {"2", "10"}, {"5", "6"}, {"7", "8"}, {"4", "9"}
+      {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"3", "4"}, {"3", "5"}
     };
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsTrue(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsTrue(testParentStar);
     }
 
     std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"1", "8"}, {"1", "9"},
-      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"2", "6"}, {"2", "7"}, {"2", "8"}, {"2", "9"},
-      {"3", "4"}, {"3", "5"}, {"3", "6"}, {"3", "7"}, {"3", "8"}, {"3", "9"}, {"3", "10"},
-      {"4", "5"}, {"4", "6"}, {"4", "7"}, {"4", "8"}, {"4", "10"}, {"5", "7"}, {"5", "8"},
-      {"5", "9"}, {"5", "10"}, {"6", "7"}, {"6", "8"}, {"6", "9"}, {"6", "10"}, {"7", "9"},
-      {"7", "10"}, {"8", "9"}, {"8", "10"}, {"9", "10"}
+      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"2", "6"}, {"3", "6"}, {"4", "5"}, {"4", "6"}, {"5", "6"}
     };
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsFalse(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsFalse(testParentStar);
     }
   }
 
-  TEST_METHOD(TestExtractFollowsStarWhileNestedThen) {
+  TEST_METHOD(TestExtractParentStarWhileNestedThen) {
     /*
      *   procedure a {
-     * 1. b = 1;
-     * 2. if (b >= 1) then {
-     * 3.   d = b;
-     * 4.   while (b >= 1) {
-     * 5.     d = b;
-     * 6.     d = b;
+     * 1. if (b >= 1) then {
+     * 2.   d = b;
+     * 3.   while (b >= 1) {
+     * 4.     d = b;
      *      }
      *    } else {
-     * 7.   d = b;
+     * 5.   d = b;
      *    }
-     * 8. d = b;
      *  }
      */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
-      tokenB, tokenAssign, tokenConstant, tokenSemiColon,
       tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
       tokenCloseBracket, tokenThen, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-      tokenOpenBrace, tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
+      tokenOpenBrace, tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
       tokenCloseBrace, tokenElse, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace
+      tokenCloseBrace, tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto token : tokenList) {
@@ -570,65 +491,55 @@ public:
     designExtractor.extractRelationship();
 
     std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-      {"1", "2"}, {"3", "4"}, {"5", "6"}, {"1", "8"}, {"2", "8"},
+      {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1", "5"}, {"3", "4"}
     };
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsTrue(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsTrue(testParentStar);
     }
 
     std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"2", "3"}, {"2", "4"},
-      {"2", "5"}, {"2", "6"}, {"2", "7"}, {"3", "5"}, {"3", "6"}, {"3", "7"}, {"3", "8"},
-      {"4", "5"}, {"4", "6"}, {"4", "7"}, {"4", "8"}, {"5", "7"}, {"5", "8"}, {"6", "7"},
-      {"6", "8"}, {"7", "8"}
+      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"3", "5"}, {"4", "5"}
     };
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsFalse(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsFalse(testParentStar);
     }
   }
 
-  TEST_METHOD(TestExtractFollowsStarWhileNestedElse) {
+  TEST_METHOD(TestExtractParentStarWhileNestedElse) {
     /*
      *   procedure a {
-     * 1. b = 1;
-     * 2. if (b >= 1) then {
-     * 3.   d = b;
+     * 1. if (b >= 1) then {
+     * 2.   d = b;
      *    } else {
-     * 4.   while (b >= 1) {
-     * 5.     d = b;
-     * 6.     d = b;
+     * 3.   while (b >= 1) {
+     * 4.     d = b;
      *      }
-     * 7.   d = b;
+     * 5.   d = b;
      *    }
-     * 8. d = b;
      *  }
      */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
-      tokenB, tokenAssign, tokenConstant, tokenSemiColon,
       tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
       tokenCloseBracket, tokenThen, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenCloseBrace, tokenElse, tokenOpenBrace,
       tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-      tokenOpenBrace, tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
+      tokenOpenBrace, tokenD, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace
+      tokenCloseBrace, tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto token : tokenList) {
@@ -645,68 +556,56 @@ public:
     designExtractor.extractRelationship();
 
     std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-      {"1", "2"}, {"1", "8"}, {"2", "8"}, {"4", "7"}, {"5", "6"},
+      {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1", "5"}, {"3", "4"}
     };
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsTrue(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsTrue(testParentStar);
     }
 
     std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"2", "3"}, {"2", "4"},
-      {"2", "5"}, {"2", "6"}, {"2", "7"}, {"3", "4"}, {"3", "5"}, {"3", "6"}, {"3", "7"},
-      {"3", "8"}, {"4", "5"}, {"4", "6"}, {"4", "8"}, {"5", "7"}, {"5", "8"}, {"6", "7"},
-      {"6", "8"}, {"7", "8"}
+      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"3", "5"}, {"4", "5"}
     };
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsFalse(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsFalse(testParentStar);
     }
   }
 
-  TEST_METHOD(TestExtractFollowsStarIfNestedWhile) {
+  TEST_METHOD(TestExtractParentStarIfNestedWhile) {
     /*
      *   procedure a {
-     * 1. d = b;
-     * 2. while (b >= 1) {
-     * 3.   d = b;
-     * 4.   if (b >= 1) then {
+     * 1. while (b >= 1) {
+     * 2.   d = b;
+     * 3.   if (b >= 1) then {
+     * 4.    d = b;
+     *      } else {
      * 5.    d = b;
-     * 6.    d = b;
-     *      } else {
-     * 7.    d = b;
-     * 8.    d = b;
      *      }
      *    }
-     * 9. d = b;
      *  }
      */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
       tokenCloseBracket, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
       tokenCloseBracket, tokenThen, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
       tokenCloseBrace, tokenElse, tokenOpenBrace,
       tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace, tokenCloseBrace,
-      tokenD, tokenAssign, tokenB, tokenSemiColon,
-      tokenCloseBrace
+      tokenCloseBrace, tokenCloseBrace, tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto token : tokenList) {
@@ -723,34 +622,29 @@ public:
     designExtractor.extractRelationship();
 
     std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-      {"1", "2"}, {"1", "9"}, {"2", "9"}, {"3", "4"}, {"5", "6"}, {"7", "8"}
+      {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1", "5"}, {"3", "4"}, {"3", "5"}
     };
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsTrue(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsTrue(testParentStar);
     }
 
     std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"1", "8"}, {"2", "3"},
-      {"2", "4"}, {"2", "5"}, {"2", "6"}, {"2", "7"}, {"2", "8"}, {"3", "5"}, {"3", "6"},
-      {"3", "7"},
-      {"3", "8"}, {"3", "9"}, {"4", "5"}, {"4", "6"}, {"4", "7"}, {"4", "8"}, {"4", "9"},
-      {"5", "7"}, {"5", "8"},
-      {"5", "9"}, {"6", "7"}, {"6", "8"}, {"6", "9"}, {"7", "9"}, {"8", "9"}
+      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"4", "5"}
     };
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
-      spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS_STAR,
+      spa::QueryResult results = pkbManager->getRelationship(spa::PARENT_STAR,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-      bool testFollowStar = results.getIsTrue();
-      Assert::IsFalse(testFollowStar);
+      bool testParentStar = results.getIsTrue();
+      Assert::IsFalse(testParentStar);
     }
   }
 };
