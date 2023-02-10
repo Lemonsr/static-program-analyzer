@@ -8,7 +8,7 @@
 #include "Token.h"
 
 namespace spa {
-    class Token;
+class Token;
 }
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
@@ -1999,4 +1999,4 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
     };
-} //  namespace UnitTesting
+}  //  namespace UnitTesting
