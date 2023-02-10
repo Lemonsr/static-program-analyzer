@@ -1,0 +1,80 @@
+1 - Follows (lineNum, lineNum)
+assign a;
+Select a such that Follows(1, 2)
+true
+5000
+2 - Follows (lineNum, stmt)
+stmt s;
+Select s such that Follows(1, s)
+1
+5000
+3 - Follows (lineNum, print)
+print pn;
+Select pn such that Follows(1, pn)
+3
+5000
+4 - Follows (assign, lineNum)
+assign a;
+Select a such that Follows(3, a)
+4
+5000
+5 - Follows (print, lineNum)
+print pn;
+Select pn such that Follows(2, pn)
+3
+5000
+6 - Follows (lineNum, underscore)
+stmt s;
+Select s such that Follows(4, _)
+5
+5000
+7 - Follows (underscore, lineNum)
+print pn;
+Select pn such that Follows(_, 3)
+2
+5000
+8 - Follows (assign, stmt)
+stmt s; assign a;
+Select s such that Follows(s, a)
+2, 3, 4
+5000
+9 - Follows (assign, print)
+print pn; assign a;
+Select a such that Follows(a, pn)
+1
+5000
+10 - Follows (print, assign)
+print pn; assign a;
+Select pn such that Follows(pn, a)
+2
+5000
+11 - Follows (stmt, stmt)
+stmt s1; stmt s2;
+Select s2 such that Follows(s1, s2)
+2, 3, 4, 5
+5000
+12 - Follows (stmt, underscore)
+stmt s1;
+Select s1 such that Follows(s1, _)
+1, 2, 3, 4
+5000
+13 - Follows (print, underscore)
+print pn;
+Select pn such that Follows(pn, _)
+2
+5000
+14 - Follows (underscore, assign)
+assign a;
+Select a such that Follows(_, a)
+2, 3, 4, 5
+5000
+15 - Follows (underscore, print)
+print pn;
+Select pn such that Follows(_, pn)
+1
+5000
+16 - Follows (underscore, underscore)
+assign a;
+Select a such that Follows(_, _)
+1, 2, 3
+5000
