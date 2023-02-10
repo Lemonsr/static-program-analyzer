@@ -67,8 +67,22 @@ TEST_CLASS(TestDesignExtractorFollowsStar) {
   spa::Token tokenElse = spa::Token(spa::TOKEN_ELSE, elseString);
   spa::Token tokenWhile = spa::Token(spa::TOKEN_WHILE, whileString);
 
-
   std::vector<spa::Token> tokenList{};
+
+  std::vector<std::pair<std::string, std::string>> generateNegTestCase(
+    int num, const std::vector<std::pair<std::string, std::string>>& exclude) {
+    std::vector<std::pair<std::string, std::string>> result;
+    for (int i = 1; i <= num; ++i) {
+      for (int j = i + 1; j <= num; ++j) {
+        std::pair<std::string, std::string> currentPair = std::make_pair(std::to_string(i),
+          std::to_string(j));
+        if (std::find(exclude.begin(), exclude.end(), currentPair) == exclude.end()) {
+          result.push_back(currentPair);
+        }
+      }
+    }
+    return result;
+  }
 
 public:
   TEST_METHOD(TestExtractSingleFollowsStarWithNoNesting) {
@@ -204,9 +218,8 @@ public:
       Assert::IsTrue(testFollowStar);
     }
 
-    std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"2", "3"}, {"2", "4"}, {"3", "5"}, {"4", "5"}
-    };
+    std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(5,
+      positiveResTestCases);
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
@@ -273,10 +286,8 @@ public:
       Assert::IsTrue(testFollowStar);
     }
 
-    std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"2", "3"}, {"2", "4"}, {"3", "5"}, {"3", "6"}, {"4", "5"}, {"4", "6"},
-      {"3", "7"}, {"4", "7"}, {"5", "7"}, {"6", "7"}
-    };
+    std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(7,
+      positiveResTestCases);
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
@@ -343,10 +354,8 @@ public:
       Assert::IsTrue(testFollowStar);
     }
 
-    std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"2", "3"}, {"2", "4"}, {"2", "5"},
-      {"2", "6"}, {"3", "5"}, {"3", "6"}, {"4", "5"}, {"4", "6"}, {"5", "7"}, {"6", "7"}
-    };
+    std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(7,
+      positiveResTestCases);
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
@@ -422,14 +431,8 @@ public:
       Assert::IsTrue(testFollowStar);
     }
 
-    std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"1", "8"}, {"1", "9"},
-      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"2", "6"}, {"2", "7"}, {"2", "8"}, {"2", "9"},
-      {"3", "5"}, {"3", "6"}, {"3", "7"}, {"3", "8"}, {"3", "9"}, {"3", "10"}, {"4", "5"},
-      {"4", "6"}, {"4", "7"}, {"4", "8"}, {"4", "9"}, {"4", "10"}, {"5", "7"}, {"5", "8"},
-      {"5", "9"}, {"5", "10"}, {"6", "7"}, {"6", "8"}, {"6", "9"}, {"6", "10"}, {"7", "9"},
-      {"7", "10"}, {"8", "9"}, {"8", "10"}, {"9", "10"}
-    };
+    std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(10,
+      positiveResTestCases);
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
@@ -505,14 +508,8 @@ public:
       Assert::IsTrue(testFollowStar);
     }
 
-    std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"1", "8"}, {"1", "9"},
-      {"2", "3"}, {"2", "4"}, {"2", "5"}, {"2", "6"}, {"2", "7"}, {"2", "8"}, {"2", "9"},
-      {"3", "4"}, {"3", "5"}, {"3", "6"}, {"3", "7"}, {"3", "8"}, {"3", "9"}, {"3", "10"},
-      {"4", "5"}, {"4", "6"}, {"4", "7"}, {"4", "8"}, {"4", "10"}, {"5", "7"}, {"5", "8"},
-      {"5", "9"}, {"5", "10"}, {"6", "7"}, {"6", "8"}, {"6", "9"}, {"6", "10"}, {"7", "9"},
-      {"7", "10"}, {"8", "9"}, {"8", "10"}, {"9", "10"}
-    };
+    std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(10,
+      positiveResTestCases);
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
@@ -582,12 +579,8 @@ public:
       Assert::IsTrue(testFollowStar);
     }
 
-    std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"2", "3"}, {"2", "4"},
-      {"2", "5"}, {"2", "6"}, {"2", "7"}, {"3", "5"}, {"3", "6"}, {"3", "7"}, {"3", "8"},
-      {"4", "5"}, {"4", "6"}, {"4", "7"}, {"4", "8"}, {"5", "7"}, {"5", "8"}, {"6", "7"},
-      {"6", "8"}, {"7", "8"}
-    };
+    std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(8,
+      positiveResTestCases);
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
@@ -657,12 +650,8 @@ public:
       Assert::IsTrue(testFollowStar);
     }
 
-    std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"2", "3"}, {"2", "4"},
-      {"2", "5"}, {"2", "6"}, {"2", "7"}, {"3", "4"}, {"3", "5"}, {"3", "6"}, {"3", "7"},
-      {"3", "8"}, {"4", "5"}, {"4", "6"}, {"4", "8"}, {"5", "7"}, {"5", "8"}, {"6", "7"},
-      {"6", "8"}, {"7", "8"}
-    };
+    std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(8,
+      positiveResTestCases);
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
@@ -735,14 +724,8 @@ public:
       Assert::IsTrue(testFollowStar);
     }
 
-    std::vector<std::pair<std::string, std::string>> negResTestCases = {
-      {"1", "3"}, {"1", "4"}, {"1", "5"}, {"1", "6"}, {"1", "7"}, {"1", "8"}, {"2", "3"},
-      {"2", "4"}, {"2", "5"}, {"2", "6"}, {"2", "7"}, {"2", "8"}, {"3", "5"}, {"3", "6"},
-      {"3", "7"},
-      {"3", "8"}, {"3", "9"}, {"4", "5"}, {"4", "6"}, {"4", "7"}, {"4", "8"}, {"4", "9"},
-      {"5", "7"}, {"5", "8"},
-      {"5", "9"}, {"6", "7"}, {"6", "8"}, {"6", "9"}, {"7", "9"}, {"8", "9"}
-    };
+    std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(9,
+      positiveResTestCases);
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
