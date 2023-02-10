@@ -1284,7 +1284,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        //procedure z {if () {} else {} then {}}
+        //  procedure z {if () {} else {} then {}}
         TEST_METHOD(TestSpValidatorInvalidIfSix) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({ spa::TOKEN_PROCEDURE, "procedure" });
@@ -1306,7 +1306,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
             }
 
-        //procedure z {if () {} else {} }
+        //  procedure z {if () {} else {} }
         TEST_METHOD(TestSpValidatorInvalidIfSeven) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({ spa::TOKEN_PROCEDURE, "procedure" });
