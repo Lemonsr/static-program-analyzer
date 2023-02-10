@@ -9,7 +9,15 @@ namespace spa {
 class SpValidator {
  public:
         explicit SpValidator(Stream<Token> tokens);
-        void validateGrammar();
+        bool validateGrammar();
+
+        bool isValidCondExprToken(Token) const;
+        bool isValidRelExprToken(Token) const;
+        bool isValidTermToken(Token) const;
+        bool isValidRelFactorToken(Token) const;
+        bool isValidExprToken(Token) const;
+
+
 
  private:
         std::unordered_set<TokenType> condExprToken = {TOKEN_BOOL_AND, TOKEN_BOOL_OR};
@@ -44,12 +52,6 @@ class SpValidator {
         static bool isValidCloseBrace(Token token);
         static bool isValidOpenBracket(Token token);
         static bool isValidCloseBracket(Token token);
-
-        bool isValidCondExprToken(Token) const;
-        bool isValidRelExprToken(Token) const;
-        bool isValidTermToken(Token) const;
-        bool isValidRelFactorToken(Token) const;
-        bool isValidExprToken(Token) const;
 
         void validateProcedure();
         void validateStmtLst();

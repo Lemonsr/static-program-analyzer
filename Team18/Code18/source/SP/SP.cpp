@@ -17,13 +17,19 @@ spa::SP::SP(std::string source, PKBManager& pkbManager) :
 void spa::SP::processSource() {
     Stream<Token> convertedTokens = convertToken();
     SpValidator validator(convertedTokens);
-    // std::cout << "TESTING VALIDATOR" << std::endl;
-    // for (int64_t i = 0; i < convertedTokens.remaining(); i++) {
+    //  std::cout << "TESTING VALIDATOR" << std::endl;
+    //  for (int64_t i = 0; i < convertedTokens.remaining(); i++) {
     //    std::cout << "Type: " << convertedTokens[i].getType() <<
     //        ", Value: " << convertedTokens[i].getValue() << std::endl;
-    //}
-     std::cout << "END OF TESTING" << std::endl;
-    validator.validateGrammar();
+    //  }
+    //  std::cout << "END OF TESTING" << std::endl;
+    try {
+        validator.validateGrammar();
+    }
+    catch (std::exception e) {
+        std::cerr << e.what() << std::endl << std::endl;
+        exit(1);
+    }
     SpParser parser = SpParser(convertedTokens);
     std::vector<ProcedureStatement> procedureList = parser.parse();
     DesignExtractor designExtractor = DesignExtractor(pkbManager, procedureList);
@@ -45,8 +51,16 @@ spa::Stream<spa::Token> spa::SP::convertToken() {
         std::string currTokenValue = currToken.getValue();
         bool isValidTokenName = stmtTokensMap.count(currTokenValue);
         if (isValidTokenName) {
+            // e.g. [i-1] => "print", [i] => "print" => continue
+            // e.g. [i-1] => "read", [i] => "print" => continue
+            // [i] should remain as TOKEN_NAME
+            if (i > 0 && (tokens[i - 1].getValue() == currTokenValue ||
+                stmtTokensMap.count(tokens[i - 1].getValue()))) {
+                continue;
+            }
             tokens[i] = Token(stmtTokensMap.at(currTokenValue), currTokenValue);
         }
     }
     return tokens;
 }
+

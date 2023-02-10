@@ -10,7 +10,7 @@ spa::SpValidator::SpValidator(Stream<Token> t) : tokens(t) {
     procNames = std::unordered_set<std::string>();
 }
 
-void spa::SpValidator::validateGrammar() {
+bool spa::SpValidator::validateGrammar() {
     while (hasRemaining()) {
         Token currToken = getToken();
         if (currToken.getType() != TOKEN_PROCEDURE) {
@@ -18,6 +18,7 @@ void spa::SpValidator::validateGrammar() {
         }
         validateProcedure();
     }
+    return true;
 }
 
 bool spa::SpValidator::isValidCondExprToken(Token token) const {
