@@ -15,7 +15,7 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
     TEST_CLASS(TestSpValidator) {
-        // procedure proc {}
+        //  procedure proc {}
         TEST_METHOD(TestSpValidatorValidProcOne) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -26,7 +26,18 @@ namespace UnitTesting {
             Assert::IsTrue(validator.validateGrammar());
         }
 
-        // procedure procedure {}
+        //  procedure print {}
+        TEST_METHOD(TestSpValidatorValidProcTwo) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({ spa::TOKEN_PROCEDURE, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "print" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            spa::SpValidator validator(tokens);
+            Assert::IsTrue(validator.validateGrammar());
+        }
+
+        //  procedure procedure {}
         TEST_METHOD(TestSpValidatorValidProcThree) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -37,7 +48,7 @@ namespace UnitTesting {
             Assert::IsTrue(validator.validateGrammar());
         }
 
-        // procedure 123 { x = z + v; }
+        //  procedure 123 { x = z + v; }
         TEST_METHOD(TestSpValidatorInvalidProcOne) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -54,7 +65,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        // procedure{}
+        //  procedure{}
         TEST_METHOD(TestSpValidatorInvalidProcTwo) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -64,7 +75,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        // procedure 1{}
+        //  procedure 1{}
         TEST_METHOD(TestSpValidatorInvalidProcThree) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -75,7 +86,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        // procedure proc {;}
+        //  procedure proc {;}
         TEST_METHOD(TestSpValidatorInvalidProcFour) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -87,7 +98,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        // procedure proc ;
+        //  procedure proc ;
         TEST_METHOD(TestSpValidatorInvalidProcFive) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -97,7 +108,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        // procedure ;
+        //  procedure ;
         TEST_METHOD(TestSpValidatorInvalidProcSix) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -106,7 +117,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        // proc { x = z + v ;}
+        //  proc { x = z + v ;}
         TEST_METHOD(TestSpValidatorInvalidProcSeven) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
@@ -122,7 +133,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        // procedure proc 12 {}
+        //  procedure proc 12 {}
         TEST_METHOD(TestSpValidatorInvalidProcEight) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
@@ -133,7 +144,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        // procedure proc {
+        //  procedure proc {
         TEST_METHOD(TestSpValidatorInvalidProcNine) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -143,19 +154,30 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        // procedure proc }
+        //  procedure proc }
         TEST_METHOD(TestSpValidatorInvalidProcTen) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
-            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "}"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
+            spa::SpValidator validator(tokens);
+            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+        }
+
+        //  procedure proc{ () }
+        TEST_METHOD(TestSpValidatorInvalidProcEleven) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({ spa::TOKEN_PROCEDURE, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "proc" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
         // procedure a {} procedure b {} procedure proc { 'stmt' }
-
-
         // procedure a {} procedure b {} procedure proc { read print;}
         TEST_METHOD(TestSpValidatorValidReadOne) {
             spa::Stream<spa::Token> tokens;
