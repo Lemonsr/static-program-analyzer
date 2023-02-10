@@ -8,7 +8,7 @@
 #include "Token.h"
 
 namespace spa {
-class Token;
+    class Token;
 }
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
@@ -564,8 +564,27 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_MODULO, "%"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
             tokens.pushBack({spa::TOKEN_INTEGER, "5"});
-            tokens.pushBack({spa::TOKEN_MULTIPLY, "*"});
-            tokens.pushBack({spa::TOKEN_INTEGER, "10"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
+            spa::SpValidator validator(tokens);
+            Assert::IsTrue(validator.validateGrammar());
+        }
+
+        //  procedure z { x = 8 % ((5));}
+        TEST_METHOD(TestSpValidatorValidExprSeven) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
+            tokens.pushBack({spa::TOKEN_NAME, "z"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
+            tokens.pushBack({spa::TOKEN_NAME, "x"});
+            tokens.pushBack({spa::TOKEN_EQUAL, "="});
+            tokens.pushBack({spa::TOKEN_INTEGER, "8"});
+            tokens.pushBack({spa::TOKEN_MODULO, "%"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_INTEGER, "5"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
@@ -575,7 +594,7 @@ namespace UnitTesting {
 
 
         //  procedure z { x = 8 - (5 / ( 10 + 10))}
-        TEST_METHOD(TestSpValidatorValidExprSeven) {
+        TEST_METHOD(TestSpValidatorValidExprEight) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
@@ -600,7 +619,7 @@ namespace UnitTesting {
         }
 
         //  procedure z { x = 8 + (5 / ( 10 + 10))}
-        TEST_METHOD(TestSpValidatorValidExprEight) {
+        TEST_METHOD(TestSpValidatorValidExprNine) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
@@ -625,7 +644,7 @@ namespace UnitTesting {
         }
 
         //  procedure z { x = 8 - ((5) + (10) * (2 % (1 + 2)));}
-        TEST_METHOD(TestSpValidatorValidExprNine) {
+        TEST_METHOD(TestSpValidatorValidExprTen) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
@@ -659,10 +678,10 @@ namespace UnitTesting {
             Assert::IsTrue(validator.validateGrammar());
         }
 
-        //  procedure z { 1 + (8 % ((5)) + (10 * (((2)) / (9)
+        //  procedure z { 1 + ((8) % ((5)) + (10 * (((2)) / (9)
         //  + (2 / (4 + 8)))) + (((1)) + 7 + 10 + (2 /
-        //  (7 - 1 + (((1) % 10)) + (7) + (100 / (1 + 1 + 9 * 10)))));}
-        TEST_METHOD(TestSpValidatorValidExprTen) {
+        //  (7 - 1 + (((1) % 10)) + (7) + (100 / (1 + 1 + 9 * 10))))));}
+        TEST_METHOD(TestSpValidatorValidExprEleven) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
@@ -670,7 +689,9 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_INTEGER, "1"});
             tokens.pushBack({spa::TOKEN_PLUS, "+"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
             tokens.pushBack({spa::TOKEN_INTEGER, "8"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
             tokens.pushBack({spa::TOKEN_MODULO, "%"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
             tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
@@ -748,6 +769,96 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_INTEGER, "10"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
+            spa::SpValidator validator(tokens);
+            Assert::IsTrue(validator.validateGrammar());
+        }
+
+        //  procedure z { x = 8 % ((5) / ( 10 + 10))}
+        TEST_METHOD(TestSpValidatorValidExprTwelve) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
+            tokens.pushBack({spa::TOKEN_NAME, "z"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
+            tokens.pushBack({spa::TOKEN_NAME, "x"});
+            tokens.pushBack({spa::TOKEN_EQUAL, "="});
+            tokens.pushBack({spa::TOKEN_INTEGER, "8"});
+            tokens.pushBack({spa::TOKEN_MODULO, "%"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_INTEGER, "5"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_DIVIDE, "/"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_INTEGER, "10"});
+            tokens.pushBack({spa::TOKEN_PLUS, "+ "});
+            tokens.pushBack({spa::TOKEN_INTEGER, "10"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
+            spa::SpValidator validator(tokens);
+            Assert::IsTrue(validator.validateGrammar());
+        }
+
+        //  procedure z { x = 8 % ((5)  + (2 / ( 10 + 10)))}
+        TEST_METHOD(TestSpValidatorValidExprThirteen) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
+            tokens.pushBack({spa::TOKEN_NAME, "z"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
+            tokens.pushBack({spa::TOKEN_NAME, "x"});
+            tokens.pushBack({spa::TOKEN_EQUAL, "="});
+            tokens.pushBack({spa::TOKEN_INTEGER, "8"});
+            tokens.pushBack({spa::TOKEN_MODULO, "%"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_INTEGER, "5"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_PLUS, "+ "});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_INTEGER, "2"});
+            tokens.pushBack({spa::TOKEN_DIVIDE, "/"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_INTEGER, "10"});
+            tokens.pushBack({spa::TOKEN_PLUS, "+ "});
+            tokens.pushBack({spa::TOKEN_INTEGER, "10"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
+            spa::SpValidator validator(tokens);
+            Assert::IsTrue(validator.validateGrammar());
+        }
+
+        //  procedure z { x = 8 % ((5)  * (2 / ( 10 + 10)))}
+        TEST_METHOD(TestSpValidatorValidExprFourteen) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
+            tokens.pushBack({spa::TOKEN_NAME, "z"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
+            tokens.pushBack({spa::TOKEN_NAME, "x"});
+            tokens.pushBack({spa::TOKEN_EQUAL, "="});
+            tokens.pushBack({spa::TOKEN_INTEGER, "8"});
+            tokens.pushBack({spa::TOKEN_MODULO, "%"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_INTEGER, "5"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_MULTIPLY, "*"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_INTEGER, "2"});
+            tokens.pushBack({spa::TOKEN_DIVIDE, "/"});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_INTEGER, "10"});
+            tokens.pushBack({spa::TOKEN_PLUS, "+ "});
+            tokens.pushBack({spa::TOKEN_INTEGER, "10"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
@@ -876,7 +987,7 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
 
-        //  procedure z { x = 8 % (5 / ( 10 + 10));}
+        //  procedure z { x = 8 % ((5) / ( 10 + 10));}
         TEST_METHOD(TestSpValidatorInvalidExprEight) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
@@ -887,7 +998,10 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_INTEGER, "8"});
             tokens.pushBack({spa::TOKEN_MODULO, "%"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
+            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
             tokens.pushBack({spa::TOKEN_INTEGER, "5"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
+            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
             tokens.pushBack({spa::TOKEN_MULTIPLY, "/"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
             tokens.pushBack({spa::TOKEN_INTEGER, "10"});
@@ -1186,29 +1300,6 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_THEN, "then"});
-            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
-            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-            spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
-        }
-
-        //  procedure z { if(y >= 5) then {} else {}}
-        TEST_METHOD(TestSpValidatorValidIfSix) {
-            spa::Stream<spa::Token> tokens;
-            tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
-            tokens.pushBack({spa::TOKEN_NAME, "z"});
-            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
-            tokens.pushBack({spa::TOKEN_IF, "if"});
-            tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
-            tokens.pushBack({spa::TOKEN_NAME, "y"});
-            tokens.pushBack({spa::TOKEN_COND_GTE, " >= "});
-            tokens.pushBack({spa::TOKEN_INTEGER, "5"});
-            tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
-            tokens.pushBack({spa::TOKEN_THEN, "then"});
-            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
-            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-            tokens.pushBack({spa::TOKEN_ELSE, "else"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
@@ -1908,4 +1999,4 @@ namespace UnitTesting {
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
     };
-}  //  namespace UnitTesting
+} //  namespace UnitTesting
