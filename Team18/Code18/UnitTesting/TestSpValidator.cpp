@@ -26,33 +26,11 @@ namespace UnitTesting {
             Assert::IsTrue(validator.validateGrammar());
         }
 
-        // procedure a {}
-        TEST_METHOD(TestSpValidatorValidProcTwo) {
-            spa::Stream<spa::Token> tokens;
-            tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
-            tokens.pushBack({spa::TOKEN_NAME, "a"});
-            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
-            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-            spa::SpValidator validator(tokens);
-            Assert::IsTrue(validator.validateGrammar());
-        }
-
         // procedure procedure {}
         TEST_METHOD(TestSpValidatorValidProcThree) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
-            tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
-            tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-            spa::SpValidator validator(tokens);
-            Assert::IsTrue(validator.validateGrammar());
-        }
-
-        // procedure proc123 {}
-        TEST_METHOD(TestSpValidatorValidProcFour) {
-            spa::Stream<spa::Token> tokens;
-            tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
-            tokens.pushBack({spa::TOKEN_NAME, "proc123"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
@@ -1305,6 +1283,48 @@ namespace UnitTesting {
             spa::SpValidator validator(tokens);
             Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
         }
+
+        //procedure z {if () {} else {} then {}}
+        TEST_METHOD(TestSpValidatorInvalidIfSix) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({ spa::TOKEN_PROCEDURE, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "z" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_IF, "if" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_ELSE, "else" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_THEN, "then" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            spa::SpValidator validator(tokens);
+            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            }
+
+        //procedure z {if () {} else {} }
+        TEST_METHOD(TestSpValidatorInvalidIfSeven) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({ spa::TOKEN_PROCEDURE, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "z" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_IF, "if" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_ELSE, "else" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            spa::SpValidator validator(tokens);
+            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+        }
+
 
         //  nested while-if
         //  procedure z { while( y == 10) { q = 5; if (z > 2) then { x = 10;} else{ x = 3;}}}

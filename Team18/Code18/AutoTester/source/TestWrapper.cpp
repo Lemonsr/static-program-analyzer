@@ -31,12 +31,7 @@ void TestWrapper::parse(std::string filename) {
     const std::string source = std::string((std::istreambuf_iterator<char>(sourceFile)),
         std::istreambuf_iterator<char>());
     spa::SP sp = spa::SP(source, *pkbManager);
-    try {
-        sp.processSource();
-    } catch (std::exception e) {
-        std::cerr << e.what() << std::endl << std::endl;
-        exit(1);
-    }
+    sp.processSource();
 }
 
 // method to evaluating a query
