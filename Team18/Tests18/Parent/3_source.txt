@@ -1,0 +1,12 @@
+procedure singleIfElse {
+    read x;
+    y = 10;
+    print x;
+    if (x != 0) then {
+           y = y + x;
+           x = x - 1;
+     } else {
+           y = 10;
+     }
+     y = x + y;
+}

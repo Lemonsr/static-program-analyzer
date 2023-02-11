@@ -1,0 +1,7 @@
+procedure noNesting {
+    x = 10;
+    print  x;
+    y = 10;
+    y = x + y;
+    x = x + x;
+}

@@ -1,0 +1,7 @@
+procedure whileInIfThen {
+  if (x==1) then {
+	while(z < 0) {
+    z = x + 1; }
+}
+  else {
+    x = z + x; } }
