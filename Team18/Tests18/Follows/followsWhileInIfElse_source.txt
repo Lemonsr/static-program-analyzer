@@ -1,8 +1,8 @@
 procedure whileInIfElse {
   if (x == 1) then {
     e = f;
-    print h;
     read i;
+    print h;
   } else {
     c = d;
     while (z < 0) {
