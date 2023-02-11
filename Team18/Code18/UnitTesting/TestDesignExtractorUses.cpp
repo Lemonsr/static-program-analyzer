@@ -19,6 +19,7 @@ TEST_CLASS(TestDesignExtractorUses) {
   std::string varD = "d";
   std::string varE = "e";
   std::string varF = "f";
+  std::string varG = "g";
   std::string constant = "1";
 
   std::string openBracket = "(";
@@ -47,6 +48,7 @@ TEST_CLASS(TestDesignExtractorUses) {
   spa::Token tokenD = spa::Token(spa::TOKEN_NAME, varD);
   spa::Token tokenE = spa::Token(spa::TOKEN_NAME, varE);
   spa::Token tokenF = spa::Token(spa::TOKEN_NAME, varF);
+  spa::Token tokenG = spa::Token(spa::TOKEN_NAME, varG);
   spa::Token tokenConstant = spa::Token(spa::TOKEN_INTEGER, constant);
 
   spa::Token tokenOpenBracket = spa::Token(spa::TOKEN_OPEN_BRACKET, openBracket);
@@ -133,37 +135,35 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}
+    };
 
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesIfNestedAssignment) {
@@ -198,57 +198,35 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"2", varD}, {"3", varB}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}
+    };
 
-    lineNum = spa::PqlArgument(spa::ArgumentType::LINE_NO, "2", {});
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult thenUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    lineNum = spa::PqlArgument(spa::ArgumentType::LINE_NO, "3", {});
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult elseUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thenUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(elseUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-    bool testThenUses = thenUsesRes.getIsTrue();
-    bool testElseUses = elseUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedThenUses = true;
-    bool expectedElseUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
-    Assert::IsTrue(expectedThenUses == testThenUses);
-    Assert::IsTrue(expectedElseUses == testElseUses);
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesWhileNestedAssignment) {
@@ -280,57 +258,35 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"2", varD}, {"3", varB}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}
+    };
 
-    lineNum = spa::PqlArgument(spa::ArgumentType::LINE_NO, "2", {});
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult fourthUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    lineNum = spa::PqlArgument(spa::ArgumentType::LINE_NO, "3", {});
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult fifthUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(fourthUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(fifthUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-    bool testFourthUses = fourthUsesRes.getIsTrue();
-    bool testFifthUses = fifthUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-    bool expectedFifthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
-    Assert::IsTrue(expectedFourthUses == testFourthUses);
-    Assert::IsTrue(expectedFifthUses == testFifthUses);
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesWhileNestedWhileAssignment) {
@@ -364,37 +320,36 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"2", varD}, {"2", varB},
+      {"3", varB}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}
+    };
 
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesIfNestedThenAssignment) {
@@ -433,46 +388,37 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"1", varF}, {"2", varB},
+      {"2", varE}, {"2", varF},
+      {"3", varB}, {"4", varF}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}, {"4", varC}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varF, {});
-    spa::QueryResult fourthUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(fourthUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-    bool testFourthUses = fourthUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
-    Assert::IsTrue(expectedFourthUses == testFourthUses);
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesIfNestedElseAssignment) {
@@ -512,46 +458,37 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"1", varF}, {"2", varB},
+      {"2", varE}, {"2", varF},
+      {"3", varB}, {"4", varF}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}, {"4", varC}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varF, {});
-    spa::QueryResult fourthUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(fourthUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-    bool testFourthUses = fourthUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
-    Assert::IsTrue(expectedFourthUses == testFourthUses);
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesIfNestedWhileAssignment) {
@@ -589,46 +526,36 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"1", varF}, {"2", varB},
+      {"2", varD}, {"2", varF}, {"3", varB}, {"4", varF}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}, {"4", varC}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varF, {});
-    spa::QueryResult fourthUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(fourthUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-    bool testFourthUses = fourthUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
-    Assert::IsTrue(testFourthUses == expectedFourthUses);
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesWhileNestedThenAssignment) {
@@ -663,38 +590,36 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"2", varB}, {"2", varE},
+      {"3", varB}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}
+    };
 
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesWhileNestedElseAssignment) {
@@ -730,38 +655,36 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"2", varB}, {"2", varE},
+      {"3", varB}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}
+    };
 
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesPrintStatement) {
@@ -833,57 +756,21 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"2", varD},
+      {"3", varB}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    lineNum = spa::PqlArgument(spa::ArgumentType::LINE_NO, "2", {});
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult thenUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    lineNum = spa::PqlArgument(spa::ArgumentType::LINE_NO, "3", {});
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult elseUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thenUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(elseUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-    bool testThenUses = thenUsesRes.getIsTrue();
-    bool testElseUses = elseUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedThenUses = true;
-    bool expectedElseUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
-    Assert::IsTrue(expectedThenUses == testThenUses);
-    Assert::IsTrue(expectedElseUses == testElseUses);
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesWhileNestedPrintStatement) {
@@ -915,57 +802,21 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"2", varD},
+      {"3", varB}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    lineNum = spa::PqlArgument(spa::ArgumentType::LINE_NO, "2", {});
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult fourthUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    lineNum = spa::PqlArgument(spa::ArgumentType::LINE_NO, "3", {});
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult fifthUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(fourthUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(fifthUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-    bool testFourthUses = fourthUsesRes.getIsTrue();
-    bool testFifthUses = fifthUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-    bool expectedFifthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
-    Assert::IsTrue(expectedFourthUses == testFourthUses);
-    Assert::IsTrue(expectedFifthUses == testFifthUses);
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesWhileNestedWhilePrintStatement) {
@@ -999,39 +850,21 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varC}, {"1", varD}, {"1", varE}, {"2", varD}, {"2", varC},
+      {"3", varD}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varC, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-    bool expectedFifthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesIfNestedThenPrintStatement) {
@@ -1069,57 +902,35 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varE}, {"1", varD}, {"1", varB}, {"1", varF}, {"2", varD},
+      {"2", varF},
+      {"2", varB}, {"3", varF}, {"4", varB}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varF, {});
-    spa::QueryResult fourthUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(fourthUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-    bool testFourthUses = fourthUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
-    Assert::IsTrue(testFourthUses == expectedFourthUses);
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesIfNestedElsePrintStatement) {
     /*
      *  procedure a {
      * 1. if (e >= 1) then {
+     *    } else {
      * 2.   if (d >= 1) then {
      * 3.     print f;
-     *        } else {
+     *      } else {
      * 4.     print b;
-     *    } else { }
+     *      }
+     *    }
      *  }
      */
     tokenList = {
@@ -1147,46 +958,22 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varE}, {"1", varD}, {"1", varB}, {"1", varF}, {"2", varD},
+      {"2", varF},
+      {"2", varB}, {"3", varF}, {"4", varB}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varB, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varF, {});
-    spa::QueryResult fourthUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(fourthUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-    bool testFourthUses = fourthUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-    bool expectedFourthUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
-    Assert::IsTrue(testFourthUses == expectedFourthUses);
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesWhileNestedThenPrintStatement) {
@@ -1220,37 +1007,21 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varE}, {"1", varD}, {"1", varF}, {"2", varD}, {"2", varF},
+      {"3", varF}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varF, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesWhileNestedElsePrintStatement) {
@@ -1287,37 +1058,21 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varE}, {"1", varD}, {"1", varF}, {"2", varD}, {"2", varF},
+      {"3", varF}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varF, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
-
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
-
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
-
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
-
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
   }
 
   TEST_METHOD(TestExtractUsesIfNestedWhilePrintStatement) {
@@ -1327,8 +1082,8 @@ public:
      * 2.   if (c >= 1) {
      * 3.     print d;
      *      } else {
-     *          print f;
-     *        }
+     * 4.        print f;
+     *      }
      *    }
      *  }
      */
@@ -1355,37 +1110,208 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varD, {});
-    spa::QueryResult firstUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varC}, {"1", varE}, {"1", varD}, {"1", varF}, {"2", varD}, {"2", varF}, {"2", varC},
+      {"3", varD},
+      {"4", varF}
+    };
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
-    spa::QueryResult secondUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
+  }
 
-    variable = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varF, {});
-    spa::QueryResult thirdUsesRes = pkbManager->getRelationship(spa::USES,
-      spa::PKBQueryArg(lineNum),
-      spa::PKBQueryArg(variable));
+  TEST_METHOD(TestExtractUsesVarPrintAssignment) {
+    /*
+     *  procedure a {
+     * 1. c = d;
+     * 2. print f;
+     *  }
+     */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenSemiColon,
+      tokenPrint, tokenF, tokenSemiColon, tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
 
-    Assert::IsTrue(firstUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(secondUsesRes.getQueryResultType() == spa::BOOL);
-    Assert::IsTrue(thirdUsesRes.getQueryResultType() == spa::BOOL);
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
 
-    bool testFirstUses = firstUsesRes.getIsTrue();
-    bool testSecondUses = secondUsesRes.getIsTrue();
-    bool testThirdUses = thirdUsesRes.getIsTrue();
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"2", varF}
+    };
 
-    bool expectedFirstUses = true;
-    bool expectedSecondUses = true;
-    bool expectedThirdUses = true;
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
 
-    Assert::IsTrue(expectedFirstUses == testFirstUses);
-    Assert::IsTrue(expectedSecondUses == testSecondUses);
-    Assert::IsTrue(expectedThirdUses == testThirdUses);
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}
+    };
+
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
+  }
+
+  TEST_METHOD(TestExtractUsesIfNestedPrintAssignment) {
+    /*
+     *  procedure a {
+     * 1. if (e >= 1) then {
+     * 2.   c = d;
+     * 3.   print f;
+     *    } else {
+     * 3.   c = b;
+     * 5.   print g;
+     *    }
+     *  }
+     */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenSemiColon,
+      tokenPrint, tokenF, tokenSemiColon,
+      tokenCloseBrace,
+      tokenElse, tokenOpenBrace,
+      tokenC, tokenAssign, tokenB, tokenSemiColon,
+      tokenPrint, tokenG, tokenSemiColon,
+      tokenCloseBrace, tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varF}, {"1", varG}, {"1", varE},
+      {"2", varD}, {"3", varF}, {"4", varB}, {"5", varG}
+    };
+
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
+
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}
+    };
+
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
+  }
+
+  TEST_METHOD(TestExtractUsesWhileNestedPrintAssignment) {
+    /*
+     *  procedure a {
+     * 1. while (e >= 1) {
+     * 2.   c = d;
+     * 3.   c = b;
+     * 4.   print f;
+     *    }
+     *  }
+     */
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenSemiColon,
+      tokenC, tokenAssign, tokenB, tokenSemiColon,
+      tokenPrint, tokenF, tokenSemiColon,
+      tokenCloseBrace, tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    spa::PKBManager* pkbManager = new spa::PKB();
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
+      {"1", varD}, {"1", varB}, {"1", varE}, {"1", varF}, {"2", varD},
+      {"3", varB}, {"4", varF},
+    };
+
+    for (auto pair : positiveResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsTrue(testUSES);
+    }
+
+    std::vector<std::pair<std::string, std::string>> negResTestCases = {
+      {"1", varC}, {"2", varC}, {"3", varC}
+    };
+
+    for (auto pair : negResTestCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+        {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+        {});
+      spa::QueryResult results = pkbManager->getRelationship(spa::USES,
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool testUSES = results.getIsTrue();
+      Assert::IsFalse(testUSES);
+    }
   }
 };
-}  // namespace UnitTesting
+} // namespace UnitTesting
