@@ -1457,4 +1457,4 @@ public:
     }
   }
 };
-} // namespace UnitTesting
+}  // namespace UnitTesting
