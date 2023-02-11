@@ -1,0 +1,135 @@
+1 - Valid pattern: (synonym, _)
+assign a; variable v;
+Select a pattern a (v, _)
+1, 2, 3, 4, 5, 6
+5000
+2 - Valid pattern: (synonym, _varname_)
+assign a; variable v;
+Select a pattern a (v, _"c5"_)
+3, 4
+5000
+3 - Valid pattern: (synonym, _expr_)
+assign a; variable v;
+Select a pattern a (v, _"b5 + c5"_)
+3
+5000
+4 - Valid pattern: (synonym, varname)
+assign a; variable v;
+Select a pattern a (v, "h5")
+6
+5000
+5 - Valid pattern: (synonym, expr)
+assign a; variable v;
+Select a pattern a (v, "b5 + c5 + d5")
+3
+5000
+6 - Valid pattern: (synonym, _const_)
+assign a; variable v;
+Select a pattern a (v, _"2"_)
+1, 2
+5000
+7 - Valid pattern: (synonym, const)
+assign a; variable v;
+Select a pattern a (v, "2")
+1
+5000
+8 - Valid pattern: (_, _)
+assign a;
+Select a pattern a (_, _)
+1, 2, 3, 4, 5, 6
+5000
+9 - Valid pattern: (_, _varname_)
+assign a;
+Select a pattern a (_, _"d5"_)
+3, 4, 5
+5000
+10 - Valid pattern: (_, _expr_)
+assign a;
+Select a pattern a (_, _"d5 + e5"_)
+5
+5000
+11 - Valid pattern: (_, varname)
+assign a;
+Select a pattern a (_, "h5")
+6
+5000
+12 - Valid pattern: (_, expr)
+assign a;
+Select a pattern a (_, "(d5 + e5) * g5")
+5
+5000
+13 - Valid pattern: (_, _const_)
+assign a;
+Select a pattern a (_, _"2"_)
+1, 2
+5000
+14 - Valid pattern: (_, const)
+assign a;
+Select a pattern a (_, "2")
+1
+5000
+15 - Valid pattern: (ident, _)
+assign a;
+Select a pattern a ("a5", _)
+1, 2
+5000
+16 - Valid pattern: (ident, _varname_)
+assign a;
+Select a pattern a ("b5", _"b5"_)
+3
+5000
+17 - Valid pattern: (ident, _expr_)
+assign a;
+Select a pattern a ("b5", _"b5 + c5"_)
+3
+5000
+18 - Valid pattern: (ident, varname)
+assign a;
+Select a pattern a ("c5", "h5")
+6
+5000
+18 - Valid pattern: (ident, expr)
+assign a;
+Select a pattern a ("b5", "c5 + d5 * f5")
+4
+5000
+19 - Valid pattern: (ident, _const_)
+assign a;
+Select a pattern a ("a5", _"2"_)
+1, 2
+5000
+20 - Valid pattern: (ident, const)
+assign a;
+Select a pattern a ("a5", "2")
+1
+5000
+21 - Valid pattern: Select assign (variable, expr)
+assign a; variable v;
+Select a pattern a (v, "b5 + c5 + d5")
+3
+5000
+22 - Valid pattern: Select assign (variable, _expr_)
+assign a; variable v;
+Select a pattern a (v, _"b5 + c5"_)
+3
+5000
+23 - Valid pattern: Select assign (variable, _)
+assign a; variable v;
+Select a pattern a (v, _)
+1,2,3,4,5,6
+5000
+24 - Valid pattern: Select variable (variable, expr)
+assign a; variable v;
+Select v pattern a (v, "b5 + c5 + d5")
+b5
+5000
+25 - Valid pattern: Select variable (variable, _expr_)
+assign a; variable v;
+Select v pattern a (v, _"b5 + c5"_)
+b5
+5000
+26 - Valid pattern: Select variable (variable, _)
+assign a; variable v;
+Select v pattern a (v, _)
+a5,b5,c5
+5000
