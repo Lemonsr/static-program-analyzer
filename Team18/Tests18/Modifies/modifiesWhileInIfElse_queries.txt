@@ -1,0 +1,75 @@
+1 - comment
+stmt s;
+Select s such that Modifies(7, "z")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+5000
+2 - comment
+stmt s;
+Select s such that Modifies(10, "y")
+none
+5000
+3 - comment
+if i;
+Select i such that Modifies(9, _)
+1
+5000
+4 - comment
+variable v;
+Select v such that Modifies(8, _)
+none
+5000
+5 - comment
+variable v;
+Select v such that Modifies(9, v)
+b
+5000
+6 - comment
+variable v;
+Select v such that Modifies(3, v)
+none
+5000
+7 - comment
+stmt s;
+Select s such that Modifies(s, "z")
+1, 6, 7
+5000
+8 - comment
+stmt s;
+Select s such that Modifies(s, "f")
+none
+5000
+9 - comment
+while w;
+Select w such that Modifies(w, "z")
+6
+5000
+10 - comment
+stmt s;
+Select s such that Modifies(s, _)
+1, 2, 4, 5, 6, 7, 9 ,10
+5000
+11 - comment
+assign a;
+Select a such that Modifies(a, _)
+2, 5, 7, 10
+5000
+12 - comment
+read re;
+Select re such that Modifies(re, _)
+4, 9
+5000
+13 - comment
+stmt s; variable v;
+Select v such that Modifies(s, v)
+e, i, c, z, b, x
+5000
+14 - comment
+read re; variable v;
+Select v such that Modifies(re, v)
+b, i
+5000
+15 - comment
+if i; variable v;
+Select v such that Modifies(i, v)
+e, i, c, z, b, x
+5000

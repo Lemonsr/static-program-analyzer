@@ -12,12 +12,12 @@ test_cases = [
     'WhileinWhile'
 ]
 query_types = [
+    'Modifies',
+    'Uses',
     'Follows',
     'FollowsStar',
-    'Modifies',
     'Parent',
     'ParentStar',
-    'Uses'
 ]
 
 autotester_path = '.\\Team18\\Code18\\Release\\AutoTester.exe'
@@ -39,6 +39,7 @@ def run_autotester(test_case_prefix):
         quit()
     if find_if_fail():
         print(f'{test_case_prefix} failed\n')
+        quit()
     else:
         print(f'{test_case_prefix} passed\n')
 

@@ -1,0 +1,65 @@
+1 - comment
+stmt s;
+Select s such that Modifies(4, "y")
+1, 2, 3, 4, 5, 6
+5000
+2 - comment
+stmt s;
+Select s such that Modifies(5, "y")
+none
+5000
+3 - comment
+while w;
+Select w such that Modifies(6, _)
+3
+5000
+4 - comment
+variable v;
+Select v such that Modifies(5, v)
+x
+5000
+5 - comment
+stmt s;
+Select s such that Modifies(s, "y")
+2, 3, 4, 6
+5000
+6 - comment
+stmt s;
+Select s such that Modifies(s, "z")
+none
+5000
+7 - comment
+read re;
+Select re such that Modifies(re, "x")
+1
+5000
+8 - comment
+stmt s;
+Select s such that Modifies(s, _)
+1, 2, 3, 4, 5, 6
+5000
+9 - comment
+assign a;
+Select a such that Modifies(a, _)
+2, 4, 5, 6
+5000
+10 - comment
+read re;
+Select re such that Modifies(re, _)
+1
+5000
+11 - comment
+stmt s; variable v;
+Select v such that Modifies(s, v)
+x, y
+5000
+12 - comment
+read re; variable v;
+Select v such that Modifies(re, v)
+x
+5000
+13 - comment
+assign a; variable v;
+Select v such that Modifies(a, v)
+x, y
+5000
