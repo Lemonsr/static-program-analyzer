@@ -3,7 +3,7 @@ procedure whileInWhile {
   print x;
   y = 10;
   while (x != 0) {
-    y = y + x;
+    y = d + g;
     x = x - 1;
     read x;
     while (a != 0) {
@@ -14,5 +14,5 @@ procedure whileInWhile {
     }
     y = x + y;
   }
-  y = x + y;
+  y = a + c;
 }

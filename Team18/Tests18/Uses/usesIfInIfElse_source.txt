@@ -4,11 +4,11 @@ procedure ifInIfElse {
   i = 10;
   print x;
   if (i != 0) then {
-    print z;
+    print w;
   } else {
     if (x != 0) then {
       y = y + x;
-      x = x - 1;
+      x = z - 1;
     } else {
       y = 10;
       read z;
