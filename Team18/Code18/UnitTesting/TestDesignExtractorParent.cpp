@@ -143,8 +143,8 @@ public:
          * 
          */
         tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,tokenIf, tokenOpenBracket,
-          tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace, 
+          tokenProcedure, tokenA, tokenOpenBrace, tokenIf, tokenOpenBracket,
+          tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
           tokenC, tokenAssign, tokenB, tokenSemiColon,
           tokenD, tokenAssign, tokenB, tokenMinusOp, tokenC, tokenSemiColon,
           tokenCloseBrace, tokenElse, tokenOpenBrace, tokenE, tokenAssign, tokenB, tokenSemiColon,
@@ -372,7 +372,7 @@ public:
         designExtractor.extractRelationship();
 
         std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-          {"1", "2"}, {"1","3"}, {"1", "8"}, {"1", "9"}, {"3", "4"}, {"3", "5"}, {"3", "6"}, {"3", "7"}
+          {"1", "2"}, {"1", "3"}, {"1", "8"}, {"1", "9"}, {"3", "4"}, {"3", "5"}, {"3", "6"}, {"3", "7"}
         };
 
         for (auto pair : positiveResTestCases) {
