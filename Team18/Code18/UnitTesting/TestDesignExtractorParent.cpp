@@ -144,12 +144,12 @@ public:
          */
         tokenList = {
           tokenProcedure, tokenA, tokenOpenBrace,tokenIf, tokenOpenBracket,
-          tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
+          tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace, 
           tokenC, tokenAssign, tokenB, tokenSemiColon,
           tokenD, tokenAssign, tokenB, tokenMinusOp, tokenC, tokenSemiColon,
           tokenCloseBrace, tokenElse, tokenOpenBrace, tokenE, tokenAssign, tokenB, tokenSemiColon,
           tokenD, tokenAssign, tokenB, tokenMinusOp, tokenE, tokenSemiColon, tokenCloseBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,tokenCloseBrace
+          tokenB, tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace
         };
         spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
         for (auto token : tokenList) {
@@ -186,12 +186,12 @@ public:
             spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
             spa::QueryResult results = pkbManager->getRelationship(spa::PARENT,
                 spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
-            bool testParent= results.getIsTrue();
+            bool testParent = results.getIsTrue();
             Assert::IsFalse(testParent);
         }
     }
 
-    // same multi stmt 
+    // same multi stmt
     TEST_METHOD(TestExtractParentWithWhileNesting) {
         /*
          *   procedure a {
@@ -372,7 +372,7 @@ public:
         designExtractor.extractRelationship();
 
         std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-          {"1", "2"}, {"1","3"},{"1", "8"}, {"1", "9"}, {"3", "4"}, {"3", "5"}, {"3", "6"}, {"3", "7"}
+          {"1", "2"}, {"1","3"}, {"1", "8"}, {"1", "9"}, {"3", "4"}, {"3", "5"}, {"3", "6"}, {"3", "7"}
         };
 
         for (auto pair : positiveResTestCases) {
@@ -450,7 +450,7 @@ public:
         designExtractor.extractRelationship();
 
         std::vector<std::pair<std::string, std::string>> positiveResTestCases = {
-          {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1","9"}, {"4", "5"}, {"4", "6"}, {"4", "7"}, {"4","8"}
+          {"1", "2"}, {"1", "3"}, {"1", "4"}, {"1", "9"}, {"4", "5"}, {"4", "6"}, {"4", "7"}, {"4", "8"}
         };
 
         for (auto pair : positiveResTestCases) {
