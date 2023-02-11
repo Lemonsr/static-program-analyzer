@@ -1,9 +1,14 @@
 procedure whileInIfThen {
+  read y;
+  print y;
   if (x == 1) then {
+    a = a + 1;
     while (z < 0) {
       z = x + 1;
     }
   } else {
     x = z + x;
+    y = 10;
   }
+  y = x + 1;
 }
