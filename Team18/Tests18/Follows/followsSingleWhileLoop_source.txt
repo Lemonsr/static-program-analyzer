@@ -1,6 +1,7 @@
 procedure singleWhileLoop {
   read x;
   y = 10;
+  print y;
   while (x != 0) {
     y = y + x;
     x = x - 1;

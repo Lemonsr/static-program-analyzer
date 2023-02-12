@@ -8,8 +8,8 @@ procedure ifInWhile {
       y = y + x;
       x = x - 1;
     } else {
-      y = 10;
       read z;
+      y = 10;
     }
   }
 }

@@ -1,9 +1,13 @@
 procedure whileInIfThen {
   if (x == 1) then {
     while (z < 0) {
-      z = x + 1;
+      read z;
+    	z = x + 1;
     }
+    print x;
   } else {
     x = z + x;
+    read z;
   }
+  z = x + 1;
 }
