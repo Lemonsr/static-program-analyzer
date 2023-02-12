@@ -1,80 +1,81 @@
-1 - Valid Parent: (integer, integer)
+1 - Parent: (integer, integer)
 stmt s;
 Select s such that Parent(1, 5)
 none
 5000
-2 - Valid Parent: (integer, synonym)
+2 - Parent: (integer, synonym)
 stmt s;
 Select s such that Parent(3, s)
-none
+4, 5
 5000
-3 - Valid Parent: Select stmt (stmt, read)
-stmt s; read re;
-Select s such that Parent(s, re)
-4, 8
+3 - Parent: Select stmt (stmt, assign)
+stmt s; assign a;
+Select s such that Parent(s, a)
+3
 5000
-4 - Valid Parent: (synonym, integer)
+4 - Parent: (synonym, integer)
 stmt s;
 Select s such that Parent(s, 2)
 none
 5000
-5 - Valid Parent:(stmt, read)
+5 - Parent:(stmt, read)
 stmt s; read re;
 Select s such that Parent(s, re)
-4, 8
+none
 5000
-6 - Valid Parent: (integer, _)
+6 - Parent: (integer, _)
 stmt s;
 Select s such that Parent(1, _)
 none
 5000
-7 - Valid Parent: (_, integer)
+7 - Parent: (_, integer)
 stmt s;
 Select s such that Parent(_, 2)
 none
 5000
-8 - Valid Parent: (stmt, print)
+8 - Parent: (stmt, print)
 stmt s; print pr;
 Select s such that Parent(s, pr)
-8
+none
 5000
-9 - Valid Parent:(read, stmt)
+9 - Parent:(read, stmt)
 stmt s; read re;
 Select s such that Parent(re, s)
 none
 5000
-10 - Valid Parent:(print, stmt)
+10 - Parent:(print, stmt)
 stmt s; print pr;
 Select s such that Parent(pr, s)
 none
 5000
-11 - Valid Parent:(print, stmt)
+11 - Parent:(print, stmt)
 stmt s; print pr;
 Select pr such that Parent(pr, s)
 none
 5000
-12 - Valid Parent:(synonym, _)
+12 - Parent:(synonym, _)
 stmt s;
 Select s such that Parent(s, _)
-4, 8
+3
 5000
-13 - Valid Parent:(while,_)
+13 - Parent:(while,_)
 while wh;
 Select wh such that Parent(6,_)
 none
 5000
-14 - Valid Parent: (_, synonym)
+14 - Parent: (_, synonym)
 stmt s;
 Select s such that Parent(_, s)
-5, 6, 7, 8, 9, 10, 11, 12, 13
+4, 5
 5000
-15 - Valid Parent:  (_, read)
+15 - Parent:  (_, read)
 read r;
 Select r such that Parent(_,r)
-7, 11
+none
 5000
-16 - Valid Parent: (_,_)
+16 - Parent: (_,_)
 stmt s;
 Select s such that Parent(_, _)
-1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+1,2,3,4,5,6
 5000
+
