@@ -1,0 +1,95 @@
+1 - Line number with line number 1
+print p;
+Select p such that Parent*(1, 4)
+none
+5000
+2 - Line number with line number 2
+stmt s;
+Select s such that Parent*(2, 4)
+none
+5000
+3 - Line number with statement synonym 1
+read re;
+Select re such that Parent*(2, re)
+none
+5000
+4 - Line number with statement synonym 2
+stmt s;
+Select s such that Parent*(2, s)
+3
+5000
+5 - Statement synonym with line number 1
+while w;
+Select w such that Parent*(w, 4)
+none
+5000
+6 - Statement synonym with line number 2
+stmt s;
+Select s such that Parent*(s, 2)
+1
+5000
+7 - Line number with underscore 1
+read re;
+Select re such that Parent*(1, _)
+none
+5000
+8 - Line number with underscore 2
+read re;
+Select re such that Parent*(9, _)
+none
+5000
+9 - Underscore with line number 1
+read re;
+Select re such that Parent*(_, re)
+none
+5000
+10 - Underscore with line number 2
+assign a;
+Select a such that Parent*(_, a)
+3, 4
+5000
+11 - Statement synonym with statement synonym 1
+while w; read re;
+Select re such that Parent*(w, re)
+none
+5000
+12 - Statement synonym with statement synonym 2
+while w; stmt s;
+Select s such that Parent*(w, s)
+3
+5000
+13 - Statement synonym with statement synonym 3
+stmt s; assign a;
+Select s such that Parent*(s, a)
+1, 2
+5000
+14 - Statement synonym with statement synonym 4
+stmt s, s1;
+Select s such that Parent*(s, s1)
+1, 2
+5000
+15 - Statement synonym with underscore 1
+stmt s;
+Select s such that Parent*(s, _)
+1, 2
+5000
+16 - Statement synonym with underscore 2
+if i;
+Select i such that Parent*(i, _)
+1
+5000
+17 - Underscore with statement synonym 1
+stmt s;
+Select s such that Parent*(_, s)
+2, 3, 4
+5000
+18 - Underscore with statement synonym 2
+while w;
+Select w such that Parent*(_, w)
+2
+5000
+19 - Underscore with underscore
+stmt s;
+Select s such that Parent*(_, _)
+1, 2, 3, 4
+5000
