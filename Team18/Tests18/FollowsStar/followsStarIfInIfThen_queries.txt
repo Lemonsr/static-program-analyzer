@@ -1,0 +1,80 @@
+1 - Valid LineLine Follows* 
+stmt s;	
+Select s such that Follows*(1, 4)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
+2 - Valid LineStatement Follows*
+stmt s;	
+Select s such that Follows*(1, s)
+2, 3, 4, 5
+5000
+3 - Valid LineAssign Follows*
+stmt s; assign a;
+Select a such that Follows*(7, a)
+8
+5000
+4 - Valid StatementLine Follows*
+stmt s;	
+Select s such that Follows*(s, 10)
+9
+5000
+5 - Valid PrintLine Follows*
+stmt s; print pn;
+Select pn such that Follows*(pn, 11)
+none
+5000
+6 - Valid LineWildCard Follows* 
+stmt s;
+Select s such that Follows*(2, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
+7 - Valid WildCardLine Follows* 
+stmt s;
+Select s such that Follows*(_, 10)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
+8 - Valid StatementStatement Follows*
+stmt s1,s2,s3; read re1,re2; print pn1,pn2; while w1,w2; if i1,i2; assign a1,a2; variable v1,v2; constant c1,c2;
+Select s3 such that Follows*(s2, s3)
+2, 3, 4, 5, 8, 10
+5000
+9 - Valid WhileStatement Follows*
+stmt s1,s2,s3; read re1,re2; print pn1,pn2; while w1,w2; if i1,i2; assign a1,a2; variable v1,v2; constant c1,c2;
+Select w1 such that Follows*(w1, s3)
+none
+5000
+10 - Valid StatementRead Follows*
+stmt s1,s2,s3; read re1,re2; print pn1,pn2; while w1,w2; if i1,i2; assign a1,a2; variable v1,v2; constant c1,c2;
+Select re2 such that Follows*(s2, re2)
+10
+5000
+11 - Valid AssignAssign Follows*
+stmt s1,s2,s3; read re1,re2; print pn1,pn2; while w1,w2; if i1,i2; assign a1,a2; variable v1,v2; constant c1,c2;
+Select a1 such that Follows*(a1, a2)
+1, 2, 7
+5000
+12 - Valid StatementWildCard Follows*
+stmt s;
+Select s such that Follows*(s, _)
+1, 2, 3, 4, 7, 9
+5000
+13 - Valid IfWildCard Follows*
+if i;
+Select i such that Follows*(i, _)
+none
+5000
+14 - Valid WildCardStatement Follows*
+stmt s;
+Select s such that Follows*(_, s)
+2, 3, 4, 5, 8, 10
+5000
+15 - Valid WildCardAssign Follows*
+assign a;
+Select a such that Follows*(_, a)
+2, 3, 8
+5000
+16 - Valid WildCardWildCard Follows* 
+stmt s;
+Select s such that Follows*(_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
