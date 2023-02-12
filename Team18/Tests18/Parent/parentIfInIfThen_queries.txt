@@ -1,0 +1,94 @@
+1 - Parent: (integer, integer)
+stmt s;
+Select s such that Parent(1, 5)
+none
+5000
+2 - Parent: (integer, synonym)
+stmt s;
+Select s such that Parent(3, s)
+none
+5000
+3 - Parent: Select stmt (stmt, print pr)
+stmt s; print pr;
+Select s such that Parent(s, pr)
+5
+5000
+4 - Parent: (synonym, integer)
+stmt s;
+Select s such that Parent(s, 2)
+none
+5000
+5 - Parent:(stmt, while)
+stmt s; while wh;
+Select s such that Parent(s, wh)
+none
+5000
+6 - Parent: (integer, _)
+stmt s;
+Select s such that Parent(1, _)
+none
+5000
+7 - Parent: (_, integer)
+stmt s;
+Select s such that Parent(_, 2)
+none
+5000
+8 - Parent: (stmt, while)
+stmt s; while wh;
+Select s such that Parent(s, wh)
+none
+5000
+9 - Parent:(read, stmt)
+stmt s; read re;
+Select s such that Parent(re, s)
+none
+5000
+10 - Parent:(print, stmt)
+stmt s; print pr;
+Select s such that Parent(pr, s)
+none
+5000
+11 - Parent:(while, stmt)
+stmt s; while wh;
+Select wh such that Parent(wh, s)
+none
+5000
+12 - Parent:(synonym, _)
+stmt s;
+Select s such that Parent(s, _)
+5, 6
+5000
+13 - Parent:(while,_)
+while wh;
+Select wh such that Parent(6,_)
+none
+5000
+14 - Parent: (_, synonym)
+stmt s;
+Select s such that Parent(_, s)
+6, 7, 8, 9, 10, 11
+5000
+15 - Parent:  (_, read)
+read r;
+Select r such that Parent(_,r)
+10
+5000
+16 - Parent: (_,_)
+stmt s;
+Select s such that Parent(_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
