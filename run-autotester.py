@@ -52,4 +52,5 @@ for type in query_types:
         test_case_prefix += type[0].lower()
         test_case_prefix += type[1:] + case
         run_autotester(test_case_prefix)
-        
+
+run_autotester(f'{test_path}\\MultiClause\\multiclause')        
