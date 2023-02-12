@@ -1,0 +1,95 @@
+1 - Line number with line number 1
+print p;
+Select p such that Parent*(5, 8)
+4, 6
+5000
+2 - Line number with line number 2
+stmt s;
+Select s such that Parent*(9, 10)
+none
+5000
+3 - Line number with statement synonym 1
+read re;
+Select re such that Parent*(5, re)
+11
+5000
+4 - Line number with statement synonym 2
+stmt s;
+Select s such that Parent*(7, s)
+8, 9, 10, 11
+5000
+5 - Statement synonym with line number 1
+if i;
+Select i such that Parent*(i, 11)
+5, 7
+5000
+6 - Statement synonym with line number 2
+stmt s;
+Select s such that Parent*(s, 9)
+5, 7
+5000
+7 - Line number with underscore 1
+read re;
+Select re such that Parent*(5, _)
+11
+5000
+8 - Line number with underscore 2
+read re;
+Select re such that Parent*(6, _)
+none
+5000
+9 - Underscore with line number 1
+read re;
+Select re such that Parent*(_, re)
+11
+5000
+10 - Underscore with line number 2
+assign a;
+Select a such that Parent*(_, a)
+8, 9, 10
+5000
+11 - Statement synonym with statement synonym 1
+if i; print pr;
+Select pr such that Parent*(i, pr)
+6
+5000
+12 - Statement synonym with statement synonym 2
+if i; stmt s;
+Select s such that Parent*(i, s)
+6, 7, 8, 9, 10, 11
+5000
+13 - Statement synonym with statement synonym 3
+stmt s; print pr;
+Select s such that Parent*(s, pr)
+5
+5000
+14 - Statement synonym with statement synonym 4
+stmt s, s1;
+Select s such that Parent*(s, s1)
+5, 7
+5000
+15 - Statement synonym with underscore 1
+stmt s;
+Select s such that Parent*(s, _)
+5, 7
+5000
+16 - Statement synonym with underscore 2
+if i;
+Select i such that Parent*(i, _)
+5, 7
+5000
+17 - Underscore with statement synonym 1
+stmt s;
+Select s such that Parent*(_, s)
+6, 7, 8, 9, 10, 11
+5000
+18 - Underscore with statement synonym 2
+if i;
+Select i such that Parent*(_, i)
+7
+5000
+19 - Underscore with underscore
+stmt s;
+Select s such that Parent*(_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
