@@ -113,5 +113,8 @@
     <ClCompile Include="TestDesignExtractorParentStar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestDesignExtractorParent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
