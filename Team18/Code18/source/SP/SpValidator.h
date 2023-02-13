@@ -11,14 +11,6 @@ class SpValidator {
         explicit SpValidator(Stream<Token> tokens);
         bool validateGrammar();
 
-        bool isValidCondExprToken(Token) const;
-        bool isValidRelExprToken(Token) const;
-        bool isValidTermToken(Token) const;
-        bool isValidRelFactorToken(Token) const;
-        bool isValidExprToken(Token) const;
-
-
-
  private:
         std::unordered_set<TokenType> condExprToken = {TOKEN_BOOL_AND, TOKEN_BOOL_OR};
         std::unordered_set<TokenType> relExprToken = {
@@ -32,6 +24,12 @@ class SpValidator {
             TOKEN_PRINT, TOKEN_READ
         };
         std::unordered_set<TokenType> relFactorToken = {TOKEN_NAME, TOKEN_INTEGER};
+
+        bool isValidCondExprToken(Token) const;
+        bool isValidRelExprToken(Token) const;
+        bool isValidTermToken(Token) const;
+        bool isValidRelFactorToken(Token) const;
+        bool isValidExprToken(Token) const;
 
         int64_t idx = 0;  // Track the current token position
         Stream<Token> tokens;
