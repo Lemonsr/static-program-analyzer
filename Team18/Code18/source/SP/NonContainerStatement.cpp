@@ -164,7 +164,8 @@ void spa::NonContainerStatement::addParentUses(PKBManager& pkbManager, std::stri
   }
 }
 
-void spa::NonContainerStatement::addParentModifies(PKBManager& pkbManager, std::string variableName) {
+void spa::NonContainerStatement::addParentModifies(PKBManager& pkbManager,
+                                                   std::string variableName) {
   for (int parent : whileStmtParents) {
     std::string stringParentStmtNum = std::to_string(parent);
     pkbManager.addRelationship(MODIFIES, stringParentStmtNum, variableName);
