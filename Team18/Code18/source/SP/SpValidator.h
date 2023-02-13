@@ -64,8 +64,5 @@ class SpValidator {
         void validateBraceCondExpr();
         void validateBraceStmtLst();
         void validateCondExpr();
-        void validateRelExpr();
-        void validateBracketExpr();
-        void validateFactor();
 };
 }  // namespace spa
