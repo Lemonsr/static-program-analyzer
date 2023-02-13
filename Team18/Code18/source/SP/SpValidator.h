@@ -46,10 +46,10 @@ class SpValidator {
         bool isCondExpr(std::vector<Token>);
         bool isRelExpr(std::vector<Token>);
         bool isRelFactor(std::vector<Token>);
-        static bool isValidOpenBrace(Token token);
-        static bool isValidCloseBrace(Token token);
-        static bool isValidOpenBracket(Token token);
-        static bool isValidCloseBracket(Token token);
+        bool isValidOpenBrace(Token token);
+        bool isValidCloseBrace(Token token);
+        bool isValidOpenBracket(Token token);
+        bool isValidCloseBracket(Token token);
 
         void validateProcedure();
         void validateStmtLst();
@@ -64,8 +64,5 @@ class SpValidator {
         void validateBraceCondExpr();
         void validateBraceStmtLst();
         void validateCondExpr();
-        void validateRelExpr();
-        void validateBracketExpr();
-        void validateFactor();
 };
 }  // namespace spa
