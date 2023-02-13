@@ -110,8 +110,8 @@ void spa::CallStatement::processStatement(spa::PKBManager& pkbManager) {
 void spa::AssignStatement::processStatement(spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addEntity(VARIABLE, assignVar);
-  pkbManager.addStatementType(stringStmtLineNum, StatementType::ASSIGN);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
+  pkbManager.addStatementType(stringStmtLineNum, StatementType::ASSIGN);
   pkbManager.addRelationship(MODIFIES, stringStmtLineNum, assignVar);
   addParentModifies(pkbManager, assignVar, whileStmtParents, ifStmtParents);
   extractUsesFromPostfix(pkbManager, postfixExpr);
