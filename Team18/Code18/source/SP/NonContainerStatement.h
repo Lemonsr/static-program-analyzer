@@ -7,7 +7,7 @@
 
 namespace spa {
 class NonContainerStatement : public ProgramStatement {
- protected:
+protected:
   std::unordered_set<int> whileStmtParents;
   std::unordered_set<int> ifStmtParents;
 
@@ -16,15 +16,15 @@ class NonContainerStatement : public ProgramStatement {
 };
 
 class OneVarNonContainerStatement : public NonContainerStatement {
- protected:
+protected:
   std::string variableName;
 
- public:
+public:
   std::string getVariableName();
 };
 
 class ReadStatement : public OneVarNonContainerStatement {
- public:
+public:
   ReadStatement(std::string parentProcedureVal, std::string variableName,
                 std::unordered_set<int> whileStmtParents,
                 std::unordered_set<int> ifStmtParents, int statementLineNum);
@@ -32,7 +32,7 @@ class ReadStatement : public OneVarNonContainerStatement {
 };
 
 class PrintStatement : public OneVarNonContainerStatement {
- public:
+public:
   PrintStatement(std::string parentProcedureVal, std::string variableName,
                  std::unordered_set<int> whileStmtParents,
                  std::unordered_set<int> ifStmtParents, int statementLineNum);
@@ -40,7 +40,7 @@ class PrintStatement : public OneVarNonContainerStatement {
 };
 
 class CallStatement : public OneVarNonContainerStatement {
- public:
+public:
   CallStatement(std::string parentProcedureVal, std::string variableName,
                 std::unordered_set<int> whileStmtParents,
                 std::unordered_set<int> ifStmtParents, int statementLineNum);
@@ -48,17 +48,16 @@ class CallStatement : public OneVarNonContainerStatement {
 };
 
 class MultiVarNonContainerStatement : public NonContainerStatement {
- protected:
+protected:
   std::string postfixExpr;
-  void extractUsesFromPostfix(
-    PKBManager& pkbManager, std::string postfix);
+  void extractUsesFromPostfix(PKBManager& pkbManager, std::string postfix);
 };
 
 class AssignStatement : public MultiVarNonContainerStatement {
- private:
+private:
   std::string assignVar;
 
- public:
+public:
   AssignStatement(std::string parentProcedureVal, std::string assignVar, std::string postfixExpr,
                   std::unordered_set<int> whileStmtParents,
                   std::unordered_set<int> ifStmtParents, int statementLineNum);
@@ -66,7 +65,7 @@ class AssignStatement : public MultiVarNonContainerStatement {
 };
 
 class IfConditionStatement : public MultiVarNonContainerStatement {
- public:
+public:
   IfConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
                        std::unordered_set<int> whileStmtParents,
                        std::unordered_set<int> ifStmtParents, int statementLineNum);
@@ -74,10 +73,10 @@ class IfConditionStatement : public MultiVarNonContainerStatement {
 };
 
 class WhileConditionStatement : public MultiVarNonContainerStatement {
- public:
+public:
   WhileConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
                           std::unordered_set<int> whileStmtParents,
                           std::unordered_set<int> ifStmtParents, int statementLineNum);
   void processStatement(PKBManager& pkbManager) override;
 };
-}  // namespace spa
+} // namespace spa
