@@ -11,12 +11,8 @@ class NonContainerStatement : public ProgramStatement {
   std::unordered_set<int> whileStmtParents;
   std::unordered_set<int> ifStmtParents;
 
-  void addParentUses(PKBManager& pkbManager, std::string variableName,
-                     std::unordered_set<int> whileStmtParents,
-                     std::unordered_set<int> ifStmtParents);
-  void addParentModifies(PKBManager& pkbManager, std::string variableName,
-                         std::unordered_set<int> whileStmtParents,
-                         std::unordered_set<int> ifStmtParents);
+  void addParentUses(PKBManager& pkbManager, std::string variableName);
+  void addParentModifies(PKBManager& pkbManager, std::string variableName);
 };
 
 class OneVarNonContainerStatement : public NonContainerStatement {
