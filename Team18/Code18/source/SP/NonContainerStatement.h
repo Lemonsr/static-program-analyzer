@@ -50,7 +50,7 @@ class CallStatement : public OneVarNonContainerStatement {
 class MultiVarNonContainerStatement : public NonContainerStatement {
  protected:
   std::string postfixExpr;
-  void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
+  void extractUsesFromPostfix(
     PKBManager& pkbManager, std::string postfix);
 };
 
