@@ -3,7 +3,6 @@
 #include <string>
 
 #include "ProgramStatement.h"
-#include "Token.h"
 
 namespace spa {
 class NonContainerStatement : public ProgramStatement {
@@ -11,12 +10,8 @@ class NonContainerStatement : public ProgramStatement {
   std::unordered_set<int> whileStmtParents;
   std::unordered_set<int> ifStmtParents;
 
-  void addParentUses(PKBManager& pkbManager, std::string variableName,
-                     std::unordered_set<int> whileStmtParents,
-                     std::unordered_set<int> ifStmtParents);
-  void addParentModifies(PKBManager& pkbManager, std::string variableName,
-                         std::unordered_set<int> whileStmtParents,
-                         std::unordered_set<int> ifStmtParents);
+  void addParentUses(PKBManager& pkbManager, std::string variableName);
+  void addParentModifies(PKBManager& pkbManager, std::string variableName);
 };
 
 class OneVarNonContainerStatement : public NonContainerStatement {
@@ -54,8 +49,7 @@ class CallStatement : public OneVarNonContainerStatement {
 class MultiVarNonContainerStatement : public NonContainerStatement {
  protected:
   std::string postfixExpr;
-  void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
-    PKBManager& pkbManager, std::string postfix);
+  void extractUsesFromPostfix(PKBManager& pkbManager, std::string postfix);
 };
 
 class AssignStatement : public MultiVarNonContainerStatement {

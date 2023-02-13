@@ -87,7 +87,7 @@ void spa::ReadStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::READ);
   pkbManager.addRelationship(MODIFIES, stringStmtLineNum, variableName);
-  addParentModifies(pkbManager, variableName, whileStmtParents, ifStmtParents);
+  addParentModifies(pkbManager, variableName);
 }
 
 void spa::PrintStatement::processStatement(spa::PKBManager& pkbManager) {
@@ -96,7 +96,7 @@ void spa::PrintStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::PRINT);
   pkbManager.addRelationship(USES, stringStmtLineNum, variableName);
-  addParentUses(pkbManager, variableName, whileStmtParents, ifStmtParents);
+  addParentUses(pkbManager, variableName);
 }
 
 void spa::CallStatement::processStatement(spa::PKBManager& pkbManager) {
@@ -113,7 +113,7 @@ void spa::AssignStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::ASSIGN);
   pkbManager.addRelationship(MODIFIES, stringStmtLineNum, assignVar);
-  addParentModifies(pkbManager, assignVar, whileStmtParents, ifStmtParents);
+  addParentModifies(pkbManager, assignVar);
   extractUsesFromPostfix(pkbManager, postfixExpr);
   pkbManager.addPattern(stringStmtLineNum, assignVar, postfixExpr);
 }
@@ -147,15 +147,13 @@ void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
     } else if (std::all_of(expr.begin(), expr.end(), ::isalnum)) {
       pkbManager.addEntity(VARIABLE, expr);
       pkbManager.addRelationship(USES, stringStmtLineNum, expr);
-      addParentUses(pkbManager, expr, whileStmtParents, ifStmtParents);
+      addParentUses(pkbManager, expr);
     }
     expr = "";
   }
 }
 
-void spa::NonContainerStatement::addParentUses(PKBManager& pkbManager, std::string variableName,
-                                               std::unordered_set<int> whileStmtParents,
-                                               std::unordered_set<int> ifStmtParents) {
+void spa::NonContainerStatement::addParentUses(PKBManager& pkbManager, std::string variableName) {
   for (int parent : whileStmtParents) {
     std::string stringParentStmtNum = std::to_string(parent);
     pkbManager.addRelationship(USES, stringParentStmtNum, variableName);
@@ -166,9 +164,8 @@ void spa::NonContainerStatement::addParentUses(PKBManager& pkbManager, std::stri
   }
 }
 
-void spa::NonContainerStatement::addParentModifies(PKBManager& pkbManager, std::string variableName,
-                                                   std::unordered_set<int> whileStmtParents,
-                                                   std::unordered_set<int> ifStmtParents) {
+void spa::NonContainerStatement::addParentModifies(PKBManager& pkbManager,
+                                                   std::string variableName) {
   for (int parent : whileStmtParents) {
     std::string stringParentStmtNum = std::to_string(parent);
     pkbManager.addRelationship(MODIFIES, stringParentStmtNum, variableName);
