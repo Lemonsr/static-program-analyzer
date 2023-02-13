@@ -17,18 +17,11 @@ spa::SP::SP(std::string source, PKBManager& pkbManager) :
 void spa::SP::processSource() {
     Stream<Token> convertedTokens = convertToken();
     SpValidator validator(convertedTokens);
-    //  std::cout << "TESTING VALIDATOR" << std::endl;
-    //  for (int64_t i = 0; i < convertedTokens.remaining(); i++) {
-    //    std::cout << "Type: " << convertedTokens[i].getType() <<
-    //        ", Value: " << convertedTokens[i].getValue() << std::endl;
-    //  }
-    //  std::cout << "END OF TESTING" << std::endl;
     try {
         validator.validateGrammar();
     }
     catch (std::exception e) {
-        std::cerr << e.what() << std::endl << std::endl;
-        exit(1);
+        return;
     }
     SpParser parser = SpParser(convertedTokens);
     std::vector<ProcedureStatement> procedureList = parser.parse();
