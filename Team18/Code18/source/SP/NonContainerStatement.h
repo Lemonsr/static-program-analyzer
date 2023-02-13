@@ -79,4 +79,4 @@ public:
                           std::unordered_set<int> ifStmtParents, int statementLineNum);
   void processStatement(PKBManager& pkbManager) override;
 };
-} // namespace spa
+}  // namespace spa
