@@ -62,7 +62,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure{}
@@ -72,7 +72,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure 1{}
@@ -83,7 +83,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure proc {;}
@@ -95,7 +95,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure proc ;
@@ -105,7 +105,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure ;
@@ -114,7 +114,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  proc { x = z + v ;}
@@ -130,7 +130,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure proc 12 {}
@@ -141,7 +141,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure proc {
@@ -151,7 +151,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure proc }
@@ -161,7 +161,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure proc{ () }
@@ -174,7 +174,7 @@ namespace UnitTesting {
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         // procedure a {} procedure b {} procedure proc { 'stmt' }
@@ -233,7 +233,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
 
@@ -277,7 +277,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  assign
@@ -379,7 +379,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         // procedure z { x = 1 a;}
@@ -395,7 +395,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         // procedure z { x = 1 1;}
@@ -411,7 +411,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
 
@@ -428,7 +428,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { 10 = x;}
@@ -443,7 +443,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  expr
@@ -882,7 +882,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { ) 10 + 1 (;}
@@ -899,7 +899,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { ) 10 + a (;}
@@ -916,7 +916,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { ) 10 + ( 4 ;}
@@ -933,7 +933,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { ) 10 +  4 ;}
@@ -949,7 +949,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
 
@@ -966,7 +966,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { () 10 + 4 ;}
@@ -983,7 +983,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { x = 8 % ((5) / ( 10 + 10));}
@@ -1011,7 +1011,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  while
@@ -1049,7 +1049,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { while(y >= 5{};}
@@ -1068,7 +1068,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { while y >= 5{}}
@@ -1085,7 +1085,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { while(){}}
@@ -1101,7 +1101,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
 
@@ -1205,7 +1205,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { if() then {x = 2;} else { z = 2;}}
@@ -1233,7 +1233,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { if() then {x = 2;}}
@@ -1254,7 +1254,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { if(y == 5) then {z = 2} else {}}
@@ -1280,7 +1280,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { if(y >= 5) else {} then {} }
@@ -1303,7 +1303,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z {if () {} else {} then {}}
@@ -1325,7 +1325,7 @@ namespace UnitTesting {
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
             }
 
         //  procedure z {if () {} else {} }
@@ -1344,7 +1344,7 @@ namespace UnitTesting {
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
 
@@ -1912,7 +1912,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { while ( ( z < 3)) {}}
@@ -1933,7 +1933,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
 
@@ -1961,7 +1961,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { while ( ! (x >= 12 ) && ( 12 == 12){}}
@@ -1988,11 +1988,11 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { while ( !(12 == 12 ) && ( 12== 12){}}
-        TEST_METHOD(TestSpValidatorInalidCondExpFive) {
+        TEST_METHOD(TestSpValidatorInvalidCondExpFive) {
             spa::Stream<spa::Token> tokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
@@ -2015,7 +2015,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
 
         //  procedure z { while ( x == 12  ||  y == 12{}}
@@ -2037,7 +2037,7 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             spa::SpValidator validator(tokens);
-            Assert::ExpectException<std::exception>([&] { validator.validateGrammar(); });
+            Assert::IsFalse(validator.validateGrammar());
         }
     };
 }  //  namespace UnitTesting
