@@ -122,7 +122,7 @@ void spa::SpValidator::validateStmtLst() {
         Token token = peekNextToken();
         TokenType tokenType = token.getType();
         if (tokenType == TOKEN_CLOSE_BRACE) {
-            return; // Empty proc
+            return;  // Empty proc
         }
 
         if (!nameToken.count(tokenType)) {
@@ -157,7 +157,7 @@ void spa::SpValidator::validateStmt() {
 
 // assign: var_name '=' tokensToCheck ';'
 void spa::SpValidator::validateEqual() {
-    next(2); // Already checked NAME + EQUAL
+    next(2);  // Already checked NAME + EQUAL
     std::vector<Token> tokensToCheck;
     while (hasRemaining()) {
         const bool isSemiColon = peekNextToken().getType() == TOKEN_SEMICOLON;
@@ -187,7 +187,7 @@ void spa::SpValidator::validateReadPrint() {
         throw std::exception("Unknown Statement");
     }
 
-    next(); // var_name
+    next();  // var_name
 
     // Check that stmt is closed with ;
     if (!hasRemaining() || getToken().getType() != TOKEN_SEMICOLON) {
@@ -210,7 +210,7 @@ void spa::SpValidator::validateWhileIf() {
 
 // while: 'while' '(' cond_expr ')' '{' stmtLst '}'
 void spa::SpValidator::validateWhile() {
-    next(2); // Already checked WHILE + (
+    next(2);  // Already checked WHILE + (
 
     validateCondExpr();
 
@@ -231,7 +231,7 @@ void spa::SpValidator::validateWhile() {
 
 // if: 'if' '(' cond_expr ')' 'then' '{' stmtLst '}' 'else' '{' stmtLst '}'
 void spa::SpValidator::validateIf() {
-    next(2); // Already checked IF + (
+    next(2);  // Already checked IF + (
 
     validateCondExpr();
 
