@@ -60,9 +60,6 @@ class SpValidator {
         void validateWhileIf();
         void validateWhile();
         void validateIf();
-        void validateBracketCondExpr();
-        void validateBraceCondExpr();
-        void validateBraceStmtLst();
         void validateCondExpr();
 };
 }  // namespace spa
