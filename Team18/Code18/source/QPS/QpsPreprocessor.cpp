@@ -1,9 +1,7 @@
-#include <vector>
-#include <sstream>
-#include <optional>
-
 #include "QpsPreprocessor.h"
 
+#include <sstream>
+#include <optional>
 #include <iostream>
 
 #include "Tokenizer.h"
