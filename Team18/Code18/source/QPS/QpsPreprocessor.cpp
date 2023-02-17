@@ -21,8 +21,7 @@ std::optional<spa::ParsedQuery> spa::QpsPreprocessor::preprocess(
     tokens = tokenizer.tokenize(ss);
   }
   catch (std::runtime_error& e) {
-    std::cerr << e.what() << std::endl;
-    exit(1);
+      return {};
   }
   ParsedQuery parsedQuery;
   PqlQueryParser parser;
