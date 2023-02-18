@@ -1,8 +1,9 @@
-#include <vector>
+#include "QpsPreprocessor.h"
+
 #include <sstream>
 #include <optional>
+#include <iostream>
 
-#include "QpsPreprocessor.h"
 #include "Tokenizer.h"
 #include "Token.h"
 #include "Stream.h"
@@ -15,7 +16,13 @@ std::optional<spa::ParsedQuery> spa::QpsPreprocessor::preprocess(
   std::stringstream ss;
   ss.str(query);
   Tokenizer tokenizer;
-  Stream<Token> tokens = tokenizer.tokenize(ss);
+  Stream<Token> tokens;
+  try {
+    tokens = tokenizer.tokenize(ss);
+  }
+  catch (std::runtime_error& e) {
+      return {};
+  }
   ParsedQuery parsedQuery;
   PqlQueryParser parser;
   if (parser.parse(tokens, parsedQuery) == PQL_PARSE_SUCCESS) {

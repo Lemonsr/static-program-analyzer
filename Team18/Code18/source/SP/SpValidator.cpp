@@ -11,14 +11,20 @@ spa::SpValidator::SpValidator(Stream<Token> t) : tokens(t) {
 }
 
 bool spa::SpValidator::validateGrammar() {
-    while (hasRemaining()) {
-        Token currToken = getToken();
-        if (currToken.getType() != TOKEN_PROCEDURE) {
-            throw std::exception("Program should start with procedure");
+    try {
+        while (hasRemaining()) {
+            Token currToken = getToken();
+            if (currToken.getType() != TOKEN_PROCEDURE) {
+                throw std::exception("Program should start with procedure");
+            }
+            validateProcedure();
         }
-        validateProcedure();
+        return true;
+    } catch (std::exception& e) {
+        std::cerr << "Invalid Source Code: ";
+        std::cerr << e.what() << std::endl;
+        return false;
     }
-    return true;
 }
 
 bool spa::SpValidator::isValidCondExprToken(Token token) const {
@@ -120,8 +126,6 @@ void spa::SpValidator::validateStmtLst() {
         }
 
         if (!nameToken.count(tokenType)) {
-            // std::cout << token.getValue() << std::endl;
-            // std::cout << token.getType() << std::endl;
             throw std::exception("Unknown stmt");
         }
 
@@ -147,7 +151,6 @@ void spa::SpValidator::validateStmt() {
             validateEqual();
             break;
         default:
-            std::cout << token.getValue() << std::endl;
             throw std::exception("Invalid Stmt");
     }
 }
@@ -155,7 +158,7 @@ void spa::SpValidator::validateStmt() {
 // assign: var_name '=' tokensToCheck ';'
 void spa::SpValidator::validateEqual() {
     next(2);  // Already checked NAME + EQUAL
-    std::vector<Token> tokensToCheck = std::vector<Token>();
+    std::vector<Token> tokensToCheck;
     while (hasRemaining()) {
         const bool isSemiColon = peekNextToken().getType() == TOKEN_SEMICOLON;
         if (isSemiColon) {
@@ -265,52 +268,11 @@ void spa::SpValidator::validateIf() {
     }
 }
 
-void spa::SpValidator::validateBracketCondExpr() {
-    if (!hasRemaining() || !isValidOpenBracket(tokens[idx])) {
-        throw std::exception("Missing '(' before cond_expr in IF");
-    }
-
-    validateCondExpr();
-
-    if (!hasRemaining() || !isValidCloseBracket(tokens[idx])) {
-        throw std::exception(" Missing ')' after cond_expr for IF");
-    }
-}
-
-
-void spa::SpValidator::validateBraceCondExpr() {
-    if (!hasRemaining() || !isValidOpenBrace(tokens[idx])) {
-        throw std::exception("Missing '(' before stmtLst in IF-THEN");
-    }
-    {
-        idx++;
-        validateStmtLst();
-    }
-    if (!hasRemaining() || !isValidCloseBrace(tokens[idx])) {
-        throw
-            std::exception("Missing ')' after stmtLst in IF-THEN");
-    }
-}
-
-void spa::SpValidator::validateBraceStmtLst() {
-    if (!hasRemaining() || !isValidOpenBrace(tokens[idx])) {
-        throw std::exception("Missing '{' before stmtLst in IF-THEN-ELSE");
-    }
-    {
-        idx++;
-        validateStmtLst();
-    }
-    if (!hasRemaining() || !isValidCloseBrace(tokens[idx])) {
-        throw
-            std::exception("Missing '}' after stmtLst in IF-THEN-ELSE");
-    }
-}
-
 // cond_expr: rel_expr | '!' '(' cond_expr ')' |
 // '(' cond_expr ')' '&&' '(' cond_expr ')' |
 // '(' cond_expr ')' '||' '(' cond_expr ')'
 void spa::SpValidator::validateCondExpr() {
-    std::vector<Token> tokensToCheck = std::vector<Token>();
+    std::vector<Token> tokensToCheck;
     int unclosedBracketCount = 0;
     while (hasRemaining() && (unclosedBracketCount != 0 || !isValidCloseBracket(peekNextToken()))) {
         const TokenType tokenType = peekNextToken().getType();
@@ -343,30 +305,28 @@ bool spa::SpValidator::isExpr(std::vector<Token> tokensToCheck) {
 
     // Find outer most +/- from the right
     int unclosedBracketCount = 0;
-    auto tokenItr = tokensToCheck.rbegin();
-    for (; tokenItr < tokensToCheck.rend(); tokenItr++) {
-        const TokenType tokenType = tokenItr->getType();
+    int index = -1;
+    for (int i = tokensToCheck.size() - 1; i >= 0; i--) {
+        const TokenType tokenType = tokensToCheck[i].getType();
         if (tokenType == TOKEN_OPEN_BRACKET) {
             unclosedBracketCount += 1;
         } else if (tokenType == TOKEN_CLOSE_BRACKET) {
             unclosedBracketCount -= 1;
         }
 
-        if (isValidExprToken(*tokenItr) && unclosedBracketCount == 0) {
+        if (isValidExprToken(tokensToCheck[i]) && unclosedBracketCount == 0) {
+            index = i;
             break;
         }
     }
 
     // +/- not found
-    if (tokenItr == tokensToCheck.rend()) {
+    if (index == -1) {
         return isTerm(tokensToCheck);
     }
 
-    std::vector<Token> right(tokensToCheck.rbegin(), tokenItr);
-    std::vector<Token> left(tokenItr + 1, tokensToCheck.rend());
-
-    reverse(right.begin(), right.end());
-    reverse(left.begin(), left.end());
+    std::vector<Token> left(tokensToCheck.begin(), tokensToCheck.begin() + index);
+    std::vector<Token> right(tokensToCheck.begin() + index + 1, tokensToCheck.end());
 
     return (isExpr(left) && isTerm(right)) || isTerm(tokensToCheck);
     // This means that the operator is surrounded by Parenthesis
@@ -376,30 +336,28 @@ bool spa::SpValidator::isExpr(std::vector<Token> tokensToCheck) {
 bool spa::SpValidator::isTerm(std::vector<Token> tokensToCheck) {
     // Find outer most ( * | / | % ) from the right
     int unclosedBracketCount = 0;
-    auto tokenItr = tokensToCheck.rbegin();
-    for (; tokenItr < tokensToCheck.rend(); tokenItr++) {
-        const TokenType tokenType = tokenItr->getType();
+    int index = -1;
+    for (int i = tokensToCheck.size() - 1; i >= 0; i--) {
+        const TokenType tokenType = tokensToCheck[i].getType();
         if (tokenType == TOKEN_OPEN_BRACKET) {
             unclosedBracketCount += 1;
         } else if (tokenType == TOKEN_CLOSE_BRACKET) {
             unclosedBracketCount -= 1;
         }
 
-        if (isValidTermToken(*tokenItr) && unclosedBracketCount == 0) {
+        if (isValidTermToken(tokensToCheck[i]) && unclosedBracketCount == 0) {
+            index = i;
             break;
         }
     }
 
     // ( * | / | % ) not found
-    if (tokenItr == tokensToCheck.rend()) {
+    if (index == -1) {
         return isFactor(tokensToCheck);
     }
 
-    std::vector<Token> right(tokensToCheck.rbegin(), tokenItr);
-    std::vector<Token> left(tokenItr + 1, tokensToCheck.rend());
-
-    std::reverse(right.begin(), right.end());
-    std::reverse(left.begin(), left.end());
+    std::vector<Token> left(tokensToCheck.begin(), tokensToCheck.begin() + index);
+    std::vector<Token> right(tokensToCheck.begin() + index + 1, tokensToCheck.end());
 
     return isTerm(left) && isFactor(right);
 }
@@ -434,7 +392,7 @@ bool spa::SpValidator::isCondExpr(std::vector<Token> tokensToCheck) {
     }
 
     Token secondToken = tokensToCheck[1];
-    // CASE 1 : '!' '(' cond_expr ')'
+    // Case 1: '!' '(' cond_expr ')'
     if (tokensToCheck.size() >= 3 && firstToken.getType() == TOKEN_BOOL_NOT && isValidOpenBracket(
             secondToken)
         && isValidCloseBracket(tokensToCheck.back())) {
@@ -442,38 +400,41 @@ bool spa::SpValidator::isCondExpr(std::vector<Token> tokensToCheck) {
             std::vector<Token>(tokensToCheck.begin() + 2, tokensToCheck.end() - 1));
     }
 
-    // CASE 2 : | '(' cond_expr ')' '||&&' '(' cond_expr ')'
-    if (!(tokensToCheck.size() >= 5 && isValidOpenBracket(tokensToCheck.front()) &&
-        isValidCloseBracket(tokensToCheck.back()))) {
-        return isRelExpr(tokensToCheck);  // else CASE 3 : rel_expr
+    // Case 2: | '(' cond_expr ')' '||&&' '(' cond_expr ')'
+    if (tokensToCheck.size() < 5 || !isValidOpenBracket(tokensToCheck.front()) ||
+        !isValidCloseBracket(tokensToCheck.back())) {
+        return isRelExpr(tokensToCheck);
     }
 
+    // Case 3: rel_expr
     // Find outermost || &&
     int unclosedBracketCount = 0;
-    auto tokenItr = tokensToCheck.begin();
-    for (; tokenItr < tokensToCheck.end(); tokenItr++) {
-        const TokenType tokenType = tokenItr->getType();
+    int index = -1;
+    for (int i = 0; i < tokensToCheck.size(); i++) {
+        const TokenType tokenType = tokensToCheck[i].getType();
         if (tokenType == TOKEN_OPEN_BRACKET) {
             unclosedBracketCount += 1;
         } else if (tokenType == TOKEN_CLOSE_BRACKET) {
             unclosedBracketCount -= 1;
         }
 
-        if (isValidCondExprToken(*tokenItr) && unclosedBracketCount == 0) {
+        if (isValidCondExprToken(tokensToCheck[i]) && unclosedBracketCount == 0) {
+            index = i;
             break;
         }
     }
 
-    if (tokenItr == tokensToCheck.end()) {
+    if (index == -1) {
         return isRelExpr(tokensToCheck);
     }
 
-    if ((tokenItr + 1)->getType() != TOKEN_OPEN_BRACKET) {
+    if (tokensToCheck[index + 1].getType() != TOKEN_OPEN_BRACKET) {
         throw std::exception("&&|| Missing an opening '('");
     }
 
-    std::vector<Token> left(tokensToCheck.begin() + 1, tokenItr - 1);
-    std::vector<Token> right(tokenItr + 2, tokensToCheck.end() - 1);
+
+    std::vector<Token> left(tokensToCheck.begin() + 1, tokensToCheck.begin() + index - 1);
+    std::vector<Token> right(tokensToCheck.begin() + index + 2, tokensToCheck.end() - 1);
 
     return isCondExpr(left) && isCondExpr(right);
 }
@@ -485,18 +446,20 @@ bool spa::SpValidator::isRelExpr(std::vector<Token> tokensToCheck) {
         return false;
     }
 
-    std::vector<Token>::iterator tokenItr = find_if(tokensToCheck.begin(), tokensToCheck.end(),
-        [&](Token t) -> bool {
-            TokenType tokenType = t.getType();
-            return relExprToken.count(tokenType);
-        });
+    int index = -1;
+    for (int i = 0; i < tokensToCheck.size(); i++) {
+        if (relExprToken.count(tokensToCheck[i].getType())) {
+            index = i;
+            break;
+        }
+    }
 
-    if (tokenItr == tokensToCheck.end()) {
+    if (index == -1) {
         return false;
     }
 
-    std::vector<Token> left(tokensToCheck.begin(), tokenItr);
-    std::vector<Token> right(tokenItr + 1, tokensToCheck.end());
+    std::vector<Token> left(tokensToCheck.begin(), tokensToCheck.begin() + index);
+    std::vector<Token> right(tokensToCheck.begin() + index + 1, tokensToCheck.end());
 
     return isRelFactor(left) && isRelFactor(right);
 }

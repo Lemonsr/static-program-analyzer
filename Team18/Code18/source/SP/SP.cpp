@@ -17,12 +17,11 @@ spa::SP::SP(std::string source, PKBManager& pkbManager) :
 void spa::SP::processSource() {
     Stream<Token> convertedTokens = convertToken();
     SpValidator validator(convertedTokens);
-    try {
-        validator.validateGrammar();
+    bool isValid = validator.validateGrammar();
+    if (!isValid) {
+        exit(1);
     }
-    catch (std::exception e) {
-        return;
-    }
+
     SpParser parser = SpParser(convertedTokens);
     std::vector<ProcedureStatement> procedureList = parser.parse();
     DesignExtractor designExtractor = DesignExtractor(pkbManager, procedureList);
@@ -31,8 +30,15 @@ void spa::SP::processSource() {
 
 spa::Stream<spa::Token> spa::SP::convertToken() {
     std::stringstream ss(sourceCode);
+    Stream<Token> tokens;
     Tokenizer tokenizer;
-    Stream<Token> tokens = tokenizer.tokenize(ss);
+    try {
+        tokens = tokenizer.tokenize(ss);
+    } catch (std::runtime_error &e) {
+        std::cerr << e.what() << std::endl;
+        exit(1);
+    }
+
     for (int64_t i = 0; i < tokens.remaining(); i++) {
         Token currToken = tokens[i];
         TokenType currTokenType = currToken.getType();
