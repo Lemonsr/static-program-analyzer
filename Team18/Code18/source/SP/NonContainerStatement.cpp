@@ -1,6 +1,7 @@
 #include "NonContainerStatement.h"
 
 #include <algorithm>
+#include <iostream>
 
 std::string spa::OneVarNonContainerStatement::getVariableName() {
   return variableName;
@@ -123,6 +124,7 @@ void spa::IfConditionStatement::processStatement(PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::IF);
   extractUsesFromPostfix(pkbManager, postfixExpr);
+  extractControlVariableFromPostfix(pkbManager, postfixExpr);
 }
 
 void spa::WhileConditionStatement::processStatement(PKBManager& pkbManager) {
@@ -130,6 +132,7 @@ void spa::WhileConditionStatement::processStatement(PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::WHILE);
   extractUsesFromPostfix(pkbManager, postfixExpr);
+  extractControlVariableFromPostfix(pkbManager, postfixExpr);
 }
 
 void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
@@ -152,6 +155,38 @@ void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
     expr = "";
   }
 }
+
+void spa::MultiVarNonContainerStatement::extractControlVariableFromPostfix(PKBManager& pkbManager, std::string postfix){
+    postfix += " ";
+    std::set<std::string> controlVariables;
+    std::string operand;
+    for (auto& ch : postfix) {
+        if (isspace(ch)) {
+            if (!operand.empty()) {
+                if (!isdigit(operand[0])) {
+                    controlVariables.insert(operand);
+                }
+                operand.clear();
+            }
+        }
+        else {
+            operand += ch;
+        }
+    }
+    for (int parent : whileStmtParents) {
+        std::string stringParentStmtNum = std::to_string(parent);
+        for (auto& var : controlVariables) {
+            pkbManager.addContainerPattern(WHILE, stringParentStmtNum, var);
+        }
+    }
+    for (int parent : ifStmtParents) {
+        std::string stringParentStmtNum = std::to_string(parent);
+        for (auto& var : controlVariables) {
+            pkbManager.addContainerPattern(IF, stringParentStmtNum, var);
+        }
+    }
+}
+
 
 void spa::NonContainerStatement::addParentUses(PKBManager& pkbManager, std::string variableName) {
   for (int parent : whileStmtParents) {

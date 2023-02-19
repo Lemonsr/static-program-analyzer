@@ -50,6 +50,7 @@ class MultiVarNonContainerStatement : public NonContainerStatement {
  protected:
   std::string postfixExpr;
   void extractUsesFromPostfix(PKBManager& pkbManager, std::string postfix);
+  void extractControlVariableFromPostfix(PKBManager& pkbManager, std::string postfix);
 };
 
 class AssignStatement : public MultiVarNonContainerStatement {
