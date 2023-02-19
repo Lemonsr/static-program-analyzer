@@ -24,5 +24,7 @@ class PatternStorage {
   QueryResult getAssignVarName(PKBQueryArg lhs, Pattern rhs);
 
   void setAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> assignTable);
+  void setPatternIfTable(std::unordered_map<int, std::unordered_set<std::string>> patternIfTable);
+  void setPatternWhileTable(std::unordered_map<int, std::unordered_set<std::string>> patternWhileTable);
 };
 }  // namespace spa

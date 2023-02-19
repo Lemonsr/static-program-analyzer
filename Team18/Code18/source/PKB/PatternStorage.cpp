@@ -122,3 +122,11 @@ spa::QueryResult spa::PatternStorage::getAssignVarName(PKBQueryArg lhs, Pattern 
 void spa::PatternStorage::setAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> assignTable) {
   this->assignTable = assignTable;
 }
+
+void spa::PatternStorage::setPatternIfTable(std::unordered_map<int, std::unordered_set<std::string>> patternIfTable) {
+  this->patternIfTable = patternIfTable;
+}
+
+void spa::PatternStorage::setPatternWhileTable(std::unordered_map<int, std::unordered_set<std::string>> patternWhileTable) {
+  this->patternWhileTable = patternWhileTable;
+}

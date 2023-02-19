@@ -21,17 +21,25 @@ namespace UnitTesting {
     std::unordered_map<int, std::pair<std::string, std::string>> assignTable = {
       {1, {"a", "v x y * + z t * +"}},
     };
+    std::unordered_map<int, std::unordered_set<std::string>> patternIfTable = {
+      {1, {"x"}},
+      {4, {"y", "z"}},
+    };
+    std::unordered_map<int, std::unordered_set<std::string>> patternWhileTable = {
+      {7, {"a", "b"}},
+      {8, {"c"}},
+    };
 
     std::vector<spa::Token> tokens1 = {
-  spa::Token(spa::TokenType::TOKEN_NAME, "v"),
-  spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
-  spa::Token(spa::TokenType::TOKEN_NAME, "x"),
-  spa::Token(spa::TokenType::TOKEN_MULTIPLY, "*"),
-  spa::Token(spa::TokenType::TOKEN_NAME, "y"),
-  spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
-  spa::Token(spa::TokenType::TOKEN_NAME, "z"),
-  spa::Token(spa::TokenType::TOKEN_MULTIPLY, "*"),
-  spa::Token(spa::TokenType::TOKEN_NAME, "t"),
+      spa::Token(spa::TokenType::TOKEN_NAME, "v"),
+      spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
+      spa::Token(spa::TokenType::TOKEN_NAME, "x"),
+      spa::Token(spa::TokenType::TOKEN_MULTIPLY, "*"),
+      spa::Token(spa::TokenType::TOKEN_NAME, "y"),
+      spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
+      spa::Token(spa::TokenType::TOKEN_NAME, "z"),
+      spa::Token(spa::TokenType::TOKEN_MULTIPLY, "*"),
+      spa::Token(spa::TokenType::TOKEN_NAME, "t"),
     };
 
     TEST_METHOD(TestAddAssign) {
@@ -40,6 +48,22 @@ namespace UnitTesting {
 
       Assert::IsTrue(patternStorage.addAssign("2", "x", "1 2 +"));
       Assert::IsFalse(patternStorage.addAssign("2", "x", "1 2 +"));
+    }
+
+    TEST_METHOD(TestAddPatternIf) {
+      spa::PatternStorage patternStorage;
+      patternStorage.setPatternIfTable(patternIfTable);
+
+      Assert::IsTrue(patternStorage.addPatternIf("1", "y"));
+      Assert::IsFalse(patternStorage.addPatternIf("1", "y"));
+    }
+
+    TEST_METHOD(TestAddPatternWhile) {
+      spa::PatternStorage patternStorage;
+      patternStorage.setPatternWhileTable(patternWhileTable);
+
+      Assert::IsTrue(patternStorage.addPatternWhile("8", "a"));
+      Assert::IsFalse(patternStorage.addPatternWhile("8", "a"));
     }
 
     TEST_METHOD(TestGetAssignUnderscoreExact) {
