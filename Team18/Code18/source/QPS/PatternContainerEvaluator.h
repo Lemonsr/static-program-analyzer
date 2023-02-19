@@ -5,13 +5,13 @@
 #include "QpsResultTable.h"
 
 namespace spa {
-  class PatternContainerEvaluator : public QpsEvaluator {
-  private:
+class PatternContainerEvaluator : public QpsEvaluator {
+ private:
     DesignEntityType entityType;
     PqlArgument& patternSynonym;
     PqlArgument& firstArg;
-  public:
+ public:
     PatternContainerEvaluator(DesignEntityType entityType, PqlArgument& patternSynonym, PqlArgument& firstArg);
     QpsResultTable evaluate(PKBManager& pkbManager);
-  };
+};
 }  // namespace spa

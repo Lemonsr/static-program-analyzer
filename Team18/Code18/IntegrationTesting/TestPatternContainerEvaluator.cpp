@@ -150,7 +150,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(dim.first == 2);
       Assert::IsTrue(dim.second == 0);
     }
-    
+
     TEST_METHOD(TestGetPatternWhileUnderscore) {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
       Assert::IsTrue(pkbManager->addContainerPattern(spa::DesignEntityType::WHILE, "1", "x"));
