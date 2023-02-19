@@ -322,7 +322,8 @@ namespace UnitTesting {
       patternStorage.setPatternIfTable(patternIfTable);
       std::vector<std::pair<int, std::string>> expected = { {1, "x"}, {4, "y"}, {4, "z"} };
 
-      spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "v", { spa::DesignEntityType::VARIABLE }));
+      spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "v",
+                                                                    { spa::DesignEntityType::VARIABLE }));
       spa::QueryResult queryResult = patternStorage.getPatternIfUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -376,7 +377,8 @@ namespace UnitTesting {
       patternStorage.setPatternWhileTable(patternWhileTable);
       std::vector<std::pair<int, std::string>> expected = { {7, "a"}, {7, "b"}, {8, "c"} };
 
-      spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "v", { spa::DesignEntityType::VARIABLE }));
+      spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "v",
+                                                                    { spa::DesignEntityType::VARIABLE }));
       spa::QueryResult queryResult = patternStorage.getPatternWhileUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);

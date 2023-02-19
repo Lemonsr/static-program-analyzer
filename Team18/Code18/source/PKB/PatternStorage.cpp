@@ -221,6 +221,7 @@ void spa::PatternStorage::setPatternIfTable(std::unordered_map<int, std::unorder
   this->patternIfTable = patternIfTable;
 }
 
-void spa::PatternStorage::setPatternWhileTable(std::unordered_map<int, std::unordered_set<std::string>> patternWhileTable) {
+void spa::PatternStorage::setPatternWhileTable(std::unordered_map<int,
+                                               std::unordered_set<std::string>> patternWhileTable) {
   this->patternWhileTable = patternWhileTable;
 }
