@@ -33,6 +33,7 @@
     <ClInclude Include="..\source\QPS\ParentEvaluator.h" />
     <ClInclude Include="..\source\QPS\ParentStarEvaluator.h" />
     <ClInclude Include="..\source\QPS\ParsedQuery.h" />
+    <ClInclude Include="..\source\QPS\PatternContainerEvaluator.h" />
     <ClInclude Include="..\source\QPS\PatternEvaluator.h" />
     <ClInclude Include="..\source\QPS\PqlArgument.h" />
     <ClInclude Include="..\source\QPS\PqlArgumentParser.h" />
@@ -79,6 +80,7 @@
     <ClCompile Include="..\source\QPS\ParentEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\ParentStarEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\ParsedQuery.cpp" />
+    <ClCompile Include="..\source\QPS\PatternContainerEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\PatternEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\PqlArgument.cpp" />
     <ClCompile Include="..\source\QPS\PqlArgumentParser.cpp" />
