@@ -19,6 +19,7 @@ class RelationshipStorage {
   std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable;
   std::unordered_map<int, std::unordered_set<std::string>> usesTable;
   std::unordered_map<std::string, std::unordered_set<std::string>> usesProcTable;
+  std::unordered_map<std::string, std::string> callsTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;
 
@@ -87,12 +88,25 @@ class RelationshipStorage {
   QueryResult getModifiesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getModifiesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
+  bool addCalls(std::string firstProc, std::string secondProc);
+  QueryResult getCallsNameName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getCallsNameUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getCallsNameProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getCallsUnderscoreName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getCallsUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getCallsUnderscoreProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getCallsProcedureName(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getCallsProcedureUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getCallsProcedureProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg);
+
+
   void setFollowsTable(std::unordered_map<int, int> followsTable);
   void setFollowsStarTable(std::unordered_map<int, std::unordered_set<int>> followsStarTable);
   void setParentTable(std::unordered_map<int, std::unordered_set<int>> parentTable);
   void setParentStarTable(std::unordered_map<int, std::unordered_set<int>> parentStarTable);
   void setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable);
   void setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable);
+  void setCallsTable(std::unordered_map<std::string, std::string> callsTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
 };
 }  // namespace spa

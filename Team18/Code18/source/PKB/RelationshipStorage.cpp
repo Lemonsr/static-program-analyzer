@@ -843,6 +843,139 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVar(PKBQueryArg firstA
   return queryResult;
 }
 
+bool spa::RelationshipStorage::addCalls(std::string firstProc, std::string secondProc) {
+  if (callsTable.find(firstProc) != callsTable.end()) {
+    return false;
+  }
+
+  callsTable.insert({ firstProc, secondProc });
+  return true;
+}
+
+spa::QueryResult spa::RelationshipStorage::getCallsNameName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  std::string firstProc = firstArg.getName().name;
+  std::string secondProc = secondArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  if (callsTable.find(firstProc) == callsTable.end() || callsTable[firstProc] != secondProc) {
+    queryResult.setIsTrue(false);
+    return queryResult;
+  }
+
+  queryResult.setIsTrue(true);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getCallsNameUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  std::string firstProc = firstArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  if (callsTable.find(firstProc) == callsTable.end()) {
+    queryResult.setIsTrue(false);
+    return queryResult;
+  }
+
+  queryResult.setIsTrue(true);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getCallsNameProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  std::string firstProc = firstArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<std::string, std::string>> procNameProcNamePairs;
+  queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
+  if (callsTable.find(firstProc) == callsTable.end()) {
+    return queryResult;
+  }
+
+  procNameProcNamePairs.push_back({ firstProc, callsTable[firstProc] });
+  queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getCallsUnderscoreName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  std::string proc = secondArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
+    if (itr->second == proc) {
+      queryResult.setIsTrue(true);
+      return queryResult;
+    }
+  }
+
+  queryResult.setIsTrue(false);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getCallsUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+  queryResult.setIsTrue(!callsTable.empty());
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getCallsUnderscoreProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<std::string, std::string>> procNameProcNamePairs;
+  for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
+    procNameProcNamePairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getCallsProcedureName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  std::string proc = secondArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<std::string, std::string>> procNameProcNamePairs;
+  for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
+    if (itr->second != proc) {
+      continue;
+    }
+    procNameProcNamePairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getCallsProcedureUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<std::string, std::string>> procNameProcNamePairs;
+  for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
+    procNameProcNamePairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getCallsProcedureProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<std::string, std::string>> procNameProcNamePairs;
+  for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
+    procNameProcNamePairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
+  return queryResult;
+}
+
 bool spa::RelationshipStorage::addUses(std::string lineNo, std::string varName) {
   int lineNumber = std::stoi(lineNo);
   if (usesTable.find(lineNumber) != usesTable.end() &&
@@ -994,6 +1127,10 @@ void spa::RelationshipStorage::setUsesTable(std::unordered_map<int, std::unorder
 void spa::RelationshipStorage::setModifiesTable(std::unordered_map<int,
   std::unordered_set<std::string>> modifiesTable) {
   this->modifiesTable = modifiesTable;
+}
+
+void spa::RelationshipStorage::setCallsTable(std::unordered_map<std::string, std::string> callsTable) {
+  this->callsTable = callsTable;
 }
 
 void spa::RelationshipStorage::setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable) {
