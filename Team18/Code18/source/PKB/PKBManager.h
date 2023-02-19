@@ -20,5 +20,6 @@ class PKBManager {
                                             PKBQueryArg firstArg, PKBQueryArg secondArg) = 0;
   virtual const QueryResult getEntity(DesignEntityType entityType) = 0;
   virtual const QueryResult getPattern(PKBQueryArg lhs, Pattern rhs) = 0;
+  virtual const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg) = 0;
 };
 }  // namespace spa

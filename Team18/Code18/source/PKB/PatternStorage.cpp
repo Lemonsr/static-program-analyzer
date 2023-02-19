@@ -202,7 +202,7 @@ spa::QueryResult spa::PatternStorage::getPatternWhileVarName(PKBQueryArg firstAr
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
-  for (auto& itr = patternIfTable.begin(); itr != patternIfTable.end(); itr++) {
+  for (auto& itr = patternWhileTable.begin(); itr != patternWhileTable.end(); itr++) {
     if (itr->second.find(varName) == itr->second.end()) {
       continue;
     }
