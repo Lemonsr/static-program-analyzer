@@ -21,7 +21,8 @@ enum RelationshipType {
   PARENT_STAR,
   MODIFIES,
   USES,
-  CALLS
+  CALLS,
+  CALLS_STAR
 };
 
 class SuchThatClause {

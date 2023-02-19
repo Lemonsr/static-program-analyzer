@@ -180,6 +180,7 @@
     <ClCompile Include="TestDesignExtractorStatements.cpp" />
     <ClCompile Include="TestDesignExtractorUses.cpp" />
     <ClCompile Include="TestPKBCalls.cpp" />
+    <ClCompile Include="TestPKBCallsStar.cpp" />
     <ClCompile Include="TestPKBFollows.cpp" />
     <ClCompile Include="TestPKBFollowsStar.cpp" />
     <ClCompile Include="TestPKBParent.cpp" />
