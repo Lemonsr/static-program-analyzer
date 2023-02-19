@@ -5,6 +5,7 @@ namespace spa {
     SYNONYM,
     WILDCARD,
     VARIABLE_NAME,
-    LINE_NO
+    LINE_NO,
+    PROCEDURE_NAME
   };
 }  // namespace spa

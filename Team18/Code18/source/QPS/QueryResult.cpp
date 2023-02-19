@@ -20,6 +20,10 @@ const std::vector<std::pair<int, int>>& spa::QueryResult::getLineNumberLineNumbe
   return lineNumberLineNumberPairs.value();
 }
 
+const std::vector<std::pair<std::string, std::string>>& spa::QueryResult::getProcNameProcNamePairs() {
+  return procNameProcNamePairs.value();
+}
+
 const bool& spa::QueryResult::getIsTrue() {
   return isTrue.value();
 }
@@ -46,4 +50,9 @@ void spa::QueryResult::setLineNumberLineNumberPairs(std::vector<std::pair<int, i
 
 void spa::QueryResult::setIsTrue(bool isTrue) {
   this->isTrue = isTrue;
+}
+
+void spa::QueryResult::setProcNameProcNamePairs(std::vector<std::pair<std::string,
+                                                std::string>> procNameProcNamePairs) {
+  this->procNameProcNamePairs = procNameProcNamePairs;
 }
