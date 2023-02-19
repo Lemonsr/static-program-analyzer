@@ -844,11 +844,12 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVar(PKBQueryArg firstA
 }
 
 bool spa::RelationshipStorage::addCalls(std::string firstProc, std::string secondProc) {
-  if (callsTable.find(firstProc) != callsTable.end()) {
+  if (callsTable.find(firstProc) != callsTable.end() &&
+    callsTable[firstProc].find(secondProc) != callsTable[firstProc].end()) {
     return false;
   }
 
-  callsTable.insert({ firstProc, secondProc });
+  callsTable[firstProc].insert(secondProc);
   return true;
 }
 
@@ -858,7 +859,8 @@ spa::QueryResult spa::RelationshipStorage::getCallsNameName(PKBQueryArg firstArg
   QueryResult queryResult;
   queryResult.setQueryResultType(BOOL);
 
-  if (callsTable.find(firstProc) == callsTable.end() || callsTable[firstProc] != secondProc) {
+  if (callsTable.find(firstProc) == callsTable.end() ||
+    callsTable[firstProc].find(secondProc) == callsTable[firstProc].end()) {
     queryResult.setIsTrue(false);
     return queryResult;
   }
@@ -892,7 +894,10 @@ spa::QueryResult spa::RelationshipStorage::getCallsNameProcedure(PKBQueryArg fir
     return queryResult;
   }
 
-  procNameProcNamePairs.push_back({ firstProc, callsTable[firstProc] });
+  for (auto& itr = callsTable[firstProc].begin(); itr != callsTable[firstProc].end(); itr++) {
+    procNameProcNamePairs.push_back({ firstProc, *itr });
+  }
+
   queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
   return queryResult;
 }
@@ -903,7 +908,7 @@ spa::QueryResult spa::RelationshipStorage::getCallsUnderscoreName(PKBQueryArg fi
   queryResult.setQueryResultType(BOOL);
 
   for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
-    if (itr->second == proc) {
+    if (itr->second.find(proc) != itr->second.end()) {
       queryResult.setIsTrue(true);
       return queryResult;
     }
@@ -926,7 +931,9 @@ spa::QueryResult spa::RelationshipStorage::getCallsUnderscoreProcedure(PKBQueryA
 
   std::vector<std::pair<std::string, std::string>> procNameProcNamePairs;
   for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
-    procNameProcNamePairs.push_back({ itr->first, itr->second });
+    for (auto& procName : callsTable[itr->first]) {
+      procNameProcNamePairs.push_back({ itr->first, procName });
+    }
   }
 
   queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
@@ -940,10 +947,10 @@ spa::QueryResult spa::RelationshipStorage::getCallsProcedureName(PKBQueryArg fir
 
   std::vector<std::pair<std::string, std::string>> procNameProcNamePairs;
   for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
-    if (itr->second != proc) {
+    if (itr->second.find(proc) == itr->second.end()) {
       continue;
     }
-    procNameProcNamePairs.push_back({ itr->first, itr->second });
+    procNameProcNamePairs.push_back({ itr->first, proc });
   }
 
   queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
@@ -956,7 +963,8 @@ spa::QueryResult spa::RelationshipStorage::getCallsProcedureUnderscore(PKBQueryA
 
   std::vector<std::pair<std::string, std::string>> procNameProcNamePairs;
   for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
-    procNameProcNamePairs.push_back({ itr->first, itr->second });
+    for (auto& procName : callsTable[itr->first])
+    procNameProcNamePairs.push_back({ itr->first, procName });
   }
 
   queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
@@ -969,7 +977,8 @@ spa::QueryResult spa::RelationshipStorage::getCallsProcedureProcedure(PKBQueryAr
 
   std::vector<std::pair<std::string, std::string>> procNameProcNamePairs;
   for (auto& itr = callsTable.begin(); itr != callsTable.end(); itr++) {
-    procNameProcNamePairs.push_back({ itr->first, itr->second });
+    for (auto& procName : callsTable[itr->first])
+      procNameProcNamePairs.push_back({ itr->first, procName });
   }
 
   queryResult.setProcNameProcNamePairs(procNameProcNamePairs);
@@ -1129,7 +1138,7 @@ void spa::RelationshipStorage::setModifiesTable(std::unordered_map<int,
   this->modifiesTable = modifiesTable;
 }
 
-void spa::RelationshipStorage::setCallsTable(std::unordered_map<std::string, std::string> callsTable) {
+void spa::RelationshipStorage::setCallsTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsTable) {
   this->callsTable = callsTable;
 }
 
