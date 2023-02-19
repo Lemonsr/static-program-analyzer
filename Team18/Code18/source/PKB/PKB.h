@@ -34,10 +34,16 @@ class PKB : public PKBManager {
   std::unordered_map<PKBQueryArgType, std::function<QueryResult(PatternStorage& patternStorage,
                                                                 PKBQueryArg,
                                                                 Pattern)>> patternQueryFunctionMap;
+  std::unordered_map<
+    std::tuple<DesignEntityType, PKBQueryArgType>,
+    std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg)>,
+    TupleHash,
+    TupleEquality> patternContainerQueryFunctionMap;
 
   void createRelationshipQueryFunctionMap();
   void createEntityQueryFunctionMap();
   void createPatternQueryFunctionMap();
+  void createPatternContainerQueryFunctionMap();
 
  public:
   PKB();
@@ -45,11 +51,13 @@ class PKB : public PKBManager {
                              std::string firstArg, std::string secondArg);
   const bool addEntity(DesignEntityType entityType, std::string arg);
   const bool addPattern(std::string lineNo, std::string lhs, std::string rhs);
+  const bool addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName);
   const bool addStatementType(std::string lineNo, StatementType statementType);
   const bool addStatementProc(std::string lineNo, std::string procedure);
   const QueryResult getRelationship(RelationshipType relationshipType,
                                     PKBQueryArg firstArg, PKBQueryArg secondArg);
   const QueryResult getEntity(DesignEntityType entityType);
   const QueryResult getPattern(PKBQueryArg lhs, Pattern rhs);
+  const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg);
 };
 }  // namespace spa
