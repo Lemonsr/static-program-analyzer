@@ -52,6 +52,7 @@ void spa::QueryResult::setIsTrue(bool isTrue) {
   this->isTrue = isTrue;
 }
 
-void spa::QueryResult::setProcNameProcNamePairs(std::vector<std::pair<std::string, std::string>> procNameProcNamePairs) {
+void spa::QueryResult::setProcNameProcNamePairs(std::vector<std::pair<std::string,
+                                                std::string>> procNameProcNamePairs) {
   this->procNameProcNamePairs = procNameProcNamePairs;
 }

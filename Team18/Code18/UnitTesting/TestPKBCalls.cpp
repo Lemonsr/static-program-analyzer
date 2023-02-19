@@ -24,9 +24,9 @@ namespace UnitTesting {
       TEST_METHOD(TestAddCalls) {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setCallsTable(callsTable);
-        
-        Assert::IsTrue(relationshipStorage.addCalls("p", "s" ));
-        Assert::IsFalse(relationshipStorage.addCalls( "p", "s" ));
+
+        Assert::IsTrue(relationshipStorage.addCalls("p", "s"));
+        Assert::IsFalse(relationshipStorage.addCalls("p", "s"));
       };
 
       TEST_METHOD(TestGetCallsNameName) {
@@ -42,7 +42,7 @@ namespace UnitTesting {
 
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "a", {}));
         queryResult = relationshipStorage.getCallsNameName(firstArg, secondArg);
-        
+
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
         Assert::IsFalse(queryResult.getIsTrue());
       }
@@ -72,7 +72,8 @@ namespace UnitTesting {
 
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "q", {}));
-        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "p", { spa::DesignEntityType::PROCEDURE }));
+        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM,
+                                                                       "p", { spa::DesignEntityType::PROCEDURE }));
         spa::QueryResult queryResult = relationshipStorage.getCallsNameProcedure(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -113,7 +114,7 @@ namespace UnitTesting {
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
         Assert::IsTrue(queryResult.getIsTrue());
-        
+
         relationshipStorage.setCallsTable({});
         queryResult = relationshipStorage.getCallsUnderscoreUnderscore(firstArg, secondArg);
 
@@ -133,7 +134,8 @@ namespace UnitTesting {
         };
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
-        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "p", { spa::DesignEntityType::PROCEDURE }));
+        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM,
+                                                      "p", { spa::DesignEntityType::PROCEDURE }));
         spa::QueryResult queryResult = relationshipStorage.getCallsUnderscoreProcedure(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -154,7 +156,8 @@ namespace UnitTesting {
           {"r", "s"},
         };
 
-        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "p", { spa::DesignEntityType::PROCEDURE }));
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM,
+                                                     "p", { spa::DesignEntityType::PROCEDURE }));
         spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "s", {}));
 
         spa::QueryResult queryResult = relationshipStorage.getCallsProcedureName(firstArg, secondArg);
@@ -180,7 +183,8 @@ namespace UnitTesting {
           {"r", "s"},
         };
 
-        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "p", { spa::DesignEntityType::PROCEDURE }));
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM,
+                                                                      "p", { spa::DesignEntityType::PROCEDURE }));
         spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
 
         spa::QueryResult queryResult = relationshipStorage.getCallsProcedureUnderscore(firstArg, secondArg);
@@ -206,7 +210,8 @@ namespace UnitTesting {
           {"r", "s"},
         };
 
-        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "p", { spa::DesignEntityType::PROCEDURE }));
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM,
+                                                     "p", { spa::DesignEntityType::PROCEDURE }));
         spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
 
         spa::QueryResult queryResult = relationshipStorage.getCallsProcedureProcedure(firstArg, secondArg);

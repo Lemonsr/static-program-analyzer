@@ -1138,7 +1138,8 @@ void spa::RelationshipStorage::setModifiesTable(std::unordered_map<int,
   this->modifiesTable = modifiesTable;
 }
 
-void spa::RelationshipStorage::setCallsTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsTable) {
+void spa::RelationshipStorage::setCallsTable(std::unordered_map<std::string,
+                                             std::unordered_set<std::string>> callsTable) {
   this->callsTable = callsTable;
 }
 
