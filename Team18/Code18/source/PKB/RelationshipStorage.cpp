@@ -1060,14 +1060,16 @@ spa::QueryResult spa::RelationshipStorage::getCallsStarUnderscoreName(PKBQueryAr
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getCallsStarUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getCallsStarUnderscoreUnderscore(PKBQueryArg firstArg,
+                                                                            PKBQueryArg secondArg) {
   QueryResult queryResult;
   queryResult.setQueryResultType(BOOL);
   queryResult.setIsTrue(!callsStarTable.empty());
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getCallsStarUnderscoreProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getCallsStarUnderscoreProcedure(PKBQueryArg firstArg,
+                                                                           PKBQueryArg secondArg) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
@@ -1099,7 +1101,8 @@ spa::QueryResult spa::RelationshipStorage::getCallsStarProcedureName(PKBQueryArg
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getCallsStarProcedureUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getCallsStarProcedureUnderscore(PKBQueryArg firstArg,
+                                                                           PKBQueryArg secondArg) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
@@ -1285,7 +1288,8 @@ void spa::RelationshipStorage::setCallsTable(std::unordered_map<std::string,
   this->callsTable = callsTable;
 }
 
-void spa::RelationshipStorage::setCallsStarTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable) {
+void spa::RelationshipStorage::setCallsStarTable(std::unordered_map<std::string,
+                                                 std::unordered_set<std::string>> callsStarTable) {
   this->callsStarTable = callsStarTable;
 }
 
