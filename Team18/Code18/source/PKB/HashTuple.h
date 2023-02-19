@@ -20,6 +20,13 @@ struct TupleHash {
     hash_combine<std::size_t>(result, static_cast<size_t>(std::get<2>(t)));
     return result;  // or use boost::hash_combine
   }
+
+  std::size_t operator()(std::tuple<DesignEntityType, PKBQueryArgType> const& t) const noexcept {
+    std::size_t result = 0;
+    hash_combine<std::size_t>(result, static_cast<size_t>(std::get<0>(t)));
+    hash_combine<std::size_t>(result, static_cast<size_t>(std::get<1>(t)));
+    return result;
+  }
 };
 
 struct TupleEquality {
@@ -29,6 +36,13 @@ struct TupleEquality {
     bool arg1Eq = std::get<1>(t1) == std::get<1>(t2);
     bool arg2Eq = std::get<2>(t1) == std::get<2>(t2);
     return relEq && arg1Eq && arg2Eq;  // or use boost::hash_combine
+  }
+
+  bool operator()(const std::tuple<DesignEntityType, PKBQueryArgType>& t1,
+                  const std::tuple<DesignEntityType, PKBQueryArgType>& t2) const {
+    bool deEq = std::get<0>(t1) == std::get<0>(t2);
+    bool arg1Eq = std::get<1>(t1) == std::get<1>(t2);
+    return deEq && arg1Eq;
   }
 };
 }  // namespace spa
