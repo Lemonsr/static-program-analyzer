@@ -991,7 +991,7 @@ bool spa::RelationshipStorage::addCallsStar(std::string firstProc, std::string s
     return false;
   }
 
-  callsTable[firstProc].insert(secondProc);
+  callsStarTable[firstProc].insert(secondProc);
   return true;
 }
 
