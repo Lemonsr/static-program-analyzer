@@ -15,6 +15,28 @@ bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName,
   return true;
 }
 
+bool spa::PatternStorage::addPatternIf(std::string lineNo, std::string varName) {
+  int lineNumber = std::stoi(lineNo);
+  if (patternIfTable.find(lineNumber) != patternIfTable.end() &&
+      patternIfTable[lineNumber].find(varName) != patternIfTable[lineNumber].end()) {
+    return false;
+  }
+
+  patternIfTable[lineNumber].insert(varName);
+  return true;
+}
+
+bool spa::PatternStorage::addPatternWhile(std::string lineNo, std::string varName) {
+  int lineNumber = std::stoi(lineNo);
+  if (patternWhileTable.find(lineNumber) != patternWhileTable.end() &&
+      patternWhileTable[lineNumber].find(varName) != patternWhileTable[lineNumber].end()) {
+    return false;
+  }
+
+  patternWhileTable[lineNumber].insert(varName);
+  return true;
+}
+
 spa::QueryResult spa::PatternStorage::getAssignUnderscore(PKBQueryArg lhs, Pattern rhs) {
   PatternType type = rhs.getType();
   std::string queryPattern = UtilsFunction::infixToPostfix(rhs.getValue());

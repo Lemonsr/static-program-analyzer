@@ -195,6 +195,21 @@ const bool spa::PKB::addPattern(std::string lineNo, std::string lhs, std::string
   return patternStorage.addAssign(lineNo, lhs, rhs);
 }
 
+const bool spa::PKB::addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName) {
+  switch (entityType) {
+  case IF: {
+    return patternStorage.addPatternIf(lineNo, varName);
+  }
+  case WHILE: {
+    return patternStorage.addPatternWhile(lineNo, varName);
+  }
+  default: {
+    return false;
+  }
+  }
+  return false;
+}
+
 const bool spa::PKB::addStatementType(std::string lineNo, StatementType statementType) {
   return relationshipStorage.addStatementType(lineNo, statementType);
 }

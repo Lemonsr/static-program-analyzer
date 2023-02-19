@@ -13,6 +13,7 @@ class PKBManager {
                                      std::string firstArg, std::string secondArg) = 0;
   virtual const bool addEntity(DesignEntityType entityType, std::string arg) = 0;
   virtual const bool addPattern(std::string lineNo, std::string lhs, std::string rhs) = 0;
+  virtual const bool addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName) = 0;
   virtual const bool addStatementType(std::string lineNo, StatementType statementType) = 0;
   virtual const bool addStatementProc(std::string lineNo, std::string procedure) = 0;
   virtual const QueryResult getRelationship(RelationshipType relationshipType,
