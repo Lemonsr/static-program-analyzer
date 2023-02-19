@@ -34,10 +34,16 @@ class PKB : public PKBManager {
   std::unordered_map<PKBQueryArgType, std::function<QueryResult(PatternStorage& patternStorage,
                                                                 PKBQueryArg,
                                                                 Pattern)>> patternQueryFunctionMap;
+  std::unordered_map<
+    std::tuple<DesignEntityType, PKBQueryArgType>,
+    std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg)>,
+    TupleHash,
+    TupleEquality> patternContainerQueryFunctionMap;
 
   void createRelationshipQueryFunctionMap();
   void createEntityQueryFunctionMap();
   void createPatternQueryFunctionMap();
+  void createPatternContainerQueryFunctionMap();
 
  public:
   PKB();
@@ -52,5 +58,6 @@ class PKB : public PKBManager {
                                     PKBQueryArg firstArg, PKBQueryArg secondArg);
   const QueryResult getEntity(DesignEntityType entityType);
   const QueryResult getPattern(PKBQueryArg lhs, Pattern rhs);
+  const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg);
 };
 }  // namespace spa

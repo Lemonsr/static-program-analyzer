@@ -125,7 +125,18 @@ void spa::PKB::createPatternQueryFunctionMap() {
   patternQueryFunctionMap = {
     {PKBQueryArgType::UNDERSCORE, &PatternStorage::getAssignUnderscore},
     {PKBQueryArgType::VARIABLE, &PatternStorage::getAssignVar},
-    {PKBQueryArgType::NAME, &PatternStorage::getAssignVarName}
+    {PKBQueryArgType::NAME, &PatternStorage::getAssignVarName},
+  };
+}
+
+void spa::PKB::createPatternContainerQueryFunctionMap() {
+  patternContainerQueryFunctionMap = {
+    {{DesignEntityType::IF, PKBQueryArgType::UNDERSCORE }, &PatternStorage::getPatternIfUnderscore},
+    {{DesignEntityType::IF, PKBQueryArgType::VARIABLE }, &PatternStorage::getPatternIfVar},
+    {{DesignEntityType::IF, PKBQueryArgType::NAME }, &PatternStorage::getPatternIfVarName},
+    {{DesignEntityType::WHILE, PKBQueryArgType::UNDERSCORE }, &PatternStorage::getPatternWhileUnderscore},
+    {{DesignEntityType::WHILE, PKBQueryArgType::VARIABLE }, &PatternStorage::getPatternWhileVar},
+    {{DesignEntityType::WHILE, PKBQueryArgType::NAME }, &PatternStorage::getPatternWhileVarName},
   };
 }
 
@@ -133,6 +144,7 @@ spa::PKB::PKB() {
   createRelationshipQueryFunctionMap();
   createEntityQueryFunctionMap();
   createPatternQueryFunctionMap();
+  createPatternContainerQueryFunctionMap();
 }
 
 const bool spa::PKB::addRelationship(RelationshipType relationshipType,
@@ -240,4 +252,9 @@ const spa::QueryResult spa::PKB::getEntity(DesignEntityType entityType) {
 const spa::QueryResult spa::PKB::getPattern(PKBQueryArg lhs, Pattern rhs) {
   auto patternFunctionItr = patternQueryFunctionMap.find(lhs.getType());
   return (patternFunctionItr->second)(patternStorage, lhs, rhs);
+}
+
+const spa::QueryResult spa::PKB::getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg) {
+  auto patternContainerFunctionItr = patternContainerQueryFunctionMap.find({ entityType, firstArg.getType() });
+  return (patternContainerFunctionItr->second)(patternStorage, firstArg);
 }
