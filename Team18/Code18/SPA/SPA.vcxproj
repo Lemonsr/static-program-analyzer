@@ -43,6 +43,7 @@
     <ClInclude Include="..\source\QPS\PqlQueryParser.h" />
     <ClInclude Include="..\source\QPS\PqlSemanticChecker.h" />
     <ClInclude Include="..\source\QPS\PqlSuchThatParser.h" />
+    <ClInclude Include="..\source\QPS\PqlSuchThatSubParser.h" />
     <ClInclude Include="..\source\QPS\QPS.h" />
     <ClInclude Include="..\source\QPS\QpsEvaluator.h" />
     <ClInclude Include="..\source\QPS\QpsPreprocessor.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="..\source\QPS\PqlQueryParser.cpp" />
     <ClCompile Include="..\source\QPS\PqlSemanticChecker.cpp" />
     <ClCompile Include="..\source\QPS\PqlSuchThatParser.cpp" />
+    <ClCompile Include="..\source\QPS\PqlSuchThatSubParser.cpp" />
     <ClCompile Include="..\source\QPS\QPS.cpp" />
     <ClCompile Include="..\source\QPS\QpsPreprocessor.cpp" />
     <ClCompile Include="..\source\QPS\QpsQueryEvaluator.cpp" />

@@ -1,16 +1,12 @@
 #pragma once
 
-#include "PqlArgumentParser.h"
 #include "PqlParser.h"
-#include "ParsedQuery.h"
+#include "PqlSuchThatSubParser.h"
 
 namespace spa {
 class PqlSuchThatParser : public PqlParser {
  private:
-  PqlArgumentParser argParser;
-  PqlParseStatus getArgs(RelationshipType type,
-                          Stream<Token>& tokens,
-                          ParsedQuery& query);
+  PqlSuchThatSubParser subParser;
  public:
   PqlParseStatus parse(Stream<Token>& tokens, ParsedQuery& query);
 };
