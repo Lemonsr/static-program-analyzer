@@ -165,6 +165,9 @@
     <ClInclude Include="..\source\SP\SpValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\QPS\PatternContainerEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\PKB\EntityStorage.cpp">
@@ -291,6 +294,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\SP\SpValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\QPS\PatternContainerEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
