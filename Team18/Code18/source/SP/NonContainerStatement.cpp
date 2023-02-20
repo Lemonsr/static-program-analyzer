@@ -165,8 +165,7 @@ void spa::MultiVarNonContainerStatement::extractPatternFromPostfix(PKBManager& p
             operand.clear();
         }
     }
-    QueryResult result = pkbManager.getEntity(type);
-    std::vector <int> stmtNums = result.getLineNumbers();
+
     for (auto& var : controlVariables) {
         pkbManager.addContainerPattern(type, lineNum, var);
     }
