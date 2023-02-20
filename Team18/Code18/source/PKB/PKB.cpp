@@ -131,6 +131,7 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::CALLS, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
       &RelationshipStorage::getCallsProcedureProcedure},
 
+    // Calls Star
     {{RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
       &RelationshipStorage::getCallsStarNameName},
     {{RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
