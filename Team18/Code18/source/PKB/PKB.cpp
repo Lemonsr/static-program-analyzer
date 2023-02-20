@@ -129,7 +129,26 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::CALLS, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
       &RelationshipStorage::getCallsProcedureUnderscore},
     {{RelationshipType::CALLS, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
-      &RelationshipStorage::getCallsProcedureProcedure}
+      &RelationshipStorage::getCallsProcedureProcedure},
+
+    {{RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
+      &RelationshipStorage::getCallsStarNameName},
+    {{RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getCallsStarNameUnderscore},
+    {{RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::PROCEDURE},
+      &RelationshipStorage::getCallsStarNameProcedure},
+    {{RelationshipType::CALLS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getCallsStarUnderscoreName},
+    {{RelationshipType::CALLS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getCallsStarUnderscoreUnderscore},
+    {{RelationshipType::CALLS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::PROCEDURE},
+      & RelationshipStorage::getCallsStarUnderscoreProcedure},
+    {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getCallsStarProcedureName},
+    {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getCallsStarProcedureUnderscore},
+    {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
+      &RelationshipStorage::getCallsStarProcedureProcedure}
   };
 }
 
