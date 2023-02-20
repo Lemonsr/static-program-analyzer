@@ -545,4 +545,4 @@ namespace UnitTesting {
             Assert::IsFalse(expectedWhile == testWhile.getLineNumberVariablePairs());
         }
     };
-} // namespace UnitTesting
+}  // namespace UnitTesting
