@@ -122,10 +122,17 @@
     <ClCompile Include="TestPKBCallsStar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="TestPqlSuchThatSubParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPqlPatternSubParser.cpp">
+=======
+    <ClCompile Include="TestDesignExtractorCalls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorCallsStarcpp.cpp">
+>>>>>>> Stashed changes
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

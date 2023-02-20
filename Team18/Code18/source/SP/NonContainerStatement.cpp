@@ -104,7 +104,7 @@ void spa::CallStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addEntity(VARIABLE, variableName);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::CALL);
-  pkbManager.addRelationship(MODIFIES, stringStmtLineNum, variableName);
+  pkbManager.addRelationship(CALLS, parentProcedureVal, variableName);
 }
 
 void spa::AssignStatement::processStatement(spa::PKBManager& pkbManager) {

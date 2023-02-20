@@ -21,7 +21,7 @@ class SpValidator {
         std::unordered_set<TokenType> termToken = {TOKEN_DIVIDE, TOKEN_MULTIPLY, TOKEN_MODULO};
         std::unordered_set<TokenType> nameToken = {
             TOKEN_NAME, TOKEN_IF, TOKEN_WHILE,
-            TOKEN_PRINT, TOKEN_READ
+            TOKEN_PRINT, TOKEN_READ, TOKEN_CALL
         };
         std::unordered_set<TokenType> relFactorToken = {TOKEN_NAME, TOKEN_INTEGER};
 
