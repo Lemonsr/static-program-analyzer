@@ -62,6 +62,7 @@
     <ClInclude Include="..\source\SP\ProcedureStatement.h" />
     <ClInclude Include="..\source\SP\ProgramStatement.h" />
     <ClInclude Include="..\source\SP\SP.h" />
+    <ClInclude Include="..\source\SP\SpCyclicValidator.h" />
     <ClInclude Include="..\source\SP\SpParser.h" />
     <ClInclude Include="..\source\SP\SpValidator.h" />
   </ItemGroup>
@@ -109,6 +110,7 @@
     <ClCompile Include="..\source\SP\ProcedureStatement.cpp" />
     <ClCompile Include="..\source\SP\ProgramStatement.cpp" />
     <ClCompile Include="..\source\SP\SP.cpp" />
+    <ClCompile Include="..\source\SP\SpCyclicValidator.cpp" />
     <ClCompile Include="..\source\SP\SpParser.cpp" />
     <ClCompile Include="..\source\SP\SpValidator.cpp" />
   </ItemGroup>

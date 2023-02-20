@@ -5,6 +5,7 @@
 
 #include "ContainerStatement.h"
 #include "ProcedureStatement.h"
+#include "SpCyclicValidator.h"
 
 spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
                                       std::vector<ProcedureStatement>& procedureList) :
@@ -23,6 +24,14 @@ void spa::DesignExtractor::extractDesignAbstraction(std::vector<ProgramStatement
   extractFollowsStar(statementList);
   extractParentAbstraction(statementList);
   extractUsesAndModifies(statementList);
+
+    // semantic check for calls stmts
+  spa::SpCyclicValidator cyclicValidator(procedureList);
+  bool isValid = cyclicValidator.validateCyclic();
+  if (!isValid) {
+      exit(1);
+  }
+    extractCallsStar();
 }
 
 void spa::DesignExtractor::extractParentAbstraction(std::vector<ProgramStatement*> statementList) {
@@ -136,4 +145,23 @@ void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*>
   for (auto statement : statementList) {
     statement->processStatement(pkbManager);
   }
+}
+
+void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {
+    if (procCallMap.find(child) == procCallMap.end()) return;
+    for (auto& childChild : procCallMap[child]->getCalledVars()) {
+        pkbManager.addRelationship(CALLS_STAR, parent, childChild);
+        dfsCallsStar(parent, childChild);
+    }
+    return;
+}
+
+void spa::DesignExtractor::extractCallsStar() {
+    for (auto& procedure : procedureList) {
+        auto& currentProcedure = procedure.getProcedureVarToken().getValue();
+        for (auto& directCall : procedure.getCalledVars()) {
+            pkbManager.addRelationship(CALLS_STAR, currentProcedure, directCall);
+            dfsCallsStar(currentProcedure, directCall);
+        }
+    }
 }
