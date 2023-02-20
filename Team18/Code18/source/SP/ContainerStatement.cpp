@@ -13,7 +13,7 @@ spa::IfContainerStatement::IfContainerStatement(std::string parentProcedureVal,
   this->statementList = statementList;
 }
 
-// Constructor for IfContainerStatement
+// Constructor for WhileContainerStatement
 spa::WhileContainerStatement::WhileContainerStatement(std::string parentProcedureVal,
                                                       int statementLineNum,
                                                       std::vector<ProgramStatement*>
