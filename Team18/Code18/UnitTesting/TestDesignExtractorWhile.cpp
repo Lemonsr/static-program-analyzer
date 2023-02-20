@@ -135,7 +135,7 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> negWhile = { {1, "a"}, {1, "d"} };
+            std::vector<std::pair<int, std::string>> negWhile = {{1, "a"}, {1, "d"}};
 
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
@@ -162,7 +162,7 @@ namespace UnitTesting {
                 tokenA, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
                 tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenOpenBracket,
                 tokenA, tokenMultiply, tokenB, tokenCloseBracket, tokenCloseBracket,
-                tokenOpenBrace,tokenC, tokenAssign, tokenD, tokenSemiColon, tokenCloseBrace,
+                tokenOpenBrace, tokenC, tokenAssign, tokenD, tokenSemiColon, tokenCloseBrace,
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
@@ -177,7 +177,9 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> expectedWhile = { {1, "c"}, {1, "d"}, {3, "a"}, {3, "b"}, {3, "e"} };
+            std::vector<std::pair<int, std::string>> expectedWhile = {
+                {1, "c"}, {1, "d"}, {3, "a"}, {3, "b"}, {3, "e"}
+            };
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -203,7 +205,7 @@ namespace UnitTesting {
                 tokenA, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
                 tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenOpenBracket,
                 tokenA, tokenMultiply, tokenB, tokenCloseBracket, tokenCloseBracket,
-                tokenOpenBrace,tokenC, tokenAssign, tokenD, tokenSemiColon, tokenCloseBrace,
+                tokenOpenBrace, tokenC, tokenAssign, tokenD, tokenSemiColon, tokenCloseBrace,
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
@@ -218,7 +220,9 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> expectedWhile = { {1, "a"}, {1, "d"}, {3, "e"}, {3, "a"}, {3, "b"} };
+            std::vector<std::pair<int, std::string>> expectedWhile = {
+                {1, "a"}, {1, "d"}, {3, "e"}, {3, "a"}, {3, "b"}
+            };
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -240,18 +244,19 @@ namespace UnitTesting {
              *  }
              */
             tokenList = {
-              tokenProcedure, tokenA, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-              tokenCloseBracket, tokenOpenBrace,
-              tokenD, tokenAssign, tokenB, tokenSemiColon,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenE, tokenMinusOp,
-              tokenConstant,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenD, tokenAssign, tokenB, tokenSemiColon,
-              tokenD, tokenAssign, tokenB, tokenSemiColon,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-              tokenCloseBrace
+                tokenProcedure, tokenA, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
+                tokenCloseBracket, tokenOpenBrace,
+                tokenD, tokenAssign, tokenB, tokenSemiColon,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenE,
+                tokenMinusOp,
+                tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
+                tokenD, tokenAssign, tokenB, tokenSemiColon,
+                tokenD, tokenAssign, tokenB, tokenSemiColon,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
             for (auto token : tokenList) {
@@ -265,7 +270,7 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> expectedWhile = { {1, "b"}, {3, "b"}, {3, "e"}};
+            std::vector<std::pair<int, std::string>> expectedWhile = {{1, "b"}, {3, "b"}, {3, "e"}};
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -287,18 +292,19 @@ namespace UnitTesting {
              *  }
              */
             tokenList = {
-              tokenProcedure, tokenA, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-              tokenCloseBracket, tokenOpenBrace,
-              tokenD, tokenAssign, tokenB, tokenSemiColon,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenE, tokenMinusOp,
-              tokenConstant,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenD, tokenAssign, tokenB, tokenSemiColon,
-              tokenD, tokenAssign, tokenB, tokenSemiColon,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-              tokenCloseBrace
+                tokenProcedure, tokenA, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
+                tokenCloseBracket, tokenOpenBrace,
+                tokenD, tokenAssign, tokenB, tokenSemiColon,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenE,
+                tokenMinusOp,
+                tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
+                tokenD, tokenAssign, tokenB, tokenSemiColon,
+                tokenD, tokenAssign, tokenB, tokenSemiColon,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
             for (auto token : tokenList) {
@@ -312,7 +318,7 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> expectedWhile = { {1, "b"}, {3, "b"}};
+            std::vector<std::pair<int, std::string>> expectedWhile = {{1, "b"}, {3, "b"}};
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -334,19 +340,21 @@ namespace UnitTesting {
              *  }
              */
             tokenList = {
-              tokenProcedure, tokenA, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-              tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
-              tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC, tokenMinusOp,
-              tokenD,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenD, tokenAssign, tokenA, tokenSemiColon,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-              tokenCloseBrace
+                tokenProcedure, tokenA, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
+                tokenCloseBracket, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
+                tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket,
+                tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC,
+                tokenMinusOp,
+                tokenD, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
+                tokenD, tokenAssign, tokenA, tokenSemiColon,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
             for (auto token : tokenList) {
@@ -360,7 +368,9 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> expectedWhile = { {1, "b"}, {2, "b"}, {2, "e"}, {3, "b"}, {3, "c"}, {3, "d"}};
+            std::vector<std::pair<int, std::string>> expectedWhile = {
+                {1, "b"}, {2, "b"}, {2, "e"}, {3, "b"}, {3, "c"}, {3, "d"}
+            };
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -383,20 +393,22 @@ namespace UnitTesting {
              *  }
              */
             tokenList = {
-              tokenProcedure, tokenA, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-              tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
-              tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC, tokenMinusOp,
-              tokenD,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenD, tokenAssign, tokenA, tokenSemiColon,
-              tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-              tokenCloseBrace
+                tokenProcedure, tokenA, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
+                tokenCloseBracket, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
+                tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket,
+                tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC,
+                tokenMinusOp,
+                tokenD, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
+                tokenD, tokenAssign, tokenA, tokenSemiColon,
+                tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
             for (auto token : tokenList) {
@@ -410,7 +422,9 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> expectedWhile = {{2, "b"}, {2, "e"}, {3, "b"}, {3, "c"}, {3, "d"} };
+            std::vector<std::pair<int, std::string>> expectedWhile = {
+                {2, "b"}, {2, "e"}, {3, "b"}, {3, "c"}, {3, "d"}
+            };
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -434,21 +448,24 @@ namespace UnitTesting {
              *  }
              */
             tokenList = {
-              tokenProcedure, tokenA, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-              tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
-              tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC, tokenMinusOp,
-              tokenD,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenD, tokenCloseBracket, tokenOpenBrace,
-              tokenD, tokenAssign, tokenA, tokenSemiColon,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-              tokenCloseBrace
+                tokenProcedure, tokenA, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
+                tokenCloseBracket, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
+                tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket,
+                tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC,
+                tokenMinusOp,
+                tokenD, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenD, tokenCloseBracket,
+                tokenOpenBrace,
+                tokenD, tokenAssign, tokenA, tokenSemiColon,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
             for (auto token : tokenList) {
@@ -462,7 +479,9 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> expectedWhile = { {1, "b"}, {2, "b"}, {2, "e"}, {3, "b"}, {3, "c"}, {3, "d"}, {4, "b"}, {4, "d"}};
+            std::vector<std::pair<int, std::string>> expectedWhile = {
+                {1, "b"}, {2, "b"}, {2, "e"}, {3, "b"}, {3, "c"}, {3, "d"}, {4, "b"}, {4, "d"}
+            };
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -487,20 +506,22 @@ namespace UnitTesting {
              *  }
              */
             tokenList = {
-              tokenProcedure, tokenA, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
-              tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
-              tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC, tokenMinusOp,
-              tokenD,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
-              tokenD, tokenAssign, tokenA, tokenSemiColon,
-              tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenCloseBrace,
-              tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-              tokenCloseBrace
+                tokenProcedure, tokenA, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
+                tokenCloseBracket, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
+                tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket,
+                tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC,
+                tokenMinusOp,
+                tokenD, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
+                tokenD, tokenAssign, tokenA, tokenSemiColon,
+                tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenCloseBrace,
+                tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
             for (auto token : tokenList) {
@@ -514,7 +535,9 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> expectedWhile = { {2, "b"}, {2, "e"}, {3, "b"}, {3, "c"}, {3, "d"} };
+            std::vector<std::pair<int, std::string>> expectedWhile = {
+                {2, "b"}, {2, "e"}, {3, "b"}, {3, "c"}, {3, "d"}
+            };
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -522,4 +545,4 @@ namespace UnitTesting {
             Assert::IsFalse(expectedWhile == testWhile.getLineNumberVariablePairs());
         }
     };
-}
+} // namespace UnitTesting
