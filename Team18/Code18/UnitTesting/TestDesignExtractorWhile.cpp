@@ -273,7 +273,7 @@ namespace UnitTesting {
             Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
         }
 
-        TEST_METHOD(TestExtractNestedOneWhileAssignmentNegative) {
+        TEST_METHOD(TestExtractNestedOneWhileNegative) {
             /*
              *   procedure a {
              * 1. while (b >= 1) {
