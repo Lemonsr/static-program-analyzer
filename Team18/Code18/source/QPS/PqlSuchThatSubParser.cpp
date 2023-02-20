@@ -48,7 +48,7 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::parse(Stream<Token>& tokens,
   }
   std::string relationship = tokens[0].getValue();
   tokens.seek(1);
-  if (!tokens.match({ { TOKEN_MULTIPLY, "*" } })) {
+  if (tokens.match({ { TOKEN_MULTIPLY, "*" } })) {
     relationship.push_back('*');
     tokens.seek(1);
   }
