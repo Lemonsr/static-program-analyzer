@@ -17,7 +17,7 @@ const std::unordered_map<std::string, spa::RelationshipType> relationshipMap{
 spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
   Stream<Token>& tokens,
   ParsedQuery& query) {
-  if (!tokens[0].getType() == TOKEN_OPEN_BRACKET) {
+  if (!tokens.match({ { TOKEN_OPEN_BRACKET, "(" } })) {
     return PQL_PARSE_ERROR;
   }
   tokens.seek(1);
@@ -25,7 +25,7 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
   if (!firstArg) {
     return PQL_PARSE_ERROR;
   }
-  if (!tokens[0].getType() == TOKEN_COMMA) {
+  if (!tokens.match({ { TOKEN_COMMA, "," } })) {
     return PQL_PARSE_ERROR;
   }
   tokens.seek(1);
@@ -33,7 +33,7 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
   if (!secondArg) {
     return PQL_PARSE_ERROR;
   }
-  if (!tokens[0].getType() == TOKEN_CLOSE_BRACKET) {
+  if (!tokens.match({ { TOKEN_CLOSE_BRACKET, ")" } })) {
     return PQL_PARSE_ERROR;
   }
   tokens.seek(1);
@@ -43,12 +43,12 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
 
 spa::PqlParseStatus spa::PqlSuchThatSubParser::parse(Stream<Token>& tokens,
   ParsedQuery& query) {
-  if (tokens[0].getType() != TOKEN_NAME) {
+  if (!tokens.match({ { TOKEN_NAME, "" } })) {
     return PQL_PARSE_ERROR;
   }
   std::string relationship = tokens[0].getValue();
   tokens.seek(1);
-  if (tokens[0].getType() == TOKEN_MULTIPLY) {
+  if (!tokens.match({ { TOKEN_MULTIPLY, "*" } })) {
     relationship.push_back('*');
     tokens.seek(1);
   }
