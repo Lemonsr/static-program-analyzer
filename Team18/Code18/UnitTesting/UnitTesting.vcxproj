@@ -190,6 +190,8 @@
     <ClCompile Include="TestPKBModifies.cpp" />
     <ClCompile Include="TestPkbQueryArg.cpp" />
     <ClCompile Include="TestPKBUses.cpp" />
+    <ClCompile Include="TestPqlPatternSubParser.cpp" />
+    <ClCompile Include="TestPqlSuchThatSubParser.cpp" />
     <ClCompile Include="TestQpsResultTable.cpp" />
     <ClCompile Include="TestQpsValue.cpp" />
     <ClCompile Include="TestPqlArgumentParser.cpp" />
