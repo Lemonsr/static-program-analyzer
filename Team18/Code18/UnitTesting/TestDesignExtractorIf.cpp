@@ -12,7 +12,7 @@
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
-    TEST_CLASS(TestDesignExtractorUses) {
+    TEST_CLASS(TestDesignExtractorIf) {
         std::string varA = "a";
         std::string varB = "b";
         std::string varC = "c";
