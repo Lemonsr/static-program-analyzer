@@ -43,7 +43,7 @@ spa::CallStatement::CallStatement(std::string parentProcedureVal, std::string va
   this->statementLineNum = statementLineNum;
 }
 
-// Constructor for ifConditionStatement
+// Constructor for AssignConditionStatement
 spa::AssignStatement::AssignStatement(std::string parentProcedureVal, std::string assignVar,
                                       std::string postfixExpr,
                                       std::unordered_set<int> whileStmtParents,
@@ -56,7 +56,7 @@ spa::AssignStatement::AssignStatement(std::string parentProcedureVal, std::strin
   this->statementLineNum = statementLineNum;
 }
 
-// Constructor for AssignStatement
+// Constructor for IfStatement
 spa::IfConditionStatement::IfConditionStatement(std::string parentProcedureVal,
                                                 std::string postfixExpr,
                                                 std::unordered_set<int> whileStmtParents,
@@ -124,7 +124,7 @@ void spa::IfConditionStatement::processStatement(PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::IF);
   extractUsesFromPostfix(pkbManager, postfixExpr);
-  extractControlVariableFromPostfix(pkbManager, postfixExpr);
+  extractPatternFromPostfix(pkbManager, stringStmtLineNum, postfixExpr, IF);
 }
 
 void spa::WhileConditionStatement::processStatement(PKBManager& pkbManager) {
@@ -132,7 +132,7 @@ void spa::WhileConditionStatement::processStatement(PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::WHILE);
   extractUsesFromPostfix(pkbManager, postfixExpr);
-  extractControlVariableFromPostfix(pkbManager, postfixExpr);
+  extractPatternFromPostfix(pkbManager,stringStmtLineNum, postfixExpr, WHILE);
 }
 
 void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
@@ -156,34 +156,25 @@ void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
   }
 }
 
-void spa::MultiVarNonContainerStatement::extractControlVariableFromPostfix(PKBManager& pkbManager, std::string postfix){
+void spa::MultiVarNonContainerStatement::extractPatternFromPostfix(PKBManager& pkbManager, std::string lineNum, std::string postfix,  spa::DesignEntityType type) {
     postfix += " ";
     std::set<std::string> controlVariables;
     std::string operand;
     for (auto& ch : postfix) {
-        if (isspace(ch)) {
-            if (!operand.empty()) {
-                if (!isdigit(operand[0])) {
-                    controlVariables.insert(operand);
-                }
-                operand.clear();
-            }
-        }
-        else {
+        if (!isspace(ch)) {
             operand += ch;
         }
-    }
-    for (int parent : whileStmtParents) {
-        std::string stringParentStmtNum = std::to_string(parent);
-        for (auto& var : controlVariables) {
-            pkbManager.addContainerPattern(WHILE, stringParentStmtNum, var);
+        else if (!operand.empty()) {
+            if (std::isalpha(operand[0])) {
+                controlVariables.insert(operand);
+            }
+            operand.clear();
         }
     }
-    for (int parent : ifStmtParents) {
-        std::string stringParentStmtNum = std::to_string(parent);
-        for (auto& var : controlVariables) {
-            pkbManager.addContainerPattern(IF, stringParentStmtNum, var);
-        }
+    QueryResult result = pkbManager.getEntity(type);
+    std::vector <int> stmtNums = result.getLineNumbers();
+    for (auto& var : controlVariables) {
+        pkbManager.addContainerPattern(type, lineNum, var);
     }
 }
 

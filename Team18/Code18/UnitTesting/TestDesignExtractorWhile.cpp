@@ -78,14 +78,14 @@ namespace UnitTesting {
         TEST_METHOD(TestExtractSingleWhile) {
             /*
              *  procedure a {
-             * 1. while ( c = d) {
+             * 1. while ( c >= d) {
              * 2.  a = b;
              *    }
              *  }
              */
             tokenList = {
                 tokenProcedure, tokenA, tokenOpenBrace,
-                tokenWhile, tokenOpenBracket, tokenC, tokenAssign, tokenD, tokenCloseBracket,
+                tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenD, tokenCloseBracket,
                 tokenOpenBrace,
                 tokenA, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace, tokenCloseBrace
             };
@@ -112,14 +112,14 @@ namespace UnitTesting {
         TEST_METHOD(TestExtractSingleWhileNegative) {
             /*
              *  procedure a {
-             * 1. while ( c = d) {
+             * 1. while ( c >= d) {
              * 2.  a = b;
              *    }
              *  }
              */
             tokenList = {
                 tokenProcedure, tokenA, tokenOpenBrace,
-                tokenWhile, tokenOpenBracket, tokenC, tokenAssign, tokenD, tokenCloseBracket,
+                tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenD, tokenCloseBracket,
                 tokenOpenBrace,
                 tokenA, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace, tokenCloseBrace
             };
@@ -136,6 +136,7 @@ namespace UnitTesting {
             designExtractor.extractRelationship();
 
             std::vector<std::pair<int, std::string>> negWhile = { {1, "a"}, {1, "d"} };
+
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -146,20 +147,20 @@ namespace UnitTesting {
         TEST_METHOD(TestExtractDoubleSingleWhile) {
             /*
              *  procedure a {
-             * 1. while ( c = d) {
+             * 1. while ( c >= d) {
              * 2.  a = b;
              *    }
-             * 3. while ( e = ( a * b)) {
+             * 3. while ( e >= ( a * b)) {
              * 4. c = d;
              *    }
              *  }
              */
             tokenList = {
                 tokenProcedure, tokenA, tokenOpenBrace,
-                tokenWhile, tokenOpenBracket, tokenC, tokenAssign, tokenD, tokenCloseBracket,
+                tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenD, tokenCloseBracket,
                 tokenOpenBrace,
                 tokenA, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
-                tokenWhile, tokenOpenBracket, tokenE, tokenAssign, tokenOpenBracket,
+                tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenOpenBracket,
                 tokenA, tokenMultiply, tokenB, tokenCloseBracket, tokenCloseBracket,
                 tokenOpenBrace,tokenC, tokenAssign, tokenD, tokenSemiColon, tokenCloseBrace,
                 tokenCloseBrace
@@ -176,7 +177,7 @@ namespace UnitTesting {
             spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
             designExtractor.extractRelationship();
 
-            std::vector<std::pair<int, std::string>> expectedWhile = { {1, "c"}, {1, "d"}, {3, "e"}, {3, "a"}, {3, "b"} };
+            std::vector<std::pair<int, std::string>> expectedWhile = { {1, "c"}, {1, "d"}, {3, "a"}, {3, "b"}, {3, "e"} };
             spa::PKBQueryArg firstArg = spa::PKBQueryArg(
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
@@ -187,20 +188,20 @@ namespace UnitTesting {
         TEST_METHOD(TestExtractDoubleSingleWhileNegative) {
             /*
              *  procedure a {
-             * 1. while ( c = d) {
+             * 1. while ( c >= d) {
              * 2.  a = b;
              *    }
-             * 3. while ( e = ( a * b)) {
+             * 3. while ( e >= ( a * b)) {
              * 4. c = d;
              *    }
              *  }
              */
             tokenList = {
                 tokenProcedure, tokenA, tokenOpenBrace,
-                tokenWhile, tokenOpenBracket, tokenC, tokenAssign, tokenD, tokenCloseBracket,
+                tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenD, tokenCloseBracket,
                 tokenOpenBrace,
                 tokenA, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace,
-                tokenWhile, tokenOpenBracket, tokenE, tokenAssign, tokenOpenBracket,
+                tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenOpenBracket,
                 tokenA, tokenMultiply, tokenB, tokenCloseBracket, tokenCloseBracket,
                 tokenOpenBrace,tokenC, tokenAssign, tokenD, tokenSemiColon, tokenCloseBrace,
                 tokenCloseBrace
@@ -323,7 +324,7 @@ namespace UnitTesting {
             /*
              *   procedure a {
              * 1. while (b >= 1) {
-             * 2.   while (b = (e - 1)) {
+             * 2.   while (b >= (e - 1)) {
              * 3.     while (b >= (c - d)) {
              * 4.        d = a;
              *        }
@@ -336,7 +337,7 @@ namespace UnitTesting {
               tokenProcedure, tokenA, tokenOpenBrace,
               tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
               tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenAssign, tokenOpenBracket,
+              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
               tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
               tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC, tokenMinusOp,
               tokenD,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
@@ -371,7 +372,7 @@ namespace UnitTesting {
             /*
              *   procedure a {
              * 1. while (b >= 1) {
-             * 2.   while (b = (e - 1)) {
+             * 2.   while (b >= (e - 1)) {
              * 3.     while (b >= (c - d)) {
              * 4.        d = a;
              * 5.        b = 10;
@@ -385,7 +386,7 @@ namespace UnitTesting {
               tokenProcedure, tokenA, tokenOpenBrace,
               tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
               tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenAssign, tokenOpenBracket,
+              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
               tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
               tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC, tokenMinusOp,
               tokenD,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
@@ -421,7 +422,7 @@ namespace UnitTesting {
             /*
              *   procedure a {
              * 1. while (b >= 1) {
-             * 2.   while (b = (e - 1)) {
+             * 2.   while (b >= (e - 1)) {
              * 3.     while (b >= (c - d)) {
              * 4.       while (b >= d) {
              * 5.       d = a;
@@ -436,7 +437,7 @@ namespace UnitTesting {
               tokenProcedure, tokenA, tokenOpenBrace,
               tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
               tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenAssign, tokenOpenBracket,
+              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
               tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
               tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC, tokenMinusOp,
               tokenD,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
@@ -473,7 +474,7 @@ namespace UnitTesting {
             /*
              *   procedure a {
              * 1. while (b >= 1) {
-             * 2.   while (b = (e - 1)) {
+             * 2.   while (b >= (e - 1)) {
              * 3.     while (b >= (c - d)) {
              * 4.       while (b >= d) {
              * 4.        d = a;
@@ -489,7 +490,7 @@ namespace UnitTesting {
               tokenProcedure, tokenA, tokenOpenBrace,
               tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
               tokenCloseBracket, tokenOpenBrace,
-              tokenWhile, tokenOpenBracket, tokenB, tokenAssign, tokenOpenBracket,
+              tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket,
               tokenE, tokenMinusOp, tokenConstant, tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
               tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenOpenBracket, tokenC, tokenMinusOp,
               tokenD,tokenCloseBracket, tokenCloseBracket, tokenOpenBrace,
