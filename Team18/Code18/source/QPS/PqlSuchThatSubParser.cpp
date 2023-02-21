@@ -10,8 +10,14 @@ const std::unordered_map<std::string, spa::RelationshipType> relationshipMap{
   {"Follows*", spa::FOLLOWS_STAR},
   {"Parent", spa::PARENT},
   {"Parent*", spa::PARENT_STAR},
-  {"Uses", spa::USES},
   {"Modifies", spa::MODIFIES},
+  {"Uses", spa::USES},
+  {"Calls", spa::CALLS},
+  {"Calls*", spa::CALLS_STAR},
+  {"Next", spa::NEXT},
+  {"Next*", spa::NEXT_STAR},
+  {"Affects", spa::AFFECTS},
+  {"Affects*", spa::AFFECTS_STAR}
 };
 
 spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,

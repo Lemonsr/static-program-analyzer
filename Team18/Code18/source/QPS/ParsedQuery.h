@@ -22,7 +22,11 @@ enum RelationshipType {
   MODIFIES,
   USES,
   CALLS,
-  CALLS_STAR
+  CALLS_STAR,
+  NEXT,
+  NEXT_STAR,
+  AFFECTS,
+  AFFECTS_STAR
 };
 
 class SuchThatClause {
