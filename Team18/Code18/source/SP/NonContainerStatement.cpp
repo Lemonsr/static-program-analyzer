@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
-#include <set>
+#include <unordered_set>
 
 std::string spa::OneVarNonContainerStatement::getVariableName() {
     return variableName;
@@ -153,7 +153,7 @@ void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
 
 void spa::MultiVarNonContainerStatement::extractPatternFromPostfix(
     PKBManager& pkbManager, std::string lineNum, std::string postfix, spa::DesignEntityType type) {
-    std::set<std::string> controlVariables;
+    std::unordered_set<std::string> controlVariables;
     std::string operand;
     for (auto& ch : postfix) {
         if (!isspace(ch)) {
