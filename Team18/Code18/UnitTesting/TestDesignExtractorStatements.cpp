@@ -78,12 +78,18 @@ public:
      * 2. print c;
      * 3. call d;
      *  }
+     *  procedure d {
+     * 4. read b;
+     *  }
      */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenRead, tokenB, tokenSemiColon,
       tokenPrint, tokenC, tokenSemiColon,
       tokenCall, tokenD, tokenSemiColon,
+      tokenCloseBrace,
+      tokenProcedure, tokenD, tokenOpenBrace,
+      tokenRead, tokenB, tokenSemiColon,
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
@@ -93,7 +99,7 @@ public:
     spa::PKBManager* pkbManager = new spa::PKB();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 1);
+    Assert::IsTrue(procedureList.size() == 2);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
@@ -109,9 +115,9 @@ public:
     std::optional<std::vector<int>> testPrintStmt = printStmtRes.getLineNumbers();
     std::optional<std::vector<int>> testCallStmt = callStmtRes.getLineNumbers();
 
-    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA, varD}};
     std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
-    std::optional<std::vector<int>> expectedReadStmt = {{1}};
+    std::optional<std::vector<int>> expectedReadStmt = {{1, 4}};
     std::optional<std::vector<int>> expectedPrintStmt = {{2}};
     std::optional<std::vector<int>> expectedCallStmt = {{3}};
 
@@ -137,6 +143,12 @@ public:
      * 5. print b;
      * 6. call c;
      *  }
+     *  procedure d {
+     * 7. read b;
+     * }
+     * procedure c {
+     * 8. read b;
+     * }
      */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
@@ -146,6 +158,12 @@ public:
       tokenRead, tokenD, tokenSemiColon,
       tokenPrint, tokenB, tokenSemiColon,
       tokenCall, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenProcedure, tokenD, tokenOpenBrace,
+      tokenRead, tokenB, tokenSemiColon,
+      tokenCloseBrace,
+      tokenProcedure, tokenC, tokenOpenBrace,
+      tokenRead, tokenB, tokenSemiColon,
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
@@ -155,7 +173,7 @@ public:
     spa::PKBManager* pkbManager = new spa::PKB();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 1);
+    Assert::IsTrue(procedureList.size() == 3);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
@@ -171,9 +189,9 @@ public:
     std::optional<std::vector<int>> testPrintStmt = printStmtRes.getLineNumbers();
     std::optional<std::vector<int>> testCallStmt = callStmtRes.getLineNumbers();
 
-    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
+    std::optional<std::vector<std::string>> expectedProcedure = { {varA, varD, varC}};
     std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
-    std::optional<std::vector<int>> expectedReadStmt = {{1, 4}};
+    std::optional<std::vector<int>> expectedReadStmt = {{1, 4, 7, 8}};
     std::optional<std::vector<int>> expectedPrintStmt = {{2, 5}};
     std::optional<std::vector<int>> expectedCallStmt = {{3, 6}};
 
