@@ -77,7 +77,6 @@ public:
      * 2.    c = b;
      * 3.    call d;
      *  }
-     *
      *   procedure d {
      * 4.    a = 5;
      *   }
@@ -127,7 +126,6 @@ public:
      * 2.    c = b;
      * 3.    call d;
      *  }
-     *
      *   procedure d {
      * 4.    a = 5;
      *   }
@@ -178,7 +176,6 @@ public:
      * 3.    call d;
      * 4.    call e;
      *  }
-     *
      *   procedure d {
      * 5.    a = 5;
      *   }
@@ -249,7 +246,6 @@ public:
      * 3.    call d;
      * 4.    call e;
      *  }
-     *
      *   procedure d {
      * 5.    a = 5;
      *   }
@@ -319,7 +315,6 @@ public:
      * 2.    c = b;
      * 3.    call d;
      *  }
-     *
      *   procedure d {
      * 4.    call e;
      *   }
@@ -388,7 +383,6 @@ public:
      * 2.    c = b;
      * 3.    call d;
      *  }
-     *
      *   procedure d {
      * 4.    call e;
      *   }
@@ -457,7 +451,6 @@ public:
      * 2.    c = b;
      * 3.    call d;
      *  }
-     *
      *   procedure d {
      * 4.    call e;
      *   }
@@ -547,7 +540,6 @@ public:
      * 2.    c = b;
      * 3.    call d;
      *  }
-     *
      *   procedure d {
      * 4.    call e;
      *   }
@@ -637,7 +629,6 @@ public:
      * 2.    c = b;
      * 3.    call d;
      *  }
-     *
      *   procedure d {
      * 4.    call e;
      *   }
@@ -747,7 +738,6 @@ public:
      * 2.    c = b;
      * 3.    call d;
      *  }
-     *
      *   procedure d {
      * 4.    call e;
      *   }
