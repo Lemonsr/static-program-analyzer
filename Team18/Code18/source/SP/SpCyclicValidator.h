@@ -14,8 +14,9 @@ class SpCyclicValidator {
     bool dfsCheckCyclicCall(std::string parent, std::unordered_set<std::string>* currentSeen,
         std::unordered_map<std::string, bool>* visited);
     void generateProcCallMap();
+
  public:
     explicit SpCyclicValidator(std::vector<ProcedureStatement*> pl);
     bool validateCyclic();
-    };
+};
 }  // namespace spa
