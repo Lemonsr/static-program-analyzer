@@ -321,10 +321,10 @@ public:
      *  }
      *
      *   procedure d {
-     * 5.    call e;
+     * 4.    call e;
      *   }
      *   procedure e {
-     * 6.    b = 6;
+     * 5.    b = 6;
      *   }
      */
     tokenList = {
@@ -390,10 +390,10 @@ public:
      *  }
      *
      *   procedure d {
-     * 5.    call e;
+     * 4.    call e;
      *   }
      *   procedure e {
-     * 6.    b = 6;
+     * 5.    b = 6;
      *   }
      */
     tokenList = {
@@ -459,13 +459,13 @@ public:
      *  }
      *
      *   procedure d {
-     * 5.    call e;
+     * 4.    call e;
      *   }
      *   procedure e {
-     * 6.    call b;
+     * 5.    call b;
      *   }
      *   procedure b {
-     * 7.    d = 9;
+     * 6.    d = 9;
      *   }
      *
      */
@@ -549,13 +549,13 @@ public:
      *  }
      *
      *   procedure d {
-     * 5.    call e;
+     * 4.    call e;
      *   }
      *   procedure e {
-     * 6.    call b;
+     * 5.    call b;
      *   }
      *   procedure b {
-     * 7.    d = 9;
+     * 6.    d = 9;
      *   }
      *
      */
@@ -639,17 +639,17 @@ public:
      *  }
      *
      *   procedure d {
-     * 5.    call e;
+     * 4.    call e;
      *   }
      *   procedure e {
-     * 6.    call b;
+     * 5.    call b;
      *   }
      *   procedure b {
-     * 7.    call c;
+     * 6.    call c;
      *   }
      *
      *   procedure c{
-     * 8.     a = 1;
+     * 7.     a = 1;
      *    }
      *
      */
@@ -749,17 +749,17 @@ public:
      *  }
      *
      *   procedure d {
-     * 5.    call e;
+     * 4.    call e;
      *   }
      *   procedure e {
-     * 6.    call b;
+     * 5.    call b;
      *   }
      *   procedure b {
-     * 7.    call c;
+     * 6.    call c;
      *   }
      *
      *   procedure c{
-     * 8.     a = 1;
+     * 7.     a = 1;
      *    }
      *
      */
@@ -850,4 +850,4 @@ public:
     Assert::IsTrue(expectedFourthCalls == testFourthCalls);
   }
 };
-}
+}  // namespace UnitTesting
