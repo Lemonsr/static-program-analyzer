@@ -1,138 +1,140 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <ItemGroup>
-        <Filter Include="Source Files">
-            <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-            <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-        </Filter>
-        <Filter Include="Header Files">
-            <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-            <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-        </Filter>
-        <Filter Include="Resource Files">
-            <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-            <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-        </Filter>
-    </ItemGroup>
-    <ItemGroup>
-        <ClInclude Include="stdafx.h">
-            <Filter>Header Files</Filter>
-        </ClInclude>
-        <ClInclude Include="targetver.h">
-            <Filter>Header Files</Filter>
-        </ClInclude>
-    </ItemGroup>
-    <ItemGroup>
-        <ClCompile Include="stdafx.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestAST.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestTokenizer.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPqlDeclarationParser.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPqlSuchThatParser.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPqlArgumentParser.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPqlPatternParser.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPqlQueryParser.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKB.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestUtilsFunction.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBQueryArg.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBPatternStorage.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBEntityStorage.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBModifies.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBUses.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestSpValidator.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestQpsValue.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestQpsResultTable.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPqlSemanticChecker.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorEntities.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBFollows.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBParent.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorStatements.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorUses.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorModifies.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBFollowsStar.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBParentStar.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorFollows.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorFollowsStar.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorParentStar.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorParent.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBCalls.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPKBCallsStar.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPqlSuchThatSubParser.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestPqlPatternSubParser.cpp">
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorCalls.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-        <ClCompile Include="TestDesignExtractorCallsStarcpp.cpp">
-            <Filter>Source Files</Filter>
-        </ClCompile>
-    </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestAST.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestTokenizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPqlDeclarationParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPqlSuchThatParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPqlArgumentParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPqlPatternParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPqlQueryParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUtilsFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBQueryArg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBPatternStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBEntityStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBModifies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBUses.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSpValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestQpsValue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestQpsResultTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPqlSemanticChecker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorEntities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBFollows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBParent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorStatements.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorUses.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorModifies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBFollowsStar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBParentStar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorFollows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorFollowsStar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorParentStar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorParent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBCalls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBCallsStar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPqlSuchThatSubParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPqlPatternSubParser.cpp">
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorCalls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorCallsStarcpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSpCyclicValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

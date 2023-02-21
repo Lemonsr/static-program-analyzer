@@ -26,9 +26,13 @@ void spa::DesignExtractor::extractDesignAbstraction(std::vector<ProgramStatement
   extractUsesAndModifies(statementList);
 
     // semantic check for calls stmts
-  spa::SpCyclicValidator cyclicValidator(procedureList);
-  bool isValid = cyclicValidator.validateCyclic();
-  if (!isValid) {
+    std::vector<ProcedureStatement*> procedureRefList = {};
+    for (auto& procedure : procedureList) {
+        procedureRefList.push_back(&procedure);
+    }
+    spa::SpCyclicValidator cyclicValidator(procedureRefList);
+  bool isCyclic = cyclicValidator.validateCyclic();
+  if (isCyclic) {
       exit(1);
   }
     extractCallsStar();
@@ -158,7 +162,10 @@ void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {
 
 void spa::DesignExtractor::extractCallsStar() {
     for (auto& procedure : procedureList) {
-        auto& currentProcedure = procedure.getProcedureVarToken().getValue();
+        procCallMap.emplace(procedure.getProcedureVarToken().getValue(), &procedure);
+    }
+    for (auto& procedure : procedureList) {
+        auto currentProcedure = procedure.getProcedureVarToken().getValue();
         for (auto& directCall : procedure.getCalledVars()) {
             pkbManager.addRelationship(CALLS_STAR, currentProcedure, directCall);
             dfsCallsStar(currentProcedure, directCall);
