@@ -106,87 +106,36 @@ public:
 
   TEST_METHOD(TestTokenizerTokenizeInvalidSymbol) {
     bool hasException = false;
-    bool matchResult;
     try {
       std::stringstream srcStream;
       srcStream << "stmt s;\n";
       srcStream << "Select s such that Uses* (w, &)";
       spa::Tokenizer tokenizer;
       spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
-      matchResult = tokenStream.match({
-        { spa::TOKEN_NAME, "stmt" },
-        { spa::TOKEN_NAME, "s" },
-        { spa::TOKEN_SEMICOLON, ";" },
-        { spa::TOKEN_NAME, "Select" },
-        { spa::TOKEN_NAME, "s" },
-        { spa::TOKEN_NAME, "such" },
-        { spa::TOKEN_NAME, "that" },
-        { spa::TOKEN_NAME, "Uses" },
-        { spa::TOKEN_MULTIPLY, "*" },
-        { spa::TOKEN_OPEN_BRACKET, "(" },
-        { spa::TOKEN_NAME, "w" },
-        { spa::TOKEN_COMMA, "," },
-        { spa::TOKEN_BOOL_AND, "&" },
-        { spa::TOKEN_CLOSE_BRACKET, ")" },
-        });
-    }
-    catch (const std::runtime_error& runTimeError) {
+    } catch (const std::runtime_error& runTimeError) {
       hasException = true;
-      std::string expectedSubMsg = "Unknown Symbol:";
+      std::string expectedMsg = "Unknown Symbol: &";
       std::string errorMsg = runTimeError.what();
-      bool isInMsg = errorMsg.find(expectedSubMsg) != std::string::npos;
-      Assert::IsTrue(isInMsg);
+      Assert::AreEqual(expectedMsg, errorMsg);
     }
-    catch (...) {
-      hasException = true;
-      Assert::Fail();
-    }
-    if (!hasException) {
-      Assert::IsTrue(matchResult);
-    }
+    Assert::IsTrue(hasException);
   }
 
   TEST_METHOD(TestTokenizerTokenizeInvalidName) {
     bool hasException = false;
-    bool matchResult;
     try {
       std::stringstream srcStream;
       srcStream << "stmt 123Test;\n";
       srcStream << "Select 123Test such that Uses* (w, v)";
       spa::Tokenizer tokenizer;
       spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
-      matchResult = tokenStream.match({
-        { spa::TOKEN_NAME, "stmt" },
-        { spa::TOKEN_NAME, "123Test" },
-        { spa::TOKEN_SEMICOLON, ";" },
-        { spa::TOKEN_NAME, "Select" },
-        { spa::TOKEN_NAME, "123Test" },
-        { spa::TOKEN_NAME, "s" },
-        { spa::TOKEN_NAME, "such" },
-        { spa::TOKEN_NAME, "that" },
-        { spa::TOKEN_NAME, "Uses" },
-        { spa::TOKEN_MULTIPLY, "*" },
-        { spa::TOKEN_OPEN_BRACKET, "(" },
-        { spa::TOKEN_NAME, "w" },
-        { spa::TOKEN_COMMA, "," },
-        { spa::TOKEN_NAME, "v" },
-        { spa::TOKEN_CLOSE_BRACKET, ")" },
-        });
-    }
-    catch (const std::runtime_error& runTimeError) {
+    } catch (const std::runtime_error& runTimeError) {
       hasException = true;
-      std::string expectedSubMsg = "Invalid name in SIMPLE code";
+      std::string expectedMsg = "Invalid name in SIMPLE code";
       std::string errorMsg = runTimeError.what();
-      bool isInMsg = errorMsg.find(expectedSubMsg) != std::string::npos;
-      Assert::IsTrue(isInMsg);
+      Assert::AreEqual(expectedMsg, errorMsg);
     }
-    catch (...) {
-      hasException = true;
-      Assert::Fail();
-    }
-    if (!hasException) {
-      Assert::IsTrue(matchResult);
-    }
+    Assert::IsTrue(hasException);
   }
   };
 }  // namespace UnitTesting
