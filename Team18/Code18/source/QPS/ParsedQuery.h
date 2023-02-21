@@ -54,23 +54,39 @@ class PatternClause {
   friend bool operator!=(const PatternClause& p1, const PatternClause& p2);
 };
 
+enum class SelectClauseType {
+  SELECT_BOOLEAN,
+  SELECT_TUPLE
+};
+
+enum class PqlClauseType {
+  PATTERN_CLAUSE,
+  SUCH_THAT_CLAUSE,
+  WITH_CLAUSE
+};
+
 class ParsedQuery {
  private:
-  std::string selectSynonym;
-  std::optional<PatternClause> patternClause;
-  std::optional<SuchThatClause> suchThatClause;
+  SelectClauseType selectType;
+  PqlClauseType lastAddedClause;
+  std::vector<std::string> selectColumns;
+  std::vector<PatternClause> patternClauses;
+  std::vector<SuchThatClause> suchThatClauses;
   std::unordered_map<std::string, DesignEntityType> declarations;
  public:
   bool addDeclaration(std::string synonym, DesignEntityType designEntity);
   int getDeclarationsCount();
-  std::optional<DesignEntityType> getType(std::string synonym);
-  bool setSelectSynonym(std::string synonym);
-  void setSuchThatClause(SuchThatClause clause);
-  void setPatternClause(PatternClause clause);
-  const std::string& getSelectSynonym();
-  const std::optional<SuchThatClause>& getSuchThatClause();
-  const std::optional<PatternClause>& getPatternClause();
-  const DesignEntityType& getSelectSynonymType();
+  std::optional<DesignEntityType> getDeclarationType(std::string synonym);
+  void setSelectClauseType(SelectClauseType selectType);
+  SelectClauseType getSelectClauseType();
+  PqlClauseType getLastAddedClause();
+  void addSelectColumn(std::string selectColumn);
+  const std::vector<std::string>& getSelectColumns();
+  void addSuchThatClause(SuchThatClause clause);
+  const std::vector<SuchThatClause>& getSuchThatClauses();
+  void addPatternClause(PatternClause clause);
+  const std::vector<PatternClause>& getPatternClauses();
+  bool hasClauses();
 };
 }  // namespace spa
 

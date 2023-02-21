@@ -26,7 +26,7 @@ int spa::ParsedQuery::getDeclarationsCount() {
   return declarations.size();
 }
 
-std::optional<spa::DesignEntityType> spa::ParsedQuery::getType(
+std::optional<spa::DesignEntityType> spa::ParsedQuery::getDeclarationType(
   std::string synonym
 ) {
   auto it = declarations.find(synonym);
@@ -36,37 +36,46 @@ std::optional<spa::DesignEntityType> spa::ParsedQuery::getType(
   return { it->second };
 }
 
-bool spa::ParsedQuery::setSelectSynonym(std::string synonym) {
-  if (declarations.find(synonym) == declarations.end()) {
-    return false;
-  }
-  this->selectSynonym = synonym;
-  return true;
+void spa::ParsedQuery::setSelectClauseType(SelectClauseType selectType) {
+  this->selectType = selectType;
 }
 
-const std::string& spa::ParsedQuery::getSelectSynonym() {
-  return selectSynonym;
+spa::SelectClauseType spa::ParsedQuery::getSelectClauseType() {
+  return selectType;
 }
 
-void spa::ParsedQuery::setSuchThatClause(SuchThatClause clause) {
-  suchThatClause = clause;
+spa::PqlClauseType spa::ParsedQuery::getLastAddedClause() {
+  return lastAddedClause;
 }
 
-void spa::ParsedQuery::setPatternClause(PatternClause clause) {
-  patternClause = clause;
+void spa::ParsedQuery::addSelectColumn(std::string selectColumn) {
+  selectColumns.push_back(selectColumn);
 }
 
-const std::optional<spa::SuchThatClause>&
-    spa::ParsedQuery::getSuchThatClause() {
-  return suchThatClause;
+const std::vector<std::string>& spa::ParsedQuery::getSelectColumns() {
+  return selectColumns;
 }
 
-const std::optional<spa::PatternClause>& spa::ParsedQuery::getPatternClause() {
-  return patternClause;
+void spa::ParsedQuery::addSuchThatClause(SuchThatClause clause) {
+  suchThatClauses.push_back(clause);
+  lastAddedClause = PqlClauseType::SUCH_THAT_CLAUSE;
 }
 
-const spa::DesignEntityType & spa::ParsedQuery::getSelectSynonymType() {
-  return declarations[selectSynonym];
+const std::vector<spa::SuchThatClause>& spa::ParsedQuery::getSuchThatClauses() {
+  return suchThatClauses;
+}
+
+void spa::ParsedQuery::addPatternClause(PatternClause clause) {
+  patternClauses.push_back(clause);
+  lastAddedClause = PqlClauseType::PATTERN_CLAUSE;
+}
+
+const std::vector<spa::PatternClause>& spa::ParsedQuery::getPatternClauses() {
+  return patternClauses;
+}
+
+bool spa::ParsedQuery::hasClauses() {
+  return suchThatClauses.size() > 0 && patternClauses.size() > 0;
 }
 
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
