@@ -74,13 +74,14 @@ namespace UnitTesting {
 
         std::vector<spa::Token> tokenList{};
 
-        bool checkVectorEquals(std::vector<std::pair<int, std::string>> expected, std::vector<std::pair<int, std::string>> actual) {
+        bool checkVectorEquals(std::vector<std::pair<int, std::string>> expected,
+                               std::vector<std::pair<int, std::string>> actual) {
             if (expected.size() != actual.size()) {
                 return false;
             }
             for (int i = 0; i < expected.size(); i++) {
                 bool found = false;
-                for(int j = 0; j < actual.size(); j++) {
+                for (int j = 0; j < actual.size(); j++) {
                     if (expected[i].first == actual[j].first && expected[i].second == actual[j].second) {
                         found = true;
                         break;
@@ -912,7 +913,6 @@ namespace UnitTesting {
             *  }
             */
 
-
             tokenList = {
                 tokenProcedure, tokenA, tokenOpenBrace, tokenIf,
                 tokenOpenBracket, tokenA, tokenGreaterEqual, tokenB, tokenCloseBracket,
@@ -921,7 +921,7 @@ namespace UnitTesting {
                 tokenGreaterEqual, tokenC, tokenCloseBracket, tokenThen, tokenOpenBrace, tokenD,
                 tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace, tokenElse, tokenOpenBrace,
                 tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenConstant,
-                tokenCloseBracket, tokenOpenBrace, tokenB, tokenAssign, tokenConstant,tokenSemiColon,
+                tokenCloseBracket, tokenOpenBrace, tokenB, tokenAssign, tokenConstant, tokenSemiColon,
                 tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
                 tokenElse, tokenOpenBrace, tokenE, tokenAssign, tokenConstant, tokenSemiColon,
                 tokenCloseBrace, tokenCloseBrace

@@ -74,7 +74,8 @@ namespace UnitTesting {
 
         std::vector<spa::Token> tokenList{};
 
-        bool checkVectorEquals(std::vector<std::pair<int, std::string>> expected, std::vector<std::pair<int, std::string>> actual) {
+        bool checkVectorEquals(std::vector<std::pair<int, std::string>> expected,
+                               std::vector<std::pair<int, std::string>> actual) {
             if (expected.size() != actual.size()) {
                 return false;
             }
@@ -633,7 +634,8 @@ namespace UnitTesting {
                 tokenC, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
                 tokenA, tokenAssign, tokenConstant, tokenSemiColon, tokenIf, tokenOpenBracket, tokenC,
                 tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace, tokenA,
-                tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace, tokenElse, tokenOpenBrace, tokenA, tokenAssign,
+                tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace, tokenElse, tokenOpenBrace,
+                tokenA, tokenAssign,
                 tokenConstant, tokenSemiColon, tokenCloseBrace, tokenCloseBrace, tokenElse, tokenOpenBrace, tokenA,
                 tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace
             };
@@ -825,7 +827,6 @@ namespace UnitTesting {
                 tokenCloseBrace, tokenElse, tokenOpenBrace, tokenA, tokenAssign, tokenConstant, tokenSemiColon,
                 tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace
             };
-                
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
             for (auto token : tokenList) {
                 tokenStream.pushBack(token);
