@@ -661,7 +661,7 @@ namespace UnitTesting {
 
         TEST_METHOD(TestExtractIfWhile) {
             /*
-             * procedure a{
+             *   procedure a{
              *1.   if (b >= 1) then {
              *2.       c = 5;
              *3.       while (d >= 3) {
@@ -671,7 +671,7 @@ namespace UnitTesting {
              *5.   else {
              *6.       c = 5;
              *     }
-             * }
+             *   }
              */
             tokenList = {
                 tokenProcedure, tokenA, tokenOpenBrace,
@@ -711,10 +711,9 @@ namespace UnitTesting {
 
             Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
         }
-
         TEST_METHOD(TestExtractIfWhileIf) {
             /*
-             * procedure a {
+             *   procedure a {
              *1.    if (b >= 1) then {
              *2.        c = 5;
              *3.        while (d >= 3) {
@@ -730,7 +729,7 @@ namespace UnitTesting {
              *8.    else {
              *9.        c = 5;
              *     }
-             * }
+             *   }
              */
 
             tokenList = {
@@ -774,5 +773,186 @@ namespace UnitTesting {
 
             Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
         }
+
+        TEST_METHOD(TestExtractIfElseWhileIf) {
+            /*
+            *   procedure a {
+            *1.    if (b >= 1) then {
+            *2.        c = 5;
+            *      }
+            *      else {
+            *3.        c = 5;
+            *4.        while (d >= 3) {
+            *5.            e = 6;
+            *6.            if (b  >= 1) then {
+            *7.                c = 5;
+            *              }
+            *              else {
+            *8.                c = 5;
+            *              }
+            *          }
+            *      }
+            *   }
+             */
+
+            tokenList = {
+                tokenProcedure, tokenA, tokenOpenBrace,
+                tokenIf, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+                tokenThen, tokenOpenBrace,
+                tokenC, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace, tokenElse, tokenOpenBrace,
+                tokenC, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenWhile, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+                tokenOpenBrace, tokenE, tokenAssign, tokenConstant, tokenSemiColon, tokenIf, tokenOpenBracket,
+                tokenB, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
+                tokenC, tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace, tokenElse, tokenOpenBrace,
+                tokenC, tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace, tokenCloseBrace,
+                tokenCloseBrace, tokenCloseBrace
+            };
+            spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+            for (auto token : tokenList) {
+                tokenStream.pushBack(token);
+            }
+            std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+            auto parser = spa::SpParser(tokenStream);
+            std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+            Assert::IsTrue(procedureList.size() == 1);
+
+            spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+            designExtractor.extractRelationship();
+
+            std::vector<std::pair<int, std::string>> expectedIf = { {1, "b"}, {6, "b"} };
+
+            spa::PKBQueryArg firstArgIf = spa::PKBQueryArg(
+                spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+            spa::QueryResult testIf = pkbManager->getContainerPattern(spa::IF, firstArgIf);
+
+            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberVariablePairs()));
+
+            std::vector<std::pair<int, std::string>> expectedWhile = { {4, "d"} };
+            spa::PKBQueryArg firstArgWhile = spa::PKBQueryArg(
+                spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+            spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArgWhile);
+
+            Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
+        }
+
+        TEST_METHOD(TestExtractIfWhileWhile) {
+            /*
+            *   procedure a {
+            *1.    if (c >= e) then {
+            *2.        while (d >= a) {
+            *3.            while (b >= c) {
+            *4.                a = 10;
+            *              }
+            *          }
+            *      }
+            *5.    else {
+            *6.        d = 5;
+            *      }
+            *  }
+             */
+
+            tokenList = {
+                tokenProcedure, tokenA, tokenOpenBrace,
+                tokenIf, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenE, tokenCloseBracket,
+                tokenThen, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenA, tokenCloseBracket,
+                tokenOpenBrace, tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
+                tokenCloseBracket, tokenOpenBrace, tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenElse, tokenOpenBrace,
+                tokenD, tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace, tokenCloseBrace
+            };
+            spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+            for (auto token : tokenList) {
+                tokenStream.pushBack(token);
+            }
+            std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+            auto parser = spa::SpParser(tokenStream);
+            std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+            Assert::IsTrue(procedureList.size() == 1);
+
+            spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+            designExtractor.extractRelationship();
+
+            std::vector<std::pair<int, std::string>> expectedIf = { {1, "c"}, {1, "e"} };
+
+            spa::PKBQueryArg firstArgIf = spa::PKBQueryArg(
+                spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+            spa::QueryResult testIf = pkbManager->getContainerPattern(spa::IF, firstArgIf);
+
+            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberVariablePairs()));
+
+            std::vector<std::pair<int, std::string>> expectedWhile = { {2, "d"}, {2, "a"}, {3, "b"}, {3, "c"} };
+            spa::PKBQueryArg firstArgWhile = spa::PKBQueryArg(
+                spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+            spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArgWhile);
+
+            Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
+        }
+
+        TEST_METHOD(TestExtractIfWhileIfElseWhile) {
+            /*
+            *  procedure a {
+            *1.    if (a >= b) then {
+            *2.        while (c >= 10) {
+            *3.            if (a >= c) then {
+            *4.                d = 10;
+            *              }
+            *              else {
+            *5.                while (e >= 10) {
+            *6.                     b = 10;
+            *                  }
+            *              }
+            *          }
+            *      }
+            *      else {
+            *7.      e = 20;
+            *      }
+            *  }
+            */
+
+
+            tokenList = {
+                tokenProcedure, tokenA, tokenOpenBrace, tokenIf,
+                tokenOpenBracket, tokenA, tokenGreaterEqual, tokenB, tokenCloseBracket,
+                tokenThen, tokenOpenBrace, tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual,
+                tokenConstant, tokenCloseBracket, tokenOpenBrace, tokenIf, tokenOpenBracket, tokenA,
+                tokenGreaterEqual, tokenC, tokenCloseBracket, tokenThen, tokenOpenBrace, tokenD,
+                tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace, tokenElse, tokenOpenBrace,
+                tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenConstant,
+                tokenCloseBracket, tokenOpenBrace, tokenB, tokenAssign, tokenConstant,tokenSemiColon,
+                tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
+                tokenElse, tokenOpenBrace, tokenE, tokenAssign, tokenConstant, tokenSemiColon,
+                tokenCloseBrace, tokenCloseBrace
+            };
+            spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+            for (auto token : tokenList) {
+                tokenStream.pushBack(token);
+            }
+            std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+            auto parser = spa::SpParser(tokenStream);
+            std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+            Assert::IsTrue(procedureList.size() == 1);
+
+            spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+            designExtractor.extractRelationship();
+
+            std::vector<std::pair<int, std::string>> expectedIf = { {1, "a"}, {1, "b"}, {3, "a"}, {3, "c"} };
+
+            spa::PKBQueryArg firstArgIf = spa::PKBQueryArg(
+                spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+            spa::QueryResult testIf = pkbManager->getContainerPattern(spa::IF, firstArgIf);
+
+            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberVariablePairs()));
+
+            std::vector<std::pair<int, std::string>> expectedWhile = { {2, "c"}, {5, "e"}};
+            spa::PKBQueryArg firstArgWhile = spa::PKBQueryArg(
+                spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+            spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArgWhile);
+
+            Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
+        }
+        
     };
 }  // namespace UnitTesting
