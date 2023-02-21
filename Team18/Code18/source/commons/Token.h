@@ -36,7 +36,9 @@ enum TokenType {
     TOKEN_WHILE,
     TOKEN_IF,
     TOKEN_THEN,
-    TOKEN_ELSE
+    TOKEN_ELSE,
+    TOKEN_FULL_STOP,
+    TOKEN_HASH
 };
 
 class Token;
