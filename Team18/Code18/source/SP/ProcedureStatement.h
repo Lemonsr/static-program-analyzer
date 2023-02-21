@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <string>
+#include <unordered_set>
 
 #include "ProgramStatement.h"
 #include "Token.h"

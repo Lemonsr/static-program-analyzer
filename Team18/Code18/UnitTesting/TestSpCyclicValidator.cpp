@@ -465,4 +465,4 @@ public:
         Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
     };
-}  // namespace UnitTesting}
+}  // namespace UnitTesting
