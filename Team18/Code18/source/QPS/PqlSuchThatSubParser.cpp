@@ -37,7 +37,7 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
     return PQL_PARSE_ERROR;
   }
   tokens.seek(1);
-  query.setSuchThatClause({ type, firstArg.value(), secondArg.value() });
+  query.addSuchThatClause({ type, firstArg.value(), secondArg.value() });
   return PQL_PARSE_SUCCESS;
 }
 

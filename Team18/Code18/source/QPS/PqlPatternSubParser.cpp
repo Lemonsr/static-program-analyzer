@@ -138,7 +138,6 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
     return PQL_PARSE_ERROR;
   }
   tokens.seek(1);
-  query.setPatternClause(
-    { designEntity, firstOpt.value(), patternOpt.value() });
+  query.addPatternClause({ designEntity, firstOpt.value(), patternOpt.value() });
   return PQL_PARSE_SUCCESS;
 }
