@@ -153,7 +153,6 @@ void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
 
 void spa::MultiVarNonContainerStatement::extractPatternFromPostfix(
     PKBManager& pkbManager, std::string lineNum, std::string postfix, spa::DesignEntityType type) {
-    postfix += " ";
     std::set<std::string> controlVariables;
     std::string operand;
     for (auto& ch : postfix) {
