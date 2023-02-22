@@ -208,15 +208,18 @@ public:
   }
 
   TEST_METHOD(TestExtractOneVarStatementWithWhileNesting) {
-    ///*
-    // *  procedure a {
-    // * 1. while (e >= 1) {
-    // * 2.   read b;
-    // * 3.   print c;
-    // * 4.   call d;
-    // *    }
-    // *  }
-    // */
+    /*
+    *  procedure a {
+    * 1. while (e >= 1) {
+    * 2.   read b;
+    * 3.   print c;
+    * 4.   call d;
+    *    }
+    *  }
+    *  procedure d {
+    *    a = 1;
+    *  }
+    */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenWhile, tokenOpenBracket, tokenE, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
@@ -224,7 +227,10 @@ public:
       tokenRead, tokenB, tokenSemiColon,
       tokenPrint, tokenC, tokenSemiColon,
       tokenCall, tokenD, tokenSemiColon,
-      tokenCloseBrace, tokenCloseBrace
+      tokenCloseBrace, tokenCloseBrace,
+      tokenProcedure, tokenD, tokenOpenBrace,
+      tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+      tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto& token : tokenList) {
@@ -233,7 +239,7 @@ public:
     spa::PKBManager* pkbManager = new spa::PKB();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 1);
+    Assert::IsTrue(procedureList.size() == 2);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
@@ -249,8 +255,8 @@ public:
     std::optional<std::vector<int>> testPrintStmt = printStmtRes.getLineNumbers();
     std::optional<std::vector<int>> testCallStmt = callStmtRes.getLineNumbers();
 
-    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
-    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE}};
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA, varD}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE, varA}};
     std::optional<std::vector<int>> expectedReadStmt = {{2}};
     std::optional<std::vector<int>> expectedPrintStmt = {{3}};
     std::optional<std::vector<int>> expectedCallStmt = {{4}};
@@ -278,6 +284,9 @@ public:
      * 4.   call d;
      *    }
      *  }
+     *  procedure d {
+     *     a = 1;
+        }
      */
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
@@ -287,7 +296,10 @@ public:
       tokenCloseBrace, tokenElse, tokenOpenBrace,
       tokenPrint, tokenC, tokenSemiColon,
       tokenCall, tokenD, tokenSemiColon,
-      tokenCloseBrace, tokenCloseBrace
+      tokenCloseBrace, tokenCloseBrace,
+      tokenProcedure, tokenD, tokenOpenBrace,
+      tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+      tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto& token : tokenList) {
@@ -296,7 +308,7 @@ public:
     spa::PKBManager* pkbManager = new spa::PKB();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 1);
+    Assert::IsTrue(procedureList.size() == 2);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
@@ -312,8 +324,8 @@ public:
     std::optional<std::vector<int>> testPrintStmt = printStmtRes.getLineNumbers();
     std::optional<std::vector<int>> testCallStmt = callStmtRes.getLineNumbers();
 
-    std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
-    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE}};
+    std::optional<std::vector<std::string>> expectedProcedure = {{varA, varD}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE, varA}};
     std::optional<std::vector<int>> expectedReadStmt = {{2}};
     std::optional<std::vector<int>> expectedPrintStmt = {{3}};
     std::optional<std::vector<int>> expectedCallStmt = {{4}};
