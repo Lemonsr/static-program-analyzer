@@ -1,5 +1,7 @@
 #include "PqlSelectParser.h"
 
+#include <string>
+
 spa::PqlParseStatus spa::PqlSelectParser::parseSynonymOrAttribute(bool parseBoolean,
                                                                   Stream<Token>& tokens,
                                                                   ParsedQuery& query) {

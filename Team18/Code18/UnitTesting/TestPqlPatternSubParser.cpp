@@ -126,8 +126,7 @@ public:
     spa::PatternClause compare(
       { spa::SYNONYM, "w", spa::WHILE },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
-      spa::Pattern(spa::ANY)
-    );
+      spa::Pattern(spa::ANY));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
   }
@@ -171,8 +170,7 @@ public:
     spa::PatternClause compare(
       { spa::SYNONYM, "ifs", spa::IF },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
-      spa::Pattern(spa::ANY)
-    );
+      spa::Pattern(spa::ANY));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
   }

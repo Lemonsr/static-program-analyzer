@@ -35,7 +35,7 @@ public:
     Assert::IsTrue(status == spa::PQL_PARSE_MISMATCH);
     Assert::AreEqual(tokens.remaining(), int64_t(8));
   }
-  
+
   TEST_METHOD(TestNoClauses) {
     spa::Stream<spa::Token> tokens;
     tokens.pushBack({ spa::TOKEN_NAME, "and" });

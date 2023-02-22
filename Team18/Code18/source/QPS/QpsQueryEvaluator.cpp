@@ -11,8 +11,7 @@ spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   std::vector<std::unique_ptr<QpsEvaluator>> evaluators;
   for (auto& synonym : parsedQuery.getSelectColumns()) {
     evaluators.push_back(
-      std::make_unique<SimpleEvaluator>(synonym, parsedQuery.getDeclarationType(synonym).value())
-    );
+      std::make_unique<SimpleEvaluator>(synonym, parsedQuery.getDeclarationType(synonym).value()));
   }
   for (auto& clause : parsedQuery.getSuchThatClauses()) {
     evaluators.push_back(clause.getEvaluator());
