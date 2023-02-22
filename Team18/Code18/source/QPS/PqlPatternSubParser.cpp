@@ -130,6 +130,7 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseWhile(PqlArgument& designEnti
   if (!matchStatus) {
     return PQL_PARSE_ERROR;
   }
+  tokens.seek(2);
   query.addPatternClause({ designEntity, firstArg, Pattern { ANY } });
   return PQL_PARSE_SUCCESS;
 }
@@ -145,6 +146,7 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseIf(PqlArgument& designEntity,
   if (!matchStatus) {
     return PQL_PARSE_ERROR;
   }
+  tokens.seek(4);
   query.addPatternClause({ designEntity, firstArg, Pattern { ANY } });
   return PQL_PARSE_SUCCESS;
 }

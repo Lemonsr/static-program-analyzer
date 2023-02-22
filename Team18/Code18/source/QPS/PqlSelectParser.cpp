@@ -28,7 +28,7 @@ spa::PqlParseStatus spa::PqlSelectParser::parseSynonymOrAttribute(bool parseBool
 
 spa::PqlParseStatus spa::PqlSelectParser::parseTuple(Stream<Token>& tokens, ParsedQuery& query) {
   tokens.seek(1);
-  while (!tokens.remaining() > 0) {
+  while (tokens.remaining() > 0) {
     PqlParseStatus status = parseSynonymOrAttribute(false, tokens, query);
     if (status != PQL_PARSE_SUCCESS || tokens.remaining() == 0) {
       break;
