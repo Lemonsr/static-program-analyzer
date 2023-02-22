@@ -27,6 +27,8 @@
     <ClInclude Include="..\source\PKB\PKBTypes.h" />
     <ClInclude Include="..\source\PKB\RelationshipStorage.h" />
     <ClInclude Include="..\source\PKB\TNode.h" />
+    <ClInclude Include="..\source\QPS\CallsEvaluator.h" />
+    <ClInclude Include="..\source\QPS\CallsStarEvaluator.h" />
     <ClInclude Include="..\source\QPS\FollowsEvaluator.h" />
     <ClInclude Include="..\source\QPS\FollowsStarEvaluator.h" />
     <ClInclude Include="..\source\QPS\ModifiesEvaluator.h" />
@@ -81,6 +83,8 @@
     <ClCompile Include="..\source\PKB\PKBQueryTypes.cpp" />
     <ClCompile Include="..\source\PKB\RelationshipStorage.cpp" />
     <ClCompile Include="..\source\PKB\TNode.cpp" />
+    <ClCompile Include="..\source\QPS\CallsEvaluator.cpp" />
+    <ClCompile Include="..\source\QPS\CallsStarEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\FollowsEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\FollowsStarEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\ModifiesEvaluator.cpp" />

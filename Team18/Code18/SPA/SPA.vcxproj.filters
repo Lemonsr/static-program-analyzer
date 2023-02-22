@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -166,7 +165,7 @@
     <ClInclude Include="..\source\SP\SpValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-	<ClInclude Include="..\source\SP\SpCyclicValidator.h">
+    <ClInclude Include="..\source\SP\SpCyclicValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\QPS\PatternContainerEvaluator.h">
@@ -188,6 +187,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\QPS\PqlAttributes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\CallsEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\CallsStarEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -315,7 +320,7 @@
     <ClCompile Include="..\source\SP\SpParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-	<ClCompile Include="..\source\SP\SpCyclicValidator.cpp">
+    <ClCompile Include="..\source\SP\SpCyclicValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\SP\SpValidator.cpp">
@@ -337,6 +342,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\QPS\PqlAndParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\QPS\CallsEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\QPS\CallsStarEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

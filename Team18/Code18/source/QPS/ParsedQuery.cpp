@@ -5,6 +5,8 @@
 #include "ParsedQuery.h"
 #include "Token.h"
 #include "QpsEvaluator.h"
+#include "CallsEvaluator.h"
+#include "CallsStarEvaluator.h"
 #include "ModifiesEvaluator.h"
 #include "UsesEvaluator.h"
 #include "FollowsEvaluator.h"
@@ -90,6 +92,12 @@ spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
 
 std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
   switch (designAbstraction) {
+  case CALLS: {
+    return std::make_unique<CallsEvaluator>(firstArg, secondArg);
+  }
+  case CALLS_STAR: {
+    return std::make_unique<CallsStarEvaluator>(firstArg, secondArg);
+  }
   case MODIFIES: {
     return std::make_unique<ModifiesEvaluator>(firstArg, secondArg);
   }
