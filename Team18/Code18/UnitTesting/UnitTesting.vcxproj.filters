@@ -136,7 +136,7 @@
     <ClCompile Include="TestDesignExtractorCalls.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestDesignExtractorCallsStarcpp.cpp">
+    <ClCompile Include="TestDesignExtractorCallsStar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestSpCyclicValidator.cpp">

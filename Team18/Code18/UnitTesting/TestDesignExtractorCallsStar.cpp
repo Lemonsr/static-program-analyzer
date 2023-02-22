@@ -1137,8 +1137,8 @@ public:
           tokenCall, tokenC, tokenSemiColon,
           tokenCloseBrace,
           tokenProcedure, tokenC, tokenOpenBrace,
-          tokenCall,tokenD, tokenSemiColon, 
-          tokenCloseBrace,tokenProcedure, 
+          tokenCall, tokenD, tokenSemiColon,
+          tokenCloseBrace, tokenProcedure,
           tokenD, tokenOpenBrace,
           tokenC, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCloseBrace
@@ -1269,8 +1269,8 @@ public:
           tokenCall, tokenC, tokenSemiColon,
           tokenCloseBrace,
           tokenProcedure, tokenC, tokenOpenBrace,
-          tokenCall,tokenD, tokenSemiColon, 
-          tokenCloseBrace,tokenProcedure, 
+          tokenCall, tokenD, tokenSemiColon,
+          tokenCloseBrace, tokenProcedure,
           tokenD, tokenOpenBrace,
           tokenC, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCloseBrace
