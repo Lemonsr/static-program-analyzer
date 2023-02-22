@@ -14,7 +14,7 @@ class SpCyclicValidator {
         std::unordered_map<std::string, bool>* visited);
 
  public:
-    explicit SpCyclicValidator(std::unordered_map<std::string, 
+    explicit SpCyclicValidator(std::unordered_map<std::string,
                                std::unordered_set<std::string>> procCallMap);
     bool validateCyclic();
 };

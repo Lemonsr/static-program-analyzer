@@ -5,7 +5,8 @@
 #include "SpCyclicValidator.h"
 #include "NonContainerStatement.h"
 
-spa::SpCyclicValidator::SpCyclicValidator(std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap) {
+spa::SpCyclicValidator::SpCyclicValidator(std::unordered_map<std::string,
+                                          std::unordered_set<std::string>> procCallMap) {
     validateCallMap = procCallMap;
 }
 

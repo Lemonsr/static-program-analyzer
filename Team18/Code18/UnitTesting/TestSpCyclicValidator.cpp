@@ -111,7 +111,6 @@ public:
             procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
                 procedure.getCalledVars());
         }
-        
         spa::SpCyclicValidator cyclicValidator(procCallMap);
 
         bool testCyclicCall = cyclicValidator.validateCyclic();
@@ -156,7 +155,6 @@ public:
         }
         auto parser = spa::SpParser(tokenStream);
         std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-        
         std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
         for (auto& procedure : procedureList) {
             auto statements = procedure.getStatementLst();
@@ -687,8 +685,10 @@ public:
           tokenProcedure, tokenA, tokenOpenBrace,
           tokenA, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
-          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
+          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
+          tokenCloseBracket, tokenOpenBrace,
+          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
+          tokenCloseBracket, tokenThen, tokenOpenBrace,
           tokenB, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCloseBrace, tokenElse, tokenOpenBrace,
           tokenCall, tokenC, tokenSemiColon,
@@ -753,8 +753,10 @@ public:
           tokenProcedure, tokenA, tokenOpenBrace,
           tokenA, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
-          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
+          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
+          tokenCloseBracket, tokenOpenBrace,
+          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
+          tokenCloseBracket, tokenThen, tokenOpenBrace,
           tokenB, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCloseBrace, tokenElse, tokenOpenBrace,
           tokenCall, tokenA, tokenSemiColon,
@@ -820,8 +822,10 @@ public:
           tokenProcedure, tokenA, tokenOpenBrace,
           tokenA, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
-          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
+          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
+          tokenCloseBracket, tokenOpenBrace,
+          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
+          tokenCloseBracket, tokenThen, tokenOpenBrace,
           tokenB, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCall, tokenC, tokenSemiColon,
           tokenCloseBrace, tokenElse, tokenOpenBrace,
@@ -889,8 +893,10 @@ public:
           tokenProcedure, tokenA, tokenOpenBrace,
           tokenA, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
-          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
+          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
+          tokenCloseBracket, tokenOpenBrace,
+          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
+          tokenCloseBracket, tokenThen, tokenOpenBrace,
           tokenB, tokenAssign, tokenConstant, tokenSemiColon,
           tokenCall, tokenC, tokenSemiColon,
           tokenCloseBrace, tokenElse, tokenOpenBrace,
@@ -1076,6 +1082,5 @@ public:
 
         Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
-
     };
 }  // namespace UnitTesting
