@@ -157,7 +157,6 @@ void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {
         pkbManager.addRelationship(CALLS_STAR, parent, childChild);
         dfsCallsStar(parent, childChild);
     }
-    return;
 }
 
 void spa::DesignExtractor::extractCallsStar() {
