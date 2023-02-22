@@ -31,9 +31,8 @@ public:
     spa::PqlPatternSubParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    std::optional<spa::PatternClause> opt = query.getPatternClause();
-    Assert::IsTrue(opt.has_value());
-    spa::PatternClause& clause = opt.value();
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
@@ -62,9 +61,8 @@ public:
     spa::PqlPatternSubParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    std::optional<spa::PatternClause> opt = query.getPatternClause();
-    Assert::IsTrue(opt.has_value());
-    spa::PatternClause& clause = opt.value();
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
@@ -95,9 +93,8 @@ public:
     spa::PqlPatternSubParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    std::optional<spa::PatternClause> opt = query.getPatternClause();
-    Assert::IsTrue(opt.has_value());
-    spa::PatternClause& clause = opt.value();
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
@@ -108,6 +105,90 @@ public:
         }));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+  }
+
+  TEST_METHOD(TestWhile) {
+    spa::Stream<spa::Token> tokens;
+    tokens.pushBack({ spa::TOKEN_NAME, "w" });
+    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+    tokens.pushBack({ spa::TOKEN_NAME, "v" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_UNDERSCORE, "_" });
+    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+    spa::ParsedQuery query;
+    query.addDeclaration("w", spa::WHILE);
+    query.addDeclaration("v", spa::VARIABLE);
+    spa::PqlPatternSubParser parser;
+    spa::PqlParseStatus status = parser.parse(tokens, query);
+    Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    spa::PatternClause& clause = query.getPatternClauses()[0];
+    spa::PatternClause compare(
+      { spa::SYNONYM, "w", spa::WHILE },
+      spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
+      spa::Pattern(spa::ANY));
+    Assert::IsTrue(clause == compare);
+    Assert::AreEqual(tokens.remaining(), int64_t(0));
+  }
+
+  TEST_METHOD(TestIncorrectWhile) {
+    spa::Stream<spa::Token> tokens;
+    tokens.pushBack({ spa::TOKEN_NAME, "w" });
+    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+    tokens.pushBack({ spa::TOKEN_NAME, "v" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_UNDERSCORE, "_" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_UNDERSCORE, "_" });
+    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+    spa::ParsedQuery query;
+    query.addDeclaration("w", spa::WHILE);
+    query.addDeclaration("v", spa::VARIABLE);
+    spa::PqlPatternSubParser parser;
+    spa::PqlParseStatus status = parser.parse(tokens, query);
+    Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
+  }
+
+  TEST_METHOD(TestIf) {
+    spa::Stream<spa::Token> tokens;
+    tokens.pushBack({ spa::TOKEN_NAME, "ifs" });
+    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+    tokens.pushBack({ spa::TOKEN_NAME, "v" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_UNDERSCORE, "_" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_UNDERSCORE, "_" });
+    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+    spa::ParsedQuery query;
+    query.addDeclaration("ifs", spa::IF);
+    query.addDeclaration("v", spa::VARIABLE);
+    spa::PqlPatternSubParser parser;
+    spa::PqlParseStatus status = parser.parse(tokens, query);
+    Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    spa::PatternClause& clause = query.getPatternClauses()[0];
+    spa::PatternClause compare(
+      { spa::SYNONYM, "ifs", spa::IF },
+      spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
+      spa::Pattern(spa::ANY));
+    Assert::IsTrue(clause == compare);
+    Assert::AreEqual(tokens.remaining(), int64_t(0));
+  }
+
+  TEST_METHOD(TestIncorrectIf) {
+    spa::Stream<spa::Token> tokens;
+    tokens.pushBack({ spa::TOKEN_NAME, "ifs" });
+    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+    tokens.pushBack({ spa::TOKEN_NAME, "v" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_UNDERSCORE, "_" });
+    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+    spa::ParsedQuery query;
+    query.addDeclaration("ifs", spa::IF);
+    query.addDeclaration("v", spa::VARIABLE);
+    spa::PqlPatternSubParser parser;
+    spa::PqlParseStatus status = parser.parse(tokens, query);
+    Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
   }
   };
 }  // namespace UnitTesting

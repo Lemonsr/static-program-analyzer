@@ -44,7 +44,7 @@ namespace UnitTesting {
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : validSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::MODIFIES, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsTrue(isValid);
         }
@@ -94,7 +94,7 @@ namespace UnitTesting {
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : invalidSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::MODIFIES, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -103,7 +103,7 @@ namespace UnitTesting {
       for (auto& firstArg : invalidFirstArgs) {
         for (auto& secondArg : validSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::MODIFIES, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -112,7 +112,7 @@ namespace UnitTesting {
       for (auto& firstArg : invalidFirstArgs) {
         for (auto& secondArg : invalidSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::MODIFIES, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -141,7 +141,7 @@ namespace UnitTesting {
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : validSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::USES, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsTrue(isValid);
         }
@@ -191,7 +191,7 @@ namespace UnitTesting {
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : invalidSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::USES, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -200,7 +200,7 @@ namespace UnitTesting {
       for (auto& firstArg : invalidFirstArgs) {
         for (auto& secondArg : validSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::USES, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -209,7 +209,7 @@ namespace UnitTesting {
       for (auto& firstArg : invalidFirstArgs) {
         for (auto& secondArg : invalidSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::USES, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -245,12 +245,12 @@ namespace UnitTesting {
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : validSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsTrue(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsTrue(isValid);
         }
@@ -300,12 +300,12 @@ namespace UnitTesting {
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : invalidSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -314,12 +314,12 @@ namespace UnitTesting {
       for (auto& firstArg : invalidFirstArgs) {
         for (auto& secondArg : validSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -328,12 +328,12 @@ namespace UnitTesting {
       for (auto& firstArg : invalidFirstArgs) {
         for (auto& secondArg : invalidSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -369,12 +369,12 @@ namespace UnitTesting {
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : validSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::PARENT, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsTrue(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::PARENT_STAR, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsTrue(isValid);
         }
@@ -424,12 +424,12 @@ namespace UnitTesting {
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : invalidSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::PARENT, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::PARENT_STAR, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -438,12 +438,12 @@ namespace UnitTesting {
       for (auto& firstArg : invalidFirstArgs) {
         for (auto& secondArg : validSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::PARENT, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::PARENT_STAR, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -452,12 +452,12 @@ namespace UnitTesting {
       for (auto& firstArg : invalidFirstArgs) {
         for (auto& secondArg : invalidSecondArgs) {
           spa::SuchThatClause suchThatClause(spa::RelationshipType::PARENT, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::PARENT_STAR, firstArg, secondArg);
-          parsedQuery.setSuchThatClause(suchThatClause);
+          parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
         }
@@ -477,7 +477,7 @@ namespace UnitTesting {
       spa::ParsedQuery parsedQuery;
       for (auto& firstArg : validFirstArgs) {
         spa::PatternClause patternClause(synonym, firstArg, pattern);
-        parsedQuery.setPatternClause(patternClause);
+        parsedQuery.addPatternClause(patternClause);
         bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
         Assert::IsTrue(isValid);
       }
@@ -502,7 +502,7 @@ namespace UnitTesting {
       spa::ParsedQuery parsedQuery;
       for (auto& firstArg : invalidFirstArgs) {
         spa::PatternClause patternClause(synonym, firstArg, pattern);
-        parsedQuery.setPatternClause(patternClause);
+        parsedQuery.addPatternClause(patternClause);
         bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
         Assert::IsFalse(isValid);
       }
