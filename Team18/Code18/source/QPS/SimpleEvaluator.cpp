@@ -61,7 +61,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateProcedure(PKBManager& pkbManag
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);
@@ -76,7 +76,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateStmt(PKBManager& pkbManager) {
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);
@@ -93,7 +93,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateRead(PKBManager& pkbManager) {
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
   QueryResult result = pkbManager.getRelationship(RelationshipType::MODIFIES, readSynonymArg, varSynonymArg);
@@ -107,15 +107,15 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateRead(PKBManager& pkbManager) {
 }
 
 spa::QpsResultTable spa::SimpleEvaluator::evaluatePrint(PKBManager& pkbManager) {
-  PKBQueryArg readSynonymArg(PqlArgument(ArgumentType::SYNONYM, "pr", designEntityType));
+  PKBQueryArg printSynonymArg(PqlArgument(ArgumentType::SYNONYM, "pr", designEntityType));
   PKBQueryArg varSynonymArg(PqlArgument(ArgumentType::SYNONYM, "v", DesignEntityType::VARIABLE));
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
-  QueryResult result = pkbManager.getRelationship(RelationshipType::MODIFIES, readSynonymArg, varSynonymArg);
+  QueryResult result = pkbManager.getRelationship(RelationshipType::USES, printSynonymArg, varSynonymArg);
   for (auto& pair : result.getLineNumberVariablePairs()) {
     int lineNumber = pair.first;
     std::string varName = pair.second;
@@ -129,7 +129,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateAssign(PKBManager& pkbManager)
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);
@@ -141,15 +141,15 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateAssign(PKBManager& pkbManager)
 }
 
 spa::QpsResultTable spa::SimpleEvaluator::evaluateCall(PKBManager& pkbManager) {
-  PKBQueryArg readSynonymArg(PqlArgument(ArgumentType::SYNONYM, "c", designEntityType));
+  PKBQueryArg callSynonymArg(PqlArgument(ArgumentType::SYNONYM, "c", designEntityType));
   PKBQueryArg varSynonymArg(PqlArgument(ArgumentType::SYNONYM, "v", DesignEntityType::VARIABLE));
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
-  QueryResult result = pkbManager.getRelationship(RelationshipType::MODIFIES, readSynonymArg, varSynonymArg);
+  QueryResult result = pkbManager.getRelationship(RelationshipType::MODIFIES, callSynonymArg, varSynonymArg);
   for (auto& pair : result.getLineNumberVariablePairs()) {
     int lineNumber = pair.first;
     std::string varName = pair.second;
@@ -163,7 +163,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateWhile(PKBManager& pkbManager) 
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);
@@ -178,7 +178,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateIf(PKBManager& pkbManager) {
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);
@@ -193,7 +193,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateVariable(PKBManager& pkbManage
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);
@@ -208,7 +208,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateConstant(PKBManager& pkbManage
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym.append(".").append(attr));
+    resultTable.addHeader(selectSynonym + "." + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);
