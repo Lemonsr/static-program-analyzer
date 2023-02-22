@@ -174,11 +174,13 @@
     <ClCompile Include="TestDesignExtractorEntities.cpp" />
     <ClCompile Include="TestDesignExtractorFollows.cpp" />
     <ClCompile Include="TestDesignExtractorFollowsStar.cpp" />
+    <ClCompile Include="TestDesignExtractorIf.cpp" />
     <ClCompile Include="TestDesignExtractorModifies.cpp" />
     <ClCompile Include="TestDesignExtractorParent.cpp" />
     <ClCompile Include="TestDesignExtractorParentStar.cpp" />
     <ClCompile Include="TestDesignExtractorStatements.cpp" />
     <ClCompile Include="TestDesignExtractorUses.cpp" />
+    <ClCompile Include="TestDesignExtractorWhile.cpp" />
     <ClCompile Include="TestPKBCalls.cpp" />
     <ClCompile Include="TestPKBCallsStar.cpp" />
     <ClCompile Include="TestPKBFollows.cpp" />
