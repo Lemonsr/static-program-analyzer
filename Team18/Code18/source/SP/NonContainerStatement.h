@@ -2,6 +2,7 @@
 #include <unordered_set>
 #include <string>
 
+#include "ProcedureStatement.h"
 #include "ProgramStatement.h"
 
 namespace spa {

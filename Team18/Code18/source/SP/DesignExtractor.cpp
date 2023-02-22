@@ -2,20 +2,46 @@
 
 #include <vector>
 #include <string>
+#include <unordered_set>
 
 #include "ContainerStatement.h"
+#include "NonContainerStatement.h"
 #include "ProcedureStatement.h"
+#include "SpCyclicValidator.h"
 
 spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
                                       std::vector<ProcedureStatement>& procedureList) :
-  pkbManager(pkbManager), procedureList(procedureList) {}
+  pkbManager(pkbManager), procedureList(procedureList) {
+    for (auto& procedure : procedureList) {
+        auto statements = procedure.getStatementLst();
+        for (auto& statement : statements) {
+            if (dynamic_cast<spa::CallStatement*>(statement)) {
+                auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
+                procedure.addCalledVars(callStatement->getVariableName());
+            } else if (dynamic_cast<spa::ContainerStatement*>(statement)) {
+                auto containerStatement = dynamic_cast<spa::ContainerStatement*>(statement);
+                std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
+                for (auto& called : calledSet) {
+                    procedure.addCalledVars(called);
+                }
+            }
+        }
+        procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
+            procedure.getCalledVars());
+    }
+}
 
 void spa::DesignExtractor::extractRelationship() {
+  spa::SpCyclicValidator cyclicValidator(procCallMap);
+  if (cyclicValidator.validateCyclic()) {
+    exit(1);
+  }
   for (ProcedureStatement& procedure : procedureList) {
     pkbManager.addEntity(PROCEDURE, procedure.getProcedureVarToken().getValue());
     std::vector<ProgramStatement*> statementList = procedure.getStatementLst();
     extractDesignAbstraction(statementList);
   }
+  extractCallsStar();
 }
 
 void spa::DesignExtractor::extractDesignAbstraction(std::vector<ProgramStatement*> statementList) {
@@ -136,4 +162,22 @@ void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*>
   for (auto statement : statementList) {
     statement->processStatement(pkbManager);
   }
+}
+
+void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {
+    if (procCallMap.find(child) == procCallMap.end()) return;
+    for (auto& childChild : procCallMap[child]) {
+        pkbManager.addRelationship(CALLS_STAR, parent, childChild);
+        dfsCallsStar(parent, childChild);
+    }
+}
+
+void spa::DesignExtractor::extractCallsStar() {
+    for (auto& procedure : procedureList) {
+        auto currentProcedure = procedure.getProcedureVarToken().getValue();
+        for (auto& directCall : procedure.getCalledVars()) {
+            pkbManager.addRelationship(CALLS_STAR, currentProcedure, directCall);
+            dfsCallsStar(currentProcedure, directCall);
+        }
+    }
 }

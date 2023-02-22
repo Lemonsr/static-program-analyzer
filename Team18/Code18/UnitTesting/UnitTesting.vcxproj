@@ -171,6 +171,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestAST.cpp" />
+    <ClCompile Include="TestDesignExtractorCalls.cpp" />
+    <ClCompile Include="TestDesignExtractorCallsStar.cpp" />
     <ClCompile Include="TestDesignExtractorEntities.cpp" />
     <ClCompile Include="TestDesignExtractorFollows.cpp" />
     <ClCompile Include="TestDesignExtractorFollowsStar.cpp" />
@@ -202,6 +204,7 @@
     <ClCompile Include="TestPqlQueryParser.cpp" />
     <ClCompile Include="TestPqlSuchThatParser.cpp" />
     <ClCompile Include="TestPqlSemanticChecker.cpp" />
+    <ClCompile Include="TestSpCyclicValidator.cpp" />
     <ClCompile Include="TestTokenizer.cpp" />
     <ClCompile Include="TestPKB.cpp" />
     <ClCompile Include="TestUtilsFunction.cpp" />

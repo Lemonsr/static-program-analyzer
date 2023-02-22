@@ -180,10 +180,11 @@ void spa::SpValidator::validateEqual() {
 
 // print: 'print' var_name';'
 // read: 'read' var_name';'
+// specifically escape the call stmt
 void spa::SpValidator::validateReadPrint() {
     Token currToken = getToken();
     TokenType currTokenType = currToken.getType();
-    if (currTokenType != TOKEN_READ && currTokenType != TOKEN_PRINT) {
+    if (currTokenType != TOKEN_READ && currTokenType != TOKEN_PRINT && currTokenType != TOKEN_CALL) {
         throw std::exception("Unknown Statement");
     }
 
@@ -474,3 +475,4 @@ bool spa::SpValidator::isRelFactor(std::vector<Token> tokensToCheck) {
 
     return isExpr(tokensToCheck);
 }
+
