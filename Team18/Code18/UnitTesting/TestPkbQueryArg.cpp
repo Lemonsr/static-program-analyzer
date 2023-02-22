@@ -53,7 +53,7 @@ public:
   }
 
   TEST_METHOD(TestVariableName) {
-    spa::PqlArgument pqlArg(spa::VARIABLE_NAME, "main", {});
+    spa::PqlArgument pqlArg(spa::LITERAL_STRING, "main", {});
     spa::PKBQueryArg queryArg(pqlArg);
     Assert::IsTrue(queryArg.getType() == spa::PKBQueryArgType::NAME);
     Assert::AreEqual(queryArg.getName().name, std::string("main"));

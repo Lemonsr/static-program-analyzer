@@ -9,7 +9,7 @@ namespace UnitTesting {
   TEST_CLASS(TestSemanticChecker) {
     std::vector<spa::PqlArgument> arguments = {
       {spa::ArgumentType::LINE_NO, "1", {}},
-      {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+      {spa::ArgumentType::LITERAL_STRING, "x", {}},
       {spa::ArgumentType::WILDCARD, "_", {}},
       {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
@@ -35,7 +35,7 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };
@@ -64,13 +64,13 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
@@ -132,7 +132,7 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };
@@ -161,13 +161,13 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
@@ -283,14 +283,14 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
       };
 
       std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
@@ -407,14 +407,14 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
       };
 
       std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
@@ -466,7 +466,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestPatternValid) {
       std::vector<spa::PqlArgument> validFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };
