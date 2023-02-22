@@ -9,9 +9,11 @@ spa::QpsQueryEvaluator::QpsQueryEvaluator(ParsedQuery& parsedQuery) : parsedQuer
 
 spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   std::vector<std::unique_ptr<QpsEvaluator>> evaluators;
-  for (auto& synonym : parsedQuery.getSelectColumns()) {
+  for (auto& declarations : parsedQuery.getDeclarations()) {
+    std::string declaration = declarations.first;
+    DesignEntityType declarationType = declarations.second;
     evaluators.push_back(
-      std::make_unique<SimpleEvaluator>(synonym, parsedQuery.getDeclarationType(synonym).value()));
+      std::make_unique<SimpleEvaluator>(declaration, declarationType));
   }
   for (auto& clause : parsedQuery.getSuchThatClauses()) {
     evaluators.push_back(clause.getEvaluator());
