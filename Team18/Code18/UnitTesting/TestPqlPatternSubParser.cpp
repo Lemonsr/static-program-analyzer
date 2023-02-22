@@ -31,9 +31,8 @@ public:
     spa::PqlPatternSubParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    std::optional<spa::PatternClause> opt = query.getPatternClause();
-    Assert::IsTrue(opt.has_value());
-    spa::PatternClause& clause = opt.value();
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
@@ -62,9 +61,8 @@ public:
     spa::PqlPatternSubParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    std::optional<spa::PatternClause> opt = query.getPatternClause();
-    Assert::IsTrue(opt.has_value());
-    spa::PatternClause& clause = opt.value();
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
@@ -95,9 +93,8 @@ public:
     spa::PqlPatternSubParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    std::optional<spa::PatternClause> opt = query.getPatternClause();
-    Assert::IsTrue(opt.has_value());
-    spa::PatternClause& clause = opt.value();
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),

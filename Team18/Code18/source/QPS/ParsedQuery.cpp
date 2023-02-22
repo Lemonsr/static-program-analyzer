@@ -52,7 +52,7 @@ void spa::ParsedQuery::addSelectColumn(std::string selectColumn) {
   selectColumns.push_back(selectColumn);
 }
 
-const std::vector<std::string>& spa::ParsedQuery::getSelectColumns() {
+std::vector<std::string>& spa::ParsedQuery::getSelectColumns() {
   return selectColumns;
 }
 
@@ -61,7 +61,7 @@ void spa::ParsedQuery::addSuchThatClause(SuchThatClause clause) {
   lastAddedClause = PqlClauseType::SUCH_THAT_CLAUSE;
 }
 
-const std::vector<spa::SuchThatClause>& spa::ParsedQuery::getSuchThatClauses() {
+std::vector<spa::SuchThatClause>& spa::ParsedQuery::getSuchThatClauses() {
   return suchThatClauses;
 }
 
@@ -70,7 +70,7 @@ void spa::ParsedQuery::addPatternClause(PatternClause clause) {
   lastAddedClause = PqlClauseType::PATTERN_CLAUSE;
 }
 
-const std::vector<spa::PatternClause>& spa::ParsedQuery::getPatternClauses() {
+std::vector<spa::PatternClause>& spa::ParsedQuery::getPatternClauses() {
   return patternClauses;
 }
 

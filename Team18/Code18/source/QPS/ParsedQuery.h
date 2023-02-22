@@ -85,11 +85,11 @@ class ParsedQuery {
   SelectClauseType getSelectClauseType();
   PqlClauseType getLastAddedClause();
   void addSelectColumn(std::string selectColumn);
-  const std::vector<std::string>& getSelectColumns();
+  std::vector<std::string>& getSelectColumns();
   void addSuchThatClause(SuchThatClause clause);
-  const std::vector<SuchThatClause>& getSuchThatClauses();
+  std::vector<SuchThatClause>& getSuchThatClauses();
   void addPatternClause(PatternClause clause);
-  const std::vector<PatternClause>& getPatternClauses();
+  std::vector<PatternClause>& getPatternClauses();
   bool hasClauses();
 };
 }  // namespace spa
