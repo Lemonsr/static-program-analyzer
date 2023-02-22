@@ -12,5 +12,5 @@ class CallsStarEvaluator : public QpsEvaluator {
  public:
   CallsStarEvaluator(PqlArgument& firstArg, PqlArgument& secondArg);
   QpsResultTable evaluate(PKBManager& pkbManager);
- };
+};
 }  // namespace spa
