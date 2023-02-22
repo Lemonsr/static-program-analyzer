@@ -2,6 +2,7 @@
 #include <unordered_set>
 #include <string>
 
+#include "ProcedureStatement.h"
 #include "ProgramStatement.h"
 
 namespace spa {
@@ -50,6 +51,8 @@ class MultiVarNonContainerStatement : public NonContainerStatement {
  protected:
   std::string postfixExpr;
   void extractUsesFromPostfix(PKBManager& pkbManager, std::string postfix);
+  void extractPatternFromPostfix(PKBManager& pkbManager, std::string lineNum,
+      std::string postfix, spa::DesignEntityType type);
 };
 
 class AssignStatement : public MultiVarNonContainerStatement {

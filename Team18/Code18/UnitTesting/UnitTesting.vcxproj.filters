@@ -122,10 +122,24 @@
     <ClCompile Include="TestPKBCallsStar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestDesignExtractorIf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorWhile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TestPqlSuchThatSubParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPqlPatternSubParser.cpp">
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorCalls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDesignExtractorCallsStar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSpCyclicValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPqlSelectParser.cpp">

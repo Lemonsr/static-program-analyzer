@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <unordered_set>
 
 #include "ProgramStatement.h"
 
@@ -8,9 +9,11 @@ namespace spa {
 class ContainerStatement : public ProgramStatement {
  protected:
   std::vector<ProgramStatement*> statementList;
+  std::unordered_set<std::string> proceduresCalled;
 
  public:
   std::vector<ProgramStatement*> getStatementList();
+  std::unordered_set<std::string> getProceduresCalled();
 };
 
 class IfContainerStatement : public ContainerStatement {
