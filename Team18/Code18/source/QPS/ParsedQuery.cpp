@@ -75,7 +75,7 @@ std::vector<spa::PatternClause>& spa::ParsedQuery::getPatternClauses() {
 }
 
 bool spa::ParsedQuery::hasClauses() {
-  return suchThatClauses.size() > 0 && patternClauses.size() > 0;
+  return suchThatClauses.size() > 0 || patternClauses.size() > 0;
 }
 
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
