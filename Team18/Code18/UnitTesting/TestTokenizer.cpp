@@ -69,8 +69,8 @@ public:
   TEST_METHOD(TestTokenizerTokenizeSuchThatAndPattern) {
     std::stringstream srcStream;
     srcStream << "assign a; while w;\n";
-    srcStream << "Select w such that Parent* (w, a)"
-      "pattern a (\"count\", _)";
+    srcStream << "Select w such that Parent* (w, a)";
+    srcStream << " pattern a (\"count\", _)";
     spa::Tokenizer tokenizer;
     spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
     bool matchResult = tokenStream.match({
@@ -104,89 +104,76 @@ public:
     Assert::IsTrue(matchResult);
   }
 
+  TEST_METHOD(TestTokenizerTupleSuchThatWith) {
+    std::stringstream srcStream;
+    srcStream << "stmt s; variable v;\n";
+    srcStream << "Select <s, v> such that Uses(s, v) with s.stmt# = 10";
+    spa::Tokenizer tokenizer;
+    spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
+    bool matchResult = tokenStream.match({
+      { spa::TOKEN_NAME, "stmt" },
+      { spa::TOKEN_NAME, "s" },
+      { spa::TOKEN_SEMICOLON, ";" },
+      { spa::TOKEN_NAME, "variable" },
+      { spa::TOKEN_NAME, "v" },
+      { spa::TOKEN_SEMICOLON, ";" },
+      { spa::TOKEN_NAME, "Select" },
+      { spa::TOKEN_COND_LT, "<" },
+      { spa::TOKEN_NAME, "s" },
+      { spa::TOKEN_COMMA, "," },
+      { spa::TOKEN_NAME, "v" },
+      { spa::TOKEN_COND_GT, ">" },
+      { spa::TOKEN_NAME, "such" },
+      { spa::TOKEN_NAME, "that" },
+      { spa::TOKEN_NAME, "Uses" },
+      { spa::TOKEN_OPEN_BRACKET, "(" },
+      { spa::TOKEN_NAME, "s" },
+      { spa::TOKEN_COMMA, "," },
+      { spa::TOKEN_NAME, "v" },
+      { spa::TOKEN_CLOSE_BRACKET, ")" },
+      { spa::TOKEN_NAME, "with" },
+      { spa::TOKEN_NAME, "s" },
+      { spa::TOKEN_FULL_STOP, "." },
+      { spa::TOKEN_NAME, "stmt" },
+      { spa::TOKEN_HASH, "#"},
+      { spa::TOKEN_EQUAL, "="},
+      { spa::TOKEN_INTEGER, "10"}
+      });
+    Assert::IsTrue(matchResult);
+  }
+
   TEST_METHOD(TestTokenizerTokenizeInvalidSymbol) {
     bool hasException = false;
-    bool matchResult;
     try {
       std::stringstream srcStream;
       srcStream << "stmt s;\n";
-      srcStream << "Select s such that Uses* (w, &)";
+      srcStream << "Select s such that Uses* (w, @)";
       spa::Tokenizer tokenizer;
       spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
-      matchResult = tokenStream.match({
-        { spa::TOKEN_NAME, "stmt" },
-        { spa::TOKEN_NAME, "s" },
-        { spa::TOKEN_SEMICOLON, ";" },
-        { spa::TOKEN_NAME, "Select" },
-        { spa::TOKEN_NAME, "s" },
-        { spa::TOKEN_NAME, "such" },
-        { spa::TOKEN_NAME, "that" },
-        { spa::TOKEN_NAME, "Uses" },
-        { spa::TOKEN_MULTIPLY, "*" },
-        { spa::TOKEN_OPEN_BRACKET, "(" },
-        { spa::TOKEN_NAME, "w" },
-        { spa::TOKEN_COMMA, "," },
-        { spa::TOKEN_BOOL_AND, "&" },
-        { spa::TOKEN_CLOSE_BRACKET, ")" },
-        });
-    }
-    catch (const std::runtime_error& runTimeError) {
+    } catch (const std::runtime_error& runTimeError) {
       hasException = true;
-      std::string expectedSubMsg = "Unknown Symbol:";
+      std::string expectedMsg = "Unknown Symbol: @";
       std::string errorMsg = runTimeError.what();
-      bool isInMsg = errorMsg.find(expectedSubMsg) != std::string::npos;
-      Assert::IsTrue(isInMsg);
+      Assert::AreEqual(expectedMsg, errorMsg);
     }
-    catch (...) {
-      hasException = true;
-      Assert::Fail();
-    }
-    if (!hasException) {
-      Assert::IsTrue(matchResult);
-    }
+    Assert::IsTrue(hasException);
   }
 
   TEST_METHOD(TestTokenizerTokenizeInvalidName) {
     bool hasException = false;
-    bool matchResult;
     try {
       std::stringstream srcStream;
       srcStream << "stmt 123Test;\n";
       srcStream << "Select 123Test such that Uses* (w, v)";
       spa::Tokenizer tokenizer;
       spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
-      matchResult = tokenStream.match({
-        { spa::TOKEN_NAME, "stmt" },
-        { spa::TOKEN_NAME, "123Test" },
-        { spa::TOKEN_SEMICOLON, ";" },
-        { spa::TOKEN_NAME, "Select" },
-        { spa::TOKEN_NAME, "123Test" },
-        { spa::TOKEN_NAME, "s" },
-        { spa::TOKEN_NAME, "such" },
-        { spa::TOKEN_NAME, "that" },
-        { spa::TOKEN_NAME, "Uses" },
-        { spa::TOKEN_MULTIPLY, "*" },
-        { spa::TOKEN_OPEN_BRACKET, "(" },
-        { spa::TOKEN_NAME, "w" },
-        { spa::TOKEN_COMMA, "," },
-        { spa::TOKEN_NAME, "v" },
-        { spa::TOKEN_CLOSE_BRACKET, ")" },
-        });
-    }
-    catch (const std::runtime_error& runTimeError) {
+    } catch (const std::runtime_error& runTimeError) {
       hasException = true;
-      std::string expectedSubMsg = "Invalid name in SIMPLE code";
+      std::string expectedMsg = "Invalid name in SIMPLE code";
       std::string errorMsg = runTimeError.what();
-      bool isInMsg = errorMsg.find(expectedSubMsg) != std::string::npos;
-      Assert::IsTrue(isInMsg);
+      Assert::AreEqual(expectedMsg, errorMsg);
     }
-    catch (...) {
-      hasException = true;
-      Assert::Fail();
-    }
-    if (!hasException) {
-      Assert::IsTrue(matchResult);
-    }
+    Assert::IsTrue(hasException);
   }
   };
 }  // namespace UnitTesting

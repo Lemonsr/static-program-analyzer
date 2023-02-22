@@ -96,7 +96,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 2);
@@ -170,7 +170,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 3);
@@ -236,7 +236,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 2);
@@ -305,7 +305,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 2);
@@ -357,7 +357,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
@@ -422,7 +422,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
@@ -497,7 +497,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
@@ -555,7 +555,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
@@ -613,7 +613,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
@@ -666,7 +666,7 @@ public:
     for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
@@ -709,7 +709,7 @@ public:
     for (auto token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
@@ -765,7 +765,7 @@ public:
     for (auto token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
@@ -812,7 +812,7 @@ public:
     for (auto token : tokenList) {
       tokenStream.pushBack(token);
     }
-    spa::PKBManager* pkbManager = new spa::PKB();
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
