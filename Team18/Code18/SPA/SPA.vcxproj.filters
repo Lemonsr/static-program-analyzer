@@ -180,6 +180,9 @@
     <ClInclude Include="..\source\QPS\PqlAttributeParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\QPS\PqlAndParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\PKB\EntityStorage.cpp">
@@ -321,6 +324,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\QPS\PqlAttributeParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\QPS\PqlAndParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

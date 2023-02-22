@@ -35,6 +35,7 @@
     <ClInclude Include="..\source\QPS\ParsedQuery.h" />
     <ClInclude Include="..\source\QPS\PatternContainerEvaluator.h" />
     <ClInclude Include="..\source\QPS\PatternEvaluator.h" />
+    <ClInclude Include="..\source\QPS\PqlAndParser.h" />
     <ClInclude Include="..\source\QPS\PqlArgument.h" />
     <ClInclude Include="..\source\QPS\PqlArgumentParser.h" />
     <ClInclude Include="..\source\QPS\PqlAttributeParser.h" />
@@ -86,6 +87,7 @@
     <ClCompile Include="..\source\QPS\ParsedQuery.cpp" />
     <ClCompile Include="..\source\QPS\PatternContainerEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\PatternEvaluator.cpp" />
+    <ClCompile Include="..\source\QPS\PqlAndParser.cpp" />
     <ClCompile Include="..\source\QPS\PqlArgument.cpp" />
     <ClCompile Include="..\source\QPS\PqlArgumentParser.cpp" />
     <ClCompile Include="..\source\QPS\PqlAttributeParser.cpp" />
