@@ -5,29 +5,14 @@
 #include "SpCyclicValidator.h"
 #include "NonContainerStatement.h"
 
-spa::SpCyclicValidator::SpCyclicValidator(std::vector<spa::ProcedureStatement*> pl) {
-    procedureList = pl;
-}
-
-void spa::SpCyclicValidator::generateProcCallMap() {
-    for (auto& procedure : procedureList) {
-        auto statements = procedure->getStatementLst();
-        for (auto& statement : statements) {
-            if (dynamic_cast<CallStatement*>(statement)) {
-                auto callStatement = dynamic_cast<CallStatement*>(statement);
-                callStatement->addCallToProcedure(procedure);
-            }
-        }
-        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
-            procedure->getCalledVars());
-    }
+spa::SpCyclicValidator::SpCyclicValidator(std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap) {
+    validateCallMap = procCallMap;
 }
 
 bool spa::SpCyclicValidator::validateCyclic() {
-    generateProcCallMap();
     std::unordered_map<std::string, bool> visited = {};
-    for (auto& procedure : procedureList) {
-        auto parent = procedure->getProcedureVarToken().getValue();
+    for (auto& procedure : validateCallMap) {
+        auto parent = procedure.first;
         if (visited.find(parent) != visited.end()) {
             continue;
         }
@@ -50,7 +35,7 @@ bool spa::SpCyclicValidator::dfsCheckCyclicCall(std::string parent,
         return visited->at(parent);
     } else {
         currentSeen->emplace(parent);
-        auto children = procCallMap.at(parent);
+        auto children = validateCallMap.at(parent);
         for (auto child : children) {
             if (dfsCheckCyclicCall(child, currentSeen, visited)) {
                 visited->emplace(child, true);

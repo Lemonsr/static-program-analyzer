@@ -153,11 +153,6 @@ void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
   }
 }
 
-
-void spa::CallStatement::addCallToProcedure(spa::ProcedureStatement* procedure) {
-    procedure->addCalledVars(variableName);
-}
-
 void spa::NonContainerStatement::addParentUses(PKBManager& pkbManager, std::string variableName) {
   for (int parent : whileStmtParents) {
     std::string stringParentStmtNum = std::to_string(parent);

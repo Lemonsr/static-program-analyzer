@@ -12,7 +12,7 @@ class DesignExtractor {
  private:
   PKBManager& pkbManager;
   std::vector<ProcedureStatement>& procedureList;
-  std::unordered_map<std::string, ProcedureStatement*> procCallMap;
+  std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
 
   void extractDesignAbstraction(std::vector<ProgramStatement*> statementList);
   void extractParentAbstraction(std::vector<ProgramStatement*> statementList);

@@ -45,7 +45,6 @@ class CallStatement : public OneVarNonContainerStatement {
                 std::unordered_set<int> whileStmtParents,
                 std::unordered_set<int> ifStmtParents, int statementLineNum);
   void processStatement(PKBManager& pkbManager) override;
-  void addCallToProcedure(spa::ProcedureStatement* procedureStatement);
 };
 
 class MultiVarNonContainerStatement : public NonContainerStatement {
