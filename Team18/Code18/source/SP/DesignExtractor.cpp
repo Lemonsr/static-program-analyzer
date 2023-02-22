@@ -41,6 +41,7 @@ void spa::DesignExtractor::extractRelationship() {
     std::vector<ProgramStatement*> statementList = procedure.getStatementLst();
     extractDesignAbstraction(statementList);
   }
+  extractCallsStar();
 }
 
 void spa::DesignExtractor::extractDesignAbstraction(std::vector<ProgramStatement*> statementList) {
@@ -48,7 +49,6 @@ void spa::DesignExtractor::extractDesignAbstraction(std::vector<ProgramStatement
   extractFollowsStar(statementList);
   extractParentAbstraction(statementList);
   extractUsesAndModifies(statementList);
-  extractCallsStar();
 }
 
 void spa::DesignExtractor::extractParentAbstraction(std::vector<ProgramStatement*> statementList) {

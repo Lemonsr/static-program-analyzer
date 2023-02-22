@@ -19,12 +19,6 @@ std::unordered_set<std::string> spa::ContainerStatement::getProceduresCalled() {
                 for (auto& called : calledSet) {
                     proceduresCalled.emplace(called);
                 }
-            } else if (dynamic_cast<spa::IfContainerStatement*>(statement)) {
-                auto ifStatement = dynamic_cast<spa::IfContainerStatement*>(statement);
-                std::unordered_set<std::string> calledSet = ifStatement->getProceduresCalled();
-                for (auto& called : calledSet) {
-                    proceduresCalled.emplace(called);
-                }
             }
         }
     }
