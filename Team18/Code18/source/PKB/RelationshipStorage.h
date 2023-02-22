@@ -15,12 +15,13 @@ class RelationshipStorage {
   std::unordered_map<int, std::unordered_set<int>> followsStarTable;
   std::unordered_map<int, std::unordered_set<int>> parentTable;
   std::unordered_map<int, std::unordered_set<int>> parentStarTable;
-  std::unordered_map<int, std::unordered_set<std::string>> modifiesTable;
-  std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable;
   std::unordered_map<int, std::unordered_set<std::string>> usesTable;
   std::unordered_map<std::string, std::unordered_set<std::string>> usesProcTable;
+  std::unordered_map<int, std::unordered_set<std::string>> modifiesTable;
+  std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable;
   std::unordered_map<std::string, std::unordered_set<std::string>> callsTable;
   std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable;
+  std::unordered_map<std::string, std::unordered_set<int>> callsContainerParentsTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;
 

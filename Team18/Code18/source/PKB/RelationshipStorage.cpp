@@ -766,17 +766,17 @@ spa::QueryResult spa::RelationshipStorage::getModifiesLineVar(PKBQueryArg firstA
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   if (modifiesTable.find(lineNumber) == modifiesTable.end()) {
     return queryResult;
   }
 
   for (auto& varName : modifiesTable[lineNumber]) {
-    lineNumberVariablePairs.push_back({ lineNumber, varName });
+    lineNumberNamePairs.push_back({ lineNumber, varName });
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -787,17 +787,17 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVarName(PKBQueryArg fi
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto itr = modifiesTable.begin(); itr != modifiesTable.end(); itr++) {
     if ((stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) ||
       itr->second.find(varName) == itr->second.end()) {
       continue;
     }
 
-    lineNumberVariablePairs.push_back({ itr->first, varName });
+    lineNumberNamePairs.push_back({ itr->first, varName });
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -807,18 +807,18 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtUnderscore(PKBQueryArg
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto itr = modifiesTable.begin(); itr != modifiesTable.end(); itr++) {
     if (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) {
       continue;
     }
 
     for (auto& varName : itr->second) {
-      lineNumberVariablePairs.push_back({ itr->first, varName });
+      lineNumberNamePairs.push_back({ itr->first, varName });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -828,18 +828,18 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVar(PKBQueryArg firstA
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto itr = modifiesTable.begin(); itr != modifiesTable.end(); itr++) {
     if (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) {
       continue;
     }
 
     for (auto& varName : itr->second) {
-      lineNumberVariablePairs.push_back({ itr->first, varName });
+      lineNumberNamePairs.push_back({ itr->first, varName });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -1179,17 +1179,17 @@ spa::QueryResult spa::RelationshipStorage::getUsesLineVar(PKBQueryArg firstArg,
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   if (usesTable.find(lineNumber) == usesTable.end()) {
     return queryResult;
   }
 
   for (auto& varName : usesTable[lineNumber]) {
-    lineNumberVariablePairs.push_back({ lineNumber, varName });
+    lineNumberNamePairs.push_back({ lineNumber, varName });
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -1200,7 +1200,7 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PKBQueryArg firstA
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto itr = usesTable.begin(); itr != usesTable.end(); itr++) {
     if ((stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) ||
       itr->second.find(varName) == itr->second.end()) {
@@ -1208,11 +1208,11 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PKBQueryArg firstA
     }
 
     for (auto& varName : itr->second) {
-      lineNumberVariablePairs.push_back({ itr->first, varName });
+      lineNumberNamePairs.push_back({ itr->first, varName });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -1222,18 +1222,18 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtUnderscore(PKBQueryArg fir
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto itr = usesTable.begin(); itr != usesTable.end(); itr++) {
     if (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) {
       continue;
     }
 
     for (auto& varName : itr->second) {
-      lineNumberVariablePairs.push_back({ itr->first, varName });
+      lineNumberNamePairs.push_back({ itr->first, varName });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -1243,18 +1243,18 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVar(PKBQueryArg firstArg,
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto itr = usesTable.begin(); itr != usesTable.end(); itr++) {
     if (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) {
       continue;
     }
 
     for (auto& varName : itr->second) {
-      lineNumberVariablePairs.push_back({ itr->first, varName });
+      lineNumberNamePairs.push_back({ itr->first, varName });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 

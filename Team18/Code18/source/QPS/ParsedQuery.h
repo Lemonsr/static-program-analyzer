@@ -20,6 +20,7 @@ enum RelationshipType {
   PARENT,
   PARENT_STAR,
   MODIFIES,
+  MODIFIES_P,
   USES,
   CALLS,
   CALLS_STAR

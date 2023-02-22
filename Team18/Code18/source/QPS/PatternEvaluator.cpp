@@ -11,7 +11,7 @@ spa::QpsResultTable spa::PatternEvaluator::evaluate(PKBManager& pkbManager) {
   resultTable.addHeader(assignSynonym);
   resultTable.addHeader(firstArg);
 
-  for (auto& [lineNumber, varName] : result.getLineNumberVariablePairs()) {
+  for (auto& [lineNumber, varName] : result.getLineNumberNamePairs()) {
     resultTable.addRow({ QpsValue(lineNumber), QpsValue(varName) });
   }
   return resultTable;
