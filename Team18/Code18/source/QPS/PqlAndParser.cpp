@@ -12,7 +12,9 @@ spa::PqlParseStatus spa::PqlAndParser::parse(Stream<Token>& tokens, ParsedQuery&
   switch (lastAddedClause) {
     case PqlClauseType::SUCH_THAT_CLAUSE:
       return suchThatParser.parse(tokens, query);
-    default:
+    case PqlClauseType::PATTERN_CLAUSE:
       return patternParser.parse(tokens, query);
+    default:
+      return PQL_PARSE_ERROR;
   }
 }

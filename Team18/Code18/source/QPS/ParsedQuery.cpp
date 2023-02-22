@@ -36,6 +36,10 @@ std::optional<spa::DesignEntityType> spa::ParsedQuery::getDeclarationType(
   return { it->second };
 }
 
+std::unordered_map<std::string, spa::DesignEntityType>& spa::ParsedQuery::getDeclarations() {
+  return declarations;
+}
+
 void spa::ParsedQuery::setSelectClauseType(SelectClauseType selectType) {
   this->selectType = selectType;
 }

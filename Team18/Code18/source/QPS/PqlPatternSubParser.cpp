@@ -180,7 +180,9 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
       return parseAssign(designEntity, firstArg, tokens, query);
     case WHILE:
       return parseWhile(designEntity, firstArg, tokens, query);
-    default:
+    case IF:
       return parseIf(designEntity, firstArg, tokens, query);
+    default:
+      return PQL_PARSE_ERROR;
   }
 }

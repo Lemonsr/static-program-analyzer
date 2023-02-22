@@ -81,6 +81,7 @@ class ParsedQuery {
   bool addDeclaration(std::string synonym, DesignEntityType designEntity);
   int getDeclarationsCount();
   std::optional<DesignEntityType> getDeclarationType(std::string synonym);
+  std::unordered_map<std::string, DesignEntityType>& getDeclarations();
   void setSelectClauseType(SelectClauseType selectType);
   SelectClauseType getSelectClauseType();
   PqlClauseType getLastAddedClause();

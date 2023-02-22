@@ -39,6 +39,7 @@
     <ClInclude Include="..\source\QPS\PqlArgument.h" />
     <ClInclude Include="..\source\QPS\PqlArgumentParser.h" />
     <ClInclude Include="..\source\QPS\PqlAttributeParser.h" />
+    <ClInclude Include="..\source\QPS\PqlAttributes.h" />
     <ClInclude Include="..\source\QPS\PqlDeclarationParser.h" />
     <ClInclude Include="..\source\QPS\PqlParser.h" />
     <ClInclude Include="..\source\QPS\PqlPatternParser.h" />

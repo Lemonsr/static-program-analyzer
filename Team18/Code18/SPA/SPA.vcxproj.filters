@@ -183,6 +183,9 @@
     <ClInclude Include="..\source\QPS\PqlAndParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\QPS\PqlAttributes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\PKB\EntityStorage.cpp">

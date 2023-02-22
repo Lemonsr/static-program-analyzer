@@ -1,20 +1,6 @@
 #include "PqlAttributeParser.h"
 
-#include <unordered_map>
-#include <unordered_set>
-
-std::unordered_map<spa::DesignEntityType, std::unordered_set<std::string>> attributesMap {
-  { spa::ASSIGN, { "stmt#" }},
-  { spa::CONSTANT, { "value" }},
-  { spa::STMT, { "stmt#" } },
-  { spa::READ, { "stmt#", "varName" }},
-  { spa::PRINT, { "stmt#", "varName" }},
-  { spa::CALL, { "stmt#", "procName" }},
-  { spa::WHILE, { "stmt#" }},
-  { spa::IF, { "stmt#" }},
-  { spa::VARIABLE, { "varName"}},
-  { spa::PROCEDURE, { "procName" }}
-};
+#include "PqlAttributes.h"
 
 std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>& tokens, ParsedQuery& query) {
   std::string synonym = tokens[0].getValue();
@@ -27,7 +13,7 @@ std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>
   if (hasHash) {
     attribute.append("#");
   }
-  auto& attributes = attributesMap[entityOpt.value()];
+  auto& attributes = pqlAttributesMap[entityOpt.value()];
   auto it = attributes.find(attribute);
   if (it == attributes.end()) {
     return {};
