@@ -5,6 +5,7 @@
 #include "QueryResult.h"
 
 #include <string>
+#include <unordered_set>
 
 namespace spa {
 class PKBManager {

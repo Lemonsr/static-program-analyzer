@@ -1278,7 +1278,7 @@ std::optional<std::unordered_set<int>> spa::RelationshipStorage::getCallsContain
     }
     queryResult = callsContainerParentsTable[procName];
   }
-  
+
   return queryResult;
 }
 
@@ -1348,7 +1348,7 @@ void spa::RelationshipStorage::setCallsStarTable(std::unordered_map<
 }
 
 void spa::RelationshipStorage::setCallsContainerParentsTable(std::unordered_map<
-                                                               std::string, 
+                                                               std::string,
                                                                std::unordered_set<int>> callsContainerParentsTable) {
   this->callsContainerParentsTable = callsContainerParentsTable;
 }

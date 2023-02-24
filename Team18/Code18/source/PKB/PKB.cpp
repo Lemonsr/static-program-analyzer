@@ -1,6 +1,8 @@
 #include "PKB.h"
 #include "PKBQueryTypes.h"
 
+#include <unordered_set>
+
 void spa::PKB::createRelationshipQueryFunctionMap() {
   relationshipQueryFunctionMap = {
     // Follows
@@ -287,7 +289,7 @@ const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure)
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
   PKBQueryArg firstArg, PKBQueryArg secondArg) {
   auto relationshipFunctionItr = relationshipQueryFunctionMap.find({ relationshipType,
-                                                     firstArg.getType(), secondArg.getType() });
+                                                                     firstArg.getType(), secondArg.getType() });
   return (relationshipFunctionItr->second)(relationshipStorage, firstArg, secondArg);
 }
 
