@@ -268,6 +268,14 @@ const bool spa::PKB::addContainerPattern(DesignEntityType entityType, std::strin
   return false;
 }
 
+const bool spa::PKB::addCallsContainerParent(std::string procedureName, std::string lineNo) {
+  return relationshipStorage.addCallsContainerParent(procedureName, lineNo);
+}
+
+const bool spa::PKB::addCallsProc(int lineNo, std::string procedure) {
+  return relationshipStorage.addCallsProc(lineNo, procedure);
+}
+
 const bool spa::PKB::addStatementType(std::string lineNo, StatementType statementType) {
   return relationshipStorage.addStatementType(lineNo, statementType);
 }
@@ -303,4 +311,12 @@ const spa::QueryResult spa::PKB::getPattern(PKBQueryArg lhs, Pattern rhs) {
 const spa::QueryResult spa::PKB::getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg) {
   auto patternContainerFunctionItr = patternContainerQueryFunctionMap.find({ entityType, firstArg.getType() });
   return (patternContainerFunctionItr->second)(patternStorage, firstArg);
+}
+
+const std::optional<std::unordered_set<int>> spa::PKB::getCallsContainerParent(std::string procedureName) {
+  return relationshipStorage.getCallsContainerParent(procedureName);
+}
+
+const spa::QueryResult spa::PKB::getCallsProc() {
+  return relationshipStorage.getCallsProc();
 }

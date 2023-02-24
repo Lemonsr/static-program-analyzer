@@ -22,6 +22,7 @@ class RelationshipStorage {
   std::unordered_map<std::string, std::unordered_set<std::string>> callsTable;
   std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable;
   std::unordered_map<std::string, std::unordered_set<int>> callsContainerParentsTable;
+  std::unordered_map<int, std::string> callsProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;
 
@@ -112,6 +113,12 @@ class RelationshipStorage {
   QueryResult getCallsStarProcedureUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getCallsStarProcedureProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
+  bool addCallsContainerParent(std::string procName, std::string lineNo);
+  std::optional<std::unordered_set<int>> getCallsContainerParent(std::string procName);
+
+  bool addCallsProc(int lineNumber, std::string procName);
+  QueryResult getCallsProc();
+
   void setFollowsTable(std::unordered_map<int, int> followsTable);
   void setFollowsStarTable(std::unordered_map<int, std::unordered_set<int>> followsStarTable);
   void setParentTable(std::unordered_map<int, std::unordered_set<int>> parentTable);
@@ -120,6 +127,9 @@ class RelationshipStorage {
   void setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable);
   void setCallsTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsTable);
   void setCallsStarTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable);
+  void setCallsContainerParentsTable(std::unordered_map<std::string,
+                                                        std::unordered_set<int>> callsContainerParentsTable);
+  void setCallsProcTable(std::unordered_map<int, std::string> statementTypeTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
 };
 }  // namespace spa
