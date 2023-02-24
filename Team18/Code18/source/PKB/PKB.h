@@ -11,6 +11,7 @@
 #include <tuple>
 #include <functional>
 #include <unordered_map>
+#include <unordered_set>
 
 namespace spa {
 class TNode;
