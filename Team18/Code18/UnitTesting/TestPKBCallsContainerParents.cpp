@@ -7,8 +7,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "RelationshipStorage.h"
-#include "PqlArgument.h"
-#include "Argument.h"
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
@@ -40,13 +38,13 @@ public:
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getLineNumbers());
 
-    spa::QueryResult queryResult = relationshipStorage.getCallsContainerParent("D");
+    queryResult = relationshipStorage.getCallsContainerParent("D");
 
-    std::vector<int> expected = { {1, 4, 6} };
+    expected = { {1, 4, 6} };
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getLineNumbers());
 
-    spa::QueryResult queryResult = relationshipStorage.getCallsContainerParent("F");
+    queryResult = relationshipStorage.getCallsContainerParent("F");
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(queryResult.getLineNumbers().empty());
