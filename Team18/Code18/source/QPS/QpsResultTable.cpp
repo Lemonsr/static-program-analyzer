@@ -33,7 +33,7 @@ spa::QpsResultRow spa::QpsResultTable::concatenateRow(QpsResultRow& row, QpsResu
   return result;
 }
 
-void spa::QpsResultTable::addHeader(std::string header) {
+void spa::QpsResultTable::addHeader(const std::string& header) {
   if (!header.empty()) {
     headerIndexMap[header].push_back(headers.size());
   }
@@ -51,7 +51,7 @@ std::pair<int, int> spa::QpsResultTable::getDimension() {
   return { headers.size(), rows.size() };
 }
 
-void spa::QpsResultTable::addRow(QpsResultRow row) {
+void spa::QpsResultTable::addRow(const QpsResultRow& row) {
   if (row.size() != headers.size()) {
     throw std::runtime_error("QpsResultTable addRow: row size not equal to columns");
   }

@@ -46,10 +46,10 @@ class QpsResultTable {
                                     QpsValueRowsMap& cMap,
                                     QpsValueRowsMap& oMap);
  public:
-  void addHeader(std::string header);
+  void addHeader(const std::string& header);
   void addHeader(PqlArgument header);
   std::pair<int, int> getDimension();
-  void addRow(QpsResultRow row);
+  void addRow(const QpsResultRow& row);
   QpsValueSet getColumn(std::string header);
   std::vector<QpsResultRow> getColumns(std::vector<std::string> headers);
   QpsResultTable innerJoin(QpsResultTable& other);
