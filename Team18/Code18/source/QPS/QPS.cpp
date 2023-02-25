@@ -24,11 +24,13 @@ spa::QpsResult spa::QPS::evaluate(std::string query, PKBManager& pkbManager) {
     return result;
   }
 
-  std::unique_ptr<QpsEvaluator> qpsEvaluator = std::make_unique<QpsQueryEvaluator>(queryOpt.value());
+  ParsedQuery& parsedQuery = queryOpt.value();
+
+  std::unique_ptr<QpsEvaluator> qpsEvaluator = std::make_unique<QpsQueryEvaluator>(parsedQuery);
   QpsResultTable resultTable = qpsEvaluator->evaluate(pkbManager);
 
   QpsTranslator translator(resultTable);
-  std::list<std::string> translatedResult = translator.translate(queryOpt.value().getSelectSynonym());
+  std::list<std::string> translatedResult = translator.translate(parsedQuery.getSelectColumns()[0]);
   result.setResults(translatedResult);
   return result;
 }

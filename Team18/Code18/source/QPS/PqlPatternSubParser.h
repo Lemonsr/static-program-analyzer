@@ -19,6 +19,12 @@ class PqlPatternSubParser : public PqlParser {
   std::optional<Pattern> parsePattern(Stream<Token>& tokens,
       ParsedQuery& query);
   std::optional<PqlArgument> parseDesignEntity(Token& token, ParsedQuery& query);
+  PqlParseStatus parseAssign(PqlArgument& designEntity, PqlArgument& firstArg,
+                             Stream<Token>& tokens, ParsedQuery& query);
+  PqlParseStatus parseWhile(PqlArgument& designEntity, PqlArgument& firstArg,
+                            Stream<Token>& tokens, ParsedQuery& query);
+  PqlParseStatus parseIf(PqlArgument& designEntity, PqlArgument& firstArg,
+                         Stream<Token>& tokens, ParsedQuery& query);
  public:
   PqlParseStatus parse(Stream<Token>& tokens, ParsedQuery& query);
 };

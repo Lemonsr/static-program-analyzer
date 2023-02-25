@@ -27,7 +27,7 @@ namespace UnitTesting {
         spa::PqlParseStatus status = parser.parse(tokens, query);
         Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
         Assert::AreEqual(1, query.getDeclarationsCount());
-        std::optional<spa::DesignEntityType> type = query.getType("a");
+        std::optional<spa::DesignEntityType> type = query.getDeclarationType("a");
         Assert::IsTrue(type.has_value());
         Assert::IsTrue(spa::ASSIGN == type.value());
         Assert::AreEqual(int64_t(0), tokens.remaining());
@@ -49,7 +49,7 @@ namespace UnitTesting {
         Assert::AreEqual(3, query.getDeclarationsCount());
         std::vector<std::string> variables { "a", "b", "c" };
         for (std::string& v : variables) {
-          std::optional<spa::DesignEntityType> type = query.getType(v);
+          std::optional<spa::DesignEntityType> type = query.getDeclarationType(v);
           Assert::IsTrue(type.has_value());
           Assert::IsTrue(spa::READ == type.value());
         }

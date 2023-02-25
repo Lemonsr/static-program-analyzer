@@ -10,7 +10,7 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getSynonym(
     return {};
   }
   std::string val = tokens[0].getValue();
-  auto op = query.getType(val);
+  auto op = query.getDeclarationType(val);
   if (!op) {
     return {};
   }

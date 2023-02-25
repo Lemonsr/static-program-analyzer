@@ -28,9 +28,9 @@ public:
     spa::PqlQueryParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    Assert::AreEqual(query.getSelectSynonym(), std::string("v"));
-    Assert::IsFalse(query.getSuchThatClause().has_value());
-    Assert::IsFalse(query.getPatternClause().has_value());
+    Assert::AreEqual(query.getSelectColumns().size(), size_t(1));
+    Assert::AreEqual(query.getSelectColumns()[0], std::string("v"));
+    Assert::IsFalse(query.hasClauses());
     Assert::AreEqual(tokens.remaining(), int64_t(0));
   }
 
@@ -56,11 +56,12 @@ public:
     spa::PqlQueryParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    Assert::AreEqual(query.getSelectSynonym(), std::string("v"));
-    Assert::IsFalse(query.getPatternClause().has_value());
-    std::optional<spa::SuchThatClause> opt = query.getSuchThatClause();
-    Assert::IsTrue(opt.has_value());
-    spa::SuchThatClause& clause = opt.value();
+    Assert::IsTrue(query.hasClauses());
+    Assert::AreEqual(query.getSelectColumns().size(), size_t(1));
+    Assert::AreEqual(query.getSelectColumns()[0], std::string("v"));
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(0));
+    Assert::AreEqual(query.getSuchThatClauses().size(), size_t(1));
+    spa::SuchThatClause& clause = query.getSuchThatClauses()[0];
     spa::SuchThatClause compare(
       spa::MODIFIES,
       spa::PqlArgument(spa::SYNONYM, "a", { spa::ASSIGN }),
@@ -94,11 +95,12 @@ public:
     spa::PqlQueryParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    Assert::AreEqual(query.getSelectSynonym(), std::string("a"));
-    Assert::IsFalse(query.getSuchThatClause().has_value());
-    std::optional<spa::PatternClause> opt = query.getPatternClause();
-    Assert::IsTrue(opt.has_value());
-    spa::PatternClause& clause = opt.value();
+    Assert::IsTrue(query.hasClauses());
+    Assert::AreEqual(query.getSelectColumns().size(), size_t(1));
+    Assert::AreEqual(query.getSelectColumns()[0], std::string("a"));
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    Assert::AreEqual(query.getSuchThatClauses().size(), size_t(0));
+    spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
@@ -144,11 +146,13 @@ public:
     spa::PqlQueryParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    Assert::AreEqual(query.getSelectSynonym(), std::string("a"));
+    Assert::IsTrue(query.hasClauses());
+    Assert::AreEqual(query.getSelectColumns().size(), size_t(1));
+    Assert::AreEqual(query.getSelectColumns()[0], std::string("a"));
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    Assert::AreEqual(query.getSuchThatClauses().size(), size_t(1));
     {
-      std::optional<spa::SuchThatClause> opt = query.getSuchThatClause();
-      Assert::IsTrue(opt.has_value());
-      spa::SuchThatClause& clause = opt.value();
+      spa::SuchThatClause& clause = query.getSuchThatClauses()[0];
       spa::SuchThatClause compare(
         spa::MODIFIES,
         spa::PqlArgument(spa::SYNONYM, "a", { spa::ASSIGN }),
@@ -156,9 +160,7 @@ public:
       Assert::IsTrue(clause == compare);
     }
     {
-      std::optional<spa::PatternClause> opt = query.getPatternClause();
-      Assert::IsTrue(opt.has_value());
-      spa::PatternClause& clause = opt.value();
+      spa::PatternClause& clause = query.getPatternClauses()[0];
       spa::PatternClause compare(
         { spa::SYNONYM, "a", spa::ASSIGN },
         spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
@@ -205,11 +207,13 @@ public:
     spa::PqlQueryParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    Assert::AreEqual(query.getSelectSynonym(), std::string("a"));
+    Assert::IsTrue(query.hasClauses());
+    Assert::AreEqual(query.getSelectColumns().size(), size_t(1));
+    Assert::AreEqual(query.getSelectColumns()[0], std::string("a"));
+    Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    Assert::AreEqual(query.getSuchThatClauses().size(), size_t(1));
     {
-      std::optional<spa::SuchThatClause> opt = query.getSuchThatClause();
-      Assert::IsTrue(opt.has_value());
-      spa::SuchThatClause& clause = opt.value();
+      spa::SuchThatClause& clause = query.getSuchThatClauses()[0];
       spa::SuchThatClause compare(
         spa::MODIFIES,
         spa::PqlArgument(spa::SYNONYM, "a", { spa::ASSIGN }),
@@ -217,9 +221,7 @@ public:
       Assert::IsTrue(clause == compare);
     }
     {
-      std::optional<spa::PatternClause> opt = query.getPatternClause();
-      Assert::IsTrue(opt.has_value());
-      spa::PatternClause& clause = opt.value();
+      spa::PatternClause& clause = query.getPatternClauses()[0];
       spa::PatternClause compare(
         { spa::SYNONYM, "a", spa::ASSIGN },
         spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),

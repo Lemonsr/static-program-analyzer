@@ -33,9 +33,8 @@ public:
     spa::PqlSuchThatParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-    std::optional<spa::SuchThatClause> opt = query.getSuchThatClause();
-    Assert::IsTrue(opt.has_value());
-    spa::SuchThatClause& clause = opt.value();
+    Assert::AreEqual(query.getSuchThatClauses().size(), size_t(1));
+    spa::SuchThatClause& clause = query.getSuchThatClauses()[0];
     spa::SuchThatClause compare(
       spa::MODIFIES,
       spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),

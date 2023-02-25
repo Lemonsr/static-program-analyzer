@@ -2,27 +2,21 @@
 
 #include <optional>
 
-bool spa::PqlSemanticChecker::isSemanticallyValid(ParsedQuery parsedQuery) {
-  std::optional<SuchThatClause> suchThatClause = parsedQuery.getSuchThatClause();
-  if (suchThatClause) {
-    bool isSuchThatClauseValid = isValid(suchThatClause.value());
-    if (!isSuchThatClauseValid) {
+bool spa::PqlSemanticChecker::isSemanticallyValid(ParsedQuery& parsedQuery) {
+  for (auto& clause : parsedQuery.getSuchThatClauses()) {
+    if (!isValid(clause)) {
       return false;
     }
   }
-
-  std::optional<PatternClause> patternClause = parsedQuery.getPatternClause();
-  if (patternClause) {
-    bool isPatternClauseValid = isValid(patternClause.value());
-    if (!isPatternClauseValid) {
+  for (auto& clause : parsedQuery.getPatternClauses()) {
+    if (!isValid(clause)) {
       return false;
     }
   }
-
   return true;
 }
 
-bool spa::PqlSemanticChecker::isValid(SuchThatClause suchThatClause) {
+bool spa::PqlSemanticChecker::isValid(SuchThatClause& suchThatClause) {
   RelationshipType designAbstraction = suchThatClause.getDesignAbstraction();
   PqlArgument firstArg = suchThatClause.getFirstArg();
   PqlArgument secondArg = suchThatClause.getSecondArg();
@@ -41,7 +35,7 @@ bool spa::PqlSemanticChecker::isValid(SuchThatClause suchThatClause) {
   return false;
 }
 
-bool spa::PqlSemanticChecker::isValid(PatternClause patternClause) {
+bool spa::PqlSemanticChecker::isValid(PatternClause& patternClause) {
   PqlArgument firstArg = patternClause.getFirstArg();
   ArgumentType firstArgType = firstArg.getType();
   if (firstArgType == LINE_NO) {
@@ -58,7 +52,7 @@ bool spa::PqlSemanticChecker::isValid(PatternClause patternClause) {
   return true;
 }
 
-bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument firstArg, PqlArgument secondArg) {
+bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   ArgumentType firstArgType = firstArg.getType();
   if (firstArgType == WILDCARD || firstArgType == VARIABLE_NAME) {
     return false;
@@ -83,7 +77,7 @@ bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument firstArg, PqlAr
   return true;
 }
 
-bool spa::PqlSemanticChecker::checkUsesArguments(PqlArgument firstArg, PqlArgument secondArg) {
+bool spa::PqlSemanticChecker::checkUsesArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   ArgumentType firstArgType = firstArg.getType();
   if (firstArgType == WILDCARD || firstArgType == VARIABLE_NAME) {
     return false;
@@ -107,7 +101,7 @@ bool spa::PqlSemanticChecker::checkUsesArguments(PqlArgument firstArg, PqlArgume
   return true;
 }
 
-bool spa::PqlSemanticChecker::checkParentArguments(PqlArgument firstArg, PqlArgument secondArg) {
+bool spa::PqlSemanticChecker::checkParentArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   for (PqlArgument arg : { firstArg, secondArg }) {
     ArgumentType argType = arg.getType();
     if (argType == VARIABLE_NAME) {
@@ -125,7 +119,7 @@ bool spa::PqlSemanticChecker::checkParentArguments(PqlArgument firstArg, PqlArgu
   return true;
 }
 
-bool spa::PqlSemanticChecker::checkFollowsArguments(PqlArgument firstArg, PqlArgument secondArg) {
+bool spa::PqlSemanticChecker::checkFollowsArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   for (PqlArgument arg : { firstArg, secondArg }) {
     ArgumentType argType = arg.getType();
     if (argType == VARIABLE_NAME) {
