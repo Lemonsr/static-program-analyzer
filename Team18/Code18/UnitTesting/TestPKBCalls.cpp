@@ -77,13 +77,13 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getCallsNameProcedure(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs() == expected);
+        Assert::IsTrue(queryResult.getNameNamePairs() == expected);
 
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "a", {}));
         queryResult = relationshipStorage.getCallsNameProcedure(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs().empty());
+        Assert::IsTrue(queryResult.getNameNamePairs().empty());
       }
 
       TEST_METHOD(TestGetCallsUnderscoreName) {
@@ -139,13 +139,13 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getCallsUnderscoreProcedure(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs() == expected);
+        Assert::IsTrue(queryResult.getNameNamePairs() == expected);
 
         relationshipStorage.setCallsTable({});
         queryResult = relationshipStorage.getCallsUnderscoreProcedure(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs().empty());
+        Assert::IsTrue(queryResult.getNameNamePairs().empty());
       }
 
       TEST_METHOD(TestGetCallsProcedureName) {
@@ -163,13 +163,13 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getCallsProcedureName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs() == expected);
+        Assert::IsTrue(queryResult.getNameNamePairs() == expected);
 
         secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "t", {}));
         queryResult = relationshipStorage.getCallsProcedureName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs().empty());
+        Assert::IsTrue(queryResult.getNameNamePairs().empty());
       }
 
       TEST_METHOD(TestGetCallsProcedureUnderscore) {
@@ -190,13 +190,13 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getCallsProcedureUnderscore(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs() == expected);
+        Assert::IsTrue(queryResult.getNameNamePairs() == expected);
 
         relationshipStorage.setCallsTable({});
         queryResult = relationshipStorage.getCallsProcedureUnderscore(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs().empty());
+        Assert::IsTrue(queryResult.getNameNamePairs().empty());
       }
 
       TEST_METHOD(TestGetCallsProcedureProcedure) {
@@ -217,13 +217,13 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getCallsProcedureProcedure(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs() == expected);
+        Assert::IsTrue(queryResult.getNameNamePairs() == expected);
 
         relationshipStorage.setCallsTable({});
         queryResult = relationshipStorage.getCallsProcedureProcedure(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getProcNameProcNamePairs().empty());
+        Assert::IsTrue(queryResult.getNameNamePairs().empty());
       }
   };
 }  // namespace UnitTesting

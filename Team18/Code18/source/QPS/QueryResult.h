@@ -19,7 +19,7 @@ class QueryResult {
   std::optional<std::vector<int>> lineNumbers;
   std::optional<std::vector<std::pair<int, std::string>>> lineNumberNamePairs;
   std::optional<std::vector<std::pair<int, int>>> lineNumberLineNumberPairs;
-  std::optional<std::vector<std::pair<std::string, std::string>>> procNameProcNamePairs;
+  std::optional<std::vector<std::pair<std::string, std::string>>> nameNamePairs;
   std::optional<bool> isTrue;
 
  public:
@@ -28,7 +28,7 @@ class QueryResult {
   const std::vector<int>& getLineNumbers();
   const std::vector<std::pair<int, std::string>>& getLineNumberNamePairs();
   const std::vector<std::pair<int, int>>& getLineNumberLineNumberPairs();
-  const std::vector<std::pair<std::string, std::string>>& getProcNameProcNamePairs();
+  const std::vector<std::pair<std::string, std::string>>& getNameNamePairs();
   const bool& getIsTrue();
 
   void setQueryResultType(QueryResultType queryResultType);
@@ -37,6 +37,6 @@ class QueryResult {
   void setLineNumberNamePairs(std::vector<std::pair<int, std::string>> lineNumberNamePairs);
   void setLineNumberLineNumberPairs(std::vector<std::pair<int, int>> lineNumberLineNumberPairs);
   void setIsTrue(bool isTrue);
-  void setProcNameProcNamePairs(std::vector<std::pair<std::string, std::string>> procNameProcNamePairs);
+  void setNameNamePairs(std::vector<std::pair<std::string, std::string>> nameNamePairs);
 };
 }  // namespace spa

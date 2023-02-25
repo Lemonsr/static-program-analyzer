@@ -16,7 +16,7 @@ spa::QpsResultTable spa::CallsStarEvaluator::evaluate(PKBManager& pkbManager) {
       table.addRow({ QpsValue(0), QpsValue(0) });
     }
   } else {
-    for (auto& pair : result.getProcNameProcNamePairs()) {
+    for (auto& pair : result.getNameNamePairs()) {
       table.addRow({ QpsValue(pair.first), QpsValue(pair.second) });
     }
   }
