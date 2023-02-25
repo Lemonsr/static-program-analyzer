@@ -903,7 +903,6 @@ spa::QueryResult spa::RelationshipStorage::getModifiesProcNameVar(PKBQueryArg fi
 }
 
 spa::QueryResult spa::RelationshipStorage::getModifiesProcedureVarName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
-  Procedure proc = firstArg.getProcedure();
   std::string varName = secondArg.getName().name;
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
@@ -913,10 +912,7 @@ spa::QueryResult spa::RelationshipStorage::getModifiesProcedureVarName(PKBQueryA
     if (itr->second.find(varName) == itr->second.end()) {
       continue;
     }
-
-    for (auto& varName : itr->second) {
-      nameNamePairs.push_back({ itr->first, varName });
-    }
+    nameNamePairs.push_back({ itr->first, varName });
   }
 
   queryResult.setNameNamePairs(nameNamePairs);
@@ -924,7 +920,6 @@ spa::QueryResult spa::RelationshipStorage::getModifiesProcedureVarName(PKBQueryA
 }
 
 spa::QueryResult spa::RelationshipStorage::getModifiesProcedureUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
-  Procedure proc = firstArg.getProcedure();
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
@@ -940,7 +935,6 @@ spa::QueryResult spa::RelationshipStorage::getModifiesProcedureUnderscore(PKBQue
 }
 
 spa::QueryResult spa::RelationshipStorage::getModifiesProcedureVar(PKBQueryArg firstArg, PKBQueryArg secondArg) {
-  Procedure proc = firstArg.getProcedure();
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
