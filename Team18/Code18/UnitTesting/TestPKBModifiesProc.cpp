@@ -127,6 +127,12 @@ public:
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getNameNamePairs());
+
+    relationshipStorage.setModifiesProcTable({});
+    queryResult = relationshipStorage.getModifiesProcedureUnderscore(firstArg, secondArg);
+
+    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+    Assert::IsTrue(queryResult.getNameNamePairs().empty());
   }
 
   TEST_METHOD(TestGetModifiesProcedureVar) {
@@ -149,6 +155,12 @@ public:
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getNameNamePairs());
+
+    relationshipStorage.setModifiesProcTable({});
+    queryResult = relationshipStorage.getModifiesProcedureUnderscore(firstArg, secondArg);
+
+    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+    Assert::IsTrue(queryResult.getNameNamePairs().empty());
   }
   };
 }  // namespace UnitTesting
