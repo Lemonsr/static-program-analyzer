@@ -43,23 +43,23 @@ spa::QueryResult spa::PatternStorage::getAssignUnderscore(PKBQueryArg lhs, Patte
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto& itr = assignTable.begin(); itr != assignTable.end(); itr++) {
     std::string postfixString = itr->second.second;
     if (type == EXACT) {
       if (queryPattern == postfixString) {
-        lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
+        lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == PARTIAL) {
       if (postfixString.find(queryPattern) != std::string::npos) {
-        lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
+        lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == ANY) {
-      lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
+      lineNumberNamePairs.push_back({ itr->first, itr->second.first });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -69,23 +69,23 @@ spa::QueryResult spa::PatternStorage::getAssignVar(PKBQueryArg lhs, Pattern rhs)
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto& itr = assignTable.begin(); itr != assignTable.end(); itr++) {
     std::string postfixString = itr->second.second;
     if (type == EXACT) {
       if (queryPattern == postfixString) {
-        lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
+        lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == PARTIAL) {
       if (postfixString.find(queryPattern) != std::string::npos) {
-        lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
+        lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == ANY) {
-      lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
+      lineNumberNamePairs.push_back({ itr->first, itr->second.first });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -96,7 +96,7 @@ spa::QueryResult spa::PatternStorage::getAssignVarName(PKBQueryArg lhs, Pattern 
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto& itr = assignTable.begin(); itr != assignTable.end(); itr++) {
     if (itr->second.first != varName) {
       continue;
@@ -104,18 +104,18 @@ spa::QueryResult spa::PatternStorage::getAssignVarName(PKBQueryArg lhs, Pattern 
     std::string postfixString = itr->second.second;
     if (type == EXACT) {
       if (queryPattern == postfixString) {
-        lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
+        lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == PARTIAL) {
       if (postfixString.find(queryPattern) != std::string::npos) {
-        lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
+        lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == ANY) {
-      lineNumberVariablePairs.push_back({ itr->first, itr->second.first });
+      lineNumberNamePairs.push_back({ itr->first, itr->second.first });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -123,14 +123,14 @@ spa::QueryResult spa::PatternStorage::getPatternIfUnderscore(PKBQueryArg firstAr
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto& itr = patternIfTable.begin(); itr != patternIfTable.end(); itr++) {
     for (auto& varName : itr->second) {
-      lineNumberVariablePairs.push_back({ itr->first, varName });
+      lineNumberNamePairs.push_back({ itr->first, varName });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -138,14 +138,14 @@ spa::QueryResult spa::PatternStorage::getPatternIfVar(PKBQueryArg firstArg) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto& itr = patternIfTable.begin(); itr != patternIfTable.end(); itr++) {
     for (auto& varName : itr->second) {
-      lineNumberVariablePairs.push_back({ itr->first, varName });
+      lineNumberNamePairs.push_back({ itr->first, varName });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -154,15 +154,15 @@ spa::QueryResult spa::PatternStorage::getPatternIfVarName(PKBQueryArg firstArg) 
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto& itr = patternIfTable.begin(); itr != patternIfTable.end(); itr++) {
     if (itr->second.find(varName) == itr->second.end()) {
       continue;
     }
-    lineNumberVariablePairs.push_back({ itr->first, varName });
+    lineNumberNamePairs.push_back({ itr->first, varName });
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -170,14 +170,14 @@ spa::QueryResult spa::PatternStorage::getPatternWhileUnderscore(PKBQueryArg firs
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto& itr = patternWhileTable.begin(); itr != patternWhileTable.end(); itr++) {
     for (auto& varName : itr->second) {
-      lineNumberVariablePairs.push_back({ itr->first, varName });
+      lineNumberNamePairs.push_back({ itr->first, varName });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -185,14 +185,14 @@ spa::QueryResult spa::PatternStorage::getPatternWhileVar(PKBQueryArg firstArg) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto& itr = patternWhileTable.begin(); itr != patternWhileTable.end(); itr++) {
     for (auto& varName : itr->second) {
-      lineNumberVariablePairs.push_back({ itr->first, varName });
+      lineNumberNamePairs.push_back({ itr->first, varName });
     }
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
@@ -201,15 +201,15 @@ spa::QueryResult spa::PatternStorage::getPatternWhileVarName(PKBQueryArg firstAr
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<std::pair<int, std::string>> lineNumberVariablePairs;
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs;
   for (auto& itr = patternWhileTable.begin(); itr != patternWhileTable.end(); itr++) {
     if (itr->second.find(varName) == itr->second.end()) {
       continue;
     }
-    lineNumberVariablePairs.push_back({ itr->first, varName });
+    lineNumberNamePairs.push_back({ itr->first, varName });
   }
 
-  queryResult.setLineNumberVariablePairs(lineNumberVariablePairs);
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
 }
 
