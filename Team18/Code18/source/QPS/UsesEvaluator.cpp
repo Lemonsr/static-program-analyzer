@@ -16,7 +16,7 @@ spa::QpsResultTable spa::UsesEvaluator::evaluate(PKBManager& pkbManager) {
       table.addRow({ QpsValue(0), QpsValue(0) });
     }
   } else {
-    for (auto& pair : result.getLineNumberVariablePairs()) {
+    for (auto& pair : result.getLineNumberNamePairs()) {
       table.addRow({ QpsValue(pair.first), QpsValue(pair.second) });
     }
   }

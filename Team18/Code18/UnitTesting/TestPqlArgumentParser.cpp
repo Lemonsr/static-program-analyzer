@@ -67,7 +67,7 @@ public:
     std::optional<spa::PqlArgument> opt = parser.parse(tokens, query);
     Assert::IsTrue(opt.has_value());
     spa::PqlArgument& arg = opt.value();
-    spa::PqlArgument compare(spa::VARIABLE_NAME, "x", {});
+    spa::PqlArgument compare(spa::LITERAL_STRING, "x", {});
     Assert::IsTrue(arg == compare);
     Assert::AreEqual(int64_t(0), tokens.remaining());
   }

@@ -98,7 +98,7 @@ public:
     designExtractor.extractRelationship();
 
     spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varC, {});
+    spa::PqlArgument variable(spa::ArgumentType::LITERAL_STRING, varC, {});
     spa::QueryResult modifiesRes = pkbManager->getRelationship(spa::MODIFIES,
       spa::PKBQueryArg(lineNum),
       spa::PKBQueryArg(variable));
@@ -116,7 +116,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -164,7 +164,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -179,7 +179,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -238,7 +238,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -255,7 +255,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -315,7 +315,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -332,7 +332,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -376,7 +376,7 @@ public:
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second, {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
       bool testModifies = results.getIsTrue();
@@ -389,7 +389,7 @@ public:
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second, {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
       bool testModifies = results.getIsTrue();
@@ -441,7 +441,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -457,7 +457,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -512,7 +512,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -527,7 +527,7 @@ public:
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second, {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
       bool testModifies = results.getIsTrue();
@@ -583,7 +583,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -600,7 +600,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -658,7 +658,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -675,7 +675,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO,
         pair.first, {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING,
         pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -708,7 +708,7 @@ public:
     designExtractor.extractRelationship();
 
     spa::PqlArgument lineNum(spa::ArgumentType::LINE_NO, "1", {});
-    spa::PqlArgument variable(spa::ArgumentType::VARIABLE_NAME, varC, {});
+    spa::PqlArgument variable(spa::ArgumentType::LITERAL_STRING, varC, {});
     spa::QueryResult modifiesRes = pkbManager->getRelationship(spa::MODIFIES,
       spa::PKBQueryArg(lineNum),
       spa::PKBQueryArg(variable));
@@ -762,7 +762,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -777,7 +777,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -836,7 +836,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -851,7 +851,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -911,7 +911,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -926,7 +926,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -970,7 +970,7 @@ public:
 
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second, {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
       bool testModifies = results.getIsTrue();
@@ -983,7 +983,7 @@ public:
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second, {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
       bool testModifies = results.getIsTrue();
@@ -1035,7 +1035,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1050,7 +1050,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1105,7 +1105,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1119,7 +1119,7 @@ public:
 
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second, {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
       bool testModifies = results.getIsTrue();
@@ -1175,7 +1175,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1190,7 +1190,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1249,7 +1249,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1264,7 +1264,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO,
         pair.first, {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING,
         pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1305,7 +1305,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1318,7 +1318,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1372,7 +1372,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1387,7 +1387,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1433,7 +1433,7 @@ public:
     for (auto pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
@@ -1448,7 +1448,7 @@ public:
     for (auto pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
         {});
-      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::VARIABLE_NAME, pair.second,
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
         {});
       spa::QueryResult results = pkbManager->getRelationship(spa::MODIFIES,
         spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));

@@ -368,7 +368,7 @@ public:
     spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
     spa::QueryResult assignStmtRes = pkbManager->getEntity(spa::ASSIGN);
 
-    spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, varD, {});
+    spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, varD, {});
     std::vector<spa::Token> tokens = {tokenB, tokenMinusOp, tokenB, tokenMultiply, tokenC};
     spa::Pattern pattern(spa::PatternType::EXACT, tokens);
     spa::QueryResult patternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
@@ -380,7 +380,7 @@ public:
     std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
     std::optional<std::vector<int>> testAssignStmt = assignStmtRes.getLineNumbers();
     std::optional<std::vector<std::pair<int, std::string>>> testPatternStmt =
-      patternStatementRes.getLineNumberVariablePairs();
+      patternStatementRes.getLineNumberNamePairs();
 
     std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
     std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
@@ -433,13 +433,13 @@ public:
     spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
     spa::QueryResult assignStmtRes = pkbManager->getEntity(spa::ASSIGN);
 
-    spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, varD, {});
+    spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, varD, {});
     std::vector<spa::Token> tokens = {tokenD, tokenMinusOp, tokenD, tokenMultiply, tokenC};
     spa::Pattern pattern(spa::PatternType::EXACT, tokens);
     spa::QueryResult firstPatternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
       pattern);
 
-    firstArg = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
+    firstArg = spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, varE, {});
     tokens = {tokenConstant};
     pattern = spa::Pattern(spa::PatternType::EXACT, tokens);
     spa::QueryResult secondPatternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
@@ -452,9 +452,9 @@ public:
     std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
     std::optional<std::vector<int>> testAssignStmt = assignStmtRes.getLineNumbers();
     std::optional<std::vector<std::pair<int, std::string>>> testFirstPatternStmt =
-      firstPatternStatementRes.getLineNumberVariablePairs();
+      firstPatternStatementRes.getLineNumberNamePairs();
     std::optional<std::vector<std::pair<int, std::string>>> testSecondPatternStmt =
-      secondPatternStatementRes.getLineNumberVariablePairs();
+      secondPatternStatementRes.getLineNumberNamePairs();
 
     std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
     std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE}};
@@ -508,7 +508,7 @@ public:
     spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
     spa::QueryResult assignStmtRes = pkbManager->getEntity(spa::ASSIGN);
 
-    spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, varD, {});
+    spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, varD, {});
     std::vector<spa::Token> tokens = {tokenD, tokenMinusOp, tokenD, tokenMultiply, tokenC};
     spa::Pattern pattern(spa::PatternType::EXACT, tokens);
     spa::QueryResult firstPatternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
@@ -520,7 +520,7 @@ public:
     std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
     std::optional<std::vector<int>> testAssignStmt = assignStmtRes.getLineNumbers();
     std::optional<std::vector<std::pair<int, std::string>>> testFirstPatternStmt =
-      firstPatternStatementRes.getLineNumberVariablePairs();
+      firstPatternStatementRes.getLineNumberNamePairs();
 
     std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
     std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};

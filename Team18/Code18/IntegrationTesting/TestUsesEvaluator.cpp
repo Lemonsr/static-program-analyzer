@@ -17,7 +17,7 @@ public:
   TEST_METHOD(TestLineVarNameExists) {
     spa::SuchThatClause clause(spa::USES,
                                spa::PqlArgument(spa::LINE_NO, "2", {}),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "x", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "x", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::USES, "2", "x");
     pkbManager->addRelationship(spa::USES, "3", "y");
@@ -33,7 +33,7 @@ public:
   TEST_METHOD(TestMultipleLineVarNameExists) {
     spa::SuchThatClause clause(spa::USES,
                                spa::PqlArgument(spa::LINE_NO, "2", {}),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "x", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "x", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::USES, "2", "x");
     pkbManager->addRelationship(spa::USES, "2", "y");
@@ -50,7 +50,7 @@ public:
   TEST_METHOD(TestLineVarNameNotExists) {
     spa::SuchThatClause clause(spa::USES,
                                spa::PqlArgument(spa::LINE_NO, "4", {}),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "z", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "z", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::USES, "2", "x");
     pkbManager->addRelationship(spa::USES, "3", "y");
@@ -169,7 +169,7 @@ public:
   TEST_METHOD(TestStmtVarNameExists) {
     spa::SuchThatClause clause(spa::USES,
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "x", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "x", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::USES, "2", "x");
     pkbManager->addRelationship(spa::USES, "3", "y");
@@ -188,7 +188,7 @@ public:
   TEST_METHOD(TestStmtVarNameMultipleExists) {
     spa::SuchThatClause clause(spa::USES,
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "a", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "a", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::USES, "2", "x");
     pkbManager->addRelationship(spa::USES, "3", "a");
@@ -208,7 +208,7 @@ public:
   TEST_METHOD(TestStmtVarNameNotExists) {
     spa::SuchThatClause clause(spa::USES,
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "b", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "b", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::USES, "2", "x");
     pkbManager->addRelationship(spa::USES, "3", "y");

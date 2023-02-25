@@ -17,7 +17,7 @@ public:
   TEST_METHOD(TestLineVarNameExists) {
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::LINE_NO, "10", {}),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "x", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "x", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::MODIFIES, "10", "x");
     pkbManager->addRelationship(spa::MODIFIES, "11", "x");
@@ -33,7 +33,7 @@ public:
   TEST_METHOD(TestLineVarNameNotExists) {
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::LINE_NO, "10", {}),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "x", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "x", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::MODIFIES, "10", "y");
     pkbManager->addRelationship(spa::MODIFIES, "11", "x");
@@ -114,7 +114,7 @@ public:
   TEST_METHOD(TestStmtVarNameExists) {
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "y", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "y", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::MODIFIES, "10", "y");
     pkbManager->addRelationship(spa::MODIFIES, "11", "x");
@@ -134,7 +134,7 @@ public:
   TEST_METHOD(TestStmtVarNameNotExists) {
     spa::SuchThatClause clause(spa::MODIFIES,
                                spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
-                               spa::PqlArgument(spa::VARIABLE_NAME, "val", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "val", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::MODIFIES, "10", "y");
     pkbManager->addRelationship(spa::MODIFIES, "11", "x");

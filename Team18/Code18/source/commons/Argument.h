@@ -4,8 +4,7 @@ namespace spa {
   enum ArgumentType {
     SYNONYM,
     WILDCARD,
-    VARIABLE_NAME,
+    LITERAL_STRING,
     LINE_NO,
-    PROCEDURE_NAME
   };
 }  // namespace spa
