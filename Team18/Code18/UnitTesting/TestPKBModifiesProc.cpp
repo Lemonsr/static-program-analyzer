@@ -36,14 +36,14 @@ public:
     spa::RelationshipStorage relationshipStorage;
     relationshipStorage.setModifiesProcTable(modifiesProcTable);
 
-    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "ProcA", {}));
-    spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "a", {}));
+    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "ProcA", {}));
+    spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "a", {}));
     spa::QueryResult queryResult = relationshipStorage.getModifiesProcNameVarName(firstArg, secondArg);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
     Assert::IsTrue(queryResult.getIsTrue());
 
-    secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "b", {}));
+    secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "b", {}));
     queryResult = relationshipStorage.getModifiesProcNameVarName(firstArg, secondArg);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
@@ -54,14 +54,14 @@ public:
     spa::RelationshipStorage relationshipStorage;
     relationshipStorage.setModifiesProcTable(modifiesProcTable);
 
-    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "ProcB", {}));
+    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "ProcB", {}));
     spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
     spa::QueryResult queryResult = relationshipStorage.getModifiesProcNameUnderscore(firstArg, secondArg);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
     Assert::IsTrue(queryResult.getIsTrue());
 
-    firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "ProcK", {}));
+    firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "ProcK", {}));
     queryResult = relationshipStorage.getModifiesProcNameUnderscore(firstArg, secondArg);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
@@ -73,7 +73,7 @@ public:
     relationshipStorage.setModifiesProcTable(modifiesProcTable);
     std::vector<std::pair<std::string, std::string>> expected = { {"ProcA", "a"} };
 
-    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "ProcA", {}));
+    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "ProcA", {}));
     spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "v",
                                                                    spa::DesignEntityType::VARIABLE));
     spa::QueryResult queryResult = relationshipStorage.getModifiesProcNameVar(firstArg, secondArg);
@@ -81,7 +81,7 @@ public:
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getNameNamePairs());
 
-    firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "ProcK", {}));
+    firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "ProcK", {}));
     queryResult = relationshipStorage.getModifiesProcNameVar(firstArg, secondArg);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -95,13 +95,13 @@ public:
 
     spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "p",
                                                                   spa::DesignEntityType::PROCEDURE));
-    spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "d", {}));
+    spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "d", {}));
     spa::QueryResult queryResult = relationshipStorage.getModifiesProcedureVarName(firstArg, secondArg);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getNameNamePairs());
 
-    secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, "z", {}));
+    secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "z", {}));
     queryResult = relationshipStorage.getModifiesProcedureVarName(firstArg, secondArg);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
