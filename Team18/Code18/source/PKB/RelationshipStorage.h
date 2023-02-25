@@ -89,7 +89,7 @@ class RelationshipStorage {
   QueryResult getModifiesStmtUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getModifiesStmtVar(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
-  bool addModifiesProc(std::string lineNo, std::string varName);
+  bool addModifiesProc(std::string procName, std::string varName);
   QueryResult getModifiesProcNameVarName(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getModifiesProcNameUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getModifiesProcNameVar(PKBQueryArg firstArg, PKBQueryArg secondArg);

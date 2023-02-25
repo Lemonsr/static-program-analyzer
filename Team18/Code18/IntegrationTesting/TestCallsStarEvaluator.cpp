@@ -14,7 +14,7 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 namespace IntegrationTesting {
   TEST_CLASS(TestCallsStarEvaluator) {
 public:
-  TEST_METHOD(TestProcNameProcNameExists) {
+  TEST_METHOD(TestNameNameExists) {
     spa::SuchThatClause clause(spa::CALLS_STAR,
                                spa::PqlArgument(spa::PROCEDURE_NAME, "first", {}),
                                spa::PqlArgument(spa::PROCEDURE_NAME, "third", {}));
@@ -29,7 +29,7 @@ public:
     Assert::AreEqual(dim.second, 1);
   }
 
-  TEST_METHOD(TestProcNameProcNameNotExists) {
+  TEST_METHOD(TestNameNameNotExists) {
     spa::SuchThatClause clause(spa::CALLS_STAR,
                                spa::PqlArgument(spa::PROCEDURE_NAME, "first", {}),
                                spa::PqlArgument(spa::PROCEDURE_NAME, "second", {}));
