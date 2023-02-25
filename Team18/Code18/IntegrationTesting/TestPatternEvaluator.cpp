@@ -198,7 +198,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
-      spa::PqlArgument lhs(spa::ArgumentType::VARIABLE_NAME, "x", {});
+      spa::PqlArgument lhs(spa::ArgumentType::LITERAL_STRING, "x", {});
       std::vector<spa::Token> patternTokens = {
         {spa::TokenType::TOKEN_NAME, "x"},
         {spa::TokenType::TOKEN_PLUS, "+"},
@@ -223,7 +223,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
-      spa::PqlArgument lhs(spa::ArgumentType::VARIABLE_NAME, "x", {});
+      spa::PqlArgument lhs(spa::ArgumentType::LITERAL_STRING, "x", {});
       std::vector<spa::Token> patternTokens = {
         {spa::TokenType::TOKEN_NAME, "x"},
       };
@@ -246,7 +246,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
-      spa::PqlArgument lhs(spa::ArgumentType::VARIABLE_NAME, "x", {});
+      spa::PqlArgument lhs(spa::ArgumentType::LITERAL_STRING, "x", {});
       std::vector<spa::Token> patternTokens = {
         {spa::TokenType::TOKEN_UNDERSCORE, "_"},
       };
@@ -269,7 +269,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(pkbManager->addPattern("1", "x", "x 1 +"));
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "a", { spa::DesignEntityType::ASSIGN });
-      spa::PqlArgument lhs(spa::ArgumentType::VARIABLE_NAME, "x", {});
+      spa::PqlArgument lhs(spa::ArgumentType::LITERAL_STRING, "x", {});
       std::vector<spa::Token> patternTokens = {
         {spa::TokenType::TOKEN_NAME, "x"},
       };

@@ -105,8 +105,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -154,8 +154,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -211,8 +211,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -224,8 +224,8 @@ public:
 
         Assert::IsTrue(expectedFirstCallsStar == testFirstCallsStar);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -281,8 +281,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -294,8 +294,8 @@ public:
 
         Assert::IsTrue(expectedFirstCallsStar == testFirstCallsStar);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -349,8 +349,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -362,8 +362,8 @@ public:
 
         Assert::IsTrue(expectedFirstCallsStar == testFirstCallsStar);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -375,8 +375,8 @@ public:
 
         Assert::IsTrue(expectedSecondCallsStar == testSecondCallsStar);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -430,8 +430,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -443,8 +443,8 @@ public:
 
         Assert::IsTrue(expectedFirstCallsStar == testFirstCallsStar);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -456,8 +456,8 @@ public:
 
         Assert::IsTrue(expectedSecondCallsStar == testSecondCallsStar);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -518,8 +518,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -531,8 +531,8 @@ public:
 
         Assert::IsTrue(expectedFirstCallsStar == testFirstCallsStar);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -544,8 +544,8 @@ public:
 
         Assert::IsTrue(expectedSecondCallsStar == testSecondCallsStar);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -557,8 +557,8 @@ public:
 
         Assert::IsTrue(expectedThirdCalls == testThirdCallsStar);
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -570,8 +570,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStarStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -583,8 +583,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -646,8 +646,8 @@ public:
         designExtractor.extractRelationship();
 
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -659,8 +659,8 @@ public:
 
         Assert::IsTrue(expectedFirstCallsStar == testFirstCallsStar);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -672,8 +672,8 @@ public:
 
         Assert::IsTrue(expectedSecondCallsStar == testSecondCallsStar);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -685,8 +685,8 @@ public:
 
         Assert::IsTrue(expectedThirdCalls == testThirdCallsStar);
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "n", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "n", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -698,8 +698,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStarStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "m", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "m", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -711,8 +711,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -781,8 +781,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -794,8 +794,8 @@ public:
 
         Assert::IsTrue(expectedFirstCallsStar == testFirstCallsStar);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -807,8 +807,8 @@ public:
 
         Assert::IsTrue(expectedSecondCallsStar == testSecondCallsStar);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -820,8 +820,8 @@ public:
 
         Assert::IsTrue(expectedThirdCalls == testThirdCallsStar);
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -833,8 +833,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -846,8 +846,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -859,8 +859,8 @@ public:
 
         Assert::IsTrue(expectedSixthCalls == testSixthCallsStar);
 
-        spa::PqlArgument pqlSeventhArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSeventhArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlSeventhArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSeventhArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult seventhRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSeventhArgOne), spa::PKBQueryArg(pqlSeventhArgTwo));
 
@@ -873,8 +873,8 @@ public:
         Assert::IsTrue(expectedSeventhCalls == testSeventhCallsStar);
 
 
-        spa::PqlArgument pqlEighthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlEighthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlEighthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlEighthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult eighthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlEighthArgOne), spa::PKBQueryArg(pqlEighthArgTwo));
 
@@ -887,8 +887,8 @@ public:
         Assert::IsTrue(expectedEighthCalls == testEighthCallsStar);
 
 
-        spa::PqlArgument pqlNinthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlNinthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlNinthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlNinthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult ninthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlNinthArgOne), spa::PKBQueryArg(pqlNinthArgTwo));
 
@@ -901,8 +901,8 @@ public:
         Assert::IsTrue(expectedNinthCalls == testNinthCallsStar);
 
 
-        spa::PqlArgument pqlTenthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
-        spa::PqlArgument pqlTenthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlTenthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
+        spa::PqlArgument pqlTenthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult tenthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlTenthArgOne), spa::PKBQueryArg(pqlTenthArgTwo));
 
@@ -972,8 +972,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "z", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "z", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -985,8 +985,8 @@ public:
 
         Assert::IsTrue(expectedFirstCallsStar == testFirstCallsStar);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -998,8 +998,8 @@ public:
 
         Assert::IsTrue(expectedSecondCallsStar == testSecondCallsStar);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -1011,8 +1011,8 @@ public:
 
         Assert::IsTrue(expectedThirdCalls == testThirdCallsStar);
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -1024,8 +1024,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "z", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "z", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -1037,8 +1037,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "n", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "n", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -1050,8 +1050,8 @@ public:
 
         Assert::IsTrue(expectedSixthCalls == testSixthCallsStar);
 
-        spa::PqlArgument pqlSeventhArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSeventhArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "g", {});
+        spa::PqlArgument pqlSeventhArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSeventhArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "g", {});
         spa::QueryResult seventhRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSeventhArgOne), spa::PKBQueryArg(pqlSeventhArgTwo));
 
@@ -1064,8 +1064,8 @@ public:
         Assert::IsTrue(expectedSeventhCalls == testSeventhCallsStar);
 
 
-        spa::PqlArgument pqlEighthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlEighthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "z", {});
+        spa::PqlArgument pqlEighthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlEighthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "z", {});
         spa::QueryResult eighthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlEighthArgOne), spa::PKBQueryArg(pqlEighthArgTwo));
 
@@ -1078,8 +1078,8 @@ public:
         Assert::IsTrue(expectedEighthCalls == testEighthCallsStar);
 
 
-        spa::PqlArgument pqlNinthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlNinthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "m", {});
+        spa::PqlArgument pqlNinthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlNinthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "m", {});
         spa::QueryResult ninthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlNinthArgOne), spa::PKBQueryArg(pqlNinthArgTwo));
 
@@ -1092,8 +1092,8 @@ public:
         Assert::IsTrue(expectedNinthCalls == testNinthCallsStar);
 
 
-        spa::PqlArgument pqlTenthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
-        spa::PqlArgument pqlTenthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "z", {});
+        spa::PqlArgument pqlTenthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
+        spa::PqlArgument pqlTenthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "z", {});
         spa::QueryResult tenthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlTenthArgOne), spa::PKBQueryArg(pqlTenthArgTwo));
 
@@ -1158,8 +1158,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -1171,8 +1171,8 @@ public:
 
         Assert::IsTrue(expectedFirstCalls == testFirstCalls);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -1184,8 +1184,8 @@ public:
 
         Assert::IsTrue(expectedSecondCalls == testSecondCalls);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -1198,8 +1198,8 @@ public:
         Assert::IsTrue(expectedThirdCalls == testThirdCalls);
 
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -1211,8 +1211,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -1224,8 +1224,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -1290,8 +1290,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -1303,8 +1303,8 @@ public:
 
         Assert::IsTrue(expectedFirstCalls == testFirstCalls);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "f", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "f", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -1316,8 +1316,8 @@ public:
 
         Assert::IsTrue(expectedSecondCalls == testSecondCalls);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "g", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "g", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -1330,8 +1330,8 @@ public:
         Assert::IsTrue(expectedThirdCalls == testThirdCalls);
 
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -1343,8 +1343,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -1356,8 +1356,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -1428,8 +1428,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -1441,8 +1441,8 @@ public:
 
         Assert::IsTrue(expectedFirstCalls == testFirstCalls);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -1454,8 +1454,8 @@ public:
 
         Assert::IsTrue(expectedSecondCalls == testSecondCalls);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -1468,8 +1468,8 @@ public:
         Assert::IsTrue(expectedThirdCalls == testThirdCalls);
 
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -1481,8 +1481,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -1494,8 +1494,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -1568,8 +1568,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -1581,8 +1581,8 @@ public:
 
         Assert::IsTrue(expectedFirstCalls == testFirstCalls);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "f", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "f", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -1594,8 +1594,8 @@ public:
 
         Assert::IsTrue(expectedSecondCalls == testSecondCalls);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "g", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "g", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -1608,8 +1608,8 @@ public:
         Assert::IsTrue(expectedThirdCalls == testThirdCalls);
 
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -1621,8 +1621,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -1634,8 +1634,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -1708,8 +1708,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -1721,8 +1721,8 @@ public:
 
         Assert::IsTrue(expectedFirstCalls == testFirstCalls);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -1734,8 +1734,8 @@ public:
 
         Assert::IsTrue(expectedSecondCalls == testSecondCalls);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -1748,8 +1748,8 @@ public:
         Assert::IsTrue(expectedThirdCalls == testThirdCalls);
 
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -1761,8 +1761,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -1774,8 +1774,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -1850,8 +1850,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -1863,8 +1863,8 @@ public:
 
         Assert::IsTrue(expectedFirstCalls == testFirstCalls);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "f", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "f", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -1876,8 +1876,8 @@ public:
 
         Assert::IsTrue(expectedSecondCalls == testSecondCalls);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "g", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "g", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -1890,8 +1890,8 @@ public:
         Assert::IsTrue(expectedThirdCalls == testThirdCalls);
 
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -1903,8 +1903,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -1916,8 +1916,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -1994,8 +1994,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -2007,8 +2007,8 @@ public:
 
         Assert::IsTrue(expectedFirstCalls == testFirstCalls);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -2020,8 +2020,8 @@ public:
 
         Assert::IsTrue(expectedSecondCalls == testSecondCalls);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -2034,8 +2034,8 @@ public:
         Assert::IsTrue(expectedThirdCalls == testThirdCalls);
 
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -2047,8 +2047,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "c", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "c", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -2060,8 +2060,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "e", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "e", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 
@@ -2139,8 +2139,8 @@ public:
         spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
         designExtractor.extractRelationship();
 
-        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "z", {});
+        spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "z", {});
         spa::QueryResult firstRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
 
@@ -2152,8 +2152,8 @@ public:
 
         Assert::IsTrue(expectedFirstCalls == testFirstCalls);
 
-        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "y", {});
+        spa::PqlArgument pqlSecondArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlSecondArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "y", {});
         spa::QueryResult secondRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSecondArgOne), spa::PKBQueryArg(pqlSecondArgTwo));
 
@@ -2165,8 +2165,8 @@ public:
 
         Assert::IsTrue(expectedSecondCalls == testSecondCalls);
 
-        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "x", {});
+        spa::PqlArgument pqlThirdArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlThirdArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "x", {});
         spa::QueryResult thirdRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlThirdArgOne), spa::PKBQueryArg(pqlThirdArgTwo));
 
@@ -2179,8 +2179,8 @@ public:
         Assert::IsTrue(expectedThirdCalls == testThirdCalls);
 
 
-        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
-        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "n", {});
+        spa::PqlArgument pqlFourthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
+        spa::PqlArgument pqlFourthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "n", {});
         spa::QueryResult fourthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFourthArgOne), spa::PKBQueryArg(pqlFourthArgTwo));
 
@@ -2192,8 +2192,8 @@ public:
 
         Assert::IsTrue(expectedFourthCalls == testtFourthCallsStar);
 
-        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "b", {});
-        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlFifthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "b", {});
+        spa::PqlArgument pqlFifthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult fifthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlFifthArgOne), spa::PKBQueryArg(pqlFifthArgTwo));
 
@@ -2205,8 +2205,8 @@ public:
 
         Assert::IsTrue(expectedFifthCalls == testtFifthCallsStar);
 
-        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::PROCEDURE_NAME, "d", {});
-        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::PROCEDURE_NAME, "a", {});
+        spa::PqlArgument pqlSixthArgOne = spa::PqlArgument(spa::LITERAL_STRING, "d", {});
+        spa::PqlArgument pqlSixthArgTwo = spa::PqlArgument(spa::LITERAL_STRING, "a", {});
         spa::QueryResult sixthRes = pkbManager->getRelationship(spa::CALLS_STAR,
             spa::PKBQueryArg(pqlSixthArgOne), spa::PKBQueryArg(pqlSixthArgTwo));
 

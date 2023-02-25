@@ -52,7 +52,7 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getVariableName(
   }
   std::string val = tokens[1].getValue();
   tokens.seek(3);
-  return { { VARIABLE_NAME, val, {} } };
+  return { { LITERAL_STRING, val, {} } };
 }
 
 std::optional<spa::PqlArgument> spa::PqlArgumentParser::parse(

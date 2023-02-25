@@ -128,8 +128,6 @@
     <ClCompile Include="TestPqlSuchThatSubParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestPqlPatternSubParser.cpp">
-    </ClCompile>
     <ClCompile Include="TestDesignExtractorCalls.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -155,6 +153,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestPqlAndParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPqlPatternSubParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

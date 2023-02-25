@@ -368,7 +368,7 @@ public:
     spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
     spa::QueryResult assignStmtRes = pkbManager->getEntity(spa::ASSIGN);
 
-    spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, varD, {});
+    spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, varD, {});
     std::vector<spa::Token> tokens = {tokenB, tokenMinusOp, tokenB, tokenMultiply, tokenC};
     spa::Pattern pattern(spa::PatternType::EXACT, tokens);
     spa::QueryResult patternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
@@ -433,13 +433,13 @@ public:
     spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
     spa::QueryResult assignStmtRes = pkbManager->getEntity(spa::ASSIGN);
 
-    spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, varD, {});
+    spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, varD, {});
     std::vector<spa::Token> tokens = {tokenD, tokenMinusOp, tokenD, tokenMultiply, tokenC};
     spa::Pattern pattern(spa::PatternType::EXACT, tokens);
     spa::QueryResult firstPatternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
       pattern);
 
-    firstArg = spa::PqlArgument(spa::ArgumentType::VARIABLE_NAME, varE, {});
+    firstArg = spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, varE, {});
     tokens = {tokenConstant};
     pattern = spa::Pattern(spa::PatternType::EXACT, tokens);
     spa::QueryResult secondPatternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
@@ -508,7 +508,7 @@ public:
     spa::QueryResult variablesRes = pkbManager->getEntity(spa::VARIABLE);
     spa::QueryResult assignStmtRes = pkbManager->getEntity(spa::ASSIGN);
 
-    spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, varD, {});
+    spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, varD, {});
     std::vector<spa::Token> tokens = {tokenD, tokenMinusOp, tokenD, tokenMultiply, tokenC};
     spa::Pattern pattern(spa::PatternType::EXACT, tokens);
     spa::QueryResult firstPatternStatementRes = pkbManager->getPattern(spa::PKBQueryArg(firstArg),
