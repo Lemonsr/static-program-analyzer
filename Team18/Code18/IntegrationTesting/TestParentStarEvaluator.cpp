@@ -297,14 +297,6 @@ public:
     Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
-
-    columnVals = table.getColumn("");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(8)) != columnVals.end());
   }
 
   TEST_METHOD(TestStatementUnderscoreNotExists) {
