@@ -47,9 +47,6 @@
     <ClCompile Include="TestPqlQueryParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestPKB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TestUtilsFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -140,6 +137,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestSpCyclicValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBCallsContainerParents.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

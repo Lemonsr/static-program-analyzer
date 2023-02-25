@@ -1269,16 +1269,21 @@ bool spa::RelationshipStorage::addCallsContainerParent(std::string procName, std
   return true;
 }
 
-std::optional<std::unordered_set<int>> spa::RelationshipStorage::getCallsContainerParent(std::string procName) {
-  std::optional<std::unordered_set<int>> queryResult;
+spa::QueryResult spa::RelationshipStorage::getCallsContainerParent(std::string procName) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
 
-  for (auto itr = callsContainerParentsTable.begin(); itr != callsContainerParentsTable.end(); itr++) {
-    if (callsContainerParentsTable.find(procName) == callsContainerParentsTable.end()) {
-      continue;
-    }
-    queryResult = callsContainerParentsTable[procName];
+  std::vector<int> lineNumbers;
+  if (callsContainerParentsTable.find(procName) == callsContainerParentsTable.end()) {
+    queryResult.setLineNumbers(lineNumbers);
+    return queryResult;
   }
 
+  for (auto& lineNo : callsContainerParentsTable[procName]) {
+    lineNumbers.push_back(lineNo);
+  }
+
+  queryResult.setLineNumbers(lineNumbers);
   return queryResult;
 }
 
@@ -1291,12 +1296,12 @@ bool spa::RelationshipStorage::addCallsProc(int lineNumber, std::string procName
   return true;
 }
 
-// Returns the entire callsProcTable.
 spa::QueryResult spa::RelationshipStorage::getCallsProc() {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, std::string>> lineNumberNamePairs;
+  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   if (callsProcTable.empty()) {
     return queryResult;
   }

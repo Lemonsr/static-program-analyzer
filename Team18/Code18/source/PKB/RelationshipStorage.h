@@ -114,7 +114,7 @@ class RelationshipStorage {
   QueryResult getCallsStarProcedureProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   bool addCallsContainerParent(std::string procName, std::string lineNo);
-  std::optional<std::unordered_set<int>> getCallsContainerParent(std::string procName);
+  QueryResult getCallsContainerParent(std::string procName);
 
   bool addCallsProc(int lineNumber, std::string procName);
   QueryResult getCallsProc();

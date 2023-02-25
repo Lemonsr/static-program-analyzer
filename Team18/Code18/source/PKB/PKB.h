@@ -53,16 +53,16 @@ class PKB : public PKBManager {
   const bool addEntity(DesignEntityType entityType, std::string arg);
   const bool addPattern(std::string lineNo, std::string lhs, std::string rhs);
   const bool addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName);
-  const bool addCallsContainerParent(std::string procedureName, std::string lineNo);
-  const bool addCallsProc(int lineNo, std::string procedure);
+  const bool addCallsContainerParent(std::string procName, std::string lineNo);
+  const bool addCallsProc(int lineNo, std::string procName);
   const bool addStatementType(std::string lineNo, StatementType statementType);
-  const bool addStatementProc(std::string lineNo, std::string procedure);
+  const bool addStatementProc(std::string lineNo, std::string procName);
   const QueryResult getRelationship(RelationshipType relationshipType,
                                     PKBQueryArg firstArg, PKBQueryArg secondArg);
   const QueryResult getEntity(DesignEntityType entityType);
   const QueryResult getPattern(PKBQueryArg lhs, Pattern rhs);
   const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg);
-  const std::optional<std::unordered_set<int>> getCallsContainerParent(std::string procedureName);
+  const QueryResult getCallsContainerParent(std::string procName);
   const QueryResult getCallsProc();
 };
 }  // namespace spa
