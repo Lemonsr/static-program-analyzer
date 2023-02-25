@@ -843,6 +843,40 @@ spa::QueryResult spa::RelationshipStorage::getModifiesStmtVar(PKBQueryArg firstA
   return queryResult;
 }
 
+bool spa::RelationshipStorage::addModifiesProc(std::string procName, std::string varName) {
+  if (modifiesProcTable.find(procName) != modifiesProcTable.end() &&
+    modifiesProcTable[procName].find(varName) != modifiesProcTable[procName].end()) {
+    return false;
+  }
+
+  modifiesProcTable[procName].insert(varName);
+  return true;
+}
+
+spa::QueryResult spa::RelationshipStorage::getModifiesProcNameVarName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getModifiesProcNameUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getModifiesProcNameVar(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getModifiesProcedureVarName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getModifiesProcedureUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
+spa::QueryResult spa::RelationshipStorage::getModifiesProcedureVar(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  return QueryResult();
+}
+
 bool spa::RelationshipStorage::addCalls(std::string firstProc, std::string secondProc) {
   if (callsTable.find(firstProc) != callsTable.end() &&
     callsTable[firstProc].find(secondProc) != callsTable[firstProc].end()) {
@@ -1278,18 +1312,27 @@ void spa::RelationshipStorage::setUsesTable(std::unordered_map<int, std::unorder
   this->usesTable = usesTable;
 }
 
-void spa::RelationshipStorage::setModifiesTable(std::unordered_map<int,
-  std::unordered_set<std::string>> modifiesTable) {
+void spa::RelationshipStorage::setModifiesTable(std::unordered_map<
+                                                  int,
+                                                  std::unordered_set<std::string>> modifiesTable) {
   this->modifiesTable = modifiesTable;
 }
 
-void spa::RelationshipStorage::setCallsTable(std::unordered_map<std::string,
-                                             std::unordered_set<std::string>> callsTable) {
+void spa::RelationshipStorage::setModifiesProcTable(std::unordered_map<
+                                                      std::string,
+                                                      std::unordered_set<std::string>> modifiesProcTable) {
+  this->modifiesProcTable = modifiesProcTable;
+}
+
+void spa::RelationshipStorage::setCallsTable(std::unordered_map<
+                                               std::string,
+                                               std::unordered_set<std::string>> callsTable) {
   this->callsTable = callsTable;
 }
 
-void spa::RelationshipStorage::setCallsStarTable(std::unordered_map<std::string,
-                                                 std::unordered_set<std::string>> callsStarTable) {
+void spa::RelationshipStorage::setCallsStarTable(std::unordered_map<
+                                                   std::string,
+                                                   std::unordered_set<std::string>> callsStarTable) {
   this->callsStarTable = callsStarTable;
 }
 

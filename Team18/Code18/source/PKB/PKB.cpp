@@ -111,6 +111,20 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE},
       &RelationshipStorage::getModifiesStmtVar},
 
+    // Modifies Proc
+    {{RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesProcedureVarName},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesProcedureUnderscore},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesProcedureVar},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesProcNameVarName},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesProcNameUnderscore},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesProcNameVar},
+
     // Calls
     {{RelationshipType::CALLS, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
       &RelationshipStorage::getCallsNameName},
@@ -204,6 +218,9 @@ const bool spa::PKB::addRelationship(RelationshipType relationshipType,
   }
   case MODIFIES: {
     return relationshipStorage.addModifies(firstArg, secondArg);
+  }
+  case MODIFIES_P: {
+    return relationshipStorage.addModifiesProc(firstArg, secondArg);
   }
   case USES: {
     return relationshipStorage.addUses(firstArg, secondArg);
