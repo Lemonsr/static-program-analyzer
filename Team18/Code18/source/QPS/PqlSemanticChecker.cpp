@@ -143,7 +143,7 @@ bool spa::PqlSemanticChecker::checkFollowsArguments(PqlArgument& firstArg, PqlAr
 bool spa::PqlSemanticChecker::checkCallsArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   for (PqlArgument arg : { firstArg, secondArg }) {
     ArgumentType argType = arg.getType();
-    if (argType == LITERAL_STRING) {
+    if (argType == LINE_NO) {
       return false;
     }
 
