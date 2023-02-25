@@ -226,18 +226,33 @@ namespace IntegrationTesting {
 
     TEST_METHOD(TestGetCallStatements) {
       std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::IF, "1"));
-      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::WHILE, "2"));
-      Assert::IsTrue(pkbManager->addEntity(spa::DesignEntityType::CALL, "3"));
+      Assert::IsTrue(pkbManager->addCallsProc(1, "A"));
+      Assert::IsTrue(pkbManager->addCallsProc(2, "B"));
+      Assert::IsTrue(pkbManager->addCallsProc(3, "C"));
 
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
-"c", spa::DesignEntityType::CALL);
+        "c", spa::DesignEntityType::CALL);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
-      Assert::IsTrue(rows.size() == 1);
-      Assert::IsTrue(rows[0][0].getType() == spa::QpsValueType::INTEGER);
-      Assert::IsTrue(rows[0][0].getInteger() == 3);
+      auto dim = resultTable.getDimension();
+      Assert::AreEqual(dim.first, 3);
+      Assert::AreEqual(dim.second, 3);
+
+      auto columnVals = resultTable.getColumn("c");
+      Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
+      Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
+      Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
+
+      columnVals = resultTable.getColumn("c.stmt#");
+      Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
+      Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
+      Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
+
+      columnVals = resultTable.getColumn("c.procName");
+      Assert::IsTrue(columnVals.find(spa::QpsValue("A")) != columnVals.end());
+      Assert::IsTrue(columnVals.find(spa::QpsValue("B")) != columnVals.end());
+      Assert::IsTrue(columnVals.find(spa::QpsValue("C")) != columnVals.end());
     }
   };
 }  // namespace IntegrationTesting
