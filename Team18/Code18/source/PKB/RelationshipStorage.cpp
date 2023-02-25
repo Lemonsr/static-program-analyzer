@@ -1542,6 +1542,12 @@ void spa::RelationshipStorage::setUsesTable(std::unordered_map<int, std::unorder
   this->usesTable = usesTable;
 }
 
+void spa::RelationshipStorage::setUsesProcTable(std::unordered_map<
+                                                      std::string,
+                                                      std::unordered_set<std::string>> usesProcTable) {
+  this->usesProcTable = usesProcTable;
+}
+
 void spa::RelationshipStorage::setModifiesTable(std::unordered_map<
                                                   int,
                                                   std::unordered_set<std::string>> modifiesTable) {

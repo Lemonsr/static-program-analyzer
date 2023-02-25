@@ -198,6 +198,7 @@
     <ClCompile Include="TestPKBModifies.cpp" />
     <ClCompile Include="TestPkbQueryArg.cpp" />
     <ClCompile Include="TestPKBUses.cpp" />
+    <ClCompile Include="TestPKBUsesProc.cpp" />
     <ClCompile Include="TestPqlAndParser.cpp" />
     <ClCompile Include="TestPqlAttributeParser.cpp" />
     <ClCompile Include="TestPqlPatternSubParser.cpp" />
