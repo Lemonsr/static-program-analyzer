@@ -380,7 +380,7 @@ public:
     std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
     std::optional<std::vector<int>> testAssignStmt = assignStmtRes.getLineNumbers();
     std::optional<std::vector<std::pair<int, std::string>>> testPatternStmt =
-      patternStatementRes.getLineNumberVariablePairs();
+      patternStatementRes.getLineNumberNamePairs();
 
     std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
     std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
@@ -452,9 +452,9 @@ public:
     std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
     std::optional<std::vector<int>> testAssignStmt = assignStmtRes.getLineNumbers();
     std::optional<std::vector<std::pair<int, std::string>>> testFirstPatternStmt =
-      firstPatternStatementRes.getLineNumberVariablePairs();
+      firstPatternStatementRes.getLineNumberNamePairs();
     std::optional<std::vector<std::pair<int, std::string>>> testSecondPatternStmt =
-      secondPatternStatementRes.getLineNumberVariablePairs();
+      secondPatternStatementRes.getLineNumberNamePairs();
 
     std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
     std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE}};
@@ -520,7 +520,7 @@ public:
     std::optional<std::vector<std::string>> testVariable = variablesRes.getNames();
     std::optional<std::vector<int>> testAssignStmt = assignStmtRes.getLineNumbers();
     std::optional<std::vector<std::pair<int, std::string>>> testFirstPatternStmt =
-      firstPatternStatementRes.getLineNumberVariablePairs();
+      firstPatternStatementRes.getLineNumberNamePairs();
 
     std::optional<std::vector<std::string>> expectedProcedure = {{varA}};
     std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};

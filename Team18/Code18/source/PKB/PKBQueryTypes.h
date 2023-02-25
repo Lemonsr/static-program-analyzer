@@ -14,7 +14,7 @@ namespace spa {
 /**
   * A struct for a declared constant in a PQL query. E.g. constant c.
   */
-struct Constant {};
+struct Constant { };
 
 /**
  * A struct for a declared variable in a PQL query. E.g. variable v.

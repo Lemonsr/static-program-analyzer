@@ -98,13 +98,13 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getModifiesLineVar(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
+        Assert::IsTrue(expected == queryResult.getLineNumberNamePairs());
 
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LINE_NO, "10", {}));
         queryResult = relationshipStorage.getModifiesLineVar(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+        Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
       }
 
       TEST_METHOD(TestGetModifiesStmtVarName) {
@@ -119,13 +119,13 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getModifiesStmtVarName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
+        Assert::IsTrue(expected == queryResult.getLineNumberNamePairs());
 
         secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "z", {}));
         queryResult = relationshipStorage.getModifiesStmtVarName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+        Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
 
         expected = { {1, "a"}};
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "re", spa::DesignEntityType::READ));
@@ -133,7 +133,7 @@ namespace UnitTesting {
         queryResult = relationshipStorage.getModifiesStmtVarName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
+        Assert::IsTrue(expected == queryResult.getLineNumberNamePairs());
       }
 
       TEST_METHOD(TestGetModifiesStmtUnderscore) {
@@ -155,14 +155,14 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getModifiesStmtUnderscore(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
+        Assert::IsTrue(expected == queryResult.getLineNumberNamePairs());
 
         expected = { {3, "c"}, {6, "a"}, {8, "a"}};
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "a", spa::DesignEntityType::ASSIGN));
         queryResult = relationshipStorage.getModifiesStmtUnderscore(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
+        Assert::IsTrue(expected == queryResult.getLineNumberNamePairs());
       }
 
       TEST_METHOD(TestGetModifiesStmtVar) {
@@ -184,14 +184,14 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getModifiesStmtVar(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
+        Assert::IsTrue(expected == queryResult.getLineNumberNamePairs());
 
         expected = { {4, "d"}, {5, "e"} };
         firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "c", spa::DesignEntityType::CALL));
         queryResult = relationshipStorage.getModifiesStmtVar(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
+        Assert::IsTrue(expected == queryResult.getLineNumberNamePairs());
       }
 
       TEST_METHOD(TestGetModifiesNested) {
@@ -207,7 +207,7 @@ namespace UnitTesting {
         spa::QueryResult queryResult = relationshipStorage.getModifiesStmtVar(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-        Assert::IsTrue(expected == queryResult.getLineNumberVariablePairs());
+        Assert::IsTrue(expected == queryResult.getLineNumberNamePairs());
       }
   };
 }  // namespace UnitTesting

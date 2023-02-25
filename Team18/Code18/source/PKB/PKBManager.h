@@ -5,6 +5,7 @@
 #include "QueryResult.h"
 
 #include <string>
+#include <unordered_set>
 
 namespace spa {
 class PKBManager {
@@ -14,12 +15,16 @@ class PKBManager {
   virtual const bool addEntity(DesignEntityType entityType, std::string arg) = 0;
   virtual const bool addPattern(std::string lineNo, std::string lhs, std::string rhs) = 0;
   virtual const bool addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName) = 0;
+  virtual const bool addCallsContainerParent(std::string procName, std::string lineNo) = 0;
+  virtual const bool addCallsProc(int lineNo, std::string procName) = 0;
   virtual const bool addStatementType(std::string lineNo, StatementType statementType) = 0;
-  virtual const bool addStatementProc(std::string lineNo, std::string procedure) = 0;
+  virtual const bool addStatementProc(std::string lineNo, std::string procName) = 0;
   virtual const QueryResult getRelationship(RelationshipType relationshipType,
                                             PKBQueryArg firstArg, PKBQueryArg secondArg) = 0;
   virtual const QueryResult getEntity(DesignEntityType entityType) = 0;
   virtual const QueryResult getPattern(PKBQueryArg lhs, Pattern rhs) = 0;
   virtual const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg) = 0;
+  virtual const QueryResult getCallsContainerParent(std::string procName) = 0;
+  virtual const QueryResult getCallsProc() = 0;
 };
 }  // namespace spa

@@ -87,14 +87,14 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       pattern = spa::Pattern(spa::PatternType::EXACT, tokens);
       queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetAssignUnderscorePartial) {
@@ -108,7 +108,7 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       tokens = {
         spa::Token(spa::TokenType::TOKEN_NAME, "v"),
@@ -119,7 +119,7 @@ namespace UnitTesting {
       queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetAssignUnderscoreAny) {
@@ -133,7 +133,7 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
     }
 
     TEST_METHOD(TestGetAssignVarExact) {
@@ -158,14 +158,14 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getAssignVar(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       pattern = spa::Pattern(spa::PatternType::EXACT, tokens);
       queryResult = patternStorage.getAssignVar(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetAssignVarPartial) {
@@ -180,7 +180,7 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getAssignVar(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       tokens = {
         spa::Token(spa::TokenType::TOKEN_NAME, "v"),
@@ -191,7 +191,7 @@ namespace UnitTesting {
       queryResult = patternStorage.getAssignVar(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetAssignVarAny) {
@@ -206,7 +206,7 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getAssignVar(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
     }
 
     TEST_METHOD(TestGetAssignVarNameExact) {
@@ -230,13 +230,13 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "b", {}));
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
 
       tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       pattern = spa::Pattern(spa::PatternType::EXACT, tokens);
@@ -244,7 +244,7 @@ namespace UnitTesting {
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetAssignVarNamePartial) {
@@ -258,13 +258,13 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "b", {}));
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
 
       tokens = {
         spa::Token(spa::TokenType::TOKEN_NAME, "v"),
@@ -276,7 +276,7 @@ namespace UnitTesting {
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetAssignVarNameAny) {
@@ -290,13 +290,13 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "b", {}));
       queryResult = patternStorage.getAssignVarName(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetPatternIfUnderscore) {
@@ -308,13 +308,13 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getPatternIfUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       patternStorage.setPatternIfTable({});
       queryResult = patternStorage.getPatternIfUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetPatternIfVar) {
@@ -327,13 +327,13 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getPatternIfUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       patternStorage.setPatternIfTable({});
       queryResult = patternStorage.getPatternIfUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetPatternIfVarName) {
@@ -345,13 +345,13 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getPatternIfVarName(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       patternStorage.setPatternIfTable({});
       queryResult = patternStorage.getPatternIfUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetPatternWhileUnderscore) {
@@ -363,13 +363,13 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getPatternWhileUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       patternStorage.setPatternWhileTable({});
       queryResult = patternStorage.getPatternIfUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetPatternWhileVar) {
@@ -382,13 +382,13 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getPatternWhileUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       patternStorage.setPatternWhileTable({});
       queryResult = patternStorage.getPatternIfUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
 
     TEST_METHOD(TestGetPatternWhileVarName) {
@@ -400,13 +400,13 @@ namespace UnitTesting {
       spa::QueryResult queryResult = patternStorage.getPatternWhileVarName(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs() == expected);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
       patternStorage.setPatternWhileTable({});
       queryResult = patternStorage.getPatternIfUnderscore(firstArg);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-      Assert::IsTrue(queryResult.getLineNumberVariablePairs().empty());
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
     }
   };
 }  // namespace UnitTesting
