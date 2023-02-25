@@ -186,6 +186,7 @@
     <ClCompile Include="TestPKB.cpp" />
     <ClCompile Include="TestPKBCalls.cpp" />
     <ClCompile Include="TestPKBCallsContainerParents.cpp" />
+    <ClCompile Include="TestPKBCallsProc.cpp" />
     <ClCompile Include="TestPKBCallsStar.cpp" />
     <ClCompile Include="TestPKBFollows.cpp" />
     <ClCompile Include="TestPKBFollowsStar.cpp" />

@@ -1301,11 +1301,7 @@ spa::QueryResult spa::RelationshipStorage::getCallsProc() {
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, std::string>> lineNumberNamePairs;
-  queryResult.setLineNumberNamePairs(lineNumberNamePairs);
-  if (callsProcTable.empty()) {
-    return queryResult;
-  }
-
+ 
   for (auto itr = callsProcTable.begin(); itr != callsProcTable.end(); itr++) {
     lineNumberNamePairs.push_back({ itr->first , itr->second });
   }
@@ -1358,7 +1354,7 @@ void spa::RelationshipStorage::setCallsContainerParentsTable(std::unordered_map<
   this->callsContainerParentsTable = callsContainerParentsTable;
 }
 
-void spa::RelationshipStorage::setCallsProcTable(std::unordered_map<int, std::string> statementTypeTable) {
+void spa::RelationshipStorage::setCallsProcTable(std::unordered_map<int, std::string> callsProcTable) {
   this->callsProcTable = callsProcTable;
 }
 

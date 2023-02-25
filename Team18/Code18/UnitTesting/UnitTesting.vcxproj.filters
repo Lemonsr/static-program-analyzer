@@ -145,5 +145,8 @@
     <ClCompile Include="TestPKBCallsContainerParents.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestPKBCallsProc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
