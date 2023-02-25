@@ -11,7 +11,8 @@
 namespace spa {
 class SimpleEvaluator : public QpsEvaluator {
  private:
-  std::unordered_map<DesignEntityType, std::function<QpsResultTable(SimpleEvaluator, PKBManager)>> designEntityEvaluateFunctionMap;
+  std::unordered_map<DesignEntityType,
+                     std::function<QpsResultTable(SimpleEvaluator, PKBManager)>> designEntityEvaluateFunctionMap;
   std::string selectSynonym;
   DesignEntityType designEntityType;
   QpsResultTable evaluateRead(PKBManager& pkbManager);
