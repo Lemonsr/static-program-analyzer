@@ -14,19 +14,14 @@ class SimpleEvaluator : public QpsEvaluator {
   std::unordered_map<DesignEntityType, std::function<QpsResultTable(SimpleEvaluator, PKBManager)>> designEntityEvaluateFunctionMap;
   std::string selectSynonym;
   DesignEntityType designEntityType;
+  QpsResultTable evaluateRead(PKBManager& pkbManager);
+  QpsResultTable evaluatePrint(PKBManager& pkbManager);
+  QpsResultTable evaluateCall(PKBManager& pkbManager);
+  QpsResultTable evaluateStatementNumbers(PKBManager& pkbManager);
+  QpsResultTable evaluateNames(PKBManager& pkbManager);
 
  public:
   explicit SimpleEvaluator(std::string selectSynonym, DesignEntityType designEntityType);
   QpsResultTable evaluate(PKBManager& pkbManager);
-  QpsResultTable evaluateProcedure(PKBManager& pkbManager);
-  QpsResultTable evaluateStmt(PKBManager& pkbManager);
-  QpsResultTable evaluateRead(PKBManager& pkbManager);
-  QpsResultTable evaluatePrint(PKBManager& pkbManager);
-  QpsResultTable evaluateAssign(PKBManager& pkbManager);
-  QpsResultTable evaluateCall(PKBManager& pkbManager);
-  QpsResultTable evaluateWhile(PKBManager& pkbManager);
-  QpsResultTable evaluateIf(PKBManager& pkbManager);
-  QpsResultTable evaluateVariable(PKBManager& pkbManager);
-  QpsResultTable evaluateConstant(PKBManager& pkbManager);
 };
 }  // namespace spa
