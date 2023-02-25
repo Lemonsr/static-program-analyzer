@@ -31,6 +31,9 @@ bool spa::PqlSemanticChecker::isValid(SuchThatClause& suchThatClause) {
   case FOLLOWS:
   case FOLLOWS_STAR:
     return checkFollowsArguments(firstArg, secondArg);
+  case CALLS:
+  case CALLS_STAR:
+    return checkCallsArguments(firstArg, secondArg);
   }
   return false;
 }
@@ -54,7 +57,7 @@ bool spa::PqlSemanticChecker::isValid(PatternClause& patternClause) {
 
 bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   ArgumentType firstArgType = firstArg.getType();
-  if (firstArgType == WILDCARD || firstArgType == LITERAL_STRING) {
+  if (firstArgType == WILDCARD) {
     return false;
   }
 
@@ -79,7 +82,7 @@ bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument& firstArg, PqlA
 
 bool spa::PqlSemanticChecker::checkUsesArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   ArgumentType firstArgType = firstArg.getType();
-  if (firstArgType == WILDCARD || firstArgType == LITERAL_STRING) {
+  if (firstArgType == WILDCARD) {
     return false;
   }
   if (firstArgType == SYNONYM) {
@@ -129,6 +132,24 @@ bool spa::PqlSemanticChecker::checkFollowsArguments(PqlArgument& firstArg, PqlAr
     if (argType == SYNONYM) {
       DesignEntityType deType = arg.getDesignEntity().value();
       if (deType == PROCEDURE || deType == VARIABLE || deType == CONSTANT) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+bool spa::PqlSemanticChecker::checkCallsArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
+  for (PqlArgument arg : { firstArg, secondArg }) {
+    ArgumentType argType = arg.getType();
+    if (argType == LITERAL_STRING) {
+      return false;
+    }
+
+    if (argType == SYNONYM) {
+      DesignEntityType deType = arg.getDesignEntity().value();
+      if (deType != PROCEDURE) {
         return false;
       }
     }
