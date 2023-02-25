@@ -7,20 +7,6 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
   TEST_CLASS(TestSemanticChecker) {
-    std::vector<spa::PqlArgument> arguments = {
-      {spa::ArgumentType::LINE_NO, "1", {}},
-      {spa::ArgumentType::VARIABLE_NAME, "x", {}},
-      {spa::ArgumentType::WILDCARD, "_", {}},
-      {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
-      {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
-      {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
-      {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
-      {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
-      {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
-      {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
-      {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
-      {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
-    };
     spa::PqlSemanticChecker semanticChecker;
     TEST_METHOD(TestModifiesValid) {
       std::vector<spa::PqlArgument> validFirstArgs = {
@@ -32,10 +18,11 @@ namespace UnitTesting {
         {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
         {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
         {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
+        {spa::ArgumentType::LITERAL_STRING, "func1", {}},
       };
 
       std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };
@@ -61,16 +48,16 @@ namespace UnitTesting {
         {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
         {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
         {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
+        {spa::ArgumentType::LITERAL_STRING, "func1", {}},
       };
 
       std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
@@ -129,10 +116,11 @@ namespace UnitTesting {
         {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
         {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
         {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
+        {spa::ArgumentType::LITERAL_STRING, "func1", {}},
       };
 
       std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };
@@ -158,16 +146,16 @@ namespace UnitTesting {
         {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
         {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
         {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
+        {spa::ArgumentType::LITERAL_STRING, "func1", {}},
       };
 
       std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
@@ -283,14 +271,14 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
       };
 
       std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
@@ -407,14 +395,14 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
       };
 
       std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
@@ -464,9 +452,122 @@ namespace UnitTesting {
       }
     }
 
+    TEST_METHOD(TestCallsValid) {
+      std::vector<spa::PqlArgument> validFirstArgs = {
+        {spa::ArgumentType::LITERAL_STRING, "func1", {}},
+        {spa::ArgumentType::WILDCARD, "_", {}},
+        {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
+      };
+
+      std::vector<spa::PqlArgument> validSecondArgs = {
+        {spa::ArgumentType::LITERAL_STRING, "func1", {}},
+        {spa::ArgumentType::WILDCARD, "_", {}},
+        {spa::ArgumentType::SYNONYM, "q", {spa::DesignEntityType::PROCEDURE}},
+      };
+
+      spa::ParsedQuery parsedQuery;
+      for (auto& firstArg : validFirstArgs) {
+        for (auto& secondArg : validSecondArgs) {
+          spa::SuchThatClause suchThatClause(spa::RelationshipType::CALLS, firstArg, secondArg);
+          parsedQuery.addSuchThatClause(suchThatClause);
+          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+          Assert::IsTrue(isValid);
+
+          suchThatClause = spa::SuchThatClause(spa::RelationshipType::CALLS_STAR, firstArg, secondArg);
+          parsedQuery.addSuchThatClause(suchThatClause);
+          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+          Assert::IsTrue(isValid);
+        }
+      }
+    }
+
+    TEST_METHOD(TestCallsInvalid) {
+      std::vector<spa::PqlArgument> validFirstArgs = {
+        {spa::ArgumentType::LITERAL_STRING, "func1", {}},
+        {spa::ArgumentType::WILDCARD, "_", {}},
+        {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
+      };
+
+      std::vector<spa::PqlArgument> validSecondArgs = {
+        {spa::ArgumentType::LITERAL_STRING, "func1", {}},
+        {spa::ArgumentType::WILDCARD, "_", {}},
+        {spa::ArgumentType::SYNONYM, "q", {spa::DesignEntityType::PROCEDURE}},
+      };
+
+      std::vector<spa::PqlArgument> invalidFirstArgs = {
+        {spa::ArgumentType::LINE_NO, "1", {}},
+        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
+        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
+        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
+        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
+        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
+        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
+        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
+        {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
+        {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
+      };
+
+      std::vector<spa::PqlArgument> invalidSecondArgs = {
+        {spa::ArgumentType::LINE_NO, "1", {}},
+        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
+        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
+        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
+        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
+        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
+        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
+        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
+        {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
+        {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
+      };
+
+
+      spa::ParsedQuery parsedQuery;
+      for (auto& firstArg : validFirstArgs) {
+        for (auto& secondArg : invalidSecondArgs) {
+          spa::SuchThatClause suchThatClause(spa::RelationshipType::CALLS, firstArg, secondArg);
+          parsedQuery.addSuchThatClause(suchThatClause);
+          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+          Assert::IsFalse(isValid);
+
+          suchThatClause = spa::SuchThatClause(spa::RelationshipType::CALLS_STAR, firstArg, secondArg);
+          parsedQuery.addSuchThatClause(suchThatClause);
+          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+          Assert::IsFalse(isValid);
+        }
+      }
+
+      for (auto& firstArg : invalidFirstArgs) {
+        for (auto& secondArg : validSecondArgs) {
+          spa::SuchThatClause suchThatClause(spa::RelationshipType::CALLS, firstArg, secondArg);
+          parsedQuery.addSuchThatClause(suchThatClause);
+          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+          Assert::IsFalse(isValid);
+
+          suchThatClause = spa::SuchThatClause(spa::RelationshipType::CALLS_STAR, firstArg, secondArg);
+          parsedQuery.addSuchThatClause(suchThatClause);
+          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+          Assert::IsFalse(isValid);
+        }
+      }
+
+      for (auto& firstArg : invalidFirstArgs) {
+        for (auto& secondArg : invalidSecondArgs) {
+          spa::SuchThatClause suchThatClause(spa::RelationshipType::CALLS, firstArg, secondArg);
+          parsedQuery.addSuchThatClause(suchThatClause);
+          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+          Assert::IsFalse(isValid);
+
+          suchThatClause = spa::SuchThatClause(spa::RelationshipType::CALLS_STAR, firstArg, secondArg);
+          parsedQuery.addSuchThatClause(suchThatClause);
+          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+          Assert::IsFalse(isValid);
+        }
+      }
+    }
+
     TEST_METHOD(TestPatternValid) {
       std::vector<spa::PqlArgument> validFirstArgs = {
-        {spa::ArgumentType::VARIABLE_NAME, "x", {}},
+        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
       };

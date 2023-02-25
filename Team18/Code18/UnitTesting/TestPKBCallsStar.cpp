@@ -33,14 +33,14 @@ namespace UnitTesting {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setCallsStarTable(callsStarTable);
 
-        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "p", {}));
-        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "q", {}));
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "p", {}));
+        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "q", {}));
         spa::QueryResult queryResult = relationshipStorage.getCallsStarNameName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
         Assert::IsTrue(queryResult.getIsTrue());
 
-        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "a", {}));
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "a", {}));
         queryResult = relationshipStorage.getCallsStarNameName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
@@ -51,14 +51,14 @@ namespace UnitTesting {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setCallsStarTable(callsStarTable);
 
-        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "p", {}));
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "p", {}));
         spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
         spa::QueryResult queryResult = relationshipStorage.getCallsStarNameUnderscore(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
         Assert::IsTrue(queryResult.getIsTrue());
 
-        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "a", {}));
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "a", {}));
         queryResult = relationshipStorage.getCallsStarNameUnderscore(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
@@ -71,7 +71,7 @@ namespace UnitTesting {
         std::vector<std::pair<std::string, std::string>> expected = { {"q", "r"}, {"q", "s"}};
 
 
-        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "q", {}));
+        spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "q", {}));
         spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM,
                                                                        "p", { spa::DesignEntityType::PROCEDURE }));
         spa::QueryResult queryResult = relationshipStorage.getCallsStarNameProcedure(firstArg, secondArg);
@@ -79,7 +79,7 @@ namespace UnitTesting {
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(queryResult.getNameNamePairs() == expected);
 
-        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "a", {}));
+        firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "a", {}));
         queryResult = relationshipStorage.getCallsStarNameProcedure(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
@@ -91,13 +91,13 @@ namespace UnitTesting {
         relationshipStorage.setCallsStarTable(callsStarTable);
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
-        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "s", {}));
+        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "s", {}));
         spa::QueryResult queryResult = relationshipStorage.getCallsStarUnderscoreName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
         Assert::IsTrue(queryResult.getIsTrue());
 
-        secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "a", {}));
+        secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "a", {}));
         queryResult = relationshipStorage.getCallsStarUnderscoreName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
@@ -160,14 +160,14 @@ namespace UnitTesting {
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM,
                                                      "p", { spa::DesignEntityType::PROCEDURE }));
-        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "s", {}));
+        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "s", {}));
 
         spa::QueryResult queryResult = relationshipStorage.getCallsStarProcedureName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
         Assert::IsTrue(queryResult.getNameNamePairs() == expected);
 
-        secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::PROCEDURE_NAME, "t", {}));
+        secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LITERAL_STRING, "t", {}));
         queryResult = relationshipStorage.getCallsStarProcedureName(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);

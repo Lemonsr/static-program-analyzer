@@ -12,8 +12,8 @@ const std::vector<int>& spa::QueryResult::getLineNumbers() {
   return lineNumbers.value();
 }
 
-const std::vector<std::pair<int, std::string>>& spa::QueryResult::getLineNumberVariablePairs() {
-  return lineNumberVariablePairs.value();
+const std::vector<std::pair<int, std::string>>& spa::QueryResult::getLineNumberNamePairs() {
+  return lineNumberNamePairs.value();
 }
 
 const std::vector<std::pair<int, int>>& spa::QueryResult::getLineNumberLineNumberPairs() {
@@ -40,8 +40,8 @@ void spa::QueryResult::setLineNumbers(std::vector<int> lineNumbers) {
   this->lineNumbers = lineNumbers;
 }
 
-void spa::QueryResult::setLineNumberVariablePairs(std::vector<std::pair<int, std::string>> lineNumberVariablePairs) {
-  this->lineNumberVariablePairs = lineNumberVariablePairs;
+void spa::QueryResult::setLineNumberNamePairs(std::vector<std::pair<int, std::string>> lineNumberNamePairs) {
+  this->lineNumberNamePairs = lineNumberNamePairs;
 }
 
 void spa::QueryResult::setLineNumberLineNumberPairs(std::vector<std::pair<int, int>> lineNumberLineNumberPairs) {

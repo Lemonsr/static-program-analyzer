@@ -183,7 +183,10 @@
     <ClCompile Include="TestDesignExtractorStatements.cpp" />
     <ClCompile Include="TestDesignExtractorUses.cpp" />
     <ClCompile Include="TestDesignExtractorWhile.cpp" />
+    <ClCompile Include="TestPKB.cpp" />
     <ClCompile Include="TestPKBCalls.cpp" />
+    <ClCompile Include="TestPKBCallsContainerParents.cpp" />
+    <ClCompile Include="TestPKBCallsProc.cpp" />
     <ClCompile Include="TestPKBCallsStar.cpp" />
     <ClCompile Include="TestPKBFollows.cpp" />
     <ClCompile Include="TestPKBFollowsStar.cpp" />
@@ -210,7 +213,6 @@
     <ClCompile Include="TestPqlSemanticChecker.cpp" />
     <ClCompile Include="TestSpCyclicValidator.cpp" />
     <ClCompile Include="TestTokenizer.cpp" />
-    <ClCompile Include="TestPKB.cpp" />
     <ClCompile Include="TestUtilsFunction.cpp" />
     <ClCompile Include="TestSpValidator.cpp" />
   </ItemGroup>
