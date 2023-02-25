@@ -60,7 +60,11 @@ void spa::QpsResultTable::addRow(QpsResultRow row) {
 
 spa::QpsValueSet spa::QpsResultTable::getColumn(std::string header) {
   QpsValueSet result;
-  int index = headerIndexMap[header][0];
+  auto it = headerIndexMap.find(header);
+  if (it == headerIndexMap.end()) {
+    return {};
+  }
+  int index = it->second[0];
   for (auto& row : rows) {
     result.insert(row[index]);
   }

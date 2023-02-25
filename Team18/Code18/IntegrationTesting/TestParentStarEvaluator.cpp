@@ -352,15 +352,7 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 6);
 
-    auto columnVals = table.getColumn("");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
-
-    columnVals = table.getColumn("s");
+    auto columnVals = table.getColumn("s");
     Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
