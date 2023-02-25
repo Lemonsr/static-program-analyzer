@@ -1301,7 +1301,7 @@ spa::QueryResult spa::RelationshipStorage::getCallsProc() {
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, std::string>> lineNumberNamePairs;
- 
+
   for (auto itr = callsProcTable.begin(); itr != callsProcTable.end(); itr++) {
     lineNumberNamePairs.push_back({ itr->first , itr->second });
   }
