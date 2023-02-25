@@ -845,6 +845,112 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVar(PKBQueryArg firstArg,
   return queryResult;
 }
 
+bool spa::RelationshipStorage::addUsesProc(std::string procName, std::string varName) {
+  if (usesProcTable.find(procName) != usesProcTable.end() &&
+    usesProcTable[procName].find(varName) != usesProcTable[procName].end()) {
+    return false;
+  }
+
+  usesProcTable[procName].insert(varName);
+  return true;
+}
+
+spa::QueryResult spa::RelationshipStorage::getUsesProcNameVarName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  std::string procName = firstArg.getName().name;
+  std::string varName = secondArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  if (usesProcTable.find(procName) == usesProcTable.end() ||
+    usesProcTable[procName].find(varName) == usesProcTable[procName].end()) {
+    queryResult.setIsTrue(false);
+    return queryResult;
+  }
+
+  queryResult.setIsTrue(true);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getUsesProcNameUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  std::string procName = firstArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  if (usesProcTable.find(procName) == usesProcTable.end()) {
+    queryResult.setIsTrue(false);
+    return queryResult;
+  }
+
+  queryResult.setIsTrue(true);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getUsesProcNameVar(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  std::string procName = firstArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<std::string, std::string>> nameNamePairs;
+  queryResult.setNameNamePairs(nameNamePairs);
+  if (usesProcTable.find(procName) == usesProcTable.end()) {
+    return queryResult;
+  }
+
+  for (auto& varName : usesProcTable[procName]) {
+    nameNamePairs.push_back({ procName, varName });
+  }
+
+  queryResult.setNameNamePairs(nameNamePairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getUsesProcedureVarName(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  std::string varName = secondArg.getName().name;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<std::string, std::string>> nameNamePairs;
+  for (auto& itr = usesProcTable.begin(); itr != usesProcTable.end(); itr++) {
+    if (itr->second.find(varName) == itr->second.end()) {
+      continue;
+    }
+    nameNamePairs.push_back({ itr->first, varName });
+  }
+
+  queryResult.setNameNamePairs(nameNamePairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getUsesProcedureUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<std::string, std::string>> nameNamePairs;
+  for (auto& itr = usesProcTable.begin(); itr != usesProcTable.end(); itr++) {
+    for (auto& varName : itr->second) {
+      nameNamePairs.push_back({ itr->first, varName });
+    }
+  }
+
+  queryResult.setNameNamePairs(nameNamePairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getUsesProcedureVar(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<std::string, std::string>> nameNamePairs;
+  for (auto& itr = usesProcTable.begin(); itr != usesProcTable.end(); itr++) {
+    for (auto& varName : itr->second) {
+      nameNamePairs.push_back({ itr->first, varName });
+    }
+  }
+
+  queryResult.setNameNamePairs(nameNamePairs);
+  return queryResult;
+}
+
 bool spa::RelationshipStorage::addModifies(std::string lineNo, std::string varName) {
   int lineNumber = std::stoi(lineNo);
   if (modifiesTable.find(lineNumber) != modifiesTable.end() &&
@@ -1434,6 +1540,12 @@ void spa::RelationshipStorage::setParentStarTable(std::unordered_map<int, std::u
 
 void spa::RelationshipStorage::setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable) {
   this->usesTable = usesTable;
+}
+
+void spa::RelationshipStorage::setUsesProcTable(std::unordered_map<
+                                                      std::string,
+                                                      std::unordered_set<std::string>> usesProcTable) {
+  this->usesProcTable = usesProcTable;
 }
 
 void spa::RelationshipStorage::setModifiesTable(std::unordered_map<
