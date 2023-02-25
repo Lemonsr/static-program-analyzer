@@ -22,6 +22,7 @@ enum RelationshipType {
   MODIFIES,
   MODIFIES_P,
   USES,
+  USES_P,
   CALLS,
   CALLS_STAR,
   NEXT,
