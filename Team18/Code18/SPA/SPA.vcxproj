@@ -62,15 +62,15 @@
     <ClInclude Include="..\source\QPS\Preprocessor\QpsPreprocessor.h" />
     <ClInclude Include="..\source\QPS\QPS.h" />
     <ClInclude Include="..\source\QPS\Translator\QpsTranslator.h" />
-    <ClInclude Include="..\source\SP\ContainerStatement.h" />
-    <ClInclude Include="..\source\SP\DesignExtractor.h" />
-    <ClInclude Include="..\source\SP\NonContainerStatement.h" />
-    <ClInclude Include="..\source\SP\ProcedureStatement.h" />
-    <ClInclude Include="..\source\SP\ProgramStatement.h" />
+    <ClInclude Include="..\source\SP\DesignExtractor\DesignExtractor.h" />
+    <ClInclude Include="..\source\SP\Parser\SpParser.h" />
     <ClInclude Include="..\source\SP\SP.h" />
-    <ClInclude Include="..\source\SP\SpCyclicValidator.h" />
-    <ClInclude Include="..\source\SP\SpParser.h" />
-    <ClInclude Include="..\source\SP\SpValidator.h" />
+    <ClInclude Include="..\source\SP\Statements\ContainerStatement.h" />
+    <ClInclude Include="..\source\SP\Statements\NonContainerStatement.h" />
+    <ClInclude Include="..\source\SP\Statements\ProcedureStatement.h" />
+    <ClInclude Include="..\source\SP\Statements\ProgramStatement.h" />
+    <ClInclude Include="..\source\SP\Validators\SpCyclicValidator.h" />
+    <ClInclude Include="..\source\SP\Validators\SpValidator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\commons\Token.cpp" />
@@ -115,15 +115,15 @@
     <ClCompile Include="..\source\QPS\Preprocessor\QpsPreprocessor.cpp" />
     <ClCompile Include="..\source\QPS\QPS.cpp" />
     <ClCompile Include="..\source\QPS\Translator\QpsTranslator.cpp" />
-    <ClCompile Include="..\source\SP\ContainerStatement.cpp" />
-    <ClCompile Include="..\source\SP\DesignExtractor.cpp" />
-    <ClCompile Include="..\source\SP\NonContainerStatement.cpp" />
-    <ClCompile Include="..\source\SP\ProcedureStatement.cpp" />
-    <ClCompile Include="..\source\SP\ProgramStatement.cpp" />
+    <ClCompile Include="..\source\SP\DesignExtractor\DesignExtractor.cpp" />
+    <ClCompile Include="..\source\SP\Parser\SpParser.cpp" />
     <ClCompile Include="..\source\SP\SP.cpp" />
-    <ClCompile Include="..\source\SP\SpCyclicValidator.cpp" />
-    <ClCompile Include="..\source\SP\SpParser.cpp" />
-    <ClCompile Include="..\source\SP\SpValidator.cpp" />
+    <ClCompile Include="..\source\SP\Statements\ContainerStatement.cpp" />
+    <ClCompile Include="..\source\SP\Statements\NonContainerStatement.cpp" />
+    <ClCompile Include="..\source\SP\Statements\ProcedureStatement.cpp" />
+    <ClCompile Include="..\source\SP\Statements\ProgramStatement.cpp" />
+    <ClCompile Include="..\source\SP\Validators\SpCyclicValidator.cpp" />
+    <ClCompile Include="..\source\SP\Validators\SpValidator.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
@@ -175,7 +175,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\PKB\Storage;$(SolutionDir)source\PKB\DataTypes;$(SolutionDir)source\PKB\utils;$(SolutionDir)source\QPS;$(SolutionDir)source\QPS\Evaluators;$(SolutionDir)source\QPS\Preprocessor;$(SolutionDir)source\QPS\Translator;$(SolutionDir)source\commons;$(SolutionDir)source\SP</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\PKB\Storage;$(SolutionDir)source\PKB\DataTypes;$(SolutionDir)source\PKB\utils;$(SolutionDir)source\QPS;$(SolutionDir)source\QPS\Evaluators;$(SolutionDir)source\QPS\Preprocessor;$(SolutionDir)source\QPS\Translator;$(SolutionDir)source\commons;$(SolutionDir)source\SP;$(SolutionDir)source\SP\Parser;$(SolutionDir)source\SP\DesignExtractor;$(SolutionDir)source\SP\Validators;$(SolutionDir)source\SP\Statements</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

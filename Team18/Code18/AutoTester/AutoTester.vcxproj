@@ -73,7 +73,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\PKB\Storage;$(SolutionDir)source\PKB\DataTypes;$(SolutionDir)source\PKB\utils;$(SolutionDir)source\QPS;$(SolutionDir)source\QPS\Evaluators;$(SolutionDir)source\QPS\Preprocessor;$(SolutionDir)source\QPS\Translator;$(SolutionDir)source\commons;$(SolutionDir)source\SP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\PKB\Storage;$(SolutionDir)source\PKB\DataTypes;$(SolutionDir)source\PKB\utils;$(SolutionDir)source\QPS;$(SolutionDir)source\QPS\Evaluators;$(SolutionDir)source\QPS\Preprocessor;$(SolutionDir)source\QPS\Translator;$(SolutionDir)source\commons;$(SolutionDir)source\SP;$(SolutionDir)source\SP\Parser;$(SolutionDir)source\SP\DesignExtractor;$(SolutionDir)source\SP\Validators;$(SolutionDir)source\SP\Statements;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
