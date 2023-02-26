@@ -16,17 +16,17 @@
     <ClInclude Include="..\source\commons\Token.h" />
     <ClInclude Include="..\source\commons\Tokenizer.h" />
     <ClInclude Include="..\source\commons\UtilsFunction.h" />
-    <ClInclude Include="..\source\PKB\DesignEntity.h" />
-    <ClInclude Include="..\source\PKB\EntityStorage.h" />
-    <ClInclude Include="..\source\PKB\HashTuple.h" />
-    <ClInclude Include="..\source\PKB\PatternStorage.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\DesignEntity.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\PKBQueryArg.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\PKBQueryTypes.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\PKBTypes.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\TNode.h" />
     <ClInclude Include="..\source\PKB\PKB.h" />
     <ClInclude Include="..\source\PKB\PKBManager.h" />
-    <ClInclude Include="..\source\PKB\PKBQueryArg.h" />
-    <ClInclude Include="..\source\PKB\PKBQueryTypes.h" />
-    <ClInclude Include="..\source\PKB\PKBTypes.h" />
-    <ClInclude Include="..\source\PKB\RelationshipStorage.h" />
-    <ClInclude Include="..\source\PKB\TNode.h" />
+    <ClInclude Include="..\source\PKB\Storage\EntityStorage.h" />
+    <ClInclude Include="..\source\PKB\Storage\PatternStorage.h" />
+    <ClInclude Include="..\source\PKB\Storage\RelationshipStorage.h" />
+    <ClInclude Include="..\source\PKB\utils\HashTuple.h" />
     <ClInclude Include="..\source\QPS\Evaluators\CallsEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\CallsStarEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\FollowsEvaluator.h" />
@@ -76,13 +76,13 @@
     <ClCompile Include="..\source\commons\Token.cpp" />
     <ClCompile Include="..\source\commons\Tokenizer.cpp" />
     <ClCompile Include="..\source\commons\UtilsFunction.cpp" />
-    <ClCompile Include="..\source\PKB\EntityStorage.cpp" />
-    <ClCompile Include="..\source\PKB\PatternStorage.cpp" />
+    <ClCompile Include="..\source\PKB\DataTypes\PKBQueryArg.cpp" />
+    <ClCompile Include="..\source\PKB\DataTypes\PKBQueryTypes.cpp" />
+    <ClCompile Include="..\source\PKB\DataTypes\TNode.cpp" />
     <ClCompile Include="..\source\PKB\PKB.cpp" />
-    <ClCompile Include="..\source\PKB\PKBQueryArg.cpp" />
-    <ClCompile Include="..\source\PKB\PKBQueryTypes.cpp" />
-    <ClCompile Include="..\source\PKB\RelationshipStorage.cpp" />
-    <ClCompile Include="..\source\PKB\TNode.cpp" />
+    <ClCompile Include="..\source\PKB\Storage\EntityStorage.cpp" />
+    <ClCompile Include="..\source\PKB\Storage\PatternStorage.cpp" />
+    <ClCompile Include="..\source\PKB\Storage\RelationshipStorage.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\CallsEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\CallsStarEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\FollowsEvaluator.cpp" />
@@ -175,7 +175,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\QPS;$(SolutionDir)source\commons;$(SolutionDir)source\SP;$(SolutionDir)source\QPS\Evaluators;$(SolutionDir)source\QPS\Preprocessor;$(SolutionDir)source\QPS\Translator</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\PKB\Storage;$(SolutionDir)source\PKB\DataTypes;$(SolutionDir)source\PKB\utils;$(SolutionDir)source\QPS;$(SolutionDir)source\QPS\Evaluators;$(SolutionDir)source\QPS\Preprocessor;$(SolutionDir)source\QPS\Translator;$(SolutionDir)source\commons;$(SolutionDir)source\SP</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
