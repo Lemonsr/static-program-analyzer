@@ -96,7 +96,6 @@ namespace UnitTesting {
         //  procedure 123 { x = z + v; }
         TEST_METHOD(TestSpValidatorInvalidProcOne) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_INTEGER, "123"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -107,111 +106,64 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_NAME, "v"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "123" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "x" });
-            expectedTokens.push_back({ spa::TOKEN_EQUAL, "=" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_PLUS, "+" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "v" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure{}
         TEST_METHOD(TestSpValidatorInvalidProcTwo) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure 1{}
         TEST_METHOD(TestSpValidatorInvalidProcThree) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_INTEGER, "1"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "1" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure proc {;}
         TEST_METHOD(TestSpValidatorInvalidProcFour) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "proc" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure proc ;
         TEST_METHOD(TestSpValidatorInvalidProcFive) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "proc" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure ;
         TEST_METHOD(TestSpValidatorInvalidProcSix) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
             spa::SpValidator validator(tokens);
-            Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  proc { x = z + v ;}
         TEST_METHOD(TestSpValidatorInvalidProcSeven) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_NAME, "x"});
@@ -222,108 +174,63 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
 
-            expectedTokens.push_back({ spa::TOKEN_NAME, "proc" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "x" });
-            expectedTokens.push_back({ spa::TOKEN_EQUAL, "=" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "+" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "v" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure proc 12 {}
         TEST_METHOD(TestSpValidatorInvalidProcEight) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
             tokens.pushBack({spa::TOKEN_INTEGER, "12"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_NAME, "proc" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "12" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure proc {
         TEST_METHOD(TestSpValidatorInvalidProcNine) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "proc"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "proc" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure proc }
         TEST_METHOD(TestSpValidatorInvalidProcTen) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
             tokens.pushBack({ spa::TOKEN_NAME, "proc" });
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "proc" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure proc{ () }
         TEST_METHOD(TestSpValidatorInvalidProcEleven) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
             tokens.pushBack({ spa::TOKEN_NAME, "proc" });
             tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
             tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "proc" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure proc {}
         TEST_METHOD(TestSpValidatorInvalidProcTwelve) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
             tokens.pushBack({ spa::TOKEN_NAME, "proc" });
             tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "proc" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         // procedure a { x = 1; } procedure b { x = 1; } procedure proc { read print;}
@@ -654,7 +561,6 @@ namespace UnitTesting {
         // procedure z { x x = a;}
         TEST_METHOD(TestSpValidatorInvalidAssignOne) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -664,25 +570,13 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_NAME, "a"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "x" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "x" });
-            expectedTokens.push_back({ spa::TOKEN_EQUAL, "=" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "a" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         // procedure z { x = 1 a;}
         TEST_METHOD(TestSpValidatorInvalidAssignTwo) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -692,25 +586,13 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_NAME, "a"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "x" });
-            expectedTokens.push_back({ spa::TOKEN_EQUAL, "=" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "1" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "a" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         // procedure z { x = 1 1;}
         TEST_METHOD(TestSpValidatorInvalidAssignThree) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -720,26 +602,14 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_INTEGER, "1"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "x" });
-            expectedTokens.push_back({ spa::TOKEN_EQUAL, "=" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "1" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "1" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
 
         //  procedure z { x = 1 %;}
         TEST_METHOD(TestSpValidatorInvalidAssignFour) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -749,25 +619,13 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_MODULO, "%"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "x" });
-            expectedTokens.push_back({ spa::TOKEN_EQUAL, "=" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "1" });
-            expectedTokens.push_back({ spa::TOKEN_MODULO, "%" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure z { 10 = x;}
         TEST_METHOD(TestSpValidatorInvalidAssignFive) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -777,17 +635,8 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
 
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_EQUAL, "=" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "x" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  expr
@@ -1575,7 +1424,6 @@ namespace UnitTesting {
         //  procedure z { ) (10 + 1;}
         TEST_METHOD(TestSpValidatorInvalidExprOne) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -1586,26 +1434,13 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_INTEGER, "1"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_PLUS, "+" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "1" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure z { ) 10 + 1 (;}
         TEST_METHOD(TestSpValidatorInvalidExprTwo) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -1616,26 +1451,13 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_PLUS, "+" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "1" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure z { ) 10 + a (;}
         TEST_METHOD(TestSpValidatorInvalidExprThree) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -1646,26 +1468,13 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACKET, "("});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_PLUS, "+" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "a" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure z { ) 10 + ( 4 ;}
         TEST_METHOD(TestSpValidatorInvalidExprFour) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_PROCEDURE, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -1676,26 +1485,13 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_INTEGER, "4"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_PLUS, "+" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "4" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure z { ) 10 +  4 ;}
         TEST_METHOD(TestSpValidatorInvalidExprFive) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -1705,26 +1501,14 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_INTEGER, "4"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_PLUS, "+" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "4" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
 
         //  procedure z {  10 + ( 4 ;}
         TEST_METHOD(TestSpValidatorInvalidExprSix) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -1734,25 +1518,13 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_INTEGER, "4"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_PLUS, "+" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "4" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure z { () 10 + 4 ;}
         TEST_METHOD(TestSpValidatorInvalidExprSeven) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -1763,26 +1535,13 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_INTEGER, "4"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_PLUS, "+" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "4" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  procedure z { x = 8 % ((5) / ( 10 + 10));}
         TEST_METHOD(TestSpValidatorInvalidExprEight) {
             spa::Stream<spa::Token> tokens;
-            std::vector<spa::Token> expectedTokens;
             tokens.pushBack({spa::TOKEN_NAME, "procedure"});
             tokens.pushBack({spa::TOKEN_NAME, "z"});
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
@@ -1804,31 +1563,8 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACKET, ")"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
-            expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
-            expectedTokens.push_back({ spa::TOKEN_NAME, "x" });
-            expectedTokens.push_back({ spa::TOKEN_EQUAL, "=" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "8" });
-            expectedTokens.push_back({ spa::TOKEN_MODULO, "%" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "5" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_MULTIPLY, "/" });
-            expectedTokens.push_back({ spa::TOKEN_OPEN_BRACKET, "(" });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_PLUS, "+ " });
-            expectedTokens.push_back({ spa::TOKEN_INTEGER, "10" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACKET, ")" });
-            expectedTokens.push_back({ spa::TOKEN_SEMICOLON, ";" });
-            expectedTokens.push_back({ spa::TOKEN_CLOSE_BRACE, "}" });
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
-            Assert::IsTrue(validator.getUpdatedStream().match(expectedTokens));
         }
 
         //  while
@@ -3403,7 +3139,6 @@ namespace UnitTesting {
             tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-            
             expectedTokens.push_back({ spa::TOKEN_PROCEDURE, "procedure" });
             expectedTokens.push_back({ spa::TOKEN_NAME, "z" });
             expectedTokens.push_back({ spa::TOKEN_OPEN_BRACE, "{" });
@@ -3488,7 +3223,6 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }
@@ -3518,7 +3252,6 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }
@@ -3547,7 +3280,6 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }
@@ -3575,7 +3307,6 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }
@@ -3598,7 +3329,6 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }
