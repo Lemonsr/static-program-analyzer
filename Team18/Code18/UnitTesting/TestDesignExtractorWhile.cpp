@@ -119,7 +119,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractSingleWhileNegative) {
@@ -154,7 +154,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsFalse(checkVectorEquals(negWhile, testWhile.getLineNumberVariablePairs()));
+            Assert::IsFalse(checkVectorEquals(negWhile, testWhile.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractDoubleSingleWhile) {
@@ -197,7 +197,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractDoubleSingleWhileNegative) {
@@ -240,7 +240,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsFalse(expectedWhile == testWhile.getLineNumberVariablePairs());
+            Assert::IsFalse(expectedWhile == testWhile.getLineNumberNamePairs());
         }
 
         TEST_METHOD(TestExtractNestedOneWhile) {
@@ -288,7 +288,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractNestedOneWhileNegative) {
@@ -336,7 +336,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsFalse(expectedWhile == testWhile.getLineNumberVariablePairs());
+            Assert::IsFalse(expectedWhile == testWhile.getLineNumberNamePairs());
         }
 
         TEST_METHOD(TestExtractNestedTwoWhile) {
@@ -388,7 +388,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractNestedTwoWhileNegative) {
@@ -442,7 +442,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsFalse(expectedWhile == testWhile.getLineNumberVariablePairs());
+            Assert::IsFalse(expectedWhile == testWhile.getLineNumberNamePairs());
         }
 
         TEST_METHOD(TestExtractNestedThreeWhile) {
@@ -499,7 +499,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedWhile, testWhile.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractNestedThreeWhileNegative) {
@@ -555,7 +555,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArg);
 
-            Assert::IsFalse(expectedWhile == testWhile.getLineNumberVariablePairs());
+            Assert::IsFalse(expectedWhile == testWhile.getLineNumberNamePairs());
         }
 
         TEST_METHOD(TestExtractWhileIf) {
@@ -596,7 +596,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArgWhile);
 
-            Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
+            Assert::IsTrue(expectedWhile == testWhile.getLineNumberNamePairs());
 
             std::vector<std::pair<int, std::string>> expectedIf = { {2, "b"}, {2, "e"}};
 
@@ -604,7 +604,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testIf = pkbManager->getContainerPattern(spa::IF, firstArgIf);
 
-            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractWhileIfIf) {
@@ -656,7 +656,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArgWhile);
 
-            Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
+            Assert::IsTrue(expectedWhile == testWhile.getLineNumberNamePairs());
 
             std::vector<std::pair<int, std::string>> expectedIf = { {3, "c"}, {5, "c"} };
 
@@ -664,7 +664,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testIf = pkbManager->getContainerPattern(spa::IF, firstArgIf);
 
-            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractWhileIfIfElse) {
@@ -716,7 +716,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArgWhile);
 
-            Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
+            Assert::IsTrue(expectedWhile == testWhile.getLineNumberNamePairs());
 
             std::vector<std::pair<int, std::string>> expectedIf = { {3, "c"}, {6, "c"} };
 
@@ -724,7 +724,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testIf = pkbManager->getContainerPattern(spa::IF, firstArgIf);
 
-            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractWhileIfWhileIf) {
@@ -780,7 +780,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArgWhile);
 
-            Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
+            Assert::IsTrue(expectedWhile == testWhile.getLineNumberNamePairs());
 
             std::vector<std::pair<int, std::string>> expectedIf = { {3, "c"}, {7, "c"} };
 
@@ -788,7 +788,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testIf = pkbManager->getContainerPattern(spa::IF, firstArgIf);
 
-            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberNamePairs()));
         }
 
         TEST_METHOD(TestExtractWhileIfElseWhileIf) {
@@ -844,7 +844,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testWhile = pkbManager->getContainerPattern(spa::WHILE, firstArgWhile);
 
-            Assert::IsTrue(expectedWhile == testWhile.getLineNumberVariablePairs());
+            Assert::IsTrue(expectedWhile == testWhile.getLineNumberNamePairs());
 
             std::vector<std::pair<int, std::string>> expectedIf = { {3, "c"}, {8, "c"} };
 
@@ -852,7 +852,7 @@ namespace UnitTesting {
                 spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
             spa::QueryResult testIf = pkbManager->getContainerPattern(spa::IF, firstArgIf);
 
-            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberVariablePairs()));
+            Assert::IsTrue(checkVectorEquals(expectedIf, testIf.getLineNumberNamePairs()));
         }
     };
 }  // namespace UnitTesting

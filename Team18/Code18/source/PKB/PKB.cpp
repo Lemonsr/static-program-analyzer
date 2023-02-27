@@ -1,6 +1,8 @@
 #include "PKB.h"
 #include "PKBQueryTypes.h"
 
+#include <unordered_set>
+
 void spa::PKB::createRelationshipQueryFunctionMap() {
   relationshipQueryFunctionMap = {
     // Follows
@@ -97,6 +99,20 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE},
       &RelationshipStorage::getUsesStmtVar},
 
+    // Uses Proc
+    {{RelationshipType::USES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getUsesProcedureVarName},
+    {{RelationshipType::USES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getUsesProcedureUnderscore},
+    {{RelationshipType::USES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getUsesProcedureVar},
+    {{RelationshipType::USES, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
+      &RelationshipStorage::getUsesProcNameVarName},
+    {{RelationshipType::USES, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getUsesProcNameUnderscore},
+    {{RelationshipType::USES, PKBQueryArgType::NAME, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getUsesProcNameVar},
+
     // Modifies
     {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::NAME},
       &RelationshipStorage::getModifiesLineVarName},
@@ -110,6 +126,20 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
       &RelationshipStorage::getModifiesStmtUnderscore},
     {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE},
       &RelationshipStorage::getModifiesStmtVar},
+
+    // Modifies Proc
+    {{RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesProcedureVarName},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesProcedureUnderscore},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesProcedureVar},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesProcNameVarName},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesProcNameUnderscore},
+    {{RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesProcNameVar},
 
     // Calls
     {{RelationshipType::CALLS, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
@@ -205,8 +235,14 @@ const bool spa::PKB::addRelationship(RelationshipType relationshipType,
   case MODIFIES: {
     return relationshipStorage.addModifies(firstArg, secondArg);
   }
+  case MODIFIES_P: {
+    return relationshipStorage.addModifiesProc(firstArg, secondArg);
+  }
   case USES: {
     return relationshipStorage.addUses(firstArg, secondArg);
+  }
+  case USES_P: {
+    return relationshipStorage.addUsesProc(firstArg, secondArg);
   }
   case CALLS: {
     return relationshipStorage.addCalls(firstArg, secondArg);
@@ -268,6 +304,14 @@ const bool spa::PKB::addContainerPattern(DesignEntityType entityType, std::strin
   return false;
 }
 
+const bool spa::PKB::addCallsContainerParent(std::string procName, std::string lineNo) {
+  return relationshipStorage.addCallsContainerParent(procName, lineNo);
+}
+
+const bool spa::PKB::addCallsProc(int lineNo, std::string procedure) {
+  return relationshipStorage.addCallsProc(lineNo, procedure);
+}
+
 const bool spa::PKB::addStatementType(std::string lineNo, StatementType statementType) {
   return relationshipStorage.addStatementType(lineNo, statementType);
 }
@@ -279,7 +323,7 @@ const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure)
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
   PKBQueryArg firstArg, PKBQueryArg secondArg) {
   auto relationshipFunctionItr = relationshipQueryFunctionMap.find({ relationshipType,
-                                                     firstArg.getType(), secondArg.getType() });
+                                                                     firstArg.getType(), secondArg.getType() });
   return (relationshipFunctionItr->second)(relationshipStorage, firstArg, secondArg);
 }
 
@@ -303,4 +347,12 @@ const spa::QueryResult spa::PKB::getPattern(PKBQueryArg lhs, Pattern rhs) {
 const spa::QueryResult spa::PKB::getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg) {
   auto patternContainerFunctionItr = patternContainerQueryFunctionMap.find({ entityType, firstArg.getType() });
   return (patternContainerFunctionItr->second)(patternStorage, firstArg);
+}
+
+const spa::QueryResult spa::PKB::getCallsContainerParent(std::string procName) {
+  return relationshipStorage.getCallsContainerParent(procName);
+}
+
+const spa::QueryResult spa::PKB::getCallsProc() {
+  return relationshipStorage.getCallsProc();
 }

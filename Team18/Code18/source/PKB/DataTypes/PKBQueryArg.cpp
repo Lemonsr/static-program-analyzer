@@ -42,8 +42,7 @@ spa::PKBQueryArg::PKBQueryArg(PqlArgument& pqlArg) {
     underscoreOpt = {};
     break;
   }
-  case PROCEDURE_NAME:
-  case VARIABLE_NAME: {
+  case LITERAL_STRING: {
     type = PKBQueryArgType::NAME;
     nameOpt = { pqlArg.getValue() };
     break;

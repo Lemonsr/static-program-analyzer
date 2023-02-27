@@ -14,10 +14,10 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 namespace IntegrationTesting {
   TEST_CLASS(TestCallsEvaluator) {
 public:
-  TEST_METHOD(TestProcNameProcNameExists) {
+  TEST_METHOD(TestNameNameExists) {
     spa::SuchThatClause clause(spa::CALLS,
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "first", {}),
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "second", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "first", {}),
+                               spa::PqlArgument(spa::LITERAL_STRING, "second", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "first", "second");
     pkbManager->addRelationship(spa::CALLS, "second", "third");
@@ -28,10 +28,10 @@ public:
     Assert::AreEqual(dim.second, 1);
   }
 
-  TEST_METHOD(TestProcNameProcNameNotExists) {
+  TEST_METHOD(TestNameNameNotExists) {
     spa::SuchThatClause clause(spa::CALLS,
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "first", {}),
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "second", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "first", {}),
+                               spa::PqlArgument(spa::LITERAL_STRING, "second", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "first", "third");
     pkbManager->addRelationship(spa::CALLS, "second", "third");
@@ -44,7 +44,7 @@ public:
 
   TEST_METHOD(TestProcNameUnderscoreExists) {
     spa::SuchThatClause clause(spa::CALLS,
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "first", {}),
+                               spa::PqlArgument(spa::LITERAL_STRING, "first", {}),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "first", "second");
@@ -58,7 +58,7 @@ public:
 
   TEST_METHOD(TestProcNameUnderscoreNotExists) {
     spa::SuchThatClause clause(spa::CALLS,
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "first", {}),
+                               spa::PqlArgument(spa::LITERAL_STRING, "first", {}),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "second", "first");
@@ -72,7 +72,7 @@ public:
 
   TEST_METHOD(TestProcNameProcExists) {
     spa::SuchThatClause clause(spa::CALLS,
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "first", {}),
+                               spa::PqlArgument(spa::LITERAL_STRING, "first", {}),
                                spa::PqlArgument(spa::SYNONYM, "p", { spa::PROCEDURE }));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "first", "second");
@@ -89,7 +89,7 @@ public:
 
   TEST_METHOD(TestProcNameProcNotExists) {
     spa::SuchThatClause clause(spa::CALLS,
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "first", {}),
+                               spa::PqlArgument(spa::LITERAL_STRING, "first", {}),
                                spa::PqlArgument(spa::SYNONYM, "p", { spa::PROCEDURE }));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "second", "first");
@@ -104,7 +104,7 @@ public:
   TEST_METHOD(TestUnderscoreProcNameExists) {
     spa::SuchThatClause clause(spa::CALLS,
                                spa::PqlArgument(spa::WILDCARD, "_", {}),
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "second", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "second", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "first", "second");
     pkbManager->addRelationship(spa::CALLS, "second", "third");
@@ -118,7 +118,7 @@ public:
   TEST_METHOD(TestUnderscoreProcNameNotExists) {
     spa::SuchThatClause clause(spa::CALLS,
                                spa::PqlArgument(spa::WILDCARD, "_", {}),
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "second", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "second", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "first", "third");
     pkbManager->addRelationship(spa::CALLS, "second", "third");
@@ -189,7 +189,7 @@ public:
   TEST_METHOD(TestProcProcNameExists) {
     spa::SuchThatClause clause(spa::CALLS,
                                spa::PqlArgument(spa::SYNONYM, "p", { spa::PROCEDURE }),
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "second", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "second", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "first", "second");
     pkbManager->addRelationship(spa::CALLS, "second", "third");
@@ -206,7 +206,7 @@ public:
   TEST_METHOD(TestProcProcNameNotExists) {
     spa::SuchThatClause clause(spa::CALLS,
                                spa::PqlArgument(spa::SYNONYM, "p", { spa::PROCEDURE }),
-                               spa::PqlArgument(spa::PROCEDURE_NAME, "second", {}));
+                               spa::PqlArgument(spa::LITERAL_STRING, "second", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::CALLS, "first", "third");
     pkbManager->addRelationship(spa::CALLS, "second", "third");

@@ -1,14 +1,14 @@
-#include "UsesEvaluator.h"
+#include "ModifiesEvaluator.h"
 
-spa::UsesEvaluator::UsesEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
+spa::ModifiesEvaluator::ModifiesEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
   firstArg(firstArg), secondArg(secondArg) {
 }
 
-spa::QpsResultTable spa::UsesEvaluator::evaluate(PKBManager& pkbManager) {
+spa::QpsResultTable spa::ModifiesEvaluator::evaluate(PKBManager& pkbManager) {
   QpsResultTable table;
   table.addHeader(firstArg);
   table.addHeader(secondArg);
-  QueryResult result = pkbManager.getRelationship(USES,
+  QueryResult result = pkbManager.getRelationship(MODIFIES,
                                                   PKBQueryArg(firstArg),
                                                   PKBQueryArg(secondArg));
   if (result.getQueryResultType() == BOOL) {
@@ -16,7 +16,7 @@ spa::QpsResultTable spa::UsesEvaluator::evaluate(PKBManager& pkbManager) {
       table.addRow({ QpsValue(0), QpsValue(0) });
     }
   } else {
-    for (auto& pair : result.getLineNumberVariablePairs()) {
+    for (auto& pair : result.getLineNumberNamePairs()) {
       table.addRow({ QpsValue(pair.first), QpsValue(pair.second) });
     }
   }

@@ -1,14 +1,14 @@
-#include "CallsEvaluator.h"
+#include "CallsStarEvaluator.h"
 
-spa::CallsEvaluator::CallsEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
+spa::CallsStarEvaluator::CallsStarEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
   firstArg(firstArg), secondArg(secondArg) {
 }
 
-spa::QpsResultTable spa::CallsEvaluator::evaluate(PKBManager& pkbManager) {
+spa::QpsResultTable spa::CallsStarEvaluator::evaluate(PKBManager& pkbManager) {
   QpsResultTable table;
   table.addHeader(firstArg);
   table.addHeader(secondArg);
-  QueryResult result = pkbManager.getRelationship(CALLS,
+  QueryResult result = pkbManager.getRelationship(CALLS_STAR,
                                                   PKBQueryArg(firstArg),
                                                   PKBQueryArg(secondArg));
   if (result.getQueryResultType() == BOOL) {
@@ -16,7 +16,7 @@ spa::QpsResultTable spa::CallsEvaluator::evaluate(PKBManager& pkbManager) {
       table.addRow({ QpsValue(0), QpsValue(0) });
     }
   } else {
-    for (auto& pair : result.getProcNameProcNamePairs()) {
+    for (auto& pair : result.getNameNamePairs()) {
       table.addRow({ QpsValue(pair.first), QpsValue(pair.second) });
     }
   }

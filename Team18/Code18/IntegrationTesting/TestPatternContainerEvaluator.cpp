@@ -114,7 +114,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(pkbManager->addContainerPattern(spa::DesignEntityType::WHILE, "3", "z"));
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "ifs", { spa::DesignEntityType::IF });
-      spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, "x", {});
+      spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, "x", {});
 
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
         std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::IF, synonym, firstArg);
@@ -138,7 +138,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(pkbManager->addContainerPattern(spa::DesignEntityType::WHILE, "3", "z"));
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "ifs", { spa::DesignEntityType::IF });
-      spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, "a", {});
+      spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, "a", {});
 
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
         std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::IF, synonym, firstArg);
@@ -251,7 +251,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(pkbManager->addContainerPattern(spa::DesignEntityType::IF, "3", "z"));
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "w", { spa::DesignEntityType::WHILE });
-      spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, "z", {});
+      spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, "z", {});
 
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
         std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::WHILE, synonym, firstArg);
@@ -275,7 +275,7 @@ namespace IntegrationTesting {
       Assert::IsTrue(pkbManager->addContainerPattern(spa::DesignEntityType::IF, "3", "z"));
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "w", { spa::DesignEntityType::WHILE });
-      spa::PqlArgument firstArg(spa::ArgumentType::VARIABLE_NAME, "a", {});
+      spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, "a", {});
 
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
         std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::WHILE, synonym, firstArg);

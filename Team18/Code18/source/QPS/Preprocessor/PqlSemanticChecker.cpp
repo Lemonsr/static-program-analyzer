@@ -31,6 +31,9 @@ bool spa::PqlSemanticChecker::isValid(SuchThatClause& suchThatClause) {
   case FOLLOWS:
   case FOLLOWS_STAR:
     return checkFollowsArguments(firstArg, secondArg);
+  case CALLS:
+  case CALLS_STAR:
+    return checkCallsArguments(firstArg, secondArg);
   }
   return false;
 }
@@ -54,7 +57,7 @@ bool spa::PqlSemanticChecker::isValid(PatternClause& patternClause) {
 
 bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   ArgumentType firstArgType = firstArg.getType();
-  if (firstArgType == WILDCARD || firstArgType == VARIABLE_NAME) {
+  if (firstArgType == WILDCARD) {
     return false;
   }
 
@@ -79,7 +82,7 @@ bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument& firstArg, PqlA
 
 bool spa::PqlSemanticChecker::checkUsesArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   ArgumentType firstArgType = firstArg.getType();
-  if (firstArgType == WILDCARD || firstArgType == VARIABLE_NAME) {
+  if (firstArgType == WILDCARD) {
     return false;
   }
   if (firstArgType == SYNONYM) {
@@ -104,7 +107,7 @@ bool spa::PqlSemanticChecker::checkUsesArguments(PqlArgument& firstArg, PqlArgum
 bool spa::PqlSemanticChecker::checkParentArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   for (PqlArgument arg : { firstArg, secondArg }) {
     ArgumentType argType = arg.getType();
-    if (argType == VARIABLE_NAME) {
+    if (argType == LITERAL_STRING) {
       return false;
     }
 
@@ -122,13 +125,31 @@ bool spa::PqlSemanticChecker::checkParentArguments(PqlArgument& firstArg, PqlArg
 bool spa::PqlSemanticChecker::checkFollowsArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
   for (PqlArgument arg : { firstArg, secondArg }) {
     ArgumentType argType = arg.getType();
-    if (argType == VARIABLE_NAME) {
+    if (argType == LITERAL_STRING) {
       return false;
     }
 
     if (argType == SYNONYM) {
       DesignEntityType deType = arg.getDesignEntity().value();
       if (deType == PROCEDURE || deType == VARIABLE || deType == CONSTANT) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+bool spa::PqlSemanticChecker::checkCallsArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
+  for (PqlArgument arg : { firstArg, secondArg }) {
+    ArgumentType argType = arg.getType();
+    if (argType == LINE_NO) {
+      return false;
+    }
+
+    if (argType == SYNONYM) {
+      DesignEntityType deType = arg.getDesignEntity().value();
+      if (deType != PROCEDURE) {
         return false;
       }
     }
