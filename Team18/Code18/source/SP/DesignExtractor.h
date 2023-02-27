@@ -23,8 +23,12 @@ class DesignExtractor {
   void extractParentStar(ContainerStatement* containerStatement, std::string ancestorLineNum);
   void extractUsesAndModifies(std::vector<ProgramStatement*> statementList);
   void extractCallsStar();
+  void extractUsesAndModifiesProc();
+  void extractNestedProcUsesAndModifies();
+  void extractCallsModifiesAndUses();
 
   void dfsCallsStar(std::string parent, std::string child);
+
 
  public:
   DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement>& procedureList);

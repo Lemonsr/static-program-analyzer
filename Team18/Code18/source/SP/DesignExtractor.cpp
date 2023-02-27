@@ -12,23 +12,23 @@
 spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
                                       std::vector<ProcedureStatement>& procedureList) :
   pkbManager(pkbManager), procedureList(procedureList) {
-    for (auto& procedure : procedureList) {
-        auto statements = procedure.getStatementLst();
-        for (auto& statement : statements) {
-            if (dynamic_cast<spa::CallStatement*>(statement)) {
-                auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                procedure.addCalledVars(callStatement->getVariableName());
-            } else if (dynamic_cast<spa::ContainerStatement*>(statement)) {
-                auto containerStatement = dynamic_cast<spa::ContainerStatement*>(statement);
-                std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
-                for (auto& called : calledSet) {
-                    procedure.addCalledVars(called);
-                }
-            }
+  for (auto& procedure : procedureList) {
+    auto statements = procedure.getStatementLst();
+    for (auto& statement : statements) {
+      if (dynamic_cast<spa::CallStatement*>(statement)) {
+        auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
+        procedure.addCalledVars(callStatement->getVariableName());
+      } else if (dynamic_cast<spa::ContainerStatement*>(statement)) {
+        auto containerStatement = dynamic_cast<spa::ContainerStatement*>(statement);
+        std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
+        for (auto& called : calledSet) {
+          procedure.addCalledVars(called);
         }
-        procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-            procedure.getCalledVars());
+      }
     }
+    procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
+      procedure.getCalledVars());
+  }
 }
 
 void spa::DesignExtractor::extractRelationship() {
@@ -165,19 +165,76 @@ void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*>
 }
 
 void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {
-    if (procCallMap.find(child) == procCallMap.end()) return;
-    for (auto& childChild : procCallMap[child]) {
-        pkbManager.addRelationship(CALLS_STAR, parent, childChild);
-        dfsCallsStar(parent, childChild);
-    }
+  if (procCallMap.find(child) == procCallMap.end()) return;
+  for (auto& childChild : procCallMap[child]) {
+    pkbManager.addRelationship(CALLS_STAR, parent, childChild);
+    dfsCallsStar(parent, childChild);
+  }
 }
 
 void spa::DesignExtractor::extractCallsStar() {
-    for (auto& procedure : procedureList) {
-        auto currentProcedure = procedure.getProcedureVarToken().getValue();
-        for (auto& directCall : procedure.getCalledVars()) {
-            pkbManager.addRelationship(CALLS_STAR, currentProcedure, directCall);
-            dfsCallsStar(currentProcedure, directCall);
-        }
+  for (auto& procedure : procedureList) {
+    auto currentProcedure = procedure.getProcedureVarToken().getValue();
+    for (auto& directCall : procedure.getCalledVars()) {
+      pkbManager.addRelationship(CALLS_STAR, currentProcedure, directCall);
+      dfsCallsStar(currentProcedure, directCall);
     }
+  }
+}
+
+void spa::DesignExtractor::extractUsesAndModifiesProc() {
+  for (auto& procedure: procedureList) {
+    std::string procName = procedure.getProcedureVarToken().getValue();
+    std::unordered_set<std::string> childrenProcs = pkbManager.getParentProcedure(procName);
+    for (auto& childProc : childrenProcs) {
+      std::unordered_set<std::string> varUses = pkbManager.getUsesProc(childProc);
+      std::unordered_set<std::string> varModifies = pkbManager.getModifiesProc(childProc);
+      for (auto& var : varUses) {
+        pkbManager.addRelationship(USES_PROC, procName, var);
+      }
+      for (auto& var : varModifies) {
+        pkbManager.addRelationship(MODIFIES_PROC, procName, var);
+      }
+    }
+  }
+}
+
+void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
+  for (auto& procedure : procedureList) {
+    std::string procName = procedure.getProcedureVarToken().getValue();
+    std::optional<std::unordered_set<int>> ifWhileParents = pkbManager.getCallContainerParent(procName);
+    if (!ifWhileParents.has_value()) {
+      continue;
+    }
+    std::unordered_set<std::string> varUses = pkbManager.getUsesProc(procName);
+    std::unordered_set<std::string> varModifies = pkbManager.getModifiesProc(procName);
+    for (auto& parent : ifWhileParents.value()) {
+      for (auto& var : varUses) {
+        pkbManager.addRelationship(USES, std::to_string(parent), var);
+      }
+      for (auto& var : varModifies) {
+        pkbManager.addRelationship(MODIFIES, std::to_string(parent), var);
+      }
+    }
+  }
+}
+
+void spa::DesignExtractor::extractCallsModifiesAndUses() {
+
+  for (auto& procedure : procedureList) {
+    std::string procName = procedure.getProcedureVarToken().getValue();
+    std::optional<std::unordered_set<int>> ifWhileParents = pkbManager.getCallContainerParent(procName);
+    if (!ifWhileParents.has_value()) {
+      continue;
+    }
+    std::unordered_set<std::string> varUses = pkbManager.getUsesProc(procName);
+    std::unordered_set<std::string> varModifies = pkbManager.getModifiesProc(procName);
+    for (auto& parent : ifWhileParents.value()) {
+      for (auto& var : varUses) {
+        pkbManager.addRelationship(USES_PROC, procName, var);
+      }      for (auto& var : varModifies) {
+        pkbManager.addRelationship(MODIFIES_PROC, procName, var);
+      }
+    }
+  }
 }
