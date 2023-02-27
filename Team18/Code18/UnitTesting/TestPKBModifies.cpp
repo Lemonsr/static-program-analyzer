@@ -180,7 +180,8 @@ namespace UnitTesting {
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
                                                                       spa::DesignEntityType::STMT));
-        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+        spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "v",
+                                                                       spa::DesignEntityType::VARIABLE));
         spa::QueryResult queryResult = relationshipStorage.getModifiesStmtVar(firstArg, secondArg);
 
         Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
