@@ -90,7 +90,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\QPS;$(SolutionDir)source\commons;$(SolutionDir)source\SP;$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\PKB\Storage;$(SolutionDir)source\PKB\DataTypes;$(SolutionDir)source\PKB\utils;$(SolutionDir)source\QPS;$(SolutionDir)source\QPS\Evaluators;$(SolutionDir)source\QPS\Preprocessor;$(SolutionDir)source\QPS\Translator;$(SolutionDir)source\commons;$(SolutionDir)source\SP;$(SolutionDir)source\SP\Parser;$(SolutionDir)source\SP\DesignExtractor;$(SolutionDir)source\SP\Validators;$(SolutionDir)source\SP\Statements;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
