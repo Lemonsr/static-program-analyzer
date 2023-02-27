@@ -1,0 +1,45 @@
+1 - Calls (ProcName, ProcName) 
+stmt s;
+Select s such that Calls("A", "B")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+5000
+2 - Calls (ProcName, Underscore) 
+assign a;
+Select a such that Calls("B", _)
+2, 7, 8, 10, 15
+5000
+3 - Calls (ProcName, Proc)
+procedure p1;
+Select p1 such that Calls("B", p1)
+C
+5000
+4 - Calls (Underscore, ProcName) 
+stmt s;
+Select s such that Calls(_, "F")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+5000
+5 - Calls (Underscore, Underscore) 
+stmt s;
+Select s such that Calls(_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+5000
+6 - Calls (Underscore, Proc)
+procedure p1;
+Select p1 such that Calls(_, p1)
+B, C, D, E, F
+5000
+7 - Calls (Proc, ProcName)
+procedure p1;
+Select p1 such that Calls(p1, "F")
+E
+5000
+8 - Calls (Proc, Underscore)
+procedure p1;
+Select p1 such that Calls(p1, _)
+A, B, C, E, F
+5000
+9 - Calls (Proc, Proc)
+procedure p1, p2;
+Select p2 such that Calls(p1,p2)
+B, C, D, E, F
+5000
