@@ -1888,7 +1888,6 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-            
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }
@@ -1908,7 +1907,6 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_SEMICOLON, ";"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }
@@ -1943,7 +1941,6 @@ namespace UnitTesting {
             tokens.pushBack({spa::TOKEN_OPEN_BRACE, "{"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
             tokens.pushBack({spa::TOKEN_CLOSE_BRACE, "}"});
-            
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }
@@ -2307,7 +2304,6 @@ namespace UnitTesting {
             tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
             tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
-            
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }

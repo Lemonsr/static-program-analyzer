@@ -192,14 +192,11 @@ void spa::SpValidator::validateReadPrint() {
     std::string currTokenValue = currToken.getValue();
     if (currTokenValue == "read") {
         tokens[idx - 1] = Token(TOKEN_READ, "read");
-    }
-    else if (currTokenValue == "print") {
+    } else if (currTokenValue == "print") {
         tokens[idx - 1] = Token(TOKEN_PRINT, "print");
-    }
-    else if (currTokenValue == "call") {
+    } else if (currTokenValue == "call") {
         tokens[idx - 1] = Token(TOKEN_CALL, "call");
-    }
-    else {
+    } else {
         throw std::exception("Unknown Statement");
     }
 
@@ -216,12 +213,10 @@ void spa::SpValidator::validateWhileIf() {
     if (nextTokenValue == "if") {
         tokens[idx] = Token(TOKEN_IF, nextTokenValue);
         validateIf();
-    }
-    else if (nextTokenValue == "while") {
+    } else if (nextTokenValue == "while") {
         tokens[idx] = Token(TOKEN_WHILE, nextTokenValue);
         validateWhile();
-    }
-    else {
+    } else {
         throw std::exception("Unknown stmt");
     }
 }
