@@ -28,8 +28,9 @@ class DesignExtractor {
   void extractCallsModifiesAndUses();
 
   void dfsCallsStar(std::string parent, std::string child);
-
-
+  std::optional<std::vector<std::string>> getResFromPkbHelper(
+    std::string procName, std::string synonym, DesignEntityType type);
+  void addUsesModifiesAndProc(std::string relArg, std::optional<std::vector<std::string>> varUses, std::optional<std::vector<std::string>> varModifies, bool isByProc);
  public:
   DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement>& procedureList);
   void extractRelationship();

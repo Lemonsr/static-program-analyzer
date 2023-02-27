@@ -83,7 +83,7 @@ void spa::ReadStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::READ);
   pkbManager.addRelationship(MODIFIES, stringStmtLineNum, variableName);
-  pkbManager.addRelationship(MODIFIES_PROC, parentProcedureVal, variableName);
+  pkbManager.addRelationship(MODIFIES_P, parentProcedureVal, variableName);
   addParentModifies(pkbManager, variableName);
 }
 
@@ -93,7 +93,7 @@ void spa::PrintStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::PRINT);
   pkbManager.addRelationship(USES, stringStmtLineNum, variableName);
-  pkbManager.addRelationship(USES_PROC, parentProcedureVal, variableName);
+  pkbManager.addRelationship(USES_P, parentProcedureVal, variableName);
   addParentUses(pkbManager, variableName);
 }
 
@@ -102,11 +102,8 @@ void spa::CallStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addEntity(VARIABLE, variableName);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::CALL);
+  pkbManager.addCallsProc(statementLineNum, variableName);
   pkbManager.addRelationship(CALLS, parentProcedureVal, variableName);
-  pkbManager.addRelationship(USES, stringStmtLineNum, variableName);
-  pkbManager.addRelationship(MODIFIES, stringStmtLineNum, variableName);
-  pkbManager.addRelationship(USES_PROC, parentProcedureVal, variableName);
-  pkbManager.addRelationship(MODIFIES_PROC, parentProcedureVal, variableName);
   addCallIfWhileParent(pkbManager);
 }
 
@@ -116,7 +113,7 @@ void spa::AssignStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::ASSIGN);
   pkbManager.addRelationship(MODIFIES, stringStmtLineNum, assignVar);
-  pkbManager.addRelationship(MODIFIES_PROC, parentProcedureVal, assignVar);
+  pkbManager.addRelationship(MODIFIES_P, parentProcedureVal, assignVar);
   addParentModifies(pkbManager, assignVar);
   extractUsesFromPostfix(pkbManager, postfixExpr);
   pkbManager.addPattern(stringStmtLineNum, assignVar, postfixExpr);
@@ -153,7 +150,7 @@ void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
     } else if (std::all_of(expr.begin(), expr.end(), ::isalnum)) {
       pkbManager.addEntity(VARIABLE, expr);
       pkbManager.addRelationship(USES, stringStmtLineNum, expr);
-      pkbManager.addRelationship(USES_PROC, parentProcedureVal, expr);
+      pkbManager.addRelationship(USES_P, parentProcedureVal, expr);
       addParentUses(pkbManager, expr);
     }
     expr = "";
@@ -206,10 +203,10 @@ void spa::NonContainerStatement::addParentModifies(PKBManager& pkbManager,
 
 void spa::CallStatement::addCallIfWhileParent(PKBManager& pkbManager) {
   for (int parent : whileStmtParents) {
-    pkbManager.addContainerParentsTable(parentProcedureVal, parent);
+    pkbManager.addCallsContainerParent(parentProcedureVal, std::to_string(parent));
   }
 
   for (int parent : ifStmtParents) {
-    pkbManager.addContainerParentsTable(parentProcedureVal, parent);
+    pkbManager.addCallsContainerParent(parentProcedureVal, std::to_string(parent));
   }
 }
