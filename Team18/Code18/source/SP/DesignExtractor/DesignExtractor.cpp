@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <unordered_set>
+#include <utility>
 
 #include "ContainerStatement.h"
 #include "NonContainerStatement.h"
@@ -197,41 +198,6 @@ void spa::DesignExtractor::extractUsesAndModifiesProc() {
         childProc.second, "v",
         VARIABLE, MODIFIES);
       addUsesModifiesAndProc(procName, varUses, varModifies, true);
-    }
-  }
-}
-
-void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
-  for (auto& procedure : procedureList) {
-    std::string procName = procedure.getProcedureVarToken().getValue();
-    QueryResult queryResult = pkbManager.getCallsContainerParent(procName);
-    std::vector<int> ifWhileParents = queryResult.getLineNumbers();
-
-    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(procName, "v",
-      VARIABLE, USES);
-    std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(procName,
-      "v",
-      VARIABLE, MODIFIES);
-    for (auto& parent : ifWhileParents) {
-      addUsesModifiesAndProc(std::to_string(parent), varUses, varModifies, false);
-    }
-  }
-}
-
-void spa::DesignExtractor::extractCallsModifiesAndUses() {
-  for (auto& procedure : procedureList) {
-    std::string procName = procedure.getProcedureVarToken().getValue();
-    QueryResult queryResult = pkbManager.getCallsProc();
-    std::vector<std::pair<int, std::string>> callLineNamePairs = queryResult.
-      getLineNumberNamePairs();
-    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(procName, "v",
-      VARIABLE, USES);
-    std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(procName,
-      "v",
-      VARIABLE, MODIFIES);
-
-    for (auto& pair : callLineNamePairs) {
-      addUsesModifiesAndProc(std::to_string(pair.first), varUses, varModifies, false);
     }
   }
 }
