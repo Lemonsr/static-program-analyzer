@@ -21,8 +21,8 @@ void spa::SP::processSource() {
     if (!isValid) {
         exit(1);
     }
-
-    SpParser parser = SpParser(convertedTokens);
+    auto updatedStream = validator.getUpdatedStream();
+    SpParser parser = SpParser(updatedStream);
     std::vector<ProcedureStatement> procedureList = parser.parse();
     DesignExtractor designExtractor = DesignExtractor(pkbManager, procedureList);
     designExtractor.extractRelationship();
@@ -37,28 +37,6 @@ spa::Stream<spa::Token> spa::SP::convertToken() {
     } catch (std::runtime_error &e) {
         std::cerr << e.what() << std::endl;
         exit(1);
-    }
-
-    for (int64_t i = 0; i < tokens.remaining(); i++) {
-        Token currToken = tokens[i];
-        TokenType currTokenType = currToken.getType();
-        bool isTokenNameType = currTokenType == TOKEN_NAME;
-        if (!isTokenNameType) {
-            continue;
-        }
-
-        std::string currTokenValue = currToken.getValue();
-        bool isValidTokenName = stmtTokensMap.count(currTokenValue);
-        if (isValidTokenName) {
-            // e.g. [i-1] => "print", [i] => "print" => continue
-            // e.g. [i-1] => "read", [i] => "print" => continue
-            // [i] should remain as TOKEN_NAME
-            if (i > 0 && (tokens[i - 1].getValue() == currTokenValue ||
-                stmtTokensMap.count(tokens[i - 1].getValue()))) {
-                continue;
-            }
-            tokens[i] = Token(stmtTokensMap.at(currTokenValue), currTokenValue);
-        }
     }
     return tokens;
 }
