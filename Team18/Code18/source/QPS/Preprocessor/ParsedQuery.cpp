@@ -14,6 +14,7 @@
 #include "ParentEvaluator.h"
 #include "ParentStarEvaluator.h"
 #include "PatternEvaluator.h"
+#include "PatternContainerEvaluator.h"
 
 bool spa::ParsedQuery::addDeclaration(std::string synonym,
   DesignEntityType designEntity) {
@@ -151,7 +152,13 @@ spa::PatternClause::PatternClause(PqlArgument synonym, PqlArgument firstArg,
 }
 
 std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
-  return std::make_unique<spa::PatternEvaluator>(synonym, firstArg, pattern);
+  switch (synonym.getDesignEntity().value()) {
+  case IF:
+  case WHILE:
+    return std::make_unique<spa::PatternContainerEvaluator>(synonym.getDesignEntity().value(), synonym, firstArg);
+  case ASSIGN:
+    return std::make_unique<spa::PatternEvaluator>(synonym, firstArg, pattern);
+  };
 }
 
 const spa::PqlArgument& spa::PatternClause::getFirstArg() {
