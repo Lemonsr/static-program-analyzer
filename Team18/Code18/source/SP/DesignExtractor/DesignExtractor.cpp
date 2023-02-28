@@ -201,3 +201,28 @@ void spa::DesignExtractor::extractUsesAndModifiesProc() {
     }
   }
 }
+
+std::vector<std::pair<std::string, std::string>> spa::DesignExtractor::getResFromPkbHelper(
+  std::string procName, std::string synonym, DesignEntityType type, RelationshipType relType) {
+  PqlArgument firstArg = PqlArgument(LITERAL_STRING, procName, {});
+  PqlArgument secondArg = PqlArgument(SYNONYM, synonym,
+    {type});
+  QueryResult queryResult = pkbManager.getRelationship(relType, PKBQueryArg(firstArg),
+    PKBQueryArg(secondArg));
+  return queryResult.getNameNamePairs();
+}
+
+void spa::DesignExtractor::addUsesModifiesAndProc(std::string relArg,
+                                                  std::vector<std::pair<std::string, std::string>>
+                                                  varUses,
+                                                  std::vector<std::pair<std::string, std::string>>
+                                                  varModifies, bool isByProc) {
+  RelationshipType usesType = isByProc ? USES_P : USES;
+  RelationshipType modifiesType = isByProc ? MODIFIES_P : MODIFIES;
+  for (auto& var : varUses) {
+    pkbManager.addRelationship(usesType, relArg, var.second);
+  }
+  for (auto& var : varModifies) {
+    pkbManager.addRelationship(modifiesType, relArg, var.second);
+  }
+}
