@@ -42,6 +42,7 @@ void spa::DesignExtractor::extractRelationship() {
     extractDesignAbstraction(statementList);
   }
   extractCallsStar();
+  extractUsesAndModifiesProc();
 }
 
 void spa::DesignExtractor::extractDesignAbstraction(std::vector<ProgramStatement*> statementList) {
@@ -185,17 +186,17 @@ void spa::DesignExtractor::extractCallsStar() {
 void spa::DesignExtractor::extractUsesAndModifiesProc() {
   for (auto& procedure : procedureList) {
     std::string procName = procedure.getProcedureVarToken().getValue();
-    std::optional<std::vector<std::string>> childrenProc = getResFromPkbHelper(procName, "p",
-      PROCEDURE);
-    if (!childrenProc.has_value()) {
-      continue;
-    }
-    for (auto& childProc : childrenProc.value()) {
-      std::optional<std::vector<std::string>> varUses = getResFromPkbHelper(childProc, "v",
-        VARIABLE);
-      std::optional<std::vector<std::string>> varModifies = getResFromPkbHelper(childProc, "v",
-        VARIABLE);
-      addUsesModifiesAndProc(childProc, varUses, varModifies, true);
+    std::vector<std::pair<std::string, std::string>> childrenProc = getResFromPkbHelper(procName,
+      "p",
+      PROCEDURE, CALLS_STAR);
+    for (auto& childProc : childrenProc) {
+      std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(
+        childProc.second, "v",
+        VARIABLE, USES);
+      std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(
+        childProc.second, "v",
+        VARIABLE, MODIFIES);
+      addUsesModifiesAndProc(procName, varUses, varModifies, true);
     }
   }
 }
@@ -204,14 +205,14 @@ void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
   for (auto& procedure : procedureList) {
     std::string procName = procedure.getProcedureVarToken().getValue();
     QueryResult queryResult = pkbManager.getCallsContainerParent(procName);
-    std::optional<std::vector<int>> ifWhileParents = queryResult.getLineNumbers();
-    if (!ifWhileParents.has_value()) {
-      continue;
-    }
-    std::optional<std::vector<std::string>> varUses = getResFromPkbHelper(procName, "v", VARIABLE);
-    std::optional<std::vector<std::string>> varModifies = getResFromPkbHelper(procName, "v",
-      VARIABLE);
-    for (auto& parent : ifWhileParents.value()) {
+    std::vector<int> ifWhileParents = queryResult.getLineNumbers();
+
+    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(procName, "v",
+      VARIABLE, USES);
+    std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(procName,
+      "v",
+      VARIABLE, MODIFIES);
+    for (auto& parent : ifWhileParents) {
       addUsesModifiesAndProc(std::to_string(parent), varUses, varModifies, false);
     }
   }
@@ -221,44 +222,16 @@ void spa::DesignExtractor::extractCallsModifiesAndUses() {
   for (auto& procedure : procedureList) {
     std::string procName = procedure.getProcedureVarToken().getValue();
     QueryResult queryResult = pkbManager.getCallsProc();
-    std::optional<std::vector<int>> allCallsLineNumber = queryResult.getLineNumbers();
-    if (!allCallsLineNumber.has_value()) {
-      continue;
-    }
-    std::optional<std::vector<std::string>> varUses = getResFromPkbHelper(procName, "v", VARIABLE);
-    std::optional<std::vector<std::string>> varModifies = getResFromPkbHelper(procName, "v",
-      VARIABLE);
-    for (auto& parent : allCallsLineNumber.value()) {
-      addUsesModifiesAndProc(std::to_string(parent), varUses, varModifies, false);
-    }
-  }
-}
+    std::vector<std::pair<int, std::string>> callLineNamePairs = queryResult.
+      getLineNumberNamePairs();
+    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(procName, "v",
+      VARIABLE, USES);
+    std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(procName,
+      "v",
+      VARIABLE, MODIFIES);
 
-std::optional<std::vector<std::string>> spa::DesignExtractor::getResFromPkbHelper(
-  std::string procName, std::string synonym, DesignEntityType type) {
-  PqlArgument firstArg = PqlArgument(LITERAL_STRING, procName, {});
-  PqlArgument secondArg = PqlArgument(SYNONYM, synonym,
-    {type});
-  QueryResult queryResult = pkbManager.getRelationship(CALLS_STAR, PKBQueryArg(firstArg),
-    PKBQueryArg(secondArg));
-  return queryResult.getNames();
-}
-
-
-void spa::DesignExtractor::addUsesModifiesAndProc(std::string relArg,
-                                                  std::optional<std::vector<std::string>> varUses,
-                                                  std::optional<std::vector<std::string>>
-                                                  varModifies, bool isByProc) {
-  RelationshipType usesType = isByProc ? USES_P : USES;
-  RelationshipType modifiesType = isByProc ? MODIFIES_P : MODIFIES;
-  if (varUses.has_value()) {
-    for (auto& var : varUses.value()) {
-      pkbManager.addRelationship(usesType, relArg, var);
-    }
-  }
-  if (varModifies.has_value()) {
-    for (auto& var : varModifies.value()) {
-      pkbManager.addRelationship(modifiesType, relArg, var);
+    for (auto& pair : callLineNamePairs) {
+      addUsesModifiesAndProc(std::to_string(pair.first), varUses, varModifies, false);
     }
   }
 }
