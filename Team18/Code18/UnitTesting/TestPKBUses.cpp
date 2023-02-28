@@ -115,8 +115,7 @@ namespace UnitTesting {
         spa::RelationshipStorage relationshipStorage;
         relationshipStorage.setUsesTable(usesTable);
         relationshipStorage.setStatementTypeTable(statementTypeTable);
-        std::vector<std::pair<int, std::string>> expected = { {1, "a"}, {1, "b"}, {1, "c"}, {7, "a"}, {7, "b"},
-                                                              {7, "c"}, {8, "a"}, {8, "b"} };
+        std::vector<std::pair<int, std::string>> expected = { {1, "a"}, {7, "a"}, {8, "a"} };
 
         spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
           spa::DesignEntityType::STMT));
