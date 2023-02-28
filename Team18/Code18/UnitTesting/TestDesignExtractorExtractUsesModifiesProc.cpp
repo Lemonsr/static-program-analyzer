@@ -1,9 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 #include "stdafx.h"
-
-#include <algorithm>
 
 #include "DesignExtractor.h"
 #include "PKB.h"
