@@ -14,9 +14,10 @@ bool spa::SpValidator::validateGrammar() {
     try {
         while (hasRemaining()) {
             Token currToken = getToken();
-            if (currToken.getType() != TOKEN_PROCEDURE) {
+            if (currToken.getValue() != "procedure") {
                 throw std::exception("Program should start with procedure");
             }
+            tokens[idx - 1] = Token(TOKEN_PROCEDURE, "procedure");
             validateProcedure();
         }
         return true;
@@ -114,20 +115,25 @@ void spa::SpValidator::validateProcedure() {
     }
 }
 
-// call not working
 // stmtLst: stmt +
 // stmt : read | print | call | while | if | assign
 void spa::SpValidator::validateStmtLst() {
+    bool hasOneOrMoreStatement = false;
     while (hasRemaining()) {
         Token token = peekNextToken();
         TokenType tokenType = token.getType();
-        if (tokenType == TOKEN_CLOSE_BRACE) {
+        std::string tokenValue = token.getValue();
+
+        if (hasOneOrMoreStatement && tokenType == TOKEN_CLOSE_BRACE) {
             return;  // Empty proc
+        } else if (!hasOneOrMoreStatement && tokenType == TOKEN_CLOSE_BRACE) {
+            throw std::exception("No stmt in stmtLst");
         }
 
-        if (!nameToken.count(tokenType)) {
+        if (tokenType != TOKEN_NAME) {
             throw std::exception("Unknown stmt");
         }
+        hasOneOrMoreStatement = true;
 
         validateStmt();
     }
@@ -183,8 +189,14 @@ void spa::SpValidator::validateEqual() {
 // specifically escape the call stmt
 void spa::SpValidator::validateReadPrint() {
     Token currToken = getToken();
-    TokenType currTokenType = currToken.getType();
-    if (currTokenType != TOKEN_READ && currTokenType != TOKEN_PRINT && currTokenType != TOKEN_CALL) {
+    std::string currTokenValue = currToken.getValue();
+    if (currTokenValue == "read") {
+        tokens[idx - 1] = Token(TOKEN_READ, "read");
+    } else if (currTokenValue == "print") {
+        tokens[idx - 1] = Token(TOKEN_PRINT, "print");
+    } else if (currTokenValue == "call") {
+        tokens[idx - 1] = Token(TOKEN_CALL, "call");
+    } else {
         throw std::exception("Unknown Statement");
     }
 
@@ -197,17 +209,18 @@ void spa::SpValidator::validateReadPrint() {
 }
 
 void spa::SpValidator::validateWhileIf() {
-    switch (peekNextToken().getType()) {
-        case TOKEN_IF:
-            validateIf();
-            break;
-        case TOKEN_WHILE:
-            validateWhile();
-            break;
-        default:
-            throw std::exception("Unknown stmt");
+    std::string nextTokenValue = peekNextToken().getValue();
+    if (nextTokenValue == "if") {
+        tokens[idx] = Token(TOKEN_IF, nextTokenValue);
+        validateIf();
+    } else if (nextTokenValue == "while") {
+        tokens[idx] = Token(TOKEN_WHILE, nextTokenValue);
+        validateWhile();
+    } else {
+        throw std::exception("Unknown stmt");
     }
 }
+
 
 // while: 'while' '(' cond_expr ')' '{' stmtLst '}'
 void spa::SpValidator::validateWhile() {
@@ -240,9 +253,11 @@ void spa::SpValidator::validateIf() {
         throw std::exception("Missing ')' for IF after COND_EXPR");
     }
 
-    if (!hasRemaining() || getToken().getType() != TOKEN_THEN) {
+    if (!hasRemaining() || getToken().getValue() != "then") {
         throw std::exception("Missing THEN for IF");
     }
+
+    tokens[idx - 1] = Token(TOKEN_THEN, "then");
 
     if (!hasRemaining() || !isValidOpenBrace(getToken())) {
         throw std::exception("Missing '{' for THEN clause");
@@ -254,9 +269,11 @@ void spa::SpValidator::validateIf() {
         throw std::exception("Missing '}' for THEN clause");
     }
 
-    if (!hasRemaining() || getToken().getType() != TOKEN_ELSE) {
+    if (!hasRemaining() || getToken().getValue() != "else") {
         throw std::exception("Missing ELSE for IF");
     }
+
+    tokens[idx - 1] = Token(TOKEN_ELSE, "else");
 
     if (!hasRemaining() || !isValidOpenBrace(getToken())) {
         throw std::exception("Missing '{' for ELSE clause");
@@ -476,3 +493,6 @@ bool spa::SpValidator::isRelFactor(std::vector<Token> tokensToCheck) {
     return isExpr(tokensToCheck);
 }
 
+spa::Stream<spa::Token> spa::SpValidator::getUpdatedStream() {
+    return tokens;
+}

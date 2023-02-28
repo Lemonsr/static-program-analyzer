@@ -10,6 +10,7 @@ class SpValidator {
  public:
         explicit SpValidator(Stream<Token> tokens);
         bool validateGrammar();
+        spa::Stream<spa::Token> getUpdatedStream();
 
  private:
         std::unordered_set<TokenType> condExprToken = {TOKEN_BOOL_AND, TOKEN_BOOL_OR};
@@ -19,10 +20,7 @@ class SpValidator {
         };
         std::unordered_set<TokenType> exprToken = {TOKEN_PLUS, TOKEN_MINUS};
         std::unordered_set<TokenType> termToken = {TOKEN_DIVIDE, TOKEN_MULTIPLY, TOKEN_MODULO};
-        std::unordered_set<TokenType> nameToken = {
-            TOKEN_NAME, TOKEN_IF, TOKEN_WHILE,
-            TOKEN_PRINT, TOKEN_READ, TOKEN_CALL
-        };
+
         std::unordered_set<TokenType> relFactorToken = {TOKEN_NAME, TOKEN_INTEGER};
 
         bool isValidCondExprToken(Token) const;
