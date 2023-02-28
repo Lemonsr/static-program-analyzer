@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <utility>
 
 #include "stdafx.h"
 
@@ -88,7 +89,7 @@ TEST_CLASS(TestDesignExtractorUsesModifiesProc) {
     std::vector<std::string> trxResult(result.size());
 
     std::transform(result.begin(), result.end(), trxResult.begin(),
-      [](std::pair<std::string, std::string> x) { return x.second; });
+      [](std::pair<std::string, std::string>& x) { return x.second; });
     return trxResult;
   }
 
