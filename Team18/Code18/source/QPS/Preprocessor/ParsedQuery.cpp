@@ -158,7 +158,7 @@ std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
     return std::make_unique<spa::PatternContainerEvaluator>(synonym.getDesignEntity().value(), synonym, firstArg);
   case ASSIGN:
     return std::make_unique<spa::PatternEvaluator>(synonym, firstArg, pattern);
-  };
+  }
 }
 
 const spa::PqlArgument& spa::PatternClause::getFirstArg() {
