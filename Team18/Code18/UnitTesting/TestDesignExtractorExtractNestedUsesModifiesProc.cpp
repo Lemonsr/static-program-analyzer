@@ -110,14 +110,15 @@ TEST_CLASS(TestDesignExtractorNestedUsesModifiesProc) {
     return std::equal(sorted_v1.begin(), sorted_v1.end(), sorted_v2.begin());
   }
 
-  void assertTrueTestCases(std::vector<std::pair<std::string, std::string>> testCases, spa::RelationshipType relType) {
+  void assertTrueTestCases(std::vector<std::pair<std::string, std::string>> testCases,
+                           spa::RelationshipType relType) {
     for (auto pair : testCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
-                                                    {});
+        {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
-                                                    {});
+        {});
       spa::QueryResult results = pkbManager->getRelationship(relType,
-                                                             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+        spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
       bool test = results.getIsTrue();
       Assert::IsTrue(test);
     }
@@ -483,7 +484,7 @@ public:
     assertTrueTestCases(positiveUsesTestCases, spa::USES);
 
     std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
-      {"1", varC},{"2", varC}
+      {"1", varC}, {"2", varC}
     };
 
     assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
@@ -534,7 +535,7 @@ public:
     assertTrueTestCases(positiveUsesTestCases, spa::USES);
 
     std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
-      {"1", varC},{"2", varC}
+      {"1", varC}, {"2", varC}
     };
 
     assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
@@ -588,7 +589,7 @@ public:
     assertTrueTestCases(positiveUsesTestCases, spa::USES);
 
     std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
-      {"1", varC},{"2", varC}
+      {"1", varC}, {"2", varC}
     };
 
     assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
