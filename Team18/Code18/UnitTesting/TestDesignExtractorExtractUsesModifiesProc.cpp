@@ -1,14 +1,13 @@
 #include "stdafx.h"
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <algorithm>
 
 #include "DesignExtractor.h"
 #include "PKB.h"
 #include "SpParser.h"
 #include "Token.h"
-
-#include <iostream>
-#include <vector>
-#include <utility>
-#include <algorithm>
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
