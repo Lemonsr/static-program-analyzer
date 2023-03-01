@@ -794,9 +794,7 @@ spa::QueryResult spa::RelationshipStorage::getUsesStmtVarName(PKBQueryArg firstA
       continue;
     }
 
-    for (auto& varName : itr->second) {
-      lineNumberNamePairs.push_back({ itr->first, varName });
-    }
+    lineNumberNamePairs.push_back({ itr->first, varName });
   }
 
   queryResult.setLineNumberNamePairs(lineNumberNamePairs);

@@ -15,15 +15,5 @@ class SP {
     std::string sourceCode;
     PKBManager& pkbManager;
     Stream<Token> convertToken();
-    const std::unordered_map<std::string, TokenType> stmtTokensMap{
-    {"procedure", spa::TOKEN_PROCEDURE},
-    {"read", spa::TOKEN_READ},
-    {"call", spa::TOKEN_CALL},
-    {"print", spa::TOKEN_PRINT},
-    {"while", spa::TOKEN_WHILE},
-    {"if", spa::TOKEN_IF},
-    {"then", spa::TOKEN_THEN},
-    {"else", spa::TOKEN_ELSE},
-    };
 };
 }  // namespace spa
