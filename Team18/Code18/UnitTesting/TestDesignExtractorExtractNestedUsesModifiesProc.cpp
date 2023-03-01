@@ -4,7 +4,6 @@
 #include <utility>
 #include <algorithm>
 
-#include <algorithm>
 #include "DesignExtractor.h"
 #include "PKB.h"
 #include "SpParser.h"
