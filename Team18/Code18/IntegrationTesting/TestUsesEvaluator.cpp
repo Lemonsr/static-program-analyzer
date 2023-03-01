@@ -315,10 +315,10 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 2);
     std::vector<std::vector<spa::QpsValue>> resultRows = table.getRows();
-    Assert::IsTrue(resultRows[0][0].getInteger() == 6 &&
-                   resultRows[0][1].getString() == "x");
-    Assert::IsTrue(resultRows[1][0].getInteger() == 11 &&
-                   resultRows[1][1].getString() == "z");
+    Assert::IsTrue(resultRows[0][0].getInteger() == 11 &&
+                   resultRows[0][1].getString() == "z");
+    Assert::IsTrue(resultRows[1][0].getInteger() == 6 &&
+                   resultRows[1][1].getString() == "x");
   }
 
   TEST_METHOD(TestWhileStmtVar) {
