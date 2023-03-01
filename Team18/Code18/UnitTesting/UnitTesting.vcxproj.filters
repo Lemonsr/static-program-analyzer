@@ -173,5 +173,8 @@
     <ClCompile Include="TestDesignExtractorExtractNestedUsesModifiesProc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestDesignExtractorCallUsesModifies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
