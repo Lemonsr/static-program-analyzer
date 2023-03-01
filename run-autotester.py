@@ -18,6 +18,14 @@ query_types = [
     'FollowsStar',
     'Parent',
     'ParentStar',
+    'Calls',
+    'CallsStar'
+]
+
+pattern_types = [
+    'Assign',
+    'If',
+    'While'
 ]
 
 autotester_path = '.\\Team18\\Code18\\Release\\AutoTester.exe'
@@ -44,7 +52,9 @@ def run_autotester(test_case_prefix):
         print(f'{test_case_prefix} passed\n')
 
 run_autotester(f'{test_path}\\SimpleSelect\\entities')
-run_autotester(f'{test_path}\\Pattern\\pattern')
+
+for pattern in pattern_types:
+  run_autotester(f'{test_path}\\Pattern\\pattern{pattern}')
 
 for type in query_types:
     for case in test_cases:
