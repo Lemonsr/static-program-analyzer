@@ -4,6 +4,7 @@
 #include <utility>
 #include <algorithm>
 
+#include <algorithm>
 #include "DesignExtractor.h"
 #include "PKB.h"
 #include "SpParser.h"
@@ -12,7 +13,7 @@
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
-TEST_CLASS(TestDesignExtractorUsesModifiesProc) {
+TEST_CLASS(TestDesignExtractorNestedUsesModifiesProc) {
   std::string varA = "a";
   std::string varB = "b";
   std::string varC = "c";
@@ -109,20 +110,43 @@ TEST_CLASS(TestDesignExtractorUsesModifiesProc) {
     return std::equal(sorted_v1.begin(), sorted_v1.end(), sorted_v2.begin());
   }
 
+  void assertTrueTestCases(std::vector<std::pair<std::string, std::string>> testCases, spa::RelationshipType relType) {
+    for (auto pair : testCases) {
+      spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first,
+                                                    {});
+      spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LITERAL_STRING, pair.second,
+                                                    {});
+      spa::QueryResult results = pkbManager->getRelationship(relType,
+                                                             spa::PKBQueryArg(pqlArgOne), spa::PKBQueryArg(pqlArgTwo));
+      bool test = results.getIsTrue();
+      Assert::IsTrue(test);
+    }
+  }
+
 public:
   TEST_METHOD_INITIALIZE(BeforeEach) {
     pkbManager = std::make_unique<spa::PKB>();
   }
 
-  TEST_METHOD(TestExtractUsesAndModifiesProcBasic) {
+  TEST_METHOD(TestExtractNestedWhileUsesAndModifiesProc) {
     /*
      *  procedure a {
-     * 1. c = d - e;
+     * 1. while (1 >= 1) {
+     * 2.   call b;
+     *    }
+     *  }
+     *
+     *  procedure b {
+     * 3. c = d - e;
      *  }
      */
 
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace, tokenCall,
+      tokenB, tokenSemiColon, tokenCloseBrace, tokenCloseBrace,
+      tokenProcedure, tokenB, tokenOpenBrace,
       tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
       tokenCloseBrace
     };
@@ -132,38 +156,45 @@ public:
     }
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 1);
+    Assert::IsTrue(procedureList.size() == 2);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    std::vector<std::string> testUses = retrieveResFromPkb(varA, "v", spa::VARIABLE, spa::USES);
-    std::vector<std::string> testModifies = retrieveResFromPkb(varA, "v", spa::VARIABLE,
-      spa::MODIFIES);
+    std::vector<std::pair<std::string, std::string>> positiveUsesTestCases = {
+      {"1", varD}, {"1", varE}
+    };
 
-    std::vector<std::string> expectedUses = {"d", "e"};
-    std::vector<std::string> expectedModifies = {"c"};
+    assertTrueTestCases(positiveUsesTestCases, spa::USES);
 
-    Assert::IsTrue(areStringVectorsEqual(expectedUses, testUses));
-    Assert::IsTrue(areStringVectorsEqual(expectedModifies, testModifies));
+    std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
+      {"1", varC}
+    };
+
+    assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
   }
 
-  TEST_METHOD(TestExtractUsesAndModifiesProcNoNesting) {
+  TEST_METHOD(TestExtractNestedThenUsesAndModifiesProc) {
     /*
      *  procedure a {
-     * 1. call b;
+     * 1. if (1 >= 1) then {
+     * 2.   call b;
+     *    } else {}
      *  }
      *
      *  procedure b {
-     * 2. d = e;
+     * 3. c = d - e;
      *  }
      */
 
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
-      tokenCall, tokenB, tokenSemiColon,
-      tokenCloseBrace, tokenProcedure, tokenB, tokenOpenBrace,
-      tokenD, tokenAssign, tokenE, tokenSemiColon,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen, tokenOpenBrace,
+      tokenCall, tokenB, tokenSemiColon, tokenCloseBrace,
+      tokenElse, tokenOpenBrace, tokenCloseBrace, tokenCloseBrace,
+      tokenProcedure, tokenB, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
@@ -177,93 +208,43 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    std::vector<std::string> testUses = retrieveResFromPkb(varA, "v", spa::VARIABLE, spa::USES);
-    std::vector<std::string> testModifies = retrieveResFromPkb(varA, "v", spa::VARIABLE,
-      spa::MODIFIES);
-
-    std::vector<std::string> expectedUses = {"e"};
-    std::vector<std::string> expectedModifies = {"d"};
-
-    Assert::IsTrue(areStringVectorsEqual(expectedUses, testUses));
-    Assert::IsTrue(areStringVectorsEqual(expectedModifies, testModifies));
-  }
-
-  TEST_METHOD(TestExtractUsesAndModifiesWithDoubleCall) {
-    /*
-     *  procedure a {
-     * 1. call b;
-     * 2. call f;
-     *  }
-     *
-     *  procedure b {
-     * 3. d = e;
-     *  }
-     *
-     *  procedure f {
-     * 4. g = h;
-     *  }
-     */
-    tokenList = {
-      tokenProcedure, tokenA, tokenOpenBrace,
-      tokenCall, tokenB, tokenSemiColon,
-      tokenCall, tokenF, tokenSemiColon,
-      tokenCloseBrace, tokenProcedure, tokenB, tokenOpenBrace,
-      tokenD, tokenAssign, tokenE, tokenSemiColon,
-      tokenCloseBrace, tokenProcedure, tokenF, tokenOpenBrace,
-      tokenG, tokenAssign, tokenH, tokenSemiColon, tokenCloseBrace
+    std::vector<std::pair<std::string, std::string>> positiveUsesTestCases = {
+      {"1", varD}, {"1", varE}
     };
-    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
-      tokenStream.pushBack(token);
-    }
-    auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 3);
 
-    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
-    designExtractor.extractRelationship();
+    assertTrueTestCases(positiveUsesTestCases, spa::USES);
 
-    std::vector<std::string> testUses = retrieveResFromPkb(varA, "v", spa::VARIABLE, spa::USES);
-    std::vector<std::string> testModifies = retrieveResFromPkb(varA, "v", spa::VARIABLE,
-      spa::MODIFIES);
+    std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
+      {"1", varC}
+    };
 
-    std::vector<std::string> expectedUses = {"e", "h"};
-    std::vector<std::string> expectedModifies = {"d", "g"};
-
-    Assert::IsTrue(areStringVectorsEqual(expectedUses, testUses));
-    Assert::IsTrue(areStringVectorsEqual(expectedModifies, testModifies));
+    assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
   }
 
-  TEST_METHOD(TestExtractUsesAndModifiesProcIfNested) {
+  TEST_METHOD(TestExtractNestedElseUsesAndModifiesProc) {
     /*
      *  procedure a {
      * 1. if (1 >= 1) then {
-     * 2.   call b;
      *    } else {
-     * 3.   call f;
+     * 2.   call b;
      *    }
      *  }
      *
      *  procedure b {
-     * 4. d = e;
-     *  }
-     *
-     *  procedure f {
-     * 5. g = h;
+     * 3. c = d - e;
      *  }
      */
+
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
-      tokenThen, tokenOpenBrace,
+      tokenCloseBracket, tokenThen, tokenOpenBrace, tokenCloseBrace,
+      tokenElse, tokenOpenBrace,
       tokenCall, tokenB, tokenSemiColon,
-      tokenCloseBrace, tokenElse, tokenOpenBrace,
-      tokenCall, tokenF, tokenSemiColon,
       tokenCloseBrace, tokenCloseBrace,
       tokenProcedure, tokenB, tokenOpenBrace,
-      tokenD, tokenAssign, tokenE, tokenSemiColon,
-      tokenCloseBrace, tokenProcedure, tokenF, tokenOpenBrace,
-      tokenG, tokenAssign, tokenH, tokenSemiColon, tokenCloseBrace
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto token : tokenList) {
@@ -271,23 +252,25 @@ public:
     }
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 3);
+    Assert::IsTrue(procedureList.size() == 2);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    std::vector<std::string> testUses = retrieveResFromPkb(varA, "v", spa::VARIABLE, spa::USES);
-    std::vector<std::string> testModifies = retrieveResFromPkb(varA, "v", spa::VARIABLE,
-      spa::MODIFIES);
+    std::vector<std::pair<std::string, std::string>> positiveUsesTestCases = {
+      {"1", varD}, {"1", varE}
+    };
 
-    std::vector<std::string> expectedUses = {"e", "h"};
-    std::vector<std::string> expectedModifies = {"d", "g"};
+    assertTrueTestCases(positiveUsesTestCases, spa::USES);
 
-    Assert::IsTrue(areStringVectorsEqual(expectedUses, testUses));
-    Assert::IsTrue(areStringVectorsEqual(expectedModifies, testModifies));
+    std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
+      {"1", varC}
+    };
+
+    assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
   }
 
-  TEST_METHOD(TestExtractUsesAndModifiesProcWhileNested) {
+  TEST_METHOD(TestExtractNestedWhileUsesAndModifiesMultiProc) {
     /*
      *  procedure a {
      * 1. while (1 >= 1) {
@@ -296,18 +279,191 @@ public:
      *  }
      *
      *  procedure b {
-     * 3. d = e;
+     * 3. call g;
      *  }
      *
+     *  procedure g {
+     * 4. c = d - e;
+     *  }
      */
+
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
       tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
-      tokenOpenBrace, tokenCall, tokenB, tokenSemiColon,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenCall, tokenB, tokenSemiColon,
       tokenCloseBrace, tokenCloseBrace,
       tokenProcedure, tokenB, tokenOpenBrace,
-      tokenD, tokenAssign, tokenE, tokenSemiColon,
+      tokenCall, tokenG, tokenSemiColon,
+      tokenCloseBrace,
+      tokenProcedure, tokenG, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
       tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 3);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<std::string, std::string>> positiveUsesTestCases = {
+      {"1", varD}, {"1", varE}
+    };
+
+    assertTrueTestCases(positiveUsesTestCases, spa::USES);
+
+    std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
+      {"1", varC}
+    };
+
+    assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
+  }
+
+  TEST_METHOD(TestExtractNestedThenUsesAndModifiesMultiProc) {
+    /*
+     *  procedure a {
+     * 1. if (1 >= 1) then {
+     * 2.   call b;
+     *    } else {}
+     *  }
+     *
+     *  procedure b {
+     * 3. call g;
+     *  }
+     *
+     *  procedure g {
+     * 4. c = d - e;
+     *  }
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen,
+      tokenOpenBrace,
+      tokenCall, tokenB, tokenSemiColon,
+      tokenCloseBrace,
+      tokenElse, tokenOpenBrace,
+      tokenCloseBrace, tokenCloseBrace,
+      tokenProcedure, tokenB, tokenOpenBrace,
+      tokenCall, tokenG, tokenSemiColon,
+      tokenCloseBrace,
+      tokenProcedure, tokenG, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 3);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<std::string, std::string>> positiveUsesTestCases = {
+      {"1", varD}, {"1", varE}
+    };
+
+    assertTrueTestCases(positiveUsesTestCases, spa::USES);
+
+    std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
+      {"1", varC}
+    };
+
+    assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
+  }
+
+  TEST_METHOD(TestExtractNestedElseUsesAndModifiesMultiProc) {
+    /*
+     *  procedure a {
+     * 1. if (1 >= 1) then {
+     *    } else {
+     * 2.   call b;
+     *    }
+     *  }
+     *
+     *  procedure b {
+     * 3. call g;
+     *  }
+     *
+     *  procedure g {
+     * 4. c = d - e;
+     *  }
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen,
+      tokenOpenBrace, tokenCloseBrace,
+      tokenElse, tokenOpenBrace,
+      tokenCall, tokenB, tokenSemiColon,
+      tokenCloseBrace, tokenCloseBrace,
+      tokenProcedure, tokenB, tokenOpenBrace,
+      tokenCall, tokenG, tokenSemiColon,
+      tokenCloseBrace,
+      tokenProcedure, tokenG, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 3);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<std::string, std::string>> positiveUsesTestCases = {
+      {"1", varD}, {"1", varE}
+    };
+
+    assertTrueTestCases(positiveUsesTestCases, spa::USES);
+
+    std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
+      {"1", varC}
+    };
+
+    assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
+  }
+
+  TEST_METHOD(TestExtractWhileNestedWhileUsesAndModifiesProc) {
+    /*
+     *  procedure a {
+     * 1. while (1 >= 1) {
+     * 2.   while (1 >= 1) {
+     * 3.     call b;
+     *      }
+     *    }
+     *  }
+     *
+     *  procedure b {
+     * 4. c = d - e;
+     *  }
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual,
+      tokenConstant, tokenCloseBracket, tokenOpenBrace,
+      tokenCall, tokenB, tokenSemiColon,
+      tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
+      tokenProcedure, tokenB, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenCloseBrace,
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto token : tokenList) {
@@ -320,44 +476,45 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    std::vector<std::string> testUses = retrieveResFromPkb(varA, "v", spa::VARIABLE, spa::USES);
-    std::vector<std::string> testModifies = retrieveResFromPkb(varA, "v", spa::VARIABLE,
-      spa::MODIFIES);
+    std::vector<std::pair<std::string, std::string>> positiveUsesTestCases = {
+      {"1", varD}, {"1", varE}, {"2", varD}, {"2", varE}
+    };
 
-    std::vector<std::string> expectedUses = {"e"};
-    std::vector<std::string> expectedModifies = {"d"};
+    assertTrueTestCases(positiveUsesTestCases, spa::USES);
 
-    Assert::IsTrue(areStringVectorsEqual(expectedUses, testUses));
-    Assert::IsTrue(areStringVectorsEqual(expectedModifies, testModifies));
+    std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
+      {"1", varC},{"2", varC}
+    };
+
+    assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
   }
 
-  TEST_METHOD(TestExtractUsesAndModifiesChainedProc) {
+  TEST_METHOD(TestExtractIfNestedThenUsesAndModifiesProc) {
     /*
      *  procedure a {
-     * 1. call b;
+     * 1. if (1 >= 1) then {
+     * 2.   if (1 >= 1) then {
+     * 3.     call b;
+     *      } else {}
+     *    } else {}
      *  }
      *
      *  procedure b {
-     * 2. call c;
-     * 3. g = h;
+     * 4. c = d - e;
      *  }
-     *
-     *  procedure c {
-     * 3. d = e;
-     *  }
-     *
      */
+
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant, tokenCloseBracket,
+      tokenThen, tokenOpenBrace, tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual,
+      tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
       tokenCall, tokenB, tokenSemiColon,
-      tokenCloseBrace,
+      tokenCloseBrace, tokenElse, tokenOpenBrace, tokenCloseBrace, tokenCloseBrace,
+      tokenElse, tokenOpenBrace, tokenCloseBrace, tokenCloseBrace,
       tokenProcedure, tokenB, tokenOpenBrace,
-      tokenCall, tokenC, tokenSemiColon,
-      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
       tokenCloseBrace,
-      tokenProcedure, tokenC, tokenOpenBrace,
-      tokenD, tokenAssign, tokenE, tokenSemiColon,
-      tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto token : tokenList) {
@@ -365,171 +522,53 @@ public:
     }
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 3);
+    Assert::IsTrue(procedureList.size() == 2);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
-    std::vector<std::string> testProcedures = {varA, varB};
-    std::vector<std::vector<std::string>> expectedUses = {{"e", "h"}, {"e", "h"}};
-    std::vector<std::vector<std::string>> expectedModifies = {{"d", "g"}, {"d", "g"}};
 
-    for (int i = 0; i < testProcedures.size(); i++) {
-      std::vector<std::string> testUses = retrieveResFromPkb(testProcedures[i], "v", spa::VARIABLE,
-        spa::USES);
-      std::vector<std::string> testModifies = retrieveResFromPkb(testProcedures[i], "v",
-        spa::VARIABLE, spa::MODIFIES);
+    std::vector<std::pair<std::string, std::string>> positiveUsesTestCases = {
+      {"1", varD}, {"1", varE}, {"2", varD}, {"2", varE}
+    };
 
-      Assert::IsTrue(areStringVectorsEqual(expectedUses[i], testUses));
-      Assert::IsTrue(areStringVectorsEqual(expectedModifies[i], testModifies));
-    }
+    assertTrueTestCases(positiveUsesTestCases, spa::USES);
+
+    std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
+      {"1", varC},{"2", varC}
+    };
+
+    assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
   }
 
-  TEST_METHOD(TestExtractUsesAndModifiesThenNestedChainedProc) {
+  TEST_METHOD(TestExtractIfNestedElseUsesAndModifiesProc) {
     /*
      *  procedure a {
-     * 1. call b;
+     * 1. if (1 >= 1) then {
+     *    } else {
+     * 2.   if (1 >= 1) then {
+     * 3.     call b;
+     *      } else {}
+     *    }
      *  }
      *
      *  procedure b {
-     * 2. if (1 >= 1) then {
-     * 3.   call c;
-     * 4.   g = h;
-     *  } else {
+     * 4. c = d - e;
      *  }
-     *
-     *  procedure c {
-     * 5. d = e;
-     *  }
-     *
      */
+
     tokenList = {
       tokenProcedure, tokenA, tokenOpenBrace,
-      tokenCall, tokenB, tokenSemiColon,
-      tokenCloseBrace,
-      tokenProcedure, tokenB, tokenOpenBrace,
       tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
-      tokenThen, tokenOpenBrace,
-      tokenCall, tokenC, tokenSemiColon,
-      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenThen, tokenOpenBrace, tokenCloseBrace,
+      tokenElse, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual,
+      tokenConstant, tokenCloseBracket, tokenThen, tokenOpenBrace,
+      tokenCall, tokenB, tokenSemiColon,
       tokenCloseBrace, tokenElse, tokenOpenBrace, tokenCloseBrace,
-      tokenCloseBrace,
-      tokenProcedure, tokenC, tokenOpenBrace,
-      tokenD, tokenAssign, tokenE, tokenSemiColon,
-      tokenCloseBrace
-    };
-    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
-      tokenStream.pushBack(token);
-    }
-    auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 3);
-
-    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
-    designExtractor.extractRelationship();
-    std::vector<std::string> testProcedures = {varA, varB};
-    std::vector<std::vector<std::string>> expectedUses = {{"e", "h"}, {"e", "h"}};
-    std::vector<std::vector<std::string>> expectedModifies = {{"d", "g"}, {"d", "g"}};
-
-    for (int i = 0; i < testProcedures.size(); i++) {
-      std::vector<std::string> testUses = retrieveResFromPkb(testProcedures[i], "v", spa::VARIABLE,
-        spa::USES);
-      std::vector<std::string> testModifies = retrieveResFromPkb(testProcedures[i], "v",
-        spa::VARIABLE, spa::MODIFIES);
-
-      Assert::IsTrue(areStringVectorsEqual(expectedUses[i], testUses));
-      Assert::IsTrue(areStringVectorsEqual(expectedModifies[i], testModifies));
-    }
-  }
-
-  TEST_METHOD(TestExtractUsesAndModifiesElseNestedChainedProc) {
-    /*
-     *  procedure a {
-     * 1. call b;
-     *  }
-     *
-     *  procedure b {
-     * 2. if (1 >= 1) then {
-     *  } else {
-     * 3.   call c;
-     * 4.   g = h;
-     *  }
-     *
-     *  procedure c {
-     * 5. d = e;
-     *  }
-     *
-     */
-    tokenList = {
-      tokenProcedure, tokenA, tokenOpenBrace,
-      tokenCall, tokenB, tokenSemiColon,
-      tokenCloseBrace,
-      tokenProcedure, tokenB, tokenOpenBrace,
-      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
-      tokenThen, tokenOpenBrace,
-      tokenCloseBrace, tokenElse, tokenOpenBrace,
-      tokenCall, tokenC, tokenSemiColon,
-      tokenG, tokenAssign, tokenH, tokenSemiColon,
       tokenCloseBrace, tokenCloseBrace,
-      tokenProcedure, tokenC, tokenOpenBrace,
-      tokenD, tokenAssign, tokenE, tokenSemiColon,
-      tokenCloseBrace
-    };
-    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
-      tokenStream.pushBack(token);
-    }
-    auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 3);
-
-    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
-    designExtractor.extractRelationship();
-    std::vector<std::string> testProcedures = {varA, varB};
-    std::vector<std::vector<std::string>> expectedUses = {{"e", "h"}, {"e", "h"}};
-    std::vector<std::vector<std::string>> expectedModifies = {{"d", "g"}, {"d", "g"}};
-
-    for (int i = 0; i < testProcedures.size(); i++) {
-      std::vector<std::string> testUses = retrieveResFromPkb(testProcedures[i], "v", spa::VARIABLE,
-        spa::USES);
-      std::vector<std::string> testModifies = retrieveResFromPkb(testProcedures[i], "v",
-        spa::VARIABLE, spa::MODIFIES);
-
-      Assert::IsTrue(areStringVectorsEqual(expectedUses[i], testUses));
-      Assert::IsTrue(areStringVectorsEqual(expectedModifies[i], testModifies));
-    }
-  }
-
-  TEST_METHOD(TestExtractUsesAndModifiesWhileNestedChainedProc) {
-    /*
-     *  procedure a {
-     * 1. call b;
-     *  }
-     *
-     *  procedure b {
-     * 2. while (1 >= 1) {
-     * 3.   call c;
-     * 4.   g = h;
-     *  }
-     *
-     *  procedure c {
-     * 5. d = e;
-     *  }
-     *
-     */
-    tokenList = {
-      tokenProcedure, tokenA, tokenOpenBrace,
-      tokenCall, tokenB, tokenSemiColon,
-      tokenCloseBrace,
       tokenProcedure, tokenB, tokenOpenBrace,
-      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
-      tokenOpenBrace,
-      tokenCall, tokenC, tokenSemiColon,
-      tokenG, tokenAssign, tokenH, tokenSemiColon,
-      tokenCloseBrace, tokenCloseBrace,
-      tokenProcedure, tokenC, tokenOpenBrace,
-      tokenD, tokenAssign, tokenE, tokenSemiColon,
-      tokenCloseBrace
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenCloseBrace,
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
     for (auto token : tokenList) {
@@ -537,23 +576,22 @@ public:
     }
     auto parser = spa::SpParser(tokenStream);
     std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-    Assert::IsTrue(procedureList.size() == 3);
+    Assert::IsTrue(procedureList.size() == 2);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
-    std::vector<std::string> testProcedures = {varA, varB};
-    std::vector<std::vector<std::string>> expectedUses = {{"e", "h"}, {"e", "h"}};
-    std::vector<std::vector<std::string>> expectedModifies = {{"d", "g"}, {"d", "g"}};
 
-    for (int i = 0; i < testProcedures.size(); i++) {
-      std::vector<std::string> testUses = retrieveResFromPkb(testProcedures[i], "v", spa::VARIABLE,
-        spa::USES);
-      std::vector<std::string> testModifies = retrieveResFromPkb(testProcedures[i], "v",
-        spa::VARIABLE, spa::MODIFIES);
+    std::vector<std::pair<std::string, std::string>> positiveUsesTestCases = {
+      {"1", varD}, {"1", varE}, {"2", varD}, {"2", varE}
+    };
 
-      Assert::IsTrue(areStringVectorsEqual(expectedUses[i], testUses));
-      Assert::IsTrue(areStringVectorsEqual(expectedModifies[i], testModifies));
-    }
+    assertTrueTestCases(positiveUsesTestCases, spa::USES);
+
+    std::vector<std::pair<std::string, std::string>> positiveModifiesTestCases = {
+      {"1", varC},{"2", varC}
+    };
+
+    assertTrueTestCases(positiveModifiesTestCases, spa::MODIFIES);
   }
 };
 }  // namespace UnitTesting
