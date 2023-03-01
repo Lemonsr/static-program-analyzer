@@ -99,7 +99,6 @@ void spa::PrintStatement::processStatement(spa::PKBManager& pkbManager) {
 
 void spa::CallStatement::processStatement(spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
-  pkbManager.addEntity(VARIABLE, variableName);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::CALL);
   pkbManager.addCallsProc(statementLineNum, variableName);
