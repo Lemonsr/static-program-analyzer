@@ -81,12 +81,17 @@ std::vector<spa::PatternClause>& spa::ParsedQuery::getPatternClauses() {
   return patternClauses;
 }
 
-void spa::ParsedQuery::setUsedDeclarations(std::unordered_map<std::string, DesignEntityType> usedDeclarations) {
-  this->usedDeclarations = usedDeclarations;
-}
-
 std::unordered_map<std::string, spa::DesignEntityType> spa::ParsedQuery::getUsedDeclarations() {
   return usedDeclarations;
+}
+
+bool spa::ParsedQuery::addUsedDeclaration(std::string declaration, DesignEntityType designEntityType) {
+  if (usedDeclarations.find(declaration) == usedDeclarations.end()) {
+    return false;
+  }
+
+  usedDeclarations.insert({ declaration, designEntityType });
+  return true;
 }
 
 bool spa::ParsedQuery::hasClauses() {
@@ -135,11 +140,11 @@ const spa::RelationshipType& spa::SuchThatClause::getDesignAbstraction() {
   return designAbstraction;
 }
 
-spa::PqlArgument& spa::SuchThatClause::getFirstArg() {
+const spa::PqlArgument& spa::SuchThatClause::getFirstArg() {
   return firstArg;
 }
 
-spa::PqlArgument& spa::SuchThatClause::getSecondArg() {
+const spa::PqlArgument& spa::SuchThatClause::getSecondArg() {
   return secondArg;
 }
 
@@ -169,11 +174,11 @@ std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
   }
 }
 
-spa::PqlArgument& spa::PatternClause::getSynonym() {
+const spa::PqlArgument& spa::PatternClause::getSynonym() {
   return synonym;
 }
 
-spa::PqlArgument& spa::PatternClause::getFirstArg() {
+const spa::PqlArgument& spa::PatternClause::getFirstArg() {
   return firstArg;
 }
 

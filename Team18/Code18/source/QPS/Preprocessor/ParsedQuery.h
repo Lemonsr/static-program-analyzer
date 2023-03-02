@@ -42,8 +42,8 @@ class SuchThatClause {
     PqlArgument secondArg);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
   const RelationshipType& getDesignAbstraction();
-  PqlArgument& getFirstArg();
-  PqlArgument& getSecondArg();
+  const PqlArgument& getFirstArg();
+  const PqlArgument& getSecondArg();
   friend bool operator==(const SuchThatClause& s1, const SuchThatClause& s2);
   friend bool operator!=(const SuchThatClause& s1, const SuchThatClause& s2);
 };
@@ -57,8 +57,8 @@ class PatternClause {
  public:
   PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
-  PqlArgument& getSynonym();
-  PqlArgument& getFirstArg();
+  const PqlArgument& getSynonym();
+  const PqlArgument& getFirstArg();
   friend bool operator==(const PatternClause& p1, const PatternClause& p2);
   friend bool operator!=(const PatternClause& p1, const PatternClause& p2);
 };
@@ -98,9 +98,8 @@ class ParsedQuery {
   std::vector<SuchThatClause>& getSuchThatClauses();
   void addPatternClause(PatternClause clause);
   std::vector<PatternClause>& getPatternClauses();
-  void setUsedDeclarations(std::unordered_map<std::string, DesignEntityType> usedDeclarations);
+  bool addUsedDeclaration(std::string declaration, DesignEntityType designEntityType);
   std::unordered_map<std::string, DesignEntityType> getUsedDeclarations();
   bool hasClauses();
 };
 }  // namespace spa
-
