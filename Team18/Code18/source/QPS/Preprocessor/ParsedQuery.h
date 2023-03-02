@@ -36,6 +36,7 @@ class SuchThatClause {
   RelationshipType designAbstraction;
   PqlArgument firstArg;
   PqlArgument secondArg;
+
  public:
   SuchThatClause(RelationshipType designAbstraction, PqlArgument firstArg,
     PqlArgument secondArg);
@@ -52,6 +53,7 @@ class PatternClause {
   PqlArgument synonym;
   PqlArgument firstArg;
   Pattern pattern;
+
  public:
   PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
@@ -81,6 +83,7 @@ class ParsedQuery {
   std::vector<SuchThatClause> suchThatClauses;
   std::unordered_map<std::string, DesignEntityType> declarations;
   std::unordered_map<std::string, DesignEntityType> usedDeclarations;
+
  public:
   bool addDeclaration(std::string synonym, DesignEntityType designEntity);
   int getDeclarationsCount();
