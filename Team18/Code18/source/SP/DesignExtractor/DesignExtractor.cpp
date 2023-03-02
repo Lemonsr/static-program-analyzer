@@ -45,7 +45,6 @@ void spa::DesignExtractor::extractRelationship() {
   extractCallsStar();
   extractUsesAndModifiesProc();
   extractNestedProcUsesAndModifies();
-  extractCallsModifiesAndUses();
 }
 
 void spa::DesignExtractor::extractDesignAbstraction(std::vector<ProgramStatement*> statementList) {
