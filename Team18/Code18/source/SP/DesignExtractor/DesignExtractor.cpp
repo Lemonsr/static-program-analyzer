@@ -220,6 +220,24 @@ void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
   }
 }
 
+void spa::DesignExtractor::extractCallsModifiesAndUses() {
+  for (auto& procedure : procedureList) {
+    std::string procName = procedure.getProcedureVarToken().getValue();
+    QueryResult queryResult = pkbManager.getCallsProc();
+    std::vector<std::pair<int, std::string>> callLineNamePairs = queryResult.
+      getLineNumberNamePairs();
+    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(procName, "v",
+      VARIABLE, USES);
+    std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(procName,
+      "v",
+      VARIABLE, MODIFIES);
+
+    for (auto& pair : callLineNamePairs) {
+      addUsesModifiesAndProc(std::to_string(pair.first), varUses, varModifies, false);
+    }
+  }
+}
+
 std::vector<std::pair<std::string, std::string>> spa::DesignExtractor::getResFromPkbHelper(
   std::string procName, std::string synonym, DesignEntityType type, RelationshipType relType) {
   PqlArgument firstArg = PqlArgument(LITERAL_STRING, procName, {});

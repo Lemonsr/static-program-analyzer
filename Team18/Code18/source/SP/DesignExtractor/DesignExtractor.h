@@ -26,6 +26,7 @@ class DesignExtractor {
   void extractCallsStar();
   void extractUsesAndModifiesProc();
   void extractNestedProcUsesAndModifies();
+  void extractCallsModifiesAndUses();
 
   void dfsCallsStar(std::string parent, std::string child);
   std::vector<std::pair<std::string, std::string>> getResFromPkbHelper(
