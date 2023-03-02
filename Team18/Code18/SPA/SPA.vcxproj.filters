@@ -156,7 +156,7 @@
     <ClInclude Include="..\source\PKB\DataTypes\PKBTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\PKB\DataTypes\TNode.h">
+    <ClInclude Include="..\source\PKB\DataTypes\CFGNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\PKB\Storage\EntityStorage.h">
@@ -323,7 +323,7 @@
     <ClCompile Include="..\source\PKB\DataTypes\PKBQueryTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\PKB\DataTypes\TNode.cpp">
+    <ClCompile Include="..\source\PKB\DataTypes\CFGNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\SP\Validators\SpCyclicValidator.cpp">

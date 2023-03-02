@@ -1,5 +1,5 @@
 #pragma once
 
-class TNode {
+class CFGNode {
  public:
 };

@@ -14,7 +14,7 @@
 #include <unordered_set>
 
 namespace spa {
-class TNode;
+class CFGNode;
 
 class PKB : public PKBManager {
  private:
