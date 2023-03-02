@@ -40,8 +40,6 @@ bool spa::PatternStorage::addPatternWhile(std::string lineNo, std::string varNam
 spa::QueryResult spa::PatternStorage::getAssignUnderscore(PKBQueryArg lhs, Pattern rhs) {
   PatternType type = rhs.getType();
   std::string queryPattern = UtilsFunction::infixToPostfix(rhs.getValue());
-  // split by space -> convert to vector/set -> find
-  // 1 1 +
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
