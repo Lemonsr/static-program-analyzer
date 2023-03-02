@@ -21,7 +21,7 @@ class RelationshipStorage {
   std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable;
   std::unordered_map<std::string, std::unordered_set<std::string>> callsTable;
   std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable;
-  std::unordered_map<int, int> nextTable;
+  std::unordered_map<int, std::unordered_set<int>> nextTable;
   std::unordered_map<std::string, std::unordered_set<int>> callsContainerParentsTable;
   std::unordered_map<int, std::string> callsProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
@@ -157,7 +157,7 @@ class RelationshipStorage {
   void setModifiesProcTable(std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable);
   void setCallsTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsTable);
   void setCallsStarTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable);
-  void setNextTable(std::unordered_map<int, int> nextTable);
+  void setNextTable(std::unordered_map<int, std::unordered_set<int>> nextTable);
   void setCallsContainerParentsTable(std::unordered_map<std::string,
                                                         std::unordered_set<int>> callsContainerParentsTable);
   void setCallsProcTable(std::unordered_map<int, std::string> statementTypeTable);
