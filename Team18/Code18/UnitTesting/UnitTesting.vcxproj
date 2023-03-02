@@ -175,6 +175,7 @@
     <ClCompile Include="TestDesignExtractorCalls.cpp" />
     <ClCompile Include="TestDesignExtractorCallsStar.cpp" />
     <ClCompile Include="TestDesignExtractorEntities.cpp" />
+    <ClCompile Include="TestDesignExtractorExtractUsesModifiesProc.cpp" />
     <ClCompile Include="TestDesignExtractorFollows.cpp" />
     <ClCompile Include="TestDesignExtractorFollowsStar.cpp" />
     <ClCompile Include="TestDesignExtractorIf.cpp" />
