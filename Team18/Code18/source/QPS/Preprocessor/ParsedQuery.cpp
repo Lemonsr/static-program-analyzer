@@ -86,7 +86,7 @@ std::unordered_map<std::string, spa::DesignEntityType> spa::ParsedQuery::getUsed
 }
 
 bool spa::ParsedQuery::addUsedDeclaration(std::string declaration, DesignEntityType designEntityType) {
-  if (usedDeclarations.find(declaration) == usedDeclarations.end()) {
+  if (usedDeclarations.find(declaration) != usedDeclarations.end()) {
     return false;
   }
 
