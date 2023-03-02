@@ -1468,6 +1468,163 @@ spa::QueryResult spa::RelationshipStorage::getCallsStarProcedureProcedure(PKBQue
   return queryResult;
 }
 
+bool spa::RelationshipStorage::addNext(std::string firstLineNo, std::string secondLineNo) {
+  int firstLineNumber = std::stoi(firstLineNo);
+  int secondLineNumber = std::stoi(secondLineNo);
+  if (nextTable.find(firstLineNumber) != nextTable.end()) {
+    return false;
+  }
+
+  nextTable.insert({ firstLineNumber, secondLineNumber });
+  return true;
+}
+
+spa::QueryResult spa::RelationshipStorage::getNextLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  int firstLineNumber = firstArg.getLineNumber().lineNo;
+  int secondLineNumber = secondArg.getLineNumber().lineNo;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  if (nextTable.find(firstLineNumber) == nextTable.end() || nextTable[firstLineNumber] != secondLineNumber) {
+    queryResult.setIsTrue(false);
+    return queryResult;
+  }
+
+  queryResult.setIsTrue(true);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getNextLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  int lineNumber = firstArg.getLineNumber().lineNo;
+  Statement stmt = secondArg.getStatement();
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
+  queryResult.setLineNumberLineNumberPairs(lineNumberLineNumberPairs);
+  if (nextTable.find(lineNumber) == nextTable.end()) {
+    return queryResult;
+  }
+
+  if (stmt.statementType && statementTypeTable[nextTable[lineNumber]] != stmt.statementType) {
+    return queryResult;
+  }
+
+  lineNumberLineNumberPairs.push_back({ lineNumber, nextTable[lineNumber] });
+  queryResult.setLineNumberLineNumberPairs(lineNumberLineNumberPairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getNextStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  Statement stmt = firstArg.getStatement();
+  int lineNumber = secondArg.getLineNumber().lineNo;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
+  for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
+    if (itr->second != lineNumber ||
+      (stmt.statementType && statementTypeTable[itr->first] != stmt.statementType)) {
+      continue;
+    }
+    lineNumberLineNumberPairs.push_back({ itr->first, lineNumber });
+  }
+
+  queryResult.setLineNumberLineNumberPairs(lineNumberLineNumberPairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getNextLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  int lineNumber = firstArg.getLineNumber().lineNo;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  if (nextTable.find(lineNumber) == nextTable.end()) {
+    queryResult.setIsTrue(false);
+    return queryResult;
+  }
+
+  queryResult.setIsTrue(true);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getNextUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  int lineNumber = secondArg.getLineNumber().lineNo;
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+
+  for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
+    if (itr->second == lineNumber) {
+      queryResult.setIsTrue(true);
+      return queryResult;
+    }
+  }
+
+  queryResult.setIsTrue(false);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getNextStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  Statement firstStmt = firstArg.getStatement();
+  Statement secondStmt = secondArg.getStatement();
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
+  for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
+    if ((firstStmt.statementType && statementTypeTable[itr->first] != firstStmt.statementType) ||
+      (secondStmt.statementType && statementTypeTable[itr->second] != secondStmt.statementType)) {
+      continue;
+    }
+    lineNumberLineNumberPairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setLineNumberLineNumberPairs(lineNumberLineNumberPairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getNextStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  Statement firstStmt = firstArg.getStatement();
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
+  for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
+    if (firstStmt.statementType && statementTypeTable[itr->first] != firstStmt.statementType) {
+      continue;
+    }
+    lineNumberLineNumberPairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setLineNumberLineNumberPairs(lineNumberLineNumberPairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getNextUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  Statement secondStmt = secondArg.getStatement();
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
+  for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
+    if (secondStmt.statementType && statementTypeTable[itr->second] != secondStmt.statementType) {
+      continue;
+    }
+    lineNumberLineNumberPairs.push_back({ itr->first, itr->second });
+  }
+
+  queryResult.setLineNumberLineNumberPairs(lineNumberLineNumberPairs);
+  return queryResult;
+}
+
+spa::QueryResult spa::RelationshipStorage::getNextUnderscoreUnderscore(PKBQueryArg firstArg,
+  PKBQueryArg secondArg) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(BOOL);
+  queryResult.setIsTrue(!nextTable.empty());
+  return queryResult;
+}
+
 bool spa::RelationshipStorage::addCallsContainerParent(std::string procName, std::string lineNo) {
   int lineNumber = std::stoi(lineNo);
   if (callsContainerParentsTable.find(procName) != callsContainerParentsTable.end() &&
@@ -1568,6 +1725,10 @@ void spa::RelationshipStorage::setCallsStarTable(std::unordered_map<
                                                    std::string,
                                                    std::unordered_set<std::string>> callsStarTable) {
   this->callsStarTable = callsStarTable;
+}
+
+void spa::RelationshipStorage::setNextTable(std::unordered_map<int, int> nextTable) {
+  this->nextTable = nextTable;
 }
 
 void spa::RelationshipStorage::setCallsContainerParentsTable(std::unordered_map<

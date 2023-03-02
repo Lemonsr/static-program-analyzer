@@ -250,6 +250,9 @@ const bool spa::PKB::addRelationship(RelationshipType relationshipType,
   case CALLS_STAR: {
     return relationshipStorage.addCallsStar(firstArg, secondArg);
   }
+  case NEXT: {
+    return relationshipStorage.addNext(firstArg, secondArg);
+  }
   default: {
     return false;
   }
