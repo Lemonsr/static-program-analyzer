@@ -44,6 +44,7 @@ void spa::DesignExtractor::extractRelationship() {
   }
   extractCallsStar();
   extractUsesAndModifiesProc();
+  extractNestedProcUsesAndModifies();
 }
 
 void spa::DesignExtractor::extractDesignAbstraction(std::vector<ProgramStatement*> statementList) {
@@ -198,6 +199,23 @@ void spa::DesignExtractor::extractUsesAndModifiesProc() {
         childProc.second, "v",
         VARIABLE, MODIFIES);
       addUsesModifiesAndProc(procName, varUses, varModifies, true);
+    }
+  }
+}
+
+void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
+  for (auto& procedure : procedureList) {
+    std::string procName = procedure.getProcedureVarToken().getValue();
+    QueryResult queryResult = pkbManager.getCallsContainerParent(procName);
+    std::vector<int> ifWhileParents = queryResult.getLineNumbers();
+
+    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(procName, "v",
+      VARIABLE, USES);
+    std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(procName,
+      "v",
+      VARIABLE, MODIFIES);
+    for (auto& parent : ifWhileParents) {
+      addUsesModifiesAndProc(std::to_string(parent), varUses, varModifies, false);
     }
   }
 }
