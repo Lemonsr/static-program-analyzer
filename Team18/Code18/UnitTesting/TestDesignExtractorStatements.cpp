@@ -116,7 +116,7 @@ public:
     std::optional<std::vector<int>> testCallStmt = callStmtRes.getLineNumbers();
 
     std::optional<std::vector<std::string>> expectedProcedure = {{varA, varD}};
-    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC}};
     std::optional<std::vector<int>> expectedReadStmt = {{1, 4}};
     std::optional<std::vector<int>> expectedPrintStmt = {{2}};
     std::optional<std::vector<int>> expectedCallStmt = {{3}};
@@ -256,7 +256,7 @@ public:
     std::optional<std::vector<int>> testCallStmt = callStmtRes.getLineNumbers();
 
     std::optional<std::vector<std::string>> expectedProcedure = {{varA, varD}};
-    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE, varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varE, varA}};
     std::optional<std::vector<int>> expectedReadStmt = {{2}};
     std::optional<std::vector<int>> expectedPrintStmt = {{3}};
     std::optional<std::vector<int>> expectedCallStmt = {{4}};
@@ -325,7 +325,7 @@ public:
     std::optional<std::vector<int>> testCallStmt = callStmtRes.getLineNumbers();
 
     std::optional<std::vector<std::string>> expectedProcedure = {{varA, varD}};
-    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varD, varE, varA}};
+    std::optional<std::vector<std::string>> expectedVariable = {{varB, varC, varE, varA}};
     std::optional<std::vector<int>> expectedReadStmt = {{2}};
     std::optional<std::vector<int>> expectedPrintStmt = {{3}};
     std::optional<std::vector<int>> expectedCallStmt = {{4}};
