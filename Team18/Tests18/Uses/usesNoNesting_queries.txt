@@ -70,7 +70,7 @@ none
 5000
 15 - Statement synonym with variable name 5
 stmt s;
-Select a such that Uses(s, "a")
+Select s such that Uses(s, "a")
 none
 5000
 16 - Statement synonym with variable synonym 1

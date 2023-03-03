@@ -39,7 +39,7 @@ Select s such that Uses(1, _)
 none
 5000
 9 - Line number with underscore 3
-while w
+while w;
 Select w such that Uses(9, _)
 none
 5000
