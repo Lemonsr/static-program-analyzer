@@ -37,7 +37,6 @@ def find_if_fail():
         hasFailed = not content.find('failed') < 0
         hasSyntaxError = not content.find('SyntaxError') < 0
         hasSemanticError = not content.find('SemanticError') < 0
-        errorExists = hasFailed or hasSyntaxError or hasSemanticError
 
         if hasFailed:
           print('There are failed test cases')
@@ -46,7 +45,7 @@ def find_if_fail():
         if hasFailed and hasSemanticError:
           print(f'There might be some unexpected semantic errors')
 
-    return True if errorExists else False
+    return True if hasFailed else False
 
 def run_autotester(test_case_prefix):
     cmd = f'{autotester_path} {test_case_prefix}_source.txt {test_case_prefix}_queries.txt '
