@@ -1,7 +1,7 @@
 1 - Valid pattern: (synonym, _)
 assign a; variable v;
 Select a pattern a (v, _)
-1, 2, 3, 4, 5, 6
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 5000
 2 - Valid pattern: (synonym, _varname_)
 assign a; variable v;
@@ -36,7 +36,7 @@ Select a pattern a (v, "2")
 8 - Valid pattern: (_, _)
 assign a;
 Select a pattern a (_, _)
-1, 2, 3, 4, 5, 6
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 5000
 9 - Valid pattern: (_, _varname_)
 assign a;
@@ -116,7 +116,7 @@ Select a pattern a (v, _"b5 + c5"_)
 23 - Valid pattern: Select assign (variable, _)
 assign a; variable v;
 Select a pattern a (v, _)
-1,2,3,4,5,6
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 5000
 24 - Valid pattern: Select variable (variable, expr)
 assign a; variable v;
@@ -131,5 +131,25 @@ b5
 26 - Valid pattern: Select variable (variable, _)
 assign a; variable v;
 Select v pattern a (v, _)
-a5,b5,c5
+a5, b5, c5, n1, n2, n3, n4
+5000
+27 - Valid pattern: (_, _const_)
+assign a;
+Select a.stmt# pattern a (_, _"1 "_)
+7
+5000
+28 - Valid pattern: (_, _const_)
+assign a;
+Select a.stmt# pattern a (_, _" 1"_)
+7
+5000
+29 - Valid pattern: (_, _const_)
+assign a;
+Select a.stmt# pattern a (_, _"123"_)
+8
+5000
+30 - Valid pattern: (_, _const_)
+assign a;
+Select a.stmt# pattern a (_, _"298"_)
+8
 5000
