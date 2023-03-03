@@ -15,13 +15,13 @@ B, C, E
 5000
 4 - Calls (Underscore, ProcName) 
 stmt s;
-Select s such that Calls(_, "E")
+Select s.stmt# such that Calls(_, "E")
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
 5000
 5 - Calls (Underscore, Underscore) 
-stmt s;
-Select s such that Calls(_, _)
-1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+print pn;
+Select pn.stmt# such that Calls(_, _)
+8
 5000
 6 - Calls (Underscore, Proc)
 procedure p1;
@@ -42,4 +42,14 @@ If
 procedure p1, p2;
 Select p2 such that Calls(p1,p2)
 B, C, E
+5000
+10 - Calls (ProcName, Underscore) 
+assign a;
+Select a.stmt# such that Calls("If", _)
+1, 4, 6, 9, 10, 11
+5000
+11 - Calls (ProcName, Underscore) 
+stmt s;
+Select s such that Calls("E", _)
+none
 5000

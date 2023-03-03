@@ -14,14 +14,14 @@ Select p1 such that Calls("C", p1)
 D, E
 5000
 4 - Calls (Underscore, ProcName) 
-stmt s;
-Select s such that Calls(_, "E")
-1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+call c;
+Select c.stmt# such that Calls(_, "E")
+3, 4, 7, 8
 5000
 5 - Calls (Underscore, Underscore) 
-stmt s;
-Select s such that Calls(_, _)
-1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+while w;
+Select w.stmt# such that Calls(_, _)
+2
 5000
 6 - Calls (Underscore, Proc)
 procedure p1;
@@ -42,4 +42,14 @@ While, C
 procedure p1, p2;
 Select p2 such that Calls(p1,p2)
 B, C, D, E
+5000
+19 - Calls (ProcName, Underscore) 
+assign a;
+Select a.stmt# such that Calls("C", _)
+1, 5, 9, 10
+5000
+11 - Calls (ProcName, Underscore) 
+stmt s;
+Select s such that Calls("E", _)
+none
 5000
