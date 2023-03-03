@@ -25,6 +25,7 @@ public:
 
     Assert::IsTrue(relationshipStorage.addCfgNode(3, {}));
     Assert::IsFalse(relationshipStorage.addCfgNode(3, {}));
+    Assert::IsTrue(relationshipStorage.addCfgNode(4, {}));
   };
   };
 }  // namespace UnitTesting
