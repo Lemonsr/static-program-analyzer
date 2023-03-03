@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-// #include "TNode.h"
+// #include "CFGNode.h"
 
 namespace UnitTesting {
   TEST_CLASS(TestAST) {
   public:
     TEST_METHOD(TestMethod1) {
-      // TNode T;
+      // CFGNode T;
       // TODO(team): Your test code here
     }
   };

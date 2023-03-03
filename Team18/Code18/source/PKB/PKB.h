@@ -5,6 +5,7 @@
 #include "EntityStorage.h"
 #include "PatternStorage.h"
 #include "HashTuple.h"
+#include "CFGNode.h"
 
 #include <string>
 #include <vector>
@@ -14,7 +15,6 @@
 #include <unordered_set>
 
 namespace spa {
-class TNode;
 
 class PKB : public PKBManager {
  private:
@@ -57,6 +57,7 @@ class PKB : public PKBManager {
   const bool addCallsProc(int lineNo, std::string procName);
   const bool addStatementType(std::string lineNo, StatementType statementType);
   const bool addStatementProc(std::string lineNo, std::string procName);
+  const bool addCfgNode(int lineNo, spa::CFGNode cfgNode);
   const QueryResult getRelationship(RelationshipType relationshipType,
                                     PKBQueryArg firstArg, PKBQueryArg secondArg);
   const QueryResult getEntity(DesignEntityType entityType);

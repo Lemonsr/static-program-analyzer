@@ -2,6 +2,7 @@
 
 #include "QueryResult.h"
 #include "PKBQueryArg.h"
+#include "CFGNode.h"
 
 #include <unordered_map>
 #include <string>
@@ -26,6 +27,7 @@ class RelationshipStorage {
   std::unordered_map<int, std::string> callsProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;
+  std::unordered_map<int, spa::CFGNode> cfgTable;
 
  public:
   bool addStatementType(std::string lineNo, StatementType statementType);
@@ -147,6 +149,8 @@ class RelationshipStorage {
   bool addCallsProc(int lineNumber, std::string procName);
   QueryResult getCallsProc();
 
+  bool addCfgNode(int lineNumber, spa::CFGNode cfgNode);
+
   void setFollowsTable(std::unordered_map<int, int> followsTable);
   void setFollowsStarTable(std::unordered_map<int, std::unordered_set<int>> followsStarTable);
   void setParentTable(std::unordered_map<int, std::unordered_set<int>> parentTable);
@@ -162,5 +166,6 @@ class RelationshipStorage {
                                                         std::unordered_set<int>> callsContainerParentsTable);
   void setCallsProcTable(std::unordered_map<int, std::string> statementTypeTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
+  void setCfgTable(std::unordered_map<int, spa::CFGNode> cfgTable);
 };
 }  // namespace spa

@@ -20,7 +20,7 @@
     <ClInclude Include="..\source\PKB\DataTypes\PKBQueryArg.h" />
     <ClInclude Include="..\source\PKB\DataTypes\PKBQueryTypes.h" />
     <ClInclude Include="..\source\PKB\DataTypes\PKBTypes.h" />
-    <ClInclude Include="..\source\PKB\DataTypes\TNode.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\CFGNode.h" />
     <ClInclude Include="..\source\PKB\PKB.h" />
     <ClInclude Include="..\source\PKB\PKBManager.h" />
     <ClInclude Include="..\source\PKB\Storage\EntityStorage.h" />
@@ -78,7 +78,7 @@
     <ClCompile Include="..\source\commons\UtilsFunction.cpp" />
     <ClCompile Include="..\source\PKB\DataTypes\PKBQueryArg.cpp" />
     <ClCompile Include="..\source\PKB\DataTypes\PKBQueryTypes.cpp" />
-    <ClCompile Include="..\source\PKB\DataTypes\TNode.cpp" />
+    <ClCompile Include="..\source\PKB\DataTypes\CFGNode.cpp" />
     <ClCompile Include="..\source\PKB\PKB.cpp" />
     <ClCompile Include="..\source\PKB\Storage\EntityStorage.cpp" />
     <ClCompile Include="..\source\PKB\Storage\PatternStorage.cpp" />

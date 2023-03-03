@@ -1691,6 +1691,15 @@ spa::QueryResult spa::RelationshipStorage::getCallsProc() {
   return queryResult;
 }
 
+bool spa::RelationshipStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
+  if (cfgTable.find(lineNumber) != cfgTable.end()) {
+    return false;
+  }
+
+  cfgTable.insert({ lineNumber, cfgNode });
+  return true;
+}
+
 void spa::RelationshipStorage::setFollowsTable(std::unordered_map<int, int> followsTable) {
   this->followsTable = followsTable;
 }
@@ -1757,4 +1766,8 @@ void spa::RelationshipStorage::setCallsProcTable(std::unordered_map<int, std::st
 
 void spa::RelationshipStorage::setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable) {
   this->statementTypeTable = statementTypeTable;
+}
+
+void spa::RelationshipStorage::setCfgTable(std::unordered_map<int, spa::CFGNode> cfgTable) {
+  this->cfgTable = cfgTable;
 }
