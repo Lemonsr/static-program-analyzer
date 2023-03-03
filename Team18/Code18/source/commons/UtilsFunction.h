@@ -31,6 +31,8 @@ class UtilsFunction {
   static bool isValidExprToken(Token token);
   static bool isValidOpenBracket(Token token);
   static bool isValidCloseBracket(Token token);
+  static bool isValidOpenBrace(Token token);
+  static bool isValidCloseBrace(Token token);
 
   static bool isValidFactor(std::vector<Token> tokens);
   static bool isValidTerm(std::vector<Token> tokens);

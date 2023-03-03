@@ -41,6 +41,14 @@ bool spa::UtilsFunction::isValidCloseBracket(Token token) {
   return token.getType() == TOKEN_CLOSE_BRACKET;
 }
 
+bool spa::UtilsFunction::isValidOpenBrace(Token token) {
+  return token.getType() == TOKEN_OPEN_BRACE;
+}
+
+bool spa::UtilsFunction::isValidCloseBrace(Token token) {
+  return token.getType() == TOKEN_CLOSE_BRACE;
+}
+
 // factor : var_name | const_value | '(' tokens ')'
 bool spa::UtilsFunction::isValidFactor(std::vector<Token> tokens) {
   if (tokens.empty()) {
