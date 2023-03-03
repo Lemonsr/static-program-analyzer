@@ -179,7 +179,7 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
       &RelationshipStorage::getCallsStarProcedureUnderscore},
     {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
-      &RelationshipStorage::getCallsStarProcedureProcedure},     
+      &RelationshipStorage::getCallsStarProcedureProcedure},
 
     // Next
     {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
