@@ -194,6 +194,7 @@
     <ClCompile Include="TestPKBFollows.cpp" />
     <ClCompile Include="TestPKBFollowsStar.cpp" />
     <ClCompile Include="TestPKBModifiesProc.cpp" />
+    <ClCompile Include="TestPKBNext.cpp" />
     <ClCompile Include="TestPKBParent.cpp" />
     <ClCompile Include="TestPKBParentStar.cpp" />
     <ClCompile Include="TestPKBPatternStorage.cpp" />
