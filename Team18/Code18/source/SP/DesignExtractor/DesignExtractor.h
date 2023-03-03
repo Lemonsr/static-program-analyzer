@@ -3,6 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
 
 #include "ContainerStatement.h"
 #include "PKB.h"
@@ -23,8 +24,13 @@ class DesignExtractor {
   void extractParentStar(ContainerStatement* containerStatement, std::string ancestorLineNum);
   void extractUsesAndModifies(std::vector<ProgramStatement*> statementList);
   void extractCallsStar();
+  void extractUsesAndModifiesProc();
 
   void dfsCallsStar(std::string parent, std::string child);
+  std::vector<std::pair<std::string, std::string>> getResFromPkbHelper(
+    std::string procName, std::string synonym, DesignEntityType type, RelationshipType relType);
+  void addUsesModifiesAndProc(std::string relArg, std::vector<std::pair<std::string, std::string>> varUses,
+                              std::vector<std::pair<std::string, std::string>> varModifies, bool isByProc);
 
  public:
   DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement>& procedureList);
