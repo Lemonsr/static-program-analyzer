@@ -15,6 +15,7 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getSynonym(
     return {};
   }
   tokens.seek(1);
+  query.addUsedDeclaration(val, op.value());
   return { { SYNONYM, val, op } };
 }
 

@@ -16,9 +16,12 @@ spa::PqlParseStatus spa::PqlSelectParser::parseSynonymOrAttribute(bool parseBool
   }
   std::string synonym = tokens[0].getValue();
   tokens.seek(1);
-  if (query.getDeclarationType(synonym)) {
+
+  std::optional<DesignEntityType> entityOpt = query.getDeclarationType(synonym);
+  if (entityOpt) {
     query.setSelectClauseType(SelectClauseType::SELECT_TUPLE);
     query.addSelectColumn(synonym);
+    query.addUsedDeclaration(synonym, entityOpt.value());
     return PQL_PARSE_SUCCESS;
   }
   if (parseBoolean && synonym == "BOOLEAN") {

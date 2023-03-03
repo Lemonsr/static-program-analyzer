@@ -11,4 +11,3 @@ class QpsPreprocessor {
   std::optional<ParsedQuery> preprocess(std::string query);
 };
 }
-
