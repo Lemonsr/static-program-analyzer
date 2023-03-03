@@ -167,7 +167,13 @@
     <ClCompile Include="TestPKBUsesProc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestPKBCfg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TestDesignExtractorExtractUsesModifiesProc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPKBNext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestDesignExtractorExtractNestedUsesModifiesProc.cpp">

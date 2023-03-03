@@ -171,6 +171,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestAST.cpp" />
+    <ClCompile Include="TestPKBCfg.cpp" />
     <ClCompile Include="TestDesignExtractorCalls.cpp" />
     <ClCompile Include="TestDesignExtractorCallsStar.cpp" />
     <ClCompile Include="TestDesignExtractorCallUsesModifies.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="TestPKBFollows.cpp" />
     <ClCompile Include="TestPKBFollowsStar.cpp" />
     <ClCompile Include="TestPKBModifiesProc.cpp" />
+    <ClCompile Include="TestPKBNext.cpp" />
     <ClCompile Include="TestPKBParent.cpp" />
     <ClCompile Include="TestPKBParentStar.cpp" />
     <ClCompile Include="TestPKBPatternStorage.cpp" />

@@ -22,6 +22,7 @@ std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>
   if (hasHash) {
     tokens.seek(1);
   }
+  query.addUsedDeclaration(synonym, entityOpt.value());
   return { synonym.append(".").append(attribute) };
 }
 

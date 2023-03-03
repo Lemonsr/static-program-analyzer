@@ -10,7 +10,7 @@ spa::QpsQueryEvaluator::QpsQueryEvaluator(ParsedQuery& parsedQuery) : parsedQuer
 
 spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   std::vector<std::unique_ptr<QpsEvaluator>> evaluators;
-  for (auto& declarations : parsedQuery.getDeclarations()) {
+  for (auto& declarations : parsedQuery.getUsedDeclarations()) {
     std::string declaration = declarations.first;
     DesignEntityType declarationType = declarations.second;
     evaluators.push_back(

@@ -81,6 +81,19 @@ std::vector<spa::PatternClause>& spa::ParsedQuery::getPatternClauses() {
   return patternClauses;
 }
 
+std::unordered_map<std::string, spa::DesignEntityType> spa::ParsedQuery::getUsedDeclarations() {
+  return usedDeclarations;
+}
+
+bool spa::ParsedQuery::addUsedDeclaration(std::string declaration, DesignEntityType designEntityType) {
+  if (usedDeclarations.find(declaration) != usedDeclarations.end()) {
+    return false;
+  }
+
+  usedDeclarations.insert({ declaration, designEntityType });
+  return true;
+}
+
 bool spa::ParsedQuery::hasClauses() {
   return suchThatClauses.size() > 0 || patternClauses.size() > 0;
 }
@@ -159,6 +172,10 @@ std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
   case ASSIGN:
     return std::make_unique<spa::PatternEvaluator>(synonym, firstArg, pattern);
   }
+}
+
+const spa::PqlArgument& spa::PatternClause::getSynonym() {
+  return synonym;
 }
 
 const spa::PqlArgument& spa::PatternClause::getFirstArg() {

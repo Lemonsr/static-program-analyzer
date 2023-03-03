@@ -104,6 +104,7 @@ std::optional<spa::PqlArgument> spa::PqlPatternSubParser::parseDesignEntity(Toke
   if (!synOpt || patternDesignEntities.find(synOpt.value()) == patternDesignEntities.end()) {
     return {};
   }
+  query.addUsedDeclaration(synName, synOpt.value());
   return { PqlArgument(SYNONYM, synName, synOpt) };
 }
 

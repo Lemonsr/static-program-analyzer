@@ -32,6 +32,10 @@ public:
     Assert::AreEqual(query.getSelectColumns()[0], std::string("v"));
     Assert::IsFalse(query.hasClauses());
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+
+    std::unordered_map<std::string, spa::DesignEntityType> usedDeclarations = query.getUsedDeclarations();
+    Assert::IsTrue(usedDeclarations.size() == 1);
+    Assert::IsTrue(usedDeclarations.find("v") != usedDeclarations.end());
   }
 
   TEST_METHOD(TestSelectSuchThat) {
@@ -41,6 +45,9 @@ public:
     tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
     tokens.pushBack({ spa::TOKEN_NAME, "variable" });
     tokens.pushBack({ spa::TOKEN_NAME, "v" });
+    tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+    tokens.pushBack({ spa::TOKEN_NAME, "while" });
+    tokens.pushBack({ spa::TOKEN_NAME, "w" });
     tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
     tokens.pushBack({ spa::TOKEN_NAME, "Select" });
     tokens.pushBack({ spa::TOKEN_NAME, "v" });
@@ -68,6 +75,12 @@ public:
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+
+    std::unordered_map<std::string, spa::DesignEntityType> usedDeclarations = query.getUsedDeclarations();
+    Assert::IsTrue(usedDeclarations.size() == 2);
+    Assert::IsTrue(usedDeclarations.find("w") == usedDeclarations.end());
+    Assert::IsTrue(usedDeclarations.find("a") != usedDeclarations.end());
+    Assert::IsTrue(usedDeclarations.find("v") != usedDeclarations.end());
   }
 
   TEST_METHOD(TestSelectPattern) {
@@ -77,6 +90,9 @@ public:
     tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
     tokens.pushBack({ spa::TOKEN_NAME, "variable" });
     tokens.pushBack({ spa::TOKEN_NAME, "v" });
+    tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+    tokens.pushBack({ spa::TOKEN_NAME, "if" });
+    tokens.pushBack({ spa::TOKEN_NAME, "i" });
     tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
     tokens.pushBack({ spa::TOKEN_NAME, "Select" });
     tokens.pushBack({ spa::TOKEN_NAME, "a" });
@@ -111,6 +127,12 @@ public:
         }));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+
+    std::unordered_map<std::string, spa::DesignEntityType> usedDeclarations = query.getUsedDeclarations();
+    Assert::IsTrue(usedDeclarations.size() == 2);
+    Assert::IsTrue(usedDeclarations.find("i") == usedDeclarations.end());
+    Assert::IsTrue(usedDeclarations.find("a") != usedDeclarations.end());
+    Assert::IsTrue(usedDeclarations.find("v") != usedDeclarations.end());
   }
 
   TEST_METHOD(TestSelectSuchThatPattern) {
@@ -120,6 +142,8 @@ public:
     tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
     tokens.pushBack({ spa::TOKEN_NAME, "variable" });
     tokens.pushBack({ spa::TOKEN_NAME, "v" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_NAME, "v1" });
     tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
     tokens.pushBack({ spa::TOKEN_NAME, "Select" });
     tokens.pushBack({ spa::TOKEN_NAME, "a" });
@@ -172,12 +196,20 @@ public:
       Assert::IsTrue(clause == compare);
     }
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+
+    std::unordered_map<std::string, spa::DesignEntityType> usedDeclarations = query.getUsedDeclarations();
+    Assert::IsTrue(usedDeclarations.size() == 2);
+    Assert::IsTrue(usedDeclarations.find("v1") == usedDeclarations.end());
+    Assert::IsTrue(usedDeclarations.find("a") != usedDeclarations.end());
+    Assert::IsTrue(usedDeclarations.find("v") != usedDeclarations.end());
   }
 
   TEST_METHOD(TestSelectPatternSuchThat) {
     spa::Stream<spa::Token> tokens;
     tokens.pushBack({ spa::TOKEN_NAME, "assign" });
     tokens.pushBack({ spa::TOKEN_NAME, "a" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_NAME, "a1" });
     tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
     tokens.pushBack({ spa::TOKEN_NAME, "variable" });
     tokens.pushBack({ spa::TOKEN_NAME, "v" });
@@ -233,6 +265,12 @@ public:
       Assert::IsTrue(clause == compare);
     }
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+
+    std::unordered_map<std::string, spa::DesignEntityType> usedDeclarations = query.getUsedDeclarations();
+    Assert::IsTrue(usedDeclarations.size() == 2);
+    Assert::IsTrue(usedDeclarations.find("a1") == usedDeclarations.end());
+    Assert::IsTrue(usedDeclarations.find("a") != usedDeclarations.end());
+    Assert::IsTrue(usedDeclarations.find("v") != usedDeclarations.end());
   }
   };
 }  // namespace UnitTesting

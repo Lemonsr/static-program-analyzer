@@ -10,9 +10,7 @@
 #include "PqlQueryParser.h"
 #include "ParsedQuery.h"
 
-std::optional<spa::ParsedQuery> spa::QpsPreprocessor::preprocess(
-    std::string query
-) {
+std::optional<spa::ParsedQuery> spa::QpsPreprocessor::preprocess(std::string query) {
   std::stringstream ss;
   ss.str(query);
   Tokenizer tokenizer;
@@ -25,8 +23,9 @@ std::optional<spa::ParsedQuery> spa::QpsPreprocessor::preprocess(
   }
   ParsedQuery parsedQuery;
   PqlQueryParser parser;
-  if (parser.parse(tokens, parsedQuery) == PQL_PARSE_SUCCESS) {
-    return { parsedQuery };
+  if (parser.parse(tokens, parsedQuery) != PQL_PARSE_SUCCESS) {
+    return {};
   }
-  return {};
+
+  return { parsedQuery };
 }

@@ -156,9 +156,6 @@
     <ClInclude Include="..\source\PKB\DataTypes\PKBTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\PKB\DataTypes\TNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\PKB\Storage\EntityStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -193,6 +190,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\SP\Validators\SpValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\PKB\DataTypes\CFGNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -323,9 +323,6 @@
     <ClCompile Include="..\source\PKB\DataTypes\PKBQueryTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\PKB\DataTypes\TNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\SP\Validators\SpCyclicValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -348,6 +345,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\SP\DesignExtractor\DesignExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\PKB\DataTypes\CFGNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

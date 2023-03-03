@@ -3,6 +3,7 @@
 #include "ParsedQuery.h"
 #include "PKBQueryArg.h"
 #include "QueryResult.h"
+#include "CFGNode.h"
 
 #include <string>
 #include <unordered_set>
@@ -19,6 +20,7 @@ class PKBManager {
   virtual const bool addCallsProc(int lineNo, std::string procName) = 0;
   virtual const bool addStatementType(std::string lineNo, StatementType statementType) = 0;
   virtual const bool addStatementProc(std::string lineNo, std::string procName) = 0;
+  virtual const bool addCfgNode(int lineNo, spa::CFGNode cfgNode) = 0;
   virtual const QueryResult getRelationship(RelationshipType relationshipType,
                                             PKBQueryArg firstArg, PKBQueryArg secondArg) = 0;
   virtual const QueryResult getEntity(DesignEntityType entityType) = 0;

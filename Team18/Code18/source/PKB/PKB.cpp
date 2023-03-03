@@ -179,7 +179,27 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
       &RelationshipStorage::getCallsStarProcedureUnderscore},
     {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
-      &RelationshipStorage::getCallsStarProcedureProcedure}
+      &RelationshipStorage::getCallsStarProcedureProcedure},
+
+    // Next
+    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getNextLineLine},
+    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getNextLineStatement},
+    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getNextStatementLine},
+    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getNextLineUnderscore},
+    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getNextUnderscoreLine},
+    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getNextStatementStatement},
+    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getNextStatementUnderscore},
+    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getNextUnderscoreStatement},
+    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getNextUnderscoreUnderscore},
   };
 }
 
@@ -250,6 +270,9 @@ const bool spa::PKB::addRelationship(RelationshipType relationshipType,
   case CALLS_STAR: {
     return relationshipStorage.addCallsStar(firstArg, secondArg);
   }
+  case NEXT: {
+    return relationshipStorage.addNext(firstArg, secondArg);
+  }
   default: {
     return false;
   }
@@ -318,6 +341,10 @@ const bool spa::PKB::addStatementType(std::string lineNo, StatementType statemen
 
 const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure) {
   return relationshipStorage.addStatementProc(lineNo, procedure);
+}
+
+const bool spa::PKB::addCfgNode(int lineNo, spa::CFGNode cfgNode) {
+  return relationshipStorage.addCfgNode(lineNo, cfgNode);
 }
 
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
