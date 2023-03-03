@@ -3,6 +3,43 @@
 
 #include <string>
 #include <vector>
+#include <sstream>
+#include <algorithm>
+
+bool spa::PatternStorage::isPostfixSubstring(std::string postfix, std::string patternPostfix) {
+  std::vector<std::string> postfixTokens;
+  std::vector<std::string> patternPostfixTokens;
+
+  std::string token;
+  std::stringstream ss(postfix);
+  while (std::getline(ss, token, ' ')) {
+    postfixTokens.push_back(token);
+  }
+
+  ss = std::stringstream(patternPostfix);
+  while (std::getline(ss, token, ' ')) {
+    patternPostfixTokens.push_back(token);
+  }
+
+  int postfixLen = postfixTokens.size();
+  int patternPostfixLen = patternPostfixTokens.size();
+  int postfixIdx = 0;
+  int patternPostfixIdx = 0;
+
+  while (postfixIdx < postfixLen && patternPostfixIdx < patternPostfixLen) {
+    if (postfixTokens[postfixIdx] == patternPostfixTokens[patternPostfixIdx]) {
+      postfixIdx++;
+      patternPostfixIdx++;
+      if (patternPostfixIdx == patternPostfixLen)
+        return true;
+    }
+    else {
+      postfixIdx = postfixIdx - patternPostfixIdx + 1;
+      patternPostfixIdx = 0;
+    }
+  }
+  return false;
+}
 
 bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName,
   std::string postfixString) {
@@ -51,7 +88,7 @@ spa::QueryResult spa::PatternStorage::getAssignUnderscore(PKBQueryArg lhs, Patte
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == PARTIAL) {
-      if (postfixString.find(queryPattern) != std::string::npos) {
+      if (isPostfixSubstring(postfixString, queryPattern)) {
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == ANY) {
@@ -77,7 +114,7 @@ spa::QueryResult spa::PatternStorage::getAssignVar(PKBQueryArg lhs, Pattern rhs)
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == PARTIAL) {
-      if (postfixString.find(queryPattern) != std::string::npos) {
+      if (isPostfixSubstring(postfixString, queryPattern)) {
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == ANY) {
@@ -107,7 +144,7 @@ spa::QueryResult spa::PatternStorage::getAssignVarName(PKBQueryArg lhs, Pattern 
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == PARTIAL) {
-      if (postfixString.find(queryPattern) != std::string::npos) {
+      if (isPostfixSubstring(postfixString, queryPattern)) {
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == ANY) {

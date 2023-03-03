@@ -20,6 +20,7 @@ namespace UnitTesting {
   TEST_CLASS(TestPKBPatternStorage) {
     std::unordered_map<int, std::pair<std::string, std::string>> assignTable = {
       {1, {"a", "v x y * + z t * +"}},
+      {5, {"c", "ab 100 +"}}
     };
     std::unordered_map<int, std::unordered_set<std::string>> patternIfTable = {
       {1, {"x"}},
@@ -126,7 +127,7 @@ namespace UnitTesting {
       spa::PatternStorage patternStorage;
       patternStorage.setAssignTable(assignTable);
       std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
-      std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
+      std::vector<std::pair<int, std::string>> expected = { {1, "a"}, {5, "c"}};
 
       spa::Pattern pattern(spa::PatternType::ANY);
       spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
@@ -198,7 +199,7 @@ namespace UnitTesting {
       spa::PatternStorage patternStorage;
       patternStorage.setAssignTable(assignTable);
       std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
-      std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
+      std::vector<std::pair<int, std::string>> expected = { {1, "a"}, {5, "c"} };
 
       spa::Pattern pattern(spa::PatternType::ANY);
       spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_",
@@ -404,6 +405,39 @@ namespace UnitTesting {
 
       patternStorage.setPatternWhileTable({});
       queryResult = patternStorage.getPatternIfUnderscore(firstArg);
+
+      Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
+    }
+
+    TEST_METHOD(TestPatternContains) {
+      spa::PatternStorage patternStorage;
+      patternStorage.setAssignTable(assignTable);
+      std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "a") };
+      std::vector<std::pair<int, std::string>> expected = {};
+
+      spa::Pattern pattern(spa::PatternType::PARTIAL, tokens);
+      spa::PKBQueryArg lhs = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
+      spa::QueryResult queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
+
+      Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
+
+      expected = { {5, "c"}};
+      tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "ab") };
+      pattern = spa::Pattern(spa::PatternType::PARTIAL, tokens);
+      queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
+
+      Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+      Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
+
+      tokens = { 
+        spa::Token(spa::TokenType::TOKEN_NAME, "b"),
+        spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
+        spa::Token(spa::TokenType::TOKEN_INTEGER, "100"),
+      };
+      pattern = spa::Pattern(spa::PatternType::PARTIAL, tokens);
+      queryResult = patternStorage.getAssignUnderscore(lhs, pattern);
 
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
       Assert::IsTrue(queryResult.getLineNumberNamePairs().empty());
