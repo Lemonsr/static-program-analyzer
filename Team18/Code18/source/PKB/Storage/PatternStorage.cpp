@@ -32,8 +32,7 @@ bool spa::PatternStorage::isPostfixSubstring(std::string postfix, std::string pa
       patternPostfixIdx++;
       if (patternPostfixIdx == patternPostfixLen)
         return true;
-    }
-    else {
+    } else {
       postfixIdx = postfixIdx - patternPostfixIdx + 1;
       patternPostfixIdx = 0;
     }

@@ -431,7 +431,7 @@ namespace UnitTesting {
       Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
       Assert::IsTrue(queryResult.getLineNumberNamePairs() == expected);
 
-      tokens = { 
+      tokens = {
         spa::Token(spa::TokenType::TOKEN_NAME, "b"),
         spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
         spa::Token(spa::TokenType::TOKEN_INTEGER, "100"),
