@@ -14,7 +14,7 @@ test_cases = [
 query_types = [
     'Modifies',
     'Uses',
-    'Follows',  
+    'Follows',
     'FollowsStar',
     'Parent',
     'ParentStar',
