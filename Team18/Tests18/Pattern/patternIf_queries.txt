@@ -18,3 +18,13 @@ if if;
 Select if pattern if("Variable", _, _)
 5, 41
 5000
+5 - Pattern if(variable, _, _)
+if if;
+Select if pattern if("None", _, _)
+none
+5000
+4 - Pattern if(variable, _, _)
+if if;
+Select if.stmt# pattern if("Variable", _, _)
+5, 41
+5000

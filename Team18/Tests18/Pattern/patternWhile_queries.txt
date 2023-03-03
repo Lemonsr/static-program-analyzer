@@ -18,3 +18,13 @@ while w;
 Select w pattern w("read", _)
 13, 16
 5000
+5 - Pattern while(variable, _)
+while w;
+Select w pattern w("check", _)
+none
+5000
+6 - Pattern while(variable, _)
+while w;
+Select w.stmt# pattern w("print", _)
+13, 16
+5000
