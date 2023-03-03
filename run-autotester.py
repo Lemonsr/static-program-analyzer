@@ -14,7 +14,7 @@ test_cases = [
 query_types = [
     'Modifies',
     'Uses',
-    'Follows',
+    'Follows',  
     'FollowsStar',
     'Parent',
     'ParentStar',
@@ -34,9 +34,19 @@ test_path = '.\\Team18\\Tests18'
 def find_if_fail():
     with open(f'{test_path}\\out.xml', 'r') as file:
         content = file.read()
-        if content.find('failed') < 0:
-            return False
-    return True
+        hasFailed = not content.find('failed') < 0
+        hasSyntaxError = not content.find('SyntaxError') < 0
+        hasSemanticError = not content.find('SemanticError') < 0
+        errorExists = hasFailed or hasSyntaxError or hasSemanticError
+
+        if hasFailed:
+          print('There are failed test cases')
+        if hasFailed and hasSyntaxError:
+          print(f'There might be some unexpected syntax errors')
+        if hasFailed and hasSemanticError:
+          print(f'There might be some unexpected semantic errors')
+
+    return True if errorExists else False
 
 def run_autotester(test_case_prefix):
     cmd = f'{autotester_path} {test_case_prefix}_source.txt {test_case_prefix}_queries.txt '
@@ -64,3 +74,4 @@ for type in query_types:
         run_autotester(test_case_prefix)
 
 run_autotester(f'{test_path}\\MultiClause\\multiclause')        
+run_autotester(f'{test_path}\\Invalid\invalid')   
