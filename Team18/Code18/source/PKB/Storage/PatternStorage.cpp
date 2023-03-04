@@ -7,34 +7,19 @@
 #include <algorithm>
 
 bool spa::PatternStorage::isPostfixSubstring(std::string postfix, std::string patternPostfix) {
-  std::vector<std::string> postfixTokens;
-  std::vector<std::string> patternPostfixTokens;
+  std::vector<std::string> postfixTokens = UtilsFunction::splitStringByDelimiter(postfix, ' ');
+  std::vector<std::string> patternPostfixTokens = UtilsFunction::splitStringByDelimiter(patternPostfix, ' ');
 
-  std::string token;
-  std::stringstream ss(postfix);
-  while (std::getline(ss, token, ' ')) {
-    postfixTokens.push_back(token);
-  }
-
-  ss = std::stringstream(patternPostfix);
-  while (std::getline(ss, token, ' ')) {
-    patternPostfixTokens.push_back(token);
-  }
-
-  int postfixLen = postfixTokens.size();
-  int patternPostfixLen = patternPostfixTokens.size();
-  int postfixIdx = 0;
-  int patternPostfixIdx = 0;
-
-  while (postfixIdx < postfixLen && patternPostfixIdx < patternPostfixLen) {
-    if (postfixTokens[postfixIdx] == patternPostfixTokens[patternPostfixIdx]) {
-      postfixIdx++;
-      patternPostfixIdx++;
-      if (patternPostfixIdx == patternPostfixLen)
-        return true;
-    } else {
-      postfixIdx = postfixIdx - patternPostfixIdx + 1;
-      patternPostfixIdx = 0;
+  for (int i = 0; i <= postfixTokens.size() - patternPostfixTokens.size(); ++i) {
+    bool isMatch = true;
+    for (int j = 0; j < patternPostfixTokens.size(); ++j) {
+      if (postfixTokens[i + j] != patternPostfixTokens[j]) {
+        isMatch = false;
+        break;
+      }
+    }
+    if (isMatch) {
+      return true;
     }
   }
   return false;

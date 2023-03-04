@@ -17,6 +17,7 @@ class UtilsFunction {
   static void rtrim(std::string& s);
   static void trimString(std::string& s);
   static std::string infixToPostfix(std::vector<spa::Token> tokens);
+  static std::vector<std::string> splitStringByDelimiter(std::string str, char delimiter);
 
   template <typename T>
   static bool isOptionalVectorEqual(std::optional<std::vector<T>>& expected,
