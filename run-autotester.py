@@ -18,6 +18,14 @@ query_types = [
     'FollowsStar',
     'Parent',
     'ParentStar',
+    'Calls',
+    'CallsStar'
+]
+
+pattern_types = [
+    'Assign',
+    'If',
+    'While'
 ]
 
 autotester_path = '.\\Team18\\Code18\\Release\\AutoTester.exe'
@@ -26,9 +34,18 @@ test_path = '.\\Team18\\Tests18'
 def find_if_fail():
     with open(f'{test_path}\\out.xml', 'r') as file:
         content = file.read()
-        if content.find('failed') < 0:
-            return False
-    return True
+        hasFailed = not content.find('failed') < 0
+        hasSyntaxError = not content.find('SyntaxError') < 0
+        hasSemanticError = not content.find('SemanticError') < 0
+
+        if hasFailed:
+          print('There are failed test cases')
+        if hasFailed and hasSyntaxError:
+          print(f'There might be some unexpected syntax errors')
+        if hasFailed and hasSemanticError:
+          print(f'There might be some unexpected semantic errors')
+
+    return True if hasFailed else False
 
 def run_autotester(test_case_prefix):
     cmd = f'{autotester_path} {test_case_prefix}_source.txt {test_case_prefix}_queries.txt '
@@ -44,7 +61,9 @@ def run_autotester(test_case_prefix):
         print(f'{test_case_prefix} passed\n')
 
 run_autotester(f'{test_path}\\SimpleSelect\\entities')
-run_autotester(f'{test_path}\\Pattern\\pattern')
+
+for pattern in pattern_types:
+  run_autotester(f'{test_path}\\Pattern\\pattern{pattern}')
 
 for type in query_types:
     for case in test_cases:
@@ -54,3 +73,4 @@ for type in query_types:
         run_autotester(test_case_prefix)
 
 run_autotester(f'{test_path}\\MultiClause\\multiclause')        
+run_autotester(f'{test_path}\\Invalid\invalid')   

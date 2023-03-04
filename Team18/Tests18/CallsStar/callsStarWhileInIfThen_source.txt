@@ -1,0 +1,36 @@
+procedure A {
+  if (x == 1) then {
+	while (x != 0) {
+	  call B;
+	}
+	call C;
+  } else {
+	x = y + 1;
+  }
+  call E;
+}
+
+procedure B {
+  call E;
+  call F;
+  x = x - 1;
+}
+
+procedure C {
+  x = x % 10;
+  call D;
+}
+
+procedure D {
+  print count;
+}
+
+procedure E {
+  count = count + 1;
+  call D;
+}
+
+procedure F {
+  print y;
+  call D;
+}

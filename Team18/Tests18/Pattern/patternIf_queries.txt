@@ -1,0 +1,30 @@
+1 - Pattern if(_, _, _)
+if if;
+Select if pattern if(_, _, _)
+2, 5, 41
+5000
+2 - Pattern if(varSynonym, _, _)
+if if; variable v;
+Select if pattern if(v, _, _)
+2, 5, 41
+5000
+3 - Pattern (v) if(varSynonym, _, _)
+if if; variable v;
+Select v pattern if(v, _, _)
+while, that, Variable, UsesUsed
+5000
+4 - Pattern if(variable, _, _)
+if if;
+Select if pattern if("Variable", _, _)
+5, 41
+5000
+5 - Pattern if(variable, _, _)
+if if;
+Select if pattern if("None", _, _)
+none
+5000
+4 - Pattern if(variable, _, _)
+if if;
+Select if.stmt# pattern if("Variable", _, _)
+5, 41
+5000

@@ -1,0 +1,122 @@
+procedure main {
+  if (procedure != procedure) then {                   - 1
+	call procedure;                                    - 2
+	print prodcedure;                                  - 3
+  } else {
+	while ((!(while == if)) || (while != if)) {        - 4
+	  call while;                                      - 5
+	  if = 0;                                          - 6
+	  while = if;                                      - 7
+	}
+	if (stmt < read) then {                            - 8
+	  read read;                                       - 9
+	  read print;                                      - 10
+	  print print;                                     - 11
+	  print PrInT;                                     - 12
+	  while (print > read) {                           - 13
+		call Uses;                                     - 14
+		Uses = 0;                                      - 15
+	  }
+	} else {
+	  while (print <= read) {                          - 16
+		call Modifies;                                 - 17
+		while (Modifies <= Uses) {                     - 18
+		  assign = 0;                                  - 19
+		  stmtLst = 1  + 3  +4;                        - 20
+		  such = that;                                 - 21
+		  if = then;                                   - 22
+		  then = else;                                 - 23
+		  call Calls;                                  - 24
+		  if (!(Select <= INTEGER)) then {             - 25
+			call Select;                               - 26
+		  } else {
+			while ((!(pattern >= and)) && (x == y)) {  - 27
+			  call pattern;                            - 28
+			}
+			while (0 == 1) {                           - 29
+			  x = 4 +          1;                      - 30
+			  y = x +1 +111 +  1;                      - 31
+			}
+			if (!(0 < not)) then {                     - 32
+			  ParentsStar = 0;                         - 33
+			  CallsStar = 0;                           - 34
+			  FollowsStar = 0;                         - 35
+			} else {
+			  variable = a+b;                          - 36
+			}
+		  }
+		}
+		call  Next;                                    - 37
+		call   Affects;                                - 38
+	  }
+	  call call;                                       - 39
+	}
+  }
+}
+
+procedure procedure {
+  simple = (0 * 1 + 2 / 3) % 6;                        - 40
+}
+
+procedure while {
+  while = (0 + 1 - 1 * 3) * 7 ;                        - 41
+}
+
+procedure if {
+  if = while;                                          - 42
+}
+
+procedure call {
+  call = 1+ 1  + 1 + 1;                                - 43
+}
+
+procedure Follows {
+  Follows = empty;                                     - 44
+}
+
+procedure Parents {
+  Parents = true;                                      - 45
+}
+
+procedure Uses {
+  while (call >= procedure) {                          - 46
+	print usesCall;                                    - 47
+	print usesProc;                                    - 48
+	call = procedure;                                  - 49
+  }
+}
+
+procedure Modifies {
+  while (call >= procedure) {                          - 50
+	print ModifiesCall;                                - 51
+	print ModifiesProc;                                - 52
+	call = procedure;                                  - 53
+  }
+}
+
+procedure Calls {
+  print callProc;                                      - 54
+  read call;                                           - 55
+}
+
+procedure Next {
+  Next = 0;                                            - 56
+}
+
+procedure Affects {
+  Affects = 0;                                         - 57
+}
+
+procedure Select {
+  Select = 1;                                          - 58
+  while (0213123 != 0123456789) {                      - 59
+	print Test;                                        - 60
+  }
+}
+
+procedure pattern {
+  print pattern;                                       - 61
+  while (0 != 0) {                                     - 62
+	print N0;                                          - 63
+  }
+}

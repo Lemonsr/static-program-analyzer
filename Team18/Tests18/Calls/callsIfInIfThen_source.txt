@@ -1,0 +1,35 @@
+procedure A {
+  if (y == 1) then {
+	if (x != 0) then {
+	  call B;
+	} else {
+	  call F;
+	}
+	call C;
+  } else {
+	print x;
+  }
+}
+
+procedure B {
+  z = x * y;
+  print z;
+}
+
+procedure C {
+  y = 0;
+}
+
+procedure Detached {
+  print total;
+}
+
+procedure Empty {
+  x = 0;
+  y = 0;
+  z = 0;
+}
+
+procedure F {
+  read x;
+}

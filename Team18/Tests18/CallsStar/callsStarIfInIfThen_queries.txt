@@ -1,0 +1,55 @@
+1 - Calls* (ProcName, ProcName) 
+stmt s;
+Select s such that Calls*("A", "F")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+5000
+2 - Calls* (ProcName, Underscore) 
+assign a;
+Select a such that Calls*("A", _)
+7, 9, 11, 12, 13
+5000
+3 - Calls* (ProcName, Proc)
+procedure p1;
+Select p1 such that Calls*("F", p1)
+none
+5000
+4 - Calls* (Underscore, ProcName) 
+variable variable;
+Select variable.varName such that Calls*(_, "C")
+y, x, z, total
+5000
+5 - Calls* (Underscore, Underscore) 
+variable variable;
+Select variable such that Calls*(_, _)
+y, x, z, total
+5000
+6 - Calls* (Underscore, Proc)
+procedure p1;
+Select p1 such that Calls*(_, p1)
+B, C, F
+5000
+7 - Calls* (Proc, ProcName)
+procedure p1;
+Select p1 such that Calls*(p1, "B")
+A
+5000
+8 - Calls* (Proc, Underscore)
+procedure p1;
+Select p1 such that Calls*(p1, _)
+A
+5000
+9 - Calls* (Proc, Proc)
+procedure p1, p2;
+Select p2 such that Calls*(p1,p2)
+B, C, F
+5000
+10 - Calls* (ProcName, Underscore) 
+assign a;
+Select a.stmt# such that Calls*("A", _)
+7, 9, 11, 12, 13
+5000
+11 - Calls* (ProcName, Underscore) 
+stmt s;
+Select s such that Calls*("Detached", _)
+none
+5000

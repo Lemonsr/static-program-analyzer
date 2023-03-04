@@ -1,0 +1,30 @@
+1 - Pattern while(_, _)
+while while;
+Select while pattern while(_, _)
+4, 13, 16, 18, 27, 46, 50
+5000
+2 - Pattern w(varSynonym, _)
+while w; variable v;
+Select w pattern w(v, _)
+4, 13, 16, 18, 27, 46, 50
+5000
+3 - Pattern (v) while(varSynonym, _)
+while w; variable v;
+Select v pattern w(v, _)
+while, if, print, read, Modifies, Uses, pattern, and, x, y, call, procedure
+5000
+4 - Pattern while(variable, _)
+while w;
+Select w pattern w("read", _)
+13, 16
+5000
+5 - Pattern while(variable, _)
+while w;
+Select w pattern w("check", _)
+none
+5000
+6 - Pattern while(variable, _)
+while w;
+Select w.stmt# pattern w("print", _)
+13, 16
+5000
