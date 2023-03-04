@@ -94,6 +94,8 @@ class WithClause {
   WithClause(WithArgument firstArg, WithArgument secondArg);
   const WithArgument& getFirstArg();
   const WithArgument& getSecondArg();
+  friend bool operator==(const WithClause& w1, const WithClause& w2);
+  friend bool operator!=(const WithClause& w1, const WithClause& w2);
 };
 
 enum class SelectClauseType {

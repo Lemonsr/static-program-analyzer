@@ -250,3 +250,11 @@ const spa::WithArgument& spa::WithClause::getSecondArg() {
   return secondArg;
 }
 
+bool spa::operator==(const WithClause& w1, const WithClause& w2) {
+  return w1.firstArg == w2.firstArg && w1.secondArg == w2.secondArg;
+}
+
+bool spa::operator!=(const WithClause& w1, const WithClause& w2) {
+  return !(w1 == w2);
+}
+
