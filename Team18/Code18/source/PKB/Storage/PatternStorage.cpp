@@ -3,6 +3,27 @@
 
 #include <string>
 #include <vector>
+#include <sstream>
+#include <algorithm>
+
+bool spa::PatternStorage::isPostfixSubstring(std::string postfix, std::string patternPostfix) {
+  std::vector<std::string> postfixTokens = UtilsFunction::splitStringByDelimiter(postfix, ' ');
+  std::vector<std::string> patternPostfixTokens = UtilsFunction::splitStringByDelimiter(patternPostfix, ' ');
+
+  for (int i = 0; i <= postfixTokens.size() - patternPostfixTokens.size(); ++i) {
+    bool isMatch = true;
+    for (int j = 0; j < patternPostfixTokens.size(); ++j) {
+      if (postfixTokens[i + j] != patternPostfixTokens[j]) {
+        isMatch = false;
+        break;
+      }
+    }
+    if (isMatch) {
+      return true;
+    }
+  }
+  return false;
+}
 
 bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName,
   std::string postfixString) {
@@ -51,7 +72,7 @@ spa::QueryResult spa::PatternStorage::getAssignUnderscore(PKBQueryArg lhs, Patte
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == PARTIAL) {
-      if (postfixString.find(queryPattern) != std::string::npos) {
+      if (isPostfixSubstring(postfixString, queryPattern)) {
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == ANY) {
@@ -77,7 +98,7 @@ spa::QueryResult spa::PatternStorage::getAssignVar(PKBQueryArg lhs, Pattern rhs)
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == PARTIAL) {
-      if (postfixString.find(queryPattern) != std::string::npos) {
+      if (isPostfixSubstring(postfixString, queryPattern)) {
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == ANY) {
@@ -107,7 +128,7 @@ spa::QueryResult spa::PatternStorage::getAssignVarName(PKBQueryArg lhs, Pattern 
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == PARTIAL) {
-      if (postfixString.find(queryPattern) != std::string::npos) {
+      if (isPostfixSubstring(postfixString, queryPattern)) {
         lineNumberNamePairs.push_back({ itr->first, itr->second.first });
       }
     } else if (type == ANY) {

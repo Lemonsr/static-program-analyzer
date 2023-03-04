@@ -17,6 +17,27 @@ class UtilsFunction {
   static void rtrim(std::string& s);
   static void trimString(std::string& s);
   static std::string infixToPostfix(std::vector<spa::Token> tokens);
+  static std::vector<std::string> splitStringByDelimiter(std::string str, char delimiter);
+
+  static std::unordered_set<TokenType> condExprToken;
+  static std::unordered_set<TokenType> relExprToken;
+  static std::unordered_set<TokenType> exprToken;
+  static std::unordered_set<TokenType> termToken;
+  static std::unordered_set<TokenType> relFactorToken;
+
+  static bool isValidCondExprToken(Token token);
+  static bool isValidRelExprToken(Token token);
+  static bool isValidTermToken(Token token);
+  static bool isValidRelFactorToken(Token token);
+  static bool isValidExprToken(Token token);
+  static bool isValidOpenBracket(Token token);
+  static bool isValidCloseBracket(Token token);
+  static bool isValidOpenBrace(Token token);
+  static bool isValidCloseBrace(Token token);
+
+  static bool isValidFactor(std::vector<Token> tokens);
+  static bool isValidTerm(std::vector<Token> tokens);
+  static bool isValidExpr(std::vector<Token> tokens);
 
   template <typename T>
   static bool isOptionalVectorEqual(std::optional<std::vector<T>>& expected,

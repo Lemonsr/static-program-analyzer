@@ -13,22 +13,6 @@ class SpValidator {
         spa::Stream<spa::Token> getUpdatedStream();
 
  private:
-        std::unordered_set<TokenType> condExprToken = {TOKEN_BOOL_AND, TOKEN_BOOL_OR};
-        std::unordered_set<TokenType> relExprToken = {
-            TOKEN_COND_EQ, TOKEN_COND_NEQ, TOKEN_COND_LT, TOKEN_COND_LTE, TOKEN_COND_GT,
-            TOKEN_COND_GTE
-        };
-        std::unordered_set<TokenType> exprToken = {TOKEN_PLUS, TOKEN_MINUS};
-        std::unordered_set<TokenType> termToken = {TOKEN_DIVIDE, TOKEN_MULTIPLY, TOKEN_MODULO};
-
-        std::unordered_set<TokenType> relFactorToken = {TOKEN_NAME, TOKEN_INTEGER};
-
-        bool isValidCondExprToken(Token) const;
-        bool isValidRelExprToken(Token) const;
-        bool isValidTermToken(Token) const;
-        bool isValidRelFactorToken(Token) const;
-        bool isValidExprToken(Token) const;
-
         int64_t idx = 0;  // Track the current token position
         Stream<Token> tokens;
         std::unordered_set<std::string> procNames;
@@ -38,16 +22,9 @@ class SpValidator {
         Token getToken();
         Token peekNextToken(int64_t offset = 0);
 
-        bool isExpr(std::vector<Token>);
-        bool isTerm(std::vector<Token>);
-        bool isFactor(std::vector<Token>);
         bool isCondExpr(std::vector<Token>);
         bool isRelExpr(std::vector<Token>);
         bool isRelFactor(std::vector<Token>);
-        bool isValidOpenBrace(Token token);
-        bool isValidCloseBrace(Token token);
-        bool isValidOpenBracket(Token token);
-        bool isValidCloseBracket(Token token);
 
         void validateProcedure();
         void validateStmtLst();
