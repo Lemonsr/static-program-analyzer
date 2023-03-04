@@ -16,7 +16,8 @@ class UtilsFunction {
   static void ltrim(std::string& s);
   static void rtrim(std::string& s);
   static void trimString(std::string& s);
-  static std::string infixToPostfix(std::vector<Token> tokens);
+  static std::string infixToPostfix(std::vector<spa::Token> tokens);
+  static std::vector<std::string> splitStringByDelimiter(std::string str, char delimiter);
 
   static std::unordered_set<TokenType> condExprToken;
   static std::unordered_set<TokenType> relExprToken;

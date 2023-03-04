@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <stack>
 #include <unordered_set>
+#include <sstream>
 
 std::unordered_set<spa::TokenType> spa::UtilsFunction::condExprToken = { TOKEN_BOOL_AND, TOKEN_BOOL_OR };
 std::unordered_set<spa::TokenType> spa::UtilsFunction::relExprToken = {
@@ -202,4 +203,16 @@ std::string spa::UtilsFunction::infixToPostfix(std::vector<spa::Token> tokens) {
   }
   trimString(postfix);
   return postfix;
+}
+
+std::vector<std::string> spa::UtilsFunction::splitStringByDelimiter(std::string str, char delimiter) {
+  std::vector<std::string> tokens;
+  std::string token;
+  std::stringstream ss(str);
+
+  while (std::getline(ss, token, delimiter)) {
+    tokens.push_back(token);
+  }
+
+  return tokens;
 }

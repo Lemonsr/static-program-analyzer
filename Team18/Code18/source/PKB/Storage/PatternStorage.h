@@ -14,6 +14,7 @@ class PatternStorage {
   std::unordered_map<int, std::pair<std::string, std::string>> assignTable;
   std::unordered_map<int, std::unordered_set<std::string>> patternIfTable;
   std::unordered_map<int, std::unordered_set<std::string>> patternWhileTable;
+  bool isPostfixSubstring(std::string postfix, std::string patternPostfix);
 
  public:
   bool addAssign(std::string lineNo, std::string varName, std::string postfixString);
