@@ -75,14 +75,14 @@ class WithArgument {
   std::optional<std::string> attributeOpt;
  public:
   WithArgument() = default;
-  WithArgument(QpsValue value);
-  WithArgument(std::string attribute);
+  explicit WithArgument(QpsValue value);
+  explicit WithArgument(std::string attribute);
   const WithArgumentType& getType();
   const QpsValue& getValue();
   const std::string& getAttribute();
- 
- friend bool operator==(const WithArgument& first, const WithArgument& second);
- friend bool operator!=(const WithArgument& first, const WithArgument& second);
+
+  friend bool operator==(const WithArgument& first, const WithArgument& second);
+  friend bool operator!=(const WithArgument& first, const WithArgument& second);
 };
 
 class WithClause {
