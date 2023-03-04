@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "ParsedQuery.h"
+#include "UtilsFunction.h"
 #include "Token.h"
 
 std::optional<spa::Pattern> spa::PqlPatternSubParser::parseWildcard(
@@ -39,6 +40,11 @@ std::optional<spa::Pattern> spa::PqlPatternSubParser::parseExact(
     return {};
   }
   tokens.seek(1);
+
+  if (!UtilsFunction::isValidExpr(patternTokens)) {
+    return {};
+  }
+
   return { Pattern { EXACT, patternTokens } };
 }
 
@@ -70,6 +76,11 @@ std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePartial(
     return {};
   }
   tokens.seek(2);
+
+  if (!UtilsFunction::isValidExpr(patternTokens)) {
+    return {};
+  }
+
   return { Pattern { PARTIAL, patternTokens } };
 }
 
