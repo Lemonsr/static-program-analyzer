@@ -10,6 +10,10 @@ bool spa::PatternStorage::isPostfixSubstring(std::string postfix, std::string pa
   std::vector<std::string> postfixTokens = UtilsFunction::splitStringByDelimiter(postfix, ' ');
   std::vector<std::string> patternPostfixTokens = UtilsFunction::splitStringByDelimiter(patternPostfix, ' ');
 
+  if (postfixTokens.size() < patternPostfixTokens.size()) {
+    return false;
+  }
+
   for (int i = 0; i <= postfixTokens.size() - patternPostfixTokens.size(); ++i) {
     bool isMatch = true;
     for (int j = 0; j < patternPostfixTokens.size(); ++j) {
