@@ -1,5 +1,5 @@
 #include <string>
-#include <optional>
+#include <utility>
 #include <memory>
 
 #include "QPS.h"
@@ -10,21 +10,21 @@
 
 spa::QpsResult spa::QPS::evaluate(std::string query, PKBManager& pkbManager) {
   QpsPreprocessor preprocessor;
-  std::optional<ParsedQuery> queryOpt = preprocessor.preprocess(query);
+  std::pair<PqlParseStatus, ParsedQuery> parseResult = preprocessor.preprocess(query);
   QpsResult result;
-  if (!queryOpt) {
-    result.setErrorMessage("Syntax error in query");
+  if (parseResult.first == PQL_PARSE_SYNTAX_ERROR) {
+    result.setErrorMessage("SyntaxError");
     return result;
   }
+
+  ParsedQuery& parsedQuery = parseResult.second;
 
   PqlSemanticChecker pqlSemanticChecker;
-  bool isValid = pqlSemanticChecker.isSemanticallyValid(queryOpt.value());
+  bool isValid = pqlSemanticChecker.isSemanticallyValid(parsedQuery);
   if (!isValid) {
-    result.setErrorMessage("Semantic error in query");
+    result.setErrorMessage("SemanticError");
     return result;
   }
-
-  ParsedQuery& parsedQuery = queryOpt.value();
 
   std::unique_ptr<QpsEvaluator> qpsEvaluator = std::make_unique<QpsQueryEvaluator>(parsedQuery);
   QpsResultTable resultTable = qpsEvaluator->evaluate(pkbManager);
