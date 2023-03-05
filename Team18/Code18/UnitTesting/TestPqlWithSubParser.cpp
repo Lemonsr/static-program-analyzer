@@ -31,6 +31,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getWithClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::WITH_CLAUSE);
     spa::WithClause& clause = query.getWithClauses()[0];
     spa::WithClause compare(
       spa::WithArgument(spa::QpsValue("hayley")),
@@ -49,6 +50,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getWithClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::WITH_CLAUSE);
     spa::WithClause& clause = query.getWithClauses()[0];
     spa::WithClause compare(
       spa::WithArgument(spa::QpsValue(100)),
@@ -72,6 +74,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getWithClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::WITH_CLAUSE);
     spa::WithClause& clause = query.getWithClauses()[0];
     spa::WithClause compare(
       spa::WithArgument("v.varName"),
@@ -94,6 +97,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getWithClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::WITH_CLAUSE);
     spa::WithClause& clause = query.getWithClauses()[0];
     spa::WithClause compare(
       spa::WithArgument(spa::QpsValue(123)),
@@ -120,6 +124,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getWithClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::WITH_CLAUSE);
     spa::WithClause& clause = query.getWithClauses()[0];
     spa::WithClause compare(
       spa::WithArgument("s.stmt#"),
