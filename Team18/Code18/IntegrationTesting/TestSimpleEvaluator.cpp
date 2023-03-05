@@ -23,21 +23,18 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "v", spa::DesignEntityType::VARIABLE);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 2);
       Assert::AreEqual(dim.second, 3);
 
-      auto columnVals = resultTable.getColumn("v");
-      Assert::IsTrue(columnVals.find(spa::QpsValue("x")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("y")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("z")) != columnVals.end());
-
-      columnVals = resultTable.getColumn("v.varName");
-      Assert::IsTrue(columnVals.find(spa::QpsValue("x")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("y")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("z")) != columnVals.end());
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+      Assert::IsTrue(rows[0][0].getString() == "x");
+      Assert::IsTrue(rows[0][1].getString() == "x");
+      Assert::IsTrue(rows[1][0].getString() == "y");
+      Assert::IsTrue(rows[1][1].getString() == "y");
+      Assert::IsTrue(rows[2][0].getString() == "z");
+      Assert::IsTrue(rows[2][1].getString() == "z");
     }
 
     TEST_METHOD(TestGetProcs) {
@@ -49,21 +46,18 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "p", spa::DesignEntityType::PROCEDURE);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 2);
       Assert::AreEqual(dim.second, 3);
 
-      auto columnVals = resultTable.getColumn("p");
-      Assert::IsTrue(columnVals.find(spa::QpsValue("func1")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("func2")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("func3")) != columnVals.end());
-
-      columnVals = resultTable.getColumn("p.procName");
-      Assert::IsTrue(columnVals.find(spa::QpsValue("func1")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("func2")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("func3")) != columnVals.end());
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+      Assert::IsTrue(rows[0][0].getString() == "func1");
+      Assert::IsTrue(rows[0][1].getString() == "func1");
+      Assert::IsTrue(rows[1][0].getString() == "func2");
+      Assert::IsTrue(rows[1][1].getString() == "func2");
+      Assert::IsTrue(rows[2][0].getString() == "func3");
+      Assert::IsTrue(rows[2][1].getString() == "func3");
     }
 
     TEST_METHOD(TestGetConsts) {
@@ -75,21 +69,18 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "c", spa::DesignEntityType::CONSTANT);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 2);
       Assert::AreEqual(dim.second, 3);
 
-      auto columnVals = resultTable.getColumn("c");
-      Assert::IsTrue(columnVals.find(spa::QpsValue("1")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("2")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("3")) != columnVals.end());
-
-      columnVals = resultTable.getColumn("c.value");
-      Assert::IsTrue(columnVals.find(spa::QpsValue("1")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("2")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("3")) != columnVals.end());
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+      Assert::IsTrue(rows[0][0].getString() == "1");
+      Assert::IsTrue(rows[0][1].getString() == "1");
+      Assert::IsTrue(rows[1][0].getString() == "2");
+      Assert::IsTrue(rows[1][1].getString() == "2");
+      Assert::IsTrue(rows[2][0].getString() == "3");
+      Assert::IsTrue(rows[2][1].getString() == "3");
     }
 
     TEST_METHOD(TestGetAllStatements) {
@@ -101,21 +92,18 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "s", spa::DesignEntityType::STMT);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 2);
       Assert::AreEqual(dim.second, 3);
 
-      auto columnVals = resultTable.getColumn("s");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
-
-      columnVals = resultTable.getColumn("s.stmt#");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+      Assert::IsTrue(rows[0][0].getInteger() == 1);
+      Assert::IsTrue(rows[0][1].getInteger() == 1);
+      Assert::IsTrue(rows[1][0].getInteger() == 2);
+      Assert::IsTrue(rows[1][1].getInteger() == 2);
+      Assert::IsTrue(rows[2][0].getInteger() == 3);
+      Assert::IsTrue(rows[2][1].getInteger() == 3);
     }
 
     TEST_METHOD(TestGetReadStatements) {
@@ -128,20 +116,15 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "re", spa::DesignEntityType::READ);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 3);
       Assert::AreEqual(dim.second, 1);
 
-      auto columnVals = resultTable.getColumn("re");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-
-      columnVals = resultTable.getColumn("re.stmt#");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-
-      columnVals = resultTable.getColumn("re.varName");
-      Assert::IsTrue(columnVals.find(spa::QpsValue("x")) != columnVals.end());
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+      Assert::IsTrue(rows[0][0].getInteger() == 1);
+      Assert::IsTrue(rows[0][1].getInteger() == 1);
+      Assert::IsTrue(rows[0][2].getString() == "x");
     }
 
     TEST_METHOD(TestGetAssignStatements) {
@@ -153,17 +136,14 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "a", spa::DesignEntityType::ASSIGN);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 2);
       Assert::AreEqual(dim.second, 1);
 
-      auto columnVals = resultTable.getColumn("a");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-
-      columnVals = resultTable.getColumn("a.stmt#");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+      Assert::IsTrue(rows[0][0].getInteger() == 2);
+      Assert::IsTrue(rows[0][1].getInteger() == 2);
     }
 
     TEST_METHOD(TestGetPrintStatements) {
@@ -176,20 +156,15 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "pr", spa::DesignEntityType::PRINT);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 3);
       Assert::AreEqual(dim.second, 1);
 
-      auto columnVals = resultTable.getColumn("pr");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
-
-      columnVals = resultTable.getColumn("pr.stmt#");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
-
-      columnVals = resultTable.getColumn("pr.varName");
-      Assert::IsTrue(columnVals.find(spa::QpsValue("x")) != columnVals.end());
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+      Assert::IsTrue(rows[0][0].getInteger() == 3);
+      Assert::IsTrue(rows[0][1].getInteger() == 3);
+      Assert::IsTrue(rows[0][2].getString() == "x");
     }
 
     TEST_METHOD(TestGetIfStatements) {
@@ -201,11 +176,10 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "i", spa::DesignEntityType::IF);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
-      Assert::IsTrue(rows.size() == 1);
-      Assert::IsTrue(rows[0][0].getType() == spa::QpsValueType::INTEGER);
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
       Assert::IsTrue(rows[0][0].getInteger() == 1);
+      Assert::IsTrue(rows[0][1].getInteger() == 1);
     }
 
     TEST_METHOD(TestGetWhileStatements) {
@@ -217,11 +191,10 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "w", spa::DesignEntityType::WHILE);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
-      Assert::IsTrue(rows.size() == 1);
-      Assert::IsTrue(rows[0][0].getType() == spa::QpsValueType::INTEGER);
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
       Assert::IsTrue(rows[0][0].getInteger() == 2);
+      Assert::IsTrue(rows[0][1].getInteger() == 2);
     }
 
     TEST_METHOD(TestGetCallStatements) {
@@ -233,26 +206,21 @@ namespace IntegrationTesting {
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = std::make_unique<spa::SimpleEvaluator>(
         "c", spa::DesignEntityType::CALL);
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
-      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
 
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 3);
       Assert::AreEqual(dim.second, 3);
 
-      auto columnVals = resultTable.getColumn("c");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
-
-      columnVals = resultTable.getColumn("c.stmt#");
-      Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue(3)) != columnVals.end());
-
-      columnVals = resultTable.getColumn("c.procName");
-      Assert::IsTrue(columnVals.find(spa::QpsValue("A")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("B")) != columnVals.end());
-      Assert::IsTrue(columnVals.find(spa::QpsValue("C")) != columnVals.end());
+      std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
+      Assert::IsTrue(rows[0][0].getInteger() == 1);
+      Assert::IsTrue(rows[0][1].getInteger() == 1);
+      Assert::IsTrue(rows[0][2].getString() == "A");
+      Assert::IsTrue(rows[1][0].getInteger() == 2);
+      Assert::IsTrue(rows[1][1].getInteger() == 2);
+      Assert::IsTrue(rows[1][2].getString() == "B");
+      Assert::IsTrue(rows[2][0].getInteger() == 3);
+      Assert::IsTrue(rows[2][1].getInteger() == 3);
+      Assert::IsTrue(rows[2][2].getString() == "C");
     }
   };
 }  // namespace IntegrationTesting
