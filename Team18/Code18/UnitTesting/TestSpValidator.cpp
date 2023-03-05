@@ -3332,5 +3332,137 @@ namespace UnitTesting {
             spa::SpValidator validator(tokens);
             Assert::IsFalse(validator.validateGrammar());
         }
+
+        //  procedure a {x = 12; call b;} procedure b {x = 2;}
+        TEST_METHOD(TestSpValidatorValidCallOne) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "a" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "12" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_NAME, "call" });
+            tokens.pushBack({ spa::TOKEN_NAME, "b" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "b" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "2" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            spa::SpValidator validator(tokens);
+            Assert::IsTrue(validator.validateGrammar());
+        }
+
+        //  procedure a {x = 12; call b; call c;} procedure b {x = 2;} procedure c {x = 3;}
+        TEST_METHOD(TestSpValidatorValidCallTwo) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "a" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "12" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_NAME, "call" });
+            tokens.pushBack({ spa::TOKEN_NAME, "b" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_NAME, "call" });
+            tokens.pushBack({ spa::TOKEN_NAME, "c" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "b" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "2" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "c" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "3" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            spa::SpValidator validator(tokens);
+            Assert::IsTrue(validator.validateGrammar());
+        }
+
+        //  procedure a {x = 12; call b;} procedure b {x = 2; call c;}
+        TEST_METHOD(TestSpValidatorInvalidCallOne) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "a" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "12" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_NAME, "call" });
+            tokens.pushBack({ spa::TOKEN_NAME, "b" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "b" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "2" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_NAME, "call" });
+            tokens.pushBack({ spa::TOKEN_NAME, "c" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            spa::SpValidator validator(tokens);
+            Assert::IsFalse(validator.validateGrammar());
+        }
+
+        //  procedure a {x = 12; call b; call c;} procedure b {x = 2;} procedure c {x = 3; call d;}
+        TEST_METHOD(TestSpValidatorInvalidCallTwo) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "a" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "12" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_NAME, "call" });
+            tokens.pushBack({ spa::TOKEN_NAME, "b" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_NAME, "call" });
+            tokens.pushBack({ spa::TOKEN_NAME, "c" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "b" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "2" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "c" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "x" });
+            tokens.pushBack({ spa::TOKEN_EQUAL, "=" });
+            tokens.pushBack({ spa::TOKEN_INTEGER, "3" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_NAME, "call" });
+            tokens.pushBack({ spa::TOKEN_NAME, "d" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+            spa::SpValidator validator(tokens);
+            Assert::IsFalse(validator.validateGrammar());
+        }
     };
 }  //  namespace UnitTesting

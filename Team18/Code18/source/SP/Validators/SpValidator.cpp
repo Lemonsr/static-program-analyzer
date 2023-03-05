@@ -9,6 +9,7 @@
 
 spa::SpValidator::SpValidator(Stream<Token> t) : tokens(t) {
     procNames = std::unordered_set<std::string>();
+    callNames = std::unordered_set<std::string>();
 }
 
 bool spa::SpValidator::validateGrammar() {
@@ -21,6 +22,7 @@ bool spa::SpValidator::validateGrammar() {
             tokens[idx - 1] = Token(TOKEN_PROCEDURE, "procedure");
             validateProcedure();
         }
+        validateCallExists();
         return true;
     } catch (std::exception& e) {
         std::cerr << "Invalid Source Code: ";
@@ -112,7 +114,7 @@ void spa::SpValidator::validateStmt() {
     TokenType tokenType = token.getType();
     switch (tokenType) {
         case TOKEN_NAME:
-            validateReadPrint();
+            validateReadPrintCall();
             break;
         case TOKEN_OPEN_BRACKET:
             validateWhileIf();
@@ -150,8 +152,7 @@ void spa::SpValidator::validateEqual() {
 
 // print: 'print' var_name';'
 // read: 'read' var_name';'
-// specifically escape the call stmt
-void spa::SpValidator::validateReadPrint() {
+void spa::SpValidator::validateReadPrintCall() {
     Token currToken = getToken();
     std::string currTokenValue = currToken.getValue();
     if (currTokenValue == "read") {
@@ -160,6 +161,8 @@ void spa::SpValidator::validateReadPrint() {
         tokens[idx - 1] = Token(TOKEN_PRINT, "print");
     } else if (currTokenValue == "call") {
         tokens[idx - 1] = Token(TOKEN_CALL, "call");
+        std::string callValue = peekNextToken(0).getValue();
+        callNames.insert(callValue);
     } else {
         throw std::exception("Unknown Statement");
     }
@@ -170,6 +173,15 @@ void spa::SpValidator::validateReadPrint() {
     if (!hasRemaining() || getToken().getType() != TOKEN_SEMICOLON) {
         throw std::exception("Read, Print stmt must end with ';'");
     }
+}
+
+void spa::SpValidator::validateCallExists() {
+    for (const auto& callName : callNames) {
+        if (procNames.count(callName) == 0) {
+            throw std::exception("Calling non-existing procedure");
+        }
+    }
+
 }
 
 void spa::SpValidator::validateWhileIf() {
