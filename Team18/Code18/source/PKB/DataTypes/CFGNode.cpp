@@ -1,6 +1,5 @@
 #include "CFGNode.h"
 
-
 spa::CFGNode::CFGNode(int lineNumber) {
     this->lineNumber = lineNumber;
 }
