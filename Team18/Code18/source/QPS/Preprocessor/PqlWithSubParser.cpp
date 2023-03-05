@@ -5,7 +5,7 @@
 
 std::optional<spa::WithArgument> spa::PqlWithSubParser::parseArgument(Stream<Token>& tokens,
                                                                       ParsedQuery& query) {
-  std::optional<std::string> attribOpt = attribParser.parse(tokens, query);
+  std::optional<std::string> attribOpt = attributeParser.parse(tokens, query);
   if (attribOpt) {
     return { WithArgument(attribOpt.value()) };
   }

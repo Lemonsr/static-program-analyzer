@@ -8,7 +8,7 @@
 namespace spa {
 class PqlWithSubParser : public PqlParser {
  private:
-  PqlAttributeParser attribParser;
+  PqlAttributeParser attributeParser;
   std::optional<WithArgument> parseArgument(Stream<Token>& tokens, ParsedQuery& query);
  public:
   PqlParseStatus parse(Stream<Token>& tokens, ParsedQuery& query);
