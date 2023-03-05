@@ -179,7 +179,6 @@ void spa::SpValidator::validateCallExists() {
             throw std::exception("Calling non-existing procedure");
         }
     }
-
 }
 
 void spa::SpValidator::validateWhileIf() {
