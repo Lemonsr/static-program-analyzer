@@ -179,6 +179,7 @@
     <ClCompile Include="TestParentStarEvaluator.cpp" />
     <ClCompile Include="TestPatternContainerEvaluator.cpp" />
     <ClCompile Include="TestPatternEvaluator.cpp" />
+    <ClCompile Include="TestQps.cpp" />
     <ClCompile Include="TestSimpleEvaluator.cpp" />
     <ClCompile Include="TestModifiesEvaluator.cpp" />
     <ClCompile Include="TestUsesEvaluator.cpp" />
