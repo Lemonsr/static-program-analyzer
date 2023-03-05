@@ -577,7 +577,7 @@ namespace UnitTesting {
 
       spa::ParsedQuery parsedQuery;
       for (auto& firstArg : validFirstArgs) {
-        spa::PatternClause patternClause(synonym, firstArg, pattern);
+        spa::PatternClause patternClause(synonym, firstArg, pattern, 2);
         parsedQuery.addPatternClause(patternClause);
         bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
         Assert::IsTrue(isValid);
@@ -602,7 +602,7 @@ namespace UnitTesting {
 
       spa::ParsedQuery parsedQuery;
       for (auto& firstArg : invalidFirstArgs) {
-        spa::PatternClause patternClause(synonym, firstArg, pattern);
+        spa::PatternClause patternClause(synonym, firstArg, pattern, 2);
         parsedQuery.addPatternClause(patternClause);
         bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
         Assert::IsFalse(isValid);

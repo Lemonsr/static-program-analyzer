@@ -53,12 +53,15 @@ class PatternClause {
   PqlArgument synonym;
   PqlArgument firstArg;
   Pattern pattern;
-
+  int numArgs;
  public:
-  PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern);
+  PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern, int numArgs);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
-  const PqlArgument& getSynonym();
-  const PqlArgument& getFirstArg();
+  PqlArgument& getSynonym();
+  PqlArgument& getFirstArg();
+  DesignEntityType getSynonymType();
+  PatternType getPatternType();
+  int getNumArgs();
   friend bool operator==(const PatternClause& p1, const PatternClause& p2);
   friend bool operator!=(const PatternClause& p1, const PatternClause& p2);
 };

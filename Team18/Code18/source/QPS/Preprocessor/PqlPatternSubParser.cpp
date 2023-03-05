@@ -9,17 +9,6 @@
 #include "UtilsFunction.h"
 #include "Token.h"
 
-std::optional<spa::Pattern> spa::PqlPatternSubParser::parseWildcard(
-  Stream<Token>& tokens,
-  ParsedQuery& query
-) {
-  if (!tokens.match({ { TOKEN_UNDERSCORE, "_" } })) {
-    return {};
-  }
-  tokens.seek(1);
-  return { Pattern { ANY } };
-}
-
 std::optional<spa::Pattern> spa::PqlPatternSubParser::parseExact(
   Stream<Token>& tokens,
   ParsedQuery& query
@@ -96,54 +85,42 @@ std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePattern(
   if (pOptional) {
     return pOptional;
   }
-  std::optional<Pattern> wOptional = parseWildcard(tokens, query);
-  if (wOptional) {
-    return wOptional;
-  }
   return {};
 }
 
-spa::PqlParseStatus spa::PqlPatternSubParser::parseAssign(PqlArgument& designEntity, PqlArgument& firstArg,
-                                                          Stream<Token>& tokens, ParsedQuery& query) {
-  std::optional<Pattern> patternOpt = parsePattern(tokens, query);
+spa::PqlParseStatus spa::PqlPatternSubParser::parseOtherArgs(Stream<Token>& tokens,
+                                                             ParsedQuery& query,
+                                                             PqlArgument& designEntity,
+                                                             PqlArgument& firstArg) {
+  bool matchSingleWildcard = tokens.match({
+    { TOKEN_UNDERSCORE, "_"},
+    { TOKEN_CLOSE_BRACKET, ")"},
+    });
+  if (matchSingleWildcard) {
+    tokens.seek(2);
+    query.addPatternClause({ designEntity, firstArg, Pattern { ANY }, 2 });
+    return PQL_PARSE_SUCCESS;
+  }
+  bool matchDoubleWildcard = tokens.match({
+    { TOKEN_UNDERSCORE, "_"},
+    { TOKEN_COMMA, ","},
+    { TOKEN_UNDERSCORE, "_"},
+    { TOKEN_CLOSE_BRACKET, ")"},
+    });
+  if (matchDoubleWildcard) {
+    tokens.seek(4);
+    query.addPatternClause({ designEntity, firstArg, Pattern { ANY }, 3 });
+    return PQL_PARSE_SUCCESS;
+  }
+  auto patternOpt = parsePattern(tokens, query);
   if (!patternOpt) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
-  if (!tokens.match({ { spa::TOKEN_CLOSE_BRACKET, ")"} })) {
+  if (!tokens.match({ {TOKEN_CLOSE_BRACKET, ")"} })) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);
-  query.addPatternClause({ designEntity, firstArg, patternOpt.value() });
-  return PQL_PARSE_SUCCESS;
-}
-
-spa::PqlParseStatus spa::PqlPatternSubParser::parseWhile(PqlArgument& designEntity, PqlArgument& firstArg,
-                                                         Stream<Token>& tokens, ParsedQuery& query) {
-  bool matchStatus = tokens.match({
-    { TOKEN_UNDERSCORE, "_" },
-    { TOKEN_CLOSE_BRACKET, ")" }
-  });
-  if (!matchStatus) {
-    return PQL_PARSE_SYNTAX_ERROR;
-  }
-  tokens.seek(2);
-  query.addPatternClause({ designEntity, firstArg, Pattern { ANY } });
-  return PQL_PARSE_SUCCESS;
-}
-
-spa::PqlParseStatus spa::PqlPatternSubParser::parseIf(PqlArgument& designEntity, PqlArgument& firstArg,
-  Stream<Token>& tokens, ParsedQuery& query) {
-  bool matchStatus = tokens.match({
-    { TOKEN_UNDERSCORE, "_" },
-    { TOKEN_COMMA, "," },
-    { TOKEN_UNDERSCORE, "_" },
-    { TOKEN_CLOSE_BRACKET, ")" }
-    });
-  if (!matchStatus) {
-    return PQL_PARSE_SYNTAX_ERROR;
-  }
-  tokens.seek(4);
-  query.addPatternClause({ designEntity, firstArg, Pattern { ANY } });
+  query.addPatternClause({ designEntity, firstArg, patternOpt.value(), 2});
   return PQL_PARSE_SUCCESS;
 }
 
@@ -171,14 +148,5 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
     return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);
-  switch (designEntity.getDesignEntity().value()) {
-    case ASSIGN:
-      return parseAssign(designEntity, firstArg, tokens, query);
-    case WHILE:
-      return parseWhile(designEntity, firstArg, tokens, query);
-    case IF:
-      return parseIf(designEntity, firstArg, tokens, query);
-    default:
-      return PQL_PARSE_SEMANTIC_ERROR;
-  }
+  return parseOtherArgs(tokens, query, designEntity, firstArg);
 }

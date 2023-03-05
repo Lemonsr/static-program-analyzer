@@ -164,8 +164,12 @@ bool spa::operator!=(const SuchThatClause& s1, const SuchThatClause& s2) {
 }
 
 spa::PatternClause::PatternClause(PqlArgument synonym, PqlArgument firstArg,
-  Pattern pattern) : synonym(synonym), firstArg(firstArg),
-                     pattern(pattern) {
+                                  Pattern pattern, int numArgs) : synonym(synonym), firstArg(firstArg),
+                                                                  pattern(pattern), numArgs(numArgs) {
+}
+
+int spa::PatternClause::getNumArgs() {
+  return numArgs;
 }
 
 std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
@@ -178,19 +182,28 @@ std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
   }
 }
 
-const spa::PqlArgument& spa::PatternClause::getSynonym() {
+spa::PqlArgument& spa::PatternClause::getSynonym() {
   return synonym;
 }
 
-const spa::PqlArgument& spa::PatternClause::getFirstArg() {
+spa::PqlArgument& spa::PatternClause::getFirstArg() {
   return firstArg;
+}
+
+spa::DesignEntityType spa::PatternClause::getSynonymType() {
+  return synonym.getDesignEntity().value();
+}
+
+spa::PatternType spa::PatternClause::getPatternType() {
+  return pattern.getType();
 }
 
 bool spa::operator==(const PatternClause& p1, const PatternClause& p2) {
   bool synonymMatch = p1.synonym == p2.synonym;
   bool firstArgMatch = p1.firstArg == p2.firstArg;
   bool patternMatch = p1.pattern == p2.pattern;
-  return synonymMatch && firstArgMatch && patternMatch;
+  bool numArgsMatch = p1.numArgs == p2.numArgs;
+  return synonymMatch && firstArgMatch && patternMatch && numArgsMatch;
 }
 
 bool spa::operator!=(const PatternClause& p1, const PatternClause& p2) {

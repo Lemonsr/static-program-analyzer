@@ -37,7 +37,7 @@ public:
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
-      spa::Pattern(spa::ANY));
+      spa::Pattern(spa::ANY), 2);
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
   }

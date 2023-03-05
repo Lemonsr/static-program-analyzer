@@ -26,7 +26,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -49,7 +49,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::PARTIAL, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -72,7 +72,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::ANY, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -95,7 +95,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -116,7 +116,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -139,7 +139,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::PARTIAL, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -162,7 +162,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::ANY, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -185,7 +185,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -206,7 +206,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -229,7 +229,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::PARTIAL, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -252,7 +252,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::ANY, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -275,7 +275,7 @@ namespace IntegrationTesting {
       };
       spa::Pattern pattern(spa::PatternType::EXACT, patternTokens);
 
-      spa::PatternClause patternClause(synonym, lhs, pattern);
+      spa::PatternClause patternClause(synonym, lhs, pattern, 2);
       std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
