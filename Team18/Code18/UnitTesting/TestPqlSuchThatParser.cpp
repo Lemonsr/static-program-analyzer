@@ -76,7 +76,7 @@ public:
     query.addDeclaration("s1", spa::STMT);
     spa::PqlSuchThatParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
-    Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
   }
   };
 }  // namespace UnitTesting

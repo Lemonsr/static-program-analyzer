@@ -117,7 +117,7 @@ public:
     query.addDeclaration("BOOLEAN", spa::ASSIGN);
     spa::PqlSelectParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
-    Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
   }
 
   TEST_METHOD(TestNonExisistentSimple) {
@@ -130,7 +130,7 @@ public:
     spa::ParsedQuery query;
     spa::PqlSelectParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
-    Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
   }
 
   TEST_METHOD(TestNonExisistentSynonymTuple) {
@@ -147,7 +147,7 @@ public:
     spa::ParsedQuery query;
     spa::PqlSelectParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
-    Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
   }
   };
 }  // namespace UnitTesting

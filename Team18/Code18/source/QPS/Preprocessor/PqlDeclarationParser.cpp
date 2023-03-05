@@ -26,21 +26,21 @@ spa::PqlParseStatus spa::PqlDeclarationParser::addDeclarations(
 ) {
   while (tokens.remaining() >= 2) {
     if (tokens[0].getType() != TOKEN_NAME) {
-      return PQL_PARSE_ERROR;
+      return PQL_PARSE_SYNTAX_ERROR;
     }
     if (!query.addDeclaration(tokens[0].getValue(), type)) {
-      return PQL_PARSE_ERROR;
+      return PQL_PARSE_SYNTAX_ERROR;
     }
     TokenType tokenType = tokens[1].getType();
     if (tokenType != TOKEN_SEMICOLON && tokenType != TOKEN_COMMA) {
-      return PQL_PARSE_ERROR;
+      return PQL_PARSE_SYNTAX_ERROR;
     }
     tokens.seek(2);
     if (tokenType == TOKEN_SEMICOLON) {
       return PQL_PARSE_SUCCESS;
     }
   }
-  return PQL_PARSE_ERROR;
+  return PQL_PARSE_SYNTAX_ERROR;
 }
 
 spa::PqlParseStatus spa::PqlDeclarationParser::parse(Stream<Token>& tokens,

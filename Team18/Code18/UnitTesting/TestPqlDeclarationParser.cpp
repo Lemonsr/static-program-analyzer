@@ -80,7 +80,7 @@ namespace UnitTesting {
         spa::ParsedQuery query;
         spa::PqlDeclarationParser parser;
         spa::PqlParseStatus status = parser.parse(tokens, query);
-        Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
+        Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
       }
 
       TEST_METHOD(TestIncorrectDeclaration) {
@@ -94,7 +94,7 @@ namespace UnitTesting {
         spa::ParsedQuery query;
         spa::PqlDeclarationParser parser;
         spa::PqlParseStatus status = parser.parse(tokens, query);
-        Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
+        Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
       }
   };
 }  // namespace UnitTesting

@@ -12,7 +12,7 @@ spa::PqlParseStatus spa::PqlSelectParser::parseSynonymOrAttribute(bool parseBool
     return PQL_PARSE_SUCCESS;
   }
   if (!tokens.match({ {TOKEN_NAME, ""} })) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   std::string synonym = tokens[0].getValue();
   tokens.seek(1);
@@ -28,7 +28,7 @@ spa::PqlParseStatus spa::PqlSelectParser::parseSynonymOrAttribute(bool parseBool
     query.setSelectClauseType(SelectClauseType::SELECT_BOOLEAN);
     return PQL_PARSE_SUCCESS;
   }
-  return PQL_PARSE_ERROR;
+  return PQL_PARSE_SYNTAX_ERROR;
 }
 
 spa::PqlParseStatus spa::PqlSelectParser::parseTuple(Stream<Token>& tokens, ParsedQuery& query) {
@@ -46,7 +46,7 @@ spa::PqlParseStatus spa::PqlSelectParser::parseTuple(Stream<Token>& tokens, Pars
       break;
     }
   }
-  return PQL_PARSE_ERROR;
+  return PQL_PARSE_SYNTAX_ERROR;
 }
 
 spa::PqlParseStatus spa::PqlSelectParser::parse(Stream<Token>& tokens, ParsedQuery& query) {

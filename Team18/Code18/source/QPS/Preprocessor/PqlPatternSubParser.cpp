@@ -123,10 +123,10 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseAssign(PqlArgument& designEnt
                                                           Stream<Token>& tokens, ParsedQuery& query) {
   std::optional<Pattern> patternOpt = parsePattern(tokens, query);
   if (!patternOpt) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   if (!tokens.match({ { spa::TOKEN_CLOSE_BRACKET, ")"} })) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);
   query.addPatternClause({ designEntity, firstArg, patternOpt.value() });
@@ -140,7 +140,7 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseWhile(PqlArgument& designEnti
     { TOKEN_CLOSE_BRACKET, ")" }
   });
   if (!matchStatus) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(2);
   query.addPatternClause({ designEntity, firstArg, Pattern { ANY } });
@@ -156,7 +156,7 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseIf(PqlArgument& designEntity,
     { TOKEN_CLOSE_BRACKET, ")" }
     });
   if (!matchStatus) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(4);
   query.addPatternClause({ designEntity, firstArg, Pattern { ANY } });
@@ -170,21 +170,21 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
     { spa::TOKEN_OPEN_BRACKET, "("},
   });
   if (!matchResult) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   std::optional<spa::PqlArgument> designEntityOpt = parseDesignEntity(tokens[0], query);
   if (!designEntityOpt) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   spa::PqlArgument& designEntity = designEntityOpt.value();
   tokens.seek(2);
   std::optional<PqlArgument> firstArgOpt = argParser.parse(tokens, query);
   if (!firstArgOpt) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   spa::PqlArgument& firstArg = firstArgOpt.value();
   if (!tokens.match({ { spa::TOKEN_COMMA, ","} })) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);
   switch (designEntity.getDesignEntity().value()) {
@@ -195,6 +195,6 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
     case IF:
       return parseIf(designEntity, firstArg, tokens, query);
     default:
-      return PQL_PARSE_ERROR;
+      return PQL_PARSE_SYNTAX_ERROR;
   }
 }
