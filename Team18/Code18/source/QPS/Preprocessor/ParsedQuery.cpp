@@ -15,6 +15,7 @@
 #include "ParentStarEvaluator.h"
 #include "PatternEvaluator.h"
 #include "PatternContainerEvaluator.h"
+#include "NextEvaluator.h"
 
 void spa::ParsedQuery::addDeclaration(std::string synonym, DesignEntityType designEntity) {
   declarations[synonym] = designEntity;
@@ -79,6 +80,7 @@ std::vector<spa::PatternClause>& spa::ParsedQuery::getPatternClauses() {
 
 void spa::ParsedQuery::addWithClause(spa::WithClause clause) {
   withClauses.push_back(clause);
+  lastAddedClause = PqlClauseType::WITH_CLAUSE;
 }
 
 std::vector<spa::WithClause>& spa::ParsedQuery::getWithClauses() {
@@ -134,6 +136,9 @@ std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
   case PARENT_STAR: {
     return std::make_unique<ParentStarEvaluator>(firstArg, secondArg);
   }
+  case NEXT: {
+    return std::make_unique<NextEvaluator>(firstArg, secondArg);
+  }
   default: {
     throw std::runtime_error("Unable to find evaluator");
   }
@@ -175,10 +180,15 @@ int spa::PatternClause::getNumArgs() {
 std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
   switch (synonym.getDesignEntity().value()) {
   case IF:
-  case WHILE:
+  case WHILE: {
     return std::make_unique<spa::PatternContainerEvaluator>(synonym.getDesignEntity().value(), synonym, firstArg);
-  case ASSIGN:
+  }
+  case ASSIGN: {
     return std::make_unique<spa::PatternEvaluator>(synonym, firstArg, pattern);
+  }
+  default: {
+    throw std::runtime_error("Unable to find evaluator");
+  }
   }
 }
 

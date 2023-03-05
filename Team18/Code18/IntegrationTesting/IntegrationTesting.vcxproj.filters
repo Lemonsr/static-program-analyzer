@@ -62,6 +62,9 @@
     <ClCompile Include="TestCallsStarEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestNextEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TestQps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

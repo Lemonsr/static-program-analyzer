@@ -32,6 +32,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::PATTERN_CLAUSE);
     spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
@@ -62,6 +63,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::PATTERN_CLAUSE);
     spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
@@ -94,6 +96,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::PATTERN_CLAUSE);
     spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
@@ -122,6 +125,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::PATTERN_CLAUSE);
     spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "w", spa::WHILE },
@@ -148,6 +152,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getPatternClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::PATTERN_CLAUSE);
     spa::PatternClause& clause = query.getPatternClauses()[0];
     spa::PatternClause compare(
       { spa::SYNONYM, "ifs", spa::IF },
