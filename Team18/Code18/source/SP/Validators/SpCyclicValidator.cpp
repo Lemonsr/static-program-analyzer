@@ -6,8 +6,7 @@
 #include "NonContainerStatement.h"
 
 spa::SpCyclicValidator::SpCyclicValidator(std::unordered_map<std::string,
-                                                             std::unordered_set<std::string>>
-    procCallMap) {
+                                          std::unordered_set<std::string>> procCallMap) {
     validateCallMap = procCallMap;
 }
 
@@ -37,12 +36,6 @@ bool spa::SpCyclicValidator::dfsCheckCyclicCall(std::string parent,
         return visited->at(parent);
     } else {
         currentSeen->emplace(parent);
-        if (validateCallMap.find(parent) == validateCallMap.end()) {
-            visited->emplace(parent, false);
-            currentSeen->erase(parent);
-            return false;
-        }
-
         auto children = validateCallMap.at(parent);
         for (auto child : children) {
             if (dfsCheckCyclicCall(child, currentSeen, visited)) {
