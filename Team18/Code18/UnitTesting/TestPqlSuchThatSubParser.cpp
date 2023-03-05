@@ -32,6 +32,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getSuchThatClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::SUCH_THAT_CLAUSE);
     spa::SuchThatClause& clause = query.getSuchThatClauses()[0];
     spa::SuchThatClause compare(
       spa::MODIFIES,
@@ -57,6 +58,7 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
     Assert::AreEqual(query.getSuchThatClauses().size(), size_t(1));
+    Assert::IsTrue(query.getLastAddedClause() == spa::PqlClauseType::SUCH_THAT_CLAUSE);
     spa::SuchThatClause& clause = query.getSuchThatClauses()[0];
     spa::SuchThatClause compare(
       spa::PARENT_STAR,

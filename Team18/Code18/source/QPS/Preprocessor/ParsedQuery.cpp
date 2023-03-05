@@ -83,6 +83,7 @@ std::vector<spa::PatternClause>& spa::ParsedQuery::getPatternClauses() {
 
 void spa::ParsedQuery::addWithClause(spa::WithClause clause) {
   withClauses.push_back(clause);
+  lastAddedClause = PqlClauseType::WITH_CLAUSE;
 }
 
 std::vector<spa::WithClause>& spa::ParsedQuery::getWithClauses() {
