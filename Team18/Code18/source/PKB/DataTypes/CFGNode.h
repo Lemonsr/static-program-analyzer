@@ -5,7 +5,7 @@
 namespace spa {
 class CFGNode {
  public:
-    CFGNode(int lineNumber);
+    explicit CFGNode(int lineNumber);
     int getLineNumber() const;
     void linkTo(CFGNode* node);
     void addModifiedVariable(std::string variable);
@@ -18,7 +18,7 @@ class CFGNode {
     void removeOutgoingNode(CFGNode* node);
     void removeNodeFromGraph();
 
-private:
+ private:
     int lineNumber;
     std::unordered_set<std::string> modifiedVariables;
     std::unordered_set<CFGNode*> incomingEdges;
