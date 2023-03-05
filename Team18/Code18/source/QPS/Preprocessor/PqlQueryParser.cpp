@@ -29,11 +29,11 @@ spa::PqlParseStatus spa::PqlQueryParser::parseClauses(Stream<Token>& tokens,
     bool parserUsed = false;
     for (auto parser : parsers) {
       PqlParseStatus status = parser->parse(tokens, query);
-      if (status == PQL_PARSE_SYNTAX_ERROR) {
-        return PQL_PARSE_SYNTAX_ERROR;
-      } else if (status == PQL_PARSE_SUCCESS) {
+      if (status == PQL_PARSE_SUCCESS) {
         parserUsed = true;
         break;
+      } else if (status != PQL_PARSE_MISMATCH) {
+        return status;
       }
     }
     if (!parserUsed) {

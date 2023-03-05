@@ -15,6 +15,9 @@ spa::QpsResult spa::QPS::evaluate(std::string query, PKBManager& pkbManager) {
   if (parseResult.first == PQL_PARSE_SYNTAX_ERROR) {
     result.setErrorMessage("SyntaxError");
     return result;
+  } else if (parseResult.first == PQL_PARSE_SEMANTIC_ERROR) {
+    result.setErrorMessage("SemanticError");
+    return result;
   }
 
   ParsedQuery& parsedQuery = parseResult.second;
