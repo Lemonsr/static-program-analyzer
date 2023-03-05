@@ -75,6 +75,24 @@ TEST_CLASS(TestQPS) {
     Assert::AreEqual(result.getErrorMessage().value(), std::string("SemanticError"));
   }
 
+  TEST_METHOD(TestInvalidPatternAssignSynonymExpr) {
+    spa::QPS qps;
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+    std::string query = "variable v; assign a; Select a pattern a(v, c)";
+    spa::QpsResult result = qps.evaluate(query, *pkbManager);
+    Assert::IsTrue(result.getErrorMessage().has_value());
+    Assert::AreEqual(result.getErrorMessage().value(), std::string("SyntaxError"));
+  }
+
+  TEST_METHOD(TestInvalidPatternAssignInfixExpr) {
+    spa::QPS qps;
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+    std::string query = "variable v; assign a; Select a pattern a(v, _\"+temp\")";
+    spa::QpsResult result = qps.evaluate(query, *pkbManager);
+    Assert::IsTrue(result.getErrorMessage().has_value());
+    Assert::AreEqual(result.getErrorMessage().value(), std::string("SyntaxError"));
+  }
+
   TEST_METHOD(TestInvalidPatternWhile) {
     spa::QPS qps;
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
