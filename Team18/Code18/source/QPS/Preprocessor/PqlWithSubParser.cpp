@@ -30,15 +30,15 @@ std::optional<spa::WithArgument> spa::PqlWithSubParser::parseArgument(Stream<Tok
 spa::PqlParseStatus spa::PqlWithSubParser::parse(Stream<Token>& tokens, ParsedQuery& query) {
   std::optional<WithArgument> firstOpt = parseArgument(tokens, query);
   if (!firstOpt.has_value()) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   if (!tokens.match({ { TOKEN_EQUAL, "="} })) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);
   std::optional<WithArgument> secondOpt = parseArgument(tokens, query);
   if (!secondOpt.has_value()) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   query.addWithClause({ firstOpt.value(), secondOpt.value() });
   return PQL_PARSE_SUCCESS;

@@ -17,6 +17,7 @@ inline std::unordered_map<DesignEntityType, std::unordered_set<std::string>> pql
   { WHILE, { "stmt#" }},
   { IF, { "stmt#" }},
   { VARIABLE, { "varName"}},
-  { PROCEDURE, { "procName" }}
+  { PROCEDURE, { "procName" }},
+  { UNKNOWN, { "stmt#", "varName", "procName", "value" }},
 };
 }  // namespace spa

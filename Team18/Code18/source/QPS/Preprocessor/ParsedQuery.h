@@ -53,12 +53,15 @@ class PatternClause {
   PqlArgument synonym;
   PqlArgument firstArg;
   Pattern pattern;
-
+  int numArgs;
  public:
-  PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern);
+  PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern, int numArgs);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
-  const PqlArgument& getSynonym();
-  const PqlArgument& getFirstArg();
+  PqlArgument& getSynonym();
+  PqlArgument& getFirstArg();
+  DesignEntityType getSynonymType();
+  PatternType getPatternType();
+  int getNumArgs();
   friend bool operator==(const PatternClause& p1, const PatternClause& p2);
   friend bool operator!=(const PatternClause& p1, const PatternClause& p2);
 };
@@ -118,12 +121,13 @@ class ParsedQuery {
   std::vector<SuchThatClause> suchThatClauses;
   std::vector<WithClause> withClauses;
   std::unordered_map<std::string, DesignEntityType> declarations;
+  std::unordered_map<std::string, int> declarationsCount;
   std::unordered_map<std::string, DesignEntityType> usedDeclarations;
 
  public:
-  bool addDeclaration(std::string synonym, DesignEntityType designEntity);
-  int getDeclarationsCount();
-  std::optional<DesignEntityType> getDeclarationType(std::string synonym);
+  void addDeclaration(std::string synonym, DesignEntityType designEntity);
+  std::unordered_map<std::string, int>& getDeclarationsCount();
+  DesignEntityType getDeclarationType(std::string synonym);
   std::unordered_map<std::string, DesignEntityType>& getDeclarations();
   void setSelectClauseType(SelectClauseType selectType);
   SelectClauseType getSelectClauseType();
@@ -137,7 +141,7 @@ class ParsedQuery {
   void addWithClause(WithClause clause);
   std::vector<WithClause>& getWithClauses();
   bool addUsedDeclaration(std::string declaration, DesignEntityType designEntityType);
-  std::unordered_map<std::string, DesignEntityType> getUsedDeclarations();
+  std::unordered_map<std::string, DesignEntityType>& getUsedDeclarations();
   bool hasClauses();
 };
 }  // namespace spa

@@ -4,16 +4,13 @@
 
 std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>& tokens, ParsedQuery& query) {
   std::string synonym = tokens[0].getValue();
-  std::optional<DesignEntityType> entityOpt = query.getDeclarationType(synonym);
-  if (!entityOpt) {
-    return {};
-  }
+  DesignEntityType entityType = query.getDeclarationType(synonym);
   std::string attribute = tokens[2].getValue();
   bool hasHash = tokens.remaining() >= 4 && tokens[3].getType() == TOKEN_HASH;
   if (hasHash) {
     attribute.append("#");
   }
-  auto& attributes = pqlAttributesMap[entityOpt.value()];
+  auto& attributes = pqlAttributesMap[entityType];
   auto it = attributes.find(attribute);
   if (it == attributes.end()) {
     return {};
@@ -22,7 +19,7 @@ std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>
   if (hasHash) {
     tokens.seek(1);
   }
-  query.addUsedDeclaration(synonym, entityOpt.value());
+  query.addUsedDeclaration(synonym, entityType);
   return { synonym.append(".").append(attribute) };
 }
 

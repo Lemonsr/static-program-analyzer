@@ -1,13 +1,14 @@
 #pragma once
 
 #include <string>
-#include <optional>
+#include <utility>
 
+#include "PqlParser.h"
 #include "ParsedQuery.h"
 
 namespace spa {
 class QpsPreprocessor {
  public:
-  std::optional<ParsedQuery> preprocess(std::string query);
+  std::pair<PqlParseStatus, ParsedQuery> preprocess(std::string query);
 };
 }

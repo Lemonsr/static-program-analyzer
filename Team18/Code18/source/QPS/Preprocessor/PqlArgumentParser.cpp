@@ -10,13 +10,10 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getSynonym(
     return {};
   }
   std::string val = tokens[0].getValue();
-  auto op = query.getDeclarationType(val);
-  if (!op) {
-    return {};
-  }
+  DesignEntityType entityType = query.getDeclarationType(val);
   tokens.seek(1);
-  query.addUsedDeclaration(val, op.value());
-  return { { SYNONYM, val, op } };
+  query.addUsedDeclaration(val, entityType);
+  return { { SYNONYM, val, entityType } };
 }
 
 std::optional<spa::PqlArgument> spa::PqlArgumentParser::getWildcard(

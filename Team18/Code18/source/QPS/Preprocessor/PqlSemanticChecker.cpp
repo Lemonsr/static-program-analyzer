@@ -3,6 +3,16 @@
 #include <optional>
 
 bool spa::PqlSemanticChecker::isSemanticallyValid(ParsedQuery& parsedQuery) {
+  for (auto& p : parsedQuery.getDeclarationsCount()) {
+    if (p.second > 1) {
+      return false;
+    }
+  }
+  for (auto& p : parsedQuery.getUsedDeclarations()) {
+    if (p.second == UNKNOWN) {
+      return false;
+    }
+  }
   for (auto& clause : parsedQuery.getSuchThatClauses()) {
     if (!isValid(clause)) {
       return false;
@@ -39,7 +49,7 @@ bool spa::PqlSemanticChecker::isValid(SuchThatClause& suchThatClause) {
 }
 
 bool spa::PqlSemanticChecker::isValid(PatternClause& patternClause) {
-  PqlArgument firstArg = patternClause.getFirstArg();
+  PqlArgument& firstArg = patternClause.getFirstArg();
   ArgumentType firstArgType = firstArg.getType();
   if (firstArgType == LINE_NO) {
     return false;
@@ -52,6 +62,26 @@ bool spa::PqlSemanticChecker::isValid(PatternClause& patternClause) {
     }
   }
 
+  DesignEntityType entityType = patternClause.getSynonymType();
+  switch (entityType) {
+    case ASSIGN:
+      if (patternClause.getNumArgs() != 2) {
+        return false;
+      }
+      break;
+    case IF:
+      if (patternClause.getNumArgs() != 3 || patternClause.getPatternType() != ANY) {
+        return false;
+      }
+      break;
+    case WHILE:
+      if (patternClause.getNumArgs() != 2 || patternClause.getPatternType() != ANY) {
+        return false;
+      }
+      break;
+    default:
+      return false;
+  }
   return true;
 }
 

@@ -43,8 +43,9 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results) {
     // each result must be a string.
   spa::QPS qps;
   spa::QpsResult qpsResult = qps.evaluate(query, *pkbManager);
-  if (qpsResult.getErrorMessage().has_value()) {
-    std::cout << qpsResult.getErrorMessage().value() << std::endl;
+  const auto& errorMessage = qpsResult.getErrorMessage();
+  if (errorMessage) {
+    results.push_back(errorMessage.value());
     return;
   }
 
