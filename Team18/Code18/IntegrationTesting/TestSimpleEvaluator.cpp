@@ -27,7 +27,7 @@ namespace IntegrationTesting {
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 2);
       Assert::AreEqual(dim.second, 3);
-      
+
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
       Assert::IsTrue(rows[0][0].getString() == "x");
       Assert::IsTrue(rows[0][1].getString() == "x");
@@ -140,7 +140,7 @@ namespace IntegrationTesting {
       auto dim = resultTable.getDimension();
       Assert::AreEqual(dim.first, 2);
       Assert::AreEqual(dim.second, 1);
-      
+
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
       Assert::IsTrue(rows[0][0].getInteger() == 2);
       Assert::IsTrue(rows[0][1].getInteger() == 2);
