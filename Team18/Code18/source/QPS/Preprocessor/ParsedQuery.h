@@ -63,6 +63,41 @@ class PatternClause {
   friend bool operator!=(const PatternClause& p1, const PatternClause& p2);
 };
 
+enum class WithArgumentType {
+  WITH_VALUE,
+  WITH_ATTRIBUTE
+};
+
+class WithArgument {
+ private:
+  WithArgumentType type = WithArgumentType::WITH_VALUE;
+  std::optional<QpsValue> valueOpt;
+  std::optional<std::string> attributeOpt;
+ public:
+  WithArgument() = default;
+  explicit WithArgument(QpsValue value);
+  explicit WithArgument(std::string attribute);
+  const WithArgumentType& getType();
+  const QpsValue& getValue();
+  const std::string& getAttribute();
+
+  friend bool operator==(const WithArgument& first, const WithArgument& second);
+  friend bool operator!=(const WithArgument& first, const WithArgument& second);
+};
+
+class WithClause {
+ private:
+  WithArgument firstArg;
+  WithArgument secondArg;
+ public:
+  WithClause() = default;
+  WithClause(WithArgument firstArg, WithArgument secondArg);
+  const WithArgument& getFirstArg();
+  const WithArgument& getSecondArg();
+  friend bool operator==(const WithClause& w1, const WithClause& w2);
+  friend bool operator!=(const WithClause& w1, const WithClause& w2);
+};
+
 enum class SelectClauseType {
   SELECT_BOOLEAN,
   SELECT_TUPLE
@@ -81,6 +116,7 @@ class ParsedQuery {
   std::vector<std::string> selectColumns;
   std::vector<PatternClause> patternClauses;
   std::vector<SuchThatClause> suchThatClauses;
+  std::vector<WithClause> withClauses;
   std::unordered_map<std::string, DesignEntityType> declarations;
   std::unordered_map<std::string, DesignEntityType> usedDeclarations;
 
@@ -98,6 +134,8 @@ class ParsedQuery {
   std::vector<SuchThatClause>& getSuchThatClauses();
   void addPatternClause(PatternClause clause);
   std::vector<PatternClause>& getPatternClauses();
+  void addWithClause(WithClause clause);
+  std::vector<WithClause>& getWithClauses();
   bool addUsedDeclaration(std::string declaration, DesignEntityType designEntityType);
   std::unordered_map<std::string, DesignEntityType> getUsedDeclarations();
   bool hasClauses();

@@ -5,6 +5,8 @@
 #include "PqlSelectParser.h"
 #include "PqlSuchThatParser.h"
 #include "PqlPatternParser.h"
+#include "PqlAndParser.h"
+#include "PqlWithParser.h"
 #include "ParsedQuery.h"
 
 namespace spa {
@@ -14,6 +16,8 @@ class PqlQueryParser : public PqlParser {
   PqlSelectParser selectParser;
   PqlSuchThatParser suchThatParser;
   PqlPatternParser patternParser;
+  PqlAndParser andParser;
+  PqlWithParser withParser;
   PqlParseStatus parseDeclarations(Stream<Token>& tokens,
                                     ParsedQuery& query);
   PqlParseStatus parseClauses(Stream<Token>& tokens,

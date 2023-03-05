@@ -22,7 +22,7 @@ namespace UnitTesting {
       {5, {6}},
       {6, {7}},
       {7, {8, 9}},
-      {8, {7, 9}}
+      {8, {7}}
     };
 
     std::unordered_map<int, spa::StatementType> statementTypeTable = {
@@ -123,7 +123,7 @@ public:
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
 
-    expected = { {7, 9}, {8, 9} };
+    expected = { {7, 9} };
     firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s", spa::DesignEntityType::STMT));
     queryResult = relationshipStorage.getNextStatementLine(firstArg, secondArg);
 
@@ -218,7 +218,7 @@ public:
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
 
-    expected = { {1, 2}, {2, 3}, {3, 4}, {3, 5}, {4, 7}, {5, 6}, {6, 7}, {7, 8}, {7, 9}, {8, 7}, {8, 9} };
+    expected = { {1, 2}, {2, 3}, {3, 4}, {3, 5}, {4, 7}, {5, 6}, {6, 7}, {7, 8}, {7, 9}, {8, 7} };
     firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s", spa::DesignEntityType::STMT));
     queryResult = relationshipStorage.getNextStatementUnderscore(firstArg, secondArg);
 
@@ -246,7 +246,7 @@ public:
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
 
-    expected = { {1, 2}, {2, 3}, {3, 4}, {3, 5}, {4, 7}, {5, 6}, {6, 7}, {7, 8}, {7, 9}, {8, 7}, {8, 9} };
+    expected = { {1, 2}, {2, 3}, {3, 4}, {3, 5}, {4, 7}, {5, 6}, {6, 7}, {7, 8}, {7, 9}, {8, 7} };
     secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s", spa::DesignEntityType::STMT));
     queryResult = relationshipStorage.getNextUnderscoreStatement(firstArg, secondArg);
 
@@ -292,7 +292,7 @@ public:
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
 
-    expected = { {1, 2}, {2, 3}, {3, 4}, {3, 5}, {4, 7}, {5, 6}, {6, 7}, {7, 8}, {7, 9}, {8, 7}, {8, 9} };
+    expected = { {1, 2}, {2, 3}, {3, 4}, {3, 5}, {4, 7}, {5, 6}, {6, 7}, {7, 8}, {7, 9}, {8, 7} };
     firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s1", spa::DesignEntityType::STMT));
     secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s2", spa::DesignEntityType::STMT));
     queryResult = relationshipStorage.getNextStatementStatement(firstArg, secondArg);
