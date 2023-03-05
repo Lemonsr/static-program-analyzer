@@ -77,7 +77,9 @@ public:
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addStatementType("10", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("11", spa::StatementType::PRINT);
+    pkbManager->addStatementType("12", spa::StatementType::PRINT);
     pkbManager->addRelationship(spa::NEXT, "10", "11");
+    pkbManager->addRelationship(spa::NEXT, "11", "12");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
@@ -87,6 +89,19 @@ public:
     std::vector<spa::QpsResultRow> rows = table.getRows();
     Assert::IsTrue(rows[0][0].getInteger() == 10);
     Assert::IsTrue(rows[0][1].getInteger() == 11);
+
+    clause = spa::SuchThatClause(spa::NEXT,
+                                 spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
+                                 spa::PqlArgument(spa::LINE_NO, "12", {}));
+    evaluator = clause.getEvaluator();
+    table = evaluator->evaluate(*pkbManager);
+    dim = table.getDimension();
+    Assert::AreEqual(dim.first, 2);
+    Assert::AreEqual(dim.second, 1);
+
+    rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 11);
+    Assert::IsTrue(rows[0][1].getInteger() == 12);
   }
 
   TEST_METHOD(TestStatementLineNotExists) {
@@ -158,11 +173,11 @@ public:
 
   TEST_METHOD(TestStatementStatementExists) {
     spa::SuchThatClause clause(spa::NEXT,
-                               spa::PqlArgument(spa::SYNONYM, "a1", { spa::ASSIGN }),
-                               spa::PqlArgument(spa::SYNONYM, "a2", { spa::ASSIGN }));
+                               spa::PqlArgument(spa::SYNONYM, "re", { spa::READ }),
+                               spa::PqlArgument(spa::SYNONYM, "pr", { spa::PRINT }));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addStatementType("10", spa::StatementType::ASSIGN);
-    pkbManager->addStatementType("11", spa::StatementType::ASSIGN);
+    pkbManager->addStatementType("10", spa::StatementType::READ);
+    pkbManager->addStatementType("11", spa::StatementType::PRINT);
     pkbManager->addStatementType("12", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("13", spa::StatementType::ASSIGN);
     pkbManager->addRelationship(spa::NEXT, "10", "11");
@@ -172,9 +187,22 @@ public:
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
-    Assert::AreEqual(dim.second, 3);
+    Assert::AreEqual(dim.second, 1);
 
     std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 10);
+    Assert::IsTrue(rows[0][1].getInteger() == 11);
+
+    clause = spa::SuchThatClause(spa::NEXT,
+                                 spa::PqlArgument(spa::SYNONYM, "s1", { spa::STMT }),
+                                 spa::PqlArgument(spa::SYNONYM, "s2", { spa::STMT }));
+    evaluator = clause.getEvaluator();
+    table = evaluator->evaluate(*pkbManager);
+    dim = table.getDimension();
+    Assert::AreEqual(dim.first, 2);
+    Assert::AreEqual(dim.second, 3);
+
+    rows = table.getRows();
     Assert::IsTrue(rows[0][0].getInteger() == 10);
     Assert::IsTrue(rows[0][1].getInteger() == 11);
     Assert::IsTrue(rows[1][0].getInteger() == 11);
@@ -207,7 +235,7 @@ public:
                                spa::PqlArgument(spa::SYNONYM, "a1", { spa::ASSIGN }),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addStatementType("10", spa::StatementType::ASSIGN);
+    pkbManager->addStatementType("10", spa::StatementType::PRINT);
     pkbManager->addStatementType("11", spa::StatementType::READ);
     pkbManager->addStatementType("12", spa::StatementType::ASSIGN);
     pkbManager->addStatementType("13", spa::StatementType::READ);
@@ -218,13 +246,28 @@ public:
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
-    Assert::AreEqual(dim.second, 2);
+    Assert::AreEqual(dim.second, 1);
 
     std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 12);
+    Assert::IsTrue(rows[0][1].getInteger() == 13);
+
+    clause = spa::SuchThatClause(spa::NEXT,
+                                 spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }),
+                                 spa::PqlArgument(spa::WILDCARD, "_", {}));
+    evaluator = clause.getEvaluator();
+    table = evaluator->evaluate(*pkbManager);
+    dim = table.getDimension();
+    Assert::AreEqual(dim.first, 2);
+    Assert::AreEqual(dim.second, 3);
+
+    rows = table.getRows();
     Assert::IsTrue(rows[0][0].getInteger() == 10);
     Assert::IsTrue(rows[0][1].getInteger() == 11);
-    Assert::IsTrue(rows[1][0].getInteger() == 12);
-    Assert::IsTrue(rows[1][1].getInteger() == 13);
+    Assert::IsTrue(rows[1][0].getInteger() == 11);
+    Assert::IsTrue(rows[1][1].getInteger() == 12);
+    Assert::IsTrue(rows[2][0].getInteger() == 12);
+    Assert::IsTrue(rows[2][1].getInteger() == 13);
   }
 
   TEST_METHOD(TestStatementUnderscoreNotExists) {
@@ -252,9 +295,9 @@ public:
                                spa::PqlArgument(spa::SYNONYM, "re", { spa::READ }));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addStatementType("10", spa::StatementType::READ);
-    pkbManager->addStatementType("11", spa::StatementType::READ);
+    pkbManager->addStatementType("11", spa::StatementType::PRINT);
     pkbManager->addStatementType("12", spa::StatementType::READ);
-    pkbManager->addStatementType("13", spa::StatementType::READ);
+    pkbManager->addStatementType("13", spa::StatementType::ASSIGN);
     pkbManager->addRelationship(spa::NEXT, "10", "11");
     pkbManager->addRelationship(spa::NEXT, "11", "12");
     pkbManager->addRelationship(spa::NEXT, "12", "13");
@@ -262,9 +305,22 @@ public:
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
-    Assert::AreEqual(dim.second, 3);
+    Assert::AreEqual(dim.second, 1);
 
     std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 11);
+    Assert::IsTrue(rows[0][1].getInteger() == 12);
+
+    clause = spa::SuchThatClause(spa::NEXT,
+                                 spa::PqlArgument(spa::WILDCARD, "_", {}),
+                                 spa::PqlArgument(spa::SYNONYM, "s", { spa::STMT }));
+    evaluator = clause.getEvaluator();
+    table = evaluator->evaluate(*pkbManager);
+    dim = table.getDimension();
+    Assert::AreEqual(dim.first, 2);
+    Assert::AreEqual(dim.second, 3);
+
+    rows = table.getRows();
     Assert::IsTrue(rows[0][0].getInteger() == 10);
     Assert::IsTrue(rows[0][1].getInteger() == 11);
     Assert::IsTrue(rows[1][0].getInteger() == 11);
@@ -316,10 +372,6 @@ public:
                                spa::PqlArgument(spa::WILDCARD, "_", {}),
                                spa::PqlArgument(spa::WILDCARD, "_", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
-    pkbManager->addStatementType("10", spa::StatementType::READ);
-    pkbManager->addStatementType("11", spa::StatementType::ASSIGN);
-    pkbManager->addStatementType("12", spa::StatementType::CALL);
-    pkbManager->addStatementType("13", spa::StatementType::PRINT);
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
     spa::QpsResultTable table = evaluator->evaluate(*pkbManager);
     auto dim = table.getDimension();

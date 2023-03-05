@@ -9,8 +9,8 @@ spa::QpsResultTable spa::NextEvaluator::evaluate(PKBManager& pkbManager) {
   table.addHeader(firstArg);
   table.addHeader(secondArg);
   QueryResult result = pkbManager.getRelationship(NEXT,
-    PKBQueryArg(firstArg),
-    PKBQueryArg(secondArg));
+                                                  PKBQueryArg(firstArg),
+                                                  PKBQueryArg(secondArg));
   if (result.getQueryResultType() == BOOL) {
     if (result.getIsTrue()) {
       table.addRow({ QpsValue(0), QpsValue(0) });
