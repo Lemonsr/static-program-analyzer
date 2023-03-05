@@ -12,6 +12,6 @@ class ProgramStatement {
  public:
   int getStatementLineNum();
   const std::string getParentProcedureVal();
-  virtual void processStatement(PKBManager& pkbManager);
+  virtual std::pair<CFGNode*, CFGNode*> processStatement(PKBManager& pkbManager);
 };
 }  // namespace spa
