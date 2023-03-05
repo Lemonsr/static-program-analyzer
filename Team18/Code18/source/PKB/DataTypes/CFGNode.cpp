@@ -1,11 +1,49 @@
 #include "CFGNode.h"
 
+#include "PKBManager.h"
+
 spa::CFGNode::CFGNode(int lineNumber) {
     this->lineNumber = lineNumber;
 }
 
+spa::CFGNode::CFGNode(int lineNumber, bool isDummy) {
+    this->lineNumber = lineNumber;
+    this->isDummy = isDummy;
+}
+
+spa::CFGNode::CFGNode(int lineNumber, std::string variable) {
+    this->lineNumber = lineNumber;
+    modifiedVariables.insert(variable);
+}
+
+spa::CFGNode* spa::CFGNode::createDummyNode() {
+  return new CFGNode(-1, true);
+}
+
 int spa::CFGNode::getLineNumber() const {
     return lineNumber;
+}
+
+bool spa::CFGNode::isDummyNode() {
+    return isDummy;
+}
+
+void spa::CFGNode::linkNodes(CFGNode* tail, CFGNode* head, PKBManager& pkbManager) {
+  std::string headStrLineNum = std::to_string(head->getLineNumber());
+  if (tail->isDummyNode()) {
+    std::unordered_set<CFGNode*> nodesBeforeDummyNode = tail->getIncomingEdges();
+    for (CFGNode* node: nodesBeforeDummyNode) {
+      node->removeOutgoingNode(tail);
+      node->linkTo(head);
+      std::string currNodeStrLineNum = std::to_string(node->getLineNumber());
+      pkbManager.addRelationship(NEXT, currNodeStrLineNum, headStrLineNum);
+    }
+    delete tail;
+    return;
+  }
+  std::string tailStrLineNum = std::to_string(tail->getLineNumber());
+  tail->linkTo(head);
+  pkbManager->addRelationship(NEXT, tailStrLineNum, headStrLineNum);
 }
 
 void spa::CFGNode::linkTo(CFGNode* node) {

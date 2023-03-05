@@ -59,10 +59,10 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::IfContainerStatement::processStatem
   std::pair<CFGNode*, CFGNode*> cfgThenInnerBlockNode = thenStatement->processStatement(pkbManager);
   std::pair<CFGNode*, CFGNode*> cfgElseInnerBlockNode = elseStatement->processStatement(pkbManager);
   CFGNode* dummyNode = CFGNode::createDummyNode();
-  CFGNode::linkCFGNodes(cfgIfConditionNode.second, cfgThenInnerBlockNode.first);
-  CFGNode::linkCFGNodes(cfgIfConditionNode.second, cfgElseInnerBlockNode.first);
-  CFGNode::linkCFGNodes(cfgThenInnerBlockNode.second, dummyNode);
-  CFGNode::linkCFGNodes(cfgElseInnerBlockNode.second, dummyNode);
+  CFGNode::linkNodes(cfgIfConditionNode.second, cfgThenInnerBlockNode.first, pkbManager);
+  CFGNode::linkNodes(cfgIfConditionNode.second, cfgElseInnerBlockNode.first, pkbManager);
+  CFGNode::linkNodes(cfgThenInnerBlockNode.second, dummyNode, pkbManager);
+  CFGNode::linkNodes(cfgElseInnerBlockNode.second, dummyNode, pkbManager);
   return std::make_pair(cfgIfConditionNode.first, dummyNode);
 }
 
@@ -71,8 +71,8 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::WhileContainerStatement::processSta
   ProgramStatement* innerWhileBlockStatements = statementList[1];
   std::pair<CFGNode*, CFGNode*> cfgWhileConditionNode = whileConditionStatement->processStatement(pkbManager);
   std::pair<CFGNode*, CFGNode*> cfgWhileInnerBlockNode = innerWhileBlockStatements->processStatement(pkbManager);
-  CFGNode::linkCFGNodes(cfgWhileConditionNode.second, cfgWhileInnerBlockNode.first);
-  CFGNode::linkCFGNodes(cfgWhileInnerBlockNode.second, cfgWhileConditionNode.first);
+  CFGNode::linkNodes(cfgWhileConditionNode.second, cfgWhileInnerBlockNode.first, pkbManager);
+  CFGNode::linkNodes(cfgWhileInnerBlockNode.second, cfgWhileConditionNode.first, pkbManager);
   return std::make_pair(cfgWhileConditionNode.first, cfgWhileConditionNode.first);
 }
 
@@ -86,7 +86,7 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::InnerBlockStatement::processStateme
       prevStmtEndNode = cfgStmtNode.second;
       continue;
     }
-    CFGNode::linkCFGNodes(prevStmtEndNode, cfgStmtNode.first);
+    CFGNode::linkNodes(prevStmtEndNode, cfgStmtNode.first, pkbManager);
     prevStmtEndNode = cfgStmtNode.second;
   }
   return std::make_pair(blockStmtHeadNode, prevStmtEndNode);

@@ -163,8 +163,12 @@ void spa::DesignExtractor::extractParentStar(ContainerStatement* containerStatem
 }
 
 void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*> statementList) {
+  CFGNode* dummyStartNode = CFGNode::createDummyNode();
+  CFGNode* tailNode = dummyStartNode;
   for (auto statement : statementList) {
-    statement->processStatement(pkbManager);
+    std::pair<CFGNode*, CFGNode*> cfgNode = statement->processStatement(pkbManager);
+    CFGNode::linkNodes(tailNode, cfgNode.first, pkbManager);
+    tailNode = cfgNode.second;
   }
 }
 
