@@ -8,8 +8,6 @@
 #include "UtilsFunction.h"
 
 spa::SpValidator::SpValidator(Stream<Token> t) : tokens(t) {
-    procNames = std::unordered_set<std::string>();
-    callNames = std::unordered_set<std::string>();
 }
 
 bool spa::SpValidator::validateGrammar() {
