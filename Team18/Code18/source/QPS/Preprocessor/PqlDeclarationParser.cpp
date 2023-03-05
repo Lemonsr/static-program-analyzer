@@ -28,9 +28,7 @@ spa::PqlParseStatus spa::PqlDeclarationParser::addDeclarations(
     if (tokens[0].getType() != TOKEN_NAME) {
       return PQL_PARSE_SYNTAX_ERROR;
     }
-    if (!query.addDeclaration(tokens[0].getValue(), type)) {
-      return PQL_PARSE_SYNTAX_ERROR;
-    }
+    query.addDeclaration(tokens[0].getValue(), type);
     TokenType tokenType = tokens[1].getType();
     if (tokenType != TOKEN_SEMICOLON && tokenType != TOKEN_COMMA) {
       return PQL_PARSE_SYNTAX_ERROR;

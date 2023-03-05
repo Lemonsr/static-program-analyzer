@@ -118,11 +118,12 @@ class ParsedQuery {
   std::vector<SuchThatClause> suchThatClauses;
   std::vector<WithClause> withClauses;
   std::unordered_map<std::string, DesignEntityType> declarations;
+  std::unordered_map<std::string, int> declarationsCount;
   std::unordered_map<std::string, DesignEntityType> usedDeclarations;
 
  public:
-  bool addDeclaration(std::string synonym, DesignEntityType designEntity);
-  int getDeclarationsCount();
+  void addDeclaration(std::string synonym, DesignEntityType designEntity);
+  std::unordered_map<std::string, int>& getDeclarationsCount();
   DesignEntityType getDeclarationType(std::string synonym);
   std::unordered_map<std::string, DesignEntityType>& getDeclarations();
   void setSelectClauseType(SelectClauseType selectType);

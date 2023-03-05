@@ -161,7 +161,7 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
     return PQL_PARSE_SYNTAX_ERROR;
   }
   spa::PqlArgument& designEntity = designEntityOpt.value();
-  tokens.seek(2);
+  tokens.seek(1);
   std::optional<PqlArgument> firstArgOpt = argParser.parse(tokens, query);
   if (!firstArgOpt) {
     return PQL_PARSE_SYNTAX_ERROR;

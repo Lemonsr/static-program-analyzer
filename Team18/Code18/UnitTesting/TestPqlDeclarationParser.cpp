@@ -26,10 +26,8 @@ namespace UnitTesting {
         spa::PqlDeclarationParser parser;
         spa::PqlParseStatus status = parser.parse(tokens, query);
         Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-        Assert::AreEqual(1, query.getDeclarationsCount());
-        std::optional<spa::DesignEntityType> type = query.getDeclarationType("a");
-        Assert::IsTrue(type.has_value());
-        Assert::IsTrue(spa::ASSIGN == type.value());
+        Assert::AreEqual(std::size_t(1), query.getDeclarations().size());
+        Assert::IsTrue(spa::ASSIGN == query.getDeclarationType("a"));
         Assert::AreEqual(int64_t(0), tokens.remaining());
       }
 
@@ -46,12 +44,10 @@ namespace UnitTesting {
         spa::PqlDeclarationParser parser;
         spa::PqlParseStatus status = parser.parse(tokens, query);
         Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
-        Assert::AreEqual(3, query.getDeclarationsCount());
+        Assert::AreEqual(std::size_t(3), query.getDeclarations().size());
         std::vector<std::string> variables { "a", "b", "c" };
         for (std::string& v : variables) {
-          std::optional<spa::DesignEntityType> type = query.getDeclarationType(v);
-          Assert::IsTrue(type.has_value());
-          Assert::IsTrue(spa::READ == type.value());
+          Assert::IsTrue(spa::READ == query.getDeclarationType(v));
         }
         Assert::AreEqual(int64_t(0), tokens.remaining());
       }
@@ -80,7 +76,14 @@ namespace UnitTesting {
         spa::ParsedQuery query;
         spa::PqlDeclarationParser parser;
         spa::PqlParseStatus status = parser.parse(tokens, query);
-        Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
+        Assert::IsTrue(status == spa::PQL_PARSE_SUCCESS);
+        Assert::AreEqual(std::size_t(2), query.getDeclarations().size());
+        Assert::IsTrue(spa::STMT == query.getDeclarationType("a"));
+        Assert::IsTrue(spa::STMT == query.getDeclarationType("b"));
+        auto& declarationsCount = query.getDeclarationsCount();
+        Assert::AreEqual(declarationsCount["a"], 2);
+        Assert::AreEqual(declarationsCount["b"], 1);
+        Assert::AreEqual(int64_t(0), tokens.remaining());
       }
 
       TEST_METHOD(TestIncorrectDeclaration) {

@@ -16,17 +16,13 @@
 #include "PatternEvaluator.h"
 #include "PatternContainerEvaluator.h"
 
-bool spa::ParsedQuery::addDeclaration(std::string synonym,
-  DesignEntityType designEntity) {
-  if (declarations.find(synonym) != declarations.end()) {
-    return false;
-  }
-  declarations.insert({ synonym, designEntity });
-  return true;
+void spa::ParsedQuery::addDeclaration(std::string synonym, DesignEntityType designEntity) {
+  declarations[synonym] = designEntity;
+  ++declarationsCount[synonym];
 }
 
-int spa::ParsedQuery::getDeclarationsCount() {
-  return declarations.size();
+std::unordered_map<std::string, int>& spa::ParsedQuery::getDeclarationsCount() {
+  return declarationsCount;
 }
 
 spa::DesignEntityType spa::ParsedQuery::getDeclarationType(

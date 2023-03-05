@@ -47,5 +47,14 @@ TEST_CLASS(TestQPS) {
     Assert::IsTrue(result.getErrorMessage().has_value());
     Assert::AreEqual(result.getErrorMessage().value(), std::string("SemanticError"));
   }
+
+  TEST_METHOD(TestDuplicateSynonym) {
+    spa::QPS qps;
+    std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
+    std::string query = "variable v; variable v; stmt s; Select v such that Modifies(s, v)";
+    spa::QpsResult result = qps.evaluate(query, *pkbManager);
+    Assert::IsTrue(result.getErrorMessage().has_value());
+    Assert::AreEqual(result.getErrorMessage().value(), std::string("SemanticError"));
+  }
 };
 }  // namespace IntegrationTesting
