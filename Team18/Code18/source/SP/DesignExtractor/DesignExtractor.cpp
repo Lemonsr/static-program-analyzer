@@ -222,20 +222,17 @@ void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
 }
 
 void spa::DesignExtractor::extractCallsModifiesAndUses() {
-  for (auto& procedure : procedureList) {
-    std::string procName = procedure.getProcedureVarToken().getValue();
-    QueryResult queryResult = pkbManager.getCallsProc();
-    std::vector<std::pair<int, std::string>> callLineNamePairs = queryResult.
-      getLineNumberNamePairs();
-    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(procName, "v",
+  QueryResult queryResult = pkbManager.getCallsProc();
+  std::vector<std::pair<int, std::string>> callLineNamePairs = queryResult.
+    getLineNumberNamePairs();
+
+  for (auto& pair : callLineNamePairs) {
+    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(pair.second, "v",
       VARIABLE, USES);
-    std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(procName,
+    std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(pair.second,
       "v",
       VARIABLE, MODIFIES);
-
-    for (auto& pair : callLineNamePairs) {
-      addUsesModifiesAndProc(std::to_string(pair.first), varUses, varModifies, false);
-    }
+    addUsesModifiesAndProc(std::to_string(pair.first), varUses, varModifies, false);
   }
 }
 

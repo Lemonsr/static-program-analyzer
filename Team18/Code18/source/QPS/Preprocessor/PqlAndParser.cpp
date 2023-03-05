@@ -14,6 +14,8 @@ spa::PqlParseStatus spa::PqlAndParser::parse(Stream<Token>& tokens, ParsedQuery&
       return suchThatParser.parse(tokens, query);
     case PqlClauseType::PATTERN_CLAUSE:
       return patternParser.parse(tokens, query);
+    case PqlClauseType::WITH_CLAUSE:
+      return withParser.parse(tokens, query);
     default:
       return PQL_PARSE_ERROR;
   }

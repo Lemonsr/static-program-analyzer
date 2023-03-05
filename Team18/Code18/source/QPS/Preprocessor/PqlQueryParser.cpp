@@ -21,7 +21,9 @@ spa::PqlParseStatus spa::PqlQueryParser::parseClauses(Stream<Token>& tokens,
                                                       ParsedQuery& query) {
   std::unordered_set<PqlParser*> parsers {
     &suchThatParser,
-    &patternParser
+    &patternParser,
+    &andParser,
+    &withParser
   };
   while (tokens.remaining() > 0) {
     bool parserUsed = false;

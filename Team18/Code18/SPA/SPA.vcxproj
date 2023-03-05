@@ -60,6 +60,8 @@
     <ClInclude Include="..\source\QPS\Preprocessor\PqlSemanticChecker.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\PqlSuchThatParser.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\PqlSuchThatSubParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\PqlWithParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\PqlWithSubParser.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\QpsPreprocessor.h" />
     <ClInclude Include="..\source\QPS\QPS.h" />
     <ClInclude Include="..\source\QPS\Translator\QpsTranslator.h" />
@@ -114,6 +116,8 @@
     <ClCompile Include="..\source\QPS\Preprocessor\PqlSemanticChecker.cpp" />
     <ClCompile Include="..\source\QPS\Preprocessor\PqlSuchThatParser.cpp" />
     <ClCompile Include="..\source\QPS\Preprocessor\PqlSuchThatSubParser.cpp" />
+    <ClCompile Include="..\source\QPS\Preprocessor\PqlWithParser.cpp" />
+    <ClCompile Include="..\source\QPS\Preprocessor\PqlWithSubParser.cpp" />
     <ClCompile Include="..\source\QPS\Preprocessor\QpsPreprocessor.cpp" />
     <ClCompile Include="..\source\QPS\QPS.cpp" />
     <ClCompile Include="..\source\QPS\Translator\QpsTranslator.cpp" />
