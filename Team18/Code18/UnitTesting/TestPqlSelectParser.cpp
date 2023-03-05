@@ -119,35 +119,5 @@ public:
     spa::PqlParseStatus status = parser.parse(tokens, query);
     Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
   }
-
-  TEST_METHOD(TestNonExisistentSimple) {
-    spa::Stream<spa::Token> tokens;
-    tokens.pushBack({ spa::TOKEN_NAME, "Select" });
-    tokens.pushBack({ spa::TOKEN_NAME, "s" });
-    tokens.pushBack({ spa::TOKEN_FULL_STOP, "." });
-    tokens.pushBack({ spa::TOKEN_NAME, "stmt" });
-    tokens.pushBack({ spa::TOKEN_HASH, "#" });
-    spa::ParsedQuery query;
-    spa::PqlSelectParser parser;
-    spa::PqlParseStatus status = parser.parse(tokens, query);
-    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
-  }
-
-  TEST_METHOD(TestNonExisistentSynonymTuple) {
-    spa::Stream<spa::Token> tokens;
-    tokens.pushBack({ spa::TOKEN_NAME, "Select" });
-    tokens.pushBack({ spa::TOKEN_COND_LT, "<" });
-    tokens.pushBack({ spa::TOKEN_NAME, "BOOLEAN" });
-    tokens.pushBack({ spa::TOKEN_COMMA, "," });
-    tokens.pushBack({ spa::TOKEN_NAME, "BOOLEAN" });
-    tokens.pushBack({ spa::TOKEN_FULL_STOP, "." });
-    tokens.pushBack({ spa::TOKEN_NAME, "stmt" });
-    tokens.pushBack({ spa::TOKEN_HASH, "#" });
-    tokens.pushBack({ spa::TOKEN_COND_GT, ">" });
-    spa::ParsedQuery query;
-    spa::PqlSelectParser parser;
-    spa::PqlParseStatus status = parser.parse(tokens, query);
-    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
-  }
   };
 }  // namespace UnitTesting

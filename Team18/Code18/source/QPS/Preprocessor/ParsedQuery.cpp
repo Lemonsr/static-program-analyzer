@@ -29,14 +29,14 @@ int spa::ParsedQuery::getDeclarationsCount() {
   return declarations.size();
 }
 
-std::optional<spa::DesignEntityType> spa::ParsedQuery::getDeclarationType(
+spa::DesignEntityType spa::ParsedQuery::getDeclarationType(
   std::string synonym
 ) {
   auto it = declarations.find(synonym);
   if (it == declarations.end()) {
-    return {};
+    return UNKNOWN;
   }
-  return { it->second };
+  return it->second;
 }
 
 std::unordered_map<std::string, spa::DesignEntityType>& spa::ParsedQuery::getDeclarations() {
@@ -89,7 +89,7 @@ std::vector<spa::WithClause>& spa::ParsedQuery::getWithClauses() {
   return withClauses;
 }
 
-std::unordered_map<std::string, spa::DesignEntityType> spa::ParsedQuery::getUsedDeclarations() {
+std::unordered_map<std::string, spa::DesignEntityType>& spa::ParsedQuery::getUsedDeclarations() {
   return usedDeclarations;
 }
 

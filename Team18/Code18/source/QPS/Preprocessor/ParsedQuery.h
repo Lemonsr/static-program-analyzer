@@ -123,7 +123,7 @@ class ParsedQuery {
  public:
   bool addDeclaration(std::string synonym, DesignEntityType designEntity);
   int getDeclarationsCount();
-  std::optional<DesignEntityType> getDeclarationType(std::string synonym);
+  DesignEntityType getDeclarationType(std::string synonym);
   std::unordered_map<std::string, DesignEntityType>& getDeclarations();
   void setSelectClauseType(SelectClauseType selectType);
   SelectClauseType getSelectClauseType();
@@ -137,7 +137,7 @@ class ParsedQuery {
   void addWithClause(WithClause clause);
   std::vector<WithClause>& getWithClauses();
   bool addUsedDeclaration(std::string declaration, DesignEntityType designEntityType);
-  std::unordered_map<std::string, DesignEntityType> getUsedDeclarations();
+  std::unordered_map<std::string, DesignEntityType>& getUsedDeclarations();
   bool hasClauses();
 };
 }  // namespace spa

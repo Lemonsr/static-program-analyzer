@@ -103,22 +103,6 @@ std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePattern(
   return {};
 }
 
-const std::unordered_set<spa::DesignEntityType> patternDesignEntities {
-  spa::ASSIGN,
-  spa::IF,
-  spa::WHILE
-};
-
-std::optional<spa::PqlArgument> spa::PqlPatternSubParser::parseDesignEntity(Token& token, ParsedQuery& query) {
-  std::string synName = token.getValue();
-  std::optional<DesignEntityType> synOpt = query.getDeclarationType(synName);
-  if (!synOpt || patternDesignEntities.find(synOpt.value()) == patternDesignEntities.end()) {
-    return {};
-  }
-  query.addUsedDeclaration(synName, synOpt.value());
-  return { PqlArgument(SYNONYM, synName, synOpt) };
-}
-
 spa::PqlParseStatus spa::PqlPatternSubParser::parseAssign(PqlArgument& designEntity, PqlArgument& firstArg,
                                                           Stream<Token>& tokens, ParsedQuery& query) {
   std::optional<Pattern> patternOpt = parsePattern(tokens, query);
@@ -172,7 +156,7 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
   if (!matchResult) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
-  std::optional<spa::PqlArgument> designEntityOpt = parseDesignEntity(tokens[0], query);
+  std::optional<spa::PqlArgument> designEntityOpt = argParser.parse(tokens, query);
   if (!designEntityOpt) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
@@ -195,6 +179,6 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
     case IF:
       return parseIf(designEntity, firstArg, tokens, query);
     default:
-      return PQL_PARSE_SYNTAX_ERROR;
+      return PQL_PARSE_SEMANTIC_ERROR;
   }
 }

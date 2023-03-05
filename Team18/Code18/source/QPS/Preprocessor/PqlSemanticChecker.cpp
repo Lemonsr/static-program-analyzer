@@ -3,6 +3,11 @@
 #include <optional>
 
 bool spa::PqlSemanticChecker::isSemanticallyValid(ParsedQuery& parsedQuery) {
+  for (auto& p : parsedQuery.getUsedDeclarations()) {
+    if (p.second == UNKNOWN) {
+      return false;
+    }
+  }
   for (auto& clause : parsedQuery.getSuchThatClauses()) {
     if (!isValid(clause)) {
       return false;

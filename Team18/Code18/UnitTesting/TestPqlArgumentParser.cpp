@@ -71,14 +71,5 @@ public:
     Assert::IsTrue(arg == compare);
     Assert::AreEqual(int64_t(0), tokens.remaining());
   }
-
-  TEST_METHOD(TestUnknownSynonym) {
-    spa::Stream<spa::Token> tokens;
-    tokens.pushBack({ spa::TOKEN_NAME, "s" });
-    spa::ParsedQuery query;
-    spa::PqlArgumentParser parser;
-    std::optional<spa::PqlArgument> opt = parser.parse(tokens, query);
-    Assert::IsFalse(opt.has_value());
-  }
   };
 }  // namespace UnitTesting
