@@ -5,7 +5,7 @@
 namespace spa {
 class CFGNode {
  public:
-    CFGNode(int lineNumber);
+    explicit CFGNode(int lineNumber);
     int getLineNumber() const;
     void linkTo(CFGNode* node);
     void addModifiedVariable(std::string variable);
