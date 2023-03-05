@@ -77,7 +77,8 @@ spa::WhileConditionStatement::WhileConditionStatement(std::string parentProcedur
   this->statementLineNum = statementLineNum;
 }
 
-std::pair<spa::CFGNode*, spa::CFGNode*> spa::ReadStatement::processStatement(spa::PKBManager& pkbManager) {
+std::pair<spa::CFGNode*, spa::CFGNode*> spa::ReadStatement::processStatement(
+  spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addEntity(VARIABLE, variableName);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
@@ -90,7 +91,8 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::ReadStatement::processStatement(spa
   return std::make_pair(cfgReadStmtNode, cfgReadStmtNode);
 }
 
-std::pair<spa::CFGNode*, spa::CFGNode*> spa::PrintStatement::processStatement(spa::PKBManager& pkbManager) {
+std::pair<spa::CFGNode*, spa::CFGNode*> spa::PrintStatement::processStatement(
+  spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addEntity(VARIABLE, variableName);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
@@ -103,7 +105,8 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::PrintStatement::processStatement(sp
   return std::make_pair(cfgPrintStmtNode, cfgPrintStmtNode);
 }
 
-std::pair<spa::CFGNode*, spa::CFGNode*> spa::CallStatement::processStatement(spa::PKBManager& pkbManager) {
+std::pair<spa::CFGNode*, spa::CFGNode*> spa::CallStatement::processStatement(
+  spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::CALL);
@@ -115,7 +118,8 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::CallStatement::processStatement(spa
   return std::make_pair(cfgCallStmtNode, cfgCallStmtNode);
 }
 
-std::pair<spa::CFGNode*, spa::CFGNode*> spa::AssignStatement::processStatement(spa::PKBManager& pkbManager) {
+std::pair<spa::CFGNode*, spa::CFGNode*> spa::AssignStatement::processStatement(
+  spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addEntity(VARIABLE, assignVar);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
@@ -130,7 +134,8 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::AssignStatement::processStatement(s
   return std::make_pair(cfgAssignStmtNode, cfgAssignStmtNode);
 }
 
-std::pair<spa::CFGNode*, spa::CFGNode*> spa::IfConditionStatement::processStatement(PKBManager& pkbManager) {
+std::pair<spa::CFGNode*, spa::CFGNode*> spa::IfConditionStatement::processStatement(
+  PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::IF);
@@ -141,7 +146,8 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::IfConditionStatement::processStatem
   return std::make_pair(cfgIfConditionalStmtNode, cfgIfConditionalStmtNode);
 }
 
-std::pair<spa::CFGNode*, spa::CFGNode*> spa::WhileConditionStatement::processStatement(PKBManager& pkbManager) {
+std::pair<spa::CFGNode*, spa::CFGNode*> spa::WhileConditionStatement::processStatement(
+  PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::WHILE);
