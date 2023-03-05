@@ -29,8 +29,8 @@ public:
 
   TEST_METHOD(TestLineLineNotExists) {
     spa::SuchThatClause clause(spa::NEXT,
-      spa::PqlArgument(spa::LINE_NO, "10", {}),
-      spa::PqlArgument(spa::LINE_NO, "11", {}));
+                               spa::PqlArgument(spa::LINE_NO, "10", {}),
+                               spa::PqlArgument(spa::LINE_NO, "11", {}));
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     pkbManager->addRelationship(spa::NEXT, "12", "13");
     std::unique_ptr<spa::QpsEvaluator> evaluator = clause.getEvaluator();
