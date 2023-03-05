@@ -81,6 +81,14 @@ std::vector<spa::PatternClause>& spa::ParsedQuery::getPatternClauses() {
   return patternClauses;
 }
 
+void spa::ParsedQuery::addWithClause(spa::WithClause clause) {
+  withClauses.push_back(clause);
+}
+
+std::vector<spa::WithClause>& spa::ParsedQuery::getWithClauses() {
+  return withClauses;
+}
+
 std::unordered_map<std::string, spa::DesignEntityType> spa::ParsedQuery::getUsedDeclarations() {
   return usedDeclarations;
 }
@@ -192,3 +200,61 @@ bool spa::operator==(const PatternClause& p1, const PatternClause& p2) {
 bool spa::operator!=(const PatternClause& p1, const PatternClause& p2) {
   return !(p1 == p2);
 }
+
+spa::WithArgument::WithArgument(QpsValue value) {
+  this->type = WithArgumentType::WITH_VALUE;
+  this->valueOpt = value;
+}
+
+spa::WithArgument::WithArgument(std::string attribute) {
+  this->type = WithArgumentType::WITH_ATTRIBUTE;
+  this->attributeOpt = attribute;
+}
+
+const spa::WithArgumentType& spa::WithArgument::getType() {
+  return type;
+}
+
+const spa::QpsValue& spa::WithArgument::getValue() {
+  return valueOpt.value();
+}
+
+const std::string& spa::WithArgument::getAttribute() {
+  return attributeOpt.value();
+}
+
+bool spa::operator==(const WithArgument& first, const WithArgument& second) {
+  if (first.type != second.type) {
+    return false;
+  }
+  if (first.type == WithArgumentType::WITH_ATTRIBUTE) {
+    return first.attributeOpt.value() == second.attributeOpt.value();
+  }
+  return first.valueOpt.value() == second.valueOpt.value();
+}
+
+bool spa::operator!=(const WithArgument& first, const WithArgument& second) {
+  return !(first == second);
+}
+
+spa::WithClause::WithClause(WithArgument firstArg, WithArgument secondArg) {
+  this->firstArg = firstArg;
+  this->secondArg = secondArg;
+}
+
+const spa::WithArgument& spa::WithClause::getFirstArg() {
+  return firstArg;
+}
+
+const spa::WithArgument& spa::WithClause::getSecondArg() {
+  return secondArg;
+}
+
+bool spa::operator==(const WithClause& w1, const WithClause& w2) {
+  return w1.firstArg == w2.firstArg && w1.secondArg == w2.secondArg;
+}
+
+bool spa::operator!=(const WithClause& w1, const WithClause& w2) {
+  return !(w1 == w2);
+}
+
