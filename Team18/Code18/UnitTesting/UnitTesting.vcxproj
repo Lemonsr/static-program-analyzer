@@ -219,6 +219,7 @@
     <ClCompile Include="TestPqlQueryParser.cpp" />
     <ClCompile Include="TestPqlSuchThatParser.cpp" />
     <ClCompile Include="TestPqlSemanticChecker.cpp" />
+    <ClCompile Include="TestQueryOptimizer.cpp" />
     <ClCompile Include="TestSpCyclicValidator.cpp" />
     <ClCompile Include="TestTokenizer.cpp" />
     <ClCompile Include="TestUtilsFunction.cpp" />
