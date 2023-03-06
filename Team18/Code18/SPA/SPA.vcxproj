@@ -33,6 +33,7 @@
     <ClInclude Include="..\source\QPS\Evaluators\FollowsStarEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\ModifiesEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\NextEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\NoSynonymClauseGroup.h" />
     <ClInclude Include="..\source\QPS\Evaluators\ParentEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\ParentStarEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\PatternContainerEvaluator.h" />
@@ -93,6 +94,7 @@
     <ClCompile Include="..\source\QPS\Evaluators\FollowsStarEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\ModifiesEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\NextEvaluator.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\NoSynonymClauseGroup.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\ParentEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\ParentStarEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\PatternContainerEvaluator.cpp" />
