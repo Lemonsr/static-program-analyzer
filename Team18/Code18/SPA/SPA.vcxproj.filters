@@ -204,6 +204,9 @@
     <ClInclude Include="..\source\QPS\Preprocessor\PqlWithSubParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Clause.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\PKB\PKB.cpp">

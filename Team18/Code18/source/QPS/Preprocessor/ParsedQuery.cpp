@@ -145,6 +145,10 @@ std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
   }
 }
 
+std::vector<std::string> spa::SuchThatClause::getArgValues() {
+  return { getFirstArgValue(), getSecondArgValue() };
+}
+
 const spa::RelationshipType& spa::SuchThatClause::getDesignAbstraction() {
   return designAbstraction;
 }
@@ -153,8 +157,24 @@ const spa::PqlArgument& spa::SuchThatClause::getFirstArg() {
   return firstArg;
 }
 
+const spa::ArgumentType spa::SuchThatClause::getFirstArgType() {
+  return firstArg.getType();
+}
+
+const std::string& spa::SuchThatClause::getFirstArgValue() {
+  return firstArg.getValue();
+}
+
 const spa::PqlArgument& spa::SuchThatClause::getSecondArg() {
   return secondArg;
+}
+
+const spa::ArgumentType spa::SuchThatClause::getSecondArgType() {
+  return secondArg.getType();
+}
+
+const std::string& spa::SuchThatClause::getSecondArgValue() {
+  return secondArg.getValue();
 }
 
 bool spa::operator==(const SuchThatClause& s1, const SuchThatClause& s2) {
@@ -192,6 +212,10 @@ std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
   }
 }
 
+std::vector<std::string> spa::PatternClause::getArgValues() {
+  return { getSynonymValue(), getFirstArgValue() };
+}
+
 spa::PqlArgument& spa::PatternClause::getSynonym() {
   return synonym;
 }
@@ -200,8 +224,20 @@ spa::PqlArgument& spa::PatternClause::getFirstArg() {
   return firstArg;
 }
 
+const spa::ArgumentType spa::PatternClause::getFirstArgType() {
+  return firstArg.getType();
+}
+
+const std::string& spa::PatternClause::getFirstArgValue() {
+  return firstArg.getValue();
+}
+
 spa::DesignEntityType spa::PatternClause::getSynonymType() {
   return synonym.getDesignEntity().value();
+}
+
+const std::string& spa::PatternClause::getSynonymValue() {
+  return synonym.getValue();
 }
 
 spa::PatternType spa::PatternClause::getPatternType() {
