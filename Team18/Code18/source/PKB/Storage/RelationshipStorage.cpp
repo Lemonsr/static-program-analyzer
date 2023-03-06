@@ -1700,6 +1700,21 @@ bool spa::RelationshipStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) 
   return true;
 }
 
+spa::QueryResult spa::RelationshipStorage::getCfgNode(int lineNumber) {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  spa::CFGNode cfgNode;
+  queryResult.setCfgNode(cfgNode);
+  if (cfgTable.find(lineNumber) != cfgTable.end()) {
+    return queryResult;
+  }
+
+  cfgNode = cfgTable[lineNumber];
+  queryResult.setCfgNode(cfgNode);
+  return queryResult;
+}
+
 void spa::RelationshipStorage::setFollowsTable(std::unordered_map<int, int> followsTable) {
   this->followsTable = followsTable;
 }

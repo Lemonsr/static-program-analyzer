@@ -28,5 +28,6 @@ class PKBManager {
   virtual const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg) = 0;
   virtual const QueryResult getCallsContainerParent(std::string procName) = 0;
   virtual const QueryResult getCallsProc() = 0;
+  virtual const spa::CFGNode getCfgNode(int lineNo) = 0;
 };
 }  // namespace spa

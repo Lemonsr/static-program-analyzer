@@ -21,14 +21,35 @@ namespace UnitTesting {
         };
 
 public:
-    TEST_METHOD(TestAddCfg) {
-        spa::RelationshipStorage relationshipStorage;
-        relationshipStorage.setCfgTable(cfgTable);
-        spa::CFGNode* cfgNodeTestOne = new spa::CFGNode(3);
-        spa::CFGNode* cfgNodeTestTwo = new spa::CFGNode(4);
-        Assert::IsTrue(relationshipStorage.addCfgNode(3, *cfgNodeTestOne));
-        Assert::IsFalse(relationshipStorage.addCfgNode(3, *cfgNodeTestOne));
-        Assert::IsTrue(relationshipStorage.addCfgNode(4, *cfgNodeTestTwo));
-    }
-    };
+  TEST_METHOD(TestAddCfgNode) {
+    spa::RelationshipStorage relationshipStorage;
+    relationshipStorage.setCfgTable(cfgTable);
+
+    Assert::IsTrue(relationshipStorage.addCfgNode(3, {}));
+    Assert::IsFalse(relationshipStorage.addCfgNode(3, {}));
+    Assert::IsTrue(relationshipStorage.addCfgNode(4, {}));
+  };
+
+  TEST_METHOD(TestGetCfgNode) {
+    spa::RelationshipStorage relationshipStorage;
+    relationshipStorage.setCfgTable(cfgTable);
+    spa::CFGNode expected = ;
+
+    spa::QueryResult queryResult = relationshipStorage.getCfgNode(1);
+
+    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+    Assert::IsTrue(expected == queryResult.getCfgNode());
+
+    queryResult = relationshipStorage.getCallsContainerParent("D");
+
+    expected = { {1, 4, 6} };
+    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+    Assert::IsTrue(expected == queryResult.getLineNumbers());
+
+    queryResult = relationshipStorage.getCallsContainerParent("F");
+
+    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+    Assert::IsTrue(queryResult.getLineNumbers().empty());
+  }
+  };
 }  // namespace UnitTesting

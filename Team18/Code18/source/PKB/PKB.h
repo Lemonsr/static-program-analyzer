@@ -65,5 +65,6 @@ class PKB : public PKBManager {
   const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg);
   const QueryResult getCallsContainerParent(std::string procName);
   const QueryResult getCallsProc();
+  const QueryResult getCfgNode(int lineNo);
 };
 }  // namespace spa
