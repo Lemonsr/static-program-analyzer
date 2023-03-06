@@ -8,7 +8,7 @@
 
 namespace spa {
 class SP {
-private:
+ private:
   std::string sourceCode;
   PKBManager& pkbManager;
   Stream<Token> convertToken();

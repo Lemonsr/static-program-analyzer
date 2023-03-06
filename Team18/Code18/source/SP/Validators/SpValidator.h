@@ -7,7 +7,7 @@
 
 namespace spa {
 class SpValidator {
-private:
+ private:
   int64_t idx = 0;  // Track the current token position
   Stream<Token> tokens;
   std::unordered_set<std::string> procNames;
