@@ -168,3 +168,7 @@ spa::QpsResultTable spa::QpsResultTable::innerJoin(QpsResultTable& other) {
 const std::vector<spa::QpsResultRow>& spa::QpsResultTable::getRows() {
   return rows;
 }
+
+bool spa::QpsResultTable::isEmpty() {
+  return rows.size() == 0;
+}
