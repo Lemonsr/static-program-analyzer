@@ -29,6 +29,7 @@
     <ClInclude Include="..\source\PKB\utils\HashTuple.h" />
     <ClInclude Include="..\source\QPS\Evaluators\CallsEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\CallsStarEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\ConnectedSynonymClauseGroup.h" />
     <ClInclude Include="..\source\QPS\Evaluators\FollowsEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\FollowsStarEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\ModifiesEvaluator.h" />
@@ -90,6 +91,7 @@
     <ClCompile Include="..\source\PKB\Storage\RelationshipStorage.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\CallsEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\CallsStarEvaluator.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\ConnectedSynonymClauseGroup.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\FollowsEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\FollowsStarEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\ModifiesEvaluator.cpp" />
