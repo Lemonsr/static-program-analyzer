@@ -125,7 +125,7 @@ public:
     pkbManager = std::make_unique<spa::PKB>();
   }
 
-  TEST_METHOD(TestSingleProcCFGCreation) {
+  TEST_METHOD(TestExtractNextSingleProc) {
     /*
      *  procedure a {
      * 1. c = d - e;
@@ -166,6 +166,487 @@ public:
     }
 
     std::vector<std::pair<int, int>> negativeTestCases = generateNegTestCases(4, positiveTestCases);
+
+    for (auto& pair : negativeTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsFalse(testNext);
+    }
+  }
+
+  TEST_METHOD(TestExtractSingleProcNestedWhile) {
+    /*
+     *  procedure a {
+     * 1. while (1 >= 1) {
+     * 2.   c = d - e;
+     * 3.   print c;
+     * 4.   read g;
+     *    }
+     * 5.   g = h;
+     *  }
+     *
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenCloseBrace,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<int, int>> positiveTestCases = {
+      {1, 2}, {2, 3}, {3, 4}, {4, 1}, {1, 5}
+    };
+
+    for (auto& pair : positiveTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsTrue(testNext);
+    }
+
+    std::vector<std::pair<int, int>> negativeTestCases = generateNegTestCases(5, positiveTestCases);
+
+    for (auto& pair : negativeTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsFalse(testNext);
+    }
+  }
+
+  TEST_METHOD(TestExtractSingleProcNestedIf) {
+    /*
+     *  procedure a {
+     * 1. if (1 >= 1) then {
+     * 2.   c = d - e;
+     * 3.   print c;
+     *    } else {
+     * 4.   read g;
+     * 5.   print c;
+     *    }
+     * 6.   g = h;
+     *  }
+     *
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace, tokenElse, tokenOpenBrace,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<int, int>> positiveTestCases = {
+      {1, 2}, {2, 3}, {1, 4}, {4, 5}, {3, 6}, {5, 6}
+    };
+
+    for (auto& pair : positiveTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsTrue(testNext);
+    }
+
+    std::vector<std::pair<int, int>> negativeTestCases = generateNegTestCases(6, positiveTestCases);
+
+    for (auto& pair : negativeTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsFalse(testNext);
+    }
+  }
+
+  TEST_METHOD(TestExtractSingleProcWhileNestedWhile) {
+    /*
+     *  procedure a {
+     * 1. while (1 >= 1) {
+     * 2.   c = d - e;
+     * 3.   print c;
+     * 4.   while (1 >= 1) {
+     * 5.     print c;
+     * 6.     read g;
+     *      }
+     * 7.   print c;
+     *    }
+     * 8.   g = h;
+     *  }
+     *
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenCloseBrace,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<int, int>> positiveTestCases = {
+      {1, 2}, {2, 3}, {3, 4}, {4, 5}, {5, 6}, {6, 4}, {4, 7}, {7, 1}, {1, 8}
+    };
+
+    for (auto& pair : positiveTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsTrue(testNext);
+    }
+
+    std::vector<std::pair<int, int>> negativeTestCases = generateNegTestCases(8, positiveTestCases);
+
+    for (auto& pair : negativeTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsFalse(testNext);
+    }
+  }
+
+  TEST_METHOD(TestExtractSingleProcIfNestedIf) {
+    /*
+     *  procedure a {
+     * 1. if (1 >= 1) then {
+     * 2.   c = d - e;
+     * 3.   if (1 >= 1) then {
+     * 4.     c = d - e;
+     * 5.     print c;
+     *      } else {
+     * 6.     read g;
+     * 7.     print c;
+     *      }
+     * 8.   print c;
+     *    } else {
+     * 9.   read g;
+     * 10.  if (1 >= 1) then {
+     * 11.     c = d - e;
+     * 12.     print c;
+     *      } else {
+     * 13.     read g;
+     * 14.     print c;
+     *      }
+     * 15.   print c;
+     *    }
+     * 16.   g = h;
+     *  }
+     *
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace, tokenElse, tokenOpenBrace,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace, tokenElse, tokenOpenBrace,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace, tokenElse, tokenOpenBrace,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<int, int>> positiveTestCases = {
+      {1, 2}, {1, 9}, {2, 3}, {3, 4}, {3, 6}, {4, 5}, {6, 7}, {5, 8}, {7, 8}, {9, 10}, {10, 11},
+      {10, 13}, {11, 12}, {12, 15}, {13, 14}, {14, 15}, {15, 16}, {8, 16}
+    };
+
+    for (auto& pair : positiveTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsTrue(testNext);
+    }
+
+    std::vector<std::pair<int, int>> negativeTestCases =
+      generateNegTestCases(16, positiveTestCases);
+
+    for (auto& pair : negativeTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsFalse(testNext);
+    }
+  }
+
+  TEST_METHOD(TestExtractSingleProcIfNestedWhile) {
+    /*
+     *  procedure a {
+     * 1. if (1 >= 1) then {
+     * 2.   c = d - e;
+     * 3.   while (1 >= 1) {
+     * 4.     c = d - e;
+     * 5.     print c;
+     *    }
+     * 6.   print c;
+     *    } else {
+     * 7.   read g;
+     * 8.     while (1 >= 1) {
+     * 9.       c = d - e;
+     * 10.       print c;
+     *      }
+     * 11.   print c;
+     *    }
+     * 12.   g = h;
+     *  }
+     *
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace, tokenElse, tokenOpenBrace,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<int, int>> positiveTestCases = {
+      {1, 2}, {2, 3}, {3, 4}, {4, 5}, {5, 3}, {3, 6}, {1, 7}, {7, 8}, {8, 9}, {9, 10}, {10, 8},
+      {8, 11}, {6, 12}, {11, 12}
+    };
+
+    for (auto& pair : positiveTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsTrue(testNext);
+    }
+
+    std::vector<std::pair<int, int>> negativeTestCases =
+      generateNegTestCases(12, positiveTestCases);
+
+    for (auto& pair : negativeTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsFalse(testNext);
+    }
+  }
+
+  TEST_METHOD(TestExtractSingleProcWhileNestedIf) {
+    /*
+     *  procedure a {
+     * 1. while (1 >= 1) {
+     * 2.   c = d - e;
+     * 3.   print c;
+     * 4.   while (1 >= 1) {
+     * 5.     print c;
+     * 6.     read g;
+     *      }
+     * 7.   print c;
+     *    }
+     * 8.   g = h;
+     *  }
+     *
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenCloseBrace,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenCloseBrace,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 1);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<int, int>> positiveTestCases = {
+      {1, 2}, {2, 3}, {3, 4}, {4, 5}, {5, 6}, {6, 4}, {4, 7}, {7, 1}, {1, 8}
+    };
+
+    for (auto& pair : positiveTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsTrue(testNext);
+    }
+
+    std::vector<std::pair<int, int>> negativeTestCases = generateNegTestCases(8, positiveTestCases);
+
+    for (auto& pair : negativeTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsFalse(testNext);
+    }
+  }
+
+  TEST_METHOD(TestExtractNextMultiProc) {
+    /*
+     *  procedure a {
+     * 1. c = d - e;
+     * 2. print c;
+     * 3. read g;
+     * 4. g = h;
+     *  }
+     *
+     *  procedure b {
+     * 5. c = d - e;
+     * 6. print c;
+     * 7. read g;
+     * 8. g = h;
+     *  }
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace,
+      tokenProcedure, tokenB, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (auto token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 2);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    std::vector<std::pair<int, int>> positiveTestCases = {
+      {1, 2}, {2, 3}, {3, 4}, {5, 6}, {6, 7}, {7, 8}
+    };
+
+    for (auto& pair : positiveTestCases) {
+      std::string lineNumOne = std::to_string(pair.first);
+      std::string lineNumTwo = std::to_string(pair.second);
+      bool testNext = retrieveResFromPkb(lineNumOne, lineNumTwo);
+      Assert::IsTrue(testNext);
+    }
+
+    std::vector<std::pair<int, int>> negativeTestCases = generateNegTestCases(8, positiveTestCases);
 
     for (auto& pair : negativeTestCases) {
       std::string lineNumOne = std::to_string(pair.first);

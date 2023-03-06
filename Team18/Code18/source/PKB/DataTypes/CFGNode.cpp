@@ -41,9 +41,11 @@ void spa::CFGNode::linkNodes(CFGNode* tail, CFGNode* head, PKBManager& pkbManage
     delete tail;
     return;
   }
-  std::string tailStrLineNum = std::to_string(tail->getLineNumber());
+  if (!head->isDummyNode()) {
+    std::string tailStrLineNum = std::to_string(tail->getLineNumber());
+    pkbManager.addRelationship(NEXT, tailStrLineNum, headStrLineNum);
+  }
   tail->linkTo(head);
-  pkbManager.addRelationship(NEXT, tailStrLineNum, headStrLineNum);
 }
 
 void spa::CFGNode::linkTo(CFGNode* node) {

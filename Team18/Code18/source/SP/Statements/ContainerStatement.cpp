@@ -95,5 +95,8 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::InnerBlockStatement::processStateme
     CFGNode::linkNodes(prevStmtEndNode, cfgStmtNode.first, pkbManager);
     prevStmtEndNode = cfgStmtNode.second;
   }
+  if (!blockStmtHeadNode && !prevStmtEndNode) {
+    return std::make_pair(CFGNode::createDummyNode(), CFGNode::createDummyNode());
+  }
   return std::make_pair(blockStmtHeadNode, prevStmtEndNode);
 }

@@ -2,9 +2,10 @@
 #include <string>
 #include <unordered_set>
 
-#include "PKBManager.h"
 
 namespace spa {
+class PKBManager;
+
 class CFGNode {
  public:
     explicit CFGNode(int lineNumber);
