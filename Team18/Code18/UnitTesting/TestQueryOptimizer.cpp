@@ -10,7 +10,7 @@ namespace UnitTesting {
   TEST_CLASS(TestQueryOptimizer) {
     TEST_METHOD(TestGetGroupsOnlyNoSynonym) {
       spa::ParsedQuery parsedQuery;
-      spa::SuchThatClause modifiesLineNumberVarName = 
+      spa::SuchThatClause modifiesLineNumberVarName =
         spa::SuchThatClause(spa::MODIFIES,
                             spa::PqlArgument(spa::LINE_NO, "5", {}),
                             spa::PqlArgument(spa::LITERAL_STRING, "x", {}));
@@ -82,7 +82,7 @@ namespace UnitTesting {
         Next(a, s)
       */
       spa::ParsedQuery parsedQuery;
-      spa::SuchThatClause modifiesLineNumberVarName = 
+      spa::SuchThatClause modifiesLineNumberVarName =
         spa::SuchThatClause(spa::MODIFIES,
                             spa::PqlArgument(spa::LINE_NO, "5", {}),
                             spa::PqlArgument(spa::LITERAL_STRING, "x", {}));
@@ -116,7 +116,7 @@ namespace UnitTesting {
       spa::ConnectedSynonymClauseGroup expectedConnectedSynonymClauseGroup;
       expectedConnectedSynonymClauseGroup.addClause(suchThatClauses[2]);
       expectedConnectedSynonymClauseGroup.addClause(patternClauses[0]);
-      
+
       spa::QueryOptimizer queryOptimizer;
       std::pair<spa::NoSynonymClauseGroup, std::vector<spa::ConnectedSynonymClauseGroup>> groups =
         queryOptimizer.getGroups(parsedQuery);
@@ -140,7 +140,7 @@ namespace UnitTesting {
         Follows*(a, c)
       */
       spa::ParsedQuery parsedQuery;
-      spa::SuchThatClause usesLineNumberVarName = 
+      spa::SuchThatClause usesLineNumberVarName =
         spa::SuchThatClause(spa::USES,
                             spa::PqlArgument(spa::LINE_NO, "5", {}),
                             spa::PqlArgument(spa::LITERAL_STRING, "x", {}));

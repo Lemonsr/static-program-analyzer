@@ -24,7 +24,7 @@ bool spa::operator==(const ConnectedSynonymClauseGroup& first, const ConnectedSy
   if (first.connectedSynonyms.size() != second.connectedSynonyms.size()) {
     return false;
   }
-  
+
   for (int i = 0; i < first.clauses.size(); ++i) {
     if (first.clauses[i] != second.clauses[i]) {
       return false;
