@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <unordered_set>
+#include <utility>
 
 std::string spa::OneVarNonContainerStatement::getVariableName() {
   return variableName;
