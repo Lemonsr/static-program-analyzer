@@ -23,7 +23,7 @@ class QueryResult {
   std::optional<std::vector<std::pair<int, int>>> lineNumberLineNumberPairs;
   std::optional<std::vector<std::pair<std::string, std::string>>> nameNamePairs;
   std::optional<bool> isTrue;
-  std::optional<spa::CFGNode> cfgNode;
+  std::optional<std::vector<spa::CFGNode>> cfgNodes;
 
  public:
   const QueryResultType& getQueryResultType();
@@ -32,7 +32,7 @@ class QueryResult {
   const std::vector<std::pair<int, std::string>>& getLineNumberNamePairs();
   const std::vector<std::pair<int, int>>& getLineNumberLineNumberPairs();
   const std::vector<std::pair<std::string, std::string>>& getNameNamePairs();
-  const spa::CFGNode& getCfgNode();
+  const std::vector<spa::CFGNode>& getCfgNodes();
   const bool& getIsTrue();
 
   void setQueryResultType(QueryResultType queryResultType);
@@ -42,6 +42,6 @@ class QueryResult {
   void setLineNumberLineNumberPairs(std::vector<std::pair<int, int>> lineNumberLineNumberPairs);
   void setIsTrue(bool isTrue);
   void setNameNamePairs(std::vector<std::pair<std::string, std::string>> nameNamePairs);
-  void setCfgNode(spa::CFGNode cfgNode);
+  void setCfgNodes(std::vector<spa::CFGNode> cfgNodes);
 };
 }  // namespace spa

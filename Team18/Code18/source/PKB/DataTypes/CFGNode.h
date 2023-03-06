@@ -4,7 +4,7 @@
 
 namespace spa {
 class CFGNode {
-private:
+ private:
   int lineNumber;
   std::unordered_set<std::string> modifiedVariables;
   std::unordered_set<CFGNode*> incomingEdges;
@@ -23,6 +23,8 @@ private:
   void removeIncomingNode(CFGNode* node);
   void removeOutgoingNode(CFGNode* node);
   void removeNodeFromGraph();
+  friend bool operator==(const CFGNode& s1, const CFGNode& s2);
+  friend bool operator!=(const CFGNode& s1, const CFGNode& s2);
 };
 }  // namespace spa
 

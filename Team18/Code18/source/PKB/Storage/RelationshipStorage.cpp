@@ -1704,14 +1704,14 @@ spa::QueryResult spa::RelationshipStorage::getCfgNode(int lineNumber) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  spa::CFGNode cfgNode;
-  queryResult.setCfgNode(cfgNode);
+  std::vector<spa::CFGNode> cfgNodes;
+  queryResult.setCfgNodes(cfgNodes);
   if (cfgTable.find(lineNumber) != cfgTable.end()) {
     return queryResult;
   }
 
-  cfgNode = cfgTable[lineNumber];
-  queryResult.setCfgNode(cfgNode);
+  cfgNodes.push_back(cfgTable[lineNumber]);
+  queryResult.setCfgNodes(cfgNodes);
   return queryResult;
 }
 

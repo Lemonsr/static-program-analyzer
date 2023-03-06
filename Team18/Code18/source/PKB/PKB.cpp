@@ -385,5 +385,5 @@ const spa::QueryResult spa::PKB::getCallsProc() {
 }
 
 const spa::QueryResult spa::PKB::getCfgNode(int lineNo) {
-  return relationshipStorage.getCfgNode(int lineNo);
+  return relationshipStorage.getCfgNode(lineNo);
 }
