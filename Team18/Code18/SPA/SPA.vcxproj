@@ -44,6 +44,7 @@
     <ClInclude Include="..\source\QPS\Evaluators\QpsResult.h" />
     <ClInclude Include="..\source\QPS\Evaluators\QpsResultTable.h" />
     <ClInclude Include="..\source\QPS\Evaluators\QpsValue.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\QueryOptimizer.h" />
     <ClInclude Include="..\source\QPS\Evaluators\QueryResult.h" />
     <ClInclude Include="..\source\QPS\Evaluators\SimpleEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\UsesEvaluator.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="..\source\QPS\Evaluators\QpsResult.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\QpsResultTable.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\QpsValue.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\QueryOptimizer.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\QueryResult.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\SimpleEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\UsesEvaluator.cpp" />
