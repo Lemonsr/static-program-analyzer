@@ -8,12 +8,13 @@
 
 namespace spa {
 class SP {
+private:
+  std::string sourceCode;
+  PKBManager& pkbManager;
+  Stream<Token> convertToken();
+
  public:
-    explicit SP(std::string, PKBManager& pkbManager);
-    void processSource();
- private:
-    std::string sourceCode;
-    PKBManager& pkbManager;
-    Stream<Token> convertToken();
+  explicit SP(std::string, PKBManager& pkbManager);
+  void processSource();
 };
 }  // namespace spa
