@@ -44,20 +44,6 @@ public:
     Assert::AreEqual(tokens.remaining(), int64_t(4));
   }
 
-  TEST_METHOD(TestNonExistentSynonym) {
-    spa::Stream<spa::Token> tokens;
-    tokens.pushBack({ spa::TOKEN_NAME, "s" });
-    tokens.pushBack({ spa::TOKEN_FULL_STOP, "." });
-    tokens.pushBack({ spa::TOKEN_NAME, "stmt" });
-    tokens.pushBack({ spa::TOKEN_HASH, "#" });
-    spa::ParsedQuery query;
-    query.addDeclaration("p", spa::PRINT);
-    spa::PqlAttributeParser parser;
-    std::optional<std::string> attributeOpt = parser.parse(tokens, query);
-    Assert::IsFalse(attributeOpt.has_value());
-    Assert::AreEqual(tokens.remaining(), int64_t(4));
-  }
-
   TEST_METHOD(TestWrongAttribute) {
     spa::Stream<spa::Token> tokens;
     tokens.pushBack({ spa::TOKEN_NAME, "v" });

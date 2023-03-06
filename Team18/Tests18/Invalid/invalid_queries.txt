@@ -46,12 +46,12 @@ SemanticError
 10 - Semantics wrong
 stmt s;
 Select s pattern s(_, _)
-SyntaxError
+SemanticError
 5000
 11 - Test
 stmt s; assign s;
 Select s
-SyntaxError
+SemanticError
 5000
 12 - Test
 ssdaftmt s; assigasdfn a;
@@ -66,7 +66,7 @@ SyntaxError
 14 - Test
 stmt s;
 Select a
-SyntaxError
+SemanticError
 5000
 15 - Test
 variable v; assign a;

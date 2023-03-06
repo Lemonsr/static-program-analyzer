@@ -124,7 +124,7 @@ public:
         { spa::TOKEN_NAME, "x" },
         { spa::TOKEN_PLUS, "+" },
         { spa::TOKEN_NAME, "y" }
-        }));
+        }), 2);
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
 
@@ -192,7 +192,7 @@ public:
           { spa::TOKEN_NAME, "x" },
           { spa::TOKEN_PLUS, "+" },
           { spa::TOKEN_NAME, "y" }
-          }));
+          }), 2);
       Assert::IsTrue(clause == compare);
     }
     Assert::AreEqual(tokens.remaining(), int64_t(0));
@@ -261,7 +261,7 @@ public:
           { spa::TOKEN_NAME, "x" },
           { spa::TOKEN_PLUS, "+" },
           { spa::TOKEN_NAME, "y" }
-          }));
+          }), 2);
       Assert::IsTrue(clause == compare);
     }
     Assert::AreEqual(tokens.remaining(), int64_t(0));

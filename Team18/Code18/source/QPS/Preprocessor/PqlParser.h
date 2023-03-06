@@ -8,7 +8,8 @@ namespace spa {
 
 enum PqlParseStatus {
   PQL_PARSE_SUCCESS,
-  PQL_PARSE_ERROR,
+  PQL_PARSE_SYNTAX_ERROR,
+  PQL_PARSE_SEMANTIC_ERROR,
   PQL_PARSE_MISMATCH
 };
 

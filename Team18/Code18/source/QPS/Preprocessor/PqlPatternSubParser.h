@@ -10,21 +10,11 @@ namespace spa {
 class PqlPatternSubParser : public PqlParser {
  private:
   PqlArgumentParser argParser;
-  std::optional<Pattern> parseWildcard(Stream<Token>& tokens,
-      ParsedQuery& query);
-  std::optional<Pattern> parseExact(Stream<Token>& tokens,
-      ParsedQuery& query);
-  std::optional<Pattern> parsePartial(Stream<Token>& tokens,
-      ParsedQuery& query);
-  std::optional<Pattern> parsePattern(Stream<Token>& tokens,
-      ParsedQuery& query);
-  std::optional<PqlArgument> parseDesignEntity(Token& token, ParsedQuery& query);
-  PqlParseStatus parseAssign(PqlArgument& designEntity, PqlArgument& firstArg,
-                             Stream<Token>& tokens, ParsedQuery& query);
-  PqlParseStatus parseWhile(PqlArgument& designEntity, PqlArgument& firstArg,
-                            Stream<Token>& tokens, ParsedQuery& query);
-  PqlParseStatus parseIf(PqlArgument& designEntity, PqlArgument& firstArg,
-                         Stream<Token>& tokens, ParsedQuery& query);
+  std::optional<Pattern> parseExact(Stream<Token>& tokens, ParsedQuery& query);
+  std::optional<Pattern> parsePartial(Stream<Token>& tokens, ParsedQuery& query);
+  std::optional<Pattern> parsePattern(Stream<Token>& tokens, ParsedQuery& query);
+  PqlParseStatus parseOtherArgs(Stream<Token>& tokens, ParsedQuery& query,
+                                PqlArgument& designEntity, PqlArgument& firstArg);
  public:
   PqlParseStatus parse(Stream<Token>& tokens, ParsedQuery& query);
 };

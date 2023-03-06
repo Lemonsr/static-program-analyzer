@@ -50,7 +50,7 @@ public:
     query.addDeclaration("v", spa::VARIABLE);
     spa::PqlAndParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
-    Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
   }
 
   TEST_METHOD(TestAndPattern) {
@@ -74,7 +74,8 @@ public:
     query.addPatternClause({
       { spa::SYNONYM, "w", { spa::WHILE } },
       { spa::SYNONYM, "v", { spa::VARIABLE }},
-      spa::Pattern { spa::ANY }
+      spa::Pattern { spa::ANY },
+      2
     });
     spa::PqlAndParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
@@ -85,7 +86,8 @@ public:
     spa::PatternClause compare {
       { spa::SYNONYM, "a", { spa::ASSIGN } },
       { spa::SYNONYM, "v", { spa::VARIABLE }},
-      spa::Pattern { spa::ANY }
+      spa::Pattern { spa::ANY },
+      2
     };
     Assert::IsTrue(clause == compare);
   }
@@ -106,7 +108,8 @@ public:
     query.addPatternClause({
       { spa::SYNONYM, "w", { spa::WHILE } },
       { spa::SYNONYM, "v", { spa::VARIABLE }},
-      spa::Pattern { spa::ANY }
+      spa::Pattern { spa::ANY },
+      2
     });
     query.addSuchThatClause({
       spa::USES,

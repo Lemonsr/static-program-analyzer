@@ -5,7 +5,7 @@ spa::PqlParseStatus spa::PqlAndParser::parse(Stream<Token>& tokens, ParsedQuery&
     return PQL_PARSE_MISMATCH;
   }
   if (!query.hasClauses()) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);
   const PqlClauseType lastAddedClause = query.getLastAddedClause();
@@ -17,6 +17,6 @@ spa::PqlParseStatus spa::PqlAndParser::parse(Stream<Token>& tokens, ParsedQuery&
     case PqlClauseType::WITH_CLAUSE:
       return withParser.parse(tokens, query);
     default:
-      return PQL_PARSE_ERROR;
+      return PQL_PARSE_SYNTAX_ERROR;
   }
 }

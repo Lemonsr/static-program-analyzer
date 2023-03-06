@@ -195,6 +195,9 @@
     <ClInclude Include="..\source\PKB\DataTypes\CFGNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\NextEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\source\QPS\Preprocessor\PqlWithParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -354,6 +357,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\PKB\DataTypes\CFGNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\QPS\Evaluators\NextEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\QPS\Preprocessor\PqlWithParser.cpp">

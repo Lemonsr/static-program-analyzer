@@ -175,10 +175,12 @@
     <ClCompile Include="TestFollowsEvaluator.cpp" />
     <ClCompile Include="TestFollowsStarEvaluator.cpp" />
     <ClCompile Include="TestFrontEnd.cpp" />
+    <ClCompile Include="TestNextEvaluator.cpp" />
     <ClCompile Include="TestParentEvaluator.cpp" />
     <ClCompile Include="TestParentStarEvaluator.cpp" />
     <ClCompile Include="TestPatternContainerEvaluator.cpp" />
     <ClCompile Include="TestPatternEvaluator.cpp" />
+    <ClCompile Include="TestQps.cpp" />
     <ClCompile Include="TestSimpleEvaluator.cpp" />
     <ClCompile Include="TestModifiesEvaluator.cpp" />
     <ClCompile Include="TestUsesEvaluator.cpp" />

@@ -37,7 +37,7 @@ public:
     spa::PatternClause compare(
       { spa::SYNONYM, "a", spa::ASSIGN },
       spa::PqlArgument(spa::SYNONYM, "v", { spa::VARIABLE }),
-      spa::Pattern(spa::ANY));
+      spa::Pattern(spa::ANY), 2);
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
   }
@@ -79,7 +79,7 @@ public:
     query.addDeclaration("v", spa::VARIABLE);
     spa::PqlPatternParser parser;
     spa::PqlParseStatus status = parser.parse(tokens, query);
-    Assert::IsTrue(status == spa::PQL_PARSE_ERROR);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
   }
   };
 }  // namespace UnitTesting

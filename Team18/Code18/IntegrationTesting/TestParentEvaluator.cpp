@@ -62,11 +62,13 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 3);
 
-    auto columnVals = table.getColumn("s");
-    Assert::AreEqual(columnVals.size(), size_t(3));
-    Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 4);
+    Assert::IsTrue(rows[0][1].getInteger() == 5);
+    Assert::IsTrue(rows[1][0].getInteger() == 4);
+    Assert::IsTrue(rows[1][1].getInteger() == 6);
+    Assert::IsTrue(rows[2][0].getInteger() == 4);
+    Assert::IsTrue(rows[2][1].getInteger() == 7);
   }
 
   TEST_METHOD(TestLineStatementNotExists) {
@@ -106,9 +108,9 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 1);
 
-    auto columnVals = table.getColumn("s");
-    Assert::AreEqual(columnVals.size(), size_t(1));
-    Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 1);
+    Assert::IsTrue(rows[0][1].getInteger() == 2);
   }
 
   TEST_METHOD(TestStatementLineNotExists) {
@@ -223,19 +225,17 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 5);
 
-    auto columnVals = table.getColumn("s1");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
-
-    columnVals = table.getColumn("s2");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(8)) != columnVals.end());
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 1);
+    Assert::IsTrue(rows[0][1].getInteger() == 2);
+    Assert::IsTrue(rows[1][0].getInteger() == 4);
+    Assert::IsTrue(rows[1][1].getInteger() == 5);
+    Assert::IsTrue(rows[2][0].getInteger() == 4);
+    Assert::IsTrue(rows[2][1].getInteger() == 6);
+    Assert::IsTrue(rows[3][0].getInteger() == 4);
+    Assert::IsTrue(rows[3][1].getInteger() == 7);
+    Assert::IsTrue(rows[4][0].getInteger() == 7);
+    Assert::IsTrue(rows[4][1].getInteger() == 8);
   }
 
   TEST_METHOD(TestStatementStatementNotExists) {
@@ -280,12 +280,17 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 5);
 
-    auto columnVals = table.getColumn("s1");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 1);
+    Assert::IsTrue(rows[0][1].getInteger() == 2);
+    Assert::IsTrue(rows[1][0].getInteger() == 4);
+    Assert::IsTrue(rows[1][1].getInteger() == 5);
+    Assert::IsTrue(rows[2][0].getInteger() == 4);
+    Assert::IsTrue(rows[2][1].getInteger() == 6);
+    Assert::IsTrue(rows[3][0].getInteger() == 4);
+    Assert::IsTrue(rows[3][1].getInteger() == 7);
+    Assert::IsTrue(rows[4][0].getInteger() == 7);
+    Assert::IsTrue(rows[4][1].getInteger() == 8);
   }
 
   TEST_METHOD(TestStatementUnderscoreNotExists) {
@@ -330,12 +335,17 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 5);
 
-    auto columnVals = table.getColumn("s");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(8)) != columnVals.end());
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 1);
+    Assert::IsTrue(rows[0][1].getInteger() == 2);
+    Assert::IsTrue(rows[1][0].getInteger() == 4);
+    Assert::IsTrue(rows[1][1].getInteger() == 5);
+    Assert::IsTrue(rows[2][0].getInteger() == 4);
+    Assert::IsTrue(rows[2][1].getInteger() == 6);
+    Assert::IsTrue(rows[3][0].getInteger() == 4);
+    Assert::IsTrue(rows[3][1].getInteger() == 7);
+    Assert::IsTrue(rows[4][0].getInteger() == 7);
+    Assert::IsTrue(rows[4][1].getInteger() == 8);
   }
 
   TEST_METHOD(TestUnderscoreStatementNotExists) {
@@ -418,15 +428,13 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 3);
 
-    auto columnVals = table.getColumn("s1");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-
-    columnVals = table.getColumn("s2");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 4);
+    Assert::IsTrue(rows[0][1].getInteger() == 5);
+    Assert::IsTrue(rows[1][0].getInteger() == 4);
+    Assert::IsTrue(rows[1][1].getInteger() == 6);
+    Assert::IsTrue(rows[2][0].getInteger() == 4);
+    Assert::IsTrue(rows[2][1].getInteger() == 7);
   }
 
   TEST_METHOD(TestWhileAssign) {
@@ -453,11 +461,9 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 1);
 
-    auto columnVals = table.getColumn("s1");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(4)) != columnVals.end());
-
-    columnVals = table.getColumn("a");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 4);
+    Assert::IsTrue(rows[0][1].getInteger() == 6);
   }
 
   TEST_METHOD(TestIfParent) {
@@ -484,13 +490,11 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 2);
 
-    auto columnVals = table.getColumn("s1");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(1)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
-
-    columnVals = table.getColumn("s2");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(2)) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue(8)) != columnVals.end());
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 1);
+    Assert::IsTrue(rows[0][1].getInteger() == 2);
+    Assert::IsTrue(rows[1][0].getInteger() == 7);
+    Assert::IsTrue(rows[1][1].getInteger() == 8);
   }
 
   TEST_METHOD(TestIfPrint) {
@@ -517,11 +521,9 @@ public:
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 1);
 
-    auto columnVals = table.getColumn("s1");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(7)) != columnVals.end());
-
-    columnVals = table.getColumn("p");
-    Assert::IsTrue(columnVals.find(spa::QpsValue(8)) != columnVals.end());
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getInteger() == 7);
+    Assert::IsTrue(rows[0][1].getInteger() == 8);
   }
   };
 }  // namespace IntegrationTesting

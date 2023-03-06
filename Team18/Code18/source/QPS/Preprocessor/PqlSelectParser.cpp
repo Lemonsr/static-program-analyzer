@@ -12,23 +12,20 @@ spa::PqlParseStatus spa::PqlSelectParser::parseSynonymOrAttribute(bool parseBool
     return PQL_PARSE_SUCCESS;
   }
   if (!tokens.match({ {TOKEN_NAME, ""} })) {
-    return PQL_PARSE_ERROR;
+    return PQL_PARSE_SYNTAX_ERROR;
   }
   std::string synonym = tokens[0].getValue();
   tokens.seek(1);
 
-  std::optional<DesignEntityType> entityOpt = query.getDeclarationType(synonym);
-  if (entityOpt) {
-    query.setSelectClauseType(SelectClauseType::SELECT_TUPLE);
-    query.addSelectColumn(synonym);
-    query.addUsedDeclaration(synonym, entityOpt.value());
-    return PQL_PARSE_SUCCESS;
-  }
-  if (parseBoolean && synonym == "BOOLEAN") {
+  DesignEntityType entityType = query.getDeclarationType(synonym);
+  if (parseBoolean && synonym == "BOOLEAN" && entityType == UNKNOWN) {
     query.setSelectClauseType(SelectClauseType::SELECT_BOOLEAN);
     return PQL_PARSE_SUCCESS;
   }
-  return PQL_PARSE_ERROR;
+  query.setSelectClauseType(SelectClauseType::SELECT_TUPLE);
+  query.addSelectColumn(synonym);
+  query.addUsedDeclaration(synonym, entityType);
+  return PQL_PARSE_SUCCESS;
 }
 
 spa::PqlParseStatus spa::PqlSelectParser::parseTuple(Stream<Token>& tokens, ParsedQuery& query) {
@@ -46,7 +43,7 @@ spa::PqlParseStatus spa::PqlSelectParser::parseTuple(Stream<Token>& tokens, Pars
       break;
     }
   }
-  return PQL_PARSE_ERROR;
+  return PQL_PARSE_SYNTAX_ERROR;
 }
 
 spa::PqlParseStatus spa::PqlSelectParser::parse(Stream<Token>& tokens, ParsedQuery& query) {

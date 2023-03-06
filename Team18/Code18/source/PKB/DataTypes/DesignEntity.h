@@ -2,6 +2,7 @@
 
 namespace spa {
 enum DesignEntityType {
+  UNKNOWN,
   PROCEDURE,
   STMT,
   READ,
