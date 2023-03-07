@@ -16,11 +16,46 @@ public:
     resultTable.addHeader("s.stmt#");
     resultTable.addHeader("v");
     resultTable.addHeader("v.varName");
-    resultTable.addRow({ spa::QpsValue("func1"), spa::QpsValue("func1"), spa::QpsValue(1), spa::QpsValue(1), spa::QpsValue("a"), spa::QpsValue("a") });
-    resultTable.addRow({ spa::QpsValue("func2"), spa::QpsValue("func2"), spa::QpsValue(2), spa::QpsValue(2), spa::QpsValue("b"), spa::QpsValue("b") });
-    resultTable.addRow({ spa::QpsValue("func3"), spa::QpsValue("func3"), spa::QpsValue(3), spa::QpsValue(3), spa::QpsValue("c"), spa::QpsValue("c") });
-    resultTable.addRow({ spa::QpsValue("func4"), spa::QpsValue("func4"), spa::QpsValue(4), spa::QpsValue(4), spa::QpsValue("d"), spa::QpsValue("d") });
-    resultTable.addRow({ spa::QpsValue("func5"), spa::QpsValue("func5"), spa::QpsValue(5), spa::QpsValue(5), spa::QpsValue("e"), spa::QpsValue("e") });
+    resultTable.addRow({
+      spa::QpsValue("func1"),
+      spa::QpsValue("func1"),
+      spa::QpsValue(1),
+      spa::QpsValue(1),
+      spa::QpsValue("a"),
+      spa::QpsValue("a")
+    });
+    resultTable.addRow({
+      spa::QpsValue("func2"),
+      spa::QpsValue("func2"),
+      spa::QpsValue(2),
+      spa::QpsValue(2),
+      spa::QpsValue("b"),
+      spa::QpsValue("b")
+    });
+    resultTable.addRow({
+      spa::QpsValue("func3"),
+      spa::QpsValue("func3"),
+      spa::QpsValue(3),
+      spa::QpsValue(3),
+      spa::QpsValue("c"),
+      spa::QpsValue("c")
+    });
+    resultTable.addRow({
+      spa::QpsValue("func4"),
+      spa::QpsValue("func4"),
+      spa::QpsValue(4),
+      spa::QpsValue(4),
+      spa::QpsValue("d"),
+      spa::QpsValue("d")
+    });
+    resultTable.addRow({
+      spa::QpsValue("func5"),
+      spa::QpsValue("func5"),
+      spa::QpsValue(5),
+      spa::QpsValue(5),
+      spa::QpsValue("e"),
+      spa::QpsValue("e")
+    });
   }
   TEST_METHOD(TestSimpleSelect) {
     spa::QpsTranslator translator(resultTable);

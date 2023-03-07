@@ -1,7 +1,7 @@
 #include "QpsTranslator.h"
 
 #include <unordered_set>
-#include <sstream> 
+#include <sstream>
 
 spa::QpsTranslator::QpsTranslator(QpsResultTable& result) : result(result) {
 }
@@ -17,7 +17,8 @@ std::string spa::QpsTranslator::rowToString(QpsResultRow row) {
   return ss.str();
 }
 
-std::list<std::string> spa::QpsTranslator::translate(SelectClauseType selectType, std::vector<std::string> selectColumns) {
+std::list<std::string> spa::QpsTranslator::translate(SelectClauseType selectType,
+                                                     std::vector<std::string> selectColumns) {
   std::list<std::string> translatedResult;
   if (selectType == SelectClauseType::SELECT_BOOLEAN) {
     if (result.isEmpty()) {
