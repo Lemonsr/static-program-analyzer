@@ -11,6 +11,7 @@ class SpValidator {
   int64_t idx = 0;  // Track the current token position
   Stream<Token> tokens;
   std::unordered_set<std::string> procNames;
+  std::unordered_set<std::string> callNames;
   bool hasRemaining();
   bool hasRemaining(int64_t);
   void next(int64_t offset = 1);
@@ -26,7 +27,8 @@ class SpValidator {
   void validateStmt();
 
   void validateEqual();
-  void validateReadPrint();
+  void validateReadPrintCall();
+  void validateCallExists();
   void validateWhileIf();
   void validateWhile();
   void validateIf();
