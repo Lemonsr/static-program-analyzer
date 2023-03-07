@@ -20,7 +20,7 @@ class OneVarNonContainerStatement : public NonContainerStatement {
  protected:
   std::string variableName;
 
-public:
+ public:
   std::string getVariableName();
 };
 
