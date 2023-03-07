@@ -34,9 +34,11 @@ spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
     resultTables.push_back(evaluator->evaluate(pkbManager));
   }
 
-  QpsResultTable resultTable = resultTables[0];
-  for (int i = 1; i < resultTables.size(); i++) {
-    resultTable = resultTable.innerJoin(resultTables[i]);
+  QpsResultTable resultTable;
+  resultTable.addHeader("");
+  resultTable.addRow({ QpsValue(0) });
+  for (auto& table : resultTables) {
+    resultTable = resultTable.innerJoin(table);
   }
   return resultTable;
 }
