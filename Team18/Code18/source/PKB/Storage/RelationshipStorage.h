@@ -27,7 +27,7 @@ class RelationshipStorage {
   std::unordered_map<int, std::string> callsProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;
-  std::unordered_map<int, spa::CFGNode> cfgTable;
+  std::unordered_map<int, spa::CFGNode*> cfgTable;
 
  public:
   bool addStatementType(std::string lineNo, StatementType statementType);
@@ -149,7 +149,7 @@ class RelationshipStorage {
   bool addCallsProc(int lineNumber, std::string procName);
   QueryResult getCallsProc();
 
-  bool addCfgNode(int lineNumber, spa::CFGNode cfgNode);
+  bool addCfgNode(int lineNumber, spa::CFGNode* cfgNode);
   QueryResult getCfgNode(int lineNumber);
 
   void setFollowsTable(std::unordered_map<int, int> followsTable);
@@ -167,6 +167,6 @@ class RelationshipStorage {
                                                         std::unordered_set<int>> callsContainerParentsTable);
   void setCallsProcTable(std::unordered_map<int, std::string> statementTypeTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
-  void setCfgTable(std::unordered_map<int, spa::CFGNode> cfgTable);
+  void setCfgTable(std::unordered_map<int, spa::CFGNode*> cfgTable);
 };
 }  // namespace spa

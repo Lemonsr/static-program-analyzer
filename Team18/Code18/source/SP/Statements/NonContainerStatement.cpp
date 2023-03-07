@@ -88,7 +88,7 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::ReadStatement::processStatement(
   pkbManager.addRelationship(MODIFIES_P, parentProcedureVal, variableName);
   addParentModifies(pkbManager, variableName);
   CFGNode* cfgReadStmtNode = new CFGNode(statementLineNum, variableName);
-  pkbManager.addCfgNode(statementLineNum, *cfgReadStmtNode);
+  pkbManager.addCfgNode(statementLineNum, cfgReadStmtNode);
   return std::make_pair(cfgReadStmtNode, cfgReadStmtNode);
 }
 
@@ -102,7 +102,7 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::PrintStatement::processStatement(
   pkbManager.addRelationship(USES_P, parentProcedureVal, variableName);
   addParentUses(pkbManager, variableName);
   CFGNode* cfgPrintStmtNode = new CFGNode(statementLineNum);
-  pkbManager.addCfgNode(statementLineNum, *cfgPrintStmtNode);
+  pkbManager.addCfgNode(statementLineNum, cfgPrintStmtNode);
   return std::make_pair(cfgPrintStmtNode, cfgPrintStmtNode);
 }
 
@@ -115,7 +115,7 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::CallStatement::processStatement(
   pkbManager.addRelationship(CALLS, parentProcedureVal, variableName);
   addCallIfWhileParent(pkbManager, variableName);
   CFGNode* cfgCallStmtNode = new CFGNode(statementLineNum);
-  pkbManager.addCfgNode(statementLineNum, *cfgCallStmtNode);
+  pkbManager.addCfgNode(statementLineNum, cfgCallStmtNode);
   return std::make_pair(cfgCallStmtNode, cfgCallStmtNode);
 }
 
@@ -131,7 +131,7 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::AssignStatement::processStatement(
   extractUsesFromPostfix(pkbManager, postfixExpr);
   pkbManager.addPattern(stringStmtLineNum, assignVar, postfixExpr);
   CFGNode* cfgAssignStmtNode = new CFGNode(statementLineNum, assignVar);
-  pkbManager.addCfgNode(statementLineNum, *cfgAssignStmtNode);
+  pkbManager.addCfgNode(statementLineNum, cfgAssignStmtNode);
   return std::make_pair(cfgAssignStmtNode, cfgAssignStmtNode);
 }
 
@@ -143,7 +143,7 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::IfConditionStatement::processStatem
   extractUsesFromPostfix(pkbManager, postfixExpr);
   extractPatternFromPostfix(pkbManager, stringStmtLineNum, postfixExpr, IF);
   CFGNode* cfgIfConditionalStmtNode = new CFGNode(statementLineNum);
-  pkbManager.addCfgNode(statementLineNum, *cfgIfConditionalStmtNode);
+  pkbManager.addCfgNode(statementLineNum, cfgIfConditionalStmtNode);
   return std::make_pair(cfgIfConditionalStmtNode, cfgIfConditionalStmtNode);
 }
 
@@ -155,7 +155,7 @@ std::pair<spa::CFGNode*, spa::CFGNode*> spa::WhileConditionStatement::processSta
   extractUsesFromPostfix(pkbManager, postfixExpr);
   extractPatternFromPostfix(pkbManager, stringStmtLineNum, postfixExpr, WHILE);
   CFGNode* cfgWhileConditionalStmtNode = new CFGNode(statementLineNum);
-  pkbManager.addCfgNode(statementLineNum, *cfgWhileConditionalStmtNode);
+  pkbManager.addCfgNode(statementLineNum, cfgWhileConditionalStmtNode);
   return std::make_pair(cfgWhileConditionalStmtNode, cfgWhileConditionalStmtNode);
 }
 

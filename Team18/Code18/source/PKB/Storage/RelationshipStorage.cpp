@@ -1691,12 +1691,12 @@ spa::QueryResult spa::RelationshipStorage::getCallsProc() {
   return queryResult;
 }
 
-bool spa::RelationshipStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
+bool spa::RelationshipStorage::addCfgNode(int lineNumber, spa::CFGNode* cfgNode) {
   if (cfgTable.find(lineNumber) != cfgTable.end()) {
     return false;
   }
 
-  cfgTable.insert({ lineNumber, cfgNode });
+  cfgTable.insert(std::make_pair( lineNumber, cfgNode));
   return true;
 }
 
@@ -1704,7 +1704,7 @@ spa::QueryResult spa::RelationshipStorage::getCfgNode(int lineNumber) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<spa::CFGNode> cfgNodes;
+  std::vector<spa::CFGNode*> cfgNodes;
   queryResult.setCfgNodes(cfgNodes);
   if (cfgTable.find(lineNumber) == cfgTable.end()) {
     return queryResult;
@@ -1783,6 +1783,6 @@ void spa::RelationshipStorage::setStatementTypeTable(std::unordered_map<int, Sta
   this->statementTypeTable = statementTypeTable;
 }
 
-void spa::RelationshipStorage::setCfgTable(std::unordered_map<int, spa::CFGNode> cfgTable) {
+void spa::RelationshipStorage::setCfgTable(std::unordered_map<int, spa::CFGNode*> cfgTable) {
   this->cfgTable = cfgTable;
 }

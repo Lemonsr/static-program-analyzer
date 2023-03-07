@@ -274,9 +274,9 @@ void spa::DesignExtractor::addUsesModifies(std::string relArg,
   for (auto& var : varModifies) {
     if (isCallStmt) {
       QueryResult queryResult = pkbManager.getCfgNode(stoi(relArg));
-      std::vector<CFGNode> nodes = queryResult.getCfgNodes();
+      std::vector<CFGNode*> nodes = queryResult.getCfgNodes();
       if (!nodes.empty()) {
-        CFGNode* node = nodes.data();
+        CFGNode* node = nodes[0];
         node->addModifiedVariable(var.second);
       }
     }

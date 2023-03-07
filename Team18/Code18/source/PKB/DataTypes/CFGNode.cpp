@@ -18,7 +18,12 @@ spa::CFGNode::CFGNode(int lineNumber, bool isDummy) {
 
 spa::CFGNode::CFGNode(int lineNumber, std::string variable) {
   this->lineNumber = lineNumber;
-  modifiedVariables.insert(variable);
+  this->modifiedVariables.insert(variable);
+}
+
+spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> variables) {
+  this->lineNumber = lineNumber;
+  this->modifiedVariables.insert(variables.begin(), variables.end());
 }
 
 spa::CFGNode* spa::CFGNode::createDummyNode() {
@@ -99,34 +104,8 @@ void spa::CFGNode::removeNodeFromGraph() {
   }
 }
 
-bool spa::operator==(const CFGNode& s1, const CFGNode& s2) {
-  if (s1.lineNumber != s2.lineNumber || s1.isDummy != s2.isDummy ||
-      s1.modifiedVariables.size() != s2.modifiedVariables.size() ||
-      s1.incomingEdges.size() != s2.incomingEdges.size() ||
-      s1.outgoingEdges.size() != s2.outgoingEdges.size()) {
-    return false;
-  }
-
-  for (auto& itr = s1.modifiedVariables.begin(); itr != s1.modifiedVariables.end(); itr++) {
-    if (s2.modifiedVariables.find(*itr) == s2.modifiedVariables.end()) {
-      return false;
-    }
-  }
-
-  for (auto& itr = s1.incomingEdges.begin(); itr != s1.incomingEdges.end(); itr++) {
-    if (s2.incomingEdges.find(*itr) == s2.incomingEdges.end()) {
-      return false;
-    }
-  }
-
-  for (auto& itr = s1.outgoingEdges.begin(); itr != s1.outgoingEdges.end(); itr++) {
-    if (s2.outgoingEdges.find(*itr) == s2.outgoingEdges.end()) {
-      return false;
-    }
-  }
-  return true;
-}
-
-bool spa::operator!=(const CFGNode& s1, const CFGNode& s2) {
-  return !(s1 == s2);
+bool spa::CFGNode::equal(const spa::CFGNode* s2) {
+    return lineNumber == s2->lineNumber
+    && isDummy == s2->isDummy
+    && modifiedVariables == s2->modifiedVariables;
 }

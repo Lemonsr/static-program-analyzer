@@ -18,6 +18,7 @@ class CFGNode {
   explicit CFGNode(int lineNumber);
   explicit CFGNode(int lineNumber, bool isDummy);
   explicit CFGNode(int lineNumber, std::string modifiedVariable);
+  explicit CFGNode(int lineNumber, std::unordered_set<std::string> variables);
   static CFGNode* createDummyNode();
   bool isDummyNode();
   int getLineNumber() const;
@@ -33,7 +34,6 @@ class CFGNode {
   void removeNodeFromGraph();
 
   static void linkNodes(CFGNode* tail, CFGNode* head, PKBManager& pkbManager);
-  friend bool operator==(const CFGNode& s1, const CFGNode& s2);
-  friend bool operator!=(const CFGNode& s1, const CFGNode& s2);
+  bool equal(const CFGNode* s1);
 };
 }  // namespace spa
