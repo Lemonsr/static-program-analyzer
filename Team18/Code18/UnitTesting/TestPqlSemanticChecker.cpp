@@ -790,7 +790,7 @@ namespace UnitTesting {
       parsedQuery.addWithClause(spa::WithClause(intAttr, intAttr));
       parsedQuery.addWithClause(spa::WithClause(intAttr, intVal));
       parsedQuery.addWithClause(spa::WithClause(intVal, intAttr));
-      
+
       Assert::IsTrue(semanticChecker.isSemanticallyValid(parsedQuery));
     }
 

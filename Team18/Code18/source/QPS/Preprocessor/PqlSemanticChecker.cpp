@@ -1,6 +1,8 @@
 #include "PqlSemanticChecker.h"
 
 #include <optional>
+#include <string>
+#include <unordered_map>
 
 bool spa::PqlSemanticChecker::isSemanticallyValid(ParsedQuery& parsedQuery) {
   for (auto& p : parsedQuery.getDeclarationsCount()) {
