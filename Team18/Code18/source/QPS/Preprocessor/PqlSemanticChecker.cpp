@@ -23,6 +23,11 @@ bool spa::PqlSemanticChecker::isSemanticallyValid(ParsedQuery& parsedQuery) {
       return false;
     }
   }
+  for (auto& clause : parsedQuery.getWithClauses()) {
+    if (!isValid(clause)) {
+      return false;
+    }
+  }
   return true;
 }
 
@@ -83,6 +88,15 @@ bool spa::PqlSemanticChecker::isValid(PatternClause& patternClause) {
       return false;
   }
   return true;
+}
+
+bool spa::PqlSemanticChecker::isValid(WithClause& withClause) {
+  WithArgument firstArg = withClause.getFirstArg();
+  WithArgument secondArg = withClause.getSecondArg();
+  QpsValueType firstArgType = getWithArgumentType(firstArg);
+  QpsValueType secondArgType = getWithArgumentType(secondArg);
+
+  return firstArgType == secondArgType;
 }
 
 bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
@@ -186,4 +200,20 @@ bool spa::PqlSemanticChecker::checkCallsArguments(PqlArgument& firstArg, PqlArgu
   }
 
   return true;
+}
+
+spa::QpsValueType spa::PqlSemanticChecker::getWithArgumentType(WithArgument& withArgument) {
+  std::unordered_map<std::string, QpsValueType> attributeNameTypeMap = {
+    {"stmt#", QpsValueType::INTEGER},
+    {"value", QpsValueType::INTEGER},
+    {"procName", QpsValueType::STRING},
+    {"varName", QpsValueType::STRING},
+  };
+
+  if (withArgument.getType() == WithArgumentType::WITH_VALUE) {
+    return withArgument.getValue().getType();
+  }
+
+  std::string attribute = withArgument.getAttribute();
+  return attributeNameTypeMap[attribute.substr(attribute.find('.') + 1)];
 }
