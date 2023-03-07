@@ -150,6 +150,7 @@ class RelationshipStorage {
   QueryResult getCallsProc();
 
   bool addCfgNode(int lineNumber, spa::CFGNode cfgNode);
+  QueryResult getCfgNode(int lineNumber);
 
   void setFollowsTable(std::unordered_map<int, int> followsTable);
   void setFollowsStarTable(std::unordered_map<int, std::unordered_set<int>> followsStarTable);
