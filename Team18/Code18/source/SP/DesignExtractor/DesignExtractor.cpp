@@ -203,7 +203,7 @@ void spa::DesignExtractor::extractUsesAndModifiesProc() {
       std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(
         childProc.second, "v",
         VARIABLE, MODIFIES);
-      addUsesModifiesAndProc(procName, varUses, varModifies, true);
+      addUsesModifies(procName, varUses, varModifies);
     }
   }
 }
@@ -220,7 +220,7 @@ void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
       "v",
       VARIABLE, MODIFIES);
     for (auto& parent : ifWhileParents) {
-      addUsesModifiesAndProc(std::to_string(parent), varUses, varModifies, false);
+      addUsesModifies(std::to_string(parent), varUses, varModifies, false);
     }
   }
 }
@@ -236,7 +236,7 @@ void spa::DesignExtractor::extractCallsModifiesAndUses() {
     std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(pair.second,
       "v",
       VARIABLE, MODIFIES);
-    addUsesModifiesAndProc(std::to_string(pair.first), varUses, varModifies, false);
+    addUsesModifies(std::to_string(pair.first), varUses, varModifies, true);
   }
 }
 
@@ -250,17 +250,36 @@ std::vector<std::pair<std::string, std::string>> spa::DesignExtractor::getResFro
   return queryResult.getNameNamePairs();
 }
 
-void spa::DesignExtractor::addUsesModifiesAndProc(std::string relArg,
+void spa::DesignExtractor::addUsesModifies(std::string relArg,
                                                   std::vector<std::pair<std::string, std::string>>
                                                   varUses,
                                                   std::vector<std::pair<std::string, std::string>>
-                                                  varModifies, bool isByProc) {
-  RelationshipType usesType = isByProc ? USES_P : USES;
-  RelationshipType modifiesType = isByProc ? MODIFIES_P : MODIFIES;
+                                                  varModifies) {
   for (auto& var : varUses) {
-    pkbManager.addRelationship(usesType, relArg, var.second);
+    pkbManager.addRelationship(USES_P, relArg, var.second);
   }
   for (auto& var : varModifies) {
-    pkbManager.addRelationship(modifiesType, relArg, var.second);
+    pkbManager.addRelationship(MODIFIES_P, relArg, var.second);
+  }
+}
+
+void spa::DesignExtractor::addUsesModifies(std::string relArg,
+                                                  std::vector<std::pair<std::string, std::string>>
+                                                  varUses,
+                                                  std::vector<std::pair<std::string, std::string>>
+                                                  varModifies, bool isCallStmt) {
+  for (auto& var : varUses) {
+    pkbManager.addRelationship(USES, relArg, var.second);
+  }
+  for (auto& var : varModifies) {
+    if (isCallStmt) {
+      QueryResult queryResult = pkbManager.getCfgNode(stoi(relArg));
+      std::vector<CFGNode> nodes = queryResult.getCfgNodes();
+      if (!nodes.empty()) {
+        CFGNode* node = nodes.data();
+        node->addModifiedVariable(var.second);
+      }
+    }
+    pkbManager.addRelationship(MODIFIES, relArg, var.second);
   }
 }

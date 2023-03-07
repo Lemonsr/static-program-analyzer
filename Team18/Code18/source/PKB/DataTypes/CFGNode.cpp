@@ -2,6 +2,11 @@
 
 #include "PKBManager.h"
 
+spa::CFGNode::CFGNode() {
+  lineNumber = -1;
+  isDummy = true;
+}
+
 spa::CFGNode::CFGNode(int lineNumber) {
   this->lineNumber = lineNumber;
 }
@@ -17,7 +22,7 @@ spa::CFGNode::CFGNode(int lineNumber, std::string variable) {
 }
 
 spa::CFGNode* spa::CFGNode::createDummyNode() {
-  return new CFGNode(-1, true);
+  return new CFGNode();
 }
 
 int spa::CFGNode::getLineNumber() const {
@@ -95,7 +100,7 @@ void spa::CFGNode::removeNodeFromGraph() {
 }
 
 bool spa::operator==(const CFGNode& s1, const CFGNode& s2) {
-  if (s1.lineNumber != s2.lineNumber ||
+  if (s1.lineNumber != s2.lineNumber || s1.isDummy != s2.isDummy ||
       s1.modifiedVariables.size() != s2.modifiedVariables.size() ||
       s1.incomingEdges.size() != s2.incomingEdges.size() ||
       s1.outgoingEdges.size() != s2.outgoingEdges.size()) {

@@ -10,5 +10,5 @@ const std::string spa::ProgramStatement::getParentProcedureVal() {
 }
 
 std::pair<spa::CFGNode*, spa::CFGNode*> spa::ProgramStatement::processStatement(PKBManager& pkbManager) {
-  return {new CFGNode(-1), new CFGNode(-1)};
+  return {CFGNode::createDummyNode(), CFGNode::createDummyNode()};
 }
