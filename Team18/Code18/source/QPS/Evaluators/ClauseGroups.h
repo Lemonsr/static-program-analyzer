@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <unordered_set>
+#include <unordered_map>
 #include <string>
 
 #include "QpsResultTable.h"
@@ -17,7 +18,7 @@ class ClauseGroups {
   std::vector<ConnectedSynonymClauseGroup>& connectedSynonymClauseGroups;
   WithAttrAttrClauseGroup& withAttrAttrClauseGroup;
  public:
-   ClauseGroups(NoSynonymClauseGroup& noSynonymClauseGroup,
+  ClauseGroups(NoSynonymClauseGroup& noSynonymClauseGroup,
                 std::vector<ConnectedSynonymClauseGroup>& connectedSynonymClauseGroups,
                  WithAttrAttrClauseGroup& withAttrAttrClauseGroup);
   QpsResultTable evaluate(PKBManager& pkbManager, std::unordered_map<std::string, DesignEntityType>& usedDeclarations);

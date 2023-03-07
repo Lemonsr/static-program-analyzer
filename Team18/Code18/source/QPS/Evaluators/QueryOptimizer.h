@@ -27,6 +27,6 @@ class QueryOptimizer {
   void initialize(ParsedQuery& parsedQuery);
   ConnectedSynonymClauseGroup groupConnectedComponents(Clause* clause);
  public:
- ClauseGroups getGroups(ParsedQuery& parsedQuery);
+  ClauseGroups getGroups(ParsedQuery& parsedQuery);
 };
 }  // namespace spa
