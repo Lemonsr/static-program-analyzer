@@ -5,12 +5,13 @@
 namespace spa {
 class CFGNode {
  private:
-  int lineNumber;
+  int lineNumber = -1;
   std::unordered_set<std::string> modifiedVariables;
   std::unordered_set<CFGNode*> incomingEdges;
   std::unordered_set<CFGNode*> outgoingEdges;
 
  public:
+  CFGNode() = default;
   explicit CFGNode(int lineNumber);
   int getLineNumber() const;
   void linkTo(CFGNode* node);

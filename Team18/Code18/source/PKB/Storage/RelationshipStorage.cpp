@@ -1706,7 +1706,7 @@ spa::QueryResult spa::RelationshipStorage::getCfgNode(int lineNumber) {
 
   std::vector<spa::CFGNode> cfgNodes;
   queryResult.setCfgNodes(cfgNodes);
-  if (cfgTable.find(lineNumber) != cfgTable.end()) {
+  if (cfgTable.find(lineNumber) == cfgTable.end()) {
     return queryResult;
   }
 
