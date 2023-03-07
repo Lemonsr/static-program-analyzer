@@ -14,7 +14,7 @@ spa::ConnectedSynonymClauseGroup spa::QueryOptimizer::groupConnectedComponents(C
     connectedClauses.pop();
     visitedClauses.insert(clause);
 
-    for (auto& synonym : clause->getArgValues()) {
+    for (auto& synonym : clause->getSynonyms()) {
       for (auto& nei : synonymClauseMap[synonym]) {
         if (visitedClauses.find(nei) != visitedClauses.end()) {
           continue;
@@ -50,6 +50,7 @@ std::pair<spa::NoSynonymClauseGroup,
 
 void spa::QueryOptimizer::initialize(ParsedQuery& parsedQuery) {
   for (auto& clause : parsedQuery.getSuchThatClauses()) {
+    // add withClause to noSynoymClauseGroup if got no attribute
     if (clause.getFirstArgType() != SYNONYM && clause.getSecondArgType() != SYNONYM) {
       noSynonymClauseGroup.addClause(clause);
       continue;

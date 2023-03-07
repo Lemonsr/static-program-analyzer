@@ -42,13 +42,13 @@ class SuchThatClause : public Clause {
   SuchThatClause(RelationshipType designAbstraction, PqlArgument firstArg,
     PqlArgument secondArg);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
-  std::vector<std::string> getArgValues();
+  std::vector<std::string> getSynonyms();
   const RelationshipType& getDesignAbstraction();
   const PqlArgument& getFirstArg();
-  const ArgumentType getFirstArgType();
+  const ArgumentType& getFirstArgType();
   const std::string& getFirstArgValue();
   const PqlArgument& getSecondArg();
-  const ArgumentType getSecondArgType();
+  const ArgumentType& getSecondArgType();
   const std::string& getSecondArgValue();
   friend bool operator==(const SuchThatClause& s1, const SuchThatClause& s2);
   friend bool operator!=(const SuchThatClause& s1, const SuchThatClause& s2);
@@ -63,12 +63,12 @@ class PatternClause : public Clause {
  public:
   PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern, int numArgs);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
-  std::vector<std::string> getArgValues();
+  std::vector<std::string> getSynonyms();
   PqlArgument& getSynonym();
   DesignEntityType getSynonymType();
   const std::string& getSynonymValue();
   PqlArgument& getFirstArg();
-  const ArgumentType getFirstArgType();
+  const ArgumentType& getFirstArgType();
   const std::string& getFirstArgValue();
   PatternType getPatternType();
   int getNumArgs();
@@ -98,15 +98,19 @@ class WithArgument {
   friend bool operator!=(const WithArgument& first, const WithArgument& second);
 };
 
-class WithClause {
+class WithClause : public Clause {
  private:
   WithArgument firstArg;
   WithArgument secondArg;
  public:
   WithClause() = default;
   WithClause(WithArgument firstArg, WithArgument secondArg);
+  std::unique_ptr<spa::QpsEvaluator> getEvaluator();
+  std::vector<std::string> getSynonyms();
   const WithArgument& getFirstArg();
+  const WithArgumentType& getFirstArgType();
   const WithArgument& getSecondArg();
+  const WithArgumentType& getSecondArgType();
   friend bool operator==(const WithClause& w1, const WithClause& w2);
   friend bool operator!=(const WithClause& w1, const WithClause& w2);
 };
