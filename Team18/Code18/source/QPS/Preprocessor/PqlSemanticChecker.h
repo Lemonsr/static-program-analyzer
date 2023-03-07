@@ -13,6 +13,7 @@ class PqlSemanticChecker {
   bool checkParentArguments(PqlArgument& firstArg, PqlArgument& secondArg);
   bool checkFollowsArguments(PqlArgument& firstArg, PqlArgument& secondArg);
   bool checkCallsArguments(PqlArgument& firstArg, PqlArgument& secondArg);
+  bool checkNextArguments(PqlArgument& firstArg, PqlArgument& secondArg);
   QpsValueType getWithArgumentType(WithArgument& withArgument);
  public:
   bool isSemanticallyValid(ParsedQuery& parsedQuery);

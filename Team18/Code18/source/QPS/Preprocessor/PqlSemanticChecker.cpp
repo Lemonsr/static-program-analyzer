@@ -49,6 +49,8 @@ bool spa::PqlSemanticChecker::isValid(SuchThatClause& suchThatClause) {
   case CALLS:
   case CALLS_STAR:
     return checkCallsArguments(firstArg, secondArg);
+  case NEXT:
+    return checkNextArguments(firstArg, secondArg);
   }
   return false;
 }
@@ -194,6 +196,24 @@ bool spa::PqlSemanticChecker::checkCallsArguments(PqlArgument& firstArg, PqlArgu
     if (argType == SYNONYM) {
       DesignEntityType deType = arg.getDesignEntity().value();
       if (deType != PROCEDURE) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+bool spa::PqlSemanticChecker::checkNextArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
+  for (PqlArgument arg : { firstArg, secondArg }) {
+    ArgumentType argType = arg.getType();
+    if (argType == LITERAL_STRING) {
+      return false;
+    }
+
+    if (argType == SYNONYM) {
+      DesignEntityType deType = arg.getDesignEntity().value();
+      if (deType == PROCEDURE || deType == VARIABLE || deType == CONSTANT) {
         return false;
       }
     }
