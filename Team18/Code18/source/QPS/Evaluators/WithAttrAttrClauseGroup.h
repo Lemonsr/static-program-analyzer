@@ -15,6 +15,7 @@ class WithAttrAttrClauseGroup {
  public:
   QpsResultTable evaluate(PKBManager& pkbManager, QpsResultTable resultTable);
   bool addClause(WithClause& clause);
+  bool isEmpty();
 
   friend bool operator==(const WithAttrAttrClauseGroup& first, const WithAttrAttrClauseGroup& second);
   friend bool operator!=(const WithAttrAttrClauseGroup& first, const WithAttrAttrClauseGroup& second);

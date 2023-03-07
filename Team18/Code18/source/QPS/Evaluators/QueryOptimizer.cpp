@@ -10,8 +10,11 @@ spa::ConnectedSynonymClauseGroup spa::QueryOptimizer::groupConnectedComponents(C
 
   while (!connectedClauses.empty()) {
     Clause* clause = connectedClauses.front();
-    connectedSynonymClauseGroup.addClause(*clause);
     connectedClauses.pop();
+    if (visitedClauses.find(clause) != visitedClauses.end()) {
+      continue;
+    }
+    connectedSynonymClauseGroup.addClause(*clause);
     visitedClauses.insert(clause);
 
     for (auto& synonym : clause->getSynonyms()) {
@@ -75,11 +78,12 @@ void spa::QueryOptimizer::initialize(ParsedQuery& parsedQuery) {
     }
 
     if (clause.getFirstArgType() == WithArgumentType::WITH_ATTRIBUTE &&
-      clause.getFirstArgType() == WithArgumentType::WITH_ATTRIBUTE) {
+      clause.getSecondArgType() == WithArgumentType::WITH_ATTRIBUTE) {
       withAttrAttrClauseGroup.addClause(clause);
       continue;
     }
 
+    clausesWithSynonyms.push_back(&clause);
     std::vector<std::string> synonyms = clause.getSynonyms();
     for (auto& synonym : synonyms) {
       synonymClauseMap[synonym].push_back(&clause);
