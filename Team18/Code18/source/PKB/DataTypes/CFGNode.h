@@ -14,7 +14,7 @@ class CFGNode {
   std::unordered_set<CFGNode*> outgoingEdges;
 
  public:
-  explicit CFGNode();
+  CFGNode();
   explicit CFGNode(int lineNumber);
   explicit CFGNode(int lineNumber, bool isDummy);
   explicit CFGNode(int lineNumber, std::string modifiedVariable);

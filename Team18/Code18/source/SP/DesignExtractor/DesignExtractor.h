@@ -35,6 +35,7 @@ class DesignExtractor {
                               std::vector<std::pair<std::string, std::string>> varModifies);
   void addUsesModifies(std::string relArg, std::vector<std::pair<std::string, std::string>> varUses,
                            std::vector<std::pair<std::string, std::string>> varModifies, bool isCallStmt);
+
  public:
   DesignExtractor(PKBManager& pkbManager, std::vector<ProcedureStatement>& procedureList);
   void extractRelationship();

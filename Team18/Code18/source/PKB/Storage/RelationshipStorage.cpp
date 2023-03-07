@@ -1696,7 +1696,7 @@ bool spa::RelationshipStorage::addCfgNode(int lineNumber, spa::CFGNode* cfgNode)
     return false;
   }
 
-  cfgTable.insert(std::make_pair( lineNumber, cfgNode));
+  cfgTable.insert(std::make_pair(lineNumber, cfgNode));
   return true;
 }
 
