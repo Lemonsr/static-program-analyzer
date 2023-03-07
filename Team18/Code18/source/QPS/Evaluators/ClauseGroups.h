@@ -20,7 +20,10 @@ class ClauseGroups {
    ClauseGroups(NoSynonymClauseGroup& noSynonymClauseGroup,
                 std::vector<ConnectedSynonymClauseGroup>& connectedSynonymClauseGroups,
                  WithAttrAttrClauseGroup& withAttrAttrClauseGroup);
-
   QpsResultTable evaluate(PKBManager& pkbManager, std::unordered_map<std::string, DesignEntityType>& usedDeclarations);
+
+  NoSynonymClauseGroup& getNoSynonynmClauseGroup();
+  std::vector<ConnectedSynonymClauseGroup>& getConnectedSynonymClauseGroups();
+  WithAttrAttrClauseGroup& getWithAttrAttrClauseGroup();
 };
 }  // namespace spa

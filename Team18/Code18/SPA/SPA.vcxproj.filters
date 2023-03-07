@@ -216,6 +216,12 @@
     <ClInclude Include="..\source\QPS\Evaluators\QueryOptimizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\WithAttrAttrClauseGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\ClauseGroups.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\PKB\PKB.cpp">
@@ -387,6 +393,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\QPS\Evaluators\QueryOptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\QPS\Evaluators\WithAttrAttrClauseGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\QPS\Evaluators\ClauseGroups.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

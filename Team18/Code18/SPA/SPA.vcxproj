@@ -29,6 +29,7 @@
     <ClInclude Include="..\source\PKB\utils\HashTuple.h" />
     <ClInclude Include="..\source\QPS\Evaluators\CallsEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\CallsStarEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\ClauseGroups.h" />
     <ClInclude Include="..\source\QPS\Evaluators\ConnectedSynonymClauseGroup.h" />
     <ClInclude Include="..\source\QPS\Evaluators\FollowsEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\FollowsStarEvaluator.h" />
@@ -48,6 +49,7 @@
     <ClInclude Include="..\source\QPS\Evaluators\QueryResult.h" />
     <ClInclude Include="..\source\QPS\Evaluators\SimpleEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\UsesEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\WithAttrAttrClauseGroup.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\Clause.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\ParsedQuery.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\PqlAndParser.h" />
@@ -92,6 +94,7 @@
     <ClCompile Include="..\source\PKB\Storage\RelationshipStorage.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\CallsEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\CallsStarEvaluator.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\ClauseGroups.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\ConnectedSynonymClauseGroup.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\FollowsEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\FollowsStarEvaluator.cpp" />
@@ -110,6 +113,7 @@
     <ClCompile Include="..\source\QPS\Evaluators\QueryResult.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\SimpleEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\UsesEvaluator.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\WithAttrAttrClauseGroup.cpp" />
     <ClCompile Include="..\source\QPS\Preprocessor\ParsedQuery.cpp" />
     <ClCompile Include="..\source\QPS\Preprocessor\PqlAndParser.cpp" />
     <ClCompile Include="..\source\QPS\Preprocessor\PqlArgument.cpp" />

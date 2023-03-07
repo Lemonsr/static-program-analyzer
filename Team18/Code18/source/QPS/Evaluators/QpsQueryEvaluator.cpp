@@ -13,32 +13,7 @@ spa::QpsQueryEvaluator::QpsQueryEvaluator(ParsedQuery& parsedQuery) : parsedQuer
 
 spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   QueryOptimizer optimizer;
-  std::pair<NoSynonymClauseGroup, std::vector<ConnectedSynonymClauseGroup>> groups = optimizer.getGroups(parsedQuery);
-
-  if (!groups.first.isEmpty()) {
-    QpsResultTable noSynonymResultTable = groups.first.evaluate(pkbManager);
-    if (noSynonymResultTable.isEmpty()) {
-      return noSynonymResultTable;
-    }
-  }
-
-  std::vector<QpsResultTable> resultTables;
-  for (auto& group : groups.second) {
-    resultTables.push_back(group.evaluate(pkbManager));
-  }
-
-  for (auto& declaration : parsedQuery.getUsedDeclarations()) {
-    std::string declarationSynonym = declaration.first;
-    DesignEntityType declarationType = declaration.second;
-    std::unique_ptr<QpsEvaluator> evaluator = std::make_unique<SimpleEvaluator>(declarationSynonym, declarationType);
-    resultTables.push_back(evaluator->evaluate(pkbManager));
-  }
-
-  QpsResultTable resultTable;
-  resultTable.addHeader("");
-  resultTable.addRow({ QpsValue(0) });
-  for (auto& table : resultTables) {
-    resultTable = resultTable.innerJoin(table);
-  }
-  return resultTable;
+  ClauseGroups groups = optimizer.getGroups(parsedQuery);
+  
+  return groups.evaluate(pkbManager, parsedQuery.getUsedDeclarations());
 }

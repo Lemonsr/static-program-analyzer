@@ -27,12 +27,8 @@ spa::ConnectedSynonymClauseGroup spa::QueryOptimizer::groupConnectedComponents(C
   return connectedSynonymClauseGroup;
 }
 
-std::pair<spa::NoSynonymClauseGroup,
-  std::vector<spa::ConnectedSynonymClauseGroup>> spa::QueryOptimizer::getGroups(ParsedQuery& parsedQuery) {
+spa::ClauseGroups spa::QueryOptimizer::getGroups(ParsedQuery& parsedQuery) {
   initialize(parsedQuery);
-  if (clausesWithSynonyms.empty()) {
-    return { noSynonymClauseGroup, connectedSynonymClauseGroups };
-  }
 
   for (auto& clause : clausesWithSynonyms) {
     if (visitedClauses.find(clause) != visitedClauses.end()) {
@@ -41,7 +37,8 @@ std::pair<spa::NoSynonymClauseGroup,
     connectedSynonymClauseGroups.push_back(groupConnectedComponents(clause));
   }
 
-  return { noSynonymClauseGroup, connectedSynonymClauseGroups };
+  ClauseGroups clauseGroups(noSynonymClauseGroup, connectedSynonymClauseGroups, withAttrAttrClauseGroup);
+  return clauseGroups;
 }
 
 void spa::QueryOptimizer::initialize(ParsedQuery& parsedQuery) {
@@ -67,6 +64,25 @@ void spa::QueryOptimizer::initialize(ParsedQuery& parsedQuery) {
 
     if (clause.getFirstArgType() == spa::SYNONYM) {
       synonymClauseMap[clause.getFirstArgValue()].push_back(&clause);
+    }
+  }
+
+  for (auto& clause : parsedQuery.getWithClauses()) {
+    if (clause.getFirstArgType() == WithArgumentType::WITH_VALUE &&
+      clause.getSecondArgType() == WithArgumentType::WITH_VALUE) {
+      noSynonymClauseGroup.addClause(clause);
+      continue;
+    }
+
+    if (clause.getFirstArgType() == WithArgumentType::WITH_ATTRIBUTE &&
+      clause.getFirstArgType() == WithArgumentType::WITH_ATTRIBUTE) {
+      withAttrAttrClauseGroup.addClause(clause);
+      continue;
+    }
+
+    std::vector<std::string> synonyms = clause.getSynonyms();
+    for (auto& synonym : synonyms) {
+      synonymClauseMap[synonym].push_back(&clause);
     }
   }
 }

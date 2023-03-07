@@ -40,3 +40,15 @@ spa::QpsResultTable spa::ClauseGroups::evaluate(PKBManager& pkbManager,
   resultTable = withAttrAttrClauseGroup.evaluate(pkbManager, resultTable);
   return resultTable;
 }
+
+spa::NoSynonymClauseGroup& spa::ClauseGroups::getNoSynonynmClauseGroup() {
+  return noSynonymClauseGroup;
+}
+
+std::vector<spa::ConnectedSynonymClauseGroup>& spa::ClauseGroups::getConnectedSynonymClauseGroups() {
+  return connectedSynonymClauseGroups;
+}
+
+spa::WithAttrAttrClauseGroup& spa::ClauseGroups::getWithAttrAttrClauseGroup() {
+  return withAttrAttrClauseGroup;
+}

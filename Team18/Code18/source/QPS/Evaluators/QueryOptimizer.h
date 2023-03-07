@@ -11,6 +11,8 @@
 #include "NoSynonymClauseGroup.h"
 #include "ConnectedSynonymClauseGroup.h"
 #include "ParsedQuery.h"
+#include "WithAttrAttrClauseGroup.h"
+#include "ClauseGroups.h"
 
 namespace spa {
 class QueryOptimizer {
@@ -18,12 +20,13 @@ class QueryOptimizer {
   std::unordered_map<std::string, std::vector<Clause*>> synonymClauseMap;
   NoSynonymClauseGroup noSynonymClauseGroup;
   std::vector<ConnectedSynonymClauseGroup> connectedSynonymClauseGroups;
+  WithAttrAttrClauseGroup withAttrAttrClauseGroup;
   std::vector<Clause*> clausesWithSynonyms;
   std::unordered_set<Clause*> visitedClauses;
 
   void initialize(ParsedQuery& parsedQuery);
   ConnectedSynonymClauseGroup groupConnectedComponents(Clause* clause);
  public:
-  std::pair<NoSynonymClauseGroup, std::vector<ConnectedSynonymClauseGroup>> getGroups(ParsedQuery& parsedQuery);
+ ClauseGroups getGroups(ParsedQuery& parsedQuery);
 };
 }  // namespace spa

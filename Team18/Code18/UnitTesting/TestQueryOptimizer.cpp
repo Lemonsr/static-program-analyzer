@@ -29,9 +29,8 @@ namespace UnitTesting {
       expectedNoSynonymClauseGroup.addClause(suchThatClauses[1]);
 
       spa::QueryOptimizer queryOptimizer;
-      std::pair<spa::NoSynonymClauseGroup, std::vector<spa::ConnectedSynonymClauseGroup>> groups =
-        queryOptimizer.getGroups(parsedQuery);
-      spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.first;
+      spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
+      spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.getNoSynonynmClauseGroup();
 
       Assert::IsTrue(noSynonymClauseGroup == expectedNoSynonymClauseGroup);
     }
@@ -65,11 +64,10 @@ namespace UnitTesting {
       expectedConnectedSynonymGroup.addClause(patternClauses[0]);
 
       spa::QueryOptimizer queryOptimizer;
-      std::pair<spa::NoSynonymClauseGroup, std::vector<spa::ConnectedSynonymClauseGroup>> groups =
-        queryOptimizer.getGroups(parsedQuery);
-      std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.second;
+      spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
+      std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.getConnectedSynonymClauseGroups();
 
-      Assert::IsTrue(groups.first.isEmpty());
+      Assert::IsTrue(groups.getNoSynonynmClauseGroup().isEmpty());
       Assert::IsTrue(connectedSynonymGroups.size() == size_t(1));
       Assert::IsTrue(connectedSynonymGroups[0] == expectedConnectedSynonymGroup);
     }
@@ -118,10 +116,9 @@ namespace UnitTesting {
       expectedConnectedSynonymClauseGroup.addClause(patternClauses[0]);
 
       spa::QueryOptimizer queryOptimizer;
-      std::pair<spa::NoSynonymClauseGroup, std::vector<spa::ConnectedSynonymClauseGroup>> groups =
-        queryOptimizer.getGroups(parsedQuery);
-      spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.first;
-      std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.second;
+      spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
+      spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.getNoSynonynmClauseGroup();
+      std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.getConnectedSynonymClauseGroups();
 
       Assert::IsTrue(noSynonymClauseGroup == expectedNoSynonymClauseGroup);
       Assert::IsTrue(connectedSynonymGroups.size() == size_t(1));
@@ -192,10 +189,9 @@ namespace UnitTesting {
       secondConnectedGroup.addClause(patternClauses[1]);
 
       spa::QueryOptimizer queryOptimizer;
-      std::pair<spa::NoSynonymClauseGroup, std::vector<spa::ConnectedSynonymClauseGroup>> groups =
-        queryOptimizer.getGroups(parsedQuery);
-      spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.first;
-      std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.second;
+      spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
+      spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.getNoSynonynmClauseGroup();
+      std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.getConnectedSynonymClauseGroups();
 
       Assert::IsTrue(noSynonymClauseGroup == expectedNoSynonymClauseGroup);
       Assert::IsTrue(connectedSynonymGroups.size() == size_t(2));
@@ -207,10 +203,9 @@ namespace UnitTesting {
       spa::ParsedQuery parsedQuery;
 
       spa::QueryOptimizer queryOptimizer;
-      std::pair<spa::NoSynonymClauseGroup, std::vector<spa::ConnectedSynonymClauseGroup>> groups =
-        queryOptimizer.getGroups(parsedQuery);
-      spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.first;
-      std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.second;
+      spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
+      spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.getNoSynonynmClauseGroup();
+      std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.getConnectedSynonymClauseGroups();
 
       Assert::IsTrue(noSynonymClauseGroup.isEmpty());
       Assert::IsTrue(connectedSynonymGroups.empty());
