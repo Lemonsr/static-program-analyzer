@@ -27,10 +27,6 @@ spa::ConnectedSynonymClauseGroup spa::QueryOptimizer::groupConnectedComponents(C
   return connectedSynonymClauseGroup;
 }
 
-std::unordered_map<std::string, spa::ConnectedSynonymClauseGroup> spa::QueryOptimizer::getSynonymGroupMap() {
-  return std::unordered_map<std::string, ConnectedSynonymClauseGroup>();
-}
-
 std::pair<spa::NoSynonymClauseGroup,
   std::vector<spa::ConnectedSynonymClauseGroup>> spa::QueryOptimizer::getGroups(ParsedQuery& parsedQuery) {
   initialize(parsedQuery);
@@ -50,7 +46,6 @@ std::pair<spa::NoSynonymClauseGroup,
 
 void spa::QueryOptimizer::initialize(ParsedQuery& parsedQuery) {
   for (auto& clause : parsedQuery.getSuchThatClauses()) {
-    // add withClause to noSynoymClauseGroup if got no attribute
     if (clause.getFirstArgType() != SYNONYM && clause.getSecondArgType() != SYNONYM) {
       noSynonymClauseGroup.addClause(clause);
       continue;

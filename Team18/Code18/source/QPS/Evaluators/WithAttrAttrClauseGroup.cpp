@@ -1,7 +1,7 @@
 #include "WithAttrAttrClauseGroup.h"
 
 spa::QpsResultTable spa::WithAttrAttrClauseGroup::evaluate(PKBManager& pkbManager, QpsResultTable resultTable) {
-  return QpsResultTable();
+  return resultTable;
 }
 
 bool spa::WithAttrAttrClauseGroup::addClause(WithClause& clause) {

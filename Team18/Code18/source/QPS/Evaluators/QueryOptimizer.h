@@ -23,7 +23,6 @@ class QueryOptimizer {
 
   void initialize(ParsedQuery& parsedQuery);
   ConnectedSynonymClauseGroup groupConnectedComponents(Clause* clause);
-  std::unordered_map<std::string, ConnectedSynonymClauseGroup> getSynonymGroupMap();
  public:
   std::pair<NoSynonymClauseGroup, std::vector<ConnectedSynonymClauseGroup>> getGroups(ParsedQuery& parsedQuery);
 };
