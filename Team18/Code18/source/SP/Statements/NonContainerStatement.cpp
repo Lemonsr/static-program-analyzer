@@ -103,7 +103,7 @@ void spa::CallStatement::processStatement(spa::PKBManager& pkbManager) {
   pkbManager.addStatementType(stringStmtLineNum, StatementType::CALL);
   pkbManager.addCallsProc(statementLineNum, variableName);
   pkbManager.addRelationship(CALLS, parentProcedureVal, variableName);
-  addCallIfWhileParent(pkbManager);
+  addCallIfWhileParent(pkbManager, variableName);
 }
 
 void spa::AssignStatement::processStatement(spa::PKBManager& pkbManager) {
@@ -200,12 +200,12 @@ void spa::NonContainerStatement::addParentModifies(PKBManager& pkbManager,
   }
 }
 
-void spa::CallStatement::addCallIfWhileParent(PKBManager& pkbManager) {
+void spa::CallStatement::addCallIfWhileParent(PKBManager& pkbManager, std::string childProcName) {
   for (int parent : whileStmtParents) {
-    pkbManager.addCallsContainerParent(parentProcedureVal, std::to_string(parent));
+    pkbManager.addCallsContainerParent(childProcName, std::to_string(parent));
   }
 
   for (int parent : ifStmtParents) {
-    pkbManager.addCallsContainerParent(parentProcedureVal, std::to_string(parent));
+    pkbManager.addCallsContainerParent(childProcName, std::to_string(parent));
   }
 }

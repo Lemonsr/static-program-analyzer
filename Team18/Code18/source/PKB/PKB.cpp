@@ -383,3 +383,7 @@ const spa::QueryResult spa::PKB::getCallsContainerParent(std::string procName) {
 const spa::QueryResult spa::PKB::getCallsProc() {
   return relationshipStorage.getCallsProc();
 }
+
+const spa::QueryResult spa::PKB::getCfgNode(int lineNo) {
+  return relationshipStorage.getCfgNode(lineNo);
+}

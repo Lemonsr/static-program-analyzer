@@ -212,6 +212,7 @@
     <ClCompile Include="TestPqlWithParser.cpp" />
     <ClCompile Include="TestPqlWithSubParser.cpp" />
     <ClCompile Include="TestQpsResultTable.cpp" />
+    <ClCompile Include="TestQpsTranslator.cpp" />
     <ClCompile Include="TestQpsValue.cpp" />
     <ClCompile Include="TestPqlArgumentParser.cpp" />
     <ClCompile Include="TestPqlDeclarationParser.cpp" />
