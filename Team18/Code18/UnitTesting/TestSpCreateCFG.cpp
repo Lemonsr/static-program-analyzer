@@ -413,7 +413,7 @@ public:
       addEdges(lineOne, { lineFour }, { lineTwo });
       addEdges(lineTwo, { lineOne }, { lineThree });
       addEdges(lineThree, { lineTwo }, { lineFour });
-      addEdges(lineFour, { lineThree,lineSix }, { lineOne, lineFive });
+      addEdges(lineFour, { lineThree, lineSix }, { lineOne, lineFive });
       addEdges(lineFive, { lineFour }, { lineSix });
       addEdges(lineSix, { lineFive }, { lineFour });
       std::unordered_set<spa::CFGNode*> expectedNodes = {
@@ -502,7 +502,7 @@ public:
       auto lineThirteen = new spa::CFGNode(13, std::string("g"));
       auto lineFourteen = new spa::CFGNode(14);
       auto dummyNode = spa::CFGNode::createDummyNode();
-      addEdges(lineOne, {}, { lineTwo, lineNine } );
+      addEdges(lineOne, {}, { lineTwo, lineNine });
       addEdges(lineTwo, { lineOne }, { lineThree });
       addEdges(lineThree, { lineTwo }, { lineFour, lineSix });
       addEdges(lineFour, { lineThree }, { lineFive });
@@ -517,7 +517,8 @@ public:
       addEdges(lineThirteen, { lineTen }, { lineFourteen });
       addEdges(lineFourteen, { lineThirteen}, {dummyNode});
       std::unordered_set<spa::CFGNode*> expectedNodes = {
-        lineOne, lineTwo, lineThree, lineFour, lineFive, lineSix, lineSeven, lineEight, lineNine, lineTen, lineEleven, lineTwelve, lineThirteen, lineFourteen
+        lineOne, lineTwo, lineThree, lineFour, lineFive, lineSix, lineSeven, lineEight,
+          lineNine, lineTen, lineEleven, lineTwelve, lineThirteen, lineFourteen
       };
       assertCFGMatch(expectedNodes);
       }
@@ -645,7 +646,7 @@ public:
       auto lineSix = new spa::CFGNode(6);
       auto lineSeven = new spa::CFGNode(7, std::string("g"));
       auto lineEight = new spa::CFGNode(8);
-      addEdges(lineOne, {lineSix,lineEight}, { lineTwo });
+      addEdges(lineOne, {lineSix, lineEight}, { lineTwo });
       addEdges(lineTwo, { lineOne }, { lineThree });
       addEdges(lineThree, { lineTwo }, { lineFour });
       addEdges(lineFour, { lineThree }, { lineFive, lineSeven });
