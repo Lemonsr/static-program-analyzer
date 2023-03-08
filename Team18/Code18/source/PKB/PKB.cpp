@@ -347,6 +347,10 @@ const bool spa::PKB::addCfgNode(int lineNo, spa::CFGNode cfgNode) {
   return relationshipStorage.addCfgNode(lineNo, cfgNode);
 }
 
+const bool spa::PKB::updateCfgNode(int lineNo, spa::CFGNode newCfgNode) {
+  return relationshipStorage.updateCfgNode(lineNo, newCfgNode);
+}
+
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
   PKBQueryArg firstArg, PKBQueryArg secondArg) {
   auto relationshipFunctionItr = relationshipQueryFunctionMap.find({ relationshipType,
