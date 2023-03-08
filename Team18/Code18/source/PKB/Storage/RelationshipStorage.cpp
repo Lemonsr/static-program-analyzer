@@ -1701,7 +1701,7 @@ bool spa::RelationshipStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) 
 }
 
 bool spa::RelationshipStorage::updateCfgNode(int lineNumber, spa::CFGNode newCfgNode) {
-  if (cfgTable.find(lineNumber) != cfgTable.end()) {
+  if (cfgTable.find(lineNumber) == cfgTable.end()) {
     return false;
   }
 
