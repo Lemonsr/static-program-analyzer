@@ -35,6 +35,17 @@ public:
     Assert::IsTrue(relationshipStorage.addCfgNode(4, cfgNodeTestTwo));
   }
 
+  TEST_METHOD(TestUpdateCfgNode) {
+    spa::RelationshipStorage relationshipStorage;
+    relationshipStorage.setCfgTable(cfgTable);
+    spa::CFGNode cfgNodeTestOne(3);
+    spa::CFGNode cfgNodeTestTwo(4);
+    spa::CFGNode cfgNodeTestThree(5);
+    Assert::IsTrue(relationshipStorage.updateCfgNode(1, cfgNodeTestOne));
+    Assert::IsFalse(relationshipStorage.updateCfgNode(3, cfgNodeTestTwo));
+    Assert::IsTrue(relationshipStorage.updateCfgNode(1, cfgNodeTestThree));
+  }
+
   TEST_METHOD(TestGetCfgNode) {
     spa::RelationshipStorage relationshipStorage;
     relationshipStorage.setCfgTable(cfgTable);

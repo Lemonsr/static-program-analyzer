@@ -1700,6 +1700,15 @@ bool spa::RelationshipStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) 
   return true;
 }
 
+bool spa::RelationshipStorage::updateCfgNode(int lineNumber, spa::CFGNode newCfgNode) {
+  if (cfgTable.find(lineNumber) == cfgTable.end()) {
+    return false;
+  }
+
+  cfgTable[lineNumber] = newCfgNode;
+  return true;
+}
+
 spa::QueryResult spa::RelationshipStorage::getCfgNode(int lineNumber) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
