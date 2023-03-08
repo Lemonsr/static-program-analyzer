@@ -90,12 +90,6 @@ TEST_CLASS(TestSpCreateCFG) {
         Assert::IsTrue(expected->equal(test));
         Assert::IsTrue(expected->getIncomingEdges().size() == test->getIncomingEdges().size());
         Assert::IsTrue(expected->getOutgoingEdges().size() == test->getOutgoingEdges().size());
-        //for (spa::CFGNode* node : expected->getIncomingEdges()) {
-        //    std::cout << node->getLineNumber();
-        //}
-        //for (spa::CFGNode* node : test->getIncomingEdges()) {
-        //    std::cout << node->getLineNumber();
-        //}
         std::vector<spa::CFGNode*> expectedInEdgeVec = convertToSortedVector(
           expected->getIncomingEdges());
         std::vector<spa::CFGNode*> testInEdgeVec = convertToSortedVector(test->getIncomingEdges());
