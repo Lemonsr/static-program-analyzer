@@ -188,6 +188,9 @@
     <ClCompile Include="TestPqlWithSubParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestQueryOptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TestQpsTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
