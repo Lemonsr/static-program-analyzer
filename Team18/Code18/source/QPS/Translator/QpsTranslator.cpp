@@ -29,6 +29,9 @@ std::list<std::string> spa::QpsTranslator::translate(SelectClauseType selectType
     return translatedResult;
   }
 
+  if (result.isEmpty()) {
+    return {};
+  }
   std::vector<QpsResultRow> resultRows = result.getColumns(selectColumns);
   for (const auto& row : resultRows) {
     translatedResult.push_back(rowToString(row));
