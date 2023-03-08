@@ -188,5 +188,8 @@
     <ClCompile Include="TestPqlWithSubParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestQpsTranslator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
