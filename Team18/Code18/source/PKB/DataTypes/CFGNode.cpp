@@ -11,11 +11,6 @@ spa::CFGNode::CFGNode(int lineNumber) {
   this->lineNumber = lineNumber;
 }
 
-spa::CFGNode::CFGNode(int lineNumber, bool isDummy) {
-  this->lineNumber = lineNumber;
-  this->isDummy = isDummy;
-}
-
 spa::CFGNode::CFGNode(int lineNumber, std::string variable) {
   this->lineNumber = lineNumber;
   this->modifiedVariables.insert(variable);

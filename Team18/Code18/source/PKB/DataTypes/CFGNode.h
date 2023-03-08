@@ -16,7 +16,6 @@ class CFGNode {
  public:
   CFGNode();
   explicit CFGNode(int lineNumber);
-  explicit CFGNode(int lineNumber, bool isDummy);
   explicit CFGNode(int lineNumber, std::string modifiedVariable);
   explicit CFGNode(int lineNumber, std::unordered_set<std::string> variables);
   static CFGNode* createDummyNode();
