@@ -21,6 +21,7 @@ class PKBManager {
   virtual const bool addStatementType(std::string lineNo, StatementType statementType) = 0;
   virtual const bool addStatementProc(std::string lineNo, std::string procName) = 0;
   virtual const bool addCfgNode(int lineNo, spa::CFGNode cfgNode) = 0;
+  virtual const bool deleteCfgNode(int lineNo) = 0;
 
   virtual const QueryResult getRelationship(RelationshipType relationshipType,
                                             PKBQueryArg firstArg, PKBQueryArg secondArg) = 0;

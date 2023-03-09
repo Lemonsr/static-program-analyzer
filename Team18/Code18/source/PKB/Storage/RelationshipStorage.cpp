@@ -1709,6 +1709,15 @@ bool spa::RelationshipStorage::updateCfgNode(int lineNumber, spa::CFGNode newCfg
   return true;
 }
 
+bool spa::RelationshipStorage::deleteCfgNode(int lineNumber) {
+  if (cfgTable.find(lineNumber) == cfgTable.end()) {
+    return false;
+  }
+
+  cfgTable.erase(lineNumber);
+  return true;
+}
+
 spa::QueryResult spa::RelationshipStorage::getCfgNode(int lineNumber) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
