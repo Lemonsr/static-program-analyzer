@@ -6,7 +6,7 @@
 
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "RelationshipStorage.h"
+#include "CFGStorage.h"
 #include "CFGNode.h"
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
@@ -26,54 +26,54 @@ public:
   }
 
   TEST_METHOD(TestAddCfgNode) {
-    spa::RelationshipStorage relationshipStorage;
-    relationshipStorage.setCfgTable(cfgTable);
+    spa::CFGStorage cfgStorage;
+    cfgStorage.setCfgTable(cfgTable);
     spa::CFGNode cfgNodeTestOne(3);
     spa::CFGNode cfgNodeTestTwo(4);
-    Assert::IsTrue(relationshipStorage.addCfgNode(3, cfgNodeTestOne));
-    Assert::IsFalse(relationshipStorage.addCfgNode(3, cfgNodeTestOne));
-    Assert::IsTrue(relationshipStorage.addCfgNode(4, cfgNodeTestTwo));
+    Assert::IsTrue(cfgStorage.addCfgNode(3, cfgNodeTestOne));
+    Assert::IsFalse(cfgStorage.addCfgNode(3, cfgNodeTestOne));
+    Assert::IsTrue(cfgStorage.addCfgNode(4, cfgNodeTestTwo));
   }
 
   TEST_METHOD(TestUpdateCfgNode) {
-    spa::RelationshipStorage relationshipStorage;
-    relationshipStorage.setCfgTable(cfgTable);
+    spa::CFGStorage cfgStorage;
+    cfgStorage.setCfgTable(cfgTable);
     spa::CFGNode cfgNodeTestOne(3);
     spa::CFGNode cfgNodeTestTwo(4);
     spa::CFGNode cfgNodeTestThree(5);
-    Assert::IsTrue(relationshipStorage.updateCfgNode(1, cfgNodeTestOne));
-    Assert::IsFalse(relationshipStorage.updateCfgNode(3, cfgNodeTestTwo));
-    Assert::IsTrue(relationshipStorage.updateCfgNode(1, cfgNodeTestThree));
+    Assert::IsTrue(cfgStorage.updateCfgNode(1, cfgNodeTestOne));
+    Assert::IsFalse(cfgStorage.updateCfgNode(3, cfgNodeTestTwo));
+    Assert::IsTrue(cfgStorage.updateCfgNode(1, cfgNodeTestThree));
   }
 
   TEST_METHOD(TestDeleteCfgNode) {
-    spa::RelationshipStorage relationshipStorage;
-    relationshipStorage.setCfgTable(cfgTable);
+    spa::CFGStorage cfgStorage;
+    cfgStorage.setCfgTable(cfgTable);
     spa::CFGNode cfgNodeTestOne(3);
-    Assert::IsTrue(relationshipStorage.deleteCfgNode(1));
-    Assert::IsFalse(relationshipStorage.deleteCfgNode(3));
-    Assert::IsFalse(relationshipStorage.deleteCfgNode(1));
-    Assert::IsTrue(relationshipStorage.addCfgNode(1, cfgNodeTestOne));
+    Assert::IsTrue(cfgStorage.deleteCfgNode(1));
+    Assert::IsFalse(cfgStorage.deleteCfgNode(3));
+    Assert::IsFalse(cfgStorage.deleteCfgNode(1));
+    Assert::IsTrue(cfgStorage.addCfgNode(1, cfgNodeTestOne));
   }
 
 
   TEST_METHOD(TestGetCfgNode) {
-    spa::RelationshipStorage relationshipStorage;
-    relationshipStorage.setCfgTable(cfgTable);
+    spa::CFGStorage cfgStorage;
+    cfgStorage.setCfgTable(cfgTable);
     std::vector<spa::CFGNode> expected = { cfgNodeOne };
 
-    spa::QueryResult queryResult = relationshipStorage.getCfgNode(1);
+    spa::QueryResult queryResult = cfgStorage.getCfgNode(1);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getCfgNodes());
 
-    queryResult = relationshipStorage.getCfgNode(2);
+    queryResult = cfgStorage.getCfgNode(2);
 
     expected = { cfgNodeTwo };
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getCfgNodes());
 
-    queryResult = relationshipStorage.getCfgNode(3);
+    queryResult = cfgStorage.getCfgNode(3);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(queryResult.getCfgNodes().empty());
