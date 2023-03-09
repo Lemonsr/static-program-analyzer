@@ -15,11 +15,11 @@ namespace UnitTesting {
   TEST_CLASS(TestPKBCfg) {
     spa::CFGNode cfgNodeOne;
     spa::CFGNode cfgNodeTwo;
-    std::unordered_map<int, spa::CFGNode> cfgTable;
-
+    std::unordered_map<int, spa::CFGNode> cfgNodeTable;
+    
 public:
   TestPKBCfg() : cfgNodeOne(1), cfgNodeTwo(2) {
-    cfgTable = {
+    cfgNodeTable = {
       {1, cfgNodeOne},
       {2, cfgNodeTwo}
     };
@@ -27,7 +27,7 @@ public:
 
   TEST_METHOD(TestAddCfgNode) {
     spa::CFGStorage cfgStorage;
-    cfgStorage.setCfgTable(cfgTable);
+    cfgStorage.setCfgNodeTable(cfgNodeTable);
     spa::CFGNode cfgNodeTestOne(3);
     spa::CFGNode cfgNodeTestTwo(4);
     Assert::IsTrue(cfgStorage.addCfgNode(3, cfgNodeTestOne));
@@ -37,7 +37,7 @@ public:
 
   TEST_METHOD(TestUpdateCfgNode) {
     spa::CFGStorage cfgStorage;
-    cfgStorage.setCfgTable(cfgTable);
+    cfgStorage.setCfgNodeTable(cfgNodeTable);
     spa::CFGNode cfgNodeTestOne(3);
     spa::CFGNode cfgNodeTestTwo(4);
     spa::CFGNode cfgNodeTestThree(5);
@@ -48,7 +48,7 @@ public:
 
   TEST_METHOD(TestDeleteCfgNode) {
     spa::CFGStorage cfgStorage;
-    cfgStorage.setCfgTable(cfgTable);
+    cfgStorage.setCfgNodeTable(cfgNodeTable);
     spa::CFGNode cfgNodeTestOne(3);
     Assert::IsTrue(cfgStorage.deleteCfgNode(1));
     Assert::IsFalse(cfgStorage.deleteCfgNode(3));
@@ -56,10 +56,9 @@ public:
     Assert::IsTrue(cfgStorage.addCfgNode(1, cfgNodeTestOne));
   }
 
-
   TEST_METHOD(TestGetCfgNode) {
     spa::CFGStorage cfgStorage;
-    cfgStorage.setCfgTable(cfgTable);
+    cfgStorage.setCfgNodeTable(cfgNodeTable);
     std::vector<spa::CFGNode> expected = { cfgNodeOne };
 
     spa::QueryResult queryResult = cfgStorage.getCfgNode(1);

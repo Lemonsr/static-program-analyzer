@@ -179,27 +179,7 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
       &RelationshipStorage::getCallsStarProcedureUnderscore},
     {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
-      &RelationshipStorage::getCallsStarProcedureProcedure},
-
-    // Next
-    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getNextLineLine},
-    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getNextLineStatement},
-    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getNextStatementLine},
-    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getNextLineUnderscore},
-    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getNextUnderscoreLine},
-    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getNextStatementStatement},
-    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getNextStatementUnderscore},
-    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getNextUnderscoreStatement},
-    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getNextUnderscoreUnderscore},
+      &RelationshipStorage::getCallsStarProcedureProcedure}
   };
 }
 
@@ -215,7 +195,7 @@ void spa::PKB::createPatternQueryFunctionMap() {
   patternQueryFunctionMap = {
     {PKBQueryArgType::UNDERSCORE, &PatternStorage::getAssignUnderscore},
     {PKBQueryArgType::VARIABLE, &PatternStorage::getAssignVar},
-    {PKBQueryArgType::NAME, &PatternStorage::getAssignVarName},
+    {PKBQueryArgType::NAME, &PatternStorage::getAssignVarName}
   };
 }
 
@@ -226,7 +206,31 @@ void spa::PKB::createPatternContainerQueryFunctionMap() {
     {{DesignEntityType::IF, PKBQueryArgType::NAME }, &PatternStorage::getPatternIfVarName},
     {{DesignEntityType::WHILE, PKBQueryArgType::UNDERSCORE }, &PatternStorage::getPatternWhileUnderscore},
     {{DesignEntityType::WHILE, PKBQueryArgType::VARIABLE }, &PatternStorage::getPatternWhileVar},
-    {{DesignEntityType::WHILE, PKBQueryArgType::NAME }, &PatternStorage::getPatternWhileVarName},
+    {{DesignEntityType::WHILE, PKBQueryArgType::NAME }, &PatternStorage::getPatternWhileVarName}
+  };
+}
+
+void spa::PKB::createCfgQueryFunctionMap() {
+  cfgQueryFunctionMap = {
+    // Next
+    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &CFGStorage::getNextLineLine},
+    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &CFGStorage::getNextLineStatement},
+    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &CFGStorage::getNextStatementLine},
+    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &CFGStorage::getNextLineUnderscore},
+    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &CFGStorage::getNextUnderscoreLine},
+    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &CFGStorage::getNextStatementStatement},
+    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &CFGStorage::getNextStatementUnderscore},
+    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &CFGStorage::getNextUnderscoreStatement},
+    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &CFGStorage::getNextUnderscoreUnderscore}
   };
 }
 
@@ -235,6 +239,7 @@ spa::PKB::PKB() {
   createEntityQueryFunctionMap();
   createPatternQueryFunctionMap();
   createPatternContainerQueryFunctionMap();
+  createCfgQueryFunctionMap();
 }
 
 const bool spa::PKB::addRelationship(RelationshipType relationshipType,
@@ -271,7 +276,7 @@ const bool spa::PKB::addRelationship(RelationshipType relationshipType,
     return relationshipStorage.addCallsStar(firstArg, secondArg);
   }
   case NEXT: {
-    return relationshipStorage.addNext(firstArg, secondArg);
+    return cfgStorage.addNext(firstArg, secondArg);
   }
   default: {
     return false;
@@ -344,15 +349,15 @@ const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure)
 }
 
 const bool spa::PKB::addCfgNode(int lineNo, spa::CFGNode cfgNode) {
-  return relationshipStorage.addCfgNode(lineNo, cfgNode);
+  return cfgStorage.addCfgNode(lineNo, cfgNode);
 }
 
 const bool spa::PKB::updateCfgNode(int lineNo, spa::CFGNode newCfgNode) {
-  return relationshipStorage.updateCfgNode(lineNo, newCfgNode);
+  return cfgStorage.updateCfgNode(lineNo, newCfgNode);
 }
 
 const bool spa::PKB::deleteCfgNode(int lineNo) {
-  return relationshipStorage.deleteCfgNode(lineNo);
+  return cfgStorage.deleteCfgNode(lineNo);
 }
 
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
@@ -393,5 +398,5 @@ const spa::QueryResult spa::PKB::getCallsProc() {
 }
 
 const spa::QueryResult spa::PKB::getCfgNode(int lineNo) {
-  return relationshipStorage.getCfgNode(lineNo);
+  return cfgStorage.getCfgNode(lineNo);
 }

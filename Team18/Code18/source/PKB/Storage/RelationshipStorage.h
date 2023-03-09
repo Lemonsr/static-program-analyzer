@@ -130,17 +130,6 @@ class RelationshipStorage {
   QueryResult getCallsStarProcedureUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getCallsStarProcedureProcedure(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
-  bool addNext(std::string firstLineNo, std::string secondLineNo);
-  QueryResult getNextLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getNextLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getNextStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getNextLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getNextUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getNextStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getNextStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getNextUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
-  QueryResult getNextUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
-
   bool addCallsContainerParent(std::string procName, std::string lineNo);
   QueryResult getCallsContainerParent(std::string procName);
 
@@ -157,7 +146,6 @@ class RelationshipStorage {
   void setModifiesProcTable(std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable);
   void setCallsTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsTable);
   void setCallsStarTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable);
-  void setNextTable(std::unordered_map<int, std::unordered_set<int>> nextTable);
   void setCallsContainerParentsTable(std::unordered_map<std::string,
                                                         std::unordered_set<int>> callsContainerParentsTable);
   void setCallsProcTable(std::unordered_map<int, std::string> statementTypeTable);

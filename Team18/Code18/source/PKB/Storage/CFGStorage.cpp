@@ -178,29 +178,29 @@ spa::QueryResult spa::CFGStorage::getNextUnderscoreUnderscore(PKBQueryArg firstA
 }
 
 bool spa::CFGStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
-  if (cfgTable.find(lineNumber) != cfgTable.end()) {
+  if (cfgNodeTable.find(lineNumber) != cfgNodeTable.end()) {
     return false;
   }
 
-  cfgTable.insert({ lineNumber, cfgNode });
+  cfgNodeTable.insert({ lineNumber, cfgNode });
   return true;
 }
 
 bool spa::CFGStorage::updateCfgNode(int lineNumber, spa::CFGNode newCfgNode) {
-  if (cfgTable.find(lineNumber) == cfgTable.end()) {
+  if (cfgNodeTable.find(lineNumber) == cfgNodeTable.end()) {
     return false;
   }
 
-  cfgTable[lineNumber] = newCfgNode;
+  cfgNodeTable[lineNumber] = newCfgNode;
   return true;
 }
 
 bool spa::CFGStorage::deleteCfgNode(int lineNumber) {
-  if (cfgTable.find(lineNumber) == cfgTable.end()) {
+  if (cfgNodeTable.find(lineNumber) == cfgNodeTable.end()) {
     return false;
   }
 
-  cfgTable.erase(lineNumber);
+  cfgNodeTable.erase(lineNumber);
   return true;
 }
 
@@ -210,11 +210,11 @@ spa::QueryResult spa::CFGStorage::getCfgNode(int lineNumber) {
 
   std::vector<spa::CFGNode> cfgNodes;
   queryResult.setCfgNodes(cfgNodes);
-  if (cfgTable.find(lineNumber) == cfgTable.end()) {
+  if (cfgNodeTable.find(lineNumber) == cfgNodeTable.end()) {
     return queryResult;
   }
 
-  cfgNodes.push_back(cfgTable[lineNumber]);
+  cfgNodes.push_back(cfgNodeTable[lineNumber]);
   queryResult.setCfgNodes(cfgNodes);
   return queryResult;
 }
@@ -223,6 +223,6 @@ void spa::CFGStorage::setNextTable(std::unordered_map<int, std::unordered_set<in
   this->nextTable = nextTable;
 }
 
-void spa::CFGStorage::setCfgTable(std::unordered_map<int, spa::CFGNode> cfgTable) {
-  this->cfgTable = cfgTable;
+void spa::CFGStorage::setCfgNodeTable(std::unordered_map<int, spa::CFGNode> cfgNodeTable) {
+  this->cfgNodeTable = cfgNodeTable;
 }
