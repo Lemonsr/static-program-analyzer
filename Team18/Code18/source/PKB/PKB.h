@@ -59,6 +59,7 @@ class PKB : public PKBManager {
   const bool addStatementProc(std::string lineNo, std::string procName);
   const bool addCfgNode(int lineNo, spa::CFGNode cfgNode);
   const bool updateCfgNode(int lineNo, spa::CFGNode newCfgNode);
+  const bool deleteCfgNode(int lineNo);
   const QueryResult getRelationship(RelationshipType relationshipType,
                                     PKBQueryArg firstArg, PKBQueryArg secondArg);
   const QueryResult getEntity(DesignEntityType entityType);
