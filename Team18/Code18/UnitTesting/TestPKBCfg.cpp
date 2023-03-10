@@ -7,6 +7,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "CFGStorage.h"
+#include "RelationshipStorage.h"
 #include "CFGNode.h"
 
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
@@ -16,6 +17,7 @@ namespace UnitTesting {
     spa::CFGNode cfgNodeOne;
     spa::CFGNode cfgNodeTwo;
     std::unordered_map<int, spa::CFGNode> cfgNodeTable;
+    spa::RelationshipStorage relationshipStorage;
     
 public:
   TestPKBCfg() : cfgNodeOne(1), cfgNodeTwo(2) {
@@ -26,30 +28,35 @@ public:
   }
 
   TEST_METHOD(TestAddCfgNode) {
-    spa::CFGStorage cfgStorage;
+    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setCfgNodeTable(cfgNodeTable);
+
     spa::CFGNode cfgNodeTestOne(3);
     spa::CFGNode cfgNodeTestTwo(4);
+
     Assert::IsTrue(cfgStorage.addCfgNode(3, cfgNodeTestOne));
     Assert::IsFalse(cfgStorage.addCfgNode(3, cfgNodeTestOne));
     Assert::IsTrue(cfgStorage.addCfgNode(4, cfgNodeTestTwo));
   }
 
   TEST_METHOD(TestUpdateCfgNode) {
-    spa::CFGStorage cfgStorage;
+    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setCfgNodeTable(cfgNodeTable);
+
     spa::CFGNode cfgNodeTestOne(3);
     spa::CFGNode cfgNodeTestTwo(4);
     spa::CFGNode cfgNodeTestThree(5);
+
     Assert::IsTrue(cfgStorage.updateCfgNode(1, cfgNodeTestOne));
     Assert::IsFalse(cfgStorage.updateCfgNode(3, cfgNodeTestTwo));
     Assert::IsTrue(cfgStorage.updateCfgNode(1, cfgNodeTestThree));
   }
 
   TEST_METHOD(TestDeleteCfgNode) {
-    spa::CFGStorage cfgStorage;
+    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setCfgNodeTable(cfgNodeTable);
     spa::CFGNode cfgNodeTestOne(3);
+
     Assert::IsTrue(cfgStorage.deleteCfgNode(1));
     Assert::IsFalse(cfgStorage.deleteCfgNode(3));
     Assert::IsFalse(cfgStorage.deleteCfgNode(1));
@@ -57,7 +64,7 @@ public:
   }
 
   TEST_METHOD(TestGetCfgNode) {
-    spa::CFGStorage cfgStorage;
+    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setCfgNodeTable(cfgNodeTable);
     std::vector<spa::CFGNode> expected = { cfgNodeOne };
 

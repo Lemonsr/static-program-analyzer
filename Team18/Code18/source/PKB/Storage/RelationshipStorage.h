@@ -29,6 +29,7 @@ class RelationshipStorage {
 
  public:
   bool addStatementType(std::string lineNo, StatementType statementType);
+  StatementType& getStatementType(int lineNo);
   bool addStatementProc(std::string lineNo, std::string procName);
   QueryResult getStatements(std::optional<StatementType> statementType);
 

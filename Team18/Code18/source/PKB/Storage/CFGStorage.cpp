@@ -1,10 +1,14 @@
 #include "CFGStorage.h"
 #include "PKBQueryTypes.h"
+#include "RelationshipStorage.h"
 
 #include <string>
 #include <vector>
 #include <utility>
 #include <unordered_set>
+
+spa::CFGStorage::CFGStorage(RelationshipStorage& relationshipStorage): relationshipStorage(relationshipStorage) {
+}
 
 bool spa::CFGStorage::addNext(std::string firstLineNo, std::string secondLineNo) {
   int firstLineNumber = std::stoi(firstLineNo);
@@ -46,7 +50,7 @@ spa::QueryResult spa::CFGStorage::getNextLineStatement(PKBQueryArg firstArg, PKB
     return queryResult;
   }
   for (auto& secondLineNumber : nextTable[firstLineNumber]) {
-    if (stmt.statementType && statementTypeTable[secondLineNumber] != stmt.statementType) {
+    if (stmt.statementType && relationshipStorage.getStatementType(secondLineNumber) != stmt.statementType) {
       continue;
     }
     lineNumberLineNumberPairs.push_back({ firstLineNumber, secondLineNumber });
@@ -64,7 +68,7 @@ spa::QueryResult spa::CFGStorage::getNextStatementLine(PKBQueryArg firstArg, PKB
 
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
   for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
-    if ((stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) ||
+    if ((stmt.statementType && relationshipStorage.getStatementType(itr->first) != stmt.statementType) ||
       itr->second.find(lineNumber) == itr->second.end()) {
       continue;
     }
@@ -114,11 +118,11 @@ spa::QueryResult spa::CFGStorage::getNextStatementStatement(PKBQueryArg firstArg
 
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
   for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
-    if (firstStmt.statementType && statementTypeTable[itr->first] != firstStmt.statementType) {
+    if (firstStmt.statementType && relationshipStorage.getStatementType(itr->first) != firstStmt.statementType) {
       continue;
     }
     for (auto& itr2 = nextTable[itr->first].begin(); itr2 != nextTable[itr->first].end(); itr2++) {
-      if (secondStmt.statementType && statementTypeTable[*itr2] != secondStmt.statementType) {
+      if (secondStmt.statementType && relationshipStorage.getStatementType(*itr2) != secondStmt.statementType) {
         continue;
       }
       lineNumberLineNumberPairs.push_back({ itr->first, *itr2 });
@@ -137,7 +141,7 @@ spa::QueryResult spa::CFGStorage::getNextStatementUnderscore(PKBQueryArg firstAr
 
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
   for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
-    if (firstStmt.statementType && statementTypeTable[itr->first] != firstStmt.statementType) {
+    if (firstStmt.statementType && relationshipStorage.getStatementType(itr->first) != firstStmt.statementType) {
       continue;
     }
     for (auto& itr2 = nextTable[itr->first].begin(); itr2 != nextTable[itr->first].end(); itr2++) {
@@ -158,7 +162,7 @@ spa::QueryResult spa::CFGStorage::getNextUnderscoreStatement(PKBQueryArg firstAr
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
   for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
     for (auto& lineNumber : nextTable[itr->first]) {
-      if (secondStmt.statementType && statementTypeTable[lineNumber] != secondStmt.statementType) {
+      if (secondStmt.statementType && relationshipStorage.getStatementType(lineNumber) != secondStmt.statementType) {
         continue;
       }
       lineNumberLineNumberPairs.push_back({ itr->first, lineNumber });
