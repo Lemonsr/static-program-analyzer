@@ -1,0 +1,61 @@
+procedure A {
+  call Aextra;
+  if (y == 0) then {
+	read y;
+  } else {
+  	if (x != 0) then {
+	  call F;
+	} else {
+	  call B;
+	}
+	call C;
+  }
+  call Bextra;
+}
+
+procedure B {
+  call C;
+}
+
+procedure C {
+  read x;
+  call F;
+}
+
+procedure D {
+  print total;
+  call E;
+}
+
+procedure E {
+  total = total + 1;
+}
+
+procedure F {
+  z = x * y;
+  call G;
+}
+
+procedure G {
+  print z;
+}
+
+procedure Aextra {
+  Aextra = Uses + Modifies;
+  Aextrainc = read + print;
+  read Aextra;
+  print Aextra;
+}
+
+procedure Bextra {
+  Bextra = Uses + Modifies;
+  Bextrainc = read + print;
+  Bextrainc2 = call + if;
+  read Bextra;
+  print Bextra;
+  if (Bextra == call) then {
+	call Aextra;
+  } else {
+	Aextra = wontCall;
+  }
+}
