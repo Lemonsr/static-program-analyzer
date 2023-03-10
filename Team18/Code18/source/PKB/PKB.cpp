@@ -234,7 +234,7 @@ void spa::PKB::createCfgQueryFunctionMap() {
   };
 }
 
-spa::PKB::PKB() : cfgStorage(relationshipStorage) {
+spa::PKB::PKB() {
   createRelationshipQueryFunctionMap();
   createEntityQueryFunctionMap();
   createPatternQueryFunctionMap();

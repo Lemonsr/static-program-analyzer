@@ -16,10 +16,6 @@ bool spa::RelationshipStorage::addStatementType(std::string lineNo, StatementTyp
   return true;
 }
 
-spa::StatementType& spa::RelationshipStorage::getStatementType(int lineNo) {
-  return statementTypeTable[lineNo];
-}
-
 bool spa::RelationshipStorage::addStatementProc(std::string lineNo, std::string procName) {
   int lineNumber = std::stoi(lineNo);
   if (statementProcTable.find(lineNumber) != statementProcTable.end()) {

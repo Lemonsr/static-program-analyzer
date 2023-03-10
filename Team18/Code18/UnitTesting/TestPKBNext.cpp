@@ -37,11 +37,10 @@ namespace UnitTesting {
       {8, spa::StatementType::PRINT},
       {9, spa::StatementType::ASSIGN}
     };
-
 public:
   TEST_METHOD(TestAddNext) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
 
@@ -51,8 +50,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextLineLine) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
 
@@ -77,8 +76,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextLineStatement) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
     std::vector<std::pair<int, int>> expected = { {7, 8}, {7, 9} };
@@ -115,8 +114,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextStatementLine) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
     std::vector<std::pair<int, int>> expected = { {7, 9} };
@@ -144,8 +143,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextLineUnderscore) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
 
@@ -164,8 +163,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextUnderscoreLine) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
 
@@ -184,8 +183,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextStatementStatement) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
     std::vector<std::pair<int, int>> expected = { {3, 5}, {7, 8} };
@@ -214,8 +213,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextStatementUnderscore) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
     std::vector<std::pair<int, int>> expected = { {3, 4}, {3, 5} };
@@ -243,8 +242,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextUnderscoreStatement) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
     std::vector<std::pair<int, int>> expected = { {3, 5}, {7, 8} };
@@ -272,8 +271,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextUnderscoreUnderscore) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
 
@@ -290,8 +289,8 @@ public:
   }
 
   TEST_METHOD(TestGetNextGeneralStatementStatement) {
+    spa::CFGStorage cfgStorage;
     spa::RelationshipStorage relationshipStorage;
-    spa::CFGStorage cfgStorage(relationshipStorage);
     cfgStorage.setNextTable(nextTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
     std::vector<std::pair<int, int>> expected = { {2, 3}, {4, 7}, {6, 7} };
