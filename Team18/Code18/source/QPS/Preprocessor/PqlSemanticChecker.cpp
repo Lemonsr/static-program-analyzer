@@ -1,6 +1,8 @@
 #include "PqlSemanticChecker.h"
 
 #include <optional>
+#include <string>
+#include <unordered_map>
 
 bool spa::PqlSemanticChecker::isSemanticallyValid(ParsedQuery& parsedQuery) {
   for (auto& p : parsedQuery.getDeclarationsCount()) {
@@ -19,6 +21,11 @@ bool spa::PqlSemanticChecker::isSemanticallyValid(ParsedQuery& parsedQuery) {
     }
   }
   for (auto& clause : parsedQuery.getPatternClauses()) {
+    if (!isValid(clause)) {
+      return false;
+    }
+  }
+  for (auto& clause : parsedQuery.getWithClauses()) {
     if (!isValid(clause)) {
       return false;
     }
@@ -44,6 +51,8 @@ bool spa::PqlSemanticChecker::isValid(SuchThatClause& suchThatClause) {
   case CALLS:
   case CALLS_STAR:
     return checkCallsArguments(firstArg, secondArg);
+  case NEXT:
+    return checkNextArguments(firstArg, secondArg);
   }
   return false;
 }
@@ -83,6 +92,15 @@ bool spa::PqlSemanticChecker::isValid(PatternClause& patternClause) {
       return false;
   }
   return true;
+}
+
+bool spa::PqlSemanticChecker::isValid(WithClause& withClause) {
+  WithArgument firstArg = withClause.getFirstArg();
+  WithArgument secondArg = withClause.getSecondArg();
+  QpsValueType firstArgType = getWithArgumentType(firstArg);
+  QpsValueType secondArgType = getWithArgumentType(secondArg);
+
+  return firstArgType == secondArgType;
 }
 
 bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
@@ -186,4 +204,38 @@ bool spa::PqlSemanticChecker::checkCallsArguments(PqlArgument& firstArg, PqlArgu
   }
 
   return true;
+}
+
+bool spa::PqlSemanticChecker::checkNextArguments(PqlArgument& firstArg, PqlArgument& secondArg) {
+  for (PqlArgument arg : { firstArg, secondArg }) {
+    ArgumentType argType = arg.getType();
+    if (argType == LITERAL_STRING) {
+      return false;
+    }
+
+    if (argType == SYNONYM) {
+      DesignEntityType deType = arg.getDesignEntity().value();
+      if (deType == PROCEDURE || deType == VARIABLE || deType == CONSTANT) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+spa::QpsValueType spa::PqlSemanticChecker::getWithArgumentType(WithArgument& withArgument) {
+  std::unordered_map<std::string, QpsValueType> attributeNameTypeMap = {
+    {"stmt#", QpsValueType::INTEGER},
+    {"value", QpsValueType::INTEGER},
+    {"procName", QpsValueType::STRING},
+    {"varName", QpsValueType::STRING},
+  };
+
+  if (withArgument.getType() == WithArgumentType::WITH_VALUE) {
+    return withArgument.getValue().getType();
+  }
+
+  std::string attribute = withArgument.getAttribute();
+  return attributeNameTypeMap[attribute.substr(attribute.find('.') + 1)];
 }
