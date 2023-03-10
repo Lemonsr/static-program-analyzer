@@ -20,7 +20,7 @@ bool spa::SpCyclicValidator::validateCyclic() {
 
         std::unordered_set<std::string> currentSeen = {};
         if (dfsCheckCyclicCall(parent, &currentSeen, &visited)) {
-            throw std::exception("Cyclic call detected");
+            return true;
         }
     }
     return false;
