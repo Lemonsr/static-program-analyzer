@@ -2,10 +2,11 @@
 
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "ParsedQuery.h"
 
-const std::unordered_map<std::string, spa::RelationshipType> relationshipMap{
+const std::unordered_map<std::string, spa::RelationshipType> relationshipMap {
   {"Follows", spa::FOLLOWS},
   {"Follows*", spa::FOLLOWS_STAR},
   {"Parent", spa::PARENT},
@@ -20,6 +21,42 @@ const std::unordered_map<std::string, spa::RelationshipType> relationshipMap{
   {"Affects*", spa::AFFECTS_STAR}
 };
 
+const std::unordered_set<spa::ArgumentType> stmtRef {
+  spa::LINE_NO,
+  spa::WILDCARD,
+  spa::SYNONYM
+};
+
+const std::unordered_set<spa::ArgumentType> entityRef {
+  spa::LITERAL_STRING,
+  spa::WILDCARD,
+  spa::SYNONYM
+};
+
+const std::unordered_set<spa::ArgumentType> stmtEntityRef{
+  spa::LINE_NO,
+  spa::WILDCARD,
+  spa::SYNONYM,
+  spa::LITERAL_STRING
+};
+
+const std::unordered_map<spa::RelationshipType,
+                         std::pair<const std::unordered_set<spa::ArgumentType>*,
+                                   const std::unordered_set<spa::ArgumentType>*>> relationshipArgTypesMap {
+  {spa::FOLLOWS, { &stmtRef, &stmtRef }},
+  {spa::FOLLOWS_STAR, { &stmtRef, &stmtRef }},
+  {spa::PARENT, { &stmtRef, &stmtRef }},
+  {spa::PARENT_STAR, { &stmtRef, &stmtRef }},
+  {spa::MODIFIES, { &stmtEntityRef, &stmtRef }},
+  {spa::USES, { &stmtEntityRef, &stmtRef }},
+  {spa::CALLS, { &entityRef, &entityRef }},
+  {spa::CALLS_STAR, { &entityRef, &entityRef }},
+  {spa::NEXT, { &stmtRef, &stmtRef }},
+  {spa::NEXT_STAR, { &stmtRef, &stmtRef }},
+  {spa::AFFECTS, { &stmtRef, &stmtRef }},
+  {spa::AFFECTS_STAR, { &stmtRef, &stmtRef }}
+};
+
 spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
   Stream<Token>& tokens,
   ParsedQuery& query) {
@@ -27,8 +64,11 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
     return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);
+  auto& argTypePair = relationshipArgTypesMap.find(type)->second;
+  auto& firstArgSetPtr = argTypePair.first;
+  auto& secondArgSetPtr = argTypePair.second;
   auto firstArg = argParser.parse(tokens, query);
-  if (!firstArg) {
+  if (!firstArg || firstArgSetPtr->find(firstArg.value().getType()) == firstArgSetPtr->end()) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
   if (!tokens.match({ { TOKEN_COMMA, "," } })) {
@@ -36,7 +76,7 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
   }
   tokens.seek(1);
   auto secondArg = argParser.parse(tokens, query);
-  if (!secondArg) {
+  if (!secondArg || secondArgSetPtr->find(secondArg.value().getType()) == secondArgSetPtr->end()) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
   if (!tokens.match({ { TOKEN_CLOSE_BRACKET, ")" } })) {
