@@ -23,6 +23,7 @@
     <ClInclude Include="..\source\PKB\DataTypes\CFGNode.h" />
     <ClInclude Include="..\source\PKB\PKB.h" />
     <ClInclude Include="..\source\PKB\PKBManager.h" />
+    <ClInclude Include="..\source\PKB\Storage\CFGStorage.h" />
     <ClInclude Include="..\source\PKB\Storage\EntityStorage.h" />
     <ClInclude Include="..\source\PKB\Storage\PatternStorage.h" />
     <ClInclude Include="..\source\PKB\Storage\RelationshipStorage.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="..\source\PKB\DataTypes\PKBQueryTypes.cpp" />
     <ClCompile Include="..\source\PKB\DataTypes\CFGNode.cpp" />
     <ClCompile Include="..\source\PKB\PKB.cpp" />
+    <ClCompile Include="..\source\PKB\Storage\CFGStorage.cpp" />
     <ClCompile Include="..\source\PKB\Storage\EntityStorage.cpp" />
     <ClCompile Include="..\source\PKB\Storage\PatternStorage.cpp" />
     <ClCompile Include="..\source\PKB\Storage\RelationshipStorage.cpp" />
