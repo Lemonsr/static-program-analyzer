@@ -46,17 +46,10 @@ class PKB : public PKBManager {
     TupleHash,
     TupleEquality> patternContainerQueryFunctionMap;
 
-  std::unordered_map<
-    std::tuple<RelationshipType, PKBQueryArgType, PKBQueryArgType>,
-    std::function<QueryResult(CFGStorage& cfgStorage, PKBQueryArg, PKBQueryArg)>,
-    TupleHash,
-    TupleEquality> cfgQueryFunctionMap;
-
   void createRelationshipQueryFunctionMap();
   void createEntityQueryFunctionMap();
   void createPatternQueryFunctionMap();
   void createPatternContainerQueryFunctionMap();
-  void createCfgQueryFunctionMap();
 
  public:
   PKB();
