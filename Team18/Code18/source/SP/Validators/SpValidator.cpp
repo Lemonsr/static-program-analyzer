@@ -126,7 +126,7 @@ void spa::SpValidator::validateStmt() {
 }
 
 void spa::SpValidator::validateVar() {
-    Token token = peekNextToken(1);
+    Token token = peekNextToken();
     TokenType tokenType = token.getType();
     if (tokenType != TOKEN_NAME) {
         throw std::runtime_error("Invalid variable name");
@@ -135,7 +135,6 @@ void spa::SpValidator::validateVar() {
 
 // assign: var_name '=' tokensToCheck ';'
 void spa::SpValidator::validateEqual() {
-    validateVar();
     next(2);  // Already checked NAME + EQUAL
     std::vector<Token> tokensToCheck;
     while (hasRemaining()) {
