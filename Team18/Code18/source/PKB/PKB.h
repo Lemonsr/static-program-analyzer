@@ -35,7 +35,7 @@ class PKB : public PKBManager {
   std::unordered_map<
     DesignEntityType,
     std::function<QueryResult(EntityStorage& entityStorage)>> entityQueryFunctionMap;
-  
+
   std::unordered_map<
     PKBQueryArgType,
     std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg, Pattern)>> patternQueryFunctionMap;

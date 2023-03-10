@@ -20,7 +20,7 @@ class CFGStorage {
   bool updateCfgNode(int lineNumber, spa::CFGNode newCfgNode);
   bool deleteCfgNode(int lineNumber);
   QueryResult getCfgNode(int lineNumber);
-  
+
   void setCfgNodeTable(std::unordered_map<int, spa::CFGNode> cfgNodeTable);
 };
 }  // namespace spa

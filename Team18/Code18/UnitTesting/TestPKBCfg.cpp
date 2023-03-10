@@ -16,7 +16,7 @@ namespace UnitTesting {
     spa::CFGNode cfgNodeOne;
     spa::CFGNode cfgNodeTwo;
     std::unordered_map<int, spa::CFGNode> cfgNodeTable;
-    
+
 public:
   TestPKBCfg() : cfgNodeOne(1), cfgNodeTwo(2) {
     cfgNodeTable = {
