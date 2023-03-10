@@ -199,7 +199,7 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
       &RelationshipStorage::getNextUnderscoreStatement},
     {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getNextUnderscoreUnderscore},
+      &RelationshipStorage::getNextUnderscoreUnderscore}
   };
 }
 
@@ -215,7 +215,7 @@ void spa::PKB::createPatternQueryFunctionMap() {
   patternQueryFunctionMap = {
     {PKBQueryArgType::UNDERSCORE, &PatternStorage::getAssignUnderscore},
     {PKBQueryArgType::VARIABLE, &PatternStorage::getAssignVar},
-    {PKBQueryArgType::NAME, &PatternStorage::getAssignVarName},
+    {PKBQueryArgType::NAME, &PatternStorage::getAssignVarName}
   };
 }
 
@@ -226,7 +226,7 @@ void spa::PKB::createPatternContainerQueryFunctionMap() {
     {{DesignEntityType::IF, PKBQueryArgType::NAME }, &PatternStorage::getPatternIfVarName},
     {{DesignEntityType::WHILE, PKBQueryArgType::UNDERSCORE }, &PatternStorage::getPatternWhileUnderscore},
     {{DesignEntityType::WHILE, PKBQueryArgType::VARIABLE }, &PatternStorage::getPatternWhileVar},
-    {{DesignEntityType::WHILE, PKBQueryArgType::NAME }, &PatternStorage::getPatternWhileVarName},
+    {{DesignEntityType::WHILE, PKBQueryArgType::NAME }, &PatternStorage::getPatternWhileVarName}
   };
 }
 
@@ -344,15 +344,15 @@ const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure)
 }
 
 const bool spa::PKB::addCfgNode(int lineNo, spa::CFGNode cfgNode) {
-  return relationshipStorage.addCfgNode(lineNo, cfgNode);
+  return cfgStorage.addCfgNode(lineNo, cfgNode);
 }
 
 const bool spa::PKB::updateCfgNode(int lineNo, spa::CFGNode newCfgNode) {
-  return relationshipStorage.updateCfgNode(lineNo, newCfgNode);
+  return cfgStorage.updateCfgNode(lineNo, newCfgNode);
 }
 
 const bool spa::PKB::deleteCfgNode(int lineNo) {
-  return relationshipStorage.deleteCfgNode(lineNo);
+  return cfgStorage.deleteCfgNode(lineNo);
 }
 
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
@@ -393,5 +393,5 @@ const spa::QueryResult spa::PKB::getCallsProc() {
 }
 
 const spa::QueryResult spa::PKB::getCfgNode(int lineNo) {
-  return relationshipStorage.getCfgNode(lineNo);
+  return cfgStorage.getCfgNode(lineNo);
 }

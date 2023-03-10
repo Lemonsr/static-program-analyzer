@@ -1468,6 +1468,7 @@ spa::QueryResult spa::RelationshipStorage::getCallsStarProcedureProcedure(PKBQue
   return queryResult;
 }
 
+
 bool spa::RelationshipStorage::addNext(std::string firstLineNo, std::string secondLineNo) {
   int firstLineNumber = std::stoi(firstLineNo);
   int secondLineNumber = std::stoi(secondLineNo);
@@ -1691,48 +1692,6 @@ spa::QueryResult spa::RelationshipStorage::getCallsProc() {
   return queryResult;
 }
 
-bool spa::RelationshipStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
-  if (cfgTable.find(lineNumber) != cfgTable.end()) {
-    return false;
-  }
-
-  cfgTable.insert({ lineNumber, cfgNode });
-  return true;
-}
-
-bool spa::RelationshipStorage::updateCfgNode(int lineNumber, spa::CFGNode newCfgNode) {
-  if (cfgTable.find(lineNumber) == cfgTable.end()) {
-    return false;
-  }
-
-  cfgTable[lineNumber] = newCfgNode;
-  return true;
-}
-
-bool spa::RelationshipStorage::deleteCfgNode(int lineNumber) {
-  if (cfgTable.find(lineNumber) == cfgTable.end()) {
-    return false;
-  }
-
-  cfgTable.erase(lineNumber);
-  return true;
-}
-
-spa::QueryResult spa::RelationshipStorage::getCfgNode(int lineNumber) {
-  QueryResult queryResult;
-  queryResult.setQueryResultType(TUPLE);
-
-  std::vector<spa::CFGNode> cfgNodes;
-  queryResult.setCfgNodes(cfgNodes);
-  if (cfgTable.find(lineNumber) == cfgTable.end()) {
-    return queryResult;
-  }
-
-  cfgNodes.push_back(cfgTable[lineNumber]);
-  queryResult.setCfgNodes(cfgNodes);
-  return queryResult;
-}
-
 void spa::RelationshipStorage::setFollowsTable(std::unordered_map<int, int> followsTable) {
   this->followsTable = followsTable;
 }
@@ -1799,8 +1758,4 @@ void spa::RelationshipStorage::setCallsProcTable(std::unordered_map<int, std::st
 
 void spa::RelationshipStorage::setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable) {
   this->statementTypeTable = statementTypeTable;
-}
-
-void spa::RelationshipStorage::setCfgTable(std::unordered_map<int, spa::CFGNode> cfgTable) {
-  this->cfgTable = cfgTable;
 }
