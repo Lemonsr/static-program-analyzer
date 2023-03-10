@@ -343,12 +343,16 @@ const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure)
   return relationshipStorage.addStatementProc(lineNo, procedure);
 }
 
+const bool spa::PKB::addCfgNode(int lineNo, spa::CFGNode cfgNode) {
+  return cfgStorage.addCfgNode(lineNo, cfgNode);
+}
+
 const bool spa::PKB::addCfgEndNode(int lineNumber) {
   return cfgStorage.addCfgEndNode(lineNumber);
 }
 
-const bool spa::PKB::addEdge(int lineNumber1, int lineNumber2, spa::RelationshipStorage& relationshipStorage) {
-  return cfgStorage.addEdge(lineNumber1, lineNumber2, relationshipStorage);
+const bool spa::PKB::addEdge(int lineNumberOne, int lineNumberTwo, spa::RelationshipStorage& relationshipStorage) {
+  return cfgStorage.addEdge(lineNumberOne, lineNumberTwo, relationshipStorage);
 }
 
 const bool spa::PKB::addModifiedVariable(int lineNumber, std::string varName) {

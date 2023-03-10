@@ -20,8 +20,9 @@ class CFGStorage {
   void popNode(int lineNumber, RelationshipStorage& relationshipStorage);
 
  public:
+  bool addCfgNode(int lineNumber, spa::CFGNode cfgNode);
   bool addCfgEndNode(int lineNumber);
-  bool addEdge(int lineNumber1, int lineNumber2, RelationshipStorage& relationshipStorage);
+  bool addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage);
   bool addModifiedVariable(int lineNumber, std::string varName);
   bool removeDummyNode();
 

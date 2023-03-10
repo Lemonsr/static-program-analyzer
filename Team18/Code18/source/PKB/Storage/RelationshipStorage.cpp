@@ -1473,7 +1473,7 @@ bool spa::RelationshipStorage::addNext(std::string firstLineNo, std::string seco
   int firstLineNumber = std::stoi(firstLineNo);
   int secondLineNumber = std::stoi(secondLineNo);
   if (nextTable.find(firstLineNumber) != nextTable.end() &&
-    nextTable[firstLineNumber].find(secondLineNumber) != nextTable[firstLineNumber].end()) {
+      nextTable[firstLineNumber].find(secondLineNumber) != nextTable[firstLineNumber].end()) {
     return false;
   }
 
@@ -1488,7 +1488,7 @@ spa::QueryResult spa::RelationshipStorage::getNextLineLine(PKBQueryArg firstArg,
   queryResult.setQueryResultType(BOOL);
 
   if (nextTable.find(firstLineNumber) == nextTable.end() ||
-    nextTable[firstLineNumber].find(secondLineNumber) == nextTable[firstLineNumber].end()) {
+      nextTable[firstLineNumber].find(secondLineNumber) == nextTable[firstLineNumber].end()) {
     queryResult.setIsTrue(false);
     return queryResult;
   }
@@ -1528,7 +1528,7 @@ spa::QueryResult spa::RelationshipStorage::getNextStatementLine(PKBQueryArg firs
   std::vector<std::pair<int, int>> lineNumberLineNumberPairs;
   for (auto& itr = nextTable.begin(); itr != nextTable.end(); itr++) {
     if ((stmt.statementType && statementTypeTable[itr->first] != stmt.statementType) ||
-      itr->second.find(lineNumber) == itr->second.end()) {
+         itr->second.find(lineNumber) == itr->second.end()) {
       continue;
     }
     lineNumberLineNumberPairs.push_back({ itr->first, lineNumber });
@@ -1643,7 +1643,7 @@ spa::QueryResult spa::RelationshipStorage::getNextUnderscoreUnderscore(PKBQueryA
 bool spa::RelationshipStorage::addCallsContainerParent(std::string procName, std::string lineNo) {
   int lineNumber = std::stoi(lineNo);
   if (callsContainerParentsTable.find(procName) != callsContainerParentsTable.end() &&
-    callsContainerParentsTable[procName].find(lineNumber) != callsContainerParentsTable[procName].end()) {
+      callsContainerParentsTable[procName].find(lineNumber) != callsContainerParentsTable[procName].end()) {
     return false;
   }
 

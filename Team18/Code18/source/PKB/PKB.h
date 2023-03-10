@@ -64,8 +64,9 @@ class PKB : public PKBManager {
   const bool addStatementProc(std::string lineNo, std::string procName);
 
   // Node methods
+  const bool addCfgNode(int lineNo, spa::CFGNode cfgNode);
   const bool addCfgEndNode(int lineNumber);
-  const bool addEdge(int lineNumber1, int lineNumber2, RelationshipStorage& relationshipStorage);
+  const bool addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage);
   const bool addModifiedVariable(int lineNumber, std::string varName);
   const bool removeDummyNode();
 

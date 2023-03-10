@@ -23,8 +23,9 @@ class PKBManager {
   virtual const bool addStatementProc(std::string lineNo, std::string procName) = 0;
 
   // Node methods
+  virtual const bool addCfgNode(int lineNo, spa::CFGNode cfgNode) = 0;
   virtual const bool addCfgEndNode(int lineNumber) = 0;
-  virtual const bool addEdge(int lineNumber1, int lineNumber2, RelationshipStorage& relationshipStorage) = 0;
+  virtual const bool addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage) = 0;
   virtual const bool addModifiedVariable(int lineNumber, std::string varName) = 0;
   virtual const bool removeDummyNode() = 0;
 

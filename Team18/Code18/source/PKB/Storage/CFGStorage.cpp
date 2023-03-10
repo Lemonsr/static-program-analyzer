@@ -13,33 +13,51 @@ void spa::CFGStorage::popNode(int lineNumber, RelationshipStorage& relationshipS
   }
 }
 
-bool spa::CFGStorage::addCfgEndNode(int lineNumber) {
-  cfgEndNodes.insert(lineNumber);
+bool spa::CFGStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
+  if (cfgNodeTable.find(lineNumber) != cfgNodeTable.end()) {
+    return false;
+  }
+  cfgNodeTable.insert({ lineNumber, cfgNode });
+  return true;
 }
 
-bool spa::CFGStorage::addEdge(int lineNumber1, int lineNumber2, RelationshipStorage& relationshipStorage) {
-  if (lineNumber1 == -1) {
-    popNode(lineNumber2, relationshipStorage);
+bool spa::CFGStorage::addCfgEndNode(int lineNumber) {
+  if (cfgEndNodes.find(lineNumber) != cfgEndNodes.end()) {
+    return false;
+  }
+  cfgEndNodes.insert(lineNumber);
+  return true;
+}
+
+bool spa::CFGStorage::addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage) {
+  if (lineNumberOne == -1) {
+    popNode(lineNumberTwo, relationshipStorage);
     return true;
   }
-  CFGNode& edge1 = cfgNodeTable[lineNumber1];
-  CFGNode& edge2 = cfgNodeTable[lineNumber2];
-  edge1.addOutgoingEdge(&edge2);
-  edge2.addIncomingEdge(&edge1);
-  return relationshipStorage.addNext(std::to_string(lineNumber1), std::to_string(lineNumber2));
+  CFGNode& nodeOne = cfgNodeTable[lineNumberOne];
+  CFGNode& nodeTwo = cfgNodeTable[lineNumberTwo];
+  nodeOne.addOutgoingEdge(&nodeTwo);
+  nodeTwo.addIncomingEdge(&nodeOne);
+  return relationshipStorage.addNext(std::to_string(lineNumberOne), std::to_string(lineNumberTwo));
 }
 
 bool spa::CFGStorage::addModifiedVariable(int lineNumber, std::string varName) {
-  CFGNode& edge = cfgNodeTable[lineNumber];
-  edge.addModifiedVariable(varName);
+  CFGNode& node = cfgNodeTable[lineNumber];
+  node.addModifiedVariable(varName);
+  return true;
 }
 
 bool spa::CFGStorage::removeDummyNode() {
-  CFGNode& dummyEdge = cfgNodeTable[-1];
-  for (auto& incomingEdge : dummyEdge.getIncomingEdges()) {
-    incomingEdge->removeOutgoingEdge(&dummyEdge);
+  if (cfgNodeTable.find(-1) == cfgNodeTable.end()) {
+    return false;
+  }
+
+  CFGNode& dummyNode = cfgNodeTable[-1];
+  for (auto& node : dummyNode.getIncomingEdges()) {
+    node->removeOutgoingEdge(&dummyNode);
   }
   cfgNodeTable.erase(-1);
+  return true;
 }
 
 spa::QueryResult spa::CFGStorage::getCfgNode(int lineNumber) {

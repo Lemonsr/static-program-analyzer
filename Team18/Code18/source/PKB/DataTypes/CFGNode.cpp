@@ -8,9 +8,9 @@ int spa::CFGNode::getLineNumber() const {
   return lineNumber;
 }
 
-void spa::CFGNode::linkTo(CFGNode* edge) {
-  outgoingEdges.insert(edge);
-  edge->incomingEdges.insert(this);
+void spa::CFGNode::linkTo(CFGNode* node) {
+  outgoingEdges.insert(node);
+  node->incomingEdges.insert(this);
 }
 
 void spa::CFGNode::addModifiedVariable(std::string variable) {
@@ -29,36 +29,36 @@ std::unordered_set<spa::CFGNode*> spa::CFGNode::getOutgoingEdges() const {
   return outgoingEdges;
 }
 
-void spa::CFGNode::addInEdges(std::unordered_set<CFGNode*> edges) {
-  incomingEdges.insert(edges.begin(), edges.end());
+void spa::CFGNode::addInEdges(std::unordered_set<CFGNode*> nodes) {
+  incomingEdges.insert(nodes.begin(), nodes.end());
 }
 
-void spa::CFGNode::addOutEdges(std::unordered_set<CFGNode*> edges) {
-  outgoingEdges.insert(edges.begin(), edges.end());
+void spa::CFGNode::addOutEdges(std::unordered_set<CFGNode*> nodes) {
+  outgoingEdges.insert(nodes.begin(), nodes.end());
 }
 
-void spa::CFGNode::addIncomingEdge(CFGNode* incomingEdge) {
-  incomingEdges.insert(incomingEdge);
+void spa::CFGNode::addIncomingEdge(CFGNode* node) {
+  incomingEdges.insert(node);
 }
 
-void spa::CFGNode::addOutgoingEdge(CFGNode* outgoingEdge) {
-  outgoingEdges.insert(outgoingEdge);
+void spa::CFGNode::addOutgoingEdge(CFGNode* node) {
+  outgoingEdges.insert(node);
 }
 
-void spa::CFGNode::removeIncomingEdge(CFGNode* incomingEdge) {
-  incomingEdges.erase(incomingEdge);
+void spa::CFGNode::removeIncomingEdge(CFGNode* node) {
+  incomingEdges.erase(node);
 }
 
-void spa::CFGNode::removeOutgoingEdge(CFGNode* outgoingEdge) {
-  outgoingEdges.erase(outgoingEdge);
+void spa::CFGNode::removeOutgoingEdge(CFGNode* node) {
+  outgoingEdges.erase(node);
 }
 
 void spa::CFGNode::removeNodeFromGraph() {
-  for (auto edge : incomingEdges) {
-    edge->removeOutgoingEdge(this);
+  for (auto node : incomingEdges) {
+    node->removeOutgoingEdge(this);
   }
-  for (auto edge : outgoingEdges) {
-    edge->removeIncomingEdge(this);
+  for (auto node : outgoingEdges) {
+    node->removeIncomingEdge(this);
   }
 }
 
