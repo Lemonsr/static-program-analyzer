@@ -4,6 +4,7 @@
 #include "PKBQueryArg.h"
 #include "QueryResult.h"
 #include "CFGNode.h"
+#include "RelationshipStorage.h"
 
 #include <string>
 #include <unordered_set>
@@ -17,11 +18,16 @@ class PKBManager {
   virtual const bool addPattern(std::string lineNo, std::string lhs, std::string rhs) = 0;
   virtual const bool addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName) = 0;
   virtual const bool addCallsContainerParent(std::string procName, std::string lineNo) = 0;
-  virtual const bool addCallsProc(int lineNo, std::string procName) = 0;
+  virtual const bool addCallsProc(int lineNumber, std::string procName) = 0;
   virtual const bool addStatementType(std::string lineNo, StatementType statementType) = 0;
   virtual const bool addStatementProc(std::string lineNo, std::string procName) = 0;
+
+  // Node methods
   virtual const bool addCfgNode(int lineNo, spa::CFGNode cfgNode) = 0;
-  virtual const bool deleteCfgNode(int lineNo) = 0;
+  virtual const bool addCfgEndNode(int lineNumber) = 0;
+  virtual const bool addEdge(int lineNumberOne, int lineNumberTwo) = 0;
+  virtual const bool addModifiedVariable(int lineNumber, std::string varName) = 0;
+  virtual const bool removeDummyNode() = 0;
 
   virtual const QueryResult getRelationship(RelationshipType relationshipType,
                                             PKBQueryArg firstArg, PKBQueryArg secondArg) = 0;
@@ -30,6 +36,6 @@ class PKBManager {
   virtual const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg) = 0;
   virtual const QueryResult getCallsContainerParent(std::string procName) = 0;
   virtual const QueryResult getCallsProc() = 0;
-  virtual const QueryResult getCfgNode(int lineNo) = 0;
+  virtual const QueryResult getCfgNode(int lineNumber) = 0;
 };
 }  // namespace spa

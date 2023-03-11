@@ -1,6 +1,7 @@
 #pragma once
 
 #include "QueryResult.h"
+#include "RelationshipStorage.h"
 #include "PKBQueryArg.h"
 #include "CFGNode.h"
 
@@ -13,12 +14,17 @@ namespace spa {
 class CFGStorage {
  private:
   std::unordered_map<int, spa::CFGNode> cfgNodeTable;
-  std::unordered_map<std::string, std::unordered_set<int>> cfgEndNodeTable;
+  std::unordered_set<int> cfgEndNodes;
+
+  bool popNode(int lineNumber, RelationshipStorage& relationshipStorage);
 
  public:
   bool addCfgNode(int lineNumber, spa::CFGNode cfgNode);
-  bool updateCfgNode(int lineNumber, spa::CFGNode newCfgNode);
-  bool deleteCfgNode(int lineNumber);
+  bool addCfgEndNode(int lineNumber);
+  bool addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage);
+  bool addModifiedVariable(int lineNumber, std::string varName);
+  bool removeDummyNode();
+
   QueryResult getCfgNode(int lineNumber);
 
   void setCfgNodeTable(std::unordered_map<int, spa::CFGNode> cfgNodeTable);

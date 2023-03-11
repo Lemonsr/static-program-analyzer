@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <unordered_set>
 
@@ -19,10 +20,12 @@ class CFGNode {
   std::unordered_set<std::string> getModifiedVariables() const;
   std::unordered_set<CFGNode*> getIncomingEdges() const;
   std::unordered_set<CFGNode*> getOutgoingEdges() const;
-  void addInEdges(std::unordered_set<CFGNode*> edges);
-  void addOutEdges(std::unordered_set<CFGNode*> edges);
-  void removeIncomingNode(CFGNode* node);
-  void removeOutgoingNode(CFGNode* node);
+  void addIncomingEdges(std::unordered_set<CFGNode*> nodes);
+  void addOutgoingEdges(std::unordered_set<CFGNode*> nodes);
+  void addIncomingEdge(CFGNode* node);
+  void addOutgoingEdge(CFGNode* node);
+  void removeIncomingEdge(CFGNode* node);
+  void removeOutgoingEdge(CFGNode* node);
   void removeNodeFromGraph();
   friend bool operator==(const CFGNode& s1, const CFGNode& s2);
   friend bool operator!=(const CFGNode& s1, const CFGNode& s2);

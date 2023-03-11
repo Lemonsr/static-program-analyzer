@@ -29,28 +29,36 @@ std::unordered_set<spa::CFGNode*> spa::CFGNode::getOutgoingEdges() const {
   return outgoingEdges;
 }
 
-void spa::CFGNode::addInEdges(std::unordered_set<CFGNode*> edges) {
-  incomingEdges.insert(edges.begin(), edges.end());
+void spa::CFGNode::addIncomingEdges(std::unordered_set<CFGNode*> nodes) {
+  incomingEdges.insert(nodes.begin(), nodes.end());
 }
 
-void spa::CFGNode::addOutEdges(std::unordered_set<CFGNode*> edges) {
-  outgoingEdges.insert(edges.begin(), edges.end());
+void spa::CFGNode::addOutgoingEdges(std::unordered_set<CFGNode*> nodes) {
+  outgoingEdges.insert(nodes.begin(), nodes.end());
 }
 
-void spa::CFGNode::removeIncomingNode(CFGNode* node) {
+void spa::CFGNode::addIncomingEdge(CFGNode* node) {
+  incomingEdges.insert(node);
+}
+
+void spa::CFGNode::addOutgoingEdge(CFGNode* node) {
+  outgoingEdges.insert(node);
+}
+
+void spa::CFGNode::removeIncomingEdge(CFGNode* node) {
   incomingEdges.erase(node);
 }
 
-void spa::CFGNode::removeOutgoingNode(CFGNode* node) {
+void spa::CFGNode::removeOutgoingEdge(CFGNode* node) {
   outgoingEdges.erase(node);
 }
 
 void spa::CFGNode::removeNodeFromGraph() {
   for (auto node : incomingEdges) {
-    node->removeOutgoingNode(this);
+    node->removeOutgoingEdge(this);
   }
   for (auto node : outgoingEdges) {
-    node->removeIncomingNode(this);
+    node->removeIncomingEdge(this);
   }
 }
 
