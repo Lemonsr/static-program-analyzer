@@ -1,7 +1,18 @@
 #include "WithAttrAttrClauseGroup.h"
 
+#include <memory>
+
+#include "WithEvaluator.h"
+
 spa::QpsResultTable spa::WithAttrAttrClauseGroup::evaluate(PKBManager& pkbManager, QpsResultTable resultTable) {
-  // TODO: Add with clause evaluation
+  std::vector<std::unique_ptr<QpsEvaluator>> evaluators;
+  for (auto& clause : clauses) {
+    evaluators.push_back(clause.getEvaluator());
+  }
+  for (auto& evaluator : evaluators) {
+    WithEvaluator* withPtr = static_cast<WithEvaluator*>(evaluator.get());
+    resultTable = withPtr->filter(resultTable);
+  }
   return resultTable;
 }
 

@@ -172,3 +172,19 @@ const std::vector<spa::QpsResultRow>& spa::QpsResultTable::getRows() {
 bool spa::QpsResultTable::isEmpty() {
   return rows.size() == 0;
 }
+
+spa::QpsResultTable spa::QpsResultTable::matchColumns(const std::string& first,
+                                                      const std::string& second) {
+  int firstIndex = headerIndexMap[first][0];
+  int secondIndex = headerIndexMap[second][0];
+  QpsResultTable result;
+  for (auto& header : headers) {
+    result.addHeader(header);
+  }
+  for (auto& row : rows) {
+    if (row[firstIndex] == row[secondIndex]) {
+      result.addRow(row);
+    }
+  }
+  return result;
+}
