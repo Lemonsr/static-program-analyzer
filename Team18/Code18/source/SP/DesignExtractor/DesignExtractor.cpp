@@ -35,13 +35,8 @@ spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
 
 void spa::DesignExtractor::extractRelationship() {
   spa::SpCyclicValidator cyclicValidator(procCallMap);
-  try {
-      if (cyclicValidator.validateCyclic()) {
-          throw std::exception("Cyclic calls detected");
-      }
-  }
-  catch (const std::exception& e) {
-      std::cerr << e.what() << std::endl;
+  if (cyclicValidator.validateCyclic()) {
+      std::cerr << "Cyclic calls detected" << std::endl;
       exit(1);
   }
   for (ProcedureStatement& procedure : procedureList) {
