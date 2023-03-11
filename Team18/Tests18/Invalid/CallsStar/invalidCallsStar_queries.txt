@@ -1,0 +1,165 @@
+1 - Calls* (procedure, procedure) SyntaxError Calls* -> calls*
+procedure procedure;
+Select procedure such that calls*("A", "B")
+SyntaxError
+5000
+2 - Calls* (procedure, procedure) SyntaxError 2nd arg entRef -> stmRef
+procedure procedure;
+Select procedure such that Calls*("A", 2)
+SyntaxError
+5000
+3 - Calls* (procedure, procedure) SyntaxError 1st arg entRef -> stmRef
+procedure procedure;
+Select procedure such that Calls*(3, "B")
+SyntaxError
+5000
+4 - Calls* (procedure, procedure) SyntaxError 1st and 2nd entRef -> stmRef
+procedure procedure;
+Select procedure such that Calls*(1, 2)
+SyntaxError
+5000
+5 - Calls* (Synonym, procedure) SyntaxError 2nd arg entRef -> stmRef
+procedure procedure;
+Select procedure such that Calls*(procedure, 2)
+SyntaxError
+5000
+6 - Calls* (procedure, Synonym) SyntaxError 1st arg entRef -> stmRef
+procedure procedure;
+Select procedure such that Calls*(3, procedure)
+SyntaxError
+5000
+7 - Calls* (Synonym, Synonym) SyntaxError Extra ; in select statement
+procedure procedure;
+Select BOOLEAN such that Calls*(procedure, procedure);
+SyntaxError
+5000
+8 - Calls* (procedure, procedure) SyntaxError Missing Brackets
+procedure procedure;
+Select procedure.procName such that Calls* ("A", "B"
+SyntaxError
+5000
+9 - Calls* (procedure, procedure) SyntaxError Missing Brackets
+procedure procedure;
+Select procedure such that Calls* "A", "B"                           )
+SyntaxError
+5000
+10 - Calls* (procedure, procedure) SyntaxError Missing Brackets
+procedure procedure;
+Select procedure such that Calls* "A"                  ,                     "B"                            
+SyntaxError
+5000
+11 - Calls* (procedure, procedure) SyntaxError Invalid such 
+procedure procedure;
+Select procedure Such that Calls* ("A", "B")                          
+SyntaxError
+5000
+12 - Calls* (procedure, procedure) SyntaxError Invalid that 
+procedure procedure;
+Select procedure.procName such That Calls* ("A", "B")                          
+SyntaxError
+5000
+13 - Calls* (procedure, procedure) SyntaxError Invalid '' 
+procedure procedure;
+Select procedure such that Calls* ('A', "B")                          
+SyntaxError
+5000
+14 - Calls* (procedure, procedure) SyntaxError Invalid '' 
+procedure procedure;
+Select procedure such that Calls* ("A", 'B')                          
+SyntaxError
+5000
+15 - Calls* (procedure, procedure) SemanticError Invalid synonym name
+procedure procedure1;
+Select procedure such that Calls* ("A", "B")                          
+SemanticError
+5000
+16 - Calls* (Synonym, Synonym) SemanticError Invalid synonym name -> stmt on 2nd arg
+procedure procedure; stmt stmt;
+Select procedure such that Calls* (procedure, stmt)                          
+SemanticError
+5000
+17 - Calls* (Synonym, Synonym) SemanticError Invalid synonym name -> read on 2nd arg
+procedure procedure; read read;
+Select procedure such that Calls* (procedure, read)                          
+SemanticError
+5000
+18 - Calls* (Synonym, Synonym) SemanticError Invalid synonym name -> variable on 2nd arg
+procedure procedure; variable variable;
+Select procedure such that Calls* (procedure, variable)                          
+SemanticError
+5000
+19 - Calls* (Synonym, Synonym) SemanticError Invalid synonym name -> constant on 2nd arg
+procedure procedure; constant constant;
+Select procedure such that Calls* (procedure, constant)                          
+SemanticError
+5000
+20 - Calls* (Synonym, Synonym) SemanticError Invalid synonym name -> stmt on 1st arg
+procedure procedure; stmt stmt;
+Select procedure such that Calls* (stmt, procedure)                          
+SemanticError
+5000
+21 - Calls* (Synonym, Synonym) SemanticError Invalid synonym name -> print on 1st arg
+procedure procedure; print print;
+Select procedure such that Calls* (print, procedure)                          
+SemanticError
+5000
+22 - Calls* (Synonym, Synonym) SemanticError Invalid synonym name -> variable on 2nd arg
+procedure procedure; variable variable;
+Select procedure such that Calls* (variable, procedure)                          
+SemanticError
+5000
+23 - Calls* (Synonym, Synonym) SemanticError Invalid synonym name -> constant on 2nd arg
+procedure procedure; constant constant;
+Select procedure such that Calls* (constant, procedure)                          
+SemanticError
+5000
+24 - Calls* (procedure, Synonym) SemanticError Invalid synonym name -> stmt on 2nd arg
+procedure procedure; stmt stmt;
+Select stmt such that Calls* ("A", stmt)                          
+SemanticError
+5000
+25 - Calls* (procedure, Synonym) SemanticError Invalid synonym name -> assign on 2nd arg
+procedure procedure; assign assign;
+Select assign such that Calls* ("A", assign)                          
+SemanticError
+5000
+26 - Calls* (procedure, Synonym) SemanticError Invalid synonym name -> stmt on 1st arg
+procedure procedure; stmt stmt;
+Select stmt such that Calls* (stmt, "B")                          
+SemanticError
+5000
+27 - Calls* (procedure, Synonym) SemanticError Invalid synonym name -> call on 1st arg
+procedure procedure; call call;
+Select call such that Calls* (call, "C")                          
+SemanticError
+5000
+28 - Calls* (Wildcard, Synonym) SyntaxError No brackets SemanticError Invalid procedure synonym
+while while;
+Select while such that Calls* (_,while) and Calls* "A","B")                      
+SyntaxError
+5000
+29 - Calls* (Wildcard, Synonym) SemanticError Invalid synonym name -> if on 2nd arg
+if if;
+Select call such that Calls* (_, if)                          
+SemanticError
+5000
+30 - Calls* (Wildcard, Synonym) SemanticError Invalid synonym name -> constant on 2nd arg
+constant constant;
+Select call such that Calls* (_, constant)                          
+SemanticError
+5000
+31 - Calls* (Wildcard, Synonym) SyntaxError Invalid declaration
+procedure procedure
+Select procedure such that Calls* (procedure, _)                          
+SyntaxError
+5000
+32 - Calls* (Wildcard, Wildcard) valid stmt
+stmt stmt;
+Select stmt.stmt# such that Calls*(_,_)                     
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
+31 - Calls* (lineNum, lineNum) valid stmt
+procedure procedure;
+Select procedure such that Calls*("A","C")                     
+A, B, C
+5000
