@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <cassert>
 
 spa::WithEvaluator::WithEvaluator(WithArgument& firstArg, WithArgument& secondArg): firstArg(firstArg),
                                                                                     secondArg(secondArg) {
@@ -37,9 +38,7 @@ spa::QpsResultTable spa::WithEvaluator::evaluate(PKBManager& pkbManager) {
       attributes.push_back(&(arg->getAttribute()));
     }
   }
-  if (attributes.size() == 2) {
-    throw std::runtime_error("Evaluating with two attributes");
-  }
+  assert(attributes.size() < 2);
   if (attributes.size() == 1) {
     return evaluateAttributeValue(*(attributes[0]), *(values[0]));
   }
