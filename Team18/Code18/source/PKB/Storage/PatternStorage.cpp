@@ -29,8 +29,7 @@ bool spa::PatternStorage::isPostfixSubstring(std::string postfix, std::string pa
   return false;
 }
 
-bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName,
-  std::string postfixString) {
+bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName, std::string postfixString) {
   int lineNumber = std::stoi(lineNo);
   if (assignTable.find(lineNumber) != assignTable.end()) {
     return false;

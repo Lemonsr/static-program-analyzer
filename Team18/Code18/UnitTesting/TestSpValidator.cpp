@@ -352,6 +352,23 @@ namespace UnitTesting {
             Assert::IsFalse(validator.validateGrammar());
         }
 
+        // procedure proc { read ab!c;}
+        TEST_METHOD(TestSpValidatorInvalidReadTwo) {
+            spa::Stream<spa::Token> tokens;
+            tokens.pushBack({ spa::TOKEN_NAME, "procedure" });
+            tokens.pushBack({ spa::TOKEN_NAME, "proc" });
+            tokens.pushBack({ spa::TOKEN_OPEN_BRACE, "{" });
+            tokens.pushBack({ spa::TOKEN_NAME, "read" });
+            tokens.pushBack({ spa::TOKEN_NAME, "ab" });
+            tokens.pushBack({ spa::TOKEN_BOOL_NOT, "!" });
+            tokens.pushBack({ spa::TOKEN_NAME, "c" });
+            tokens.pushBack({ spa::TOKEN_SEMICOLON, ";" });
+            tokens.pushBack({ spa::TOKEN_CLOSE_BRACE, "}" });
+
+            spa::SpValidator validator(tokens);
+            Assert::IsFalse(validator.validateGrammar());
+        }
+
 
         //  procedure proc { print call;}
         TEST_METHOD(TestSpValidatorValidPrintOne) {

@@ -5,14 +5,18 @@
 #include <unordered_set>
 #include <sstream>
 
-std::unordered_set<spa::TokenType> spa::UtilsFunction::condExprToken = { TOKEN_BOOL_AND, TOKEN_BOOL_OR };
-std::unordered_set<spa::TokenType> spa::UtilsFunction::relExprToken = {
-    TOKEN_COND_EQ, TOKEN_COND_NEQ, TOKEN_COND_LT, TOKEN_COND_LTE, TOKEN_COND_GT,
-    TOKEN_COND_GTE
+std::unordered_set<spa::TokenType> spa::UtilsFunction::condExprToken = {
+  TOKEN_BOOL_AND, TOKEN_BOOL_OR
 };
-std::unordered_set<spa::TokenType> spa::UtilsFunction::exprToken ={ TOKEN_PLUS, TOKEN_MINUS };
-std::unordered_set<spa::TokenType> spa::UtilsFunction::termToken = { TOKEN_DIVIDE, TOKEN_MULTIPLY, TOKEN_MODULO };
-std::unordered_set<spa::TokenType> spa::UtilsFunction::relFactorToken = { TOKEN_NAME, TOKEN_INTEGER };
+std::unordered_set<spa::TokenType> spa::UtilsFunction::relExprToken = {
+  TOKEN_COND_EQ, TOKEN_COND_NEQ, TOKEN_COND_LT, TOKEN_COND_LTE, TOKEN_COND_GT,
+  TOKEN_COND_GTE
+};
+std::unordered_set<spa::TokenType> spa::UtilsFunction::exprToken = {TOKEN_PLUS, TOKEN_MINUS};
+std::unordered_set<spa::TokenType> spa::UtilsFunction::termToken = {
+  TOKEN_DIVIDE, TOKEN_MULTIPLY, TOKEN_MODULO
+};
+std::unordered_set<spa::TokenType> spa::UtilsFunction::relFactorToken = {TOKEN_NAME, TOKEN_INTEGER};
 
 bool spa::UtilsFunction::isValidCondExprToken(Token token) {
   return condExprToken.count(token.getType());
@@ -160,7 +164,7 @@ void spa::UtilsFunction::ltrim(std::string& s) {
 void spa::UtilsFunction::rtrim(std::string& s) {
   s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
     return !std::isspace(ch);
-    }).base(), s.end());
+  }).base(), s.end());
 }
 
 void spa::UtilsFunction::trimString(std::string& s) {
@@ -205,7 +209,8 @@ std::string spa::UtilsFunction::infixToPostfix(std::vector<spa::Token> tokens) {
   return postfix;
 }
 
-std::vector<std::string> spa::UtilsFunction::splitStringByDelimiter(std::string str, char delimiter) {
+std::vector<std::string>
+spa::UtilsFunction::splitStringByDelimiter(std::string str, char delimiter) {
   std::vector<std::string> tokens;
   std::string token;
   std::stringstream ss(str);
