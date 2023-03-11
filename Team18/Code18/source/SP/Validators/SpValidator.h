@@ -27,7 +27,6 @@ class SpValidator {
   void validateStmt();
 
   void validateEqual();
-  void validateVar();
   void validateReadPrintCall();
   void validateCallExists();
   void validateWhileIf();
