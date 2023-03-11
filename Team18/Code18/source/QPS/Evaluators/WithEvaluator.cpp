@@ -1,5 +1,6 @@
 #include "WithEvaluator.h"
 
+#include <string>
 #include <vector>
 #include <stdexcept>
 
