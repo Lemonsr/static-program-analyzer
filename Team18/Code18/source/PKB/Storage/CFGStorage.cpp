@@ -6,11 +6,15 @@
 #include <utility>
 #include <unordered_set>
 
-void spa::CFGStorage::popNode(int lineNumber, RelationshipStorage& relationshipStorage) {
-  CFGNode& dummyEdge = cfgNodeTable[-1];
-  for (auto& incomingEdge : dummyEdge.getIncomingEdges()) {
-    addEdge(incomingEdge->getLineNumber(), lineNumber, relationshipStorage);
+bool spa::CFGStorage::popNode(int lineNumber, RelationshipStorage& relationshipStorage) {
+  CFGNode& dummyNode = cfgNodeTable[-1];
+  bool isAddEdge = true;
+
+  for (auto& incomingNode : dummyNode.getIncomingEdges()) {
+    isAddEdge = isAddEdge && addEdge(incomingNode->getLineNumber(), lineNumber, relationshipStorage);
   }
+
+  return isAddEdge;
 }
 
 bool spa::CFGStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
@@ -38,10 +42,15 @@ bool spa::CFGStorage::addEdge(int lineNumberOne, int lineNumberTwo, Relationship
   CFGNode& nodeTwo = cfgNodeTable[lineNumberTwo];
   nodeOne.addOutgoingEdge(&nodeTwo);
   nodeTwo.addIncomingEdge(&nodeOne);
-  return relationshipStorage.addNext(std::to_string(lineNumberOne), std::to_string(lineNumberTwo));
+  bool isAddNext = relationshipStorage.addNext(std::to_string(lineNumberOne), std::to_string(lineNumberTwo));
+  return isAddNext;
 }
 
 bool spa::CFGStorage::addModifiedVariable(int lineNumber, std::string varName) {
+  if (cfgNodeTable.find(lineNumber) == cfgNodeTable.end()) {
+    return false;
+  }
+
   CFGNode& node = cfgNodeTable[lineNumber];
   node.addModifiedVariable(varName);
   return true;
@@ -64,21 +73,17 @@ spa::QueryResult spa::CFGStorage::getCfgNode(int lineNumber) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<spa::CFGNode> cfgNodes;
+  std::vector<spa::CFGNode*> cfgNodes;
   queryResult.setCfgNodes(cfgNodes);
   if (cfgNodeTable.find(lineNumber) == cfgNodeTable.end()) {
     return queryResult;
   }
 
-  cfgNodes.push_back(cfgNodeTable[lineNumber]);
+  cfgNodes.push_back(&cfgNodeTable[lineNumber]);
   queryResult.setCfgNodes(cfgNodes);
   return queryResult;
 }
 
 void spa::CFGStorage::setCfgNodeTable(std::unordered_map<int, spa::CFGNode> cfgNodeTable) {
   this->cfgNodeTable = cfgNodeTable;
-}
-
-void spa::CFGStorage::setCfgEndNodeTable(std::unordered_map<std::string, std::unordered_set<int>> cfgEndNodeTable) {
-  this->cfgEndNodeTable = cfgEndNodeTable;
 }

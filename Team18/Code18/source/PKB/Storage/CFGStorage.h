@@ -14,10 +14,9 @@ namespace spa {
 class CFGStorage {
  private:
   std::unordered_map<int, spa::CFGNode> cfgNodeTable;
-  std::unordered_map<std::string, std::unordered_set<int>> cfgEndNodeTable;
   std::unordered_set<int> cfgEndNodes;
 
-  void popNode(int lineNumber, RelationshipStorage& relationshipStorage);
+  bool popNode(int lineNumber, RelationshipStorage& relationshipStorage);
 
  public:
   bool addCfgNode(int lineNumber, spa::CFGNode cfgNode);

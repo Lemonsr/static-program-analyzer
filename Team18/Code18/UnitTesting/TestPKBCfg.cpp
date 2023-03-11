@@ -28,6 +28,27 @@ public:
     };
   }
 
+  TEST_METHOD(TestGetCfgNode) {
+    spa::CFGStorage cfgStorage;
+    cfgStorage.setCfgNodeTable(cfgNodeTable);
+    std::vector<spa::CFGNode*> expected = { &cfgNodeOne };
+
+    spa::QueryResult queryResult = cfgStorage.getCfgNode(1);
+
+    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+    Assert::IsTrue(expected == queryResult.getCfgNodes());
+
+    queryResult = cfgStorage.getCfgNode(2);
+
+    expected = { &cfgNodeTwo };
+    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+    Assert::IsTrue(expected == queryResult.getCfgNodes());
+
+    queryResult = cfgStorage.getCfgNode(4);
+
+    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
+    Assert::IsTrue(queryResult.getCfgNodes().empty());
+  }
   TEST_METHOD(TestAddCfgNode) {
     spa::CFGStorage cfgStorage;
     cfgStorage.setCfgNodeTable(cfgNodeTable);
@@ -56,6 +77,26 @@ public:
     Assert::IsTrue(cfgStorage.addEdge(1, 2, relationshipStorage));
     Assert::IsTrue(cfgStorage.addEdge(2, 3, relationshipStorage));
     Assert::IsFalse(cfgStorage.addEdge(1, 2, relationshipStorage));
+
+    std::unordered_set<spa::CFGNode*> expected = { &cfgNodeTwo };
+
+    spa::QueryResult queryResult = cfgStorage.getCfgNode(1);
+    spa::CFGNode* resultNode = queryResult.getCfgNodes()[0];
+    Assert::IsTrue(resultNode->getIncomingEdges().empty());
+    Assert::IsTrue(expected == resultNode->getOutgoingEdges());
+
+    expected = { &cfgNodeOne };
+
+    queryResult = cfgStorage.getCfgNode(2);
+    resultNode = queryResult.getCfgNodes()[0];
+    Assert::IsTrue(expected == resultNode->getIncomingEdges());
+
+    expected = { &cfgNodeThree };
+    Assert::IsTrue(expected == resultNode->getOutgoingEdges());
+
+    queryResult = cfgStorage.getCfgNode(3);
+    resultNode = queryResult.getCfgNodes()[0];
+    Assert::IsTrue(resultNode->getOutgoingEdges().empty());
   }
 
   TEST_METHOD(TestAddModifiedVariable) {
@@ -74,18 +115,18 @@ public:
     std::unordered_set<std::string> expected = { varOne, varTwo };
 
     spa::QueryResult queryResult = cfgStorage.getCfgNode(1);
-    spa::CFGNode resultNode = queryResult.getCfgNodes()[0];
-    Assert::IsTrue(expected == resultNode.getModifiedVariables());
+    spa::CFGNode* resultNode = queryResult.getCfgNodes()[0];
+    Assert::IsTrue(expected == resultNode->getModifiedVariables());
 
     expected = { varThree };
 
     queryResult = cfgStorage.getCfgNode(2);
     resultNode = queryResult.getCfgNodes()[0];
-    Assert::IsTrue(expected == resultNode.getModifiedVariables());
+    Assert::IsTrue(expected == resultNode->getModifiedVariables());
 
     queryResult = cfgStorage.getCfgNode(3);
     resultNode = queryResult.getCfgNodes()[0];
-    Assert::IsTrue(resultNode.getModifiedVariables().empty());
+    Assert::IsTrue(resultNode->getModifiedVariables().empty());
   }
 
   TEST_METHOD(TestRemoveDummyNode) {
@@ -96,30 +137,16 @@ public:
     spa::CFGNode cfgNodeTest(-1);
     cfgStorage.addCfgNode(-1, cfgNodeTest);
 
+    spa::QueryResult queryResult = cfgStorage.getCfgNode(-1);
+    std::vector<spa::CFGNode*> resultNodes = queryResult.getCfgNodes();
+    Assert::IsFalse(resultNodes.empty());
+
     Assert::IsTrue(cfgStorage.removeDummyNode());
     Assert::IsFalse(cfgStorage.removeDummyNode());
-  }
 
-  TEST_METHOD(TestGetCfgNode) {
-    spa::CFGStorage cfgStorage;
-    cfgStorage.setCfgNodeTable(cfgNodeTable);
-    std::vector<spa::CFGNode> expected = { cfgNodeOne };
-
-    spa::QueryResult queryResult = cfgStorage.getCfgNode(1);
-
-    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-    Assert::IsTrue(expected == queryResult.getCfgNodes());
-
-    queryResult = cfgStorage.getCfgNode(2);
-
-    expected = { cfgNodeTwo };
-    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-    Assert::IsTrue(expected == queryResult.getCfgNodes());
-
-    queryResult = cfgStorage.getCfgNode(4);
-
-    Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-    Assert::IsTrue(queryResult.getCfgNodes().empty());
+    queryResult = cfgStorage.getCfgNode(-1);
+    resultNodes = queryResult.getCfgNodes();
+    Assert::IsTrue(resultNodes.empty());
   }
 };
 }  // namespace UnitTesting

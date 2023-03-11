@@ -66,7 +66,7 @@ class PKB : public PKBManager {
   // Node methods
   const bool addCfgNode(int lineNo, spa::CFGNode cfgNode);
   const bool addCfgEndNode(int lineNumber);
-  const bool addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage);
+  const bool addEdge(int lineNumberOne, int lineNumberTwo);
   const bool addModifiedVariable(int lineNumber, std::string varName);
   const bool removeDummyNode();
 

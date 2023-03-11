@@ -351,7 +351,7 @@ const bool spa::PKB::addCfgEndNode(int lineNumber) {
   return cfgStorage.addCfgEndNode(lineNumber);
 }
 
-const bool spa::PKB::addEdge(int lineNumberOne, int lineNumberTwo, spa::RelationshipStorage& relationshipStorage) {
+const bool spa::PKB::addEdge(int lineNumberOne, int lineNumberTwo) {
   return cfgStorage.addEdge(lineNumberOne, lineNumberTwo, relationshipStorage);
 }
 

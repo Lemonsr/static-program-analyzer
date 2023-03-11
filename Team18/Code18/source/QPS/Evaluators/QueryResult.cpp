@@ -24,7 +24,7 @@ const std::vector<std::pair<std::string, std::string>>& spa::QueryResult::getNam
   return nameNamePairs.value();
 }
 
-const std::vector<spa::CFGNode>& spa::QueryResult::getCfgNodes() {
+const std::vector<spa::CFGNode*>& spa::QueryResult::getCfgNodes() {
   return cfgNodes.value();
 }
 
@@ -61,6 +61,6 @@ void spa::QueryResult::setNameNamePairs(std::vector<std::pair<std::string,
   this->nameNamePairs = nameNamePairs;
 }
 
-void spa::QueryResult::setCfgNodes(std::vector<spa::CFGNode> cfgNodes) {
+void spa::QueryResult::setCfgNodes(std::vector<spa::CFGNode*> cfgNodes) {
   this->cfgNodes = cfgNodes;
 }
