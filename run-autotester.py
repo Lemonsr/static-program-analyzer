@@ -15,6 +15,7 @@ query_types = [
     'Modifies',
     'ModifiesProc',
     'Uses',
+    'UsesProc',
     'Follows',
     'FollowsStar',
     'Parent',

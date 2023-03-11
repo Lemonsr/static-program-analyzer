@@ -1,0 +1,115 @@
+1 - Uses (Procedure, VarName)
+procedure p;
+Select p such that Uses(p, "y")
+A, B, C, D, E
+5000
+2 - Uses (Procedure, WildCard)
+procedure p;
+Select p.procName such that Uses(p, _)
+A, B, C, D, E
+5000
+3 - Uses (Procedure, Variable)
+procedure p; variable v;
+Select p such that Uses(p, v)
+A, B, C, D, E
+5000
+4 - Uses (Procedure, Variable)
+procedure p; variable v;
+Select v such that Uses(p, v)
+call, y, x
+5000
+5 - Uses (Procedure, Variable)
+procedure p; variable v; read read; call call;
+Select <p, v, read.varName, call.procName> such that Uses(p, v)
+A call x B, A y x B, A x x B, B call x B, B y x B, B x x B, C call x B, C y x B, C x x B, D call x B, D y x B, D x x B, E y x B, E x x B, A call call B, A y call B, A x call B, B call call B, B y call B, B x call B, C call call B, C y call B, C x call B, D call call B, D y call B, D x call B, E y call B, A call x C, A y x C, A x x C, B call x C, B y x C, B x x C, C call x C, C y x C, C x x C, D call x C, D y x C, D x x C, E y x C, E x x C, A call call C, A y call C, A x call C, B call call C, B y call C, B x call C, C call call C, C y call C, C x call C, D call call C, D y call C, D x call C, E y call C, A call x D, A y x D, A x x D, B call x D, B y x D, B x x D, C call x D, C y x D, C x x D, D call x D, D y x D, D x x D, E y x D, E x x D, A call call D, A y call D, A x call D, B call call D, B y call D, B x call D, C call call D, C y call D, C x call D, D call call D, D y call D, D x call D, E y call D, A call x E, A y x E, A x x E, B call x E, B y x E, B x x E, C call x E, C y x E, C x x E, D call x E, D y x E, D x x E, E y x E, E x x E, A call call E, A y call E, A x call E, B call call E, B y call E, B x call E, C call call E, C y call E, C x call E, D call call E, D y call E, D x call E, E y call E, E x call B,E x call C,E x call D,E x call E
+5000
+6 - Uses (Call, VarName)
+call call;
+Select call such that Uses(call, "x")
+2, 3, 4, 5, 7, 9
+5000
+7 - Uses (Call, WildCard)
+call call;
+Select call.procName such that Uses(call, _)
+B, C, D, E
+5000
+8 - Uses (Call, Variable)
+call call; variable variable;
+Select call.stmt# such that Uses(call, variable)
+2, 3, 4, 5, 7, 9
+5000
+9 - Uses (Call, Variable)
+call call; variable variable; 
+Select variable such that Uses(call, variable)
+call, y, x
+5000
+10 - Uses (Call, Variable)
+call call; variable variable; read read;
+Select <call.procName,variable, read.varName> such that Uses(call, variable)
+B x x, B y x, B call x, C x x, C y x, C call x, D x x, D y x, D call x, E y x, E x x, B x call, B y call, B call call, C x call, C y call, C call call, D x call, D y call, D call call, E y call, E x call
+5000
+11 - Uses (CallLineNo, VarName) (BOOL)
+stmt s;
+Select s such that Uses(4, "x")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
+12 - Uses (LineNo, VarName) (BOOL)
+stmt s;
+Select s such that Uses(3, "read")
+none
+5000
+13 - Uses (CallLineNo, WildCard) (BOOL)
+stmt s; read read;
+Select read.stmt# such that Uses(4, _)
+1, 8
+5000
+14 - Uses (LineNo, VarName) (BOOL)
+print print; 
+Select print.varName such that Uses(2, "x")
+x
+5000
+15 - Uses (CallLineNo, Variable)
+variable variable;
+Select variable.varName such that Uses(4, variable)
+x, y, call
+5000
+16 - Uses (ProcName, VarName) (BOOL)
+if if;
+Select if.stmt# such that Uses("F", "x")
+none
+5000
+17 - Uses (ProcName, WildCard) (BOOL)
+while while;
+Select while such that Uses("A", _)
+none
+5000
+18 - Uses (ProcName, Variable)
+variable variable;
+Select variable.varName such that Uses("E", variable)
+x, y
+5000  
+19 - Uses (ProcName, Variable)
+variable variable; read read; print print;
+Select <variable.varName, read.varName, print> such that Uses("E", variable)
+x x 11, y x 11, x call 11, y call 11
+5000
+20 - Uses (ProcName, Variable)
+variable variable;
+Select BOOLEAN such that Uses("D", variable)
+TRUE
+5000
+21 - Uses (ProcName, Variable)
+
+Select BOOLEAN
+TRUE
+5000
+22 - Uses (ProcName, Variable)
+procedure p;
+Select BOOLEAN such that Uses(p, "doesntExist")
+FALSE
+5000
+23 - Multiple Chain of same 8 clauses
+variable variable; procedure procedure;
+Select <procedure, variable> such that Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable)
+A x, A y, A call, B x, B y, B call, C x, C y, C call, D x, D y, D call, E y, E x
+5000
