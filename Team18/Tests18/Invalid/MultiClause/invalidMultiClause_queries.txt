@@ -1,0 +1,51 @@
+1 - MultiClauses SyntaxError and pattern after such that
+if ifs; stmt s; variable v; print pn; read re;
+Select BOOLEAN such that Uses(pn,v) and Modifies(re,v) and pattern a(_, _)
+SyntaxError
+5000
+2 - MultiClauses SyntaxError and such that after pattern
+if ifs; stmt s; variable v; print pn; read re;
+Select BOOLEAN pattern a(_, _) and pattern if(_, _, _) and Uses(pn,v) and Modifies(re,v)
+SyntaxError
+5000
+3 - MultiClauses SyntaxError using 'and' and 'such that' in a row
+if ifs; stmt s; variable v; print pn; read re;
+Select BOOLEAN pattern a(_, _) and pattern if(_, _, _) and such that Uses(pn,v) and Modifies(re,v)
+SyntaxError
+5000
+4 - MultiClauses SyntaxError using 'such that' and 'and' in a row
+if ifs; stmt s; variable v; print pn; read re;
+Select BOOLEAN pattern a(_, _) and pattern if(_, _, _) such that and Uses(pn,v) and Modifies(re,v)
+SyntaxError
+5000
+5 - MultiClauses SyntaxError using 'and' after with to connect pattern
+if ifs; stmt s; variable v; print pn; read re;
+Select BOOLEAN with 12 = 12 and a(_, _) 
+SyntaxError
+5000
+6 - MultiClauses SyntaxError using 'and' before with to connect pattern
+if ifs; stmt s; variable v; print pn; read re;
+Select BOOLEAN pattern a(_,_) and with 12 = 12 
+SyntaxError
+5000
+7 - MultiClauses SyntaxError using 'and' after with to connect pattern
+if ifs; stmt s; variable v; print pn; read re;
+Select BOOLEAN with 12 = 12 and Uses(pn,v) 
+SyntaxError
+5000
+8 - MultiClauses SyntaxError using 'and' before with to connect pattern
+if ifs; stmt s; variable v; print pn; read re;
+Select BOOLEAN such that Uses(pn,v) and with 12 = 12 
+SyntaxError
+5000
+9 - MultiClauses SyntaxError using 'and' to connect anything and everything
+if ifs; stmt s; variable v; print pn; read re;
+Select BOOLEAN pattern a(_,_) and with "true" = "true" and such that Modifies(re,v)
+SyntaxError
+5000
+10 - MultiClauses 
+if if; stmt s; variable v; print pn; read re;
+Select <pn.varName, re.varName> pattern if("y",_,_) such that Uses(if,"y") and Parent(if,pn)
+printy ready
+5000
+
