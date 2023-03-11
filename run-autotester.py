@@ -23,7 +23,6 @@ query_types = [
     'ParentStar',
     'Calls',
     'CallsStar',
-    'Next'
 ]
 
 invalid_query_types = [
@@ -36,7 +35,6 @@ invalid_query_types = [
     'ParentStar',
     'Calls',
     'CallsStar',
-    'Next',
     'Pattern',
     'MultiClause'
 ]
