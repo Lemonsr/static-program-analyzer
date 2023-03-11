@@ -1,0 +1,95 @@
+1 - while w(Wildcard, Wildcard) SyntaxError -> Invalid declaration
+while w
+Select w pattern w (_, _)
+SyntaxError
+5000
+2 - while w(Wildcard, Wildcard) SyntaxError -> Invalid declaration
+while w1;
+Select w pattern w (_, _)
+SemanticError
+5000
+3 - while w(Wildcard, Wildcard) SyntaxError pattern -> Pattern
+while w;
+Select w Pattern w (_, _)
+SyntaxError
+5000
+4 - while w(Wildcard, Wildcard) SyntaxError syn-while does not exist
+while w;
+Select w pattern (_, _)
+SyntaxError
+5000
+5 - while w(Wildcard, Wildcard) SemanticError syn-while does not exist
+while w; print print;
+Select w pattern print (_, _)
+SemanticError
+5000
+6 - while w(Wildcard, Wildcard) SyntaxError bracket is missing
+while w;
+Select w pattern w (_, _
+SyntaxError
+5000
+7 - while w(Wildcard, Wildcard) SyntaxError bracket is missing
+while w;
+Select w pattern w _, _                             )
+SyntaxError
+5000
+8 - while w(Wildcard, Wildcard) SyntaxError bracket is missing
+while w;
+Select w pattern w _, _                             
+SyntaxError
+5000
+9 - while w(Wildcard, variable) SyntaxError 2nd arg not Wildcard
+while w;
+Select w pattern w (_, x)                             
+SyntaxError
+5000
+10 - while w(Wildcard, variable) SyntaxError 2nd arg not Wildcard
+while w;
+Select w pattern w (_, 'x')                             
+SyntaxError
+5000
+11 - while w(variable, Wildcard) SemanticError variable double quotation mark is missing or invalid synonym name
+while w;
+Select w pattern w (x, _)                             
+SemanticError
+5000
+12 - while w(variable, Wildcard) SyntaxError variable has ' ' instead of double quotation mark
+while w;
+Select w pattern w ('x', _)                             
+SyntaxError
+5000
+13 - while w(variable, Wildcard) SyntaxError entRef -> stmtRef
+while w;
+Select w pattern w (1, _)                             
+SyntaxError
+5000
+14 - while w(Wildcard, Wildcard) SyntaxError 2nd arg not Wildcard
+while w;
+Select w pattern w (_, 1)                             
+SyntaxError
+5000
+15 - while w(Wildcard, Wildcard) SemanticError only 1 arg is populated
+while w;
+Select w pattern w (_)                             
+SyntaxError
+5000
+16 - while w(Synonym, Wildcard) SemanticError 1st arg is not a variable synonym
+while w;
+Select w pattern w (w, _)                             
+SemanticError
+5000
+17 - Pattern while(varSynonym, _)
+while w; variable v;
+Select v pattern w(v, _)
+while, if, print, read, Modifies, Uses, pattern, and, x, y, call, procedure
+5000
+18 - Pattern while(Wildcard, Wildcard)
+while w; stmt s;
+Select w pattern w(_, _)
+4, 13, 16, 18, 27, 46, 50
+5000
+19 - while w(Wildcard, Wildcard) SyntaxError pattern must follow with ident
+while w; 
+Select w pattern 3 (_, _)
+SyntaxError
+5000

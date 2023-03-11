@@ -1,0 +1,130 @@
+1 - Uses (lineNum, variable) SyntaxError Uses -> Usos
+stmt s; 
+Select s such that Usos(1, "x")
+SyntaxError
+5000
+2 - Uses (lineNum, variable) SyntaxError entRef -> stmRef
+stmt s; 
+Select s such that Uses(1, 2)
+SyntaxError
+5000
+3 - Uses (lineNum, variable) SyntaxError entRef -> stmRef
+stmt s; 
+Select s such that Uses("A", 2)
+SyntaxError
+5000
+4 - Uses (lineNum, variable) SyntaxError Extra ; in select statement
+stmt s;
+Select BOOLEAN such that Uses(1, "x");
+SyntaxError
+5000
+5 - Uses (lineNum, variable) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Uses (1, "x"
+SyntaxError
+5000
+6 - Uses (lineNum, variable) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Uses 1, "x"                            )
+SyntaxError
+5000
+7 - Uses (lineNum, variable) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Uses 1                  ,                     "x"                            
+SyntaxError
+5000
+8 - Uses (lineNum, variable) SyntaxError Invalid such 
+stmt s;
+Select s.stmt# Such that Uses (1,"x")                          
+SyntaxError
+5000
+9 - Uses (lineNum, variable) SyntaxError Invalid that 
+stmt s;
+Select s.stmt# such That Uses (1,"x")                          
+SyntaxError
+5000
+10 - Uses (lineNum, variable) SemanticError Invalid synonym name
+stmt sa;
+Select s.stmt# such that Uses (1,"x")                          
+SemanticError
+5000
+11 - Uses (Wilcard, variable) SemanticError wildcard on first arg.
+stmt s; 
+Select s such that Uses(_, "x")
+SemanticError
+5000
+12 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> variable on first arg
+variable variable;
+Select variable such that Uses (variable,variable)                          
+SemanticError
+5000
+13 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> read on first arg
+read read;
+Select read such that Uses (read,variable)                          
+SemanticError
+5000
+14 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> constant on first arg
+constant constant;
+Select constant such that Uses (constant,variable)                          
+SemanticError
+5000
+15 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> constant on first arg
+constant constant;
+Select constant such that Uses (constant,variable)                          
+SemanticError
+5000
+16 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> stmt on second arg
+stmt stmt, stmt1;
+Select stmt such that Uses (stmt,stmt1)                          
+SemanticError
+5000
+17 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> assign on second arg
+stmt stmt; assign assign;
+Select stmt such that Uses (stmt,assign)                          
+SemanticError
+5000
+18 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> stmt on second arg
+procedure procedure; stmt stmt; 
+Select procedure such that Uses (procedure,stmt)                          
+SemanticError
+5000
+19 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> read on second arg
+procedure procedure; read read;
+Select procedure such that Uses (procedure,read)                          
+SemanticError
+5000
+20 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> read on the first arg and while on second arg
+read read; while while;
+Select read such that Uses (read,while)                          
+SemanticError
+5000
+21 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> procedure on second arg
+procedure p1, p2;
+Select p1 such that Uses (p1, p2)                          
+SemanticError
+5000
+22 - Uses (Synonym, Synonym) SemanticError Invalid synonym -> constant on second arg
+procedure p; constant c;
+Select p such that Uses (p, c)                          
+SemanticError
+5000
+23 - Uses (Synonym, Synonym) SyntaxError Invalid variable -> constant on 2nd arg SemanticError Invalid synonym 
+procedure p1, p2; 
+Select p1 such that Uses (p1, p2) and Uses (p1, 1)                     
+SyntaxError
+5000
+24 - Uses (Wilcard, variable) SemanticError wildcard on first arg.
+stmt s; constant c;
+Select s such that Uses(_, c)
+SemanticError
+5000
+25 - Uses (Synonym, Wildcard) valid stmt
+procedure procedure;
+Select procedure.procName such that Uses(procedure,_)                     
+A, B, C
+5000
+26 - Uses (lineNum, variable) valid stmt
+stmt stmt;
+Select stmt.stmt# such that Uses(4,"O")                     
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000

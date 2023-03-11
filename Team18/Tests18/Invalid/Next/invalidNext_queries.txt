@@ -1,0 +1,160 @@
+1 - Next (lineNum, lineNum) SyntaxError Next -> Nxt
+stmt s;
+Select s such that Nxt(1, 2)
+SyntaxError
+5000
+2 - Next (lineNum, lineNum) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Next("x", 2)
+SyntaxError
+5000
+3 - Next (lineNum, lineNum) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Next(1, "x")
+SyntaxError
+5000
+4 - Next (lineNum, lineNum) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Next("x", "x")
+SyntaxError
+5000
+5 - Next (lineNum, WildCard) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Next("x", _)
+SyntaxError
+5000
+6 - Next (WildCard, lineNum) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Next(_, "x")
+SyntaxError
+5000
+7 - Next (lineNum, lineNum) SyntaxError Extra ; in select statement
+stmt s;
+Select BOOLEAN such that Next(1, 1);
+SyntaxError
+5000
+8 - Next (lineNum, lineNum) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Next (1, 1
+SyntaxError
+5000
+9 - Next (lineNum, lineNum) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Next 1, 1                            )
+SyntaxError
+5000
+10 - Next (lineNum, lineNum) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Next 1                  ,                     1                            
+SyntaxError
+5000
+11 - Next (lineNum, lineNum) SyntaxError Invalid such 
+stmt s;
+Select s.stmt# Such that Next (1,1)                          
+SyntaxError
+5000
+12 - Next (lineNum, lineNum) SyntaxError Invalid that 
+stmt s;
+Select s.stmt# such That Next (1,1)                          
+SyntaxError
+5000
+13 - Next (lineNum, lineNum) SemanticError Invalid synonym name
+stmt sa;
+Select s.stmt# such that Next (1,1)                          
+SemanticError
+5000
+14 - Next (Synonym, lineNum) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Next (variable,1)                          
+SemanticError
+5000
+15 - F6ollows (Synonym, Synonym) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Next (variable,variable)                          
+SemanticError
+5000
+16 - Next (lineNum, Synonym) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Next (1,variable)                          
+SemanticError
+5000
+17 - Next (Synonym, Wildcard) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Next (variable,_)                          
+SemanticError
+5000
+18 - Next (Wildcard, Synonym) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Next (_,variable)                      
+SemanticError
+5000
+19 - Next (Wildcard, Synonym) SyntaxError No brackets SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Next (_,variable) and Next 1, 1)                      
+SyntaxError
+5000
+20 - Next (Synonym, lineNum) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Next (procedure,1)                  
+SemanticError
+5000
+21 - Next (lineNum, Synonym) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Next (1,procedure)                     
+SemanticError
+5000
+22 - Next (Synonym, Synonym) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Next (procedure,procedure)                     
+SemanticError
+5000
+23 - Next (Synonym, Wildcard) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Next (procedure,_)                     
+SemanticError
+5000
+24 - Next (Wildcard, Synonym) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Next (_,procedure)                     
+SemanticError
+5000
+25 - Next (Synonym, lineNum) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Next (constant,1)                     
+SemanticError
+5000
+26 - Next (lineNum, Synonym) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Next (1,constant)                     
+SemanticError
+5000
+27 - Next (Synonym, Synonym) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Next (constant,constant)                     
+SemanticError
+5000
+28 - Next (Synonym, Wildcard) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Next (constant,_)                     
+SemanticError
+5000
+29 - Next (Wildcard, Synonym) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Next (_,constant)                     
+SemanticError
+5000
+30 - Next (Wildcard, Wildcard) valid stmt
+stmt stmt;
+Select stmt.stmt# such that Next(_,_)                     
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+5000
+31 - Next (lineNum, lineNum) valid stmt
+stmt stmt;
+Select stmt.stmt# such that Next(1,1)                     
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+5000
+32 - Next (lineNum, lineNum) valid stmt
+stmt stmt;
+Select stmt such that Next(4,7)                     
+none
+5000

@@ -1,0 +1,32 @@
+procedure A {
+  while (x == 1) {
+	x = y;
+	y = y - 1;
+  }
+  if (y == 0) then {
+	total = x + y;
+  } else {
+	total = x - y;
+  }
+  while (total != 0) {
+	total = total - 1;
+  }
+  x = x + 1;
+  y = y + 2;
+  z = z + 3;
+  call B;
+}
+
+procedure B {
+  a = A + 1;
+  b = B + 1;
+  c = C + 1;
+  call C;
+}
+
+procedure C {
+  i = I + 1;
+  u = U + 1;
+  o = O + 1;
+}
+

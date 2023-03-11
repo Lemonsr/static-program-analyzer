@@ -1,0 +1,130 @@
+1 - Modifies (lineNum, variable) SyntaxError Modifies -> ModifIes
+stmt s; 
+Select s such that ModifIes(1, "x")
+SyntaxError
+5000
+2 - Modifies (lineNum, variable) SyntaxError entRef -> stmRef
+stmt s; 
+Select s such that Modifies(1, 2)
+SyntaxError
+5000
+3 - Modifies (lineNum, variable) SyntaxError entRef -> stmRef
+stmt s; 
+Select s such that Modifies("A", 2)
+SyntaxError
+5000
+4 - Modifies (lineNum, variable) SyntaxError Extra ; in select statement
+stmt s;
+Select BOOLEAN such that Modifies(1, "x");
+SyntaxError
+5000
+5 - Modifies (lineNum, variable) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Modifies (1, "x"
+SyntaxError
+5000
+6 - Modifies (lineNum, variable) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Modifies 1, "x"                            )
+SyntaxError
+5000
+7 - Modifies (lineNum, variable) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Modifies 1                  ,                     "x"                            
+SyntaxError
+5000
+8 - Modifies (lineNum, variable) SyntaxError Invalid such 
+stmt s;
+Select s.stmt# Such that Modifies (1,"x")                          
+SyntaxError
+5000
+9 - Modifies (lineNum, variable) SyntaxError Invalid that 
+stmt s;
+Select s.stmt# such That Modifies (1,"x")                          
+SyntaxError
+5000
+10 - Modifies (lineNum, variable) SemanticError Invalid synonym name
+stmt sa;
+Select s.stmt# such that Modifies (1,"x")                          
+SemanticError
+5000
+11 - Modifies (Wilcard, variable) SemanticError wildcard on first arg.
+stmt s; 
+Select s such that Modifies(_, "x")
+SemanticError
+5000
+12 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> variable on first arg
+variable variable;
+Select variable such that Modifies (variable,variable)                          
+SemanticError
+5000
+13 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> print on first arg
+print print;
+Select print such that Modifies (print,variable)                          
+SemanticError
+5000
+14 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> constant on first arg
+constant constant;
+Select constant such that Modifies (constant,variable)                          
+SemanticError
+5000
+15 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> constant on first arg
+constant constant;
+Select constant such that Modifies (constant,variable)                          
+SemanticError
+5000
+16 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> stmt on second arg
+stmt stmt, stmt1;
+Select stmt such that Modifies (stmt,stmt1)                          
+SemanticError
+5000
+17 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> assign on second arg
+stmt stmt; assign assign;
+Select stmt such that Modifies (stmt,assign)                          
+SemanticError
+5000
+18 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> stmt on second arg
+procedure procedure; stmt stmt; 
+Select procedure such that Modifies (procedure,stmt)                          
+SemanticError
+5000
+19 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> read on second arg
+procedure procedure; read read;
+Select procedure such that Modifies (procedure,read)                          
+SemanticError
+5000
+20 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> print on the first arg and while on second arg
+print print; while while;
+Select print such that Modifies (print,while)                          
+SemanticError
+5000
+21 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> procedure on second arg
+procedure p1, p2;
+Select p1 such that Modifies (p1, p2)                          
+SemanticError
+5000
+22 - Modifies (Synonym, Synonym) SemanticError Invalid synonym -> constant on second arg
+procedure p; constant c;
+Select p such that Modifies (p, c)                          
+SemanticError
+5000
+23 - Modifies (Synonym, Synonym) SyntaxError Invalid variable -> constant on 2nd arg SemanticError Invalid synonym 
+procedure p1, p2; 
+Select p1 such that Modifies (p1, p2) and Modifies (p1, 1)                     
+SyntaxError
+5000
+24 - Modifies (Wilcard, variable) SemanticError wildcard on first arg.
+stmt s; constant c;
+Select s such that Modifies(_, c)
+SemanticError
+5000
+25 - Modifies (Synonym, Wildcard) valid stmt
+procedure procedure;
+Select procedure.procName such that Modifies(procedure,_)                     
+A, B, C
+5000
+26 - Modifies (lineNum, variable) valid stmt
+stmt stmt;
+Select stmt.stmt# such that Modifies(4,"o")                     
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
