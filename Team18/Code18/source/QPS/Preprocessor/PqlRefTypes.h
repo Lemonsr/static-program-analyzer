@@ -23,4 +23,4 @@ inline const std::unordered_set<ArgumentType> stmtEntityRef{
   spa::SYNONYM,
   spa::LITERAL_STRING
 };
-}
+}  // namespace spa
