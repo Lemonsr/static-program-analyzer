@@ -31,18 +31,20 @@ public:
   TEST_METHOD(TestGetCfgNode) {
     spa::CFGStorage cfgStorage;
     cfgStorage.setCfgNodeTable(cfgNodeTable);
-    std::vector<spa::CFGNode*> expected = { &cfgNodeOne };
 
     spa::QueryResult queryResult = cfgStorage.getCfgNode(1);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-    Assert::IsTrue(expected == queryResult.getCfgNodes());
+    Assert::IsTrue(queryResult.getCfgNodes().size() == size_t(1));
+    spa::CFGNode result = *queryResult.getCfgNodes()[0];
+    Assert::IsTrue(cfgNodeOne == result);
 
     queryResult = cfgStorage.getCfgNode(2);
 
-    expected = { &cfgNodeTwo };
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
-    Assert::IsTrue(expected == queryResult.getCfgNodes());
+    Assert::IsTrue(queryResult.getCfgNodes().size() == size_t(1));
+    result = *queryResult.getCfgNodes()[0];
+    Assert::IsTrue(cfgNodeTwo == result);
 
     queryResult = cfgStorage.getCfgNode(4);
 
@@ -78,25 +80,29 @@ public:
     Assert::IsTrue(cfgStorage.addEdge(2, 3, relationshipStorage));
     Assert::IsFalse(cfgStorage.addEdge(1, 2, relationshipStorage));
 
-    std::unordered_set<spa::CFGNode*> expected = { &cfgNodeTwo };
+    spa::QueryResult nodeOneResult = cfgStorage.getCfgNode(1);
+    spa::QueryResult nodeTwoResult = cfgStorage.getCfgNode(2);
+    spa::QueryResult nodeThreeResult = cfgStorage.getCfgNode(3);
 
-    spa::QueryResult queryResult = cfgStorage.getCfgNode(1);
-    spa::CFGNode* resultNode = queryResult.getCfgNodes()[0];
-    Assert::IsTrue(resultNode->getIncomingEdges().empty());
-    Assert::IsTrue(expected == resultNode->getOutgoingEdges());
+    spa::CFGNode* nodeOne = nodeOneResult.getCfgNodes()[0];
+    spa::CFGNode* nodeTwo = nodeTwoResult.getCfgNodes()[0];
+    spa::CFGNode* nodeThree = nodeThreeResult.getCfgNodes()[0];
 
-    expected = { &cfgNodeOne };
+    Assert::IsTrue(nodeOne->getIncomingEdges().empty());
 
-    queryResult = cfgStorage.getCfgNode(2);
-    resultNode = queryResult.getCfgNodes()[0];
-    Assert::IsTrue(expected == resultNode->getIncomingEdges());
+    std::unordered_set<spa::CFGNode*> nodeOneOutgoing = nodeOne->getOutgoingEdges();
+    Assert::IsTrue(nodeOneOutgoing.find(nodeTwo) != nodeOneOutgoing.end());
 
-    expected = { &cfgNodeThree };
-    Assert::IsTrue(expected == resultNode->getOutgoingEdges());
+    std::unordered_set<spa::CFGNode*> nodeTwoIncoming = nodeTwo->getIncomingEdges();
+    Assert::IsTrue(nodeTwoIncoming.find(nodeOne) != nodeTwoIncoming.end());
 
-    queryResult = cfgStorage.getCfgNode(3);
-    resultNode = queryResult.getCfgNodes()[0];
-    Assert::IsTrue(resultNode->getOutgoingEdges().empty());
+    std::unordered_set<spa::CFGNode*> nodeTwoOutgoing = nodeTwo->getOutgoingEdges();
+    Assert::IsTrue(nodeTwoOutgoing.find(nodeThree) != nodeTwoOutgoing.end());
+
+    std::unordered_set<spa::CFGNode*> nodeThreeIncoming = nodeThree->getIncomingEdges();
+    Assert::IsTrue(nodeThreeIncoming.find(nodeTwo) != nodeThreeIncoming.end());
+
+    Assert::IsTrue(nodeThree->getOutgoingEdges().empty());
   }
 
   TEST_METHOD(TestAddModifiedVariable) {

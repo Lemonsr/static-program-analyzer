@@ -28,6 +28,5 @@ class CFGStorage {
   QueryResult getCfgNode(int lineNumber);
 
   void setCfgNodeTable(std::unordered_map<int, spa::CFGNode> cfgNodeTable);
-  void setCfgEndNodeTable(std::unordered_map<std::string, std::unordered_set<int>> cfgEndNodeTable);
 };
 }  // namespace spa
