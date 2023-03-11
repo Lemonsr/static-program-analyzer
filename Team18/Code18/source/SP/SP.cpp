@@ -23,7 +23,7 @@ void spa::SP::processSource() {
     }
     auto updatedStream = validator.getUpdatedStream();
     SpParser parser = SpParser(updatedStream);
-    std::vector<ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<ProcedureStatement>> procedureList = parser.parse();
     DesignExtractor designExtractor = DesignExtractor(pkbManager, procedureList);
     designExtractor.extractRelationship();
 }

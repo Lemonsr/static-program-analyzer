@@ -10,13 +10,13 @@ namespace spa {
 class ProcedureStatement {
  private:
   Token procedureVarToken;
-  std::vector<ProgramStatement*> statementLst;
+  std::vector<std::shared_ptr<ProgramStatement>> statementLst;
   std::unordered_set<std::string> calledVars;
 
  public:
-  ProcedureStatement(Token procedureVarToken, std::vector<ProgramStatement*> statementLst);
+  ProcedureStatement(Token procedureVarToken, std::vector<std::shared_ptr<ProgramStatement>> statementLst);
   Token getProcedureVarToken();
-  std::vector<ProgramStatement*> getStatementLst();
+  std::vector<std::shared_ptr<ProgramStatement>>& getStatementLst();
   void addCalledVars(std::string);
   std::unordered_set<std::string>& getCalledVars();
 };
