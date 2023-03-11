@@ -1,0 +1,130 @@
+1 - if i(Wildcard, Wildcard) SyntaxError -> Invalid declaration
+if i
+Select i pattern i (_, _, _)
+SyntaxError
+5000
+2 - if i(Wildcard, Wildcard, Wildcard) SyntaxError -> Invalid declaration
+if if;
+Select i pattern i (_, _, _)
+SemanticError
+5000
+3 - if i(Wildcard, Wildcard, Wildcard) SyntaxError pattern -> Pattern
+if i;
+Select i Pattern i (_, _, _)
+SyntaxError
+5000
+4 - if i(Wildcard, Wildcard, Wildcard) SyntaxError syn-if does not exist
+if i;
+Select i pattern (_, _, _)
+SyntaxError
+5000
+5 - if i(Wildcard, Wildcard, Wildcard) SemanticError syn-if does not exist
+if i; print print;
+Select i pattern print (_, _, _)
+SemanticError
+5000
+6 - if i(Wildcard, Wildcard, Wildcard) SyntaxError bracket is missing
+if i;
+Select i pattern i (_, _, _
+SyntaxError
+5000
+7 - if i(Wildcard, Wildcard, Wildcard) SyntaxError bracket is missing
+if i;
+Select i pattern i _, _, _                          )
+SyntaxError
+5000
+8 - if i(Wildcard, Wildcard, Wildcard) SyntaxError bracket is missing
+if i;
+Select i pattern i _, _, _                           
+SyntaxError
+5000
+9 - if i(Wildcard, Wildcard, Wildcard) SyntaxError 2nd arg not Wildcard
+if i;
+Select i pattern i (_, x, _)                             
+SyntaxError
+5000
+10 - if i(Wildcard, Wildcard, Wildcard) SyntaxError 2nd arg not Wildcard
+if i;
+Select i pattern i (_, 'x', _)                             
+SyntaxError
+5000
+11 - if i(Wildcard, Wildcard, Wildcard) SyntaxError 3rd arg not Wildcard
+if i;
+Select i pattern i (_, _, x)                             
+SyntaxError
+5000
+12 - if i(Wildcard, Wildcard, Wildcard) SyntaxError 3rd arg not Wildcard
+if i;
+Select i pattern i (_, _, 'x')                             
+SyntaxError
+5000
+13 - if i(Wildcard, Wildcard, Wildcard) SyntaxError 2nd and 3rd arg not Wildcard
+if i;
+Select i pattern i (_, 'x', 'x')                             
+SyntaxError
+5000
+14 - if i(Wildcard, Wildcard, Wildcard) SyntaxError 2nd and 3rd arg not Wildcard
+if i;
+Select i pattern i (_, x, x)                             
+SyntaxError
+5000
+15 - if i(variable, Wildcard, Wildcard) SemanticError variable double quotation mark is missing or invalid synonym name
+if i;
+Select i pattern i (x, _, _)                             
+SemanticError
+5000
+16 - if i(variable, Wildcard, Wildcard) SyntaxError variable has ' ' instead of double quotation mark
+if i;
+Select i pattern i ('x', _, _)                             
+SyntaxError
+5000
+17 - if i(variable, Wildcard, Wildcard) SyntaxError entRef -> stmtRef
+if i;
+Select i pattern i (1, _, _)                             
+SyntaxError
+5000
+18 - if i(Wildcard, Wildcard, Wildcard) SyntaxError 2nd arg not Wildcard
+if i;
+Select i pattern i (_, 1, _)                             
+SyntaxError
+5000
+19 - if i(Wildcard, Wildcard, Wildcard) SyntaxError 3rd arg not Wildcard
+if i;
+Select i pattern i (_, _, 1)                             
+SyntaxError
+5000
+20 - if i(Wildcard, Wildcard, Wildcard) SyntaxError 2nd and 3rd arg not Wildcard
+if i;
+Select i pattern i (_, 1, 1)                             
+SyntaxError
+5000
+21 - if i(Wildcard, Wildcard, Wildcard) SyntaxError only 1 arg is populated
+if i;
+Select i pattern i (_)                             
+SyntaxError
+5000
+22 - if i(Wildcard, Wildcard, Wildcard) SemanticError only 2 arg is populated (because assign/while exist)
+if i;
+Select i pattern i (_,_)                             
+SemanticError
+5000
+23 - if i(Synonym, Wildcard, Wildcard) SemanticError 1st arg is not a variable synonym
+if i;
+Select i pattern i (i, _, _)                             
+SemanticError
+5000
+24 - Pattern if(varSynonym, _)
+if i; variable v;
+Select v pattern i(v, _, _)
+while, that, Variable, UsesUsed
+5000
+25 - Pattern if(Wildcard, Wildcard, Wildcard)
+if i;
+Select i pattern i(_, _, _)
+2, 5, 41
+5000
+26 - if i(Wildcard, Wildcard, Wildcard) SyntaxError pattern must follow with ident
+if i; 
+Select i pattern 3 (_, _, _)
+SyntaxError
+5000
