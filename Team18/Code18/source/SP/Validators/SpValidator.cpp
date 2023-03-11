@@ -125,14 +125,6 @@ void spa::SpValidator::validateStmt() {
     }
 }
 
-void spa::SpValidator::validateVar() {
-    Token token = peekNextToken();
-    TokenType tokenType = token.getType();
-    if (tokenType != TOKEN_NAME) {
-        throw std::runtime_error("Invalid variable name");
-    }
-}
-
 // assign: var_name '=' tokensToCheck ';'
 void spa::SpValidator::validateEqual() {
     next(2);  // Already checked NAME + EQUAL
@@ -173,7 +165,6 @@ void spa::SpValidator::validateReadPrintCall() {
         throw std::exception("Unknown Statement");
     }
 
-    validateVar();
     next();  // var_name
 
     // Check that stmt is closed with ;
