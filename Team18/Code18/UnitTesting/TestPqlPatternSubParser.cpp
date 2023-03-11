@@ -17,6 +17,20 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 namespace UnitTesting {
   TEST_CLASS(TestPqlPatternSubParser) {
 public:
+  TEST_METHOD(TestFirstArgInteger) {
+    spa::Stream<spa::Token> tokens;
+    tokens.pushBack({ spa::TOKEN_NAME, "a" });
+    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+    tokens.pushBack({ spa::TOKEN_INTEGER, "123" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_UNDERSCORE, "_" });
+    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+    spa::ParsedQuery query;
+    query.addDeclaration("a", spa::ASSIGN);
+    spa::PqlPatternSubParser parser;
+    spa::PqlParseStatus status = parser.parse(tokens, query);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
+  }
   TEST_METHOD(TestWildcard) {
     spa::Stream<spa::Token> tokens;
     tokens.pushBack({ spa::TOKEN_NAME, "a" });

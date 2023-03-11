@@ -225,6 +225,9 @@
     <ClInclude Include="..\source\PKB\Storage\CFGStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\PqlRefTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\PKB\PKB.cpp">
