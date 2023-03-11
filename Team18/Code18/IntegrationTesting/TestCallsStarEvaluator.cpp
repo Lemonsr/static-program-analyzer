@@ -186,7 +186,6 @@ public:
     Assert::IsTrue(rows[1][1].getString() == "third");
     Assert::IsTrue(rows[2][0].getString() == "second");
     Assert::IsTrue(rows[2][1].getString() == "third");
-
   }
 
   TEST_METHOD(TestUnderscoreProcNotExists) {
