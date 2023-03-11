@@ -37,7 +37,8 @@ invalid_query_types = [
     'Calls',
     'CallsStar',
     'Next',
-    'Pattern'
+    'Pattern',
+    'MultiClause'
 ]
 
 pattern_types = [
