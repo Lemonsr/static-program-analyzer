@@ -21,14 +21,6 @@ spa::QpsResult spa::QPS::evaluate(std::string query, PKBManager& pkbManager) {
   }
 
   ParsedQuery& parsedQuery = parseResult.second;
-
-  PqlSemanticChecker pqlSemanticChecker;
-  bool isValid = pqlSemanticChecker.isSemanticallyValid(parsedQuery);
-  if (!isValid) {
-    result.setErrorMessage("SemanticError");
-    return result;
-  }
-
   std::unique_ptr<QpsEvaluator> qpsEvaluator = std::make_unique<QpsQueryEvaluator>(parsedQuery);
   QpsResultTable resultTable = qpsEvaluator->evaluate(pkbManager);
 

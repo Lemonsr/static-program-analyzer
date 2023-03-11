@@ -1,0 +1,120 @@
+1 - Uses (Procedure, VarName)
+procedure p;
+Select p such that Uses(p, "y")
+If, B, E
+5000
+2 - Uses (Procedure, WildCard)
+procedure p;
+Select p.procName such that Uses(p, _)
+If, B, Detached, E
+5000
+3 - Uses (Procedure, Variable)
+procedure p; variable v;
+Select p such that Uses(p, v)
+If, B, Detached, E
+5000
+4 - Uses (Procedure, Variable)
+procedure p; variable v;
+Select v such that Uses(p, v)
+x, y, z, b
+5000
+5 - Uses (Procedure, Variable)
+procedure p; variable v; read read;
+Select <p, v, read.varName> such that Uses(p, v)
+If z B, If x B, If y B, If b B, B y B, B b B, Detached x B, E x B, E y B
+5000
+6 - Uses (Call, VarName)
+call call;
+Select call such that Uses(call, "x")
+7
+5000
+7 - Uses (Call, WildCard)
+call call;
+Select call.procName such that Uses(call, _)
+B, E
+5000
+8 - Uses (Call, Variable)
+call call; variable variable;
+Select call.stmt# such that Uses(call, variable)
+3, 7
+5000
+9 - Uses (Call, Variable)
+call call; variable variable; 
+Select variable such that Uses(call, variable)
+x, y, b
+5000
+10 - Uses (Call, Variable)
+call call; variable variable; read read;
+Select <call.procName,variable, read.varName> such that Uses(call, variable)
+B y B, B b B, E x B, E y B
+5000
+11 - Uses (CallLineNo, VarName) (BOOL)
+stmt s;
+Select s such that Uses(3, "b")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+5000
+12 - Uses (LineNo, VarName) (BOOL)
+stmt s;
+Select s such that Uses(2, "UNKNOWN")
+none
+5000
+13 - Uses (CallLineNo, WildCard) (BOOL)
+stmt s; read read;
+Select read.stmt# such that Uses(3, _)
+9
+5000
+14 - Uses (LineNo, VarName) (BOOL)
+print print; 
+Select print.varName such that Uses(2, "x")
+y
+5000
+15 - Uses (CallLineNo, Variable)
+variable variable;
+Select variable.varName such that Uses(3, variable)
+y, b
+5000
+16 - Uses (ProcName, VarName) (BOOL)
+if if;
+Select if.stmt# such that Uses("Detached", "UNKNOWN")
+none
+5000
+17 - Uses (ProcName, WildCard) (BOOL)
+while while;
+Select while such that Uses("If", _)
+none
+5000
+18 - Uses (ProcName, Variable)
+variable variable;
+Select variable.varName such that Uses("E", variable)
+x, y
+5000  
+19 - Uses (ProcName, Variable)
+variable variable; read read; print print;
+Select <variable.varName, read.varName, print> such that Uses("E", variable)
+x B 8, y B 8
+5000
+20 - Uses (ProcName, Variable)
+variable variable;
+Select BOOLEAN such that Uses("Detached", variable)
+TRUE
+5000
+21 - Uses (ProcName, Variable)
+
+Select BOOLEAN
+TRUE
+5000
+22 - Uses (ProcName, Variable)
+procedure p;
+Select BOOLEAN such that Uses(p, "doesntExist")
+FALSE
+5000
+23 - Multiple Chain of same 8 clauses
+variable variable; procedure procedure;
+Select <procedure, variable> such that Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable)
+If x, If y, If z, If b, B y, B b, Detached x, E x, E y
+5000
+24 - 5 select of the same pair
+read read; print print;
+Select <read.varName, print.varName, read.varName, print.varName, read.varName, print.varName, read.varName, print.varName, read.varName, print.varName> such that Uses("B","b")
+B y B y B y B y B y
+5000

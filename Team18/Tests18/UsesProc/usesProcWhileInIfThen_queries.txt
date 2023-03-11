@@ -1,0 +1,120 @@
+1 - Uses (Procedure, VarName)
+procedure p;
+Select p such that Uses(p, "x")
+A, B, C
+5000
+2 - Uses (Procedure, WildCard)
+procedure p;
+Select p.procName such that Uses(p, _)
+A, B, C, D, E, F
+5000
+3 - Uses (Procedure, Variable)
+procedure p; variable v;
+Select p such that Uses(p, v)
+A, B, C, D, E, F
+5000
+4 - Uses (Procedure, Variable)
+procedure p; variable v;
+Select v such that Uses(p, v)
+A01Uses, x, y, count
+5000
+5 - Uses (Procedure, Variable)
+procedure p; variable v; read read;
+Select <p, v, read.varName> such that Uses(p, v)
+A A01Uses extra02, A x extra02, A y extra02, A count extra02, B x extra02, B count extra02, B y extra02, C x extra02, C count extra02, D count extra02, E count extra02, F y extra02, F count extra02
+5000
+6 - Uses (Call, VarName)
+call call;
+Select call such that Uses(call, "x")
+5, 6
+5000
+7 - Uses (Call, WildCard)
+call call;
+Select call.procName such that Uses(call, _)
+B, C, D, E, F
+5000
+8 - Uses (Call, Variable)
+call call; variable variable;
+Select call.stmt# such that Uses(call, variable)
+5, 6, 8, 9, 10, 13, 16, 18
+5000
+9 - Uses (Call, Variable)
+call call; variable variable; 
+Select variable such that Uses(call, variable)
+x, y, count
+5000
+10 - Uses (Call, Variable)
+call call; variable variable; read read;
+Select <call.procName,variable, read.varName> such that Uses(call, variable)
+B x extra02, B count extra02, B y extra02, C x extra02, C count extra02, D count extra02, E count extra02, F y extra02, F count extra02
+5000
+11 - Uses (CallLineNo, VarName) (BOOL)
+stmt s;
+Select s such that Uses(5, "y")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+5000
+12 - Uses (LineNo, VarName) (BOOL)
+stmt s;
+Select s such that Uses(2, "extra02")
+none
+5000
+13 - Uses (CallLineNo, WildCard) (BOOL)
+stmt s; read read;
+Select read.stmt# such that Uses(5, _)
+3
+5000
+14 - Uses (LineNo, VarName) (BOOL)
+print print; 
+Select print.varName such that Uses(2, "x")
+count, y
+5000
+15 - Uses (CallLineNo, Variable)
+variable variable;
+Select variable.varName such that Uses(5, variable)
+x, y, count
+5000
+16 - Uses (ProcName, VarName) (BOOL)
+if if;
+Select if.stmt# such that Uses("A", "x")
+2
+5000
+17 - Uses (ProcName, WildCard) (BOOL)
+while while;
+Select while such that Uses("A", _)
+4
+5000
+18 - Uses (ProcName, Variable)
+variable variable;
+Select variable.varName such that Uses("D", variable)
+count
+5000  
+19 - Uses (ProcName, Variable)
+variable variable; read read; print print;
+Select <variable.varName, read.varName, print> such that Uses("D", variable)
+count extra02 14, count extra02 17
+5000
+20 - Uses (ProcName, Variable)
+variable variable;
+Select BOOLEAN such that Uses("D", variable)
+TRUE
+5000
+21 - Uses (ProcName, Variable)
+
+Select BOOLEAN
+TRUE
+5000
+22 - Uses (ProcName, Variable)
+procedure p;
+Select BOOLEAN such that Uses(p, "doesntExist")
+FALSE
+5000
+23 - Multiple Chain of same 8 clauses
+variable variable; procedure procedure;
+Select <procedure, variable> such that Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable)
+A A01Uses, A x, A y, A count, B x, B y, B count, C x, C count, D count, E count, F y, F count
+5000
+24 - 5 select of the same pair
+read read; print print;
+Select <read.varName, print.varName, read.varName, print.varName, read.varName, print.varName, read.varName, print.varName, read.varName, print.varName> such that Uses("D","count")
+extra02 count extra02 count extra02 count extra02 count extra02 count, extra02 y extra02 y extra02 y extra02 y extra02 y
+5000

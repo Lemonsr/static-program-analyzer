@@ -1,0 +1,115 @@
+1 - Uses (Procedure, VarName)
+procedure p;
+Select p such that Uses(p, "x")
+A, B, C, F
+5000
+2 - Uses (Procedure, WildCard)
+procedure p;
+Select p.procName such that Uses(p, _)
+A, B, C, D, E, F, G, Aextra, Bextra
+5000
+3 - Uses (Procedure, Variable)
+procedure p; variable v;
+Select p such that Uses(p, v)
+A, B, C, D, E, F, G, Aextra, Bextra
+5000
+4 - Uses (Procedure, Variable)
+procedure p; variable v;
+Select v such that Uses(p, v)
+y, x, z, total, Uses, Modifies, read, print, Aextra, call, if, Bextra, wontCall
+5000
+5 - Uses (Procedure, Variable)
+procedure p; variable v; read read; call call;
+Select <p, v, read.varName, call.procName> such that Uses(p, v)
+A y y B, A x y B, A z y B, B x y B, B y y B, B z y B, C x y B, C y y B, C z y B, D total y B, E total y B, F x y B, F y y B, F z y B, G z y B, Aextra Uses y B, Aextra Modifies y B, Aextra read y B, Aextra print y B, Aextra Aextra y B, Bextra Uses y B, Bextra Modifies y B, Bextra read y B, Bextra print y B, Bextra call y B, Bextra if y B, Bextra Bextra y B, Bextra wontCall y B, A y x B, A x x B, A z x B, B x x B, B y x B, B z x B, C x x B, C y x B, C z x B, D total x B, E total x B, F x x B, F y x B, F z x B, G z x B, Aextra Uses x B, Aextra Modifies x B, Aextra read x B, Aextra print x B, Aextra Aextra x B, Bextra Uses x B, Bextra Modifies x B, Bextra read x B, Bextra print x B, Bextra call x B, Bextra if x B, Bextra Bextra x B, Bextra wontCall x B, A y Aextra B, A x Aextra B, A z Aextra B, B x Aextra B, B y Aextra B, B z Aextra B, C x Aextra B, C y Aextra B, C z Aextra B, D total Aextra B, E total Aextra B, F x Aextra B, F y Aextra B, F z Aextra B, G z Aextra B, Aextra Uses Aextra B, Aextra Modifies Aextra B, Aextra read Aextra B, Aextra print Aextra B, Aextra Aextra Aextra B, Bextra Uses Aextra B, Bextra Modifies Aextra B, Bextra read Aextra B, Bextra print Aextra B, Bextra call Aextra B, Bextra if Aextra B, Bextra Bextra Aextra B, Bextra wontCall Aextra B, A y Bextra B, A x Bextra B, A z Bextra B, B x Bextra B, B y Bextra B, B z Bextra B, C x Bextra B, C y Bextra B, C z Bextra B, D total Bextra B, E total Bextra B, F x Bextra B, F y Bextra B, F z Bextra B, G z Bextra B, Aextra Uses Bextra B, Aextra Modifies Bextra B, Aextra read Bextra B, Aextra print Bextra B, Aextra Aextra Bextra B, Bextra Uses Bextra B, Bextra Modifies Bextra B, Bextra read Bextra B, Bextra print Bextra B, Bextra call Bextra B, Bextra if Bextra B, Bextra Bextra Bextra B, Bextra wontCall Bextra B, A y y C, A x y C, A z y C, B x y C, B y y C, B z y C, C x y C, C y y C, C z y C, D total y C, E total y C, F x y C, F y y C, F z y C, G z y C, Aextra Uses y C, Aextra Modifies y C, Aextra read y C, Aextra print y C, Aextra Aextra y C, Bextra Uses y C, Bextra Modifies y C, Bextra read y C, Bextra print y C, Bextra call y C, Bextra if y C, Bextra Bextra y C, Bextra wontCall y C, A y x C, A x x C, A z x C, B x x C, B y x C, B z x C, C x x C, C y x C, C z x C, D total x C, E total x C, F x x C, F y x C, F z x C, G z x C, Aextra Uses x C, Aextra Modifies x C, Aextra read x C, Aextra print x C, Aextra Aextra x C, Bextra Uses x C, Bextra Modifies x C, Bextra read x C, Bextra print x C, Bextra call x C, Bextra if x C, Bextra Bextra x C, Bextra wontCall x C, A y Aextra C, A x Aextra C, A z Aextra C, B x Aextra C, B y Aextra C, B z Aextra C, C x Aextra C, C y Aextra C, C z Aextra C, D total Aextra C, E total Aextra C, F x Aextra C, F y Aextra C, F z Aextra C, G z Aextra C, Aextra Uses Aextra C, Aextra Modifies Aextra C, Aextra read Aextra C, Aextra print Aextra C, Aextra Aextra Aextra C, Bextra Uses Aextra C, Bextra Modifies Aextra C, Bextra read Aextra C, Bextra print Aextra C, Bextra call Aextra C, Bextra if Aextra C, Bextra Bextra Aextra C, Bextra wontCall Aextra C, A y Bextra C, A x Bextra C, A z Bextra C, B x Bextra C, B y Bextra C, B z Bextra C, C x Bextra C, C y Bextra C, C z Bextra C, D total Bextra C, E total Bextra C, F x Bextra C, F y Bextra C, F z Bextra C, G z Bextra C, Aextra Uses Bextra C, Aextra Modifies Bextra C, Aextra read Bextra C, Aextra print Bextra C, Aextra Aextra Bextra C, Bextra Uses Bextra C, Bextra Modifies Bextra C, Bextra read Bextra C, Bextra print Bextra C, Bextra call Bextra C, Bextra if Bextra C, Bextra Bextra Bextra C, Bextra wontCall Bextra C, A y y E, A x y E, A z y E, B x y E, B y y E, B z y E, C x y E, C y y E, C z y E, D total y E, E total y E, F x y E, F y y E, F z y E, G z y E, Aextra Uses y E, Aextra Modifies y E, Aextra read y E, Aextra print y E, Aextra Aextra y E, Bextra Uses y E, Bextra Modifies y E, Bextra read y E, Bextra print y E, Bextra call y E, Bextra if y E, Bextra Bextra y E, Bextra wontCall y E, A y x E, A x x E, A z x E, B x x E, B y x E, B z x E, C x x E, C y x E, C z x E, D total x E, E total x E, F x x E, F y x E, F z x E, G z x E, Aextra Uses x E, Aextra Modifies x E, Aextra read x E, Aextra print x E, Aextra Aextra x E, Bextra Uses x E, Bextra Modifies x E, Bextra read x E, Bextra print x E, Bextra call x E, Bextra if x E, Bextra Bextra x E, Bextra wontCall x E, A y Aextra E, A x Aextra E, A z Aextra E, B x Aextra E, B y Aextra E, B z Aextra E, C x Aextra E, C y Aextra E, C z Aextra E, D total Aextra E, E total Aextra E, F x Aextra E, F y Aextra E, F z Aextra E, G z Aextra E, Aextra Uses Aextra E, Aextra Modifies Aextra E, Aextra read Aextra E, Aextra print Aextra E, Aextra Aextra Aextra E, Bextra Uses Aextra E, Bextra Modifies Aextra E, Bextra read Aextra E, Bextra print Aextra E, Bextra call Aextra E, Bextra if Aextra E, Bextra Bextra Aextra E, Bextra wontCall Aextra E, A y Bextra E, A x Bextra E, A z Bextra E, B x Bextra E, B y Bextra E, B z Bextra E, C x Bextra E, C y Bextra E, C z Bextra E, D total Bextra E, E total Bextra E, F x Bextra E, F y Bextra E, F z Bextra E, G z Bextra E, Aextra Uses Bextra E, Aextra Modifies Bextra E, Aextra read Bextra E, Aextra print Bextra E, Aextra Aextra Bextra E, Bextra Uses Bextra E, Bextra Modifies Bextra E, Bextra read Bextra E, Bextra print Bextra E, Bextra call Bextra E, Bextra if Bextra E, Bextra Bextra Bextra E, Bextra wontCall Bextra E, A y y F, A x y F, A z y F, B x y F, B y y F, B z y F, C x y F, C y y F, C z y F, D total y F, E total y F, F x y F, F y y F, F z y F, G z y F, Aextra Uses y F, Aextra Modifies y F, Aextra read y F, Aextra print y F, Aextra Aextra y F, Bextra Uses y F, Bextra Modifies y F, Bextra read y F, Bextra print y F, Bextra call y F, Bextra if y F, Bextra Bextra y F, Bextra wontCall y F, A y x F, A x x F, A z x F, B x x F, B y x F, B z x F, C x x F, C y x F, C z x F, D total x F, E total x F, F x x F, F y x F, F z x F, G z x F, Aextra Uses x F, Aextra Modifies x F, Aextra read x F, Aextra print x F, Aextra Aextra x F, Bextra Uses x F, Bextra Modifies x F, Bextra read x F, Bextra print x F, Bextra call x F, Bextra if x F, Bextra Bextra x F, Bextra wontCall x F, A y Aextra F, A x Aextra F, A z Aextra F, B x Aextra F, B y Aextra F, B z Aextra F, C x Aextra F, C y Aextra F, C z Aextra F, D total Aextra F, E total Aextra F, F x Aextra F, F y Aextra F, F z Aextra F, G z Aextra F, Aextra Uses Aextra F, Aextra Modifies Aextra F, Aextra read Aextra F, Aextra print Aextra F, Aextra Aextra Aextra F, Bextra Uses Aextra F, Bextra Modifies Aextra F, Bextra read Aextra F, Bextra print Aextra F, Bextra call Aextra F, Bextra if Aextra F, Bextra Bextra Aextra F, Bextra wontCall Aextra F, A y Bextra F, A x Bextra F, A z Bextra F, B x Bextra F, B y Bextra F, B z Bextra F, C x Bextra F, C y Bextra F, C z Bextra F, D total Bextra F, E total Bextra F, F x Bextra F, F y Bextra F, F z Bextra F, G z Bextra F, Aextra Uses Bextra F, Aextra Modifies Bextra F, Aextra read Bextra F, Aextra print Bextra F, Aextra Aextra Bextra F, Bextra Uses Bextra F, Bextra Modifies Bextra F, Bextra read Bextra F, Bextra print Bextra F, Bextra call Bextra F, Bextra if Bextra F, Bextra Bextra Bextra F, Bextra wontCall Bextra F, A y y G, A x y G, A z y G, B x y G, B y y G, B z y G, C x y G, C y y G, C z y G, D total y G, E total y G, F x y G, F y y G, F z y G, G z y G, Aextra Uses y G, Aextra Modifies y G, Aextra read y G, Aextra print y G, Aextra Aextra y G, Bextra Uses y G, Bextra Modifies y G, Bextra read y G, Bextra print y G, Bextra call y G, Bextra if y G, Bextra Bextra y G, Bextra wontCall y G, A y x G, A x x G, A z x G, B x x G, B y x G, B z x G, C x x G, C y x G, C z x G, D total x G, E total x G, F x x G, F y x G, F z x G, G z x G, Aextra Uses x G, Aextra Modifies x G, Aextra read x G, Aextra print x G, Aextra Aextra x G, Bextra Uses x G, Bextra Modifies x G, Bextra read x G, Bextra print x G, Bextra call x G, Bextra if x G, Bextra Bextra x G, Bextra wontCall x G, A y Aextra G, A x Aextra G, A z Aextra G, B x Aextra G, B y Aextra G, B z Aextra G, C x Aextra G, C y Aextra G, C z Aextra G, D total Aextra G, E total Aextra G, F x Aextra G, F y Aextra G, F z Aextra G, G z Aextra G, Aextra Uses Aextra G, Aextra Modifies Aextra G, Aextra read Aextra G, Aextra print Aextra G, Aextra Aextra Aextra G, Bextra Uses Aextra G, Bextra Modifies Aextra G, Bextra read Aextra G, Bextra print Aextra G, Bextra call Aextra G, Bextra if Aextra G, Bextra Bextra Aextra G, Bextra wontCall Aextra G, A y Bextra G, A x Bextra G, A z Bextra G, B x Bextra G, B y Bextra G, B z Bextra G, C x Bextra G, C y Bextra G, C z Bextra G, D total Bextra G, E total Bextra G, F x Bextra G, F y Bextra G, F z Bextra G, G z Bextra G, Aextra Uses Bextra G, Aextra Modifies Bextra G, Aextra read Bextra G, Aextra print Bextra G, Aextra Aextra Bextra G, Bextra Uses Bextra G, Bextra Modifies Bextra G, Bextra read Bextra G, Bextra print Bextra G, Bextra call Bextra G, Bextra if Bextra G, Bextra Bextra Bextra G, Bextra wontCall Bextra G, A y y Aextra, A x y Aextra, A z y Aextra, B x y Aextra, B y y Aextra, B z y Aextra, C x y Aextra, C y y Aextra, C z y Aextra, D total y Aextra, E total y Aextra, F x y Aextra, F y y Aextra, F z y Aextra, G z y Aextra, Aextra Uses y Aextra, Aextra Modifies y Aextra, Aextra read y Aextra, Aextra print y Aextra, Aextra Aextra y Aextra, Bextra Uses y Aextra, Bextra Modifies y Aextra, Bextra read y Aextra, Bextra print y Aextra, Bextra call y Aextra, Bextra if y Aextra, Bextra Bextra y Aextra, Bextra wontCall y Aextra, A y x Aextra, A x x Aextra, A z x Aextra, B x x Aextra, B y x Aextra, B z x Aextra, C x x Aextra, C y x Aextra, C z x Aextra, D total x Aextra, E total x Aextra, F x x Aextra, F y x Aextra, F z x Aextra, G z x Aextra, Aextra Uses x Aextra, Aextra Modifies x Aextra, Aextra read x Aextra, Aextra print x Aextra, Aextra Aextra x Aextra, Bextra Uses x Aextra, Bextra Modifies x Aextra, Bextra read x Aextra, Bextra print x Aextra, Bextra call x Aextra, Bextra if x Aextra, Bextra Bextra x Aextra, Bextra wontCall x Aextra, A y Aextra Aextra, A x Aextra Aextra, A z Aextra Aextra, B x Aextra Aextra, B y Aextra Aextra, B z Aextra Aextra, C x Aextra Aextra, C y Aextra Aextra, C z Aextra Aextra, D total Aextra Aextra, E total Aextra Aextra, F x Aextra Aextra, F y Aextra Aextra, F z Aextra Aextra, G z Aextra Aextra, Aextra Uses Aextra Aextra, Aextra Modifies Aextra Aextra, Aextra read Aextra Aextra, Aextra print Aextra Aextra, Aextra Aextra Aextra Aextra, Bextra Uses Aextra Aextra, Bextra Modifies Aextra Aextra, Bextra read Aextra Aextra, Bextra print Aextra Aextra, Bextra call Aextra Aextra, Bextra if Aextra Aextra, Bextra Bextra Aextra Aextra, Bextra wontCall Aextra Aextra, A y Bextra Aextra, A x Bextra Aextra, A z Bextra Aextra, B x Bextra Aextra, B y Bextra Aextra, B z Bextra Aextra, C x Bextra Aextra, C y Bextra Aextra, C z Bextra Aextra, D total Bextra Aextra, E total Bextra Aextra, F x Bextra Aextra, F y Bextra Aextra, F z Bextra Aextra, G z Bextra Aextra, Aextra Uses Bextra Aextra, Aextra Modifies Bextra Aextra, Aextra read Bextra Aextra, Aextra print Bextra Aextra, Aextra Aextra Bextra Aextra, Bextra Uses Bextra Aextra, Bextra Modifies Bextra Aextra, Bextra read Bextra Aextra, Bextra print Bextra Aextra, Bextra call Bextra Aextra, Bextra if Bextra Aextra, Bextra Bextra Bextra Aextra, Bextra wontCall Bextra Aextra, Bextra Aextra Aextra Aextra,Bextra Aextra Aextra B,Bextra Aextra Aextra C,Bextra Aextra Aextra E,Bextra Aextra Aextra F,Bextra Aextra Aextra G,Bextra Aextra Bextra Aextra,Bextra Aextra Bextra B,Bextra Aextra Bextra C,Bextra Aextra Bextra E,Bextra Aextra Bextra F,Bextra Aextra Bextra G,Bextra Aextra x Aextra,Bextra Aextra x B,Bextra Aextra x C,Bextra Aextra x E,Bextra Aextra x F,Bextra Aextra x G,Bextra Aextra y Aextra,Bextra Aextra y B,Bextra Aextra y C,Bextra Aextra y E,Bextra Aextra y F,Bextra Aextra y G
+5000
+6 - Uses (Call, VarName)
+call call;
+Select call such that Uses(call, "x")
+4, 5, 6, 7, 9
+5000
+7 - Uses (Call, WildCard)
+call call;
+Select call.procName such that Uses(call, _)
+B, C, E, F, G, Aextra
+5000
+8 - Uses (Call, Variable)
+call call; variable variable;
+Select call.stmt# such that Uses(call, variable)
+4, 5, 6, 7, 9, 11, 14, 26
+5000
+9 - Uses (Call, Variable)
+call call; variable variable; 
+Select variable such that Uses(call, variable)
+y, x, z, total, Uses, Modifies, read, print, Aextra
+5000
+10 - Uses (Call, Variable)
+call call; variable variable; read read;
+Select <call.procName,variable, read.varName> such that Uses(call, variable)
+B x Aextra, B y Aextra, B z Aextra, C x Aextra, C y Aextra, C z Aextra, E total Aextra, F x Aextra, F y Aextra, F z Aextra, G z Aextra, Aextra Uses Aextra, Aextra Modifies Aextra, Aextra read Aextra, Aextra print Aextra, Aextra Aextra Aextra, B x Bextra, B y Bextra, B z Bextra, C x Bextra, C y Bextra, C z Bextra, E total Bextra, F x Bextra, F y Bextra, F z Bextra, G z Bextra, Aextra Uses Bextra, Aextra Modifies Bextra, Aextra read Bextra, Aextra print Bextra, Aextra Aextra Bextra, B x x, B y x, B z x, C x x, C y x, C z x, E total x, F x x, F y x, F z x, G z x, Aextra Uses x, Aextra Modifies x, Aextra read x, Aextra print x, Aextra Aextra x, B x y, B y y, B z y, C x y, C y y, C z y, E total y, F x y, F y y, F z y, G z y, Aextra Uses y, Aextra Modifies y, Aextra read y, Aextra print y, Aextra Aextra y
+5000
+11 - Uses (CallLineNo, VarName) (BOOL)
+stmt s;
+Select s such that Uses(5, "z")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27
+5000
+12 - Uses (LineNo, VarName) (BOOL)
+stmt s;
+Select s such that Uses(1, "Aextra")
+none
+5000
+13 - Uses (CallLineNo, WildCard) (BOOL)
+stmt s; read read;
+Select read.stmt# such that Uses(4, _)
+2, 8, 18, 23
+5000
+14 - Uses (LineNo, VarName) (BOOL)
+print print; 
+Select print.varName such that Uses(1, "x")
+total, z, Aextra, Bextra
+5000
+15 - Uses (CallLineNo, Variable)
+variable variable;
+Select variable.varName such that Uses(4, variable)
+x, y, z
+5000
+16 - Uses (ProcName, VarName) (BOOL)
+if if;
+Select if.stmt# such that Uses("F", "total")
+none
+5000
+17 - Uses (ProcName, WildCard) (BOOL)
+while while;
+Select while such that Uses("A", _)
+none
+5000
+18 - Uses (ProcName, Variable)
+variable variable;
+Select variable.varName such that Uses("G", variable)
+z
+5000  
+19 - Uses (ProcName, Variable)
+variable variable; read read; print print;
+Select <variable.varName, read.varName, print> such that Uses("G", variable)
+z x 10, z y 10, z Aextra 10, z Bextra 10, z x 15, z y 15, z Aextra 15, z Bextra 15, z x 19, z y 19, z Aextra 19, z Bextra 19, z x 24, z y 24, z Aextra 24, z Bextra 24
+5000
+20 - Uses (ProcName, Variable)
+variable variable;
+Select BOOLEAN such that Uses("D", variable)
+TRUE
+5000
+21 - Uses (ProcName, Variable)
+
+Select BOOLEAN
+TRUE
+5000
+22 - Uses (ProcName, Variable)
+procedure p;
+Select BOOLEAN such that Uses(p, "doesntExist")
+FALSE
+5000
+23 - Multiple Chain of same 8 clauses
+variable variable; procedure procedure;
+Select <procedure, variable> such that Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable) and Uses(procedure,variable)
+A x, A y, A z, B x, B y, B z, C x, C y, C z, D total, E total, F x, F y, F z, G z, Aextra Uses, Aextra Modifies, Aextra read, Aextra print, Aextra Aextra, Bextra Uses, Bextra Modifies, Bextra read, Bextra print, Bextra Aextra, Bextra call, Bextra if, Bextra Bextra, Bextra wontCall
+5000

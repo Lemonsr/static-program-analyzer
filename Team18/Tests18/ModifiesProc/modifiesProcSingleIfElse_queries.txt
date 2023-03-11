@@ -1,0 +1,110 @@
+1 - Modifies (Procedure, VarName)
+procedure p;
+Select p such that Modifies(p, "unknown")
+If, B
+5000
+2 - Modifies (Procedure, WildCard)
+procedure p;
+Select p.procName such that Modifies(p, _)
+If, B, C, Detached, E
+5000
+3 - Modifies (Procedure, Variable)
+procedure p; variable v;
+Select p such that Modifies(p, v)
+If, B, C, Detached, E
+5000
+4 - Modifies (Procedure, Variable)
+procedure p; variable v;
+Select v such that Modifies(p, v)
+x, B, unknown, UNKNOWN, y
+5000
+5 - Modifies (Procedure, Variable)
+procedure p; variable v;
+Select <p, v> such that Modifies(p, v)
+If x, If B, If unknown, If y, B B, B unknown, C x, Detached x, Detached UNKNOWN, E y
+5000
+6 - Modifies (Call, VarName)
+call call;
+Select call such that Modifies(call, "y")
+7
+5000
+7 - Modifies (Call, WildCard)
+call call;
+Select call.procName such that Modifies(call, _)
+B, C, E
+5000
+8 - Modifies (Call, Variable)
+call call; variable variable;
+Select call.stmt# such that Modifies(call, variable)
+3, 5, 7
+5000
+9 - Modifies (Call, Variable)
+call call; variable variable;
+Select variable such that Modifies(call, variable)
+B, unknown, x, y
+5000
+10 - Modifies (Call, Variable)
+call call; variable variable;
+Select <call.procName,variable> such that Modifies(call, variable)
+B B, B unknown, C x, E y
+5000
+11 - Modifies (CallLineNo, VarName) (BOOL)
+stmt s;
+Select s such that Modifies(3, "B")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+5000
+12 - Modifies (LineNo, VarName) (BOOL)
+stmt s;
+Select s such that Modifies(2, "y")
+none
+5000
+13 - Modifies (CallLineNo, WildCard) (BOOL)
+stmt s; assign assign;
+Select assign.stmt# such that Modifies(3, _)
+1, 4, 6, 10, 11, 12, 13, 14
+5000
+14 - Modifies (LineNo, VarName) (BOOL)
+read read; 
+Select read.varName such that Modifies(2, "x")
+B
+5000
+15 - Modifies (CallLineNo, Variable)
+variable variable;
+Select variable.varName such that Modifies(5, variable)
+x
+5000
+16 - Modifies (ProcName, VarName) (BOOL)
+read read;
+Select read.varName such that Modifies("If", "UNKNOWN")
+none
+5000
+17 - Modifies (ProcName, WildCard) (BOOL)
+print print;
+Select print.varName such that Modifies("E", _)
+y
+5000
+18 - Modifies (ProcName, Variable)
+variable variable;
+Select variable.varName such that Modifies("E", variable)
+y
+5000
+19 - Modifies (ProcName, Variable)
+variable variable; read read; print print;
+Select <variable.varName, read.varName, print> such that Modifies("E", variable)
+y B 8
+5000
+20 - Modifies (ProcName, Variable)
+variable variable;
+Select BOOLEAN such that Modifies("E", variable)
+TRUE
+5000
+21 - Modifies (ProcName, Variable)
+
+Select BOOLEAN
+TRUE
+5000
+22 - Modifies (ProcName, Variable)
+procedure p;
+Select BOOLEAN such that Modifies(p, "doesntExist")
+FALSE
+5000

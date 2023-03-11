@@ -1,0 +1,26 @@
+procedure While {
+  x = 5;
+  while (x != 0) {
+	call B;
+	x = x - 1;
+  }
+  call C;
+}
+
+procedure B {
+  print y;
+}
+
+procedure C {
+  read C010203C;
+  call D;
+  call E;
+}
+
+procedure D {
+  x = x + 1;
+}
+
+procedure E {
+  y = 2;
+}

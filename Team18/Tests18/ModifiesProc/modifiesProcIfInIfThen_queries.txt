@@ -1,0 +1,115 @@
+1 - Modifies (Procedure, VarName)
+procedure p;
+Select p such that Modifies(p, "x")
+A, Empty, F
+5000
+2 - Modifies (Procedure, WildCard)
+procedure p;
+Select p.procName such that Modifies(p, _)
+A, B, C, Detached, Empty, F
+5000
+3 - Modifies (Procedure, Variable)
+procedure p; variable v;
+Select p such that Modifies(p, v)
+A, B, C, Detached, Empty, F
+5000
+4 - Modifies (Procedure, Variable)
+procedure p; variable v;
+Select v such that Modifies(p, v)
+z, y, Detached, x
+5000
+5 - Modifies (Procedure, Variable)
+procedure p; variable v; read read; call call;
+Select <p, v, read.varName, call.procName> such that Modifies(p, v)
+A z Detached B, A x Detached B, A y Detached B, B z Detached B, C y Detached B, Detached Detached Detached B, Empty x Detached B, Empty y Detached B, Empty z Detached B, F x Detached B, A z x B, A x x B, A y x B, B z x B, C y x B, Detached Detached x B, Empty x x B, Empty y x B, Empty z x B, F x x B, A z Detached C, A x Detached C, A y Detached C, B z Detached C, C y Detached C, Detached Detached Detached C, Empty x Detached C, Empty y Detached C, Empty z Detached C, F x Detached C, A z x C, A x x C, A y x C, B z x C, C y x C, Detached Detached x C, Empty x x C, Empty y x C, Empty z x C, F x x C, A z Detached F, A x Detached F, A y Detached F, B z Detached F, C y Detached F, Detached Detached Detached F, Empty x Detached F, Empty y Detached F, Empty z Detached F, F x Detached F, A z x F, A x x F, A y x F, B z x F, C y x F, Detached Detached x F, Empty x x F, Empty y x F, Empty z x F, F x x F
+5000
+6 - Modifies (Call, VarName)
+call call;
+Select call such that Modifies(call, "y")
+5
+5000
+7 - Modifies (Call, WildCard)
+call call;
+Select call.procName such that Modifies(call, _)
+B, C, F
+5000
+8 - Modifies (Call, Variable)
+call call; variable variable;
+Select call.stmt# such that Modifies(call, variable)
+3, 4, 5
+5000
+9 - Modifies (Call, Variable)
+call call; variable variable; 
+Select variable such that Modifies(call, variable)
+z, y, x
+5000
+10 - Modifies (Call, Variable)
+call call; variable variable; read read;
+Select <call.procName,variable, read.varName> such that Modifies(call, variable)
+B z Detached, C y Detached, F x Detached, B z x, C y x, F x x
+5000
+11 - Modifies (CallLineNo, VarName) (BOOL)
+stmt s;
+Select s such that Modifies(3, "z")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+5000
+12 - Modifies (LineNo, VarName) (BOOL)
+stmt s;
+Select s such that Modifies(2, "y")
+none
+5000
+13 - Modifies (CallLineNo, WildCard) (BOOL)
+stmt s; read read;
+Select read.stmt# such that Modifies(4, _)
+10, 15
+5000
+14 - Modifies (LineNo, VarName) (BOOL)
+print print; 
+Select print.varName such that Modifies(2, "x")
+x, z, total
+5000
+15 - Modifies (CallLineNo, Variable)
+variable variable;
+Select variable.varName such that Modifies(4, variable)
+x
+5000
+16 - Modifies (ProcName, VarName) (BOOL)
+if if;
+Select if.stmt# such that Modifies("Detached", "total")
+none
+5000
+17 - Modifies (ProcName, WildCard) (BOOL)
+while while;
+Select while such that Modifies("Empty", _)
+none
+5000
+18 - Modifies (ProcName, Variable)
+variable variable;
+Select variable.varName such that Modifies("Empty", variable)
+x, y, z
+5000  
+19 - Modifies (ProcName, Variable)
+variable variable; read read; print print;
+Select <variable.varName, read.varName, print> such that Modifies("Empty", variable)
+x Detached 6, y Detached 6, z Detached 6, x x 6, y x 6, z x 6, x Detached 8, y Detached 8, z Detached 8, x x 8, y x 8, z x 8, x Detached 11, y Detached 11, z Detached 11, x x 11, y x 11, z x 11
+5000
+20 - Modifies (ProcName, Variable)
+variable variable;
+Select BOOLEAN such that Modifies("Detached", variable)
+TRUE
+5000
+21 - Modifies (ProcName, Variable)
+
+Select BOOLEAN
+TRUE
+5000
+22 - Modifies (ProcName, Variable)
+procedure p;
+Select BOOLEAN such that Modifies(p, "doesntExist")
+FALSE
+5000
+23 - Multiple Chain of same 8 clauses
+variable variable; procedure procedure;
+Select <procedure, variable> such that Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable)
+A z, A y, A x, B z, C y, Detached Detached, Empty x, Empty y, Empty z, F x
+5000

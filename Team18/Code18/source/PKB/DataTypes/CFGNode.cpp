@@ -64,9 +64,9 @@ void spa::CFGNode::removeNodeFromGraph() {
 
 bool spa::operator==(const CFGNode& s1, const CFGNode& s2) {
   if (s1.lineNumber != s2.lineNumber ||
-      s1.modifiedVariables.size() != s2.modifiedVariables.size() ||
-      s1.incomingEdges.size() != s2.incomingEdges.size() ||
-      s1.outgoingEdges.size() != s2.outgoingEdges.size()) {
+    s1.modifiedVariables.size() != s2.modifiedVariables.size() ||
+    s1.incomingEdges.size() != s2.incomingEdges.size() ||
+    s1.outgoingEdges.size() != s2.outgoingEdges.size()) {
     return false;
   }
 
