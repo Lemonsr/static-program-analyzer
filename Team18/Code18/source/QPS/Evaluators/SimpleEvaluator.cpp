@@ -7,9 +7,10 @@ spa::SimpleEvaluator::SimpleEvaluator(std::string selectSynonym, DesignEntityTyp
 
 spa::QpsResultTable spa::SimpleEvaluator::evaluate(PKBManager& pkbManager) {
   switch (designEntityType) {
+  case CONSTANT:
+    return evaluateConstant(pkbManager);
   case PROCEDURE:
-  case VARIABLE:
-  case CONSTANT: {
+  case VARIABLE: {
     return evaluateNames(pkbManager);
   }
   case STMT:
@@ -113,6 +114,21 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateNames(PKBManager& pkbManager) 
   QueryResult result = pkbManager.getEntity(designEntityType);
   for (auto& varName : result.getNames()) {
     resultTable.addRow({ QpsValue(varName), QpsValue(varName) });
+  }
+
+  return resultTable;
+}
+
+spa::QpsResultTable spa::SimpleEvaluator::evaluateConstant(PKBManager& pkbManager) {
+  QpsResultTable resultTable;
+  resultTable.addHeader(selectSynonym);
+  for (auto& attr : pqlAttributesMap[designEntityType]) {
+    resultTable.addHeader(selectSynonym + "." + attr);
+  }
+
+  QueryResult result = pkbManager.getEntity(designEntityType);
+  for (auto& varName : result.getNames()) {
+    resultTable.addRow({ QpsValue(std::stoi(varName)), QpsValue(std::stoi(varName)) });
   }
 
   return resultTable;

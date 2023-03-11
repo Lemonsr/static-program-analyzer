@@ -75,12 +75,12 @@ namespace IntegrationTesting {
       Assert::AreEqual(dim.second, 3);
 
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
-      Assert::IsTrue(rows[0][0].getString() == "1");
-      Assert::IsTrue(rows[0][1].getString() == "1");
-      Assert::IsTrue(rows[1][0].getString() == "2");
-      Assert::IsTrue(rows[1][1].getString() == "2");
-      Assert::IsTrue(rows[2][0].getString() == "3");
-      Assert::IsTrue(rows[2][1].getString() == "3");
+      Assert::IsTrue(rows[0][0].getInteger() == 1);
+      Assert::IsTrue(rows[0][1].getInteger() == 1);
+      Assert::IsTrue(rows[1][0].getInteger() == 2);
+      Assert::IsTrue(rows[1][1].getInteger() == 2);
+      Assert::IsTrue(rows[2][0].getInteger() == 3);
+      Assert::IsTrue(rows[2][1].getInteger() == 3);
     }
 
     TEST_METHOD(TestGetAllStatements) {
