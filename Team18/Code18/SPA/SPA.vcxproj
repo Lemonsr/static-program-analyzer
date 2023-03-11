@@ -64,6 +64,7 @@
     <ClInclude Include="..\source\QPS\Preprocessor\PqlPatternParser.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\PqlPatternSubParser.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\PqlQueryParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\PqlRefTypes.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\PqlSelectParser.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\PqlSemanticChecker.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\PqlSuchThatParser.h" />

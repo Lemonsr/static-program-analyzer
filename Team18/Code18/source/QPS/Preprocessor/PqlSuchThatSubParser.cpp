@@ -6,6 +6,7 @@
 #include <utility>
 
 #include "ParsedQuery.h"
+#include "PqlRefTypes.h"
 
 const std::unordered_map<std::string, spa::RelationshipType> relationshipMap {
   {"Follows", spa::FOLLOWS},
@@ -22,40 +23,21 @@ const std::unordered_map<std::string, spa::RelationshipType> relationshipMap {
   {"Affects*", spa::AFFECTS_STAR}
 };
 
-const std::unordered_set<spa::ArgumentType> stmtRef {
-  spa::LINE_NO,
-  spa::WILDCARD,
-  spa::SYNONYM
-};
-
-const std::unordered_set<spa::ArgumentType> entityRef {
-  spa::LITERAL_STRING,
-  spa::WILDCARD,
-  spa::SYNONYM
-};
-
-const std::unordered_set<spa::ArgumentType> stmtEntityRef{
-  spa::LINE_NO,
-  spa::WILDCARD,
-  spa::SYNONYM,
-  spa::LITERAL_STRING
-};
-
 const std::unordered_map<spa::RelationshipType,
                          std::pair<const std::unordered_set<spa::ArgumentType>*,
                                    const std::unordered_set<spa::ArgumentType>*>> relationshipArgTypesMap {
-  {spa::FOLLOWS, { &stmtRef, &stmtRef }},
-  {spa::FOLLOWS_STAR, { &stmtRef, &stmtRef }},
-  {spa::PARENT, { &stmtRef, &stmtRef }},
-  {spa::PARENT_STAR, { &stmtRef, &stmtRef }},
-  {spa::MODIFIES, { &stmtEntityRef, &entityRef }},
-  {spa::USES, { &stmtEntityRef, &entityRef }},
-  {spa::CALLS, { &entityRef, &entityRef }},
-  {spa::CALLS_STAR, { &entityRef, &entityRef }},
-  {spa::NEXT, { &stmtRef, &stmtRef }},
-  {spa::NEXT_STAR, { &stmtRef, &stmtRef }},
-  {spa::AFFECTS, { &stmtRef, &stmtRef }},
-  {spa::AFFECTS_STAR, { &stmtRef, &stmtRef }}
+  {spa::FOLLOWS, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::FOLLOWS_STAR, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::PARENT, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::PARENT_STAR, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::MODIFIES, { &spa::stmtEntityRef, &spa::entityRef }},
+  {spa::USES, { &spa::stmtEntityRef, &spa::entityRef }},
+  {spa::CALLS, { &spa::entityRef, &spa::entityRef }},
+  {spa::CALLS_STAR, { &spa::entityRef, &spa::entityRef }},
+  {spa::NEXT, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::NEXT_STAR, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::AFFECTS, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::AFFECTS_STAR, { &spa::stmtRef, &spa::stmtRef }}
 };
 
 spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
