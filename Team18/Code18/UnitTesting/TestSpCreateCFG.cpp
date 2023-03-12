@@ -261,7 +261,6 @@ public:
     auto lineThree = spa::CFGNode(3);
     auto lineFour = spa::CFGNode(4, std::string("g"));
     auto lineFive = spa::CFGNode(5);
-    auto dummyNode = spa::CFGNode();
     addEdges(&lineOne, {}, {&lineTwo, &lineFour});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {});
