@@ -13,6 +13,7 @@ test_cases = [
 ]
 query_types = [
     'Modifies',
+    'ModifiesProc',
     'Uses',
     'Follows',
     'FollowsStar',

@@ -54,5 +54,6 @@ class QpsResultTable {
   std::vector<QpsResultRow> getColumns(std::vector<std::string> headers);
   QpsResultTable innerJoin(QpsResultTable& other);
   const std::vector<QpsResultRow>& getRows();
+  bool isEmpty();
 };
 }  // namespace spa

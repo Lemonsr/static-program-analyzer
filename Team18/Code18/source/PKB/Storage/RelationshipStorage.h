@@ -27,7 +27,6 @@ class RelationshipStorage {
   std::unordered_map<int, std::string> callsProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
   std::unordered_map<int, std::string> statementProcTable;
-  std::unordered_map<int, spa::CFGNode*> cfgTable;
 
  public:
   bool addStatementType(std::string lineNo, StatementType statementType);
@@ -149,24 +148,24 @@ class RelationshipStorage {
   bool addCallsProc(int lineNumber, std::string procName);
   QueryResult getCallsProc();
 
-  bool addCfgNode(int lineNumber, spa::CFGNode* cfgNode);
-  QueryResult getCfgNode(int lineNumber);
-
   void setFollowsTable(std::unordered_map<int, int> followsTable);
   void setFollowsStarTable(std::unordered_map<int, std::unordered_set<int>> followsStarTable);
   void setParentTable(std::unordered_map<int, std::unordered_set<int>> parentTable);
   void setParentStarTable(std::unordered_map<int, std::unordered_set<int>> parentStarTable);
   void setUsesTable(std::unordered_map<int, std::unordered_set<std::string>> usesTable);
-  void setUsesProcTable(std::unordered_map<std::string, std::unordered_set<std::string>> usesProcTable);
+  void setUsesProcTable(
+    std::unordered_map<std::string, std::unordered_set<std::string>> usesProcTable);
   void setModifiesTable(std::unordered_map<int, std::unordered_set<std::string>> modifiesTable);
-  void setModifiesProcTable(std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable);
+  void setModifiesProcTable(
+    std::unordered_map<std::string, std::unordered_set<std::string>> modifiesProcTable);
   void setCallsTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsTable);
-  void setCallsStarTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable);
+  void setCallsStarTable(
+    std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable);
   void setNextTable(std::unordered_map<int, std::unordered_set<int>> nextTable);
   void setCallsContainerParentsTable(std::unordered_map<std::string,
-                                                        std::unordered_set<int>> callsContainerParentsTable);
+                                                        std::unordered_set<int>>
+    callsContainerParentsTable);
   void setCallsProcTable(std::unordered_map<int, std::string> statementTypeTable);
   void setStatementTypeTable(std::unordered_map<int, StatementType> statementTypeTable);
-  void setCfgTable(std::unordered_map<int, spa::CFGNode*> cfgTable);
 };
 }  // namespace spa

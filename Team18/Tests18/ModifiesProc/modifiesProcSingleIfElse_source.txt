@@ -1,0 +1,30 @@
+procedure If {
+  x = 5;
+  if (x != 0) then {
+	call B;
+	x = x - 1;
+  } else {
+	call C;
+  }
+  y = 0;
+  call E;
+}
+
+procedure B {
+  print y;
+  read B;
+  unknown = b - 1;
+}
+
+procedure C {
+  x = 1;
+}
+
+procedure Detached {
+  x = x + 1;
+  UNKNOWN = 0;
+}
+
+procedure E {
+  y = x + y;
+}
