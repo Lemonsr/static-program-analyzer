@@ -19,6 +19,7 @@ std::pair<spa::PqlParseStatus, spa::ParsedQuery> spa::QpsPreprocessor::preproces
   try {
     tokens = tokenizer.tokenize(ss);
   } catch (std::runtime_error& e) {
+    std::cerr << e.what() << std::endl;
     return { PQL_PARSE_SYNTAX_ERROR, {} };
   }
   ParsedQuery parsedQuery;

@@ -25,7 +25,7 @@ bool spa::operator==(const NoSynonymClauseGroup& first, const NoSynonymClauseGro
   if (first.clauses.size() != second.clauses.size()) {
     return false;
   }
-  for (int i = 0; i < first.clauses.size(); ++i) {
+  for (size_t i = 0; i < first.clauses.size(); ++i) {
     if (first.clauses[i] != second.clauses[i]) {
       return false;
     }
