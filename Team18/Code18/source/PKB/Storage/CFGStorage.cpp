@@ -6,14 +6,14 @@
 #include <utility>
 #include <unordered_set>
 
-bool spa::CFGStorage::popNode(int lineNumber, RelationshipStorage& relationshipStorage) {
+bool spa::CFGStorage::popDummyNode(int lineNumber, RelationshipStorage& relationshipStorage) {
   CFGNode& dummyNode = cfgNodeTable[-1];
   bool isAddEdge = true;
 
   for (auto& incomingNode : dummyNode.getIncomingEdges()) {
     isAddEdge = isAddEdge && addEdge(incomingNode->getLineNumber(), lineNumber, relationshipStorage);
   }
-
+  cfgNodeTable[-1] = CFGNode();
   return isAddEdge;
 }
 
@@ -35,7 +35,7 @@ bool spa::CFGStorage::addCfgEndNode(int lineNumber) {
 
 bool spa::CFGStorage::addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage) {
   if (lineNumberOne == -1) {
-    popNode(lineNumberTwo, relationshipStorage);
+    popDummyNode(lineNumberTwo, relationshipStorage);
     return true;
   }
   CFGNode& nodeOne = cfgNodeTable[lineNumberOne];
