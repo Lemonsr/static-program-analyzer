@@ -111,6 +111,14 @@ TEST_CLASS(TestSpCreateCFG) {
     }
   }
 
+  void assertEndNodeMatch(std::unordered_set<int> expected) {
+    spa::QueryResult queryResult = pkbManager->getCfgEndNodes();
+    std::vector<int> endNodes = queryResult.getCfgEndNodes();
+    std::unordered_set<int> test(endNodes.begin(), endNodes.end());
+    Assert::IsTrue(expected == test);
+  }
+
+
   std::vector<spa::CFGNode*> convertToSortedVector(std::unordered_set<spa::CFGNode*> edges) {
     std::vector<spa::CFGNode*> edgesVector(edges.begin(), edges.end());
     std::sort(edgesVector.begin(), edgesVector.end(),
@@ -164,6 +172,7 @@ public:
     addEdges(&lineFour, {&lineThree}, {});
     std::unordered_set<spa::CFGNode*> expectedNodes = {&lineOne, &lineTwo, &lineThree, &lineFour};
     assertCFGMatch(expectedNodes);
+    assertEndNodeMatch({4});
   }
 
   TEST_METHOD(TestSingleProcCFGCreationNestedWhileLast) {
@@ -208,6 +217,7 @@ public:
     addEdges(&lineFour, {&lineThree}, {&lineOne});
     std::unordered_set<spa::CFGNode*> expectedNodes = {&lineOne, &lineTwo, &lineThree, &lineFour};
     assertCFGMatch(expectedNodes);
+    assertEndNodeMatch({1});
   }
 
   TEST_METHOD(TestSingleProcCFGCreationNestedIfLast) {
@@ -254,13 +264,14 @@ public:
     auto dummyNode = spa::CFGNode::createDummyNode();
     addEdges(&lineOne, {}, {&lineTwo, &lineFour});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
-    addEdges(&lineThree, {&lineTwo}, {&dummyNode});
+    addEdges(&lineThree, {&lineTwo}, {});
     addEdges(&lineFour, {&lineOne}, {&lineFive});
-    addEdges(&lineFive, {&lineFour}, {&dummyNode});
+    addEdges(&lineFive, {&lineFour}, {});
     std::unordered_set<spa::CFGNode*> expectedNodes = {
       &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive
     };
     assertCFGMatch(expectedNodes);
+    assertEndNodeMatch({3, 5});
   }
 
   TEST_METHOD(TestMultiProcCFGCreation) {
@@ -326,6 +337,7 @@ public:
       &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix, &lineSeven, &lineEight
     };
     assertCFGMatch(expectedNodes);
+    assertEndNodeMatch({4, 8});
   }
 };
 } // namespace UnitTesting

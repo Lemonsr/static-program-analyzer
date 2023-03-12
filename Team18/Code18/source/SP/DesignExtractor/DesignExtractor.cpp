@@ -177,7 +177,6 @@ void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*>
     }
     int const tailNodeLineNum = tailNode.getLineNumber();
     int const cfgNodeStart = cfgNode.first.getLineNumber();
-    int const cfgNodeEnd = cfgNode.second.getLineNumber();
     pkbManager.addEdge(tailNodeLineNum, cfgNodeStart);
     tailNode = cfgNode.second;
   }

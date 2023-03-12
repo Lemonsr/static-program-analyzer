@@ -88,12 +88,13 @@ spa::QueryResult spa::CFGStorage::getCfgEndNodes() {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<int> cfgEndNodes;
-  queryResult.setCfgEndNodes(cfgEndNodes);
+  std::vector<int> cfgEnd;
 
   for (auto node : cfgEndNodes) {
-    cfgEndNodes.push_back(node);
+    cfgEnd.push_back(node);
   }
+
+  queryResult.setCfgEndNodes(cfgEnd);
   return queryResult;
 }
 
