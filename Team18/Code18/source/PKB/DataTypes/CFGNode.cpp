@@ -2,23 +2,21 @@
 
 #include "PKBManager.h"
 
-spa::CFGNode::CFGNode() {
-  lineNumber = -1;
-  isDummy = true;
-}
-
 spa::CFGNode::CFGNode(int lineNumber) {
   this->lineNumber = lineNumber;
+  isDummy = false;
 }
 
 spa::CFGNode::CFGNode(int lineNumber, std::string variable) {
   this->lineNumber = lineNumber;
   this->modifiedVariables.insert(variable);
+  isDummy = false;
 }
 
 spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> variables) {
   this->lineNumber = lineNumber;
   this->modifiedVariables.insert(variables.begin(), variables.end());
+  isDummy = false;
 }
 
 spa::CFGNode spa::CFGNode::createDummyNode() {

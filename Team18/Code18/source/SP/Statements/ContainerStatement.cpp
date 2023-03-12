@@ -72,8 +72,9 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::IfContainerStatement::processStatemen
   pkbManager.addEdge(cfgIfConditionNodeLineNum, cfgElseInnerBlkNodeStart);
   pkbManager.addEdge(cfgThenInnerBlkNodeEnd, dummyNodeLineNum);
   pkbManager.addEdge(cfgElseInnerBlkNodeEnd, dummyNodeLineNum);
-  dummyNode.addIncomingEdges({&cfgThenInnerBlockNode.second, &cfgElseInnerBlockNode.second});
-  return std::make_pair(cfgIfConditionNode.first, dummyNode);
+  QueryResult cfgIfCondQueryResult = pkbManager.getCfgNode(cfgIfConditionNodeLineNum);
+  QueryResult cfgDummyQueryResult = pkbManager.getCfgNode(-1);
+  return std::make_pair(*cfgIfCondQueryResult.getCfgNodes()[0], *cfgDummyQueryResult.getCfgNodes()[0]);
 }
 
 std::pair<spa::CFGNode, spa::CFGNode> spa::WhileContainerStatement::processStatement(

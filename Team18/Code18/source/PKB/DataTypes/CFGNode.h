@@ -8,14 +8,14 @@ class PKBManager;
 
 class CFGNode {
  private:
-  int lineNumber;
-  bool isDummy = false;
+  int lineNumber = -1;
+  bool isDummy = true;
   std::unordered_set<std::string> modifiedVariables;
   std::unordered_set<CFGNode*> incomingEdges;
   std::unordered_set<CFGNode*> outgoingEdges;
 
  public:
-  CFGNode();
+  CFGNode() = default;
   explicit CFGNode(int lineNumber);
   explicit CFGNode(int lineNumber, std::string modifiedVariable);
   explicit CFGNode(int lineNumber, std::unordered_set<std::string> variables);
