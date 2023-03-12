@@ -11,7 +11,7 @@
 
 namespace spa {
 class PKBManager {
-public:
+ public:
   virtual const bool addRelationship(RelationshipType relationshipType,
                                      std::string firstArg, std::string secondArg) = 0;
   virtual const bool addEntity(DesignEntityType entityType, std::string arg) = 0;
@@ -41,4 +41,4 @@ public:
   virtual const QueryResult getCfgNode(int lineNumber) = 0;
   virtual const QueryResult getCfgEndNodes() = 0;
 };
-} // namespace spa
+}  // namespace spa

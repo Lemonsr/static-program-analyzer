@@ -340,4 +340,4 @@ public:
     assertEndNodeMatch({4, 8});
   }
 };
-} // namespace UnitTesting
+}  // namespace UnitTesting
