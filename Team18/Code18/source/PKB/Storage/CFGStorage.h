@@ -26,6 +26,7 @@ class CFGStorage {
   bool removeDummyNode();
 
   QueryResult getCfgNode(int lineNumber);
+  QueryResult getCfgEndNodes();
 
   void setCfgNodeTable(std::unordered_map<int, spa::CFGNode> cfgNodeTable);
 };

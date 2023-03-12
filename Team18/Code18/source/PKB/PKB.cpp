@@ -606,3 +606,7 @@ const spa::QueryResult spa::PKB::getCallsProc() {
 const spa::QueryResult spa::PKB::getCfgNode(int lineNumber) {
   return cfgStorage.getCfgNode(lineNumber);
 }
+
+const spa::QueryResult spa::PKB::getCfgEndNodes() {
+  return cfgStorage.getCfgEndNodes();
+}

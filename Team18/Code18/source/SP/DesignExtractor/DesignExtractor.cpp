@@ -186,7 +186,9 @@ void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*>
       pkbManager.addCfgEndNode(edge->getLineNumber());
     }
     pkbManager.removeDummyNode();
+    return;
   }
+  pkbManager.addCfgEndNode(tailNode.getLineNumber());
 }
 
 void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {

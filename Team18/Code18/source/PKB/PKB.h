@@ -82,5 +82,6 @@ class PKB : public PKBManager {
   const QueryResult getCallsContainerParent(std::string procName);
   const QueryResult getCallsProc();
   const QueryResult getCfgNode(int lineNumber);
+  const QueryResult getCfgEndNodes();
 };
 }  // namespace spa

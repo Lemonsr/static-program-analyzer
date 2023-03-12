@@ -84,6 +84,19 @@ spa::QueryResult spa::CFGStorage::getCfgNode(int lineNumber) {
   return queryResult;
 }
 
+spa::QueryResult spa::CFGStorage::getCfgEndNodes() {
+  QueryResult queryResult;
+  queryResult.setQueryResultType(TUPLE);
+
+  std::vector<int> cfgEndNodes;
+  queryResult.setCfgEndNodes(cfgEndNodes);
+
+  for (auto node : cfgEndNodes) {
+    cfgEndNodes.push_back(node);
+  }
+  return queryResult;
+}
+
 void spa::CFGStorage::setCfgNodeTable(std::unordered_map<int, spa::CFGNode> cfgNodeTable) {
   this->cfgNodeTable = cfgNodeTable;
 }

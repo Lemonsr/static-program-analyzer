@@ -39,5 +39,6 @@ public:
   virtual const QueryResult getCallsContainerParent(std::string procName) = 0;
   virtual const QueryResult getCallsProc() = 0;
   virtual const QueryResult getCfgNode(int lineNumber) = 0;
+  virtual const QueryResult getCfgEndNodes() = 0;
 };
 } // namespace spa
