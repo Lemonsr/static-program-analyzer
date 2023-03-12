@@ -7,7 +7,7 @@
 spa::QpsResultTable spa::WithClauseGroup::evaluate(PKBManager& pkbManager, QpsResultTable resultTable) {
   for (auto& clause : attrValueClauses) {
     QpsResultTable result = clause.getEvaluator()->evaluate(pkbManager);
-    resultTable.innerJoin(result);
+    resultTable = resultTable.innerJoin(result);
   }
 
   std::vector<std::unique_ptr<QpsEvaluator>> evaluators;
