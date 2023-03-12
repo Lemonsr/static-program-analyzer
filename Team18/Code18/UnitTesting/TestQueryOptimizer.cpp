@@ -51,7 +51,7 @@ namespace UnitTesting {
 
       Assert::IsTrue(noSynonymClauseGroup == expectedNoSynonymClauseGroup);
       Assert::IsTrue(groups.getConnectedSynonymClauseGroups().empty());
-      Assert::IsTrue(groups.getWithAttrAttrClauseGroup().isEmpty());
+      Assert::IsTrue(groups.getWithClauseGroup().isEmpty());
     }
 
     TEST_METHOD(TestGetGroupsOnlyConnectedSynonyms) {
@@ -95,18 +95,21 @@ namespace UnitTesting {
       spa::ConnectedSynonymClauseGroup expectedConnectedSynonymGroup;
       expectedConnectedSynonymGroup.addClause(suchThatClauses[0]);
       expectedConnectedSynonymGroup.addClause(suchThatClauses[1]);
-      expectedConnectedSynonymGroup.addClause(withClauses[0]);
       expectedConnectedSynonymGroup.addClause(patternClauses[0]);
-      expectedConnectedSynonymGroup.addClause(withClauses[1]);
+
+      spa::WithClauseGroup expectedWithClauseGroup;
+      expectedWithClauseGroup.addAttrValueClause(withClauses[0]);
+      expectedWithClauseGroup.addAttrValueClause(withClauses[1]);
 
       spa::QueryOptimizer queryOptimizer;
       spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
       std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.getConnectedSynonymClauseGroups();
+      spa::WithClauseGroup withClauseGroup = groups.getWithClauseGroup();
 
       Assert::IsTrue(groups.getNoSynonynmClauseGroup().isEmpty());
-      Assert::IsTrue(groups.getWithAttrAttrClauseGroup().isEmpty());
       Assert::IsTrue(connectedSynonymGroups.size() == size_t(1));
       Assert::IsTrue(connectedSynonymGroups[0] == expectedConnectedSynonymGroup);
+      Assert::IsTrue(withClauseGroup == expectedWithClauseGroup);
     }
 
     TEST_METHOD(TestGetGroupsOnlyWithAttrAttr) {
@@ -125,15 +128,15 @@ namespace UnitTesting {
 
       std::vector<spa::WithClause>& withClauses = parsedQuery.getWithClauses();
 
-      spa::WithAttrAttrClauseGroup expectedWithAttrAttrClauseGroup;
-      expectedWithAttrAttrClauseGroup.addClause(withClauses[0]);
-      expectedWithAttrAttrClauseGroup.addClause(withClauses[1]);
+      spa::WithClauseGroup expectedWithClauseGroup;
+      expectedWithClauseGroup.addAttrAttrClause(withClauses[0]);
+      expectedWithClauseGroup.addAttrAttrClause(withClauses[1]);
 
       spa::QueryOptimizer queryOptimizer;
       spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
-      spa::WithAttrAttrClauseGroup withAttrAttrClauseGroup = groups.getWithAttrAttrClauseGroup();
+      spa::WithClauseGroup withAttrAttrClauseGroup = groups.getWithClauseGroup();
 
-      Assert::IsTrue(withAttrAttrClauseGroup == expectedWithAttrAttrClauseGroup);
+      Assert::IsTrue(withAttrAttrClauseGroup == expectedWithClauseGroup);
       Assert::IsTrue(groups.getNoSynonynmClauseGroup().isEmpty());
       Assert::IsTrue(groups.getConnectedSynonymClauseGroups().empty());
     }
@@ -187,18 +190,20 @@ namespace UnitTesting {
       spa::ConnectedSynonymClauseGroup expectedConnectedSynonymClauseGroup;
       expectedConnectedSynonymClauseGroup.addClause(suchThatClauses[2]);
       expectedConnectedSynonymClauseGroup.addClause(patternClauses[0]);
-      expectedConnectedSynonymClauseGroup.addClause(withClauses[0]);
+
+      spa::WithClauseGroup expectedWithClauseGroup;
+      expectedWithClauseGroup.addAttrValueClause(withClauses[0]);
 
       spa::QueryOptimizer queryOptimizer;
       spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
       spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.getNoSynonynmClauseGroup();
       std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.getConnectedSynonymClauseGroups();
-      spa::WithAttrAttrClauseGroup withAttrAttrClauseGroup = groups.getWithAttrAttrClauseGroup();
+      spa::WithClauseGroup withAttrAttrClauseGroup = groups.getWithClauseGroup();
 
       Assert::IsTrue(noSynonymClauseGroup == expectedNoSynonymClauseGroup);
       Assert::IsTrue(connectedSynonymGroups.size() == size_t(1));
       Assert::IsTrue(connectedSynonymGroups[0] == expectedConnectedSynonymClauseGroup);
-      Assert::IsTrue(withAttrAttrClauseGroup.isEmpty());
+      Assert::IsTrue(withAttrAttrClauseGroup == expectedWithClauseGroup);
     }
 
     TEST_METHOD(TestGetGroupsNoSynonymWithMultipleConnectedSynonym) {
@@ -269,25 +274,27 @@ namespace UnitTesting {
       spa::ConnectedSynonymClauseGroup firstConnectedGroup;
       firstConnectedGroup.addClause(suchThatClauses[1]);
       firstConnectedGroup.addClause(suchThatClauses[2]);
-      firstConnectedGroup.addClause(withClauses[0]);
       firstConnectedGroup.addClause(patternClauses[0]);
 
       spa::ConnectedSynonymClauseGroup secondConnectedGroup;
       secondConnectedGroup.addClause(suchThatClauses[3]);
       secondConnectedGroup.addClause(patternClauses[1]);
-      secondConnectedGroup.addClause(withClauses[1]);
+
+      spa::WithClauseGroup expectedWithClauseGroup;
+      expectedWithClauseGroup.addAttrValueClause(withClauses[0]);
+      expectedWithClauseGroup.addAttrValueClause(withClauses[1]);
 
       spa::QueryOptimizer queryOptimizer;
       spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
       spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.getNoSynonynmClauseGroup();
       std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.getConnectedSynonymClauseGroups();
-      spa::WithAttrAttrClauseGroup withAttrAttrClauseGroup = groups.getWithAttrAttrClauseGroup();
+      spa::WithClauseGroup withAttrAttrClauseGroup = groups.getWithClauseGroup();
 
       Assert::IsTrue(noSynonymClauseGroup == expectedNoSynonymClauseGroup);
       Assert::IsTrue(connectedSynonymGroups.size() == size_t(2));
       Assert::IsTrue(connectedSynonymGroups[0] == firstConnectedGroup);
       Assert::IsTrue(connectedSynonymGroups[1] == secondConnectedGroup);
-      Assert::IsTrue(withAttrAttrClauseGroup.isEmpty());
+      Assert::IsTrue(withAttrAttrClauseGroup == expectedWithClauseGroup);
     }
 
     TEST_METHOD(TestGetGroups) {
@@ -365,21 +372,21 @@ namespace UnitTesting {
       secondConnectedGroup.addClause(suchThatClauses[3]);
       secondConnectedGroup.addClause(patternClauses[1]);
 
-      spa::WithAttrAttrClauseGroup expectedWithAttrAttrClauseGroup;
-      expectedWithAttrAttrClauseGroup.addClause(withClauses[0]);
-      expectedWithAttrAttrClauseGroup.addClause(withClauses[1]);
+      spa::WithClauseGroup expectedWithClauseGroup;
+      expectedWithClauseGroup.addAttrAttrClause(withClauses[0]);
+      expectedWithClauseGroup.addAttrAttrClause(withClauses[1]);
 
       spa::QueryOptimizer queryOptimizer;
       spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
       spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.getNoSynonynmClauseGroup();
       std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.getConnectedSynonymClauseGroups();
-      spa::WithAttrAttrClauseGroup withAttrAttrClauseGroup = groups.getWithAttrAttrClauseGroup();
+      spa::WithClauseGroup withAttrAttrClauseGroup = groups.getWithClauseGroup();
 
       Assert::IsTrue(noSynonymClauseGroup == expectedNoSynonymClauseGroup);
       Assert::IsTrue(connectedSynonymGroups.size() == size_t(2));
       Assert::IsTrue(connectedSynonymGroups[0] == firstConnectedGroup);
       Assert::IsTrue(connectedSynonymGroups[1] == secondConnectedGroup);
-      Assert::IsTrue(withAttrAttrClauseGroup == expectedWithAttrAttrClauseGroup);
+      Assert::IsTrue(withAttrAttrClauseGroup == expectedWithClauseGroup);
     }
 
     TEST_METHOD(TestGetGroupsWithNoClauses) {
@@ -389,7 +396,7 @@ namespace UnitTesting {
       spa::ClauseGroups groups = queryOptimizer.getGroups(parsedQuery);
       spa::NoSynonymClauseGroup noSynonymClauseGroup = groups.getNoSynonynmClauseGroup();
       std::vector<spa::ConnectedSynonymClauseGroup> connectedSynonymGroups = groups.getConnectedSynonymClauseGroups();
-      spa::WithAttrAttrClauseGroup withAttrAttrClauseGroup = groups.getWithAttrAttrClauseGroup();
+      spa::WithClauseGroup withAttrAttrClauseGroup = groups.getWithClauseGroup();
 
       Assert::IsTrue(noSynonymClauseGroup.isEmpty());
       Assert::IsTrue(connectedSynonymGroups.empty());

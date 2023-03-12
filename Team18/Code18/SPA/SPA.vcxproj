@@ -50,7 +50,7 @@
     <ClInclude Include="..\source\QPS\Evaluators\QueryResult.h" />
     <ClInclude Include="..\source\QPS\Evaluators\SimpleEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\UsesEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\WithAttrAttrClauseGroup.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\WithClauseGroup.h" />
     <ClInclude Include="..\source\QPS\Evaluators\WithEvaluator.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\Clause.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\ParsedQuery.h" />
@@ -117,7 +117,7 @@
     <ClCompile Include="..\source\QPS\Evaluators\QueryResult.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\SimpleEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\UsesEvaluator.cpp" />
-    <ClCompile Include="..\source\QPS\Evaluators\WithAttrAttrClauseGroup.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\WithClauseGroup.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\WithEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Preprocessor\ParsedQuery.cpp" />
     <ClCompile Include="..\source\QPS\Preprocessor\PqlAndParser.cpp" />

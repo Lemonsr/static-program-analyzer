@@ -9,22 +9,22 @@
 #include "QpsResultTable.h"
 #include "NoSynonymClauseGroup.h"
 #include "ConnectedSynonymClauseGroup.h"
-#include "WithAttrAttrClauseGroup.h"
+#include "WithClauseGroup.h"
 
 namespace spa {
 class ClauseGroups {
  private:
   NoSynonymClauseGroup& noSynonymClauseGroup;
   std::vector<ConnectedSynonymClauseGroup>& connectedSynonymClauseGroups;
-  WithAttrAttrClauseGroup& withAttrAttrClauseGroup;
+  WithClauseGroup& withClauseGroup;
  public:
   ClauseGroups(NoSynonymClauseGroup& noSynonymClauseGroup,
                 std::vector<ConnectedSynonymClauseGroup>& connectedSynonymClauseGroups,
-                 WithAttrAttrClauseGroup& withAttrAttrClauseGroup);
+    WithClauseGroup& withClauseGroup);
   QpsResultTable evaluate(PKBManager& pkbManager, std::unordered_map<std::string, DesignEntityType>& usedDeclarations);
 
   NoSynonymClauseGroup& getNoSynonynmClauseGroup();
   std::vector<ConnectedSynonymClauseGroup>& getConnectedSynonymClauseGroups();
-  WithAttrAttrClauseGroup& getWithAttrAttrClauseGroup();
+  WithClauseGroup& getWithClauseGroup();
 };
 }  // namespace spa
