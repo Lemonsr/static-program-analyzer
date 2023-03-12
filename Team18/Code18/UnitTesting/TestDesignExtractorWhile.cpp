@@ -79,7 +79,7 @@ namespace UnitTesting {
             if (expected.size() != actual.size()) {
                 return false;
             }
-            for (int i = 0; i < expected.size(); i++) {
+            for (unsigned i = 0; i < expected.size(); i++) {
                 if (expected[i].first != actual[i].first || expected[i].second != actual[i].second) {
                     return false;
                 }
@@ -103,7 +103,7 @@ namespace UnitTesting {
                 tokenA, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace, tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -137,7 +137,7 @@ namespace UnitTesting {
                 tokenA, tokenAssign, tokenB, tokenSemiColon, tokenCloseBrace, tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -179,7 +179,7 @@ namespace UnitTesting {
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -222,7 +222,7 @@ namespace UnitTesting {
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -272,7 +272,7 @@ namespace UnitTesting {
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -320,7 +320,7 @@ namespace UnitTesting {
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -370,7 +370,7 @@ namespace UnitTesting {
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -424,7 +424,7 @@ namespace UnitTesting {
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -481,7 +481,7 @@ namespace UnitTesting {
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -537,7 +537,7 @@ namespace UnitTesting {
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -580,7 +580,7 @@ namespace UnitTesting {
                 tokenCloseBrace, tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -640,7 +640,7 @@ namespace UnitTesting {
                 tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -700,7 +700,7 @@ namespace UnitTesting {
                 tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -764,7 +764,7 @@ namespace UnitTesting {
                 tokenSemiColon, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
@@ -828,7 +828,7 @@ namespace UnitTesting {
                 tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace
             };
             spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-            for (auto token : tokenList) {
+            for (spa::Token token : tokenList) {
                 tokenStream.pushBack(token);
             }
             std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();

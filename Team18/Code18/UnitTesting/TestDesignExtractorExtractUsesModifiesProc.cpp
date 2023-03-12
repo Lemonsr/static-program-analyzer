@@ -373,7 +373,7 @@ public:
     std::vector<std::vector<std::string>> expectedUses = {{"e", "h"}, {"e", "h"}};
     std::vector<std::vector<std::string>> expectedModifies = {{"d", "g"}, {"d", "g"}};
 
-    for (int i = 0; i < testProcedures.size(); i++) {
+    for (unsigned i = 0; i < testProcedures.size(); i++) {
       std::vector<std::string> testUses = retrieveResFromPkb(testProcedures[i], "v", spa::VARIABLE,
         spa::USES);
       std::vector<std::string> testModifies = retrieveResFromPkb(testProcedures[i], "v",
@@ -431,7 +431,7 @@ public:
     std::vector<std::vector<std::string>> expectedUses = {{"e", "h"}, {"e", "h"}};
     std::vector<std::vector<std::string>> expectedModifies = {{"d", "g"}, {"d", "g"}};
 
-    for (int i = 0; i < testProcedures.size(); i++) {
+    for (unsigned i = 0; i < testProcedures.size(); i++) {
       std::vector<std::string> testUses = retrieveResFromPkb(testProcedures[i], "v", spa::VARIABLE,
         spa::USES);
       std::vector<std::string> testModifies = retrieveResFromPkb(testProcedures[i], "v",
@@ -489,7 +489,7 @@ public:
     std::vector<std::vector<std::string>> expectedUses = {{"e", "h"}, {"e", "h"}};
     std::vector<std::vector<std::string>> expectedModifies = {{"d", "g"}, {"d", "g"}};
 
-    for (int i = 0; i < testProcedures.size(); i++) {
+    for (unsigned i = 0; i < testProcedures.size(); i++) {
       std::vector<std::string> testUses = retrieveResFromPkb(testProcedures[i], "v", spa::VARIABLE,
         spa::USES);
       std::vector<std::string> testModifies = retrieveResFromPkb(testProcedures[i], "v",
@@ -545,7 +545,7 @@ public:
     std::vector<std::vector<std::string>> expectedUses = {{"e", "h"}, {"e", "h"}};
     std::vector<std::vector<std::string>> expectedModifies = {{"d", "g"}, {"d", "g"}};
 
-    for (int i = 0; i < testProcedures.size(); i++) {
+    for (unsigned i = 0; i < testProcedures.size(); i++) {
       std::vector<std::string> testUses = retrieveResFromPkb(testProcedures[i], "v", spa::VARIABLE,
         spa::USES);
       std::vector<std::string> testModifies = retrieveResFromPkb(testProcedures[i], "v",

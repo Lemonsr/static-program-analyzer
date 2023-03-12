@@ -14,7 +14,7 @@ spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
                                       std::vector<std::shared_ptr<ProcedureStatement>>& procedureList) :
   pkbManager(pkbManager), procedureList(procedureList) {
   for (auto& procedure : procedureList) {
-    auto statements = procedure->getStatementLst();
+    auto& statements = procedure->getStatementLst();
     for (auto& statement : statements) {
       if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
         auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
@@ -40,7 +40,7 @@ void spa::DesignExtractor::extractRelationship() {
   }
   for (auto& procedure : procedureList) {
     pkbManager.addEntity(PROCEDURE, procedure->getProcedureVarToken().getValue());
-    auto statementList = procedure->getStatementLst();
+    auto& statementList = procedure->getStatementLst();
     extractDesignAbstraction(statementList);
   }
   extractCallsStar();
@@ -178,7 +178,7 @@ void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {
 
 void spa::DesignExtractor::extractCallsStar() {
   for (auto& procedure : procedureList) {
-    auto currentProcedure = procedure->getProcedureVarToken().getValue();
+    std::string currentProcedure = procedure->getProcedureVarToken().getValue();
     for (auto& directCall : procedure->getCalledVars()) {
       pkbManager.addRelationship(CALLS_STAR, currentProcedure, directCall);
       dfsCallsStar(currentProcedure, directCall);

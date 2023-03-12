@@ -311,7 +311,7 @@ bool spa::SpValidator::isCondExpr(std::vector<Token> tokensToCheck) {
     // Find outermost || &&
     int unclosedBracketCount = 0;
     int index = -1;
-    for (int i = 0; i < tokensToCheck.size(); i++) {
+    for (unsigned i = 0; i < tokensToCheck.size(); i++) {
         const TokenType tokenType = tokensToCheck[i].getType();
         if (tokenType == TOKEN_OPEN_BRACKET) {
             unclosedBracketCount += 1;
@@ -348,7 +348,7 @@ bool spa::SpValidator::isRelExpr(std::vector<Token> tokensToCheck) {
     }
 
     int index = -1;
-    for (int i = 0; i < tokensToCheck.size(); i++) {
+    for (unsigned i = 0; i < tokensToCheck.size(); i++) {
         if (UtilsFunction::relExprToken.count(tokensToCheck[i].getType())) {
             index = i;
             break;
