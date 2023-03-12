@@ -15,60 +15,60 @@
 spa::SpParser::SpParser(spa::Stream<spa::Token>& tokenStream) : tokenStream(tokenStream) {}
 
 std::vector<std::shared_ptr<spa::ProcedureStatement>> spa::SpParser::parse() {
-    std::vector<std::shared_ptr<ProcedureStatement>> procedureList;
-    while (!isEndOfProgram()) {
-        if (matchToken(spa::TOKEN_PROCEDURE)) {
-            procedureList.push_back(processProcedure());
-        }
+  std::vector<std::shared_ptr<ProcedureStatement>> procedureList;
+  while (!isEndOfProgram()) {
+    if (matchToken(spa::TOKEN_PROCEDURE)) {
+      procedureList.push_back(processProcedure());
     }
-    return procedureList;
+  }
+  return procedureList;
 }
 
 std::shared_ptr<spa::ProcedureStatement> spa::SpParser::processProcedure() {
-    skipCurrToken();  // To skip over the procedure token
-    Token procedureVarToken = getCurrTokenAndAdvance();
-    skipCurrToken();  // Skip over open brace token
-    std::unordered_set<int> whileStmtParents;
-    std::unordered_set<int> ifStmtParents;
-    std::vector<std::shared_ptr<ProgramStatement>> statementLst = processStmtList(
-        procedureVarToken.getValue(),
-        whileStmtParents,
-        ifStmtParents);
-    auto procedure = std::make_shared<ProcedureStatement>(procedureVarToken, statementLst);
-    return procedure;
+  skipCurrToken(); // To skip over the procedure token
+  Token procedureVarToken = getCurrTokenAndAdvance();
+  skipCurrToken(); // Skip over open brace token
+  std::unordered_set<int> whileStmtParents;
+  std::unordered_set<int> ifStmtParents;
+  std::vector<std::shared_ptr<ProgramStatement>> statementLst = processStmtList(
+    procedureVarToken.getValue(),
+    whileStmtParents,
+    ifStmtParents);
+  auto procedure = std::make_shared<ProcedureStatement>(procedureVarToken, statementLst);
+  return procedure;
 }
 
 std::vector<std::shared_ptr<spa::ProgramStatement>> spa::SpParser::processStmtList(
-    std::string parentProcedureVal,
-    std::unordered_set<int> whileStmtParents,
-    std::unordered_set<int> ifStmtParents) {
-    std::vector<std::shared_ptr<ProgramStatement>> statements;
-    while (!matchToken(spa::TOKEN_CLOSE_BRACE) && !isEndOfProgram()) {
-        statements.push_back(handleStatements(parentProcedureVal, whileStmtParents, ifStmtParents));
-    }
-    skipCurrToken();  // Skip over close brace token
-    return statements;
+  std::string parentProcedureVal,
+  std::unordered_set<int> whileStmtParents,
+  std::unordered_set<int> ifStmtParents) {
+  std::vector<std::shared_ptr<ProgramStatement>> statements;
+  while (!matchToken(spa::TOKEN_CLOSE_BRACE) && !isEndOfProgram()) {
+    statements.push_back(handleStatements(parentProcedureVal, whileStmtParents, ifStmtParents));
+  }
+  skipCurrToken(); // Skip over close brace token
+  return statements;
 }
 
 std::shared_ptr<spa::ProgramStatement> spa::SpParser::handleStatements(
-    std::string parentProcedureVal,
-    std::unordered_set<int> whileStmtParents,
-    std::unordered_set<int> ifStmtParents) {
-    TokenType currentTokenType = getCurrTokenAndAdvance().getType();
-    switch (currentTokenType) {
+  std::string parentProcedureVal,
+  std::unordered_set<int> whileStmtParents,
+  std::unordered_set<int> ifStmtParents) {
+  TokenType currentTokenType = getCurrTokenAndAdvance().getType();
+  switch (currentTokenType) {
     case TOKEN_READ:
-        return processReadStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
+      return processReadStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
     case TOKEN_PRINT:
-        return processPrintStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
+      return processPrintStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
     case TOKEN_CALL:
-        return processCallStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
+      return processCallStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
     case TOKEN_WHILE:
-        return processWhileStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
+      return processWhileStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
     case TOKEN_IF:
-        return processIfStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
+      return processIfStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
     default:
-        return processAssignStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
-    }
+      return processAssignStatement(parentProcedureVal, whileStmtParents, ifStmtParents);
+  }
 }
 
 std::shared_ptr<spa::ProgramStatement> spa::SpParser::processReadStatement(
@@ -76,7 +76,7 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processReadStatement(
   std::unordered_set<int> whileStmtParents,
   std::unordered_set<int> ifStmtParents) {
   Token readVariable = getCurrTokenAndAdvance();
-  skipCurrToken();  // Skip over semi colon token
+  skipCurrToken(); // Skip over semi colon token
   auto readStatement = std::make_shared<ReadStatement>(parentProcedureVal,
     readVariable.getValue(),
     whileStmtParents,
@@ -90,7 +90,7 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processPrintStatement(
   std::unordered_set<int> whileStmtParents,
   std::unordered_set<int> ifStmtParents) {
   Token printVariable = getCurrTokenAndAdvance();
-  skipCurrToken();  // Skip over semi colon token
+  skipCurrToken(); // Skip over semi colon token
   auto printStatement = std::make_shared<PrintStatement>(parentProcedureVal,
     printVariable.getValue(),
     whileStmtParents,
@@ -104,7 +104,7 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processCallStatement(
   std::unordered_set<int> whileStmtParents,
   std::unordered_set<int> ifStmtParents) {
   Token callVariable = getCurrTokenAndAdvance();
-  skipCurrToken();  // Skip over semi colon token
+  skipCurrToken(); // Skip over semi colon token
   auto callStatement = std::make_shared<CallStatement>(parentProcedureVal,
     callVariable.getValue(),
     whileStmtParents,
@@ -113,29 +113,36 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processCallStatement(
   return callStatement;
 }
 
-std::shared_ptr<spa::ProgramStatement> spa::SpParser::processWhileStatement(std::string parentProcedureVal,
+std::shared_ptr<spa::ProgramStatement> spa::SpParser::processWhileStatement(
+  std::string parentProcedureVal,
   std::unordered_set<int>
   whileStmtParents,
   std::unordered_set<int> ifStmtParents) {
   int currentLineNum = statementLineNum;
   whileStmtParents.insert(currentLineNum);
   std::vector<std::shared_ptr<ProgramStatement>> whileStatementBlock{};
-  std::shared_ptr<ProgramStatement> whileConditionStatement = processWhileConditionStatement(parentProcedureVal,
+  std::shared_ptr<ProgramStatement> whileConditionStatement = processWhileConditionStatement(
+    parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
   whileStatementBlock.push_back(whileConditionStatement);
-  skipCurrToken();  // Skip over open brace token
-  std::vector<std::shared_ptr<ProgramStatement>> whileStatementList = processStmtList(parentProcedureVal,
+  skipCurrToken(); // Skip over open brace token
+  std::vector<std::shared_ptr<ProgramStatement>> whileStatementList = processStmtList(
+    parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
-  std::shared_ptr<ProgramStatement> whileInnerBlockStatement = std::make_shared<InnerBlockStatement>(parentProcedureVal, whileStatementList);
+  std::shared_ptr<ProgramStatement> whileInnerBlockStatement = std::make_shared<
+    InnerBlockStatement>(
+    parentProcedureVal, whileStatementList);
   whileStatementBlock.push_back(whileInnerBlockStatement);
-  std::shared_ptr<ProgramStatement> whileContainerStatement = std::make_shared<WhileContainerStatement>(parentProcedureVal,
+  std::shared_ptr<ProgramStatement> whileContainerStatement = std::make_shared<
+    WhileContainerStatement>(parentProcedureVal,
     currentLineNum, whileStatementBlock);
   return whileContainerStatement;
 }
 
-std::shared_ptr<spa::ProgramStatement> spa::SpParser::processWhileConditionStatement(std::string parentProcedureVal,
+std::shared_ptr<spa::ProgramStatement> spa::SpParser::processWhileConditionStatement(
+  std::string parentProcedureVal,
   std::unordered_set<int> whileStmtParents,
   std::unordered_set<int> ifStmtParents) {
   std::vector<spa::Token> rawConditionExpression{};
@@ -144,43 +151,52 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processWhileConditionState
     rawConditionExpression.push_back(currToken);
   }
   std::string postfixExpression = UtilsFunction::infixToPostfix(rawConditionExpression);
-  std::shared_ptr<ProgramStatement> whileConditionStatement = std::make_shared<WhileConditionStatement>(parentProcedureVal,
+  std::shared_ptr<ProgramStatement> whileConditionStatement = std::make_shared<
+    WhileConditionStatement>(parentProcedureVal,
     postfixExpression,
     whileStmtParents, ifStmtParents, statementLineNum);
   increaseStatementLineNum();
   return whileConditionStatement;
 }
 
-std::shared_ptr<spa::ProgramStatement> spa::SpParser::processIfStatement(std::string parentProcedureVal,
+std::shared_ptr<spa::ProgramStatement> spa::SpParser::processIfStatement(
+  std::string parentProcedureVal,
   std::unordered_set<int> whileStmtParents,
   std::unordered_set<int> ifStmtParents) {
   int currentLineNum = statementLineNum;
   ifStmtParents.insert(currentLineNum);
   std::vector<std::shared_ptr<ProgramStatement>> ifStatementBlock{};
-  std::shared_ptr<ProgramStatement> ifConditionStatement = processIfConditionStatement(parentProcedureVal,
+  std::shared_ptr<ProgramStatement> ifConditionStatement = processIfConditionStatement(
+    parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
   ifStatementBlock.push_back(ifConditionStatement);
-  skipCurrToken();  // Skip over then token
-  skipCurrToken();  // Skip over open brace token
-  std::vector<std::shared_ptr<ProgramStatement>> thenStatementList = processStmtList(parentProcedureVal,
+  skipCurrToken(); // Skip over then token
+  skipCurrToken(); // Skip over open brace token
+  std::vector<std::shared_ptr<ProgramStatement>> thenStatementList = processStmtList(
+    parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
-  std::shared_ptr<ProgramStatement> thenStatementInnerBlock = std::make_shared<InnerBlockStatement>(parentProcedureVal, thenStatementList);
+  std::shared_ptr<ProgramStatement> thenStatementInnerBlock = std::make_shared<InnerBlockStatement>(
+    parentProcedureVal, thenStatementList);
   ifStatementBlock.push_back(thenStatementInnerBlock);
-  skipCurrToken();  // Skip over else token
-  skipCurrToken();  // Skip over open brace token
-  std::vector<std::shared_ptr<ProgramStatement>> elseStatementList = processStmtList(parentProcedureVal,
+  skipCurrToken(); // Skip over else token
+  skipCurrToken(); // Skip over open brace token
+  std::vector<std::shared_ptr<ProgramStatement>> elseStatementList = processStmtList(
+    parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
-  std::shared_ptr<ProgramStatement> elseStatementInnerBlock = std::make_shared<InnerBlockStatement>(parentProcedureVal, elseStatementList);
+  std::shared_ptr<ProgramStatement> elseStatementInnerBlock = std::make_shared<InnerBlockStatement>(
+    parentProcedureVal, elseStatementList);
   ifStatementBlock.push_back(elseStatementInnerBlock);
-  std::shared_ptr<ProgramStatement> ifContainerStatement = std::make_shared<IfContainerStatement>(parentProcedureVal,
+  std::shared_ptr<ProgramStatement> ifContainerStatement = std::make_shared<IfContainerStatement>(
+    parentProcedureVal,
     currentLineNum, ifStatementBlock);
   return ifContainerStatement;
 }
 
-std::shared_ptr<spa::ProgramStatement> spa::SpParser::processIfConditionStatement(std::string parentProcedureVal,
+std::shared_ptr<spa::ProgramStatement> spa::SpParser::processIfConditionStatement(
+  std::string parentProcedureVal,
   std::unordered_set<int> whileStmtParents,
   std::unordered_set<int> ifStmtParents) {
   std::vector<spa::Token> rawConditionExpression{};
@@ -196,21 +212,23 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processIfConditionStatemen
   return ifConditionStatement;
 }
 
-std::shared_ptr<spa::ProgramStatement> spa::SpParser::processAssignStatement(std::string parentProcedureVal,
+std::shared_ptr<spa::ProgramStatement> spa::SpParser::processAssignStatement(
+  std::string parentProcedureVal,
   std::unordered_set<int>
   whileStmtParents,
   std::unordered_set<int>
   ifStmtParents) {
   std::string assignmentVar = getPrevToken().getValue();
-  skipCurrToken();  // Skip over equal token
+  skipCurrToken(); // Skip over equal token
   std::vector<spa::Token> rawAssignExpression = {};
   while (getCurrToken().getType() != spa::TOKEN_SEMICOLON) {
     spa::Token currToken = getCurrTokenAndAdvance();
     rawAssignExpression.push_back(currToken);
   }
-  skipCurrToken();  // Skip over semi colon token
+  skipCurrToken(); // Skip over semi colon token
   std::string postfixExpression = UtilsFunction::infixToPostfix(rawAssignExpression);
-  std::shared_ptr<ProgramStatement> assignStatement = std::make_shared<AssignStatement>(parentProcedureVal, assignmentVar,
+  std::shared_ptr<ProgramStatement> assignStatement = std::make_shared<AssignStatement>(
+    parentProcedureVal, assignmentVar,
     postfixExpression,
     whileStmtParents, ifStmtParents, statementLineNum);
   increaseStatementLineNum();
