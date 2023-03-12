@@ -116,7 +116,7 @@ bool spa::QpsFilteredRowEquality::operator()(const QpsFilteredRow& first, const 
   if (firstColumns.size() != secondColumns.size()) {
     return false;
   }
-  for (int i = 0; i < firstColumns.size(); ++i) {
+  for (size_t i = 0; i < firstColumns.size(); ++i) {
     if (first.row[firstColumns[i]] != second.row[secondColumns[i]]) {
       return false;
     }

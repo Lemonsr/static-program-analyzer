@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ParsedQuery.h";
+#include "ParsedQuery.h"
 
 namespace spa {
 class PqlSemanticChecker {
