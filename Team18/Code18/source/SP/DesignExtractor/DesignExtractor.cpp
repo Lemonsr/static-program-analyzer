@@ -165,7 +165,7 @@ void spa::DesignExtractor::extractParentStar(ContainerStatement* containerStatem
 }
 
 void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*> statementList) {
-  CFGNode dummyStartNode = CFGNode::createDummyNode();
+  CFGNode dummyStartNode = CFGNode();
   CFGNode tailNode = dummyStartNode;
   bool start = true;
   for (auto statement : statementList) {

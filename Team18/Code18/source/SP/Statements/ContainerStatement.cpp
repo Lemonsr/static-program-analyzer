@@ -61,7 +61,7 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::IfContainerStatement::processStatemen
     processStatement(pkbManager);
   std::pair<CFGNode, CFGNode> cfgThenInnerBlockNode = thenStatement->processStatement(pkbManager);
   std::pair<CFGNode, CFGNode> cfgElseInnerBlockNode = elseStatement->processStatement(pkbManager);
-  CFGNode dummyNode = CFGNode::createDummyNode();
+  CFGNode dummyNode = CFGNode();
   int const dummyNodeLineNum = dummyNode.getLineNumber();
   int const cfgIfConditionNodeLineNum = cfgIfConditionNode.second.getLineNumber();
   int const cfgThenInnerBlkNodeStart = cfgThenInnerBlockNode.first.getLineNumber();
@@ -112,7 +112,7 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::InnerBlockStatement::processStatement
     prevStmtEndNode = cfgStmtNode.second;
   }
   if (blockStmtHeadNode.getLineNumber() == -1 && prevStmtEndNode.getLineNumber() == -1) {
-    return std::make_pair(CFGNode::createDummyNode(), CFGNode::createDummyNode());
+    return std::make_pair(CFGNode(), CFGNode());
   }
   return std::make_pair(blockStmtHeadNode, prevStmtEndNode);
 }

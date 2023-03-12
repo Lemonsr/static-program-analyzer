@@ -19,7 +19,6 @@ class CFGNode {
   explicit CFGNode(int lineNumber);
   explicit CFGNode(int lineNumber, std::string modifiedVariable);
   explicit CFGNode(int lineNumber, std::unordered_set<std::string> variables);
-  static CFGNode createDummyNode();
   bool isDummyNode();
   int getLineNumber() const;
   void linkTo(CFGNode* node);

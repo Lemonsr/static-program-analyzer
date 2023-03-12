@@ -13,6 +13,9 @@ bool spa::CFGStorage::popDummyNode(int lineNumber, RelationshipStorage& relation
   for (auto& incomingNode : dummyNode.getIncomingEdges()) {
     isAddEdge = isAddEdge && addEdge(incomingNode->getLineNumber(), lineNumber, relationshipStorage);
   }
+  for (auto& node : dummyNode.getIncomingEdges()) {
+    node->removeOutgoingEdge(&dummyNode);
+  }
   cfgNodeTable[-1] = CFGNode();
   return isAddEdge;
 }

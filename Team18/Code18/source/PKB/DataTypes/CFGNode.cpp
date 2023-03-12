@@ -19,10 +19,6 @@ spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> variables)
   isDummy = false;
 }
 
-spa::CFGNode spa::CFGNode::createDummyNode() {
-  return CFGNode();
-}
-
 int spa::CFGNode::getLineNumber() const {
   return lineNumber;
 }
