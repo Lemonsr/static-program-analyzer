@@ -67,68 +67,72 @@ void spa::DesignExtractor::extractParentAbstraction(std::vector<std::shared_ptr<
   }
 }
 
-void spa::DesignExtractor::extractFollows(const std::vector<std::shared_ptr<ProgramStatement>>& statementList) {
-  for (std::size_t i = 0; i + 1 < statementList.size(); ++i) {
-    const std::string followStmtOne = std::to_string(statementList[i]->getStatementLineNum());
-    const std::string followStmtTwo = std::to_string(statementList[i + 1]->getStatementLineNum());
+void spa::DesignExtractor::extractFollows(std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
+  for (unsigned i = 0; i < statementList.size(); i++) {
+    if (i + 1 != statementList.size()) {
+      std::string followStmtOne = std::to_string(statementList[i]->getStatementLineNum());
+      std::string followStmtTwo = std::to_string(statementList[i + 1]->getStatementLineNum());
 
-    if (followStmtOne != "-1" && followStmtTwo != "-1") {
-      pkbManager.addRelationship(spa::FOLLOWS, followStmtOne, followStmtTwo);
+      if (followStmtOne != "-1" && followStmtTwo != "-1") {
+        pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
+      }
     }
-
-    if (const auto containerStatement = std::dynamic_pointer_cast< spa::ContainerStatement>(statementList[i])) {
+    if (std::dynamic_pointer_cast<ContainerStatement>(statementList[i])) {
+      auto containerStatement = std::dynamic_pointer_cast<ContainerStatement>(statementList[i]);
       extractFollows(containerStatement->getStatementList());
     }
   }
 }
 
-void spa::DesignExtractor::extractFollowsStar(const std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
-  for (std::size_t i = 0; i < statementList.size(); ++i) {
-    for (std::size_t j = i + 1; j < statementList.size(); ++j) {
-      const std::string followStarStmtOne = std::to_string(statementList[i]->getStatementLineNum());
-      const std::string followStarStmtTwo = std::to_string(statementList[j]->getStatementLineNum());
+void spa::DesignExtractor::extractFollowsStar(std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
+  for (unsigned i = 0; i < statementList.size(); i++) {
+    if (i + 1 != statementList.size()) {
+      for (unsigned j = i + 1; j < statementList.size(); j++) {
+        std::string followStarStmtOne = std::to_string(statementList[i]->getStatementLineNum());
+        std::string followStarStmtTwo = std::to_string(statementList[j]->getStatementLineNum());
 
-      if (followStarStmtOne != "-1" && followStarStmtTwo != "-1") {
-        pkbManager.addRelationship(spa::FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
+        if (followStarStmtOne != "-1" && followStarStmtTwo != "-1") {
+          pkbManager.addRelationship(spa::FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
+        }
       }
     }
-
-    if (const auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statementList[i])) {
+    if (std::dynamic_pointer_cast<spa::ContainerStatement>(statementList[i])) {
+      auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statementList[i]);
       extractFollowsStar(containerStatement->getStatementList());
     }
   }
 }
 
 void spa::DesignExtractor::extractParent(std::shared_ptr<spa::ContainerStatement>& containerStatement) {
-  const std::string parentStmtOne = std::to_string(containerStatement->getStatementLineNum());
-  for (const auto& statement : containerStatement->getStatementList()) {
+  std::vector<std::shared_ptr<ProgramStatement>> statementList = containerStatement->getStatementList();
+  for (auto& statement : containerStatement->getStatementList()) {
+    std::string parentStmtOne = std::to_string(containerStatement->getStatementLineNum());
     if (statement->getStatementLineNum() == containerStatement->getStatementLineNum()) {
       continue;
     }
 
     if (statement->getStatementLineNum() != -1) {
-      const std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
+      std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
       pkbManager.addRelationship(spa::RelationshipType::PARENT, parentStmtOne, parentStmtTwo);
       continue;
     }
-
-    if (const auto innerContainerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
-      for (auto& childStatement : innerContainerStatement->getStatementList()) {
-        const std::string parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
-        pkbManager.addRelationship(spa::RelationshipType::PARENT, parentStmtOne, parentStmtTwo);
-
-        if (auto grandchildContainerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(childStatement)) {
-          extractParent(grandchildContainerStatement);
-        }
+    auto innerBlockStatements = std::dynamic_pointer_cast<ContainerStatement>(statement);
+    std::vector<std::shared_ptr<ProgramStatement>> innerBlockStmtList = innerBlockStatements->getStatementList();
+    for (auto& childStatement : innerBlockStmtList) {
+      std::string parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
+      pkbManager.addRelationship(PARENT, parentStmtOne, parentStmtTwo);
+      if (std::dynamic_pointer_cast<ContainerStatement>(childStatement)) {
+        auto childContainerStmt = std::dynamic_pointer_cast<ContainerStatement>(childStatement);
+        extractParent(childContainerStmt);
       }
     }
-    }
   }
+}
 
 void spa::DesignExtractor::extractParentStar(std::shared_ptr<ContainerStatement>& containerStatement,
                                              std::string ancestorLineNum) {
-  const std::vector<std::shared_ptr<ProgramStatement>>& statementList = containerStatement->getStatementList();
-  for (const std::shared_ptr<ProgramStatement>& statement : statementList) {
+  std::vector<std::shared_ptr<ProgramStatement>>& statementList = containerStatement->getStatementList();
+  for (auto& statement : statementList) {
     std::string parentStmtOne = std::to_string(containerStatement->getStatementLineNum());
     std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
 
@@ -141,19 +145,17 @@ void spa::DesignExtractor::extractParentStar(std::shared_ptr<ContainerStatement>
     }
 
     auto innerBlockStatements = std::dynamic_pointer_cast<ContainerStatement>(statement);
-    if (innerBlockStatements) {
-      const std::vector<std::shared_ptr<ProgramStatement>>& innerBlockStmtList = innerBlockStatements->getStatementList();
+    std::vector<std::shared_ptr<ProgramStatement>> innerBlockStmtList = innerBlockStatements->getStatementList();
 
-      for (const auto& childStatement : innerBlockStmtList) {
-        parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
-        pkbManager.addRelationship(PARENT_STAR, ancestorLineNum, parentStmtTwo);
+    for (auto& childStatement : innerBlockStmtList) {
+      parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
+      pkbManager.addRelationship(PARENT_STAR, ancestorLineNum, parentStmtTwo);
 
-        if (std::dynamic_pointer_cast<ContainerStatement>(childStatement)) {
-          auto childContainerStmt = std::dynamic_pointer_cast<ContainerStatement>(childStatement);
-          extractParentStar(childContainerStmt, ancestorLineNum);
-          extractParentStar(childContainerStmt,
-            std::to_string(childStatement->getStatementLineNum()));
-        }
+      if (std::dynamic_pointer_cast<ContainerStatement>(childStatement)) {
+        auto childContainerStmt = std::dynamic_pointer_cast<ContainerStatement>(childStatement);
+        extractParentStar(childContainerStmt, ancestorLineNum);
+        extractParentStar(childContainerStmt,
+          std::to_string(childStatement->getStatementLineNum()));
       }
     }
   }
@@ -161,7 +163,7 @@ void spa::DesignExtractor::extractParentStar(std::shared_ptr<ContainerStatement>
 
 
 void spa::DesignExtractor::extractUsesAndModifies(std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
-  for (const auto& statement : statementList) {
+  for (auto& statement : statementList) {
     statement->processStatement(pkbManager);
   }
 }

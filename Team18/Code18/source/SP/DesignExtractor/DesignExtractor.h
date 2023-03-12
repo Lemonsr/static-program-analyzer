@@ -18,8 +18,8 @@ class DesignExtractor {
 
   void extractDesignAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
   void extractParentAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
-  void extractFollows(const std::vector<std::shared_ptr<ProgramStatement>>& statementList);
-  void extractFollowsStar(const std::vector<std::shared_ptr<ProgramStatement>>& statementList);
+  void extractFollows(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
+  void extractFollowsStar(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
   void extractParent(std::shared_ptr<ContainerStatement>& containerStatement);
   void extractParentStar(std::shared_ptr <ContainerStatement>& containerStatement, std::string ancestorLineNum);
   void extractUsesAndModifies(std::vector<std::shared_ptr<ProgramStatement>>& statementList);

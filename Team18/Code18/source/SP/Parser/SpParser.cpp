@@ -34,7 +34,7 @@ std::shared_ptr<spa::ProcedureStatement> spa::SpParser::processProcedure() {
         procedureVarToken.getValue(),
         whileStmtParents,
         ifStmtParents);
-    auto procedure = std::make_unique<ProcedureStatement>(procedureVarToken, statementLst);
+    auto procedure = std::make_shared<ProcedureStatement>(procedureVarToken, statementLst);
     return procedure;
 }
 
@@ -77,10 +77,12 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processReadStatement(
   std::unordered_set<int> ifStmtParents) {
   Token readVariable = getCurrTokenAndAdvance();
   skipCurrToken();  // Skip over semi colon token
-  return std::make_unique<ReadStatement>(parentProcedureVal,
+  auto readStatement = std::make_shared<ReadStatement>(parentProcedureVal,
     readVariable.getValue(),
     whileStmtParents,
     ifStmtParents, statementLineNum);
+  increaseStatementLineNum();
+  return readStatement;
 }
 
 std::shared_ptr<spa::ProgramStatement> spa::SpParser::processPrintStatement(
@@ -89,10 +91,12 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processPrintStatement(
   std::unordered_set<int> ifStmtParents) {
   Token printVariable = getCurrTokenAndAdvance();
   skipCurrToken();  // Skip over semi colon token
-  return std::make_unique<PrintStatement>(parentProcedureVal,
+  auto printStatement = std::make_shared<PrintStatement>(parentProcedureVal,
     printVariable.getValue(),
     whileStmtParents,
     ifStmtParents, statementLineNum);
+  increaseStatementLineNum();
+  return printStatement;
 }
 
 std::shared_ptr<spa::ProgramStatement> spa::SpParser::processCallStatement(
@@ -101,10 +105,12 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processCallStatement(
   std::unordered_set<int> ifStmtParents) {
   Token callVariable = getCurrTokenAndAdvance();
   skipCurrToken();  // Skip over semi colon token
-  return std::make_unique<CallStatement>(parentProcedureVal,
+  auto callStatement = std::make_shared<CallStatement>(parentProcedureVal,
     callVariable.getValue(),
     whileStmtParents,
     ifStmtParents, statementLineNum);
+  increaseStatementLineNum();
+  return callStatement;
 }
 
 std::shared_ptr<spa::ProgramStatement> spa::SpParser::processWhileStatement(std::string parentProcedureVal,
@@ -122,9 +128,9 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processWhileStatement(std:
   std::vector<std::shared_ptr<ProgramStatement>> whileStatementList = processStmtList(parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
-  std::shared_ptr<ProgramStatement> whileInnerBlockStatement = std::make_unique<InnerBlockStatement>(parentProcedureVal, whileStatementList);
+  std::shared_ptr<ProgramStatement> whileInnerBlockStatement = std::make_shared<InnerBlockStatement>(parentProcedureVal, whileStatementList);
   whileStatementBlock.push_back(whileInnerBlockStatement);
-  std::shared_ptr<ProgramStatement> whileContainerStatement = std::make_unique<WhileContainerStatement>(parentProcedureVal,
+  std::shared_ptr<ProgramStatement> whileContainerStatement = std::make_shared<WhileContainerStatement>(parentProcedureVal,
     currentLineNum, whileStatementBlock);
   return whileContainerStatement;
 }
@@ -138,7 +144,7 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processWhileConditionState
     rawConditionExpression.push_back(currToken);
   }
   std::string postfixExpression = UtilsFunction::infixToPostfix(rawConditionExpression);
-  std::shared_ptr<ProgramStatement> whileConditionStatement = std::make_unique<WhileConditionStatement>(parentProcedureVal,
+  std::shared_ptr<ProgramStatement> whileConditionStatement = std::make_shared<WhileConditionStatement>(parentProcedureVal,
     postfixExpression,
     whileStmtParents, ifStmtParents, statementLineNum);
   increaseStatementLineNum();
@@ -160,16 +166,16 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processIfStatement(std::st
   std::vector<std::shared_ptr<ProgramStatement>> thenStatementList = processStmtList(parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
-  std::shared_ptr<ProgramStatement> thenStatementInnerBlock = std::make_unique<InnerBlockStatement>(parentProcedureVal, thenStatementList);
+  std::shared_ptr<ProgramStatement> thenStatementInnerBlock = std::make_shared<InnerBlockStatement>(parentProcedureVal, thenStatementList);
   ifStatementBlock.push_back(thenStatementInnerBlock);
   skipCurrToken();  // Skip over else token
   skipCurrToken();  // Skip over open brace token
   std::vector<std::shared_ptr<ProgramStatement>> elseStatementList = processStmtList(parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
-  std::shared_ptr<ProgramStatement> elseStatementInnerBlock = std::make_unique<InnerBlockStatement>(parentProcedureVal, elseStatementList);
+  std::shared_ptr<ProgramStatement> elseStatementInnerBlock = std::make_shared<InnerBlockStatement>(parentProcedureVal, elseStatementList);
   ifStatementBlock.push_back(elseStatementInnerBlock);
-  std::shared_ptr<ProgramStatement> ifContainerStatement = std::make_unique<IfContainerStatement>(parentProcedureVal,
+  std::shared_ptr<ProgramStatement> ifContainerStatement = std::make_shared<IfContainerStatement>(parentProcedureVal,
     currentLineNum, ifStatementBlock);
   return ifContainerStatement;
 }
@@ -183,7 +189,7 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processIfConditionStatemen
     rawConditionExpression.push_back(currToken);
   }
   std::string postfixExpression = UtilsFunction::infixToPostfix(rawConditionExpression);
-  std::shared_ptr<ProgramStatement> ifConditionStatement = std::make_unique<IfConditionStatement>(
+  std::shared_ptr<ProgramStatement> ifConditionStatement = std::make_shared<IfConditionStatement>(
     parentProcedureVal, postfixExpression,
     whileStmtParents, ifStmtParents, statementLineNum);
   increaseStatementLineNum();
@@ -204,7 +210,7 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processAssignStatement(std
   }
   skipCurrToken();  // Skip over semi colon token
   std::string postfixExpression = UtilsFunction::infixToPostfix(rawAssignExpression);
-  std::shared_ptr<ProgramStatement> assignStatement = std::make_unique<AssignStatement>(parentProcedureVal, assignmentVar,
+  std::shared_ptr<ProgramStatement> assignStatement = std::make_shared<AssignStatement>(parentProcedureVal, assignmentVar,
     postfixExpression,
     whileStmtParents, ifStmtParents, statementLineNum);
   increaseStatementLineNum();

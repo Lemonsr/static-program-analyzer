@@ -97,19 +97,19 @@ public:
             tokenStream.pushBack(token);
         }
         auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
 
         std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
         for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
+          auto statements = procedure->getStatementLst();
+          for (auto& statement : statements) {
+            if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+              auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+              procedure->addCalledVars(callStatement->getVariableName());
             }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
+          }
+          procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+            procedure->getCalledVars());
         }
         spa::SpCyclicValidator cyclicValidator(procCallMap);
 
@@ -120,960 +120,961 @@ public:
     }
 
     TEST_METHOD(TestDoubleCallsNonCyclicOne) {
-        /*
-         *   procedure a {
-         * 1.    b = 1;
-         * 2.    c = b;
-         * 3.    call d;
-         * 4.    call e;
-         *  }
-         *   procedure d {
-         * 5.    a = 5;
-         *   }
-         *   procedure e {
-         * 6.    b = 6;
-         *   }
-         */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenC, tokenAssign, tokenB, tokenSemiColon,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCall, tokenE, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenD, tokenOpenBrace,
-          tokenA, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenE, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+       *   procedure a {
+       * 1.    b = 1;
+       * 2.    c = b;
+       * 3.    call d;
+       * 4.    call e;
+       *  }
+       *   procedure d {
+       * 5.    a = 5;
+       *   }
+       *   procedure e {
+       * 6.    b = 6;
+       *   }
+       */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenC, tokenAssign, tokenB, tokenSemiColon,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCall, tokenE, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenD, tokenOpenBrace,
+        tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenE, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = false;
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = false;
 
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
     TEST_METHOD(TestDoubleCallsCyclic) {
-        /*
-         *   procedure a {
-         * 1.    b = 1;
-         * 2.    c = b;
-         * 3.    call d;
-         *  }
-         *   procedure d {
-         * 4.    call a;
-         *   }
-         */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenC, tokenAssign, tokenB, tokenSemiColon,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenD, tokenOpenBrace,
-          tokenCall, tokenA, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+       *   procedure a {
+       * 1.    b = 1;
+       * 2.    c = b;
+       * 3.    call d;
+       *  }
+       *   procedure d {
+       * 4.    call a;
+       *   }
+       */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenC, tokenAssign, tokenB, tokenSemiColon,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenD, tokenOpenBrace,
+        tokenCall, tokenA, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = true;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = true;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
     TEST_METHOD(TestTwoCallsNonCyclicTwo) {
-        /*
-         *   procedure a {
-         * 1.    b = 1;
-         * 2.    c = b;
-         * 3.    call d;
-         *  }
-         *   procedure d {
-         * 4.    call e;
-         *   }
-         *   procedure e {
-         * 5.    b = 6;
-         *   }
-         */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenC, tokenAssign, tokenB, tokenSemiColon,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenD, tokenOpenBrace,
-          tokenCall, tokenE, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenE, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+       *   procedure a {
+       * 1.    b = 1;
+       * 2.    c = b;
+       * 3.    call d;
+       *  }
+       *   procedure d {
+       * 4.    call e;
+       *   }
+       *   procedure e {
+       * 5.    b = 6;
+       *   }
+       */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenC, tokenAssign, tokenB, tokenSemiColon,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenD, tokenOpenBrace,
+        tokenCall, tokenE, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenE, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = false;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = false;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
     TEST_METHOD(TestThreeCallsNonCyclic) {
-        /*
-         *   procedure a {
-         * 1.    b = 1;
-         * 2.    c = b;
-         * 3.    call d;
-         *  }
-         *   procedure d {
-         * 4.    call e;
-         *   }
-         *   procedure e {
-         * 5.    call b;
-         *   }
-         *   procedure b {
-         * 6.    d = 9;
-         *   }
-         *
-         */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenC, tokenAssign, tokenB, tokenSemiColon,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenD, tokenOpenBrace,
-          tokenCall, tokenE, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenE, tokenOpenBrace,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenD, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+       *   procedure a {
+       * 1.    b = 1;
+       * 2.    c = b;
+       * 3.    call d;
+       *  }
+       *   procedure d {
+       * 4.    call e;
+       *   }
+       *   procedure e {
+       * 5.    call b;
+       *   }
+       *   procedure b {
+       * 6.    d = 9;
+       *   }
+       *
+       */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenC, tokenAssign, tokenB, tokenSemiColon,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenD, tokenOpenBrace,
+        tokenCall, tokenE, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenE, tokenOpenBrace,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenD, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = false;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = false;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
 
     TEST_METHOD(TestThreeCallsCyclicOne) {
-        /*
-         *   procedure a {
-         * 1.    b = 1;
-         * 2.    c = b;
-         * 3.    call d;
-         * 4.    call e;
-         *  }
-         *   procedure d {
-         * 5.    a = 5;
-         *   }
-         *   procedure e {
-         * 6.    call a;
-         *   }
-         */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenC, tokenAssign, tokenB, tokenSemiColon,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCall, tokenE, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenD, tokenOpenBrace,
-          tokenA, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenE, tokenOpenBrace,
-          tokenCall, tokenA, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+       *   procedure a {
+       * 1.    b = 1;
+       * 2.    c = b;
+       * 3.    call d;
+       * 4.    call e;
+       *  }
+       *   procedure d {
+       * 5.    a = 5;
+       *   }
+       *   procedure e {
+       * 6.    call a;
+       *   }
+       */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenC, tokenAssign, tokenB, tokenSemiColon,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCall, tokenE, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenD, tokenOpenBrace,
+        tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenE, tokenOpenBrace,
+        tokenCall, tokenA, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = true;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = true;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
     TEST_METHOD(TestFourCallsNonCyclic) {
-        /*
-         *   procedure a {
-         * 1.    b = 1;
-         * 2.    c = b;
-         * 3.    call d;
-         *  }
-         *   procedure d {
-         * 4.    call e;
-         *   }
-         *   procedure e {
-         * 5.    call b;
-         *   }
-         *   procedure b {
-         * 6.    call c;
-         *   }
-         *
-         *   procedure c{
-         * 7.     a = 1;
-         *    }
-         *
-         */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenC, tokenAssign, tokenB, tokenSemiColon,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenD, tokenOpenBrace,
-          tokenCall, tokenE, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenE, tokenOpenBrace,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenC, tokenOpenBrace,
-          tokenA, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+       *   procedure a {
+       * 1.    b = 1;
+       * 2.    c = b;
+       * 3.    call d;
+       *  }
+       *   procedure d {
+       * 4.    call e;
+       *   }
+       *   procedure e {
+       * 5.    call b;
+       *   }
+       *   procedure b {
+       * 6.    call c;
+       *   }
+       *
+       *   procedure c{
+       * 7.     a = 1;
+       *    }
+       *
+       */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenC, tokenAssign, tokenB, tokenSemiColon,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenD, tokenOpenBrace,
+        tokenCall, tokenE, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenE, tokenOpenBrace,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenC, tokenOpenBrace,
+        tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = false;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = false;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
     TEST_METHOD(TestFourCallsCyclic) {
-        /*
-         *   procedure a {
-         * 1.    b = 1;
-         * 2.    c = b;
-         * 3.    call d;
-         *  }
-         *   procedure d {
-         * 4.    call e;
-         *   }
-         *   procedure e {
-         * 5.    call b;
-         *   }
-         *   procedure b {
-         * 6.    call c;
-         *   }
-         *
-         *   procedure c{
-         * 7.    call d;
-         *    }
-         *
-         */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenC, tokenAssign, tokenB, tokenSemiColon,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenD, tokenOpenBrace,
-          tokenCall, tokenE, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenE, tokenOpenBrace,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenC, tokenOpenBrace,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+       *   procedure a {
+       * 1.    b = 1;
+       * 2.    c = b;
+       * 3.    call d;
+       *  }
+       *   procedure d {
+       * 4.    call e;
+       *   }
+       *   procedure e {
+       * 5.    call b;
+       *   }
+       *   procedure b {
+       * 6.    call c;
+       *   }
+       *
+       *   procedure c{
+       * 7.    call d;
+       *    }
+       *
+       */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenC, tokenAssign, tokenB, tokenSemiColon,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenD, tokenOpenBrace,
+        tokenCall, tokenE, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenE, tokenOpenBrace,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenC, tokenOpenBrace,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = true;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = true;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
     TEST_METHOD(TestNestedOneCallsNonCyclic) {
-        /*
-        *  procedure a {
-        *1.    a = 5;
-        *2.    call b;
-        *3.    while (b >= c) {
-        *4.        call c;
-        *      }
-        *  }
-        *5. procedure b {
-        *6.    call c;
-        *  }
-        *7. procedure c{
-        *8.    c = 10;
-        *  }
-        *
-        */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace, tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace, tokenProcedure,
-          tokenC, tokenOpenBrace,
-          tokenC, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+      *  procedure a {
+      *1.    a = 5;
+      *2.    call b;
+      *3.    while (b >= c) {
+      *4.        call c;
+      *      }
+      *  }
+      *5. procedure b {
+      *6.    call c;
+      *  }
+      *7. procedure c{
+      *8.    c = 10;
+      *  }
+      *
+      */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace, tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace, tokenProcedure,
+        tokenC, tokenOpenBrace,
+        tokenC, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = false;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = false;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
     TEST_METHOD(TestNestedOneCallsCyclic) {
-        /*
-        *  procedure a {
-        *1.    a = 5;
-        *2.    call b;
-        *3.    while (b >= c) {
-        *4.        call c;
-        *      }
-        *  }
-        *5. procedure b {
-        *6.    call a;
-        *  }
-        *7. procedure c{
-        *8.    c = 10;
-        *  }
-        *
-        */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace, tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenA, tokenSemiColon,
-          tokenCloseBrace, tokenProcedure,
-          tokenC, tokenOpenBrace,
-          tokenC, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+      *  procedure a {
+      *1.    a = 5;
+      *2.    call b;
+      *3.    while (b >= c) {
+      *4.        call c;
+      *      }
+      *  }
+      *5. procedure b {
+      *6.    call a;
+      *  }
+      *7. procedure c{
+      *8.    c = 10;
+      *  }
+      *
+      */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace, tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenA, tokenSemiColon,
+        tokenCloseBrace, tokenProcedure,
+        tokenC, tokenOpenBrace,
+        tokenC, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = true;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = true;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
     TEST_METHOD(TestNestedTwoCallsOneNonCyclic) {
-        /*
-        *  procedure a{
-        *1.    a = 5;
-        *2.    call b;
-        *3.    while (b >= c) {
-        *4.        if (d >= 1) then {
-        *5.            b = 3;
-        *          }
-        *          else {
-        *6.            call c;
-        *          }
-        *      }
-        *  }
-        *    procedure b{
-        *7.     call c;
-        *  }
-        *    procedure c{
-        *8.     c = 10;
-        *  }
-        */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenA, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
-          tokenCloseBracket, tokenOpenBrace,
-          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
-          tokenCloseBracket, tokenThen, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace, tokenElse, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace, tokenProcedure, tokenC, tokenOpenBrace,
-          tokenC, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+      *  procedure a{
+      *1.    a = 5;
+      *2.    call b;
+      *3.    while (b >= c) {
+      *4.        if (d >= 1) then {
+      *5.            b = 3;
+      *          }
+      *          else {
+      *6.            call c;
+      *          }
+      *      }
+      *  }
+      *    procedure b{
+      *7.     call c;
+      *  }
+      *    procedure c{
+      *8.     c = 10;
+      *  }
+      */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
+        tokenCloseBracket, tokenOpenBrace,
+        tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
+        tokenCloseBracket, tokenThen, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace, tokenElse, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace, tokenProcedure, tokenC, tokenOpenBrace,
+        tokenC, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = false;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = false;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
     TEST_METHOD(TestNestedTwoCallsOneCyclic) {
-        /*
-        *  procedure a{
-        *1.    a = 5;
-        *2.    call b;
-        *3.    while (b >= c) {
-        *4.        if (d >= 1) then {
-        *5.            b = 3;
-        *          }
-        *          else {
-        *6.            call c;
-        *          }
-        *      }
-        *  }
-        *    procedure b{
-        *7.     call a;
-        *  }
-        *    procedure c{
-        *8.     c = 10;
-        *  }
-        */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenA, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
-          tokenCloseBracket, tokenOpenBrace,
-          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
-          tokenCloseBracket, tokenThen, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace, tokenElse, tokenOpenBrace,
-          tokenCall, tokenA, tokenSemiColon,
-          tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenA, tokenSemiColon,
-          tokenCloseBrace, tokenProcedure, tokenC, tokenOpenBrace,
-          tokenC, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+      *  procedure a{
+      *1.    a = 5;
+      *2.    call b;
+      *3.    while (b >= c) {
+      *4.        if (d >= 1) then {
+      *5.            b = 3;
+      *          }
+      *          else {
+      *6.            call c;
+      *          }
+      *      }
+      *  }
+      *    procedure b{
+      *7.     call a;
+      *  }
+      *    procedure c{
+      *8.     c = 10;
+      *  }
+      */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
+        tokenCloseBracket, tokenOpenBrace,
+        tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
+        tokenCloseBracket, tokenThen, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace, tokenElse, tokenOpenBrace,
+        tokenCall, tokenA, tokenSemiColon,
+        tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenA, tokenSemiColon,
+        tokenCloseBrace, tokenProcedure, tokenC, tokenOpenBrace,
+        tokenC, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = true;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = true;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
     TEST_METHOD(TestNestedTwoCallsTwoNonCyclic) {
-        /*
-        *  procedure a{
-        *1.    a = 5;
-        *2.    call b;
-        *3.    while (b >= c) {
-        *4.        if (d >= 1) then {
-        *5.            b = 3;
-        *6.            call c;
-        *          }
-        *          else {
-        *7.           b = 3;
-        *          }
-        *      }
-        *  }
-        *  procedure b{
-        *8.   call c;
-        *  }
-        *  procedure c{
-        *9.   c = 10;
-        *  }
-        */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenA, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
-          tokenCloseBracket, tokenOpenBrace,
-          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
-          tokenCloseBracket, tokenThen, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace, tokenElse, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace,
-          tokenCloseBrace, tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace, tokenProcedure, tokenC, tokenOpenBrace,
-          tokenC, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+      *  procedure a{
+      *1.    a = 5;
+      *2.    call b;
+      *3.    while (b >= c) {
+      *4.        if (d >= 1) then {
+      *5.            b = 3;
+      *6.            call c;
+      *          }
+      *          else {
+      *7.           b = 3;
+      *          }
+      *      }
+      *  }
+      *  procedure b{
+      *8.   call c;
+      *  }
+      *  procedure c{
+      *9.   c = 10;
+      *  }
+      */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
+        tokenCloseBracket, tokenOpenBrace,
+        tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
+        tokenCloseBracket, tokenThen, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace, tokenElse, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace,
+        tokenCloseBrace, tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace, tokenProcedure, tokenC, tokenOpenBrace,
+        tokenC, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = false;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = false;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
     TEST_METHOD(TestNestedTwoCallsTwoCyclic) {
-        /*
-        *  procedure a{
-        *1.    a = 5;
-        *2.    call b;
-        *3.    while (b >= c) {
-        *4.        if (d >= 1) then {
-        *5.            b = 3;
-        *6.            call c;
-        *          }
-        *          else {
-        *7.           b = 3;
-        *          }
-        *      }
-        *  }
-        *  procedure b{
-        *8.   call c;
-        *  }
-        *  procedure c{
-        *9.   call a;
-        *  }
-        */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenA, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
-          tokenCloseBracket, tokenOpenBrace,
-          tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
-          tokenCloseBracket, tokenThen, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace, tokenElse, tokenOpenBrace,
-          tokenB, tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace,
-          tokenCloseBrace, tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace, tokenProcedure, tokenC, tokenOpenBrace,
-          tokenCall, tokenA, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+      *  procedure a{
+      *1.    a = 5;
+      *2.    call b;
+      *3.    while (b >= c) {
+      *4.        if (d >= 1) then {
+      *5.            b = 3;
+      *6.            call c;
+      *          }
+      *          else {
+      *7.           b = 3;
+      *          }
+      *      }
+      *  }
+      *  procedure b{
+      *8.   call c;
+      *  }
+      *  procedure c{
+      *9.   call a;
+      *  }
+      */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC,
+        tokenCloseBracket, tokenOpenBrace,
+        tokenIf, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant,
+        tokenCloseBracket, tokenThen, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace, tokenElse, tokenOpenBrace,
+        tokenB, tokenAssign, tokenConstant, tokenSemiColon, tokenCloseBrace,
+        tokenCloseBrace, tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace, tokenProcedure, tokenC, tokenOpenBrace,
+        tokenCall, tokenA, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = true;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = true;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
     TEST_METHOD(TestNestedMultipleCallsNonCyclic) {
-        /*
-        *  procedure a{
-        *1.    a = 5;
-        *2.    while (b >= c) {
-        *3.        call c;
-        *4.        while (c >= 8) {
-        *5.            call b;
-        *6.            while (d >= 6) {
-        *7.                call d;
-        *              }
-        *          }
-        *      }
-        *  }
-        *  procedure b{
-        *8.  call c;
-        *  }
-        *  procedure c{
-        *9.  c = 10;
-        *  }
-        *  procedure d{
-        *10.  d = 10;
-        *  }
-        */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenA, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenOpenBrace,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenOpenBrace,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenC, tokenOpenBrace,
-          tokenC, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenD, tokenOpenBrace,
-          tokenD, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+      *  procedure a{
+      *1.    a = 5;
+      *2.    while (b >= c) {
+      *3.        call c;
+      *4.        while (c >= 8) {
+      *5.            call b;
+      *6.            while (d >= 6) {
+      *7.                call d;
+      *              }
+      *          }
+      *      }
+      *  }
+      *  procedure b{
+      *8.  call c;
+      *  }
+      *  procedure c{
+      *9.  c = 10;
+      *  }
+      *  procedure d{
+      *10.  d = 10;
+      *  }
+      */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenOpenBrace,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenOpenBrace,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenC, tokenOpenBrace,
+        tokenC, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenD, tokenOpenBrace,
+        tokenD, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
-        }
+      spa::SpCyclicValidator cyclicValidator(procCallMap);
 
-        spa::SpCyclicValidator cyclicValidator(procCallMap);
+      bool testCyclicCall = cyclicValidator.validateCyclic();
+      bool expectedCyclicCall = false;
 
-        bool testCyclicCall = cyclicValidator.validateCyclic();
-        bool expectedCyclicCall = false;
-
-        Assert::IsTrue(expectedCyclicCall == testCyclicCall);
+      Assert::IsTrue(expectedCyclicCall == testCyclicCall);
     }
 
     TEST_METHOD(TestNestedMultipleCallsCyclic) {
-        /*
-        *  procedure a{
-        *1.    a = 5;
-        *2.    while (b >= c) {
-        *3.        call c;
-        *4.        while (c >= 8) {
-        *5.            call b;
-        *6.            while (d >= 6) {
-        *7.                call d;
-        *              }
-        *          }
-        *      }
-        *  }
-        *  procedure b{
-        *8.  call c;
-        *  }
-        *  procedure c{
-        *9.  call b;
-        *  }
-        *  procedure d{
-        *10.  d = 10;
-        *  }
-        */
-        tokenList = {
-          tokenProcedure, tokenA, tokenOpenBrace,
-          tokenA, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenOpenBrace,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenWhile, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenOpenBrace,
-          tokenCall, tokenD, tokenSemiColon,
-          tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
-          tokenProcedure, tokenB, tokenOpenBrace,
-          tokenCall, tokenC, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenC, tokenOpenBrace,
-          tokenCall, tokenB, tokenSemiColon,
-          tokenCloseBrace,
-          tokenProcedure, tokenD, tokenOpenBrace,
-          tokenD, tokenAssign, tokenConstant, tokenSemiColon,
-          tokenCloseBrace
-        };
+      /*
+      *  procedure a{
+      *1.    a = 5;
+      *2.    while (b >= c) {
+      *3.        call c;
+      *4.        while (c >= 8) {
+      *5.            call b;
+      *6.            while (d >= 6) {
+      *7.                call d;
+      *              }
+      *          }
+      *      }
+      *  }
+      *  procedure b{
+      *8.  call c;
+      *  }
+      *  procedure c{
+      *9.  call b;
+      *  }
+      *  procedure d{
+      *10.  d = 10;
+      *  }
+      */
+      tokenList = {
+        tokenProcedure, tokenA, tokenOpenBrace,
+        tokenA, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenC, tokenCloseBracket, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenOpenBrace,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenWhile, tokenOpenBracket, tokenD, tokenGreaterEqual, tokenConstant, tokenCloseBracket, tokenOpenBrace,
+        tokenCall, tokenD, tokenSemiColon,
+        tokenCloseBrace, tokenCloseBrace, tokenCloseBrace, tokenCloseBrace,
+        tokenProcedure, tokenB, tokenOpenBrace,
+        tokenCall, tokenC, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenC, tokenOpenBrace,
+        tokenCall, tokenB, tokenSemiColon,
+        tokenCloseBrace,
+        tokenProcedure, tokenD, tokenOpenBrace,
+        tokenD, tokenAssign, tokenConstant, tokenSemiColon,
+        tokenCloseBrace
+      };
 
-        spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-        for (auto token : tokenList) {
-            tokenStream.pushBack(token);
-        }
-        auto parser = spa::SpParser(tokenStream);
-        std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (auto token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
 
-        std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
-        for (auto& procedure : procedureList) {
-            auto statements = procedure.getStatementLst();
-            for (auto& statement : statements) {
-                if (dynamic_cast<spa::CallStatement*>(statement)) {
-                    auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-                    procedure.addCalledVars(callStatement->getVariableName());
-                }
-            }
-            procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-                procedure.getCalledVars());
+      std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
+      for (auto& procedure : procedureList) {
+        auto statements = procedure->getStatementLst();
+        for (auto& statement : statements) {
+          if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+            auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+            procedure->addCalledVars(callStatement->getVariableName());
+          }
         }
+        procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+          procedure->getCalledVars());
+      }
 
         spa::SpCyclicValidator cyclicValidator(procCallMap);
 
