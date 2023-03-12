@@ -40,7 +40,7 @@ spa::ClauseGroups spa::QueryOptimizer::getGroups(ParsedQuery& parsedQuery) {
     connectedSynonymClauseGroups.push_back(groupConnectedComponents(clause));
   }
 
-  ClauseGroups clauseGroups(noSynonymClauseGroup, connectedSynonymClauseGroups, withAttrAttrClauseGroup);
+  ClauseGroups clauseGroups(noSynonymClauseGroup, connectedSynonymClauseGroups, withClauseGroup);
   return clauseGroups;
 }
 
@@ -71,10 +71,9 @@ void spa::QueryOptimizer::initialize(ParsedQuery& parsedQuery) {
     if (synonyms.size() == 0) {
       noSynonymClauseGroup.addClause(clause);
     } else if (synonyms.size() == 2) {
-      withAttrAttrClauseGroup.addClause(clause);
+      withClauseGroup.addAttrAttrClause(clause);
     } else {
-      clausesWithSynonyms.push_back(&clause);
-      synonymClauseMap[synonyms[0]].push_back(&clause);
+      withClauseGroup.addAttrValueClause(clause);
     }
   }
 }

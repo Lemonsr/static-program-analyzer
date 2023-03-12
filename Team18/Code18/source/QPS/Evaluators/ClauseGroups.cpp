@@ -3,10 +3,10 @@
 
 spa::ClauseGroups::ClauseGroups(NoSynonymClauseGroup& noSynonymClauseGroup,
                                 std::vector<ConnectedSynonymClauseGroup>& connectedSynonymClauseGroups,
-                                WithAttrAttrClauseGroup& withAttrAttrClauseGroup) :
+                                WithClauseGroup& withClauseGroup) :
   noSynonymClauseGroup(noSynonymClauseGroup),
   connectedSynonymClauseGroups(connectedSynonymClauseGroups),
-  withAttrAttrClauseGroup(withAttrAttrClauseGroup) {
+  withClauseGroup(withClauseGroup) {
 }
 
 spa::QpsResultTable spa::ClauseGroups::evaluate(PKBManager& pkbManager,
@@ -37,7 +37,7 @@ spa::QpsResultTable spa::ClauseGroups::evaluate(PKBManager& pkbManager,
     resultTable = resultTable.innerJoin(table);
   }
 
-  resultTable = withAttrAttrClauseGroup.evaluate(pkbManager, resultTable);
+  resultTable = withClauseGroup.evaluate(pkbManager, resultTable);
   return resultTable;
 }
 
@@ -49,6 +49,6 @@ std::vector<spa::ConnectedSynonymClauseGroup>& spa::ClauseGroups::getConnectedSy
   return connectedSynonymClauseGroups;
 }
 
-spa::WithAttrAttrClauseGroup& spa::ClauseGroups::getWithAttrAttrClauseGroup() {
-  return withAttrAttrClauseGroup;
+spa::WithClauseGroup& spa::ClauseGroups::getWithClauseGroup() {
+  return withClauseGroup;
 }
