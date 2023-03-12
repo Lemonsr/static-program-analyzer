@@ -29,7 +29,7 @@ class ReadStatement : public OneVarNonContainerStatement {
   ReadStatement(std::string parentProcedureVal, std::string variableName,
                 std::unordered_set<int> whileStmtParents,
                 std::unordered_set<int> ifStmtParents, int statementLineNum);
-  std::pair<CFGNode*, CFGNode*> processStatement(PKBManager& pkbManager) override;
+  std::pair<CFGNode, CFGNode> processStatement(PKBManager& pkbManager) override;
 };
 
 class PrintStatement : public OneVarNonContainerStatement {
@@ -37,7 +37,7 @@ class PrintStatement : public OneVarNonContainerStatement {
   PrintStatement(std::string parentProcedureVal, std::string variableName,
                  std::unordered_set<int> whileStmtParents,
                  std::unordered_set<int> ifStmtParents, int statementLineNum);
-  std::pair<CFGNode*, CFGNode*> processStatement(PKBManager& pkbManager) override;
+  std::pair<CFGNode, CFGNode> processStatement(PKBManager& pkbManager) override;
 };
 
 class CallStatement : public OneVarNonContainerStatement {
@@ -45,7 +45,7 @@ class CallStatement : public OneVarNonContainerStatement {
   CallStatement(std::string parentProcedureVal, std::string variableName,
                 std::unordered_set<int> whileStmtParents,
                 std::unordered_set<int> ifStmtParents, int statementLineNum);
-  std::pair<CFGNode*, CFGNode*> processStatement(PKBManager& pkbManager) override;
+  std::pair<CFGNode, CFGNode> processStatement(PKBManager& pkbManager) override;
   void addCallIfWhileParent(PKBManager& pkbManager, std::string childProcName);
 };
 
@@ -65,7 +65,7 @@ class AssignStatement : public MultiVarNonContainerStatement {
   AssignStatement(std::string parentProcedureVal, std::string assignVar, std::string postfixExpr,
                   std::unordered_set<int> whileStmtParents,
                   std::unordered_set<int> ifStmtParents, int statementLineNum);
-  std::pair<CFGNode*, CFGNode*> processStatement(PKBManager& pkbManager) override;
+  std::pair<CFGNode, CFGNode> processStatement(PKBManager& pkbManager) override;
 };
 
 class IfConditionStatement : public MultiVarNonContainerStatement {
@@ -73,7 +73,7 @@ class IfConditionStatement : public MultiVarNonContainerStatement {
   IfConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
                        std::unordered_set<int> whileStmtParents,
                        std::unordered_set<int> ifStmtParents, int statementLineNum);
-  std::pair<CFGNode*, CFGNode*> processStatement(PKBManager& pkbManager) override;
+  std::pair<CFGNode, CFGNode> processStatement(PKBManager& pkbManager) override;
 };
 
 class WhileConditionStatement : public MultiVarNonContainerStatement {
@@ -81,6 +81,6 @@ class WhileConditionStatement : public MultiVarNonContainerStatement {
   WhileConditionStatement(std::string parentProcedureVal, std::string postfixExpr,
                           std::unordered_set<int> whileStmtParents,
                           std::unordered_set<int> ifStmtParents, int statementLineNum);
-  std::pair<CFGNode*, CFGNode*> processStatement(PKBManager& pkbManager) override;
+  std::pair<CFGNode, CFGNode> processStatement(PKBManager& pkbManager) override;
 };
 }  // namespace spa

@@ -21,8 +21,8 @@ spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> variables)
   this->modifiedVariables.insert(variables.begin(), variables.end());
 }
 
-spa::CFGNode* spa::CFGNode::createDummyNode() {
-  return new CFGNode();
+spa::CFGNode spa::CFGNode::createDummyNode() {
+  return CFGNode();
 }
 
 int spa::CFGNode::getLineNumber() const {
@@ -31,26 +31,6 @@ int spa::CFGNode::getLineNumber() const {
 
 bool spa::CFGNode::isDummyNode() {
   return isDummy;
-}
-
-void spa::CFGNode::linkNodes(CFGNode* tail, CFGNode* head, PKBManager& pkbManager) {
-  std::string headStrLineNum = std::to_string(head->getLineNumber());
-  if (tail->isDummyNode()) {
-    std::unordered_set<CFGNode*> nodesBeforeDummyNode = tail->getIncomingEdges();
-    for (CFGNode* node : nodesBeforeDummyNode) {
-      node->removeOutgoingNode(tail);
-      node->linkTo(head);
-      std::string currNodeStrLineNum = std::to_string(node->getLineNumber());
-      pkbManager.addRelationship(NEXT, currNodeStrLineNum, headStrLineNum);
-    }
-    delete tail;
-    return;
-  }
-  if (!head->isDummyNode()) {
-    std::string tailStrLineNum = std::to_string(tail->getLineNumber());
-    pkbManager.addRelationship(NEXT, tailStrLineNum, headStrLineNum);
-  }
-  tail->linkTo(head);
 }
 
 void spa::CFGNode::linkTo(CFGNode* node) {
@@ -105,11 +85,6 @@ void spa::CFGNode::removeNodeFromGraph() {
   for (auto node : outgoingEdges) {
     node->removeIncomingEdge(this);
   }
-}
-
-bool spa::CFGNode::equal(const spa::CFGNode* s2) {
-  return lineNumber == s2->lineNumber && isDummy == s2->isDummy && modifiedVariables == s2->
-    modifiedVariables;
 }
 
 bool spa::operator==(const CFGNode& s1, const CFGNode& s2) {

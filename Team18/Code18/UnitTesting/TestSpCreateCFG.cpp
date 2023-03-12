@@ -77,8 +77,13 @@ TEST_CLASS(TestSpCreateCFG) {
 
   void addEdges(spa::CFGNode* cfgNode, std::unordered_set<spa::CFGNode*> incoming,
                 std::unordered_set<spa::CFGNode*> outgoing) {
-    cfgNode->addInEdges(incoming);
-    cfgNode->addOutEdges(outgoing);
+    cfgNode->addIncomingEdges(incoming);
+    cfgNode->addOutgoingEdges(outgoing);
+  }
+
+  bool isEqualCFG(spa::CFGNode* s1, spa::CFGNode* s2) {
+    return s1->getLineNumber() == s2->getLineNumber() && s1->isDummyNode() == s2->isDummyNode() &&
+      s1->getModifiedVariables() == s2->getModifiedVariables();
   }
 
   void assertCFGMatch(std::unordered_set<spa::CFGNode*> expectedNodes) {
@@ -87,20 +92,20 @@ TEST_CLASS(TestSpCreateCFG) {
       std::vector<spa::CFGNode*> testNodes = queryResult.getCfgNodes();
       if (!testNodes.empty()) {
         spa::CFGNode* test = testNodes[0];
-        Assert::IsTrue(expected->equal(test));
+        Assert::IsTrue(isEqualCFG(expected, test));
         Assert::IsTrue(expected->getIncomingEdges().size() == test->getIncomingEdges().size());
         Assert::IsTrue(expected->getOutgoingEdges().size() == test->getOutgoingEdges().size());
         std::vector<spa::CFGNode*> expectedInEdgeVec = convertToSortedVector(
           expected->getIncomingEdges());
         std::vector<spa::CFGNode*> testInEdgeVec = convertToSortedVector(test->getIncomingEdges());
         for (int i = 0; i < expectedInEdgeVec.size(); i++) {
-          Assert::IsTrue(expectedInEdgeVec[i]->equal(testInEdgeVec[i]));
+          Assert::IsTrue(isEqualCFG(expectedInEdgeVec[i], testInEdgeVec[i]));
         }
         std::vector<spa::CFGNode*> expectedOutEdgeVec = convertToSortedVector(
           expected->getOutgoingEdges());
         std::vector<spa::CFGNode*> testOutEdgeVec = convertToSortedVector(test->getOutgoingEdges());
         for (int i = 0; i < expectedOutEdgeVec.size(); i++) {
-          Assert::IsTrue(expectedOutEdgeVec[i]->equal(testOutEdgeVec[i]));
+          Assert::IsTrue(isEqualCFG(expectedOutEdgeVec[i], testOutEdgeVec[i]));
         }
       }
     }
@@ -149,15 +154,15 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = new spa::CFGNode(1, std::string("c"));
-    auto lineTwo = new spa::CFGNode(2);
-    auto lineThree = new spa::CFGNode(3, std::string("g"));
-    auto lineFour = new spa::CFGNode(4, std::string("g"));
-    addEdges(lineOne, {}, {lineTwo});
-    addEdges(lineTwo, {lineOne}, {lineThree});
-    addEdges(lineThree, {lineTwo}, {lineFour});
-    addEdges(lineFour, {lineThree}, {});
-    std::unordered_set<spa::CFGNode*> expectedNodes = {lineOne, lineTwo, lineThree, lineFour};
+    auto lineOne = spa::CFGNode(1, std::string("c"));
+    auto lineTwo = spa::CFGNode(2);
+    auto lineThree = spa::CFGNode(3, std::string("g"));
+    auto lineFour = spa::CFGNode(4, std::string("g"));
+    addEdges(&lineOne, {}, {&lineTwo});
+    addEdges(&lineTwo, {&lineOne}, {&lineThree});
+    addEdges(&lineThree, {&lineTwo}, {&lineFour});
+    addEdges(&lineFour, {&lineThree}, {});
+    std::unordered_set<spa::CFGNode*> expectedNodes = {&lineOne, &lineTwo, &lineThree, &lineFour};
     assertCFGMatch(expectedNodes);
   }
 
@@ -193,15 +198,15 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = new spa::CFGNode(1);
-    auto lineTwo = new spa::CFGNode(2, std::string("c"));
-    auto lineThree = new spa::CFGNode(3);
-    auto lineFour = new spa::CFGNode(4, std::string("g"));
-    addEdges(lineOne, {lineFour}, {lineTwo});
-    addEdges(lineTwo, {lineOne}, {lineThree});
-    addEdges(lineThree, {lineTwo}, {lineFour});
-    addEdges(lineFour, {lineThree}, {lineOne});
-    std::unordered_set<spa::CFGNode*> expectedNodes = {lineOne, lineTwo, lineThree, lineFour};
+    auto lineOne = spa::CFGNode(1);
+    auto lineTwo = spa::CFGNode(2, std::string("c"));
+    auto lineThree = spa::CFGNode(3);
+    auto lineFour = spa::CFGNode(4, std::string("g"));
+    addEdges(&lineOne, {&lineFour}, {&lineTwo});
+    addEdges(&lineTwo, {&lineOne}, {&lineThree});
+    addEdges(&lineThree, {&lineTwo}, {&lineFour});
+    addEdges(&lineFour, {&lineThree}, {&lineOne});
+    std::unordered_set<spa::CFGNode*> expectedNodes = {&lineOne, &lineTwo, &lineThree, &lineFour};
     assertCFGMatch(expectedNodes);
   }
 
@@ -241,19 +246,19 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = new spa::CFGNode(1);
-    auto lineTwo = new spa::CFGNode(2, std::string("c"));
-    auto lineThree = new spa::CFGNode(3);
-    auto lineFour = new spa::CFGNode(4, std::string("g"));
-    auto lineFive = new spa::CFGNode(5);
+    auto lineOne = spa::CFGNode(1);
+    auto lineTwo = spa::CFGNode(2, std::string("c"));
+    auto lineThree = spa::CFGNode(3);
+    auto lineFour = spa::CFGNode(4, std::string("g"));
+    auto lineFive = spa::CFGNode(5);
     auto dummyNode = spa::CFGNode::createDummyNode();
-    addEdges(lineOne, {}, {lineTwo, lineFour});
-    addEdges(lineTwo, {lineOne}, {lineThree});
-    addEdges(lineThree, {lineTwo}, {dummyNode});
-    addEdges(lineFour, {lineOne}, {lineFive});
-    addEdges(lineFive, {lineFour}, {dummyNode});
+    addEdges(&lineOne, {}, {&lineTwo, &lineFour});
+    addEdges(&lineTwo, {&lineOne}, {&lineThree});
+    addEdges(&lineThree, {&lineTwo}, {&dummyNode});
+    addEdges(&lineFour, {&lineOne}, {&lineFive});
+    addEdges(&lineFive, {&lineFour}, {&dummyNode});
     std::unordered_set<spa::CFGNode*> expectedNodes = {
-      lineOne, lineTwo, lineThree, lineFour, lineFive
+      &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive
     };
     assertCFGMatch(expectedNodes);
   }
@@ -300,27 +305,27 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = new spa::CFGNode(1, std::string("c"));
-    auto lineTwo = new spa::CFGNode(2);
+    auto lineOne = spa::CFGNode(1, std::string("c"));
+    auto lineTwo = spa::CFGNode(2);
     std::unordered_set<std::string> varModified = {"g", "c"};
-    auto lineThree = new spa::CFGNode(3, varModified);
-    auto lineFour = new spa::CFGNode(4, std::string("g"));
-    auto lineFive = new spa::CFGNode(5, std::string("c"));
-    auto lineSix = new spa::CFGNode(6);
-    auto lineSeven = new spa::CFGNode(7, std::string("g"));
-    auto lineEight = new spa::CFGNode(8, std::string("g"));
-    addEdges(lineOne, {}, {lineTwo});
-    addEdges(lineTwo, {lineOne}, {lineThree});
-    addEdges(lineThree, {lineTwo}, {lineFour});
-    addEdges(lineFour, {lineThree}, {});
-    addEdges(lineFive, {}, {lineSix});
-    addEdges(lineSix, {lineFive}, {lineSeven});
-    addEdges(lineSeven, {lineSix}, {lineEight});
-    addEdges(lineEight, {lineSeven}, {});
+    auto lineThree = spa::CFGNode(3, varModified);
+    auto lineFour = spa::CFGNode(4, std::string("g"));
+    auto lineFive = spa::CFGNode(5, std::string("c"));
+    auto lineSix = spa::CFGNode(6);
+    auto lineSeven = spa::CFGNode(7, std::string("g"));
+    auto lineEight = spa::CFGNode(8, std::string("g"));
+    addEdges(&lineOne, {}, {&lineTwo});
+    addEdges(&lineTwo, {&lineOne}, {&lineThree});
+    addEdges(&lineThree, {&lineTwo}, {&lineFour});
+    addEdges(&lineFour, {&lineThree}, {});
+    addEdges(&lineFive, {}, {&lineSix});
+    addEdges(&lineSix, {&lineFive}, {&lineSeven});
+    addEdges(&lineSeven, {&lineSix}, {&lineEight});
+    addEdges(&lineEight, {&lineSeven}, {});
     std::unordered_set<spa::CFGNode*> expectedNodes = {
-      lineOne, lineTwo, lineThree, lineFour, lineFive, lineSix, lineSeven, lineEight
+      &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix, &lineSeven, &lineEight
     };
     assertCFGMatch(expectedNodes);
   }
 };
-}  // namespace UnitTesting
+} // namespace UnitTesting
