@@ -1,6 +1,8 @@
+#include "ContainerStatement.h"
+
+#include <memory>
 #include <unordered_set>
 
-#include "ContainerStatement.h"
 #include "NonContainerStatement.h"
 
 std::vector<std::shared_ptr<spa::ProgramStatement>>& spa::ContainerStatement::getStatementList() {
@@ -13,8 +15,7 @@ std::unordered_set<std::string> spa::ContainerStatement::getProceduresCalled() {
       if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
         auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
         proceduresCalled.emplace(callStatement->getVariableName());
-      }
-      else if (std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
+      } else if (std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
         auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statement);
         std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
         for (auto& called : calledSet) {
@@ -28,8 +29,9 @@ std::unordered_set<std::string> spa::ContainerStatement::getProceduresCalled() {
 
 // Constructor for IfContainerStatement
 spa::IfContainerStatement::IfContainerStatement(std::string parentProcedureVal,
-  int statementLineNum,
-  std::vector<std::shared_ptr<ProgramStatement>>& statementList) {
+                                                int statementLineNum,
+                                                std::vector<std::shared_ptr<ProgramStatement>>&
+                                                statementList) {
   this->parentProcedureVal = parentProcedureVal;
   this->statementLineNum = statementLineNum;
   this->statementList = statementList;
@@ -37,8 +39,9 @@ spa::IfContainerStatement::IfContainerStatement(std::string parentProcedureVal,
 
 // Constructor for WhileContainerStatement
 spa::WhileContainerStatement::WhileContainerStatement(std::string parentProcedureVal,
-  int statementLineNum,
-  std::vector<std::shared_ptr<ProgramStatement>> statementList) {
+                                                      int statementLineNum,
+                                                      std::vector<std::shared_ptr<ProgramStatement>>
+                                                      statementList) {
   this->parentProcedureVal = parentProcedureVal;
   this->statementLineNum = statementLineNum;
   this->statementList = statementList;
@@ -46,7 +49,8 @@ spa::WhileContainerStatement::WhileContainerStatement(std::string parentProcedur
 
 // Constructor for IfContainerStatement
 spa::InnerBlockStatement::InnerBlockStatement(std::string parentProcedureVal,
-  const std::vector<std::shared_ptr<ProgramStatement>> statementList) {
+                                              std::vector<std::shared_ptr<ProgramStatement>>
+                                              statementList) {
   this->parentProcedureVal = parentProcedureVal;
   this->statementList = statementList;
 }
@@ -68,8 +72,7 @@ void spa::WhileContainerStatement::processStatement(PKBManager& pkbManager) {
 }
 
 void spa::InnerBlockStatement::processStatement(PKBManager& pkbManager) {
-  for (const auto& statement : statementList) {
+  for (auto& statement : statementList) {
     statement->processStatement(pkbManager);
   }
 }
-

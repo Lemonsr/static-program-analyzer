@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_set>
 #include <utility>
+#include <memory>
 
 #include "ContainerStatement.h"
 #include "NonContainerStatement.h"
@@ -19,8 +20,7 @@ spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
       if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
         auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
         procedure->addCalledVars(callStatement->getVariableName());
-      }
-      else if (std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
+      } else if (std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
         auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statement);
         std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
         for (auto& called : calledSet) {

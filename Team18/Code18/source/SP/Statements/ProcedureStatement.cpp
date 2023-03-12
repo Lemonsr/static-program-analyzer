@@ -1,7 +1,8 @@
+#include "ProcedureStatement.h"
+
+#include <memory>
 #include <string>
 #include <unordered_set>
-
-#include "ProcedureStatement.h"
 
 // Constructor
 spa::ProcedureStatement::ProcedureStatement(spa::Token procedureVarToken,
