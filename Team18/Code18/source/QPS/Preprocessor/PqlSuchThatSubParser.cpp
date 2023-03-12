@@ -2,10 +2,13 @@
 
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
+#include <utility>
 
 #include "ParsedQuery.h"
+#include "PqlRefTypes.h"
 
-const std::unordered_map<std::string, spa::RelationshipType> relationshipMap{
+const std::unordered_map<std::string, spa::RelationshipType> relationshipMap {
   {"Follows", spa::FOLLOWS},
   {"Follows*", spa::FOLLOWS_STAR},
   {"Parent", spa::PARENT},
@@ -20,6 +23,23 @@ const std::unordered_map<std::string, spa::RelationshipType> relationshipMap{
   {"Affects*", spa::AFFECTS_STAR}
 };
 
+const std::unordered_map<spa::RelationshipType,
+                         std::pair<const std::unordered_set<spa::ArgumentType>*,
+                                   const std::unordered_set<spa::ArgumentType>*>> relationshipArgTypesMap {
+  {spa::FOLLOWS, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::FOLLOWS_STAR, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::PARENT, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::PARENT_STAR, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::MODIFIES, { &spa::stmtEntityRef, &spa::entityRef }},
+  {spa::USES, { &spa::stmtEntityRef, &spa::entityRef }},
+  {spa::CALLS, { &spa::entityRef, &spa::entityRef }},
+  {spa::CALLS_STAR, { &spa::entityRef, &spa::entityRef }},
+  {spa::NEXT, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::NEXT_STAR, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::AFFECTS, { &spa::stmtRef, &spa::stmtRef }},
+  {spa::AFFECTS_STAR, { &spa::stmtRef, &spa::stmtRef }}
+};
+
 spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
   Stream<Token>& tokens,
   ParsedQuery& query) {
@@ -27,8 +47,11 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
     return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);
+  auto& argTypePair = relationshipArgTypesMap.find(type)->second;
+  auto& firstArgSetPtr = argTypePair.first;
+  auto& secondArgSetPtr = argTypePair.second;
   auto firstArg = argParser.parse(tokens, query);
-  if (!firstArg) {
+  if (!firstArg || firstArgSetPtr->find(firstArg.value().getType()) == firstArgSetPtr->end()) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
   if (!tokens.match({ { TOKEN_COMMA, "," } })) {
@@ -36,7 +59,7 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
   }
   tokens.seek(1);
   auto secondArg = argParser.parse(tokens, query);
-  if (!secondArg) {
+  if (!secondArg || secondArgSetPtr->find(secondArg.value().getType()) == secondArgSetPtr->end()) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
   if (!tokens.match({ { TOKEN_CLOSE_BRACKET, ")" } })) {

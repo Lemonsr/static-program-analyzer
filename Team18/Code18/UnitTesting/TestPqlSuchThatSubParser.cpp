@@ -67,5 +67,38 @@ public:
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
   }
+
+  TEST_METHOD(TestFirstArgMismatch) {
+    spa::Stream<spa::Token> tokens;
+    tokens.pushBack({ spa::TOKEN_NAME, "Follows" });
+    tokens.pushBack({ spa::TOKEN_MULTIPLY, "*" });
+    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+    tokens.pushBack({ spa::TOKEN_DOUBLE_QUOTES, "\"" });
+    tokens.pushBack({ spa::TOKEN_NAME, "s" });
+    tokens.pushBack({ spa::TOKEN_DOUBLE_QUOTES, "\"" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_NAME, "s1" });
+    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+    spa::ParsedQuery query;
+    query.addDeclaration("s1", spa::STMT);
+    spa::PqlSuchThatSubParser parser;
+    spa::PqlParseStatus status = parser.parse(tokens, query);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
+  }
+
+  TEST_METHOD(TestSecondArgMismatch) {
+    spa::Stream<spa::Token> tokens;
+    tokens.pushBack({ spa::TOKEN_NAME, "Calls" });
+    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
+    tokens.pushBack({ spa::TOKEN_NAME, "v1" });
+    tokens.pushBack({ spa::TOKEN_COMMA, "," });
+    tokens.pushBack({ spa::TOKEN_INTEGER, "123" });
+    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+    spa::ParsedQuery query;
+    query.addDeclaration("v1", spa::VARIABLE);
+    spa::PqlSuchThatSubParser parser;
+    spa::PqlParseStatus status = parser.parse(tokens, query);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
+  }
   };
 }  // namespace UnitTesting

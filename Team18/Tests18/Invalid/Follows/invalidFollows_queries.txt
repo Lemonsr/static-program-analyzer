@@ -1,0 +1,155 @@
+1 - Follows (lineNum, lineNum) SyntaxError Follows -> Follow
+stmt s;
+Select s such that Follow(1, 2)
+SyntaxError
+5000
+2 - Follows (lineNum, lineNum) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Follows("x", 2)
+SyntaxError
+5000
+3 - Follows (lineNum, lineNum) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Follows(1, "x")
+SyntaxError
+5000
+4 - Follows (lineNum, lineNum) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Follows("x", "x")
+SyntaxError
+5000
+5 - Follows (lineNum, WildCard) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Follows("x", _)
+SyntaxError
+5000
+6 - Follows (WildCard, lineNum) SyntaxError stmRef -> entRef
+stmt s;
+Select s such that Follows(_, "x")
+SyntaxError
+5000
+7 - Follows (lineNum, lineNum) SyntaxError Extra ; in select statement
+stmt s;
+Select BOOLEAN such that Follows(1, 1);
+SyntaxError
+5000
+8 - Follows (lineNum, lineNum) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Follows (1, 1
+SyntaxError
+5000
+9 - Follows (lineNum, lineNum) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Follows 1, 1                            )
+SyntaxError
+5000
+10 - Follows (lineNum, lineNum) SyntaxError Missing Brackets
+stmt s;
+Select s.stmt# such that Follows 1                  ,                     1                            
+SyntaxError
+5000
+11 - Follows (lineNum, lineNum) SyntaxError Invalid such 
+stmt s;
+Select s.stmt# Such that Follows (1,1)                          
+SyntaxError
+5000
+12 - Follows (lineNum, lineNum) SyntaxError Invalid that 
+stmt s;
+Select s.stmt# such That Follows (1,1)                          
+SyntaxError
+5000
+13 - Follows (lineNum, lineNum) SemanticError Invalid synonym name
+stmt sa;
+Select s.stmt# such that Follows (1,1)                          
+SemanticError
+5000
+14 - Follows (Synonym, lineNum) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Follows (variable,1)                          
+SemanticError
+5000
+15 - F6ollows (Synonym, Synonym) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Follows (variable,variable)                          
+SemanticError
+5000
+16 - Follows (lineNum, Synonym) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Follows (1,variable)                          
+SemanticError
+5000
+17 - Follows (Synonym, Wildcard) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Follows (variable,_)                          
+SemanticError
+5000
+18 - Follows (Wildcard, Synonym) SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Follows (_,variable)                      
+SemanticError
+5000
+19 - Follows (Wildcard, Synonym) SyntaxError No brackets SemanticError Invalid stmt synonym
+variable variable;
+Select variable such that Follows (_,variable) and Follows 1, 1)                      
+SyntaxError
+5000
+20 - Follows (Synonym, lineNum) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Follows (procedure,1)                     
+SemanticError
+5000
+21 - Follows (lineNum, Synonym) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Follows (1,procedure)                     
+SemanticError
+5000
+22 - Follows (Synonym, Synonym) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Follows (procedure,procedure)                     
+SemanticError
+5000
+23 - Follows (Synonym, Wildcard) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Follows (procedure,_)                     
+SemanticError
+5000
+24 - Follows (Wildcard, Synonym) SemanticError Invalid stmt synonym
+procedure procedure;
+Select procedure such that Follows (_,procedure)                     
+SemanticError
+5000
+25 - Follows (Synonym, lineNum) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Follows (constant,1)                     
+SemanticError
+5000
+26 - Follows (lineNum, Synonym) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Follows (1,constant)                     
+SemanticError
+5000
+27 - Follows (Synonym, Synonym) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Follows (constant,constant)                     
+SemanticError
+5000
+28 - Follows (Synonym, Wildcard) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Follows (constant,_)                     
+SemanticError
+5000
+29 - Follows (Wildcard, Synonym) SemanticError Invalid stmt synonym
+constant constant;
+Select constant such that Follows (_,constant)                     
+SemanticError
+5000
+30 - Follows (Wildcard, Wildcard) valid stmt
+stmt stmt;
+Select stmt.stmt# such that Follows(_,_)                     
+1, 2, 3
+5000
+31 - Follows (lineNum, lineNum) valid stmt
+stmt stmt;
+Select stmt.stmt# such that Follows(1,2)                     
+1, 2, 3
+5000

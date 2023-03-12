@@ -7,9 +7,10 @@
 
 #include "HashTuple.h"
 
-std::vector<std::pair<int, int>> spa::QpsResultTable::getCommonColumnIndices(QpsResultTable& table,
-                                                                             QpsResultTable& other) {
-  std::vector<std::pair<int, int>> result;
+std::pair<std::vector<int>, std::vector<int>> spa::QpsResultTable::getCommonColumnIndices(QpsResultTable& table,
+                                                                                          QpsResultTable& other) {
+  std::vector<int> tIndices;
+  std::vector<int> oIndices;
   auto& tMap = table.headerIndexMap;
   auto& oMap = other.headerIndexMap;
   for (auto it = tMap.begin(); it != tMap.end(); ++it) {
@@ -17,9 +18,10 @@ std::vector<std::pair<int, int>> spa::QpsResultTable::getCommonColumnIndices(Qps
     if (otherIt == oMap.end()) {
       continue;
     }
-    result.push_back({ it->second[0], otherIt->second[0] });
+    tIndices.push_back((it->second)[0]);
+    oIndices.push_back((otherIt->second)[0]);
   }
-  return result;
+  return { tIndices, oIndices };
 }
 
 spa::QpsResultRow spa::QpsResultTable::concatenateRow(QpsResultRow& row, QpsResultRow& other) {
@@ -99,40 +101,32 @@ void spa::QpsResultTable::cartesianProduct(QpsResultTable& result, QpsResultTabl
   }
 }
 
-spa::QpsValueRowsMap spa::QpsResultTable::getValueRowsMap(QpsResultTable& table,
-                                                          int index) {
-  QpsValueRowsMap result;
-  for (auto& row : table.rows) {
-    result[row[index]].push_back(&row);
+size_t spa::QpsFilteredRowHash::operator()(const QpsFilteredRow& r) const {
+  size_t result = 0;
+  QpsValueHash valHash;
+  for (int i : r.selectedColumns) {
+    spa::hash_combine<size_t>(result, valHash(r.row[i]));
   }
   return result;
 }
 
-size_t spa::QpsResultRowPairHash::operator()(const QpsResultRowPair& p) const {
-  size_t result = 0;
-  spa::hash_combine<QpsResultRow*>(result, p.first);
-  spa::hash_combine<QpsResultRow*>(result, p.second);
-  return result;
+bool spa::QpsFilteredRowEquality::operator()(const QpsFilteredRow& first, const QpsFilteredRow& second) const {
+  auto& firstColumns = first.selectedColumns;
+  auto& secondColumns = second.selectedColumns;
+  if (firstColumns.size() != secondColumns.size()) {
+    return false;
+  }
+  for (size_t i = 0; i < firstColumns.size(); ++i) {
+    if (first.row[firstColumns[i]] != second.row[secondColumns[i]]) {
+      return false;
+    }
+  }
+  return true;
 }
 
-bool spa::QpsResultRowPairEquality::operator()(const QpsResultRowPair& p1,
-                                               const QpsResultRowPair& p2) const {
-  return p1.first == p2.first && p1.second == p2.second;
-}
-
-void spa::QpsResultTable::fillQpsResultRowPairMatchMap(QpsResultRowPairMatchMap& result,
-                                                       QpsValueRowsMap& cMap,
-                                                       QpsValueRowsMap& oMap) {
-  for (auto it = cMap.begin(); it != cMap.end(); ++it) {
-    auto oIt = oMap.find(it->first);
-    if (oIt == oMap.end()) {
-      continue;
-    }
-    for (auto row : it->second) {
-      for (auto oRow : oIt->second) {
-        ++result[{row, oRow}];
-      }
-    }
+void spa::QpsResultTable::fillQpsRowMap(QpsRowMap& m, QpsResultTable& table, std::vector<int>& selectedColumns) {
+  for (auto& row : table.rows) {
+    m[{selectedColumns, row}].push_back(&row);
   }
 }
 
@@ -144,23 +138,25 @@ spa::QpsResultTable spa::QpsResultTable::innerJoin(QpsResultTable& other) {
   for (auto& s : other.headers) {
     resultTable.addHeader(s);
   }
-  std::vector<std::pair<int, int>> commonIndices = getCommonColumnIndices(*this, other);
-  if (commonIndices.empty()) {
+  auto commonIndices = getCommonColumnIndices(*this, other);
+  if (commonIndices.first.empty()) {
     cartesianProduct(resultTable, other);
     return resultTable;
   }
-  QpsResultRowPairMatchMap matchMap;
-  for (auto& p : commonIndices) {
-    auto tMap = getValueRowsMap(*this, p.first);
-    auto oMap = getValueRowsMap(other, p.second);
-    fillQpsResultRowPairMatchMap(matchMap, tMap, oMap);
-  }
-  for (auto it = matchMap.begin(); it != matchMap.end(); ++it) {
-    if (it->second != commonIndices.size()) {
+  QpsRowMap currMap;
+  fillQpsRowMap(currMap, *this, commonIndices.first);
+  QpsRowMap otherMap;
+  fillQpsRowMap(otherMap, other, commonIndices.second);
+  for (auto& currP : currMap) {
+    auto it = otherMap.find(currP.first);
+    if (it == otherMap.end()) {
       continue;
     }
-    auto& p = it->first;
-    resultTable.addRow(concatenateRow(*p.first, *p.second));
+    for (auto rowPtr : currP.second) {
+      for (auto otherRowPtr : it->second) {
+        resultTable.addRow(concatenateRow(*rowPtr, *otherRowPtr));
+      }
+    }
   }
   return resultTable;
 }
@@ -171,4 +167,20 @@ const std::vector<spa::QpsResultRow>& spa::QpsResultTable::getRows() {
 
 bool spa::QpsResultTable::isEmpty() {
   return rows.size() == 0;
+}
+
+spa::QpsResultTable spa::QpsResultTable::matchColumns(const std::string& first,
+                                                      const std::string& second) {
+  int firstIndex = headerIndexMap[first][0];
+  int secondIndex = headerIndexMap[second][0];
+  QpsResultTable result;
+  for (auto& header : headers) {
+    result.addHeader(header);
+  }
+  for (auto& row : rows) {
+    if (row[firstIndex] == row[secondIndex]) {
+      result.addRow(row);
+    }
+  }
+  return result;
 }

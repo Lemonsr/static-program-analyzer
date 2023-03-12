@@ -32,7 +32,7 @@ class QueryResult {
   const std::vector<std::pair<int, std::string>>& getLineNumberNamePairs();
   const std::vector<std::pair<int, int>>& getLineNumberLineNumberPairs();
   const std::vector<std::pair<std::string, std::string>>& getNameNamePairs();
-  const std::vector<spa::CFGNode*> getCfgNodes();
+  const std::vector<spa::CFGNode*>& getCfgNodes();
   const bool& getIsTrue();
 
   void setQueryResultType(QueryResultType queryResultType);

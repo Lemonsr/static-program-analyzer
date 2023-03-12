@@ -63,12 +63,17 @@ class PKB : public PKBManager {
   const bool addContainerPattern(DesignEntityType entityType, std::string lineNo,
                                  std::string varName);
   const bool addCallsContainerParent(std::string procName, std::string lineNo);
-  const bool addCallsProc(int lineNo, std::string procName);
+  const bool addCallsProc(int lineNumber, std::string procName);
   const bool addStatementType(std::string lineNo, StatementType statementType);
   const bool addStatementProc(std::string lineNo, std::string procName);
+
+  // Node methods
   const bool addCfgNode(int lineNo, spa::CFGNode cfgNode);
-  const bool updateCfgNode(int lineNo, spa::CFGNode newCfgNode);
-  const bool deleteCfgNode(int lineNo);
+  const bool addCfgEndNode(int lineNumber);
+  const bool addEdge(int lineNumberOne, int lineNumberTwo);
+  const bool addModifiedVariable(int lineNumber, std::string varName);
+  const bool removeDummyNode();
+
   const QueryResult getRelationship(RelationshipType relationshipType,
                                     PKBQueryArg firstArg, PKBQueryArg secondArg);
   const QueryResult getEntity(DesignEntityType entityType);
@@ -76,6 +81,6 @@ class PKB : public PKBManager {
   const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg);
   const QueryResult getCallsContainerParent(std::string procName);
   const QueryResult getCallsProc();
-  const QueryResult getCfgNode(int lineNo);
+  const QueryResult getCfgNode(int lineNumber);
 };
 }  // namespace spa

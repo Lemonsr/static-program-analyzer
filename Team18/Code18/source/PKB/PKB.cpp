@@ -529,8 +529,8 @@ const bool spa::PKB::addCallsContainerParent(std::string procName, std::string l
   return relationshipStorage.addCallsContainerParent(procName, lineNo);
 }
 
-const bool spa::PKB::addCallsProc(int lineNo, std::string procedure) {
-  return relationshipStorage.addCallsProc(lineNo, procedure);
+const bool spa::PKB::addCallsProc(int lineNumber, std::string procedure) {
+  return relationshipStorage.addCallsProc(lineNumber, procedure);
 }
 
 const bool spa::PKB::addStatementType(std::string lineNo, StatementType statementType) {
@@ -545,12 +545,20 @@ const bool spa::PKB::addCfgNode(int lineNo, spa::CFGNode cfgNode) {
   return cfgStorage.addCfgNode(lineNo, cfgNode);
 }
 
-const bool spa::PKB::updateCfgNode(int lineNo, spa::CFGNode newCfgNode) {
-  return cfgStorage.updateCfgNode(lineNo, newCfgNode);
+const bool spa::PKB::addCfgEndNode(int lineNumber) {
+  return cfgStorage.addCfgEndNode(lineNumber);
 }
 
-const bool spa::PKB::deleteCfgNode(int lineNo) {
-  return cfgStorage.deleteCfgNode(lineNo);
+const bool spa::PKB::addEdge(int lineNumberOne, int lineNumberTwo) {
+  return cfgStorage.addEdge(lineNumberOne, lineNumberTwo, relationshipStorage);
+}
+
+const bool spa::PKB::addModifiedVariable(int lineNumber, std::string varName) {
+  return cfgStorage.addModifiedVariable(lineNumber, varName);
+}
+
+const bool spa::PKB::removeDummyNode() {
+  return cfgStorage.removeDummyNode();
 }
 
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
@@ -595,6 +603,6 @@ const spa::QueryResult spa::PKB::getCallsProc() {
   return relationshipStorage.getCallsProc();
 }
 
-const spa::QueryResult spa::PKB::getCfgNode(int lineNo) {
-  return cfgStorage.getCfgNode(lineNo);
+const spa::QueryResult spa::PKB::getCfgNode(int lineNumber) {
+  return cfgStorage.getCfgNode(lineNumber);
 }

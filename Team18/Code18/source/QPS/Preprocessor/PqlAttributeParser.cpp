@@ -2,6 +2,16 @@
 
 #include "PqlAttributes.h"
 
+bool spa::PqlAttributeParser::attributeExists(DesignEntityType entityType, const std::string& attribute) {
+  auto& v = pqlAttributesMap[entityType];
+  for (auto& s : v) {
+    if (s == attribute) {
+      return true;
+    }
+  }
+  return false;
+}
+
 std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>& tokens, ParsedQuery& query) {
   std::string synonym = tokens[0].getValue();
   DesignEntityType entityType = query.getDeclarationType(synonym);
@@ -10,9 +20,7 @@ std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>
   if (hasHash) {
     attribute.append("#");
   }
-  auto& attributes = pqlAttributesMap[entityType];
-  auto it = attributes.find(attribute);
-  if (it == attributes.end()) {
+  if (!attributeExists(entityType, attribute)) {
     return {};
   }
   tokens.seek(3);

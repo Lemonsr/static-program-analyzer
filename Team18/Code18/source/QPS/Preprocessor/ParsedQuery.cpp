@@ -11,6 +11,7 @@
 #include "UsesEvaluator.h"
 #include "FollowsEvaluator.h"
 #include "FollowsStarEvaluator.h"
+#include "WithEvaluator.h"
 #include "ParentEvaluator.h"
 #include "ParentStarEvaluator.h"
 #include "PatternEvaluator.h"
@@ -308,7 +309,7 @@ spa::WithClause::WithClause(WithArgument firstArg, WithArgument secondArg) {
 }
 
 std::unique_ptr<spa::QpsEvaluator> spa::WithClause::getEvaluator() {
-  return std::unique_ptr<spa::QpsEvaluator>();
+  return std::make_unique<WithEvaluator>(firstArg, secondArg);
 }
 
 std::vector<std::string> spa::WithClause::getSynonyms() {

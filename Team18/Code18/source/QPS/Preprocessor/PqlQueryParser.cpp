@@ -2,10 +2,7 @@
 
 #include <unordered_set>
 
-spa::PqlParseStatus spa::PqlQueryParser::parseDeclarations(
-    Stream<Token>& tokens,
-    ParsedQuery& query
-) {
+spa::PqlParseStatus spa::PqlQueryParser::parseDeclarations(Stream<Token>& tokens, ParsedQuery& query) {
   while (tokens.remaining() > 0) {
     PqlParseStatus status = declareParser.parse(tokens, query);
     if (status == PQL_PARSE_SYNTAX_ERROR) {
@@ -17,9 +14,8 @@ spa::PqlParseStatus spa::PqlQueryParser::parseDeclarations(
   return PQL_PARSE_SUCCESS;
 }
 
-spa::PqlParseStatus spa::PqlQueryParser::parseClauses(Stream<Token>& tokens,
-                                                      ParsedQuery& query) {
-  std::unordered_set<PqlParser*> parsers {
+spa::PqlParseStatus spa::PqlQueryParser::parseClauses(Stream<Token>& tokens, ParsedQuery& query) {
+  std::unordered_set<PqlParser*> parsers{
     &suchThatParser,
     &patternParser,
     &andParser,
@@ -43,8 +39,7 @@ spa::PqlParseStatus spa::PqlQueryParser::parseClauses(Stream<Token>& tokens,
   return PQL_PARSE_SUCCESS;
 }
 
-spa::PqlParseStatus spa::PqlQueryParser::parse(Stream<Token>& tokens,
-                                               ParsedQuery& query) {
+spa::PqlParseStatus spa::PqlQueryParser::parse(Stream<Token>& tokens, ParsedQuery& query) {
   if (parseDeclarations(tokens, query) == PQL_PARSE_SYNTAX_ERROR) {
     return PQL_PARSE_SYNTAX_ERROR;
   }

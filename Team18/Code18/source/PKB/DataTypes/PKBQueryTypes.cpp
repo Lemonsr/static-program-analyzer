@@ -12,7 +12,7 @@ bool spa::operator==(const spa::Pattern& p1, const spa::Pattern& p2) {
   if (p1.value.size() != p2.value.size()) {
     return false;
   }
-  for (int i = 0; i < p1.value.size(); ++i) {
+  for (size_t i = 0; i < p1.value.size(); ++i) {
     if (p1.value[i] != p2.value[i]) {
       return false;
     }

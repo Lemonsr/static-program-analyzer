@@ -184,6 +184,7 @@
     <ClCompile Include="TestSimpleEvaluator.cpp" />
     <ClCompile Include="TestModifiesEvaluator.cpp" />
     <ClCompile Include="TestUsesEvaluator.cpp" />
+    <ClCompile Include="TestWithEvaluator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
