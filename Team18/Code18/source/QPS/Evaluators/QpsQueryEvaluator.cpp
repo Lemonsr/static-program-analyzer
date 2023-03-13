@@ -15,5 +15,5 @@ spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   QueryOptimizer optimizer;
   ClauseGroups groups = optimizer.getGroups(parsedQuery);
 
-  return groups.evaluate(pkbManager, parsedQuery.getUsedDeclarations());
+  return groups.evaluate(pkbManager, parsedQuery.getSelectWithDeclarations());
 }

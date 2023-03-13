@@ -10,7 +10,7 @@ spa::ClauseGroups::ClauseGroups(NoSynonymClauseGroup& noSynonymClauseGroup,
 }
 
 spa::QpsResultTable spa::ClauseGroups::evaluate(PKBManager& pkbManager,
-                                                std::unordered_map<std::string, DesignEntityType>& usedDeclarations) {
+                                                std::unordered_map<std::string, DesignEntityType>& selectWithDeclarations) {
   if (!noSynonymClauseGroup.isEmpty()) {
     QpsResultTable noSynonymResultTable = noSynonymClauseGroup.evaluate(pkbManager);
     if (noSynonymResultTable.isEmpty()) {
@@ -20,10 +20,10 @@ spa::QpsResultTable spa::ClauseGroups::evaluate(PKBManager& pkbManager,
 
   std::vector<QpsResultTable> resultTables;
   for (auto& group : connectedSynonymClauseGroups) {
-    resultTables.push_back(group.evaluate(pkbManager));
+    resultTables.push_back(group.evaluate(pkbManager, selectWithDeclarations));
   }
 
-  for (auto& declaration : usedDeclarations) {
+  for (auto& declaration : selectWithDeclarations) {
     std::string declarationSynonym = declaration.first;
     DesignEntityType declarationType = declaration.second;
     std::unique_ptr<QpsEvaluator> evaluator = std::make_unique<SimpleEvaluator>(declarationSynonym, declarationType);
