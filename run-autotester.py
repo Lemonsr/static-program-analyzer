@@ -11,16 +11,32 @@ test_cases = [
     'WhileInIfThen',
     'WhileinWhile'
 ]
+
 query_types = [
     'Modifies',
     'ModifiesProc',
+    'Uses',
+    'UsesProc',
+    'Follows',
+    'FollowsStar',
+    'Parent',
+    'ParentStar',
+    'Calls',
+    'CallsStar',
+]
+
+invalid_query_types = [
+    'General',
+    'Modifies',
     'Uses',
     'Follows',
     'FollowsStar',
     'Parent',
     'ParentStar',
     'Calls',
-    'CallsStar'
+    'CallsStar',
+    'Pattern',
+    'MultiClause'
 ]
 
 pattern_types = [
@@ -73,5 +89,11 @@ for type in query_types:
         test_case_prefix += type[1:] + case
         run_autotester(test_case_prefix)
 
-run_autotester(f'{test_path}\\MultiClause\\multiclause')        
-run_autotester(f'{test_path}\\Invalid\invalid')   
+run_autotester(f'{test_path}\\MultiClause\\multiclause')       
+
+for invalid_type in invalid_query_types :
+  if (invalid_type == 'Pattern'):
+    for pattern in pattern_types: 
+      run_autotester(f'{test_path}\\Invalid\{invalid_type}\invalid{invalid_type}{pattern}') 
+  else:
+    run_autotester(f'{test_path}\\Invalid\{invalid_type}\invalid{invalid_type}')     

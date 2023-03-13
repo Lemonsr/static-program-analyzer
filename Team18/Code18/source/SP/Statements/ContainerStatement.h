@@ -21,19 +21,19 @@ class IfContainerStatement : public ContainerStatement {
  public:
   IfContainerStatement(std::string parentProcedureVal, int statementLineNum,
                        std::vector<std::shared_ptr<ProgramStatement>>& statementList);
-  void processStatement(PKBManager& pkbManager) override;
+  std::pair<CFGNode, CFGNode> processStatement(PKBManager& pkbManager) override;
 };
 
 class WhileContainerStatement : public ContainerStatement {
  public:
   WhileContainerStatement(std::string parentProcedureVal, int statementLineNum,
                           std::vector<std::shared_ptr<ProgramStatement>> statementList);
-  void processStatement(PKBManager& pkbManager) override;
+  std::pair<CFGNode, CFGNode> processStatement(PKBManager& pkbManager) override;
 };
 
 class InnerBlockStatement : public ContainerStatement {
  public:
   InnerBlockStatement(std::string parentProcedureVal, std::vector<std::shared_ptr<ProgramStatement>> statementList);
-  void processStatement(PKBManager& pkbManager) override;
+  std::pair<CFGNode, CFGNode> processStatement(PKBManager& pkbManager) override;
 };
 }  // namespace spa

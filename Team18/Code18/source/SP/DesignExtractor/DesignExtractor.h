@@ -32,8 +32,10 @@ class DesignExtractor {
   void dfsCallsStar(std::string parent, std::string child);
   std::vector<std::pair<std::string, std::string>> getResFromPkbHelper(
     std::string procName, std::string synonym, DesignEntityType type, RelationshipType relType);
-  void addUsesModifiesAndProc(std::string relArg, std::vector<std::pair<std::string, std::string>> varUses,
-                              std::vector<std::pair<std::string, std::string>> varModifies, bool isByProc);
+  void addUsesModifies(std::string relArg, std::vector<std::pair<std::string, std::string>> varUses,
+                              std::vector<std::pair<std::string, std::string>> varModifies);
+  void addUsesModifies(std::string relArg, std::vector<std::pair<std::string, std::string>> varUses,
+                           std::vector<std::pair<std::string, std::string>> varModifies, bool isCallStmt);
 
  public:
   DesignExtractor(PKBManager& pkbManager, std::vector<std::shared_ptr<ProcedureStatement>>& procedureList);

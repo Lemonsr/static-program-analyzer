@@ -150,5 +150,28 @@ public:
     Assert::IsTrue(columnVals.find(spa::QpsValue(5)) != columnVals.end());
     Assert::IsTrue(columnVals.find(spa::QpsValue(6)) != columnVals.end());
   }
+
+  TEST_METHOD(TestMatchColumns) {
+    spa::QpsResultTable table;
+    table.addHeader("a1.stmt#");
+    table.addHeader("v");
+    table.addHeader("a2.stmt#");
+    table.addRow({ spa::QpsValue(1), spa::QpsValue("match"), spa::QpsValue(1) });
+    table.addRow({ spa::QpsValue(1), spa::QpsValue("unmatch"), spa::QpsValue(10) });
+    table.addRow({ spa::QpsValue(2), spa::QpsValue("match"), spa::QpsValue(2) });
+    table.addRow({ spa::QpsValue(2), spa::QpsValue("unmatch"), spa::QpsValue(20) });
+    table.addRow({ spa::QpsValue(3), spa::QpsValue("match"), spa::QpsValue(3) });
+    table.addRow({ spa::QpsValue(3), spa::QpsValue("unmatch"), spa::QpsValue(30) });
+    spa::QpsResultTable result = table.matchColumns("a1.stmt#", "a2.stmt#");
+    auto dim = result.getDimension();
+    Assert::AreEqual(dim.first, 3);
+    Assert::AreEqual(dim.second, 3);
+    auto& rows = result.getRows();
+    for (int i = 0; i < 3; ++i) {
+      int num = i + 1;
+      Assert::IsTrue(rows[i][0] == rows[i][2]);
+      Assert::IsTrue(rows[i][1] == spa::QpsValue("match"));
+    }
+  }
   };
 }  // namespace UnitTesting

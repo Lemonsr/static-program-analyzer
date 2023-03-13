@@ -82,9 +82,10 @@ public:
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 1);
-    auto columnVals = table.getColumn("p");
-    Assert::AreEqual(columnVals.size(), size_t(1));
-    Assert::IsTrue(columnVals.find(spa::QpsValue("second")) != columnVals.end());
+
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getString() == "first");
+    Assert::IsTrue(rows[0][1].getString() == "second");
   }
 
   TEST_METHOD(TestProcNameProcNotExists) {
@@ -168,10 +169,12 @@ public:
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 2);
-    auto columnVals = table.getColumn("p");
-    Assert::AreEqual(columnVals.size(), size_t(2));
-    Assert::IsTrue(columnVals.find(spa::QpsValue("second")) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue("third")) != columnVals.end());
+
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getString() == "first");
+    Assert::IsTrue(rows[0][1].getString() == "second");
+    Assert::IsTrue(rows[1][0].getString() == "second");
+    Assert::IsTrue(rows[1][1].getString() == "third");
   }
 
   TEST_METHOD(TestUnderscoreProcNotExists) {
@@ -198,9 +201,10 @@ public:
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 1);
-    auto columnVals = table.getColumn("p");
-    Assert::AreEqual(columnVals.size(), size_t(1));
-    Assert::IsTrue(columnVals.find(spa::QpsValue("first")) != columnVals.end());
+
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getString() == "first");
+    Assert::IsTrue(rows[0][1].getString() == "second");
   }
 
   TEST_METHOD(TestProcProcNameNotExists) {
@@ -229,10 +233,12 @@ public:
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 2);
-    auto columnVals = table.getColumn("p");
-    Assert::AreEqual(columnVals.size(), size_t(2));
-    Assert::IsTrue(columnVals.find(spa::QpsValue("first")) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue("second")) != columnVals.end());
+
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getString() == "first");
+    Assert::IsTrue(rows[0][1].getString() == "second");
+    Assert::IsTrue(rows[1][0].getString() == "second");
+    Assert::IsTrue(rows[1][1].getString() == "third");
   }
 
   TEST_METHOD(TestProcUnderscoreNotExists) {
@@ -259,14 +265,12 @@ public:
     auto dim = table.getDimension();
     Assert::AreEqual(dim.first, 2);
     Assert::AreEqual(dim.second, 2);
-    auto columnVals = table.getColumn("p1");
-    Assert::AreEqual(columnVals.size(), size_t(2));
-    Assert::IsTrue(columnVals.find(spa::QpsValue("first")) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue("second")) != columnVals.end());
-    columnVals = table.getColumn("p2");
-    Assert::AreEqual(columnVals.size(), size_t(2));
-    Assert::IsTrue(columnVals.find(spa::QpsValue("second")) != columnVals.end());
-    Assert::IsTrue(columnVals.find(spa::QpsValue("third")) != columnVals.end());
+
+    std::vector<spa::QpsResultRow> rows = table.getRows();
+    Assert::IsTrue(rows[0][0].getString() == "first");
+    Assert::IsTrue(rows[0][1].getString() == "second");
+    Assert::IsTrue(rows[1][0].getString() == "second");
+    Assert::IsTrue(rows[1][1].getString() == "third");
   }
 
   TEST_METHOD(TestProcProcNotExists) {

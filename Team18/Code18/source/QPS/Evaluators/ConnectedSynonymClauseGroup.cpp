@@ -4,8 +4,8 @@
 spa::QpsResultTable spa::ConnectedSynonymClauseGroup::evaluate(PKBManager& pkbManager) {
   std::unique_ptr<QpsEvaluator> evaluator = clauses[0]->getEvaluator();
   QpsResultTable resultTable = evaluator->evaluate(pkbManager);
-  for (auto& clause : clauses) {
-    evaluator = clause->getEvaluator();
+  for (size_t i = 1; i < clauses.size(); ++i) {
+    evaluator = clauses[i]->getEvaluator();
     resultTable = resultTable.innerJoin(evaluator->evaluate(pkbManager));
   }
   return resultTable;
@@ -25,7 +25,7 @@ bool spa::operator==(const ConnectedSynonymClauseGroup& first, const ConnectedSy
     return false;
   }
 
-  for (int i = 0; i < first.clauses.size(); ++i) {
+  for (size_t i = 0; i < first.clauses.size(); ++i) {
     if (first.clauses[i] != second.clauses[i]) {
       return false;
     }

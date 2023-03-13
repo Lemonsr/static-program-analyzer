@@ -13,7 +13,7 @@
 #include <vector>
 
 spa::SP::SP(std::string source, PKBManager& pkbManager) :
-    sourceCode(source), pkbManager(pkbManager) {}
+  sourceCode(source), pkbManager(pkbManager) {}
 
 void spa::SP::processSource() {
     Stream<Token> convertedTokens = convertToken();
@@ -30,15 +30,14 @@ void spa::SP::processSource() {
 }
 
 spa::Stream<spa::Token> spa::SP::convertToken() {
-    std::stringstream ss(sourceCode);
-    Stream<Token> tokens;
-    Tokenizer tokenizer;
-    try {
-        tokens = tokenizer.tokenize(ss);
-    } catch (std::runtime_error &e) {
-        std::cerr << e.what() << std::endl;
-        exit(1);
-    }
-    return tokens;
+  std::stringstream ss(sourceCode);
+  Stream<Token> tokens;
+  Tokenizer tokenizer;
+  try {
+    tokens = tokenizer.tokenize(ss);
+  } catch (std::runtime_error& e) {
+    std::cerr << e.what() << std::endl;
+    exit(1);
+  }
+  return tokens;
 }
-

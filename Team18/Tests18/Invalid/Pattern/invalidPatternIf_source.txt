@@ -1,0 +1,74 @@
+procedure if {
+  if (1 == 1) then {
+	if (while <= 0) then {
+	  while (such == 1) {
+		such = 0;
+		if (that != Variable) then {
+		  that = 0;
+		} else {
+		  pattern = 0;
+		}
+		print pn;
+	  }
+	  stmt = stmt / (stmt);
+	  Calls = Calls % (Calls);
+	} else {
+	  while (Follows != FollowsStar) {
+		call procedure;
+		call read;
+		while (1 == 1) {
+		  print true;
+		}
+	  }
+	  print Parents;
+	  if (2 < 30) then {
+		call CallsStar;
+	  } else {
+		call Uses;
+	  }
+	  print PKB;
+	}
+	constant = constant + 1;
+  } else {
+	Affects = 0;
+	Next = 0;
+	Follows = 0;
+	FollowsStar = 0;
+	Parents = 0;
+	ParentsStar = 0;
+	UsesVar = 0;
+	Modifies = 0;
+	pattern = 0;
+	a = 0;
+	if = 0;
+	while = 0;
+  }
+  AffectsStar = 0;
+  NextStar = 0;
+  call callsP;
+}
+
+procedure procedure {
+  print constant;
+  print while;
+}
+
+procedure read {
+  read and;
+}
+
+procedure CallsStar {
+  read CallsStarVar;
+}
+
+procedure Uses {
+  if(UsesUsed >= Variable) then {
+	UsesUsed = 1;
+  } else {
+	UsesUsed = 0;
+  }
+}
+
+procedure callsP {
+  print callsVar;
+}

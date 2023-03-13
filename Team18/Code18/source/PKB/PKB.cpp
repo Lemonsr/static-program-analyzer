@@ -6,200 +6,374 @@
 void spa::PKB::createRelationshipQueryFunctionMap() {
   relationshipQueryFunctionMap = {
     // Follows
-    {{RelationshipType::FOLLOWS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getFollowsLineLine},
-    {{RelationshipType::FOLLOWS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getFollowsLineStatement},
-    {{RelationshipType::FOLLOWS, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getFollowsStatementLine},
-    {{RelationshipType::FOLLOWS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getFollowsLineUnderscore},
-    {{RelationshipType::FOLLOWS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getFollowsUnderscoreLine},
-    {{RelationshipType::FOLLOWS, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getFollowsStatementStatement},
-    {{RelationshipType::FOLLOWS, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getFollowsStatementUnderscore},
-    {{RelationshipType::FOLLOWS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getFollowsUnderscoreStatement},
-    {{RelationshipType::FOLLOWS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getFollowsUnderscoreUnderscore},
+    {
+      {RelationshipType::FOLLOWS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsLineLine
+    },
+    {
+      {RelationshipType::FOLLOWS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsLineStatement
+    },
+    {
+      {RelationshipType::FOLLOWS, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsStatementLine
+    },
+    {
+      {RelationshipType::FOLLOWS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsLineUnderscore
+    },
+    {
+      {RelationshipType::FOLLOWS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsUnderscoreLine
+    },
+    {
+      {RelationshipType::FOLLOWS, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsStatementStatement
+    },
+    {
+      {RelationshipType::FOLLOWS, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsStatementUnderscore
+    },
+    {
+      {RelationshipType::FOLLOWS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsUnderscoreStatement
+    },
+    {
+      {RelationshipType::FOLLOWS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsUnderscoreUnderscore
+    },
 
     // Follows Star
-    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getFollowsStarLineLine},
-    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getFollowsStarLineStatement},
-    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getFollowsStarStatementLine},
-    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getFollowsStarLineUnderscore},
-    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getFollowsStarUnderscoreLine},
-    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getFollowsStarStatementStatement},
-    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getFollowsStarStatementUnderscore},
-    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getFollowsStarUnderscoreStatement},
-    {{RelationshipType::FOLLOWS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getFollowsStarUnderscoreUnderscore},
+    {
+      {RelationshipType::FOLLOWS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsStarLineLine
+    },
+    {
+      {RelationshipType::FOLLOWS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsStarLineStatement
+    },
+    {
+      {RelationshipType::FOLLOWS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsStarStatementLine
+    },
+    {
+      {RelationshipType::FOLLOWS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsStarLineUnderscore
+    },
+    {
+      {RelationshipType::FOLLOWS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getFollowsStarUnderscoreLine
+    },
+    {
+      {RelationshipType::FOLLOWS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsStarStatementStatement
+    },
+    {
+      {RelationshipType::FOLLOWS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsStarStatementUnderscore
+    },
+    {
+      {RelationshipType::FOLLOWS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getFollowsStarUnderscoreStatement
+    },
+    {
+      {RelationshipType::FOLLOWS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getFollowsStarUnderscoreUnderscore
+    },
 
     // Parent
-    {{RelationshipType::PARENT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getParentLineLine},
-    {{RelationshipType::PARENT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getParentLineStatement},
-    {{RelationshipType::PARENT, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getParentStatementLine},
-    {{RelationshipType::PARENT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getParentLineUnderscore},
-    {{RelationshipType::PARENT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getParentUnderscoreLine},
-    {{RelationshipType::PARENT, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getParentStatementStatement},
-    {{RelationshipType::PARENT, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getParentStatementUnderscore},
-    {{RelationshipType::PARENT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getParentUnderscoreStatement},
-    {{RelationshipType::PARENT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getParentUnderscoreUnderscore},
+    {
+      {RelationshipType::PARENT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentLineLine
+    },
+    {
+      {RelationshipType::PARENT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentLineStatement
+    },
+    {
+      {RelationshipType::PARENT, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentStatementLine
+    },
+    {
+      {RelationshipType::PARENT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentLineUnderscore
+    },
+    {
+      {RelationshipType::PARENT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentUnderscoreLine
+    },
+    {
+      {RelationshipType::PARENT, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentStatementStatement
+    },
+    {
+      {RelationshipType::PARENT, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentStatementUnderscore
+    },
+    {
+      {RelationshipType::PARENT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentUnderscoreStatement
+    },
+    {
+      {RelationshipType::PARENT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentUnderscoreUnderscore
+    },
 
     // Parent Star
-    {{RelationshipType::PARENT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getParentStarLineLine},
-    {{RelationshipType::PARENT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getParentStarLineStatement},
-    {{RelationshipType::PARENT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getParentStarStatementLine},
-    {{RelationshipType::PARENT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getParentStarLineUnderscore},
-    {{RelationshipType::PARENT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getParentStarUnderscoreLine},
-    {{RelationshipType::PARENT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getParentStarStatementStatement},
-    {{RelationshipType::PARENT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getParentStarStatementUnderscore},
-    {{RelationshipType::PARENT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getParentStarUnderscoreStatement},
-    {{RelationshipType::PARENT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getParentStarUnderscoreUnderscore},
+    {
+      {RelationshipType::PARENT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentStarLineLine
+    },
+    {
+      {RelationshipType::PARENT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentStarLineStatement
+    },
+    {
+      {RelationshipType::PARENT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentStarStatementLine
+    },
+    {
+      {RelationshipType::PARENT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentStarLineUnderscore
+    },
+    {
+      {RelationshipType::PARENT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getParentStarUnderscoreLine
+    },
+    {
+      {RelationshipType::PARENT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentStarStatementStatement
+    },
+    {
+      {RelationshipType::PARENT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentStarStatementUnderscore
+    },
+    {
+      {RelationshipType::PARENT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getParentStarUnderscoreStatement
+    },
+    {
+      {RelationshipType::PARENT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getParentStarUnderscoreUnderscore
+    },
 
     // Uses
-    {{RelationshipType::USES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::NAME},
-      &RelationshipStorage::getUsesLineVarName},
-    {{RelationshipType::USES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getUsesLineUnderscore},
-    {{RelationshipType::USES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::VARIABLE},
-      &RelationshipStorage::getUsesLineVar},
-    {{RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::NAME},
-      &RelationshipStorage::getUsesStmtVarName},
-    {{RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getUsesStmtUnderscore},
-    {{RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE},
-      &RelationshipStorage::getUsesStmtVar},
+    {
+      {RelationshipType::USES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::NAME},
+      &RelationshipStorage::getUsesLineVarName
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getUsesLineUnderscore
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getUsesLineVar
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::NAME},
+      &RelationshipStorage::getUsesStmtVarName
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getUsesStmtUnderscore
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getUsesStmtVar
+    },
 
     // Uses Proc
-    {{RelationshipType::USES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
-      &RelationshipStorage::getUsesProcedureVarName},
-    {{RelationshipType::USES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getUsesProcedureUnderscore},
-    {{RelationshipType::USES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::VARIABLE},
-      &RelationshipStorage::getUsesProcedureVar},
-    {{RelationshipType::USES, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
-      &RelationshipStorage::getUsesProcNameVarName},
-    {{RelationshipType::USES, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getUsesProcNameUnderscore},
-    {{RelationshipType::USES, PKBQueryArgType::NAME, PKBQueryArgType::VARIABLE},
-      &RelationshipStorage::getUsesProcNameVar},
+    {
+      {RelationshipType::USES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getUsesProcedureVarName
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getUsesProcedureUnderscore
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getUsesProcedureVar
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
+      &RelationshipStorage::getUsesProcNameVarName
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getUsesProcNameUnderscore
+    },
+    {
+      {RelationshipType::USES, PKBQueryArgType::NAME, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getUsesProcNameVar
+    },
 
     // Modifies
-    {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::NAME},
-      &RelationshipStorage::getModifiesLineVarName},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getModifiesLineUnderscore},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::VARIABLE},
-      &RelationshipStorage::getModifiesLineVar},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::NAME},
-      &RelationshipStorage::getModifiesStmtVarName},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getModifiesStmtUnderscore},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE},
-      &RelationshipStorage::getModifiesStmtVar},
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesLineVarName
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesLineUnderscore
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesLineVar
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesStmtVarName
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesStmtUnderscore
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::STATEMENT, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesStmtVar
+    },
 
     // Modifies Proc
-    {{RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
-      &RelationshipStorage::getModifiesProcedureVarName},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getModifiesProcedureUnderscore},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::VARIABLE},
-      &RelationshipStorage::getModifiesProcedureVar},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
-      &RelationshipStorage::getModifiesProcNameVarName},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getModifiesProcNameUnderscore},
-    {{RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::VARIABLE},
-      &RelationshipStorage::getModifiesProcNameVar},
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesProcedureVarName
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesProcedureUnderscore
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::PROCEDURE, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesProcedureVar
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
+      &RelationshipStorage::getModifiesProcNameVarName
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getModifiesProcNameUnderscore
+    },
+    {
+      {RelationshipType::MODIFIES, PKBQueryArgType::NAME, PKBQueryArgType::VARIABLE},
+      &RelationshipStorage::getModifiesProcNameVar
+    },
 
     // Calls
-    {{RelationshipType::CALLS, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
-      &RelationshipStorage::getCallsNameName},
-    {{RelationshipType::CALLS, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getCallsNameUnderscore},
-    {{RelationshipType::CALLS, PKBQueryArgType::NAME, PKBQueryArgType::PROCEDURE},
-      &RelationshipStorage::getCallsNameProcedure},
-    {{RelationshipType::CALLS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::NAME},
-      &RelationshipStorage::getCallsUnderscoreName},
-    {{RelationshipType::CALLS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getCallsUnderscoreUnderscore},
-    {{RelationshipType::CALLS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::PROCEDURE},
-      & RelationshipStorage::getCallsUnderscoreProcedure},
-    {{RelationshipType::CALLS, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
-      &RelationshipStorage::getCallsProcedureName},
-    {{RelationshipType::CALLS, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getCallsProcedureUnderscore},
-    {{RelationshipType::CALLS, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
-      &RelationshipStorage::getCallsProcedureProcedure},
+    {
+      {RelationshipType::CALLS, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
+      &RelationshipStorage::getCallsNameName
+    },
+    {
+      {RelationshipType::CALLS, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getCallsNameUnderscore
+    },
+    {
+      {RelationshipType::CALLS, PKBQueryArgType::NAME, PKBQueryArgType::PROCEDURE},
+      &RelationshipStorage::getCallsNameProcedure
+    },
+    {
+      {RelationshipType::CALLS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getCallsUnderscoreName
+    },
+    {
+      {RelationshipType::CALLS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getCallsUnderscoreUnderscore
+    },
+    {
+      {RelationshipType::CALLS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::PROCEDURE},
+      &RelationshipStorage::getCallsUnderscoreProcedure
+    },
+    {
+      {RelationshipType::CALLS, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getCallsProcedureName
+    },
+    {
+      {RelationshipType::CALLS, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getCallsProcedureUnderscore
+    },
+    {
+      {RelationshipType::CALLS, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
+      &RelationshipStorage::getCallsProcedureProcedure
+    },
 
     // Calls Star
-    {{RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
-      &RelationshipStorage::getCallsStarNameName},
-    {{RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getCallsStarNameUnderscore},
-    {{RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::PROCEDURE},
-      &RelationshipStorage::getCallsStarNameProcedure},
-    {{RelationshipType::CALLS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::NAME},
-      &RelationshipStorage::getCallsStarUnderscoreName},
-    {{RelationshipType::CALLS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getCallsStarUnderscoreUnderscore},
-    {{RelationshipType::CALLS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::PROCEDURE},
-      & RelationshipStorage::getCallsStarUnderscoreProcedure},
-    {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
-      &RelationshipStorage::getCallsStarProcedureName},
-    {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getCallsStarProcedureUnderscore},
-    {{RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
-      &RelationshipStorage::getCallsStarProcedureProcedure},
+    {
+      {RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::NAME},
+      &RelationshipStorage::getCallsStarNameName
+    },
+    {
+      {RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getCallsStarNameUnderscore
+    },
+    {
+      {RelationshipType::CALLS_STAR, PKBQueryArgType::NAME, PKBQueryArgType::PROCEDURE},
+      &RelationshipStorage::getCallsStarNameProcedure
+    },
+    {
+      {RelationshipType::CALLS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getCallsStarUnderscoreName
+    },
+    {
+      {RelationshipType::CALLS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getCallsStarUnderscoreUnderscore
+    },
+    {
+      {RelationshipType::CALLS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::PROCEDURE},
+      &RelationshipStorage::getCallsStarUnderscoreProcedure
+    },
+    {
+      {RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::NAME},
+      &RelationshipStorage::getCallsStarProcedureName
+    },
+    {
+      {RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getCallsStarProcedureUnderscore
+    },
+    {
+      {RelationshipType::CALLS_STAR, PKBQueryArgType::PROCEDURE, PKBQueryArgType::PROCEDURE},
+      &RelationshipStorage::getCallsStarProcedureProcedure
+    },
 
     // Next
-    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getNextLineLine},
-    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getNextLineStatement},
-    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getNextStatementLine},
-    {{RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getNextLineUnderscore},
-    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
-      &RelationshipStorage::getNextUnderscoreLine},
-    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getNextStatementStatement},
-    {{RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getNextStatementUnderscore},
-    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
-      &RelationshipStorage::getNextUnderscoreStatement},
-    {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getNextUnderscoreUnderscore}
+    {
+      {RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getNextLineLine
+    },
+    {
+      {RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getNextLineStatement
+    },
+    {
+      {RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getNextStatementLine
+    },
+    {
+      {RelationshipType::NEXT, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getNextLineUnderscore
+    },
+    {
+      {RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getNextUnderscoreLine
+    },
+    {
+      {RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getNextStatementStatement
+    },
+    {
+      {RelationshipType::NEXT, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getNextStatementUnderscore
+    },
+    {
+      {RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getNextUnderscoreStatement
+    },
+    {
+      {RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getNextUnderscoreUnderscore
+    }
   };
 }
 
@@ -221,12 +395,15 @@ void spa::PKB::createPatternQueryFunctionMap() {
 
 void spa::PKB::createPatternContainerQueryFunctionMap() {
   patternContainerQueryFunctionMap = {
-    {{DesignEntityType::IF, PKBQueryArgType::UNDERSCORE }, &PatternStorage::getPatternIfUnderscore},
-    {{DesignEntityType::IF, PKBQueryArgType::VARIABLE }, &PatternStorage::getPatternIfVar},
-    {{DesignEntityType::IF, PKBQueryArgType::NAME }, &PatternStorage::getPatternIfVarName},
-    {{DesignEntityType::WHILE, PKBQueryArgType::UNDERSCORE }, &PatternStorage::getPatternWhileUnderscore},
-    {{DesignEntityType::WHILE, PKBQueryArgType::VARIABLE }, &PatternStorage::getPatternWhileVar},
-    {{DesignEntityType::WHILE, PKBQueryArgType::NAME }, &PatternStorage::getPatternWhileVarName}
+    {{DesignEntityType::IF, PKBQueryArgType::UNDERSCORE}, &PatternStorage::getPatternIfUnderscore},
+    {{DesignEntityType::IF, PKBQueryArgType::VARIABLE}, &PatternStorage::getPatternIfVar},
+    {{DesignEntityType::IF, PKBQueryArgType::NAME}, &PatternStorage::getPatternIfVarName},
+    {
+      {DesignEntityType::WHILE, PKBQueryArgType::UNDERSCORE},
+      &PatternStorage::getPatternWhileUnderscore
+    },
+    {{DesignEntityType::WHILE, PKBQueryArgType::VARIABLE}, &PatternStorage::getPatternWhileVar},
+    {{DesignEntityType::WHILE, PKBQueryArgType::NAME}, &PatternStorage::getPatternWhileVarName}
   };
 }
 
@@ -238,72 +415,89 @@ spa::PKB::PKB() {
 }
 
 const bool spa::PKB::addRelationship(RelationshipType relationshipType,
-  std::string firstArg, std::string secondArg) {
+                                     std::string firstArg, std::string secondArg) {
   switch (relationshipType) {
-  case FOLLOWS: {
-    return relationshipStorage.addFollows(firstArg, secondArg);
-  }
-  case FOLLOWS_STAR: {
-    return relationshipStorage.addFollowsStar(firstArg, secondArg);
-  }
-  case PARENT: {
-    return relationshipStorage.addParent(firstArg, secondArg);
-  }
-  case PARENT_STAR: {
-    return relationshipStorage.addParentStar(firstArg, secondArg);
-  }
-  case MODIFIES: {
-    return relationshipStorage.addModifies(firstArg, secondArg);
-  }
-  case MODIFIES_P: {
-    return relationshipStorage.addModifiesProc(firstArg, secondArg);
-  }
-  case USES: {
-    return relationshipStorage.addUses(firstArg, secondArg);
-  }
-  case USES_P: {
-    return relationshipStorage.addUsesProc(firstArg, secondArg);
-  }
-  case CALLS: {
-    return relationshipStorage.addCalls(firstArg, secondArg);
-  }
-  case CALLS_STAR: {
-    return relationshipStorage.addCallsStar(firstArg, secondArg);
-  }
-  case NEXT: {
-    return relationshipStorage.addNext(firstArg, secondArg);
-  }
-  default: {
-    return false;
-  }
+    case FOLLOWS:
+      {
+        return relationshipStorage.addFollows(firstArg, secondArg);
+      }
+    case FOLLOWS_STAR:
+      {
+        return relationshipStorage.addFollowsStar(firstArg, secondArg);
+      }
+    case PARENT:
+      {
+        return relationshipStorage.addParent(firstArg, secondArg);
+      }
+    case PARENT_STAR:
+      {
+        return relationshipStorage.addParentStar(firstArg, secondArg);
+      }
+    case MODIFIES:
+      {
+        return relationshipStorage.addModifies(firstArg, secondArg);
+      }
+    case MODIFIES_P:
+      {
+        return relationshipStorage.addModifiesProc(firstArg, secondArg);
+      }
+    case USES:
+      {
+        return relationshipStorage.addUses(firstArg, secondArg);
+      }
+    case USES_P:
+      {
+        return relationshipStorage.addUsesProc(firstArg, secondArg);
+      }
+    case CALLS:
+      {
+        return relationshipStorage.addCalls(firstArg, secondArg);
+      }
+    case CALLS_STAR:
+      {
+        return relationshipStorage.addCallsStar(firstArg, secondArg);
+      }
+    case NEXT:
+      {
+        return relationshipStorage.addNext(firstArg, secondArg);
+      }
+    default:
+      {
+        return false;
+      }
   }
   return false;
 }
 
 const bool spa::PKB::addEntity(DesignEntityType entityType, std::string arg) {
   switch (entityType) {
-  case VARIABLE: {
-    return entityStorage.addVar(arg);
-  }
-  case CONSTANT: {
-    return entityStorage.addConst(arg);
-  }
-  case PROCEDURE: {
-    return entityStorage.addProc(arg);
-  }
-  case STMT:
-  case READ:
-  case PRINT:
-  case ASSIGN:
-  case CALL:
-  case WHILE:
-  case IF: {
-    auto statementTypeItr = statementTypeMap.find(entityType);
-    return addStatementType(arg, statementTypeItr->second.value());
-  }
-  default: {
-    return false;
-  }
+    case VARIABLE:
+      {
+        return entityStorage.addVar(arg);
+      }
+    case CONSTANT:
+      {
+        return entityStorage.addConst(arg);
+      }
+    case PROCEDURE:
+      {
+        return entityStorage.addProc(arg);
+      }
+    case STMT:
+    case READ:
+    case PRINT:
+    case ASSIGN:
+    case CALL:
+    case WHILE:
+    case IF:
+      {
+        auto statementTypeItr = statementTypeMap.find(entityType);
+        return addStatementType(arg, statementTypeItr->second.value());
+      }
+    default:
+      {
+        return false;
+      }
   }
   return false;
 }
@@ -312,17 +506,21 @@ const bool spa::PKB::addPattern(std::string lineNo, std::string lhs, std::string
   return patternStorage.addAssign(lineNo, lhs, rhs);
 }
 
-const bool spa::PKB::addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName) {
+const bool spa::PKB::addContainerPattern(DesignEntityType entityType, std::string lineNo,
+                                         std::string varName) {
   switch (entityType) {
-  case IF: {
-    return patternStorage.addPatternIf(lineNo, varName);
-  }
-  case WHILE: {
-    return patternStorage.addPatternWhile(lineNo, varName);
-  }
-  default: {
-    return false;
-  }
+    case IF:
+      {
+        return patternStorage.addPatternIf(lineNo, varName);
+      }
+    case WHILE:
+      {
+        return patternStorage.addPatternWhile(lineNo, varName);
+      }
+    default:
+      {
+        return false;
+      }
   }
   return false;
 }
@@ -331,8 +529,8 @@ const bool spa::PKB::addCallsContainerParent(std::string procName, std::string l
   return relationshipStorage.addCallsContainerParent(procName, lineNo);
 }
 
-const bool spa::PKB::addCallsProc(int lineNo, std::string procedure) {
-  return relationshipStorage.addCallsProc(lineNo, procedure);
+const bool spa::PKB::addCallsProc(int lineNumber, std::string procedure) {
+  return relationshipStorage.addCallsProc(lineNumber, procedure);
 }
 
 const bool spa::PKB::addStatementType(std::string lineNo, StatementType statementType) {
@@ -347,18 +545,28 @@ const bool spa::PKB::addCfgNode(int lineNo, spa::CFGNode cfgNode) {
   return cfgStorage.addCfgNode(lineNo, cfgNode);
 }
 
-const bool spa::PKB::updateCfgNode(int lineNo, spa::CFGNode newCfgNode) {
-  return cfgStorage.updateCfgNode(lineNo, newCfgNode);
+const bool spa::PKB::addCfgEndNode(int lineNumber) {
+  return cfgStorage.addCfgEndNode(lineNumber);
 }
 
-const bool spa::PKB::deleteCfgNode(int lineNo) {
-  return cfgStorage.deleteCfgNode(lineNo);
+const bool spa::PKB::addEdge(int lineNumberOne, int lineNumberTwo) {
+  return cfgStorage.addEdge(lineNumberOne, lineNumberTwo, relationshipStorage);
+}
+
+const bool spa::PKB::addModifiedVariable(int lineNumber, std::string varName) {
+  return cfgStorage.addModifiedVariable(lineNumber, varName);
+}
+
+const bool spa::PKB::removeDummyNode() {
+  return cfgStorage.removeDummyNode();
 }
 
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
-  PKBQueryArg firstArg, PKBQueryArg secondArg) {
-  auto relationshipFunctionItr = relationshipQueryFunctionMap.find({ relationshipType,
-                                                                     firstArg.getType(), secondArg.getType() });
+                                                 PKBQueryArg firstArg, PKBQueryArg secondArg) {
+  auto relationshipFunctionItr = relationshipQueryFunctionMap.find({
+    relationshipType,
+    firstArg.getType(), secondArg.getType()
+  });
   return (relationshipFunctionItr->second)(relationshipStorage, firstArg, secondArg);
 }
 
@@ -379,8 +587,11 @@ const spa::QueryResult spa::PKB::getPattern(PKBQueryArg lhs, Pattern rhs) {
   return (patternFunctionItr->second)(patternStorage, lhs, rhs);
 }
 
-const spa::QueryResult spa::PKB::getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg) {
-  auto patternContainerFunctionItr = patternContainerQueryFunctionMap.find({ entityType, firstArg.getType() });
+const spa::QueryResult spa::PKB::getContainerPattern(DesignEntityType entityType,
+                                                     PKBQueryArg firstArg) {
+  auto patternContainerFunctionItr = patternContainerQueryFunctionMap.find({
+    entityType, firstArg.getType()
+  });
   return (patternContainerFunctionItr->second)(patternStorage, firstArg);
 }
 
@@ -392,6 +603,10 @@ const spa::QueryResult spa::PKB::getCallsProc() {
   return relationshipStorage.getCallsProc();
 }
 
-const spa::QueryResult spa::PKB::getCfgNode(int lineNo) {
-  return cfgStorage.getCfgNode(lineNo);
+const spa::QueryResult spa::PKB::getCfgNode(int lineNumber) {
+  return cfgStorage.getCfgNode(lineNumber);
+}
+
+const spa::QueryResult spa::PKB::getCfgEndNodes() {
+  return cfgStorage.getCfgEndNodes();
 }

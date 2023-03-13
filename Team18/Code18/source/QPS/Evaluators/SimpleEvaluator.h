@@ -20,6 +20,7 @@ class SimpleEvaluator : public QpsEvaluator {
   QpsResultTable evaluateCall(PKBManager& pkbManager);
   QpsResultTable evaluateStatementNumbers(PKBManager& pkbManager);
   QpsResultTable evaluateNames(PKBManager& pkbManager);
+  QpsResultTable evaluateConstants(PKBManager& pkbManager);
 
  public:
   explicit SimpleEvaluator(std::string selectSynonym, DesignEntityType designEntityType);

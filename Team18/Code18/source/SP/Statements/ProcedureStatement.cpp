@@ -18,9 +18,9 @@ std::vector<std::shared_ptr<spa::ProgramStatement>>& spa::ProcedureStatement::ge
 }
 
 void spa::ProcedureStatement::addCalledVars(std::string var) {
-    calledVars.emplace(var);
+  calledVars.emplace(var);
 }
 
 std::unordered_set<std::string>& spa::ProcedureStatement::getCalledVars() {
-    return calledVars;
+  return calledVars;
 }

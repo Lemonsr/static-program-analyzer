@@ -16,7 +16,6 @@
 #include <unordered_set>
 
 namespace spa {
-
 class PKB : public PKBManager {
  private:
   // Storage Tables
@@ -30,21 +29,25 @@ class PKB : public PKBManager {
     std::tuple<RelationshipType, PKBQueryArgType, PKBQueryArgType>,
     std::function<QueryResult(RelationshipStorage& relationshipStorage, PKBQueryArg, PKBQueryArg)>,
     TupleHash,
-    TupleEquality> relationshipQueryFunctionMap;
+    TupleEquality>
+  relationshipQueryFunctionMap;
 
   std::unordered_map<
     DesignEntityType,
-    std::function<QueryResult(EntityStorage& entityStorage)>> entityQueryFunctionMap;
+    std::function<QueryResult(EntityStorage& entityStorage)>>
+  entityQueryFunctionMap;
 
   std::unordered_map<
     PKBQueryArgType,
-    std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg, Pattern)>> patternQueryFunctionMap;
+    std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg, Pattern)>>
+  patternQueryFunctionMap;
 
   std::unordered_map<
     std::tuple<DesignEntityType, PKBQueryArgType>,
     std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg)>,
     TupleHash,
-    TupleEquality> patternContainerQueryFunctionMap;
+    TupleEquality>
+  patternContainerQueryFunctionMap;
 
   void createRelationshipQueryFunctionMap();
   void createEntityQueryFunctionMap();
@@ -57,14 +60,20 @@ class PKB : public PKBManager {
                              std::string firstArg, std::string secondArg);
   const bool addEntity(DesignEntityType entityType, std::string arg);
   const bool addPattern(std::string lineNo, std::string lhs, std::string rhs);
-  const bool addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName);
+  const bool addContainerPattern(DesignEntityType entityType, std::string lineNo,
+                                 std::string varName);
   const bool addCallsContainerParent(std::string procName, std::string lineNo);
-  const bool addCallsProc(int lineNo, std::string procName);
+  const bool addCallsProc(int lineNumber, std::string procName);
   const bool addStatementType(std::string lineNo, StatementType statementType);
   const bool addStatementProc(std::string lineNo, std::string procName);
+
+  // Node methods
   const bool addCfgNode(int lineNo, spa::CFGNode cfgNode);
-  const bool updateCfgNode(int lineNo, spa::CFGNode newCfgNode);
-  const bool deleteCfgNode(int lineNo);
+  const bool addCfgEndNode(int lineNumber);
+  const bool addEdge(int lineNumberOne, int lineNumberTwo);
+  const bool addModifiedVariable(int lineNumber, std::string varName);
+  const bool removeDummyNode();
+
   const QueryResult getRelationship(RelationshipType relationshipType,
                                     PKBQueryArg firstArg, PKBQueryArg secondArg);
   const QueryResult getEntity(DesignEntityType entityType);
@@ -72,6 +81,7 @@ class PKB : public PKBManager {
   const QueryResult getContainerPattern(DesignEntityType entityType, PKBQueryArg firstArg);
   const QueryResult getCallsContainerParent(std::string procName);
   const QueryResult getCallsProc();
-  const QueryResult getCfgNode(int lineNo);
+  const QueryResult getCfgNode(int lineNumber);
+  const QueryResult getCfgEndNodes();
 };
 }  // namespace spa
