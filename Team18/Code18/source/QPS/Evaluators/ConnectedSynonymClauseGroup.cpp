@@ -2,7 +2,7 @@
 #include "SimpleEvaluator.h"
 
 spa::QpsResultTable spa::ConnectedSynonymClauseGroup::evaluate(PKBManager& pkbManager,
-  std::unordered_map<std::string, DesignEntityType>& selectWithDeclarations) {
+    std::unordered_map<std::string, DesignEntityType>& selectWithDeclarations) {
   std::unique_ptr<QpsEvaluator> evaluator = clauses[0]->getEvaluator();
   QpsResultTable resultTable = evaluator->evaluate(pkbManager);
   for (size_t i = 1; i < clauses.size(); ++i) {
@@ -15,7 +15,7 @@ spa::QpsResultTable spa::ConnectedSynonymClauseGroup::evaluate(PKBManager& pkbMa
   if (resultTable.isEmpty()) {
     return filteredTable;
   }
-  
+
   std::vector<std::string> selectWithSynonyms;
   for (auto& p : selectWithDeclarations) {
     selectWithSynonyms.push_back(p.first);

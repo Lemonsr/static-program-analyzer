@@ -10,7 +10,7 @@ spa::ClauseGroups::ClauseGroups(NoSynonymClauseGroup& noSynonymClauseGroup,
 }
 
 spa::QpsResultTable spa::ClauseGroups::evaluate(PKBManager& pkbManager,
-                                                std::unordered_map<std::string, DesignEntityType>& selectWithDeclarations) {
+    std::unordered_map<std::string, DesignEntityType>& selectWithDeclarations) {
   if (!noSynonymClauseGroup.isEmpty()) {
     QpsResultTable noSynonymResultTable = noSynonymClauseGroup.evaluate(pkbManager);
     if (noSynonymResultTable.isEmpty()) {
