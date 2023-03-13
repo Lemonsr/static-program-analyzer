@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <unordered_set>
+#include <unordered_map>
 #include <string>
 
 #include "QpsResultTable.h"
@@ -14,7 +15,8 @@ class ConnectedSynonymClauseGroup {
   std::vector<Clause*> clauses;
   std::unordered_set<std::string> connectedSynonyms;
  public:
-  QpsResultTable evaluate(PKBManager& pkbManager);
+  QpsResultTable evaluate(PKBManager& pkbManager,
+                          std::unordered_map<std::string, DesignEntityType>& selectWithDeclarations);
   bool addClause(Clause& clause);
 
   friend bool operator==(const ConnectedSynonymClauseGroup& first, const ConnectedSynonymClauseGroup& second);
