@@ -7,6 +7,9 @@
 #include <unordered_set>
 
 bool spa::CFGStorage::popDummyNode(int lineNumber, RelationshipStorage& relationshipStorage) {
+  if (lineNumber == -1) {
+    return true;
+  }
   CFGNode& dummyNode = cfgNodeTable[-1];
   bool isAddEdge = true;
 
@@ -16,9 +19,7 @@ bool spa::CFGStorage::popDummyNode(int lineNumber, RelationshipStorage& relation
   for (auto& node : dummyNode.getIncomingEdges()) {
     node->removeOutgoingEdge(&dummyNode);
   }
-  if (lineNumber != -1) {
-    cfgNodeTable[-1] = CFGNode();
-  }
+  cfgNodeTable[-1] = CFGNode();
   return isAddEdge;
 }
 
@@ -39,7 +40,7 @@ bool spa::CFGStorage::addCfgEndNode(int lineNumber) {
 }
 
 bool spa::CFGStorage::addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage) {
-  if (lineNumberOne == -1) {
+  if (lineNumberOne == -1 && lineNumberTwo) {
     popDummyNode(lineNumberTwo, relationshipStorage);
     return true;
   }

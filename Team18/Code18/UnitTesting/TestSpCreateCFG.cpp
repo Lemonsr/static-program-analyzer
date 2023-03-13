@@ -549,7 +549,7 @@ public:
        * 3.   while (1 >= 1) {
        * 4.     c = d - e;
        * 5.     print c;
-       *    }
+       *      }
        * 6.   print c;
        *    } else {
        * 7.   read g;
@@ -606,12 +606,12 @@ public:
       auto lineTen = spa::CFGNode(10);
       addEdges(&lineOne, {}, { &lineTwo, &lineSeven });
       addEdges(&lineTwo, { &lineOne }, { &lineThree });
-      addEdges(&lineThree, { &lineTwo }, { &lineFour, &lineSix });
+      addEdges(&lineThree, { &lineTwo, &lineFive}, { &lineFour, &lineSix });
       addEdges(&lineFour, { &lineThree }, { &lineFive });
       addEdges(&lineFive, { &lineFour }, { &lineThree });
       addEdges(&lineSix, { &lineThree }, {});
-      addEdges(&lineSeven, { &lineSix }, {});
-      addEdges(&lineEight, { &lineSeven }, {});
+      addEdges(&lineSeven, {&lineOne}, {&lineEight});
+      addEdges(&lineEight, { &lineSeven, &lineTen }, {&lineNine});
       addEdges(&lineNine, { &lineEight}, { &lineTen });
       addEdges(&lineTen, { &lineNine }, { &lineEight });
       std::unordered_set<spa::CFGNode*> expectedNodes = {
