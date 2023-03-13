@@ -1,11 +1,30 @@
 #include "CFGNode.h"
 
+#include "PKBManager.h"
+
 spa::CFGNode::CFGNode(int lineNumber) {
   this->lineNumber = lineNumber;
+  isDummy = false;
+}
+
+spa::CFGNode::CFGNode(int lineNumber, std::string variable) {
+  this->lineNumber = lineNumber;
+  this->modifiedVariables.insert(variable);
+  isDummy = false;
+}
+
+spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> variables) {
+  this->lineNumber = lineNumber;
+  this->modifiedVariables.insert(variables.begin(), variables.end());
+  isDummy = false;
 }
 
 int spa::CFGNode::getLineNumber() const {
   return lineNumber;
+}
+
+bool spa::CFGNode::isDummyNode() {
+  return isDummy;
 }
 
 void spa::CFGNode::linkTo(CFGNode* node) {
@@ -69,19 +88,16 @@ bool spa::operator==(const CFGNode& s1, const CFGNode& s2) {
     s1.outgoingEdges.size() != s2.outgoingEdges.size()) {
     return false;
   }
-
   for (auto& itr = s1.modifiedVariables.begin(); itr != s1.modifiedVariables.end(); itr++) {
     if (s2.modifiedVariables.find(*itr) == s2.modifiedVariables.end()) {
       return false;
     }
   }
-
   for (auto& itr = s1.incomingEdges.begin(); itr != s1.incomingEdges.end(); itr++) {
     if (s2.incomingEdges.find(*itr) == s2.incomingEdges.end()) {
       return false;
     }
   }
-
   for (auto& itr = s1.outgoingEdges.begin(); itr != s1.outgoingEdges.end(); itr++) {
     if (s2.outgoingEdges.find(*itr) == s2.outgoingEdges.end()) {
       return false;

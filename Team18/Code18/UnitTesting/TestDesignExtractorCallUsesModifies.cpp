@@ -92,23 +92,6 @@ TEST_CLASS(TestDesignExtractorCallUsesModifies) {
     return trxResult;
   }
 
-  bool areStringVectorsEqual(const std::vector<std::string>& expected,
-                             const std::vector<std::string>& test) {
-    // Check the size of the vectors
-    if (expected.size() != test.size()) {
-      return false;
-    }
-
-    // Sort the vectors
-    std::vector<std::string> sorted_v1 = expected;
-    std::vector<std::string> sorted_v2 = test;
-    std::sort(sorted_v1.begin(), sorted_v1.end());
-    std::sort(sorted_v2.begin(), sorted_v2.end());
-
-    // Compare the sorted vectors
-    return std::equal(sorted_v1.begin(), sorted_v1.end(), sorted_v2.begin());
-  }
-
   void assertTrueTestCases(std::vector<std::pair<std::string, std::string>> testCases,
                            spa::RelationshipType relType) {
     for (auto pair : testCases) {

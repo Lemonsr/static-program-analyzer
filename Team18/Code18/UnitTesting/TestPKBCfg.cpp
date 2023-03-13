@@ -13,11 +13,11 @@
 using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
-  TEST_CLASS(TestPKBCfg) {
-    spa::CFGNode cfgNodeOne;
-    spa::CFGNode cfgNodeTwo;
-    spa::CFGNode cfgNodeThree;
-    std::unordered_map<int, spa::CFGNode> cfgNodeTable;
+TEST_CLASS(TestPKBCfg) {
+  spa::CFGNode cfgNodeOne;
+  spa::CFGNode cfgNodeTwo;
+  spa::CFGNode cfgNodeThree;
+  std::unordered_map<int, spa::CFGNode> cfgNodeTable;
 
 public:
   TestPKBCfg() : cfgNodeOne(1), cfgNodeTwo(2), cfgNodeThree(3) {
@@ -51,6 +51,7 @@ public:
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(queryResult.getCfgNodes().empty());
   }
+
   TEST_METHOD(TestAddCfgNode) {
     spa::CFGStorage cfgStorage;
     cfgStorage.setCfgNodeTable(cfgNodeTable);
@@ -118,13 +119,13 @@ public:
     cfgStorage.addModifiedVariable(1, varTwo);
     cfgStorage.addModifiedVariable(2, varThree);
 
-    std::unordered_set<std::string> expected = { varOne, varTwo };
+    std::unordered_set<std::string> expected = {varOne, varTwo};
 
     spa::QueryResult queryResult = cfgStorage.getCfgNode(1);
     spa::CFGNode* resultNode = queryResult.getCfgNodes()[0];
     Assert::IsTrue(expected == resultNode->getModifiedVariables());
 
-    expected = { varThree };
+    expected = {varThree};
 
     queryResult = cfgStorage.getCfgNode(2);
     resultNode = queryResult.getCfgNodes()[0];

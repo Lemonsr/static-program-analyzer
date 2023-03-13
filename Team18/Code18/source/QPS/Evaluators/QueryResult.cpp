@@ -28,6 +28,10 @@ const std::vector<spa::CFGNode*>& spa::QueryResult::getCfgNodes() {
   return cfgNodes.value();
 }
 
+const std::vector<int>& spa::QueryResult::getCfgEndNodes() {
+  return cfgEndNodes.value();
+}
+
 const bool& spa::QueryResult::getIsTrue() {
   return isTrue.value();
 }
@@ -44,11 +48,13 @@ void spa::QueryResult::setLineNumbers(std::vector<int> lineNumbers) {
   this->lineNumbers = lineNumbers;
 }
 
-void spa::QueryResult::setLineNumberNamePairs(std::vector<std::pair<int, std::string>> lineNumberNamePairs) {
+void spa::QueryResult::setLineNumberNamePairs(
+  std::vector<std::pair<int, std::string>> lineNumberNamePairs) {
   this->lineNumberNamePairs = lineNumberNamePairs;
 }
 
-void spa::QueryResult::setLineNumberLineNumberPairs(std::vector<std::pair<int, int>> lineNumberLineNumberPairs) {
+void spa::QueryResult::setLineNumberLineNumberPairs(
+  std::vector<std::pair<int, int>> lineNumberLineNumberPairs) {
   this->lineNumberLineNumberPairs = lineNumberLineNumberPairs;
 }
 
@@ -57,10 +63,15 @@ void spa::QueryResult::setIsTrue(bool isTrue) {
 }
 
 void spa::QueryResult::setNameNamePairs(std::vector<std::pair<std::string,
-                                                std::string>> nameNamePairs) {
+                                                              std::string>>
+  nameNamePairs) {
   this->nameNamePairs = nameNamePairs;
 }
 
 void spa::QueryResult::setCfgNodes(std::vector<spa::CFGNode*> cfgNodes) {
   this->cfgNodes = cfgNodes;
+}
+
+void spa::QueryResult::setCfgEndNodes(std::vector<int> cfgEndNodes) {
+  this->cfgEndNodes = cfgEndNodes;
 }
