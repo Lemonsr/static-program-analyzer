@@ -267,7 +267,7 @@ public:
       addEdges(&lineFive, { &lineOne}, {});
       std::unordered_set<spa::CFGNode*> expectedNodes = { &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive };
       assertCFGMatch(expectedNodes);
-      assertEndNodeMatch({1});
+      assertEndNodeMatch({5});
   }
 
   TEST_METHOD(TestSingleProcCFGCreationIfLast) {
@@ -364,11 +364,11 @@ public:
 
       auto lineOne = spa::CFGNode(1);
       auto lineTwo = spa::CFGNode(2, std::string("c"));
-      auto lineThree =spa::CFGNode(3);
+      auto lineThree = spa::CFGNode(3);
       auto lineFour = spa::CFGNode(4, std::string("g"));
       auto lineFive = spa::CFGNode(5);
       auto lineSix = spa::CFGNode(6, std::string("g"));
-      addEdges(&lineOne, {}, { lineTwo, lineFour});
+      addEdges(&lineOne, {}, { &lineTwo, &lineFour});
       addEdges(&lineTwo, { &lineOne }, { &lineThree });
       addEdges(&lineThree, { &lineTwo }, { &lineSix });
       addEdges(&lineFour, { &lineOne }, { &lineFive });
@@ -538,7 +538,7 @@ public:
           &lineNine, &lineTen, &lineEleven, &lineTwelve, &lineThirteen, &lineFourteen
       };
       assertCFGMatch(expectedNodes);
-      assertEndNodeMatch({ 7, 14 });
+      assertEndNodeMatch({ 8, 12, 14 });
       }
 
   TEST_METHOD(TestExtractSingleProcIfNestedWhileLast) {
@@ -618,7 +618,7 @@ public:
         &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix, &lineSeven, &lineEight, &lineNine, &lineTen
       };
       assertCFGMatch(expectedNodes);
-      assertEndNodeMatch({ 3, 8 });
+      assertEndNodeMatch({ 6, 8 });
   }
 
   TEST_METHOD(TestSingleProcCFGCreationWhileNestedIf) {
