@@ -7,6 +7,9 @@
 #include <unordered_set>
 
 bool spa::CFGStorage::popDummyNode(int lineNumber, RelationshipStorage& relationshipStorage) {
+  if (lineNumber == -1) {
+    return true;
+  }
   CFGNode& dummyNode = cfgNodeTable[-1];
   bool isAddEdge = true;
 
