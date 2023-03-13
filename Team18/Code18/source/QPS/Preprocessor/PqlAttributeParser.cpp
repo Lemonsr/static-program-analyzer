@@ -28,6 +28,7 @@ std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>
     tokens.seek(1);
   }
   query.addUsedDeclaration(synonym, entityType);
+  query.addSelectWithDeclaration(synonym, entityType);
   return { synonym.append(".").append(attribute) };
 }
 

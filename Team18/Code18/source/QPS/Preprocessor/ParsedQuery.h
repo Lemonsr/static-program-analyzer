@@ -137,6 +137,7 @@ class ParsedQuery {
   std::unordered_map<std::string, DesignEntityType> declarations;
   std::unordered_map<std::string, int> declarationsCount;
   std::unordered_map<std::string, DesignEntityType> usedDeclarations;
+  std::unordered_map<std::string, DesignEntityType> selectWithDeclarations;
 
  public:
   void addDeclaration(std::string synonym, DesignEntityType designEntity);
@@ -154,8 +155,10 @@ class ParsedQuery {
   std::vector<PatternClause>& getPatternClauses();
   void addWithClause(WithClause clause);
   std::vector<WithClause>& getWithClauses();
-  bool addUsedDeclaration(std::string declaration, DesignEntityType designEntityType);
+  void addUsedDeclaration(std::string declaration, DesignEntityType designEntityType);
   std::unordered_map<std::string, DesignEntityType>& getUsedDeclarations();
+  void addSelectWithDeclaration(std::string declaration, DesignEntityType designEntityType);
+  std::unordered_map<std::string, DesignEntityType>& getSelectWithDeclarations();
   bool hasClauses();
 };
 }  // namespace spa
