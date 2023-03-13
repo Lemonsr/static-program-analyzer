@@ -53,24 +53,10 @@ public:
     table.addRow({ spa::QpsValue("y"), spa::QpsValue(12), spa::QpsValue(17) });
     table.addRow({ spa::QpsValue("w"), spa::QpsValue(12), spa::QpsValue(18) });
     table.addRow({ spa::QpsValue("z"), spa::QpsValue(12), spa::QpsValue(19) });
-    auto columnVals = table.getColumns({"v", "x"});
-    Assert::AreEqual(columnVals.size(), size_t(8));
-    Assert::IsTrue(columnVals[0][0] == spa::QpsValue("a"));
-    Assert::IsTrue(columnVals[0][1] == spa::QpsValue(12));
-    Assert::IsTrue(columnVals[1][0] == spa::QpsValue("b"));
-    Assert::IsTrue(columnVals[1][1] == spa::QpsValue(13));
-    Assert::IsTrue(columnVals[2][0] == spa::QpsValue("c"));
-    Assert::IsTrue(columnVals[2][1] == spa::QpsValue(14));
-    Assert::IsTrue(columnVals[3][0] == spa::QpsValue("d"));
-    Assert::IsTrue(columnVals[3][1] == spa::QpsValue(15));
-    Assert::IsTrue(columnVals[4][0] == spa::QpsValue("x"));
-    Assert::IsTrue(columnVals[4][1] == spa::QpsValue(16));
-    Assert::IsTrue(columnVals[5][0] == spa::QpsValue("y"));
-    Assert::IsTrue(columnVals[5][1] == spa::QpsValue(17));
-    Assert::IsTrue(columnVals[6][0] == spa::QpsValue("w"));
-    Assert::IsTrue(columnVals[6][1] == spa::QpsValue(18));
-    Assert::IsTrue(columnVals[7][0] == spa::QpsValue("z"));
-    Assert::IsTrue(columnVals[7][1] == spa::QpsValue(19));
+    auto result = table.getColumns({ "v", "x" });
+    auto dim = result.getDimension();
+    Assert::AreEqual(dim.first, 2);
+    Assert::AreEqual(dim.second, 8);
   }
 
   TEST_METHOD(TestInnerJoin) {

@@ -17,6 +17,8 @@ using QpsResultRow = std::vector<QpsValue>;
 struct QpsFilteredRow {
   std::vector<int>& selectedColumns;
   QpsResultRow& row;
+
+  QpsResultRow getFilteredRow() const;
 };
 
 struct QpsFilteredRowHash {
@@ -29,6 +31,8 @@ struct QpsFilteredRowEquality {
 
 using QpsRowMap = std::unordered_map<QpsFilteredRow, std::vector<QpsResultRow*>,
                                      QpsFilteredRowHash, QpsFilteredRowEquality>;
+
+using QpsRowSet = std::unordered_set<QpsFilteredRow, QpsFilteredRowHash, QpsFilteredRowEquality>;
 
 using QpsValueSet = std::unordered_set<QpsValue, QpsValueHash, QpsValueEquality>;
 
@@ -48,7 +52,7 @@ class QpsResultTable {
   std::pair<int, int> getDimension();
   void addRow(const QpsResultRow& row);
   QpsValueSet getColumn(std::string header);
-  std::vector<QpsResultRow> getColumns(std::vector<std::string> headers);
+  QpsResultTable getColumns(const std::vector<std::string>& headers);
   QpsResultTable innerJoin(QpsResultTable& other);
   const std::vector<QpsResultRow>& getRows();
   bool isEmpty();

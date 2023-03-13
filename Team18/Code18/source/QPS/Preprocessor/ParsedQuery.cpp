@@ -92,13 +92,16 @@ std::unordered_map<std::string, spa::DesignEntityType>& spa::ParsedQuery::getUse
   return usedDeclarations;
 }
 
-bool spa::ParsedQuery::addUsedDeclaration(std::string declaration, DesignEntityType designEntityType) {
-  if (usedDeclarations.find(declaration) != usedDeclarations.end()) {
-    return false;
-  }
-
+void spa::ParsedQuery::addUsedDeclaration(std::string declaration, DesignEntityType designEntityType) {
   usedDeclarations.insert({ declaration, designEntityType });
-  return true;
+}
+
+void spa::ParsedQuery::addSelectWithDeclaration(std::string declaration, DesignEntityType designEntityType) {
+  selectWithDeclarations.insert({ declaration, designEntityType });
+}
+
+std::unordered_map<std::string, spa::DesignEntityType>& spa::ParsedQuery::getSelectWithDeclarations() {
+  return selectWithDeclarations;
 }
 
 bool spa::ParsedQuery::hasClauses() {

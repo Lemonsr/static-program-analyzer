@@ -25,6 +25,7 @@ spa::PqlParseStatus spa::PqlSelectParser::parseSynonymOrAttribute(bool parseBool
   query.setSelectClauseType(SelectClauseType::SELECT_TUPLE);
   query.addSelectColumn(synonym);
   query.addUsedDeclaration(synonym, entityType);
+  query.addSelectWithDeclaration(synonym, entityType);
   return PQL_PARSE_SUCCESS;
 }
 
