@@ -100,14 +100,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -143,14 +143,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -160,7 +160,7 @@ public:
       {"1", "2"}, {"2", "3"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -173,7 +173,7 @@ public:
       {"1", "3"}
     };
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -203,14 +203,14 @@ public:
       tokenCloseBrace, tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -220,7 +220,7 @@ public:
       {"1", "2"}, {"3", "4"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -232,7 +232,7 @@ public:
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(4,
       positiveResTestCases);
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -263,14 +263,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -280,7 +280,7 @@ public:
       {"1", "4"}, {"2", "3"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -292,7 +292,7 @@ public:
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(4,
       positiveResTestCases);
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -328,14 +328,14 @@ public:
       tokenCloseBrace, tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -345,7 +345,7 @@ public:
       {"1", "2"}, {"3", "4"}, {"5", "6"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -357,7 +357,7 @@ public:
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(6,
       positiveResTestCases);
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -394,14 +394,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -411,7 +411,7 @@ public:
       {"1", "6"}, {"2", "3"}, {"4", "5"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -423,7 +423,7 @@ public:
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(6,
       positiveResTestCases);
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -461,14 +461,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -478,7 +478,7 @@ public:
       {"1", "6"}, {"2", "3"}, {"4", "5"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -490,7 +490,7 @@ public:
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(6,
       positiveResTestCases);
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -540,14 +540,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -557,7 +557,7 @@ public:
       {"1", "10"}, {"2", "3"}, {"4", "5"}, {"6", "7"}, {"8", "9"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -568,7 +568,7 @@ public:
 
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(10,
       positiveResTestCases);
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -618,14 +618,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -635,7 +635,7 @@ public:
       {"1", "10"}, {"2", "3"}, {"4", "9"}, {"5", "6"}, {"7", "8"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -647,7 +647,7 @@ public:
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(10,
       positiveResTestCases);
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -690,14 +690,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -707,7 +707,7 @@ public:
       {"1", "8"}, {"2", "3"}, {"4", "5"}, {"6", "7"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -719,7 +719,7 @@ public:
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(8,
       positiveResTestCases);
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -763,14 +763,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -780,7 +780,7 @@ public:
       {"1", "8"}, {"2", "3"}, {"4", "5"}, {"6", "7"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -792,7 +792,7 @@ public:
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(8,
       positiveResTestCases);
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -837,14 +837,14 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (auto& token : tokenList) {
       tokenStream.pushBack(token);
     }
 
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
 
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -854,7 +854,7 @@ public:
       {"1", "8"}, {"2", "3"}, {"5", "6"}, {"4", "7"}
     };
 
-    for (auto pair : positiveResTestCases) {
+    for (std::pair<std::string, std::string> pair : positiveResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,
@@ -866,7 +866,7 @@ public:
     std::vector<std::pair<std::string, std::string>> negResTestCases = generateNegTestCase(8,
       positiveResTestCases);
 
-    for (auto pair : negResTestCases) {
+    for (std::pair<std::string, std::string> pair : negResTestCases) {
       spa::PqlArgument pqlArgOne = spa::PqlArgument(spa::LINE_NO, pair.first, {});
       spa::PqlArgument pqlArgTwo = spa::PqlArgument(spa::LINE_NO, pair.second, {});
       spa::QueryResult results = pkbManager->getRelationship(spa::FOLLOWS,

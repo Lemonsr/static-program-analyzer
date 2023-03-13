@@ -7,6 +7,7 @@
 #include "Token.h"
 
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -15,17 +16,17 @@ spa::SP::SP(std::string source, PKBManager& pkbManager) :
   sourceCode(source), pkbManager(pkbManager) {}
 
 void spa::SP::processSource() {
-  Stream<Token> convertedTokens = convertToken();
-  SpValidator validator(convertedTokens);
-  bool isValid = validator.validateGrammar();
-  if (!isValid) {
-    exit(1);
-  }
-  auto updatedStream = validator.getUpdatedStream();
-  SpParser parser = SpParser(updatedStream);
-  std::vector<ProcedureStatement> procedureList = parser.parse();
-  DesignExtractor designExtractor = DesignExtractor(pkbManager, procedureList);
-  designExtractor.extractRelationship();
+    Stream<Token> convertedTokens = convertToken();
+    SpValidator validator(convertedTokens);
+    bool isValid = validator.validateGrammar();
+    if (!isValid) {
+        exit(1);
+    }
+    auto updatedStream = validator.getUpdatedStream();
+    SpParser parser = SpParser(updatedStream);
+    std::vector<std::shared_ptr<ProcedureStatement>>  procedureList = parser.parse();
+    DesignExtractor designExtractor = DesignExtractor(pkbManager, procedureList);
+    designExtractor.extractRelationship();
 }
 
 spa::Stream<spa::Token> spa::SP::convertToken() {

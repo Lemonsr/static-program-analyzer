@@ -1,18 +1,19 @@
+#include "ProcedureStatement.h"
+
+#include <memory>
 #include <string>
 #include <unordered_set>
 
-#include "ProcedureStatement.h"
-
 // Constructor
 spa::ProcedureStatement::ProcedureStatement(spa::Token procedureVarToken,
-                                            std::vector<ProgramStatement*> statementLst) :
-  procedureVarToken(procedureVarToken), statementLst(statementLst) {}
+  std::vector<std::shared_ptr<ProgramStatement>> statementLst)
+  : procedureVarToken(procedureVarToken), statementLst(statementLst) {}
 
 spa::Token spa::ProcedureStatement::getProcedureVarToken() {
   return procedureVarToken;
 }
 
-std::vector<spa::ProgramStatement*> spa::ProcedureStatement::getStatementLst() {
+std::vector<std::shared_ptr<spa::ProgramStatement>>& spa::ProcedureStatement::getStatementLst() {
   return statementLst;
 }
 

@@ -91,7 +91,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -151,7 +151,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -223,7 +223,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -300,7 +300,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -364,7 +364,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -426,7 +426,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -497,7 +497,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -568,7 +568,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -643,7 +643,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -701,7 +701,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -749,7 +749,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -821,7 +821,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -896,7 +896,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -958,7 +958,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -1020,7 +1020,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -1090,7 +1090,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -1160,7 +1160,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -1233,7 +1233,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -1292,7 +1292,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -1357,7 +1357,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
@@ -1420,7 +1420,7 @@ public:
     }
     std::unique_ptr<spa::PKBManager> pkbManager = std::make_unique<spa::PKB>();
     auto parser = spa::SpParser(tokenStream);
-    std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
     Assert::IsTrue(procedureList.size() == 1);
 
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);

@@ -283,62 +283,61 @@ void spa::SpValidator::validateCondExpr() {
 }
 
 bool spa::SpValidator::isCondExpr(std::vector<Token> tokensToCheck) {
-  if (tokensToCheck.empty()) {
-    return false;
-  }
-
-  Token firstToken = tokensToCheck[0];
-  if (tokensToCheck.size() == 1 && UtilsFunction::isValidRelFactorToken(firstToken)) {
-    return true;
-  }
-
-  Token secondToken = tokensToCheck[1];
-  // Case 1: '!' '(' cond_expr ')'
-  if (tokensToCheck.size() >= 3 && firstToken.getType() == TOKEN_BOOL_NOT &&
-    UtilsFunction::isValidOpenBracket(
-      secondToken)
-    && UtilsFunction::isValidCloseBracket(tokensToCheck.back())) {
-    return isCondExpr(
-      std::vector<Token>(tokensToCheck.begin() + 2, tokensToCheck.end() - 1));
-  }
-
-  // Case 2: | '(' cond_expr ')' '||&&' '(' cond_expr ')'
-  if (tokensToCheck.size() < 5 || !UtilsFunction::isValidOpenBracket(tokensToCheck.front()) ||
-    !UtilsFunction::isValidCloseBracket(tokensToCheck.back())) {
-    return isRelExpr(tokensToCheck);
-  }
-
-  // Case 3: rel_expr
-  // Find outermost || &&
-  int unclosedBracketCount = 0;
-  int index = -1;
-  for (int i = 0; i < tokensToCheck.size(); i++) {
-    const TokenType tokenType = tokensToCheck[i].getType();
-    if (tokenType == TOKEN_OPEN_BRACKET) {
-      unclosedBracketCount += 1;
-    } else if (tokenType == TOKEN_CLOSE_BRACKET) {
-      unclosedBracketCount -= 1;
+    if (tokensToCheck.empty()) {
+        return false;
     }
 
-    if (UtilsFunction::isValidCondExprToken(tokensToCheck[i]) && unclosedBracketCount == 0) {
-      index = i;
-      break;
+    Token firstToken = tokensToCheck[0];
+    if (tokensToCheck.size() == 1 && UtilsFunction::isValidRelFactorToken(firstToken)) {
+        return true;
     }
-  }
 
-  if (index == -1) {
-    return isRelExpr(tokensToCheck);
-  }
+    Token secondToken = tokensToCheck[1];
+    // Case 1: '!' '(' cond_expr ')'
+    if (tokensToCheck.size() >= 3 && firstToken.getType() == TOKEN_BOOL_NOT && UtilsFunction::isValidOpenBracket(
+            secondToken)
+        && UtilsFunction::isValidCloseBracket(tokensToCheck.back())) {
+        return isCondExpr(
+            std::vector<Token>(tokensToCheck.begin() + 2, tokensToCheck.end() - 1));
+    }
 
-  if (tokensToCheck[index + 1].getType() != TOKEN_OPEN_BRACKET) {
-    throw std::exception("&&|| Missing an opening '('");
-  }
+    // Case 2: | '(' cond_expr ')' '||&&' '(' cond_expr ')'
+    if (tokensToCheck.size() < 5 || !UtilsFunction::isValidOpenBracket(tokensToCheck.front()) ||
+        !UtilsFunction::isValidCloseBracket(tokensToCheck.back())) {
+        return isRelExpr(tokensToCheck);
+    }
+
+    // Case 3: rel_expr
+    // Find outermost || &&
+    int unclosedBracketCount = 0;
+    int index = -1;
+    for (unsigned i = 0; i < tokensToCheck.size(); i++) {
+        const TokenType tokenType = tokensToCheck[i].getType();
+        if (tokenType == TOKEN_OPEN_BRACKET) {
+            unclosedBracketCount += 1;
+        } else if (tokenType == TOKEN_CLOSE_BRACKET) {
+            unclosedBracketCount -= 1;
+        }
+
+        if (UtilsFunction::isValidCondExprToken(tokensToCheck[i]) && unclosedBracketCount == 0) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) {
+        return isRelExpr(tokensToCheck);
+    }
+
+    if (tokensToCheck[index + 1].getType() != TOKEN_OPEN_BRACKET) {
+        throw std::exception("&&|| Missing an opening '('");
+    }
 
 
-  std::vector<Token> left(tokensToCheck.begin() + 1, tokensToCheck.begin() + index - 1);
-  std::vector<Token> right(tokensToCheck.begin() + index + 2, tokensToCheck.end() - 1);
+    std::vector<Token> left(tokensToCheck.begin() + 1, tokensToCheck.begin() + index - 1);
+    std::vector<Token> right(tokensToCheck.begin() + index + 2, tokensToCheck.end() - 1);
 
-  return isCondExpr(left) && isCondExpr(right);
+    return isCondExpr(left) && isCondExpr(right);
 }
 
 // rel_expr: rel_factor 'COND_OP' rel_factor
@@ -349,7 +348,7 @@ bool spa::SpValidator::isRelExpr(std::vector<Token> tokensToCheck) {
   }
 
   int index = -1;
-  for (int i = 0; i < tokensToCheck.size(); i++) {
+  for (unsigned i = 0; i < tokensToCheck.size(); i++) {
     if (UtilsFunction::relExprToken.count(tokensToCheck[i].getType())) {
       index = i;
       break;

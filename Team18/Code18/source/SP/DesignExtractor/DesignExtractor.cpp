@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_set>
 #include <utility>
+#include <memory>
 
 #include "ContainerStatement.h"
 #include "NonContainerStatement.h"
@@ -12,24 +13,24 @@
 #include "SpCyclicValidator.h"
 
 spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
-                                      std::vector<ProcedureStatement>& procedureList) :
+                                      std::vector<std::shared_ptr<ProcedureStatement>>& procedureList) :
   pkbManager(pkbManager), procedureList(procedureList) {
   for (auto& procedure : procedureList) {
-    auto statements = procedure.getStatementLst();
+    auto& statements = procedure->getStatementLst();
     for (auto& statement : statements) {
-      if (dynamic_cast<spa::CallStatement*>(statement)) {
-        auto callStatement = dynamic_cast<spa::CallStatement*>(statement);
-        procedure.addCalledVars(callStatement->getVariableName());
-      } else if (dynamic_cast<spa::ContainerStatement*>(statement)) {
-        auto containerStatement = dynamic_cast<spa::ContainerStatement*>(statement);
+      if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+        auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+        procedure->addCalledVars(callStatement->getVariableName());
+      } else if (std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
+        auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statement);
         std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
         for (auto& called : calledSet) {
-          procedure.addCalledVars(called);
+          procedure->addCalledVars(called);
         }
       }
     }
-    procCallMap.emplace(procedure.getProcedureVarToken().getValue(),
-      procedure.getCalledVars());
+    procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
+      procedure->getCalledVars());
   }
 }
 
@@ -39,9 +40,9 @@ void spa::DesignExtractor::extractRelationship() {
     std::cerr << "Cyclic calls detected" << std::endl;
     exit(1);
   }
-  for (ProcedureStatement& procedure : procedureList) {
-    pkbManager.addEntity(PROCEDURE, procedure.getProcedureVarToken().getValue());
-    std::vector<ProgramStatement*> statementList = procedure.getStatementLst();
+  for (auto& procedure : procedureList) {
+    pkbManager.addEntity(PROCEDURE, procedure->getProcedureVarToken().getValue());
+    auto& statementList = procedure->getStatementLst();
     extractDesignAbstraction(statementList);
   }
   extractCallsStar();
@@ -50,17 +51,17 @@ void spa::DesignExtractor::extractRelationship() {
   extractCallsModifiesAndUses();
 }
 
-void spa::DesignExtractor::extractDesignAbstraction(std::vector<ProgramStatement*> statementList) {
+void spa::DesignExtractor::extractDesignAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList) {
   extractFollows(statementList);
   extractFollowsStar(statementList);
   extractParentAbstraction(statementList);
   extractUsesAndModifies(statementList);
 }
 
-void spa::DesignExtractor::extractParentAbstraction(std::vector<ProgramStatement*> statementList) {
-  for (ProgramStatement* statement : statementList) {
-    if (dynamic_cast<ContainerStatement*>(statement)) {
-      auto containerStatement = dynamic_cast<ContainerStatement*>(statement);
+void spa::DesignExtractor::extractParentAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList) {
+  for (auto& statement : statementList) {
+    if (std::dynamic_pointer_cast<ContainerStatement>(statement)) {
+      auto containerStatement = std::dynamic_pointer_cast<ContainerStatement>(statement);
       extractParent(containerStatement);
       extractParentStar(containerStatement,
         std::to_string(containerStatement->getStatementLineNum()));
@@ -68,7 +69,7 @@ void spa::DesignExtractor::extractParentAbstraction(std::vector<ProgramStatement
   }
 }
 
-void spa::DesignExtractor::extractFollows(std::vector<ProgramStatement*> statementList) {
+void spa::DesignExtractor::extractFollows(std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
   for (unsigned i = 0; i < statementList.size(); i++) {
     if (i + 1 != statementList.size()) {
       std::string followStmtOne = std::to_string(statementList[i]->getStatementLineNum());
@@ -78,64 +79,62 @@ void spa::DesignExtractor::extractFollows(std::vector<ProgramStatement*> stateme
         pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
       }
     }
-    if (dynamic_cast<ContainerStatement*>(statementList[i])) {
-      ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[
-        i]);
+    if (std::dynamic_pointer_cast<ContainerStatement>(statementList[i])) {
+      auto containerStatement = std::dynamic_pointer_cast<ContainerStatement>(statementList[i]);
       extractFollows(containerStatement->getStatementList());
     }
   }
 }
 
-void spa::DesignExtractor::extractFollowsStar(std::vector<ProgramStatement*> statementList) {
+void spa::DesignExtractor::extractFollowsStar(std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
   for (unsigned i = 0; i < statementList.size(); i++) {
     if (i + 1 != statementList.size()) {
       for (unsigned j = i + 1; j < statementList.size(); j++) {
-        std::string followStarStmtOne = std::to_string(statementList[i]
-          ->getStatementLineNum());
-        std::string followStarStmtTwo = std::to_string(statementList[j]
-          ->getStatementLineNum());
+        std::string followStarStmtOne = std::to_string(statementList[i]->getStatementLineNum());
+        std::string followStarStmtTwo = std::to_string(statementList[j]->getStatementLineNum());
+
         if (followStarStmtOne != "-1" && followStarStmtTwo != "-1") {
-          pkbManager.addRelationship(FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
+          pkbManager.addRelationship(spa::FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
         }
       }
     }
-    if (dynamic_cast<ContainerStatement*>(statementList[i])) {
-      ContainerStatement* containerStatement = dynamic_cast<ContainerStatement*>(statementList[
-        i]);
+    if (std::dynamic_pointer_cast<spa::ContainerStatement>(statementList[i])) {
+      auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statementList[i]);
       extractFollowsStar(containerStatement->getStatementList());
     }
   }
 }
 
-void spa::DesignExtractor::extractParent(ContainerStatement* containerStatement) {
-  std::vector<ProgramStatement*> statementList = containerStatement->getStatementList();
-  for (ProgramStatement* statement : statementList) {
+void spa::DesignExtractor::extractParent(std::shared_ptr<spa::ContainerStatement>& containerStatement) {
+  std::vector<std::shared_ptr<ProgramStatement>> statementList = containerStatement->getStatementList();
+  for (auto& statement : containerStatement->getStatementList()) {
     std::string parentStmtOne = std::to_string(containerStatement->getStatementLineNum());
     if (statement->getStatementLineNum() == containerStatement->getStatementLineNum()) {
       continue;
     }
+
     if (statement->getStatementLineNum() != -1) {
       std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
-      pkbManager.addRelationship(PARENT, parentStmtOne, parentStmtTwo);
+      pkbManager.addRelationship(spa::RelationshipType::PARENT, parentStmtOne, parentStmtTwo);
       continue;
     }
-    auto innerBlockStatements = dynamic_cast<ContainerStatement*>(statement);
-    std::vector<ProgramStatement*> innerBlockStmtList = innerBlockStatements->getStatementList();
-    for (ProgramStatement* childStatement : innerBlockStmtList) {
+    auto innerBlockStatements = std::dynamic_pointer_cast<ContainerStatement>(statement);
+    std::vector<std::shared_ptr<ProgramStatement>> innerBlockStmtList = innerBlockStatements->getStatementList();
+    for (auto& childStatement : innerBlockStmtList) {
       std::string parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
       pkbManager.addRelationship(PARENT, parentStmtOne, parentStmtTwo);
-      if (dynamic_cast<ContainerStatement*>(childStatement)) {
-        auto childContainerStmt = dynamic_cast<ContainerStatement*>(childStatement);
+      if (std::dynamic_pointer_cast<ContainerStatement>(childStatement)) {
+        auto childContainerStmt = std::dynamic_pointer_cast<ContainerStatement>(childStatement);
         extractParent(childContainerStmt);
       }
     }
   }
 }
 
-void spa::DesignExtractor::extractParentStar(ContainerStatement* containerStatement,
+void spa::DesignExtractor::extractParentStar(std::shared_ptr<ContainerStatement>& containerStatement,
                                              std::string ancestorLineNum) {
-  std::vector<ProgramStatement*> statementList = containerStatement->getStatementList();
-  for (ProgramStatement* statement : statementList) {
+  std::vector<std::shared_ptr<ProgramStatement>>& statementList = containerStatement->getStatementList();
+  for (auto& statement : statementList) {
     std::string parentStmtOne = std::to_string(containerStatement->getStatementLineNum());
     std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
 
@@ -147,15 +146,15 @@ void spa::DesignExtractor::extractParentStar(ContainerStatement* containerStatem
       continue;
     }
 
-    auto innerBlockStatements = dynamic_cast<ContainerStatement*>(statement);
-    std::vector<ProgramStatement*> innerBlockStmtList = innerBlockStatements->getStatementList();
+    auto innerBlockStatements = std::dynamic_pointer_cast<ContainerStatement>(statement);
+    std::vector<std::shared_ptr<ProgramStatement>> innerBlockStmtList = innerBlockStatements->getStatementList();
 
-    for (ProgramStatement* childStatement : innerBlockStmtList) {
+    for (auto& childStatement : innerBlockStmtList) {
       parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
       pkbManager.addRelationship(PARENT_STAR, ancestorLineNum, parentStmtTwo);
 
-      if (dynamic_cast<ContainerStatement*>(childStatement)) {
-        auto childContainerStmt = dynamic_cast<ContainerStatement*>(childStatement);
+      if (std::dynamic_pointer_cast<ContainerStatement>(childStatement)) {
+        auto childContainerStmt = std::dynamic_pointer_cast<ContainerStatement>(childStatement);
         extractParentStar(childContainerStmt, ancestorLineNum);
         extractParentStar(childContainerStmt,
           std::to_string(childStatement->getStatementLineNum()));
@@ -164,11 +163,12 @@ void spa::DesignExtractor::extractParentStar(ContainerStatement* containerStatem
   }
 }
 
-void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*> statementList) {
+
+void spa::DesignExtractor::extractUsesAndModifies(std::vector<std::shared_ptr<spa::ProgramStatement>>&statementList) {
   CFGNode dummyStartNode = CFGNode();
   CFGNode tailNode = dummyStartNode;
   bool start = true;
-  for (auto statement : statementList) {
+  for (auto& statement : statementList) {
     std::pair<CFGNode, CFGNode> cfgNode = statement->processStatement(pkbManager);
     if (start && tailNode.isDummyNode()) {
       start = false;
@@ -200,8 +200,8 @@ void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {
 
 void spa::DesignExtractor::extractCallsStar() {
   for (auto& procedure : procedureList) {
-    auto currentProcedure = procedure.getProcedureVarToken().getValue();
-    for (auto& directCall : procedure.getCalledVars()) {
+    std::string currentProcedure = procedure->getProcedureVarToken().getValue();
+    for (auto& directCall : procedure->getCalledVars()) {
       pkbManager.addRelationship(CALLS_STAR, currentProcedure, directCall);
       dfsCallsStar(currentProcedure, directCall);
     }
@@ -210,7 +210,7 @@ void spa::DesignExtractor::extractCallsStar() {
 
 void spa::DesignExtractor::extractUsesAndModifiesProc() {
   for (auto& procedure : procedureList) {
-    std::string procName = procedure.getProcedureVarToken().getValue();
+    std::string procName = procedure->getProcedureVarToken().getValue();
     std::vector<std::pair<std::string, std::string>> childrenProc = getResFromPkbHelper(procName,
       "p",
       PROCEDURE, CALLS_STAR);
@@ -228,7 +228,7 @@ void spa::DesignExtractor::extractUsesAndModifiesProc() {
 
 void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
   for (auto& procedure : procedureList) {
-    std::string procName = procedure.getProcedureVarToken().getValue();
+    std::string procName = procedure->getProcedureVarToken().getValue();
     QueryResult queryResult = pkbManager.getCallsContainerParent(procName);
     std::vector<int> ifWhileParents = queryResult.getLineNumbers();
 
