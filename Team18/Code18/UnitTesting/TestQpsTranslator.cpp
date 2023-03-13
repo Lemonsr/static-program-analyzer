@@ -57,40 +57,48 @@ public:
       spa::QpsValue("e")
     });
   }
-  TEST_METHOD(TestSimpleSelect) {
+  TEST_METHOD(TestSimpleSelectSynonym) {
     spa::QpsTranslator translator(resultTable);
-    std::vector<std::string> selectColumns;
-    selectColumns.push_back("s");
-    std::list<std::string> expected = { "1", "2", "3", "4", "5" };
+    std::vector<std::string> selectColumns = { "s" };
+    std::unordered_set<std::string> expected = { "1", "2", "3", "4", "5" };
     std::list<std::string> result = translator.translate(spa::SelectClauseType::SELECT_TUPLE, selectColumns);
-    Assert::IsTrue(result == expected);
+    Assert::AreEqual(expected.size(), result.size());
+    for (auto& s : result) {
+      Assert::IsTrue(expected.find(s) != expected.end());
+    }
+  }
 
-    selectColumns.clear();
-    selectColumns.push_back("p.procName");
-    expected = { "func1", "func2", "func3", "func4", "func5" };
-    result = translator.translate(spa::SelectClauseType::SELECT_TUPLE, selectColumns);
-    Assert::IsTrue(result == expected);
+  TEST_METHOD(TestSimpleSelectAttribute) {
+    spa::QpsTranslator translator(resultTable);
+    std::vector<std::string> selectColumns = { "p.procName" };
+    std::unordered_set<std::string> expected = { "func1", "func2", "func3", "func4", "func5" };
+    std::list<std::string> result = translator.translate(spa::SelectClauseType::SELECT_TUPLE, selectColumns);
+    Assert::AreEqual(expected.size(), result.size());
+    for (auto& s : result) {
+      Assert::IsTrue(expected.find(s) != expected.end());
+    }
   }
 
   TEST_METHOD(TestTupleDiffColumn) {
     spa::QpsTranslator translator(resultTable);
-    std::vector<std::string> selectColumns;
-    selectColumns.push_back("p");
-    selectColumns.push_back("v.varName");
-    selectColumns.push_back("s");
-    std::list<std::string> expected = { "func1 a 1", "func2 b 2", "func3 c 3", "func4 d 4", "func5 e 5" };
+    std::vector<std::string> selectColumns = { "p" , "v.varName", "s" };
+    std::unordered_set<std::string> expected = { "func1 a 1", "func2 b 2", "func3 c 3", "func4 d 4", "func5 e 5" };
     std::list<std::string> result = translator.translate(spa::SelectClauseType::SELECT_TUPLE, selectColumns);
-    Assert::IsTrue(result == expected);
+    Assert::AreEqual(expected.size(), result.size());
+    for (auto& s : result) {
+      Assert::IsTrue(expected.find(s) != expected.end());
+    }
   }
 
   TEST_METHOD(TestTupleSameColumn) {
     spa::QpsTranslator translator(resultTable);
-    std::vector<std::string> selectColumns;
-    selectColumns.push_back("s");
-    selectColumns.push_back("s");
-    std::list<std::string> expected = { "1 1", "2 2", "3 3", "4 4", "5 5" };
+    std::vector<std::string> selectColumns{ "s", "s" };
+    std::unordered_set<std::string> expected = { "1 1", "2 2", "3 3", "4 4", "5 5" };
     std::list<std::string> result = translator.translate(spa::SelectClauseType::SELECT_TUPLE, selectColumns);
-    Assert::IsTrue(result == expected);
+    Assert::AreEqual(expected.size(), result.size());
+    for (auto& s : result) {
+      Assert::IsTrue(expected.find(s) != expected.end());
+    }
   }
 
   TEST_METHOD(TestBooleanTrue) {

@@ -81,6 +81,8 @@ public:
       spa::WithArgument(spa::QpsValue("dunphy")));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+    auto& selectWithDeclarations = query.getSelectWithDeclarations();
+    Assert::IsTrue(selectWithDeclarations.find("v") != selectWithDeclarations.end());
   }
 
   TEST_METHOD(TestAttributeAndInt) {
@@ -104,6 +106,8 @@ public:
       spa::WithArgument("c.stmt#"));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+    auto& selectWithDeclarations = query.getSelectWithDeclarations();
+    Assert::IsTrue(selectWithDeclarations.find("c") != selectWithDeclarations.end());
   }
 
   TEST_METHOD(TestAttributeAndAttribute) {
@@ -131,6 +135,9 @@ public:
       spa::WithArgument("c.stmt#"));
     Assert::IsTrue(clause == compare);
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+    auto& selectWithDeclarations = query.getSelectWithDeclarations();
+    Assert::IsTrue(selectWithDeclarations.find("s") != selectWithDeclarations.end());
+    Assert::IsTrue(selectWithDeclarations.find("c") != selectWithDeclarations.end());
   }
   };
 }  // namespace UnitTesting

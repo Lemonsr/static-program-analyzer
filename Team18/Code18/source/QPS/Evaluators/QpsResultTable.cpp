@@ -7,6 +7,14 @@
 
 #include "HashTuple.h"
 
+spa::QpsResultRow spa::QpsFilteredRow::getFilteredRow() const {
+  QpsResultRow result;
+  for (int i : selectedColumns) {
+    result.push_back(row[i]);
+  }
+  return result;
+}
+
 std::pair<std::vector<int>, std::vector<int>> spa::QpsResultTable::getCommonColumnIndices(QpsResultTable& table,
                                                                                           QpsResultTable& other) {
   std::vector<int> tIndices;
@@ -73,22 +81,26 @@ spa::QpsValueSet spa::QpsResultTable::getColumn(std::string header) {
   return result;
 }
 
-std::vector<spa::QpsResultRow> spa::QpsResultTable::getColumns(std::vector<std::string> headers) {
+spa::QpsResultTable spa::QpsResultTable::getColumns(const std::vector<std::string>& headers) {
+  QpsResultTable result;
   std::vector<int> indices;
   for (auto& header : headers) {
     auto it = headerIndexMap.find(header);
     if (it == headerIndexMap.end()) {
-      throw std::runtime_error("Header doesn't exist");
+      continue;
     }
+    result.addHeader(header);
     indices.push_back(it->second[0]);
   }
-  std::vector<spa::QpsResultRow> result;
+  if (indices.empty()) {
+    return result;
+  }
+  QpsRowSet rowSet;
   for (auto& row : rows) {
-    spa::QpsResultRow temp;
-    for (int index : indices) {
-      temp.push_back(row[index]);
-    }
-    result.push_back(temp);
+    rowSet.insert({ indices, row });
+  }
+  for (auto& fRow : rowSet) {
+    result.addRow(fRow.getFilteredRow());
   }
   return result;
 }

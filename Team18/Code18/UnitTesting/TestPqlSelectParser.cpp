@@ -42,6 +42,8 @@ public:
     Assert::AreEqual(query.getSelectColumns().size(), size_t(1));
     Assert::AreEqual(query.getSelectColumns()[0], std::string("BOOLEAN"));
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+    auto& selectWithDeclarations = query.getSelectWithDeclarations();
+    Assert::IsTrue(selectWithDeclarations.find("BOOLEAN") != selectWithDeclarations.end());
   }
 
   TEST_METHOD(TestSimpleAttribute) {
@@ -59,6 +61,8 @@ public:
     Assert::AreEqual(query.getSelectColumns().size(), size_t(1));
     Assert::AreEqual(query.getSelectColumns()[0], std::string("BOOLEAN.procName"));
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+    auto& selectWithDeclarations = query.getSelectWithDeclarations();
+    Assert::IsTrue(selectWithDeclarations.find("BOOLEAN") != selectWithDeclarations.end());
   }
 
   TEST_METHOD(TestTuple) {
@@ -82,6 +86,8 @@ public:
     Assert::AreEqual(query.getSelectColumns()[0], std::string("BOOLEAN"));
     Assert::AreEqual(query.getSelectColumns()[1], std::string("BOOLEAN.stmt#"));
     Assert::AreEqual(tokens.remaining(), int64_t(0));
+    auto& selectWithDeclarations = query.getSelectWithDeclarations();
+    Assert::IsTrue(selectWithDeclarations.find("BOOLEAN") != selectWithDeclarations.end());
   }
 
   TEST_METHOD(TestMismatchQuery) {
