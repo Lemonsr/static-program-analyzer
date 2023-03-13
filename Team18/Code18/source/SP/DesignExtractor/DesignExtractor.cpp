@@ -1,5 +1,6 @@
 #include "DesignExtractor.h"
 
+#include <iostream>
 #include <vector>
 #include <string>
 #include <unordered_set>
@@ -35,6 +36,7 @@ spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
 void spa::DesignExtractor::extractRelationship() {
   spa::SpCyclicValidator cyclicValidator(procCallMap);
   if (cyclicValidator.validateCyclic()) {
+    std::cerr << "Cyclic calls detected" << std::endl;
     exit(1);
   }
   for (ProcedureStatement& procedure : procedureList) {
@@ -163,13 +165,29 @@ void spa::DesignExtractor::extractParentStar(ContainerStatement* containerStatem
 }
 
 void spa::DesignExtractor::extractUsesAndModifies(std::vector<ProgramStatement*> statementList) {
-  CFGNode* dummyStartNode = CFGNode::createDummyNode();
-  CFGNode* tailNode = dummyStartNode;
+  CFGNode dummyStartNode = CFGNode();
+  CFGNode tailNode = dummyStartNode;
+  bool start = true;
   for (auto statement : statementList) {
-    std::pair<CFGNode*, CFGNode*> cfgNode = statement->processStatement(pkbManager);
-    CFGNode::linkNodes(tailNode, cfgNode.first, pkbManager);
+    std::pair<CFGNode, CFGNode> cfgNode = statement->processStatement(pkbManager);
+    if (start && tailNode.isDummyNode()) {
+      start = false;
+      tailNode = cfgNode.second;
+      continue;
+    }
+    int const tailNodeLineNum = tailNode.getLineNumber();
+    int const cfgNodeStart = cfgNode.first.getLineNumber();
+    pkbManager.addEdge(tailNodeLineNum, cfgNodeStart);
     tailNode = cfgNode.second;
   }
+  if (tailNode.isDummyNode()) {
+    for (auto edge : tailNode.getIncomingEdges()) {
+      pkbManager.addCfgEndNode(edge->getLineNumber());
+    }
+    pkbManager.removeDummyNode();
+    return;
+  }
+  pkbManager.addCfgEndNode(tailNode.getLineNumber());
 }
 
 void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {

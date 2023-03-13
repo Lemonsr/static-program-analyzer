@@ -2,12 +2,12 @@
 
 #include <string>
 #include <unordered_map>
-#include <unordered_set>
+#include <vector>
 
 #include "DesignEntity.h"
 
 namespace spa {
-inline std::unordered_map<DesignEntityType, std::unordered_set<std::string>> pqlAttributesMap {
+inline std::unordered_map<DesignEntityType, std::vector<std::string>> pqlAttributesMap {
   { ASSIGN, { "stmt#" }},
   { CONSTANT, { "value" }},
   { STMT, { "stmt#" } },

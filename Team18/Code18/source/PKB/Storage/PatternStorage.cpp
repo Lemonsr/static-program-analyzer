@@ -14,9 +14,9 @@ bool spa::PatternStorage::isPostfixSubstring(std::string postfix, std::string pa
     return false;
   }
 
-  for (int i = 0; i <= postfixTokens.size() - patternPostfixTokens.size(); ++i) {
+  for (size_t i = 0; i <= postfixTokens.size() - patternPostfixTokens.size(); ++i) {
     bool isMatch = true;
-    for (int j = 0; j < patternPostfixTokens.size(); ++j) {
+    for (size_t j = 0; j < patternPostfixTokens.size(); ++j) {
       if (postfixTokens[i + j] != patternPostfixTokens[j]) {
         isMatch = false;
         break;
@@ -29,8 +29,7 @@ bool spa::PatternStorage::isPostfixSubstring(std::string postfix, std::string pa
   return false;
 }
 
-bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName,
-  std::string postfixString) {
+bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName, std::string postfixString) {
   int lineNumber = std::stoi(lineNo);
   if (assignTable.find(lineNumber) != assignTable.end()) {
     return false;

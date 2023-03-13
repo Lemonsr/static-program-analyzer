@@ -1,0 +1,122 @@
+procedure main {
+  if (procedure != procedure) then {
+	call procedure;
+	print prodcedure;
+  } else {
+	while ((!(while == if)) || (while != if)) {
+	  call while;
+	  if = 0;
+	  while = if;
+	}
+	if (stmt < read) then {
+	  read read;
+	  read print;
+	  print print;
+	  print PrInT;
+	  while (print > read) {
+		call Uses;
+		Uses = 0;
+	  }
+	} else {
+	  while (print <= read) {
+		call Modifies;
+		while (Modifies <= Uses) {
+		  assign = 0;
+		  stmtLst = 1  + 3  +4;
+		  such = that;
+		  if = then;
+		  then = else;
+		  call Calls;
+		  if (!(Select <= INTEGER)) then {
+			call Select;
+		  } else {
+			while ((!(pattern >= and)) && (x == y)) {
+			  call pattern;
+			}
+			while (0 == 1) {
+			  x = 4 +          1;
+			  y = x +1 +111 +  1;
+			}
+			if (!(0 < not)) then {
+			  ParentsStar = 0;
+			  CallsStar = 0;
+			  FollowsStar = 0;
+			} else {
+			  variable = a+b;
+			}
+		  }
+		}
+		call  Next;
+		call   Affects;
+	  }
+	  call call;
+	}
+  }
+}
+
+procedure procedure {
+  simple = (0 * 1 + 2 / 3) % 6;
+}
+
+procedure while {
+  while = (0 + 1 - 1 * 3) * 7 ;
+}
+
+procedure if {
+  if = while;
+}
+
+procedure call {
+  call = 1+ 1  + 1 + 1;
+}
+
+procedure Follows {
+  Follows = empty;
+}
+
+procedure Parents {
+  Parents = true;
+}
+
+procedure Uses {
+  while (call >= procedure) {
+	print usesCall;
+	print usesProc;
+	call = procedure;
+  }
+}
+
+procedure Modifies {
+  while (call >= procedure) {
+	print ModifiesCall;
+	print ModifiesProc;
+	call = procedure;
+  }
+}
+
+procedure Calls {
+  print callProc;
+  read call;
+}
+
+procedure Next {
+  Next = 0;
+}
+
+procedure Affects {
+  Affects = 0;
+}
+
+procedure Select {
+  Select = 1;
+  while (0213123 != 01312323123131) {
+	print Test;
+  }
+}
+
+procedure pattern {
+  print pattern;
+  while (0 != 0) {
+	print N0;
+  }
+}

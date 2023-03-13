@@ -1,0 +1,115 @@
+1 - Modifies (Procedure, VarName)
+procedure p;
+Select p such that Modifies(p, "x")
+A, B, C
+5000
+2 - Modifies (Procedure, WildCard)
+procedure p;
+Select p.procName such that Modifies(p, _)
+A, B, C, D, E, F, Aextra, Bextra
+5000
+3 - Modifies (Procedure, Variable)
+procedure p; variable v;
+Select p such that Modifies(p, v)
+A, B, C, D, E, F, Aextra, Bextra
+5000
+4 - Modifies (Procedure, Variable)
+procedure p; variable v;
+Select v such that Modifies(p, v)
+y, x, total, z, Aextra, Aextrainc, Bextra, Bextrainc, Bextrainc2
+5000
+5 - Modifies (Procedure, Variable)
+procedure p; variable v; read read; call call;
+Select <p, v, read.varName, call.procName> such that Modifies(p, v)
+A y y B, A x y B, A z y B, A Aextra y B, A Aextrainc y B, B x y B, B z y B, C x y B, C z y B, D total y B, E total y B, F z y B, Aextra Aextra y B, Aextra Aextrainc y B, Bextra Bextra y B, Bextra Bextrainc y B, Bextra Bextrainc2 y B, Bextra Aextra y B, Bextra Aextrainc y B, A y x B, A x x B, A z x B, A Aextra x B, A Aextrainc x B, B x x B, B z x B, C x x B, C z x B, D total x B, E total x B, F z x B, Aextra Aextra x B, Aextra Aextrainc x B, Bextra Bextra x B, Bextra Bextrainc x B, Bextra Bextrainc2 x B, Bextra Aextra x B, Bextra Aextrainc x B, A y Aextra B, A x Aextra B, A z Aextra B, A Aextra Aextra B, A Aextrainc Aextra B, B x Aextra B, B z Aextra B, C x Aextra B, C z Aextra B, D total Aextra B, E total Aextra B, F z Aextra B, Aextra Aextra Aextra B, Aextra Aextrainc Aextra B, Bextra Bextra Aextra B, Bextra Bextrainc Aextra B, Bextra Bextrainc2 Aextra B, Bextra Aextra Aextra B, Bextra Aextrainc Aextra B, A y Bextra B, A x Bextra B, A z Bextra B, A Aextra Bextra B, A Aextrainc Bextra B, B x Bextra B, B z Bextra B, C x Bextra B, C z Bextra B, D total Bextra B, E total Bextra B, F z Bextra B, Aextra Aextra Bextra B, Aextra Aextrainc Bextra B, Bextra Bextra Bextra B, Bextra Bextrainc Bextra B, Bextra Bextrainc2 Bextra B, Bextra Aextra Bextra B, Bextra Aextrainc Bextra B, A y y C, A x y C, A z y C, A Aextra y C, A Aextrainc y C, B x y C, B z y C, C x y C, C z y C, D total y C, E total y C, F z y C, Aextra Aextra y C, Aextra Aextrainc y C, Bextra Bextra y C, Bextra Bextrainc y C, Bextra Bextrainc2 y C, Bextra Aextra y C, Bextra Aextrainc y C, A y x C, A x x C, A z x C, A Aextra x C, A Aextrainc x C, B x x C, B z x C, C x x C, C z x C, D total x C, E total x C, F z x C, Aextra Aextra x C, Aextra Aextrainc x C, Bextra Bextra x C, Bextra Bextrainc x C, Bextra Bextrainc2 x C, Bextra Aextra x C, Bextra Aextrainc x C, A y Aextra C, A x Aextra C, A z Aextra C, A Aextra Aextra C, A Aextrainc Aextra C, B x Aextra C, B z Aextra C, C x Aextra C, C z Aextra C, D total Aextra C, E total Aextra C, F z Aextra C, Aextra Aextra Aextra C, Aextra Aextrainc Aextra C, Bextra Bextra Aextra C, Bextra Bextrainc Aextra C, Bextra Bextrainc2 Aextra C, Bextra Aextra Aextra C, Bextra Aextrainc Aextra C, A y Bextra C, A x Bextra C, A z Bextra C, A Aextra Bextra C, A Aextrainc Bextra C, B x Bextra C, B z Bextra C, C x Bextra C, C z Bextra C, D total Bextra C, E total Bextra C, F z Bextra C, Aextra Aextra Bextra C, Aextra Aextrainc Bextra C, Bextra Bextra Bextra C, Bextra Bextrainc Bextra C, Bextra Bextrainc2 Bextra C, Bextra Aextra Bextra C, Bextra Aextrainc Bextra C, A y y E, A x y E, A z y E, A Aextra y E, A Aextrainc y E, B x y E, B z y E, C x y E, C z y E, D total y E, E total y E, F z y E, Aextra Aextra y E, Aextra Aextrainc y E, Bextra Bextra y E, Bextra Bextrainc y E, Bextra Bextrainc2 y E, Bextra Aextra y E, Bextra Aextrainc y E, A y x E, A x x E, A z x E, A Aextra x E, A Aextrainc x E, B x x E, B z x E, C x x E, C z x E, D total x E, E total x E, F z x E, Aextra Aextra x E, Aextra Aextrainc x E, Bextra Bextra x E, Bextra Bextrainc x E, Bextra Bextrainc2 x E, Bextra Aextra x E, Bextra Aextrainc x E, A y Aextra E, A x Aextra E, A z Aextra E, A Aextra Aextra E, A Aextrainc Aextra E, B x Aextra E, B z Aextra E, C x Aextra E, C z Aextra E, D total Aextra E, E total Aextra E, F z Aextra E, Aextra Aextra Aextra E, Aextra Aextrainc Aextra E, Bextra Bextra Aextra E, Bextra Bextrainc Aextra E, Bextra Bextrainc2 Aextra E, Bextra Aextra Aextra E, Bextra Aextrainc Aextra E, A y Bextra E, A x Bextra E, A z Bextra E, A Aextra Bextra E, A Aextrainc Bextra E, B x Bextra E, B z Bextra E, C x Bextra E, C z Bextra E, D total Bextra E, E total Bextra E, F z Bextra E, Aextra Aextra Bextra E, Aextra Aextrainc Bextra E, Bextra Bextra Bextra E, Bextra Bextrainc Bextra E, Bextra Bextrainc2 Bextra E, Bextra Aextra Bextra E, Bextra Aextrainc Bextra E, A y y F, A x y F, A z y F, A Aextra y F, A Aextrainc y F, B x y F, B z y F, C x y F, C z y F, D total y F, E total y F, F z y F, Aextra Aextra y F, Aextra Aextrainc y F, Bextra Bextra y F, Bextra Bextrainc y F, Bextra Bextrainc2 y F, Bextra Aextra y F, Bextra Aextrainc y F, A y x F, A x x F, A z x F, A Aextra x F, A Aextrainc x F, B x x F, B z x F, C x x F, C z x F, D total x F, E total x F, F z x F, Aextra Aextra x F, Aextra Aextrainc x F, Bextra Bextra x F, Bextra Bextrainc x F, Bextra Bextrainc2 x F, Bextra Aextra x F, Bextra Aextrainc x F, A y Aextra F, A x Aextra F, A z Aextra F, A Aextra Aextra F, A Aextrainc Aextra F, B x Aextra F, B z Aextra F, C x Aextra F, C z Aextra F, D total Aextra F, E total Aextra F, F z Aextra F, Aextra Aextra Aextra F, Aextra Aextrainc Aextra F, Bextra Bextra Aextra F, Bextra Bextrainc Aextra F, Bextra Bextrainc2 Aextra F, Bextra Aextra Aextra F, Bextra Aextrainc Aextra F, A y Bextra F, A x Bextra F, A z Bextra F, A Aextra Bextra F, A Aextrainc Bextra F, B x Bextra F, B z Bextra F, C x Bextra F, C z Bextra F, D total Bextra F, E total Bextra F, F z Bextra F, Aextra Aextra Bextra F, Aextra Aextrainc Bextra F, Bextra Bextra Bextra F, Bextra Bextrainc Bextra F, Bextra Bextrainc2 Bextra F, Bextra Aextra Bextra F, Bextra Aextrainc Bextra F, A y y G, A x y G, A z y G, A Aextra y G, A Aextrainc y G, B x y G, B z y G, C x y G, C z y G, D total y G, E total y G, F z y G, Aextra Aextra y G, Aextra Aextrainc y G, Bextra Bextra y G, Bextra Bextrainc y G, Bextra Bextrainc2 y G, Bextra Aextra y G, Bextra Aextrainc y G, A y x G, A x x G, A z x G, A Aextra x G, A Aextrainc x G, B x x G, B z x G, C x x G, C z x G, D total x G, E total x G, F z x G, Aextra Aextra x G, Aextra Aextrainc x G, Bextra Bextra x G, Bextra Bextrainc x G, Bextra Bextrainc2 x G, Bextra Aextra x G, Bextra Aextrainc x G, A y Aextra G, A x Aextra G, A z Aextra G, A Aextra Aextra G, A Aextrainc Aextra G, B x Aextra G, B z Aextra G, C x Aextra G, C z Aextra G, D total Aextra G, E total Aextra G, F z Aextra G, Aextra Aextra Aextra G, Aextra Aextrainc Aextra G, Bextra Bextra Aextra G, Bextra Bextrainc Aextra G, Bextra Bextrainc2 Aextra G, Bextra Aextra Aextra G, Bextra Aextrainc Aextra G, A y Bextra G, A x Bextra G, A z Bextra G, A Aextra Bextra G, A Aextrainc Bextra G, B x Bextra G, B z Bextra G, C x Bextra G, C z Bextra G, D total Bextra G, E total Bextra G, F z Bextra G, Aextra Aextra Bextra G, Aextra Aextrainc Bextra G, Bextra Bextra Bextra G, Bextra Bextrainc Bextra G, Bextra Bextrainc2 Bextra G, Bextra Aextra Bextra G, Bextra Aextrainc Bextra G, A y y Aextra, A x y Aextra, A z y Aextra, A Aextra y Aextra, A Aextrainc y Aextra, B x y Aextra, B z y Aextra, C x y Aextra, C z y Aextra, D total y Aextra, E total y Aextra, F z y Aextra, Aextra Aextra y Aextra, Aextra Aextrainc y Aextra, Bextra Bextra y Aextra, Bextra Bextrainc y Aextra, Bextra Bextrainc2 y Aextra, Bextra Aextra y Aextra, Bextra Aextrainc y Aextra, A y x Aextra, A x x Aextra, A z x Aextra, A Aextra x Aextra, A Aextrainc x Aextra, B x x Aextra, B z x Aextra, C x x Aextra, C z x Aextra, D total x Aextra, E total x Aextra, F z x Aextra, Aextra Aextra x Aextra, Aextra Aextrainc x Aextra, Bextra Bextra x Aextra, Bextra Bextrainc x Aextra, Bextra Bextrainc2 x Aextra, Bextra Aextra x Aextra, Bextra Aextrainc x Aextra, A y Aextra Aextra, A x Aextra Aextra, A z Aextra Aextra, A Aextra Aextra Aextra, A Aextrainc Aextra Aextra, B x Aextra Aextra, B z Aextra Aextra, C x Aextra Aextra, C z Aextra Aextra, D total Aextra Aextra, E total Aextra Aextra, F z Aextra Aextra, Aextra Aextra Aextra Aextra, Aextra Aextrainc Aextra Aextra, Bextra Bextra Aextra Aextra, Bextra Bextrainc Aextra Aextra, Bextra Bextrainc2 Aextra Aextra, Bextra Aextra Aextra Aextra, Bextra Aextrainc Aextra Aextra, A y Bextra Aextra, A x Bextra Aextra, A z Bextra Aextra, A Aextra Bextra Aextra, A Aextrainc Bextra Aextra, B x Bextra Aextra, B z Bextra Aextra, C x Bextra Aextra, C z Bextra Aextra, D total Bextra Aextra, E total Bextra Aextra, F z Bextra Aextra, Aextra Aextra Bextra Aextra, Aextra Aextrainc Bextra Aextra, Bextra Bextra Bextra Aextra, Bextra Bextrainc Bextra Aextra, Bextra Bextrainc2 Bextra Aextra, Bextra Aextra Bextra Aextra, Bextra Aextrainc Bextra Aextra, A y y Bextra, A x y Bextra, A z y Bextra, A Aextra y Bextra, A Aextrainc y Bextra, B x y Bextra, B z y Bextra, C x y Bextra, C z y Bextra, D total y Bextra, E total y Bextra, F z y Bextra, Aextra Aextra y Bextra, Aextra Aextrainc y Bextra, Bextra Bextra y Bextra, Bextra Bextrainc y Bextra, Bextra Bextrainc2 y Bextra, Bextra Aextra y Bextra, Bextra Aextrainc y Bextra, A y x Bextra, A x x Bextra, A z x Bextra, A Aextra x Bextra, A Aextrainc x Bextra, B x x Bextra, B z x Bextra, C x x Bextra, C z x Bextra, D total x Bextra, E total x Bextra, F z x Bextra, Aextra Aextra x Bextra, Aextra Aextrainc x Bextra, Bextra Bextra x Bextra, Bextra Bextrainc x Bextra, Bextra Bextrainc2 x Bextra, Bextra Aextra x Bextra, Bextra Aextrainc x Bextra, A y Aextra Bextra, A x Aextra Bextra, A z Aextra Bextra, A Aextra Aextra Bextra, A Aextrainc Aextra Bextra, B x Aextra Bextra, B z Aextra Bextra, C x Aextra Bextra, C z Aextra Bextra, D total Aextra Bextra, E total Aextra Bextra, F z Aextra Bextra, Aextra Aextra Aextra Bextra, Aextra Aextrainc Aextra Bextra, Bextra Bextra Aextra Bextra, Bextra Bextrainc Aextra Bextra, Bextra Bextrainc2 Aextra Bextra, Bextra Aextra Aextra Bextra, Bextra Aextrainc Aextra Bextra, A y Bextra Bextra, A x Bextra Bextra, A z Bextra Bextra, A Aextra Bextra Bextra, A Aextrainc Bextra Bextra, B x Bextra Bextra, B z Bextra Bextra, C x Bextra Bextra, C z Bextra Bextra, D total Bextra Bextra, E total Bextra Bextra, F z Bextra Bextra, Aextra Aextra Bextra Bextra, Aextra Aextrainc Bextra Bextra, Bextra Bextra Bextra Bextra, Bextra Bextrainc Bextra Bextra, Bextra Bextrainc2 Bextra Bextra, Bextra Aextra Bextra Bextra, Bextra Aextrainc Bextra Bextra, A Bextra y B, A Bextrainc y B, A Bextrainc2 y B, A Bextra x B, A Bextrainc x B, A Bextrainc2 x B, A Bextra Aextra B, A Bextrainc Aextra B, A Bextrainc2 Aextra B, A Bextra Bextra B, A Bextrainc Bextra B, A Bextrainc2 Bextra B, A Bextra y C, A Bextrainc y C, A Bextrainc2 y C, A Bextra x C, A Bextrainc x C, A Bextrainc2 x C, A Bextra Aextra C, A Bextrainc Aextra C, A Bextrainc2 Aextra C, A Bextra Bextra C, A Bextrainc Bextra C, A Bextrainc2 Bextra C, A Bextra y E, A Bextrainc y E, A Bextrainc2 y E, A Bextra x E, A Bextrainc x E, A Bextrainc2 x E, A Bextra Aextra E, A Bextrainc Aextra E, A Bextrainc2 Aextra E, A Bextra Bextra E, A Bextrainc Bextra E, A Bextrainc2 Bextra E, A Bextra y F, A Bextrainc y F, A Bextrainc2 y F, A Bextra x F, A Bextrainc x F, A Bextrainc2 x F, A Bextra Aextra F, A Bextrainc Aextra F, A Bextrainc2 Aextra F, A Bextra Bextra F, A Bextrainc Bextra F, A Bextrainc2 Bextra F, A Bextra y G, A Bextrainc y G, A Bextrainc2 y G, A Bextra x G, A Bextrainc x G, A Bextrainc2 x G, A Bextra Aextra G, A Bextrainc Aextra G, A Bextrainc2 Aextra G, A Bextra Bextra G, A Bextrainc Bextra G, A Bextrainc2 Bextra G, A Bextra y Aextra, A Bextrainc y Aextra, A Bextrainc2 y Aextra, A Bextra x Aextra, A Bextrainc x Aextra, A Bextrainc2 x Aextra, A Bextra Aextra Aextra, A Bextrainc Aextra Aextra, A Bextrainc2 Aextra Aextra, A Bextra Bextra Aextra, A Bextrainc Bextra Aextra, A Bextrainc2 Bextra Aextra, A Bextra y Bextra, A Bextrainc y Bextra, A Bextrainc2 y Bextra, A Bextra x Bextra, A Bextrainc x Bextra, A Bextrainc2 x Bextra, A Bextra Aextra Bextra, A Bextrainc Aextra Bextra, A Bextrainc2 Aextra Bextra, A Bextra Bextra Bextra, A Bextrainc Bextra Bextra, A Bextrainc2 Bextra Bextra
+5000
+6 - Modifies (Call, VarName)
+call call;
+Select call such that Modifies(call, "x")
+6, 7, 9
+5000
+7 - Modifies (Call, WildCard)
+call call;
+Select call.procName such that Modifies(call, _)
+B, C, E, F, Aextra, Bextra
+5000
+8 - Modifies (Call, Variable)
+call call; variable variable;
+Select call.stmt# such that Modifies(call, variable)
+1, 5, 6, 7, 8, 9, 11, 13, 28
+5000
+9 - Modifies (Call, Variable)
+call call; variable variable; 
+Select variable such that Modifies(call, variable)
+x, total, z, Aextra, Aextrainc, Bextra, Bextrainc, Bextrainc2
+5000
+10 - Modifies (Call, Variable)
+call call; variable variable; read read;
+Select <call.procName,variable, read.varName> such that Modifies(call, variable)
+B x y, B z y, C x y, C z y, E total y, F z y, Aextra Aextra y, Aextra Aextrainc y, Bextra Aextra y, Bextra Aextrainc y, Bextra Bextra y, Bextra Bextrainc y, Bextra Bextrainc2 y, B x x, B z x, C x x, C z x, E total x, F z x, Aextra Aextra x, Aextra Aextrainc x, Bextra Aextra x, Bextra Aextrainc x, Bextra Bextra x, Bextra Bextrainc x, Bextra Bextrainc2 x, B x Aextra, B z Aextra, C x Aextra, C z Aextra, E total Aextra, F z Aextra, Aextra Aextra Aextra, Aextra Aextrainc Aextra, Bextra Aextra Aextra, Bextra Aextrainc Aextra, Bextra Bextra Aextra, Bextra Bextrainc Aextra, Bextra Bextrainc2 Aextra, B x Bextra, B z Bextra, C x Bextra, C z Bextra, E total Bextra, F z Bextra, Aextra Aextra Bextra, Aextra Aextrainc Bextra, Bextra Aextra Bextra, Bextra Aextrainc Bextra, Bextra Bextra Bextra, Bextra Bextrainc Bextra, Bextra Bextrainc2 Bextra
+5000
+11 - Modifies (CallLineNo, VarName) (BOOL)
+stmt s;
+Select s such that Modifies(5, "z")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+5000
+12 - Modifies (LineNo, VarName) (BOOL)
+stmt s;
+Select s such that Modifies(2, "Aextra")
+none
+5000
+13 - Modifies (CallLineNo, WildCard) (BOOL)
+stmt s; read read;
+Select read.stmt# such that Modifies(4, _)
+3, 10, 20, 25
+5000
+14 - Modifies (LineNo, VarName) (BOOL)
+print print; 
+Select print.varName such that Modifies(2, "x")
+total, z, Aextra, Bextra
+5000
+15 - Modifies (CallLineNo, Variable)
+variable variable;
+Select variable.varName such that Modifies(5, variable)
+z
+5000
+16 - Modifies (ProcName, VarName) (BOOL)
+if if;
+Select if.stmt# such that Modifies("F", "total")
+none
+5000
+17 - Modifies (ProcName, WildCard) (BOOL)
+while while;
+Select while such that Modifies("A", _)
+none
+5000
+18 - Modifies (ProcName, Variable)
+variable variable;
+Select variable.varName such that Modifies("C", variable)
+x, z
+5000  
+19 - Modifies (ProcName, Variable)
+variable variable; read read; print print;
+Select <variable.varName, read.varName, print> such that Modifies("C", variable)
+x y 12, z y 12, x x 12, z x 12, x Aextra 12, z Aextra 12, x Bextra 12, z Bextra 12, x y 17, z y 17, x x 17, z x 17, x Aextra 17, z Aextra 17, x Bextra 17, z Bextra 17, x y 21, z y 21, x x 21, z x 21, x Aextra 21, z Aextra 21, x Bextra 21, z Bextra 21, x y 26, z y 26, x x 26, z x 26, x Aextra 26, z Aextra 26, x Bextra 26, z Bextra 26
+5000
+20 - Modifies (ProcName, Variable)
+variable variable;
+Select BOOLEAN such that Modifies("D", variable)
+TRUE
+5000
+21 - Modifies (ProcName, Variable)
+
+Select BOOLEAN
+TRUE
+5000
+22 - Modifies (ProcName, Variable)
+procedure p;
+Select BOOLEAN such that Modifies(p, "doesntExist")
+FALSE
+5000
+23 - Multiple Chain of same 8 clauses
+variable variable; procedure procedure;
+Select <procedure, variable> such that Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable) and Modifies(procedure,variable)
+A Aextra, A Aextrainc, A y, A x, A z, A Bextra, A Bextrainc, A Bextrainc2, B x, B z, C x, C z, D total, E total, F z, Aextra Aextra, Aextra Aextrainc, Bextra Aextra, Bextra Aextrainc, Bextra Bextra, Bextra Bextrainc, Bextra Bextrainc2
+5000

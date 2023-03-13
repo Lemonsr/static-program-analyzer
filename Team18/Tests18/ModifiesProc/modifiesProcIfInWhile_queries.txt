@@ -1,0 +1,110 @@
+1 - Modifies (Procedure, VarName)
+procedure p;
+Select p such that Modifies(p, "extra01")
+A, D
+5000
+2 - Modifies (Procedure, WildCard)
+procedure p;
+Select p.procName such that Modifies(p, _)
+A, B, D, E
+5000
+3 - Modifies (Procedure, Variable)
+procedure p; variable v;
+Select p such that Modifies(p, v)
+A, B, D, E
+5000
+4 - Modifies (Procedure, Variable)
+procedure p; variable v;
+Select v such that Modifies(p, v)
+x, y, extra01
+5000
+5 - Modifies (Procedure, Variable)
+procedure p; variable v; read read; call call;
+Select <p, v, read.varName, call.procName> such that Modifies(p, v)
+A x x B, A y x B, A extra01 x B, B y x B, D x x B, D extra01 x B, E y x B, A x extra01 B, A y extra01 B, A extra01 extra01 B, B y extra01 B, D x extra01 B, D extra01 extra01 B, E y extra01 B, A x x C, A y x C, A extra01 x C, B y x C, D x x C, D extra01 x C, E y x C, A x extra01 C, A y extra01 C, A extra01 extra01 C, B y extra01 C, D x extra01 C, D extra01 extra01 C, E y extra01 C, A x x D, A y x D, A extra01 x D, B y x D, D x x D, D extra01 x D, E y x D, A x extra01 D, A y extra01 D, A extra01 extra01 D, B y extra01 D, D x extra01 D, D extra01 extra01 D, E y extra01 D, A x x E, A y x E, A extra01 x E, B y x E, D x x E, D extra01 x E, E y x E, A x extra01 E, A y extra01 E, A extra01 extra01 E, B y extra01 E, D x extra01 E, D extra01 extra01 E, E y extra01 E, A x x F, A y x F, A extra01 x F, B y x F, D x x F, D extra01 x F, E y x F, A x extra01 F, A y extra01 F, A extra01 extra01 F, B y extra01 F, D x extra01 F, D extra01 extra01 F, E y extra01 F
+5000
+6 - Modifies (Call, VarName)
+call call;
+Select call such that Modifies(call, "y")
+4, 8
+5000
+7 - Modifies (Call, WildCard)
+call call;
+Select call.procName such that Modifies(call, _)
+B, D, E
+5000
+8 - Modifies (Call, Variable)
+call call; variable variable;
+Select call.stmt# such that Modifies(call, variable)
+4, 6, 8
+5000
+9 - Modifies (Call, Variable)
+call call; variable variable; 
+Select variable such that Modifies(call, variable)
+x, y, extra01
+5000
+10 - Modifies (Call, Variable)
+call call; variable variable; read read;
+Select <call.procName,variable, read.varName> such that Modifies(call, variable)
+B y x, D x x, D extra01 x, E y x, B y extra01, D x extra01, D extra01 extra01, E y extra01
+5000
+11 - Modifies (CallLineNo, VarName) (BOOL)
+stmt s;
+Select s such that Modifies(4, "y")
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+5000
+12 - Modifies (LineNo, VarName) (BOOL)
+stmt s;
+Select s such that Modifies(3, "x")
+none
+5000
+13 - Modifies (CallLineNo, WildCard) (BOOL)
+stmt s; read read;
+Select read.stmt# such that Modifies(4, _)
+1, 12
+5000
+14 - Modifies (LineNo, VarName) (BOOL)
+print print; 
+Select print.varName such that Modifies(2, "x")
+print, call, procedure
+5000
+15 - Modifies (CallLineNo, Variable)
+variable variable;
+Select variable.varName such that Modifies(4, variable)
+y
+5000
+16 - Modifies (ProcName, VarName) (BOOL)
+if if;
+Select if.stmt# such that Modifies("D", "y")
+none
+5000
+17 - Modifies (ProcName, WildCard) (BOOL)
+while while;
+Select while such that Modifies("E", _)
+2
+5000
+18 - Modifies (ProcName, Variable)
+variable variable;
+Select variable.varName such that Modifies("E", variable)
+y
+5000  
+19 - Modifies (ProcName, Variable)
+variable variable; read read; print print;
+Select <variable.varName, read.varName, print> such that Modifies("E", variable)
+y x 9, y extra01 9, y x 10, y extra01 10, y x 15, y extra01 15
+5000
+20 - Modifies (ProcName, Variable)
+variable variable;
+Select BOOLEAN such that Modifies("D", variable)
+TRUE
+5000
+21 - Modifies (ProcName, Variable)
+
+Select BOOLEAN
+TRUE
+5000
+22 - Modifies (ProcName, Variable)
+procedure p;
+Select BOOLEAN such that Modifies(p, "doesntExist")
+FALSE
+5000

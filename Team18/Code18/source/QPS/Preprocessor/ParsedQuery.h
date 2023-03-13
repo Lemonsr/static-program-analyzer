@@ -12,6 +12,7 @@
 #include "Stream.h"
 #include "PKBQueryTypes.h"
 #include "QpsEvaluator.h"
+#include "Clause.h"
 
 namespace spa {
 enum RelationshipType {
@@ -31,7 +32,7 @@ enum RelationshipType {
   AFFECTS_STAR
 };
 
-class SuchThatClause {
+class SuchThatClause : public Clause {
  private:
   RelationshipType designAbstraction;
   PqlArgument firstArg;
@@ -41,14 +42,19 @@ class SuchThatClause {
   SuchThatClause(RelationshipType designAbstraction, PqlArgument firstArg,
     PqlArgument secondArg);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
+  std::vector<std::string> getSynonyms();
   const RelationshipType& getDesignAbstraction();
   const PqlArgument& getFirstArg();
+  const ArgumentType& getFirstArgType();
+  const std::string& getFirstArgValue();
   const PqlArgument& getSecondArg();
+  const ArgumentType& getSecondArgType();
+  const std::string& getSecondArgValue();
   friend bool operator==(const SuchThatClause& s1, const SuchThatClause& s2);
   friend bool operator!=(const SuchThatClause& s1, const SuchThatClause& s2);
 };
 
-class PatternClause {
+class PatternClause : public Clause {
  private:
   PqlArgument synonym;
   PqlArgument firstArg;
@@ -57,9 +63,13 @@ class PatternClause {
  public:
   PatternClause(PqlArgument synonym, PqlArgument firstArg, Pattern pattern, int numArgs);
   std::unique_ptr<spa::QpsEvaluator> getEvaluator();
+  std::vector<std::string> getSynonyms();
   PqlArgument& getSynonym();
-  PqlArgument& getFirstArg();
   DesignEntityType getSynonymType();
+  const std::string& getSynonymValue();
+  PqlArgument& getFirstArg();
+  const ArgumentType& getFirstArgType();
+  const std::string& getFirstArgValue();
   PatternType getPatternType();
   int getNumArgs();
   friend bool operator==(const PatternClause& p1, const PatternClause& p2);
@@ -88,15 +98,19 @@ class WithArgument {
   friend bool operator!=(const WithArgument& first, const WithArgument& second);
 };
 
-class WithClause {
+class WithClause : public Clause {
  private:
   WithArgument firstArg;
   WithArgument secondArg;
  public:
   WithClause() = default;
   WithClause(WithArgument firstArg, WithArgument secondArg);
+  std::unique_ptr<spa::QpsEvaluator> getEvaluator();
+  std::vector<std::string> getSynonyms();
   const WithArgument& getFirstArg();
+  const WithArgumentType& getFirstArgType();
   const WithArgument& getSecondArg();
+  const WithArgumentType& getSecondArgType();
   friend bool operator==(const WithClause& w1, const WithClause& w2);
   friend bool operator!=(const WithClause& w1, const WithClause& w2);
 };

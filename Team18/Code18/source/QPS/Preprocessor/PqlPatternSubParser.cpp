@@ -8,6 +8,7 @@
 #include "ParsedQuery.h"
 #include "UtilsFunction.h"
 #include "Token.h"
+#include "PqlRefTypes.h"
 
 std::optional<spa::Pattern> spa::PqlPatternSubParser::parseExact(
   Stream<Token>& tokens,
@@ -144,6 +145,9 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
     return PQL_PARSE_SYNTAX_ERROR;
   }
   spa::PqlArgument& firstArg = firstArgOpt.value();
+  if (entityRef.find(firstArg.getType()) == entityRef.end()) {
+    return PQL_PARSE_SYNTAX_ERROR;
+  }
   if (!tokens.match({ { spa::TOKEN_COMMA, ","} })) {
     return PQL_PARSE_SYNTAX_ERROR;
   }

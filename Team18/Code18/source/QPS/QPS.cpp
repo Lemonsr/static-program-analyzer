@@ -21,19 +21,12 @@ spa::QpsResult spa::QPS::evaluate(std::string query, PKBManager& pkbManager) {
   }
 
   ParsedQuery& parsedQuery = parseResult.second;
-
-  PqlSemanticChecker pqlSemanticChecker;
-  bool isValid = pqlSemanticChecker.isSemanticallyValid(parsedQuery);
-  if (!isValid) {
-    result.setErrorMessage("SemanticError");
-    return result;
-  }
-
   std::unique_ptr<QpsEvaluator> qpsEvaluator = std::make_unique<QpsQueryEvaluator>(parsedQuery);
   QpsResultTable resultTable = qpsEvaluator->evaluate(pkbManager);
 
   QpsTranslator translator(resultTable);
-  std::list<std::string> translatedResult = translator.translate(parsedQuery.getSelectColumns()[0]);
+  std::list<std::string> translatedResult = translator.translate(parsedQuery.getSelectClauseType(),
+                                                                 parsedQuery.getSelectColumns());
   result.setResults(translatedResult);
   return result;
 }
