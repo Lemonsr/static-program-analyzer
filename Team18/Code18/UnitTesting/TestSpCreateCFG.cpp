@@ -152,7 +152,7 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (spa::Token token : tokenList) {
       tokenStream.pushBack(token);
     }
     auto parser = spa::SpParser(tokenStream);
@@ -245,7 +245,7 @@ public:
         tokenCloseBrace
       };
       spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-      for (auto token : tokenList) {
+      for (spa::Token token : tokenList) {
           tokenStream.pushBack(token);
       }
       auto parser = spa::SpParser(tokenStream);
@@ -255,18 +255,19 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = new spa::CFGNode(1);
-      auto lineTwo = new spa::CFGNode(2, std::string("c"));
-      auto lineThree = new spa::CFGNode(3);
-      auto lineFour = new spa::CFGNode(4, std::string("g"));
-      auto lineFive = new spa::CFGNode(5, std::string("g"));
-      addEdges(lineOne, {lineFour}, { lineTwo, lineFive });
-      addEdges(lineTwo, { lineOne }, { lineThree });
-      addEdges(lineThree, { lineTwo }, { lineFour });
-      addEdges(lineFour, { lineThree }, { lineOne });
-      addEdges(lineFive, { lineOne}, {});
-      std::unordered_set<spa::CFGNode*> expectedNodes = { lineOne, lineTwo, lineThree, lineFour, lineFive };
+      auto lineOne = spa::CFGNode(1);
+      auto lineTwo = spa::CFGNode(2, std::string("c"));
+      auto lineThree = spa::CFGNode(3);
+      auto lineFour = spa::CFGNode(4, std::string("g"));
+      auto lineFive = spa::CFGNode(5, std::string("g"));
+      addEdges(&lineOne, {&lineFour}, { &lineTwo, &lineFive });
+      addEdges(&lineTwo, { &lineOne }, { &lineThree });
+      addEdges(&lineThree, { &lineTwo }, { &lineFour });
+      addEdges(&lineFour, { &lineThree }, { &lineOne });
+      addEdges(&lineFive, { &lineOne}, {});
+      std::unordered_set<spa::CFGNode*> expectedNodes = { &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive };
       assertCFGMatch(expectedNodes);
+      assertEndNodeMatch({1});
   }
 
   TEST_METHOD(TestSingleProcCFGCreationIfLast) {
@@ -295,7 +296,7 @@ public:
       tokenCloseBrace, tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (spa::Token token : tokenList) {
       tokenStream.pushBack(token);
     }
     auto parser = spa::SpParser(tokenStream);
@@ -351,7 +352,7 @@ public:
         tokenCloseBrace
       };
       spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-      for (auto token : tokenList) {
+      for (spa::Token token : tokenList) {
           tokenStream.pushBack(token);
       }
       auto parser = spa::SpParser(tokenStream);
@@ -361,22 +362,23 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = new spa::CFGNode(1);
-      auto lineTwo = new spa::CFGNode(2, std::string("c"));
-      auto lineThree = new spa::CFGNode(3);
-      auto lineFour = new spa::CFGNode(4, std::string("g"));
-      auto lineFive = new spa::CFGNode(5);
-      auto lineSix = new spa::CFGNode(6, std::string("g"));
-      addEdges(lineOne, {}, { lineTwo, lineFour});
-      addEdges(lineTwo, { lineOne }, { lineThree });
-      addEdges(lineThree, { lineTwo }, { lineSix });
-      addEdges(lineFour, { lineOne }, { lineFive });
-      addEdges(lineFive, { lineFour }, { lineSix });
-      addEdges(lineSix, { lineThree, lineFive }, {});
+      auto lineOne = spa::CFGNode(1);
+      auto lineTwo = spa::CFGNode(2, std::string("c"));
+      auto lineThree =spa::CFGNode(3);
+      auto lineFour = spa::CFGNode(4, std::string("g"));
+      auto lineFive = spa::CFGNode(5);
+      auto lineSix = spa::CFGNode(6, std::string("g"));
+      addEdges(&lineOne, {}, { lineTwo, lineFour});
+      addEdges(&lineTwo, { &lineOne }, { &lineThree });
+      addEdges(&lineThree, { &lineTwo }, { &lineSix });
+      addEdges(&lineFour, { &lineOne }, { &lineFive });
+      addEdges(&lineFive, { &lineFour }, { &lineSix });
+      addEdges(&lineSix, { &lineThree, &lineFive }, {});
       std::unordered_set<spa::CFGNode*> expectedNodes = {
-        lineOne, lineTwo, lineThree, lineFour, lineFive, lineSix
+        &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix
       };
       assertCFGMatch(expectedNodes);
+      assertEndNodeMatch({6});
   }
 
   TEST_METHOD(TestSingleProcCFGCreationWhileNestedWhileLast) {
@@ -409,7 +411,7 @@ public:
         tokenCloseBrace
       };
       spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-      for (auto token : tokenList) {
+      for (spa::Token token : tokenList) {
           tokenStream.pushBack(token);
       }
       auto parser = spa::SpParser(tokenStream);
@@ -419,22 +421,23 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = new spa::CFGNode(1);
-      auto lineTwo = new spa::CFGNode(2, std::string("c"));
-      auto lineThree = new spa::CFGNode(3);
-      auto lineFour = new spa::CFGNode(4);
-      auto lineFive = new spa::CFGNode(5);
-      auto lineSix = new spa::CFGNode(6, std::string("g"));
-      addEdges(lineOne, { lineFour }, { lineTwo });
-      addEdges(lineTwo, { lineOne }, { lineThree });
-      addEdges(lineThree, { lineTwo }, { lineFour });
-      addEdges(lineFour, { lineThree, lineSix }, { lineOne, lineFive });
-      addEdges(lineFive, { lineFour }, { lineSix });
-      addEdges(lineSix, { lineFive }, { lineFour });
+      auto lineOne = spa::CFGNode(1);
+      auto lineTwo = spa::CFGNode(2, std::string("c"));
+      auto lineThree = spa::CFGNode(3);
+      auto lineFour = spa::CFGNode(4);
+      auto lineFive = spa::CFGNode(5);
+      auto lineSix = spa::CFGNode(6, std::string("g"));
+      addEdges(&lineOne, { &lineFour }, { &lineTwo });
+      addEdges(&lineTwo, { &lineOne }, { &lineThree });
+      addEdges(&lineThree, { &lineTwo }, { &lineFour });
+      addEdges(&lineFour, { &lineThree, &lineSix }, { &lineOne, &lineFive });
+      addEdges(&lineFive, { &lineFour }, { &lineSix });
+      addEdges(&lineSix, { &lineFive }, { &lineFour });
       std::unordered_set<spa::CFGNode*> expectedNodes = {
-        lineOne, lineTwo, lineThree, lineFour, lineFive, lineSix
+        &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix
       };
       assertCFGMatch(expectedNodes);
+      assertEndNodeMatch({1});
   }
 
   TEST_METHOD(TestSingleProcCFGCreationIfNestedIfLast) {
@@ -492,7 +495,7 @@ public:
         tokenCloseBrace
       };
       spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-      for (auto token : tokenList) {
+      for (spa::Token token : tokenList) {
           tokenStream.pushBack(token);
       }
       auto parser = spa::SpParser(tokenStream);
@@ -502,40 +505,40 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = new spa::CFGNode(1);
-      auto lineTwo = new spa::CFGNode(2, std::string("c"));
-      auto lineThree = new spa::CFGNode(3);
-      auto lineFour = new spa::CFGNode(4, std::string("c"));
-      auto lineFive = new spa::CFGNode(5);
-      auto lineSix = new spa::CFGNode(6, std::string("g"));
-      auto lineSeven = new spa::CFGNode(7);
-      auto lineEight = new spa::CFGNode(8);
-      auto lineNine = new spa::CFGNode(9, std::string("g"));
-      auto lineTen = new spa::CFGNode(10);
-      auto lineEleven = new spa::CFGNode(11, std::string("c"));
-      auto lineTwelve = new spa::CFGNode(12);
-      auto lineThirteen = new spa::CFGNode(13, std::string("g"));
-      auto lineFourteen = new spa::CFGNode(14);
-      auto dummyNode = spa::CFGNode::createDummyNode();
-      addEdges(lineOne, {}, { lineTwo, lineNine });
-      addEdges(lineTwo, { lineOne }, { lineThree });
-      addEdges(lineThree, { lineTwo }, { lineFour, lineSix });
-      addEdges(lineFour, { lineThree }, { lineFive });
-      addEdges(lineFive, { lineFour }, { lineEight});
-      addEdges(lineSix, { lineThree }, { lineSeven });
-      addEdges(lineSeven, { lineSix }, { lineEight});
-      addEdges(lineEight, { lineFive, lineSeven }, { dummyNode });
-      addEdges(lineNine, { lineOne}, { lineTen });
-      addEdges(lineTen, { lineNine }, { lineEleven, lineThirteen });
-      addEdges(lineEleven, { lineTen }, { lineTwelve });
-      addEdges(lineTwelve, { lineEleven }, { dummyNode });
-      addEdges(lineThirteen, { lineTen }, { lineFourteen });
-      addEdges(lineFourteen, { lineThirteen}, {dummyNode});
+      auto lineOne = spa::CFGNode(1);
+      auto lineTwo = spa::CFGNode(2, std::string("c"));
+      auto lineThree = spa::CFGNode(3);
+      auto lineFour = spa::CFGNode(4, std::string("c"));
+      auto lineFive = spa::CFGNode(5);
+      auto lineSix = spa::CFGNode(6, std::string("g"));
+      auto lineSeven = spa::CFGNode(7);
+      auto lineEight = spa::CFGNode(8);
+      auto lineNine = spa::CFGNode(9, std::string("g"));
+      auto lineTen = spa::CFGNode(10);
+      auto lineEleven = spa::CFGNode(11, std::string("c"));
+      auto lineTwelve = spa::CFGNode(12);
+      auto lineThirteen = spa::CFGNode(13, std::string("g"));
+      auto lineFourteen = spa::CFGNode(14);
+      addEdges(&lineOne, {}, { &lineTwo, &lineNine });
+      addEdges(&lineTwo, { &lineOne }, { &lineThree });
+      addEdges(&lineThree, { &lineTwo }, { &lineFour, &lineSix });
+      addEdges(&lineFour, { &lineThree }, { &lineFive });
+      addEdges(&lineFive, { &lineFour }, { &lineEight});
+      addEdges(&lineSix, { &lineThree }, { &lineSeven });
+      addEdges(&lineSeven, { &lineSix }, { &lineEight});
+      addEdges(&lineEight, { &lineFive, &lineSeven }, {});
+      addEdges(&lineNine, { &lineOne}, { &lineTen });
+      addEdges(&lineTen, { &lineNine }, { &lineEleven, &lineThirteen });
+      addEdges(&lineEleven, { &lineTen }, { &lineTwelve });
+      addEdges(&lineTwelve, { &lineEleven }, {});
+      addEdges(&lineThirteen, { &lineTen }, { &lineFourteen });
+      addEdges(&lineFourteen, { &lineThirteen}, {});
       std::unordered_set<spa::CFGNode*> expectedNodes = {
-        lineOne, lineTwo, lineThree, lineFour, lineFive, lineSix, lineSeven, lineEight,
-          lineNine, lineTen, lineEleven, lineTwelve, lineThirteen, lineFourteen
+        &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix, &lineSeven, &lineEight,
+          &lineNine, &lineTen, &lineEleven, &lineTwelve, &lineThirteen, &lineFourteen
       };
       assertCFGMatch(expectedNodes);
+      assertEndNodeMatch({ 7, 14 });
       }
 
   TEST_METHOD(TestExtractSingleProcIfNestedWhileLast) {
@@ -580,32 +583,42 @@ public:
         tokenCloseBrace,
         tokenCloseBrace
       };
+      spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+      for (spa::Token token : tokenList) {
+        tokenStream.pushBack(token);
+      }
+      auto parser = spa::SpParser(tokenStream);
+      std::vector<spa::ProcedureStatement> procedureList = parser.parse();
+      Assert::IsTrue(procedureList.size() == 1);
 
-      auto lineOne = new spa::CFGNode(1);
-      auto lineTwo = new spa::CFGNode(2, std::string("c"));
-      auto lineThree = new spa::CFGNode(3);
-      auto lineFour = new spa::CFGNode(4, std::string("c"));
-      auto lineFive = new spa::CFGNode(5);
-      auto lineSix = new spa::CFGNode(6);
-      auto lineSeven = new spa::CFGNode(7, std::string("g"));
-      auto lineEight = new spa::CFGNode(8);
-      auto lineNine = new spa::CFGNode(9, std::string("c"));
-      auto lineTen = new spa::CFGNode(10);
-      auto dummyNode = spa::CFGNode::createDummyNode();
-      addEdges(lineOne, {}, { lineTwo, lineSeven });
-      addEdges(lineTwo, { lineOne }, { lineThree });
-      addEdges(lineThree, { lineTwo }, { lineFour, lineSix });
-      addEdges(lineFour, { lineThree }, { lineFive });
-      addEdges(lineFive, { lineFour }, { lineThree });
-      addEdges(lineSix, { lineThree }, { dummyNode});
-      addEdges(lineSeven, { lineSix }, {});
-      addEdges(lineEight, { lineSeven }, { dummyNode });
-      addEdges(lineNine, { lineEight}, { lineTen });
-      addEdges(lineTen, { lineNine }, { lineEight });
+      spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+      designExtractor.extractRelationship();
+
+      auto lineOne = spa::CFGNode(1);
+      auto lineTwo = spa::CFGNode(2, std::string("c"));
+      auto lineThree = spa::CFGNode(3);
+      auto lineFour = spa::CFGNode(4, std::string("c"));
+      auto lineFive = spa::CFGNode(5);
+      auto lineSix = spa::CFGNode(6);
+      auto lineSeven = spa::CFGNode(7, std::string("g"));
+      auto lineEight = spa::CFGNode(8);
+      auto lineNine = spa::CFGNode(9, std::string("c"));
+      auto lineTen = spa::CFGNode(10);
+      addEdges(&lineOne, {}, { &lineTwo, &lineSeven });
+      addEdges(&lineTwo, { &lineOne }, { &lineThree });
+      addEdges(&lineThree, { &lineTwo }, { &lineFour, &lineSix });
+      addEdges(&lineFour, { &lineThree }, { &lineFive });
+      addEdges(&lineFive, { &lineFour }, { &lineThree });
+      addEdges(&lineSix, { &lineThree }, {});
+      addEdges(&lineSeven, { &lineSix }, {});
+      addEdges(&lineEight, { &lineSeven }, {});
+      addEdges(&lineNine, { &lineEight}, { &lineTen });
+      addEdges(&lineTen, { &lineNine }, { &lineEight });
       std::unordered_set<spa::CFGNode*> expectedNodes = {
-        lineOne, lineTwo, lineThree, lineFour, lineFive, lineSix, lineSeven, lineEight, lineNine, lineTen
+        &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix, &lineSeven, &lineEight, &lineNine, &lineTen
       };
       assertCFGMatch(expectedNodes);
+      assertEndNodeMatch({ 3, 8 });
   }
 
   TEST_METHOD(TestSingleProcCFGCreationWhileNestedIf) {
@@ -643,7 +656,7 @@ public:
         tokenCloseBrace
       };
       spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-      for (auto token : tokenList) {
+      for (spa::Token token : tokenList) {
           tokenStream.pushBack(token);
       }
       auto parser = spa::SpParser(tokenStream);
@@ -653,26 +666,27 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = new spa::CFGNode(1);
-      auto lineTwo = new spa::CFGNode(2, std::string("c"));
-      auto lineThree = new spa::CFGNode(3);
-      auto lineFour = new spa::CFGNode(4);
-      auto lineFive = new spa::CFGNode(5, std::string("c"));
-      auto lineSix = new spa::CFGNode(6);
-      auto lineSeven = new spa::CFGNode(7, std::string("g"));
-      auto lineEight = new spa::CFGNode(8);
-      addEdges(lineOne, {lineSix, lineEight}, { lineTwo });
-      addEdges(lineTwo, { lineOne }, { lineThree });
-      addEdges(lineThree, { lineTwo }, { lineFour });
-      addEdges(lineFour, { lineThree }, { lineFive, lineSeven });
-      addEdges(lineFive, { lineFour }, { lineSix });
-      addEdges(lineSix, { lineFive }, { lineOne });
-      addEdges(lineSeven, { lineFour }, { lineEight });
-      addEdges(lineEight, { lineSeven }, { lineOne });
+      auto lineOne = spa::CFGNode(1);
+      auto lineTwo = spa::CFGNode(2, std::string("c"));
+      auto lineThree = spa::CFGNode(3);
+      auto lineFour = spa::CFGNode(4);
+      auto lineFive = spa::CFGNode(5, std::string("c"));
+      auto lineSix = spa::CFGNode(6);
+      auto lineSeven = spa::CFGNode(7, std::string("g"));
+      auto lineEight = spa::CFGNode(8);
+      addEdges(&lineOne, { &lineSix, &lineEight}, { &lineTwo });
+      addEdges(&lineTwo, { &lineOne }, { &lineThree });
+      addEdges(&lineThree, { &lineTwo }, { &lineFour });
+      addEdges(&lineFour, { &lineThree }, { &lineFive, &lineSeven });
+      addEdges(&lineFive, { &lineFour }, { &lineSix });
+      addEdges(&lineSix, { &lineFive }, { &lineOne });
+      addEdges(&lineSeven, { &lineFour }, { &lineEight });
+      addEdges(&lineEight, { &lineSeven }, { &lineOne });
       std::unordered_set<spa::CFGNode*> expectedNodes = {
-        lineOne, lineTwo, lineThree, lineFour, lineFive, lineSix, lineSeven, lineEight
+        &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix, &lineSeven, &lineEight
       };
       assertCFGMatch(expectedNodes);
+      assertEndNodeMatch({ 1 });
   }
 
   TEST_METHOD(TestMultiProcCFGCreation) {
@@ -707,7 +721,7 @@ public:
       tokenCloseBrace
     };
     spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
-    for (auto token : tokenList) {
+    for (spa::Token token : tokenList) {
       tokenStream.pushBack(token);
     }
     auto parser = spa::SpParser(tokenStream);
