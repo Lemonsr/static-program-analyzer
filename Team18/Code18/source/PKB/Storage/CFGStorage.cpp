@@ -40,7 +40,7 @@ bool spa::CFGStorage::addCfgEndNode(int lineNumber) {
 }
 
 bool spa::CFGStorage::addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage) {
-  if (lineNumberOne == -1 && lineNumberTwo) {
+  if (lineNumberOne == -1) {
     popDummyNode(lineNumberTwo, relationshipStorage);
     return true;
   }
