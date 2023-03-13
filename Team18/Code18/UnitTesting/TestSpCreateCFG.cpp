@@ -364,7 +364,7 @@ public:
 
       auto lineOne = spa::CFGNode(1);
       auto lineTwo = spa::CFGNode(2, std::string("c"));
-      auto lineThree =spa::CFGNode(3);
+      auto lineThree = spa::CFGNode(3);
       auto lineFour = spa::CFGNode(4, std::string("g"));
       auto lineFive = spa::CFGNode(5);
       auto lineSix = spa::CFGNode(6, std::string("g"));
