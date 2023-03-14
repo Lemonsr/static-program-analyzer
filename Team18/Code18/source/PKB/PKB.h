@@ -27,24 +27,24 @@ class PKB : public PKBManager {
   // Storage Maps
   std::unordered_map<
     std::tuple<RelationshipType, PKBQueryArgType, PKBQueryArgType>,
-    std::function<QueryResult(RelationshipStorage& relationshipStorage, PKBQueryArg, PKBQueryArg)>,
+    std::function<QueryResult(RelationshipStorage&, PKBQueryArg, PKBQueryArg)>,
     TupleHash,
     TupleEquality>
   relationshipQueryFunctionMap;
 
   std::unordered_map<
     DesignEntityType,
-    std::function<QueryResult(EntityStorage& entityStorage)>>
+    std::function<QueryResult(EntityStorage&)>>
   entityQueryFunctionMap;
 
   std::unordered_map<
     PKBQueryArgType,
-    std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg, Pattern)>>
+    std::function<QueryResult(PatternStorage&, PKBQueryArg, Pattern)>>
   patternQueryFunctionMap;
 
   std::unordered_map<
     std::tuple<DesignEntityType, PKBQueryArgType>,
-    std::function<QueryResult(PatternStorage& patternStorage, PKBQueryArg)>,
+    std::function<QueryResult(PatternStorage&, PKBQueryArg)>,
     TupleHash,
     TupleEquality>
   patternContainerQueryFunctionMap;
