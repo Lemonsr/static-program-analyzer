@@ -98,25 +98,6 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::IfContainerStatement::processStatemen
   return std::make_pair(*res.getCfgNodes()[0], dummyNode);
 }
 
-void spa::IfContainerStatement::addIncomingEdgesForDummy(CFGNode* dummyNode, CFGNode* thenBlock, CFGNode* elseBlock) {
-  if (thenBlock->getLineNumber() != -1) {
-    dummyNode->addIncomingEdges({ thenBlock });
-  } else {
-    for (auto& incomingNode : thenBlock->getIncomingEdges()) {
-      dummyNode->addIncomingEdge(incomingNode);
-    }
-  }
-
-  if (elseBlock->getLineNumber() != -1) {
-    dummyNode->addIncomingEdges({ elseBlock });
-  } else {
-    for (auto& incomingNode : elseBlock->getIncomingEdges()) {
-      dummyNode->addIncomingEdge(incomingNode);
-    }
-  }
-  return;
-}
-
 std::pair<spa::CFGNode, spa::CFGNode> spa::WhileContainerStatement::processStatement(
   PKBManager& pkbManager) {
   std::shared_ptr<ProgramStatement> whileConditionStatement = statementList[0];
