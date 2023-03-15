@@ -31,6 +31,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with: 
+          python-version: '3.10'
 
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
@@ -50,10 +53,7 @@ jobs:
 
       - name: Run VSTest
         run: vstest.console.exe /Platform:X86 Team18\Code18\Release\IntegrationTesting.dll Team18\Code18\Release\UnitTesting.dll
-      
-      - name: Run System Test
+
+      - name: Run System Tests
         working-directory: ${{env.GITHUB_WORKSPACE}}
-        uses: actions/setup-python@v4
-        with: 
-          python-version: '3.7'
         run: python run-autotester.py
