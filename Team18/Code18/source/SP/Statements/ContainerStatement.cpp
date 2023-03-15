@@ -93,8 +93,6 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::IfContainerStatement::processStatemen
     QueryResult e = pkbManager.getCfgNode(cfgElseInnerBlkNodeEnd);
     dummyNode.addIncomingEdge(e.getCfgNodes()[0]);
   }
-
-  //addIncomingEdgesForDummy(&dummyNode, &cfgThenInnerBlockNode.second, &cfgElseInnerBlockNode.second);
   return std::make_pair(*res.getCfgNodes()[0], dummyNode);
 }
 
@@ -126,7 +124,7 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::InnerBlockStatement::processStatement
   CFGNode blockStmtHeadNode;
   CFGNode prevStmtEndNode;
   for (auto statement : statementList) {
-    std::pair<CFGNode, CFGNode> cfgStmtNode = statement->processStatement(pkbManager); // 3, -1 -1 -> (5, 7)
+    std::pair<CFGNode, CFGNode> cfgStmtNode = statement->processStatement(pkbManager);
     int const prevStmtEndNodeLineNum = prevStmtEndNode.getLineNumber();
     int const cfgStmtNodeStart = cfgStmtNode.first.getLineNumber();
     if (start) {

@@ -176,8 +176,8 @@ void spa::DesignExtractor::extractUsesAndModifies(std::vector<std::shared_ptr<sp
       continue;
     }
     if (tailNode.isDummyNode()) {
-      for (auto& incomingNode : tailNode.getIncomingEdges()) { // 3,4,6,7
-        pkbManager.addEdge(incomingNode->getLineNumber(), cfgNode.first.getLineNumber()); // 2 -> 4, 3 -> 4
+      for (auto& incomingNode : tailNode.getIncomingEdges()) {
+        pkbManager.addEdge(incomingNode->getLineNumber(), cfgNode.first.getLineNumber());
       }
     } else {
       int const tailNodeLineNum = tailNode.getLineNumber(); //
