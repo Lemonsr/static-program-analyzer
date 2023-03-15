@@ -180,7 +180,7 @@ void spa::DesignExtractor::extractUsesAndModifies(std::vector<std::shared_ptr<sp
         pkbManager.addEdge(incomingNode->getLineNumber(), cfgNode.first.getLineNumber());
       }
     } else {
-      int const tailNodeLineNum = tailNode.getLineNumber(); //
+      int const tailNodeLineNum = tailNode.getLineNumber();
       int const cfgNodeStart = cfgNode.first.getLineNumber();
       pkbManager.addEdge(tailNodeLineNum, cfgNodeStart);
     }

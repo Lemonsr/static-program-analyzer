@@ -141,7 +141,6 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::InnerBlockStatement::processStatement
       pkbManager.addEdge(prevStmtEndNodeLineNum, cfgStmtNodeStart);
     }
     prevStmtEndNode = cfgStmtNode.second;
-
   }
   if (blockStmtHeadNode.getLineNumber() == -1 && prevStmtEndNode.getLineNumber() == -1) {
     return std::make_pair(CFGNode(), CFGNode());
