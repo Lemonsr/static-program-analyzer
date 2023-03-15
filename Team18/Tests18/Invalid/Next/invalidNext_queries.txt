@@ -150,7 +150,7 @@ Select stmt.stmt# such that Next(_,_)
 5000
 31 - Next (lineNum, lineNum) valid stmt
 stmt stmt;
-Select stmt.stmt# such that Next(1,1)                     
+Select stmt.stmt# such that Next(1,2)                     
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
 5000
 32 - Next (lineNum, lineNum) valid stmt
