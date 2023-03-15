@@ -68,8 +68,3 @@ if i; variable v;
 Select v such that Modifies(i, v)
 none
 5000
-15 - comment
-
-Select BOOLEAN
-FALSE
-5000
