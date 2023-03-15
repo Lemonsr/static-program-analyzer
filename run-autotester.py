@@ -1,4 +1,5 @@
 import subprocess
+import sys
 
 test_cases = [
     'IfinIfElse', 
@@ -72,10 +73,10 @@ def run_autotester(test_case_prefix):
     status = subprocess.call(cmd, stdout=subprocess.DEVNULL)
     if status:
         print(f'Cant run autotester: {test_case_prefix}')
-        quit()
+        sys.exit(1)
     if find_if_fail():
         print(f'{test_case_prefix} failed\n')
-        quit()
+        sys.exit(1)
     else:
         print(f'{test_case_prefix} passed\n')
 
