@@ -1,0 +1,50 @@
+1 - Follows, Uses, PatternAssign
+variable v, v1; assign a; stmt s, s1;
+Select <s, v> such that Follows(s, s1) and Uses(s, v) pattern a(v, _)
+3 c,3 q,3 s,3 b,3 a, 4 a, 4 c, 4 b, 6 w, 7 x, 8 x, 9 a,13 s, 13 q,14 s,14 q,14 b,14 a,14 c,15 w,19 s,19 q, 25 c, 25 b,28 q,30 q,30 s, 31 s,36 q,36 s,37 q,37 s,37 c,37 b,37 a, 39 m,41 x,41 q,41 s,42 s,42 q,43 x,45 w,45 x,47 w
+5000
+2 - Modifies, Uses, Calls
+read re; variable v; stmt s; procedure p;
+Select <p, v> such that Modifies(re, v) and Uses(s, v) and Calls(p, "B")
+A i,A s,A x,A y,A z,D i,D s,D x,D y,D z
+5000
+3 - Next, Next, Next, PatternWhile
+stmt s1, s2, s3; print p; while w;
+Select <s1, s2, s3> such that Next(s1, s2) and Next(s2, s3) and Next(s3, p) pattern w("g", _)
+28 29 30,3 4 5,31 32 30,33 32 30,4 5 6,40 41 42,40 41 45,41 42 43,44 41 42,44 41 45,45 46 45,6 7 8
+5000
+4 - CallsStar, Parent, FollowsStar, Next, Modifies, PatternAssign
+procedure p; stmt s1, s2, s3, s4; assign a;
+Select <s1, s3> such that Calls*(p, "D") and Parent(s1, s2) and Follows*(s2, s3) and Next(s1, s3) and Modifies(s2, "a") pattern a("a", _"a"_)
+none
+5000
+5 - Modifies, CallsStar, PatternIf
+if if; variable v; stmt s; procedure p;
+Select <v, p> such that Modifies(s, v) and Calls*("D", p) pattern if(v, _, _)
+a A,a B,a C,b A,b B,b C,c A,c B,c C,w A,w B,w C,x A,x B,x C,y A,y B,y C,z A,z B,z C
+5000
+6 - WithValueValue, PatternWhile, Follows, WithAttrAttr
+stmt s, s1; variable v; while w;
+Select s with 10 = 20 pattern w(v, _) such that Follows(s, s1) with s.stmt# = s1.stmt#
+none
+5000
+7 - ParentStar, PatternAssign, ModifiesProc, UsesProc
+stmt s1, s2; variable v, v1; if if; assign a;
+Select <s1, v, v1> such that Parent(if, s1) pattern a(v, _) such that Modifies(s1, v) and Uses(s2, v1)
+10 c a,10 c b,10 c c,10 c d,10 c f,10 c g,10 c h,10 c i,10 c m,10 c n,10 c o,10 c q,10 c r,10 c s,10 c t,10 c w,10 c x,10 c y,10 c z,12 a a,12 a b,12 a c,12 a d,12 a f,12 a g,12 a h,12 a i,12 a m,12 a n,12 a o,12 a q,12 a r,12 a s,12 a t,12 a w,12 a x,12 a y,12 a z,12 b a,12 b b,12 b c,12 b d,12 b f,12 b g,12 b h,12 b i,12 b m,12 b n,12 b o,12 b q,12 b r,12 b s,12 b t,12 b w,12 b x,12 b y,12 b z,12 c a,12 c b,12 c c,12 c d,12 c f,12 c g,12 c h,12 c i,12 c m,12 c n,12 c o,12 c q,12 c r,12 c s,12 c t,12 c w,12 c x,12 c y,12 c z,12 j a,12 j b,12 j c,12 j d,12 j f,12 j g,12 j h,12 j i,12 j m,12 j n,12 j o,12 j q,12 j r,12 j s,12 j t,12 j w,12 j x,12 j y,12 j z,12 s a,12 s b,12 s c,12 s d,12 s f,12 s g,12 s h,12 s i,12 s m,12 s n,12 s o,12 s q,12 s r,12 s s,12 s t,12 s w,12 s x,12 s y,12 s z,12 x a,12 x b,12 x c,12 x d,12 x f,12 x g,12 x h,12 x i,12 x m,12 x n,12 x o,12 x q,12 x r,12 x s,12 x t,12 x w,12 x x,12 x y,12 x z,13 s a,13 s b,13 s c,13 s d,13 s f,13 s g,13 s h,13 s i,13 s m,13 s n,13 s o,13 s q,13 s r,13 s s,13 s t,13 s w,13 s x,13 s y,13 s z,14 a a,14 a b,14 a c,14 a d,14 a f,14 a g,14 a h,14 a i,14 a m,14 a n,14 a o,14 a q,14 a r,14 a s,14 a t,14 a w,14 a x,14 a y,14 a z,14 b a,14 b b,14 b c,14 b d,14 b f,14 b g,14 b h,14 b i,14 b m,14 b n,14 b o,14 b q,14 b r,14 b s,14 b t,14 b w,14 b x,14 b y,14 b z,14 c a,14 c b,14 c c,14 c d,14 c f,14 c g,14 c h,14 c i,14 c m,14 c n,14 c o,14 c q,14 c r,14 c s,14 c t,14 c w,14 c x,14 c y,14 c z,14 j a,14 j b,14 j c,14 j d,14 j f,14 j g,14 j h,14 j i,14 j m,14 j n,14 j o,14 j q,14 j r,14 j s,14 j t,14 j w,14 j x,14 j y,14 j z,14 s a,14 s b,14 s c,14 s d,14 s f,14 s g,14 s h,14 s i,14 s m,14 s n,14 s o,14 s q,14 s r,14 s s,14 s t,14 s w,14 s x,14 s y,14 s z,15 b a,15 b b,15 b c,15 b d,15 b f,15 b g,15 b h,15 b i,15 b m,15 b n,15 b o,15 b q,15 b r,15 b s,15 b t,15 b w,15 b x,15 b y,15 b z,16 x a,16 x b,16 x c,16 x d,16 x f,16 x g,16 x h,16 x i,16 x m,16 x n,16 x o,16 x q,16 x r,16 x s,16 x t,16 x w,16 x x,16 x y,16 x z,17 a a,17 a b,17 a c,17 a d,17 a f,17 a g,17 a h,17 a i,17 a m,17 a n,17 a o,17 a q,17 a r,17 a s,17 a t,17 a w,17 a x,17 a y,17 a z,21 j a,21 j b,21 j c,21 j d,21 j f,21 j g,21 j h,21 j i,21 j m,21 j n,21 j o,21 j q,21 j r,21 j s,21 j t,21 j w,21 j x,21 j y,21 j z,22 s a,22 s b,22 s c,22 s d,22 s f,22 s g,22 s h,22 s i,22 s m,22 s n,22 s o,22 s q,22 s r,22 s s,22 s t,22 s w,22 s x,22 s y,22 s z,23 j a,23 j b,23 j c,23 j d,23 j f,23 j g,23 j h,23 j i,23 j m,23 j n,23 j o,23 j q,23 j r,23 j s,23 j t,23 j w,23 j x,23 j y,23 j z,25 a a,25 a b,25 a c,25 a d,25 a f,25 a g,25 a h,25 a i,25 a m,25 a n,25 a o,25 a q,25 a r,25 a s,25 a t,25 a w,25 a x,25 a y,25 a z,26 c a,26 c b,26 c c,26 c d,26 c f,26 c g,26 c h,26 c i,26 c m,26 c n,26 c o,26 c q,26 c r,26 c s,26 c t,26 c w,26 c x,26 c y,26 c z,27 b a,27 b b,27 b c,27 b d,27 b f,27 b g,27 b h,27 b i,27 b m,27 b n,27 b o,27 b q,27 b r,27 b s,27 b t,27 b w,27 b x,27 b y,27 b z,8 a a,8 a b,8 a c,8 a d,8 a f,8 a g,8 a h,8 a i,8 a m,8 a n,8 a o,8 a q,8 a r,8 a s,8 a t,8 a w,8 a x,8 a y,8 a z
+5000
+8 - WithAttrAttr, WithAttrAttr, WithAttrValue, WithAttrValue, WithValueValue, WithValueValue, 
+variable v, v1; procedure p; stmt s, s1; call c; constant co;
+Select BOOLEAN with v.varName = v1.varName and p.procName = c.procName and s.stmt# = 24 and co.value = s1.stmt# and 0 = 0 and 11111 = 11111
+TRUE
+5000
+9 - Uses, Next, Calls, Uses
+variable v; stmt s, s1; procedure p, p1;
+Select <v, s, p> such that Uses(12, v) and Next(s, s1) and Calls(p, p1) and Uses(15, "i")
+none
+5000
+10 - Calls, CallsStar, Calls, FollowsStar
+procedure p1, p2, p3; stmt s; read re;
+Select <p1, p2, p3> such that Calls(p1, p2) and Calls*(p2, p1) and Calls(p3, p1) and Follows*(re, s)
+none
+5000
