@@ -164,7 +164,7 @@ void spa::DesignExtractor::extractParentStar(std::shared_ptr<ContainerStatement>
 }
 
 
-void spa::DesignExtractor::extractUsesAndModifies(std::vector<std::shared_ptr<spa::ProgramStatement>>&statementList) {
+void spa::DesignExtractor::extractUsesAndModifies(std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
   CFGNode dummyStartNode = CFGNode();
   CFGNode tailNode = dummyStartNode;
   bool start = true;
@@ -175,16 +175,21 @@ void spa::DesignExtractor::extractUsesAndModifies(std::vector<std::shared_ptr<sp
       tailNode = cfgNode.second;
       continue;
     }
-    int const tailNodeLineNum = tailNode.getLineNumber();
-    int const cfgNodeStart = cfgNode.first.getLineNumber();
-    pkbManager.addEdge(tailNodeLineNum, cfgNodeStart);
+    if (tailNode.isDummyNode()) {
+      for (auto& incomingNode : tailNode.getIncomingEdges()) {
+        pkbManager.addEdge(incomingNode->getLineNumber(), cfgNode.first.getLineNumber());
+      }
+    } else {
+      int const tailNodeLineNum = tailNode.getLineNumber();
+      int const cfgNodeStart = cfgNode.first.getLineNumber();
+      pkbManager.addEdge(tailNodeLineNum, cfgNodeStart);
+    }
     tailNode = cfgNode.second;
   }
   if (tailNode.isDummyNode()) {
     for (auto edge : tailNode.getIncomingEdges()) {
       pkbManager.addCfgEndNode(edge->getLineNumber());
     }
-    pkbManager.removeDummyNode();
     return;
   }
   pkbManager.addCfgEndNode(tailNode.getLineNumber());
