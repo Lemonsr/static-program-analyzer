@@ -20,7 +20,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/setup-python@v4
+        with: 
+          python-version: '3.7'
       - run: pip install cpplint
       - run: cpplint --recursive --linelength=120 --filter=-legal/copyright,-readability/todo,-runtime/references,-build/include_subdir .
 
@@ -36,7 +38,7 @@ jobs:
       - name: Restore NuGet packages
         working-directory: ${{env.GITHUB_WORKSPACE}}
         run: nuget restore ${{env.SOLUTION_FILE_PATH}}
-
+        
       - name: Build
         working-directory: ${{env.GITHUB_WORKSPACE}}
         # Add additional options to the MSBuild command line here (like platform or verbosity level).
@@ -48,3 +50,10 @@ jobs:
 
       - name: Run VSTest
         run: vstest.console.exe /Platform:X86 Team18\Code18\Release\IntegrationTesting.dll Team18\Code18\Release\UnitTesting.dll
+      
+      - name: Run System Test
+        working-directory: ${{env.GITHUB_WORKSPACE}}
+        uses: actions/setup-python@v4
+        with: 
+          python-version: '3.7'
+        run: python run-autotester.py
