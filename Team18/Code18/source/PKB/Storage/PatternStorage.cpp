@@ -237,7 +237,8 @@ spa::QueryResult spa::PatternStorage::getPatternWhileVarName(PKBQueryArg firstAr
   return queryResult;
 }
 
-void spa::PatternStorage::setPatternAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> patternAssignTable) {
+void spa::PatternStorage::setPatternAssignTable(
+  std::unordered_map<int, std::pair<std::string, std::string>> patternAssignTable) {
   this->patternAssignTable = patternAssignTable;
 }
 
