@@ -163,3 +163,13 @@ read r;
 Select BOOLEAN with one = r.varName
 SyntaxError
 5000
+34 - valid query
+
+Select BOOLEAN with "one" = "one" and "two" = "two"
+TRUE
+5000
+35 - valid query
+
+Select BOOLEAN with 1 = 1 and 2 = 2
+TRUE
+5000
