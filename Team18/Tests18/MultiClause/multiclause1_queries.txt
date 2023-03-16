@@ -1,0 +1,5 @@
+1 - Modifies, Uses, PatternAssign, PatternIf
+stmt s, s1; variable v, v1; assign a; if i;
+Select <s, a, i> such that Modifies(s, v) and Uses(s1, v1)
+none
+5000
