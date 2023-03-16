@@ -1,5 +1,80 @@
-1 - Modifies, Uses, PatternAssign, PatternIf
-stmt s, s1; variable v, v1; assign a; if i;
-Select <s, a, i> such that Modifies(s, v) and Uses(s1, v1)
+1 - no inner join positive
+assign a; variable v; stmt s1, s2;
+Select v such that Parent(s1, s2) pattern a ("y", "y + 1")
+x, y
+5000
+2 - no inner join negative
+assign a; variable v; stmt s1, s2;
+Select v  such that Parent(s1, s2) pattern a ("x", "y + 1")
+none
+5000
+3 - select and such that inner join positive
+assign a; variable v; stmt s1, s2;
+Select s1 such that Parent(s1, s2) pattern a (v, _)
+2, 3
+5000
+4 - select and such that inner join negative
+assign a; variable v; stmt s1, s2;
+Select s1 such that Parent(s1, s2) pattern a (v, _"x + y"_)
+none
+5000
+5 - such that and pattern inner join positive
+assign a; variable v; stmt s1, s2;
+Select s2 such that Modifies(s1, v) pattern a (v, _)
+1, 2, 3, 4, 5, 6, 7
+5000
+6 - such that and pattern inner join negative
+assign a; variable v; stmt s1, s2;
+Select s2 such that Modifies(s1, v) pattern a (v, "x")
+none
+5000
+7 - triple inner join positive
+assign a; variable v; stmt s1;
+Select s1 such that Modifies(s1, v) pattern a (v, _)
+1, 2, 3, 4, 5, 6
+5000
+8 - triple inner join negative
+assign a; variable v; stmt s1;
+Select s1 such that Modifies(s1, v) pattern a (v, _"x + y"_)
+none
+5000
+9 - no inner join positive reverse
+assign a; variable v; stmt s1, s2;
+Select v pattern a ("y", "y + 1") such that Parent(s1, s2)
+x, y
+5000
+10 - no inner join negative reverse
+assign a; variable v; stmt s1, s2;
+Select v pattern a ("x", "y + 1") such that Parent(s1, s2)
+none
+5000
+11 - select and such that inner join positive reverse
+assign a; variable v; stmt s1, s2;
+Select s1 pattern a (v, _) such that Parent(s1, s2)
+2, 3
+5000
+12 - select and such that inner join negative reverse
+assign a; variable v; stmt s1, s2;
+Select s1 pattern a (v, _"x + y"_) such that Parent(s1, s2)
+none
+5000
+13 - such that and pattern inner join positive reverse
+assign a; variable v; stmt s1, s2;
+Select s2 pattern a (v, _) such that Modifies(s1, v)
+1, 2, 3, 4, 5, 6, 7
+5000
+14 - such that and pattern inner join negative reverse
+assign a; variable v; stmt s1, s2;
+Select s2 pattern a (v, "x") such that Modifies(s1, v)
+none
+5000
+15 - triple inner join positive reverse
+assign a; variable v; stmt s1;
+Select s1 pattern a (v, _) such that Modifies(s1, v)
+1, 2, 3, 4, 5, 6
+5000
+16 - triple inner join negative reverse
+assign a; variable v; stmt s1;
+Select s1 pattern a (v, _"x + y"_) such that Modifies(s1, v)
 none
 5000

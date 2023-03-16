@@ -1,86 +1,12 @@
-procedure A {
-  read x;
-  read y;
-  read z;
-  x = x + 1;
-  print x;
-  y = 5 * x + y;
-  if ((y == 10) && (x > y)) then {
-    call B;
-  } else {
-    while (z < 10) {
-      call C;
-    }
-  }
-  z = z * y + x / 24;
-}
-
-procedure B {
-  if ((v < 5) || (v > 20 % x)) then {
-    print v;
-    while (y >= 25) {
-      y = 35;
-    }
+procedure multiclause {
     read x;
-  } else {
-    if (y * x + z - 5 != 0) then {
-      call D;
-      read z;
-    } else {
-      call E;
-      x = v / y * x + z % x;
-    }
-  }
-}
-
-procedure C {
-  read a;
-  read b;
-  print c;
-  while (b <= a) {
-    call D;
-    b = b - a * 2;
-    if ((a + x) <= (b * c)) then {
-      a = a % a + b / a * c - 50;
-    } else {
-      print c;
-    }
-  }
-  print x;
-  call E;
-}
-
-procedure D {
-  read d;
-  if (10 == 10) then {
-    read e;
-    if (e != d) then {
-      print e;
-    } else {
-      if (b - x * 65 != 55) then {
-        while (x * a == y * v - b) {
-          y = 2023 * 3203;
+    while (x > 1) {
+        if (x % 2 == 0) then {
+            x = x / 2;
+        } else {
+            x = 3 * x + 1;
         }
-      } else {
-        read g;
-      }
-      call E;
+        y = y + 1;
     }
-    call E;
-  } else {
-    print f;
-  }
-}
-
-procedure E {
-  read g;
-  read h;
-  while (25 == 35) {
-    print h;
-    h = h - 1;
-    while (!(g - h == 10)) {
-      g = g + h;
-      print g;
-    }
-  }
+    print y;
 }

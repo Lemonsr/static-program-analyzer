@@ -92,7 +92,9 @@ for type in query_types:
         test_case_prefix += type[1:] + case
         run_autotester(test_case_prefix)
 
-run_autotester(f'{test_path}\\MultiClause\\multiclause')
+for i in range(1, 4):
+	run_autotester(f'{test_path}\\MultiClause\\multiclause{i}')
+	
 run_autotester(f'{test_path}\\With\\with')
 
 for invalid_type in invalid_query_types :
