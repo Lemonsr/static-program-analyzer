@@ -1,0 +1,86 @@
+procedure A {
+  read x; // 1
+  read y; // 2
+  read z; // 3
+  x = x + 1; // 4
+  print x; // 5
+  y = 5 * x + y; // 6
+  if ((y == 10) && (x > y)) then { // 7
+    call B; // 8
+  } else {
+    while (z < 10) { // 9
+      call C; // 10
+    }
+  }
+  z = z * y + x / 24; // 11
+}
+
+procedure B {
+  if ((v < 5) || (v > 20 % x)) then { // 12
+    print v; // 13
+    while (y >= 25) { // 14
+      y = 35; // 15
+    }
+    read x; // 16
+  } else {
+    if (y * x + z - 5 != 0) then { // 17
+      call D; // 18
+      read z; // 19
+    } else {
+      call E; // 20
+      x = v / y * x + z % x; // 21
+    }
+  }
+}
+
+procedure C {
+  read a; // 22
+  read b; // 23
+  print c; // 24
+  while (b <= a) { // 25
+    call D; // 26
+    b = b - a * 2; // 27
+    if ((a + x) <= (b * c)) then { // 28
+      a = a % a + b / a * c - 50; // 29
+    } else {
+      print c; // 30
+    }
+  }
+  print x; // 31
+  call E; // 32
+}
+
+procedure D {
+  read d; // 33
+  if (10 == 10) then { // 34
+    read e; // 35
+    if (e != d) then { // 36
+      print e; // 37
+    } else {
+      if (b - x * 65 != 55) then { // 38
+        while (x * a == y * v - b) { // 39
+          y = 2023 * 3203; // 40
+        }
+      } else {
+        read g; // 41
+      }
+      call E; // 42
+    }
+    call E; // 43
+  } else {
+    print f; // 44
+  }
+}
+
+procedure E {
+  read g; // 45
+  read h; // 46
+  while (25 == 35) { // 47
+    print h; // 48
+    h = h - 1; // 49
+    while (!(g - h == 10)) { // 50
+      g = g + h; // 51
+      print g; // 52
+    }
+  }
+}
