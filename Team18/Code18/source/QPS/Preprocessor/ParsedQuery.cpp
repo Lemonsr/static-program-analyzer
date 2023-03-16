@@ -105,7 +105,7 @@ std::unordered_map<std::string, spa::DesignEntityType>& spa::ParsedQuery::getSel
 }
 
 bool spa::ParsedQuery::hasClauses() {
-  return suchThatClauses.size() > 0 || patternClauses.size() > 0;
+  return suchThatClauses.size() > 0 || patternClauses.size() > 0 || withClauses.size() > 0;
 }
 
 spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,

@@ -1,0 +1,75 @@
+procedure A {
+  read x;
+  read y;
+  call B;
+  w = a + (b % c) / d;
+  if (w < x - y * z) then {
+    print w;
+    print x;
+    a = x - y * z;
+    print a;
+    while (a >= a + a * a) {
+      c = y;
+    }
+  } else {
+    if (w + x * y == 12) then {
+      call C;
+      call B;
+      b = w + y * z;
+      x = b;
+    } else {
+      a = w - w / w;
+    }
+  }
+}
+
+procedure B {
+  while (g <= 20) {
+    if ((10 != 10) || ((20 > f) && (f < g * (h - 2)))) then {
+      read i;
+      read j;
+      call C;
+    } else {
+      j = i;
+    }
+    if (a * a == b * b / (c / c)) then {
+      a = b / c;
+      c = a / b;
+    } else {
+      b = 10;
+    }
+  }
+}
+
+procedure C {
+  print q;
+  print r;
+  while (q == r) {
+    print s;
+    while (s == s) {
+      s = ((3)) * (((s + 1)));
+    }
+  }
+  print t;
+  read s;
+}
+
+procedure D {
+  call C;
+  call B;
+  m = n + n - ((n / o) * o) % o;
+  p = m / m * m;
+  read x;
+  while (10 == 20) {
+    call C;
+    print x;
+    print y;
+  }
+  while (20 == x) {
+    q = w - w; 
+  }
+  print w;
+  read y;
+  read z;
+  call A;
+}
