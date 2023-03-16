@@ -16,18 +16,7 @@ bool spa::RelationshipStorage::addStatementType(std::string lineNo, StatementTyp
   return true;
 }
 
-bool spa::RelationshipStorage::addStatementProc(std::string lineNo, std::string procName) {
-  int lineNumber = std::stoi(lineNo);
-  if (statementProcTable.find(lineNumber) != statementProcTable.end()) {
-    return false;
-  }
-
-  statementProcTable.insert({lineNumber, procName});
-  return true;
-}
-
-spa::QueryResult
-spa::RelationshipStorage::getStatements(std::optional<StatementType> statementType) {
+spa::QueryResult spa::RelationshipStorage::getStatements(std::optional<StatementType> statementType) {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
@@ -61,8 +50,7 @@ bool spa::RelationshipStorage::addFollows(std::string firstLineNo, std::string s
   return true;
 }
 
-spa::QueryResult spa::RelationshipStorage::getFollowsLineLine(
-  PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getFollowsLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
   int firstLineNumber = firstArg.getLineNumber().lineNo;
   int secondLineNumber = secondArg.getLineNumber().lineNo;
   QueryResult queryResult;
@@ -78,8 +66,7 @@ spa::QueryResult spa::RelationshipStorage::getFollowsLineLine(
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getFollowsLineStatement(
-  PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getFollowsLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
   int lineNumber = firstArg.getLineNumber().lineNo;
   Statement stmt = secondArg.getStatement();
   QueryResult queryResult;
@@ -120,8 +107,7 @@ spa::QueryResult spa::RelationshipStorage::getFollowsStatementLine(
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getFollowsLineUnderscore(
-  PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getFollowsLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
   int lineNumber = firstArg.getLineNumber().lineNo;
   QueryResult queryResult;
   queryResult.setQueryResultType(BOOL);
@@ -135,8 +121,7 @@ spa::QueryResult spa::RelationshipStorage::getFollowsLineUnderscore(
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreLine(
-  PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
   int lineNumber = secondArg.getLineNumber().lineNo;
   QueryResult queryResult;
   queryResult.setQueryResultType(BOOL);
@@ -152,8 +137,7 @@ spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreLine(
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getFollowsStatementStatement(
-  PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getFollowsStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
   Statement firstStmt = firstArg.getStatement();
   Statement secondStmt = secondArg.getStatement();
   QueryResult queryResult;
@@ -172,8 +156,7 @@ spa::QueryResult spa::RelationshipStorage::getFollowsStatementStatement(
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getFollowsStatementUnderscore(
-  PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getFollowsStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg) {
   Statement firstStmt = firstArg.getStatement();
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
@@ -190,8 +173,7 @@ spa::QueryResult spa::RelationshipStorage::getFollowsStatementUnderscore(
   return queryResult;
 }
 
-spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreStatement(
-  PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg) {
   Statement secondStmt = secondArg.getStatement();
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
@@ -209,7 +191,7 @@ spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreStatement(
 }
 
 spa::QueryResult spa::RelationshipStorage::getFollowsUnderscoreUnderscore(PKBQueryArg firstArg,
-  PKBQueryArg secondArg) {
+                                                                          PKBQueryArg secondArg) {
   QueryResult queryResult;
   queryResult.setQueryResultType(BOOL);
   queryResult.setIsTrue(!followsTable.empty());
@@ -229,8 +211,7 @@ bool spa::RelationshipStorage::addFollowsStar(std::string firstLineNo, std::stri
   return true;
 }
 
-spa::QueryResult spa::RelationshipStorage::getFollowsStarLineLine(
-  PKBQueryArg firstArg, PKBQueryArg secondArg) {
+spa::QueryResult spa::RelationshipStorage::getFollowsStarLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg) {
   int firstLineNumber = firstArg.getLineNumber().lineNo;
   int secondLineNumber = secondArg.getLineNumber().lineNo;
   QueryResult queryResult;

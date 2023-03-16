@@ -309,7 +309,7 @@ const bool spa::PKB::addEntity(DesignEntityType entityType, std::string arg) {
 }
 
 const bool spa::PKB::addPattern(std::string lineNo, std::string lhs, std::string rhs) {
-  return patternStorage.addAssign(lineNo, lhs, rhs);
+  return patternStorage.addPatternAssign(lineNo, lhs, rhs);
 }
 
 const bool spa::PKB::addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName) {
@@ -339,12 +339,8 @@ const bool spa::PKB::addStatementType(std::string lineNo, StatementType statemen
   return relationshipStorage.addStatementType(lineNo, statementType);
 }
 
-const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure) {
-  return relationshipStorage.addStatementProc(lineNo, procedure);
-}
-
-const bool spa::PKB::addCfgNode(int lineNo, spa::CFGNode cfgNode) {
-  return cfgStorage.addCfgNode(lineNo, cfgNode);
+const bool spa::PKB::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
+  return cfgStorage.addCfgNode(lineNumber, cfgNode);
 }
 
 const bool spa::PKB::addCfgEndNode(int lineNumber) {

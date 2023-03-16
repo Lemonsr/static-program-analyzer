@@ -82,7 +82,6 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::ReadStatement::processStatement(
   spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addEntity(VARIABLE, variableName);
-  pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::READ);
   pkbManager.addRelationship(MODIFIES, stringStmtLineNum, variableName);
   pkbManager.addRelationship(MODIFIES_P, parentProcedureVal, variableName);
@@ -96,7 +95,6 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::PrintStatement::processStatement(
   spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addEntity(VARIABLE, variableName);
-  pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::PRINT);
   pkbManager.addRelationship(USES, stringStmtLineNum, variableName);
   pkbManager.addRelationship(USES_P, parentProcedureVal, variableName);
@@ -109,7 +107,6 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::PrintStatement::processStatement(
 std::pair<spa::CFGNode, spa::CFGNode> spa::CallStatement::processStatement(
   spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
-  pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::CALL);
   pkbManager.addCallsProc(statementLineNum, variableName);
   pkbManager.addRelationship(CALLS, parentProcedureVal, variableName);
@@ -123,7 +120,6 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::AssignStatement::processStatement(
   spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   pkbManager.addEntity(VARIABLE, assignVar);
-  pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::ASSIGN);
   pkbManager.addRelationship(MODIFIES, stringStmtLineNum, assignVar);
   pkbManager.addRelationship(MODIFIES_P, parentProcedureVal, assignVar);
@@ -138,7 +134,6 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::AssignStatement::processStatement(
 std::pair<spa::CFGNode, spa::CFGNode> spa::IfConditionStatement::processStatement(
   PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
-  pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::IF);
   extractUsesFromPostfix(pkbManager, postfixExpr);
   extractPatternFromPostfix(pkbManager, stringStmtLineNum, postfixExpr, IF);
@@ -150,7 +145,6 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::IfConditionStatement::processStatemen
 std::pair<spa::CFGNode, spa::CFGNode> spa::WhileConditionStatement::processStatement(
   PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
-  pkbManager.addStatementProc(stringStmtLineNum, parentProcedureVal);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::WHILE);
   extractUsesFromPostfix(pkbManager, postfixExpr);
   extractPatternFromPostfix(pkbManager, stringStmtLineNum, postfixExpr, WHILE);

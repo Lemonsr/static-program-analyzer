@@ -50,5 +50,4 @@ using UsesTable = std::unordered_map<LineNo, Uses>;
 using UsesProcTable = std::unordered_map<ProcName, Uses>;
 using AssignTable = std::unordered_map<LineNo, Assignment>;
 using StatementTypeTable = std::unordered_map<LineNo, StatementType>;
-using StatementProcTable = std::unordered_map<LineNo, ProcName>;
 }  // namespace spa

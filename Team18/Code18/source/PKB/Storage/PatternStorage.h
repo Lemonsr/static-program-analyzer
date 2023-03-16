@@ -11,13 +11,13 @@
 namespace spa {
 class PatternStorage {
  private:
-  std::unordered_map<int, std::pair<std::string, std::string>> assignTable;
+  std::unordered_map<int, std::pair<std::string, std::string>> patternAssignTable;
   std::unordered_map<int, std::unordered_set<std::string>> patternIfTable;
   std::unordered_map<int, std::unordered_set<std::string>> patternWhileTable;
   bool isPostfixSubstring(std::string postfix, std::string patternPostfix);
 
  public:
-  bool addAssign(std::string lineNo, std::string varName, std::string postfixString);
+  bool addPatternAssign(std::string lineNo, std::string varName, std::string postfixString);
   bool addPatternIf(std::string lineNo, std::string varName);
   bool addPatternWhile(std::string lineNo, std::string varName);
   QueryResult getAssignUnderscore(PKBQueryArg lhs, Pattern rhs);
@@ -30,7 +30,7 @@ class PatternStorage {
   QueryResult getPatternWhileVar(PKBQueryArg firstArg);
   QueryResult getPatternWhileVarName(PKBQueryArg firstArg);
 
-  void setAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> assignTable);
+  void setPatternAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> patternAssignTable);
   void setPatternIfTable(std::unordered_map<int, std::unordered_set<std::string>> patternIfTable);
   void setPatternWhileTable(std::unordered_map<int, std::unordered_set<std::string>> patternWhileTable);
 };
