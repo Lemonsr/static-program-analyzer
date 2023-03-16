@@ -21,7 +21,6 @@ class PKBManager {
   virtual const bool addCallsContainerParent(std::string procName, std::string lineNo) = 0;
   virtual const bool addCallsProc(int lineNumber, std::string procName) = 0;
   virtual const bool addStatementType(std::string lineNo, StatementType statementType) = 0;
-  virtual const bool addStatementProc(std::string lineNo, std::string procName) = 0;
 
   // Node methods
   virtual const bool addCfgNode(int lineNumber, spa::CFGNode cfgNode) = 0;

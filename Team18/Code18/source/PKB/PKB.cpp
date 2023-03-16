@@ -339,10 +339,6 @@ const bool spa::PKB::addStatementType(std::string lineNo, StatementType statemen
   return relationshipStorage.addStatementType(lineNo, statementType);
 }
 
-const bool spa::PKB::addStatementProc(std::string lineNo, std::string procedure) {
-  return relationshipStorage.addStatementProc(lineNo, procedure);
-}
-
 const bool spa::PKB::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
   return cfgStorage.addCfgNode(lineNumber, cfgNode);
 }
