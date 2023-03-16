@@ -1,0 +1,80 @@
+1 - Next (LineNo ,LineNo) (BOOL)
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+Select s1.stmt# such that Next (2, 3)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+5000
+2 - Next (LineNo ,Statement) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+Select s2 such that Next (3, s2)
+4
+5000
+3 - Next (Statement ,LineNo) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+Select s3.stmt# such that Next (s3, 2)
+1, 5
+5000
+4 - Next (LineNo ,Statement) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10; call call;
+Select call.stmt# such that Next (3, call) with call.procName = "C"
+4
+5000
+5 - Next (Statement ,LineNo) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10; assign assign;
+Select assign such that Next (assign, 2) with assign.stmt# = 1
+1
+5000
+6 - Next (LineNo ,Wildcard) (BOOL)
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+Select s3 such that Next (1, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+5000
+7 - Next (Wildcard ,LineNo) (BOOL)
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10; read re; print pn; assign a;
+Select <re, pn, a> such that Next (_, 2)
+none
+5000
+8 - Next (Statement ,Statement) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+Select s5 such that Next (s5, s4)
+1, 2, 3, 4, 5, 7
+5000
+9 - Next (Statement ,Statement) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10; if if;
+Select if.stmt# such that Next (if, s6)
+none
+5000
+10 - Next (Statement ,Statement) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10; print print;
+Select print.varName such that Next (s7, print)
+none
+5000
+11 - Next (Statement ,Statement) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10; if if; call c;
+Select <if.stmt#,c.procName> such that Next (if, c)
+none
+5000
+12 - Next (Statement ,Wildcard) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+Select s8.stmt# such that Next (s8, _)
+1, 2, 3, 4, 5, 7
+5000
+13 - Next (Statement ,Wildcard) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10; while while;
+Select while such that Next (while, _)
+2
+5000
+14 - Next (Wildcard ,Statement) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+Select s9 such that Next (_, s9)
+2, 3, 4, 5, 8 
+5000
+15 - Next (Wildcard ,Wildcard) (BOOL)
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+Select BOOLEAN such that Next (_, _)
+TRUE
+5000
+16 - Next (Stmt,Stmt) 
+stmt s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+Select <s1,s4> such that Next(s1, s2) and Next(s2, s3) and Next(s3, s4) and Next(s4, s5) and Next(s5, s6) and Next(s6, s7) and Next(s7, s8) and Next(s8, s9) and Next(s9, s10)
+1 4, 2 5, 3 2, 4 3, 5 4
+5000

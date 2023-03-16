@@ -1,0 +1,53 @@
+procedure A {
+  if (y == 0) then {
+    read y;
+  } else {
+    if (x != 0) then {
+      a = a + 2;
+      b = b + 2;
+      c = c + 2;
+      call F;
+    } else {
+      call B;
+    }
+    while (v6 == v11) {
+      v6 = v7 + 7;
+      v11 = v11;
+      print v12;
+
+      if (v13 == 1) then {
+        read v13; 
+      } else {
+        read v13; 
+      }
+    }
+    call C;
+  }
+}
+
+procedure B {
+  call C;
+}
+
+procedure C {
+  read x;
+  call F;
+}
+
+procedure D {
+  print total;
+  call E;
+}
+
+procedure E {
+  total = total + 1;
+}
+
+procedure F {
+  z = x * y;
+  call G;
+}
+
+procedure G {
+  print z;
+}

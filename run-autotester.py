@@ -24,6 +24,7 @@ query_types = [
     'ParentStar',
     'Calls',
     'CallsStar',
+    'Next'
 ]
 
 invalid_query_types = [
@@ -37,7 +38,8 @@ invalid_query_types = [
     'Calls',
     'CallsStar',
     'Pattern',
-    'MultiClause'
+    'MultiClause',
+    'Next'
 ]
 
 pattern_types = [
@@ -90,7 +92,8 @@ for type in query_types:
         test_case_prefix += type[1:] + case
         run_autotester(test_case_prefix)
 
-run_autotester(f'{test_path}\\MultiClause\\multiclause')       
+run_autotester(f'{test_path}\\MultiClause\\multiclause')
+run_autotester(f'{test_path}\\With\\with')
 
 for invalid_type in invalid_query_types :
   if (invalid_type == 'Pattern'):
