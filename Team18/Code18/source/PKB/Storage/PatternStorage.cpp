@@ -29,13 +29,13 @@ bool spa::PatternStorage::isPostfixSubstring(std::string postfix, std::string pa
   return false;
 }
 
-bool spa::PatternStorage::addAssign(std::string lineNo, std::string varName, std::string postfixString) {
+bool spa::PatternStorage::addPatternAssign(std::string lineNo, std::string varName, std::string postfixString) {
   int lineNumber = std::stoi(lineNo);
-  if (assignTable.find(lineNumber) != assignTable.end()) {
+  if (patternAssignTable.find(lineNumber) != patternAssignTable.end()) {
     return false;
   }
 
-  assignTable.insert({ lineNumber, { varName, postfixString } });
+  patternAssignTable.insert({ lineNumber, { varName, postfixString } });
   return true;
 }
 
@@ -68,7 +68,7 @@ spa::QueryResult spa::PatternStorage::getAssignUnderscore(PKBQueryArg lhs, Patte
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, std::string>> lineNumberNamePairs;
-  for (auto& itr = assignTable.begin(); itr != assignTable.end(); itr++) {
+  for (auto& itr = patternAssignTable.begin(); itr != patternAssignTable.end(); itr++) {
     std::string postfixString = itr->second.second;
     if (type == EXACT) {
       if (queryPattern == postfixString) {
@@ -94,7 +94,7 @@ spa::QueryResult spa::PatternStorage::getAssignVar(PKBQueryArg lhs, Pattern rhs)
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, std::string>> lineNumberNamePairs;
-  for (auto& itr = assignTable.begin(); itr != assignTable.end(); itr++) {
+  for (auto& itr = patternAssignTable.begin(); itr != patternAssignTable.end(); itr++) {
     std::string postfixString = itr->second.second;
     if (type == EXACT) {
       if (queryPattern == postfixString) {
@@ -121,7 +121,7 @@ spa::QueryResult spa::PatternStorage::getAssignVarName(PKBQueryArg lhs, Pattern 
   queryResult.setQueryResultType(TUPLE);
 
   std::vector<std::pair<int, std::string>> lineNumberNamePairs;
-  for (auto& itr = assignTable.begin(); itr != assignTable.end(); itr++) {
+  for (auto& itr = patternAssignTable.begin(); itr != patternAssignTable.end(); itr++) {
     if (itr->second.first != varName) {
       continue;
     }
@@ -237,8 +237,8 @@ spa::QueryResult spa::PatternStorage::getPatternWhileVarName(PKBQueryArg firstAr
   return queryResult;
 }
 
-void spa::PatternStorage::setAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> assignTable) {
-  this->assignTable = assignTable;
+void spa::PatternStorage::setPatternAssignTable(std::unordered_map<int, std::pair<std::string, std::string>> patternAssignTable) {
+  this->patternAssignTable = patternAssignTable;
 }
 
 void spa::PatternStorage::setPatternIfTable(std::unordered_map<int, std::unordered_set<std::string>> patternIfTable) {

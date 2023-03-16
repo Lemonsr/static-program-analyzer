@@ -309,7 +309,7 @@ const bool spa::PKB::addEntity(DesignEntityType entityType, std::string arg) {
 }
 
 const bool spa::PKB::addPattern(std::string lineNo, std::string lhs, std::string rhs) {
-  return patternStorage.addAssign(lineNo, lhs, rhs);
+  return patternStorage.addPatternAssign(lineNo, lhs, rhs);
 }
 
 const bool spa::PKB::addContainerPattern(DesignEntityType entityType, std::string lineNo, std::string varName) {

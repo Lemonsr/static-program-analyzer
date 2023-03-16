@@ -18,7 +18,7 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
   TEST_CLASS(TestPKBPatternStorage) {
-    std::unordered_map<int, std::pair<std::string, std::string>> assignTable = {
+    std::unordered_map<int, std::pair<std::string, std::string>> patternAssignTable = {
       {1, {"a", "v x y * + z t * +"}},
       {5, {"c", "ab 100 +"}}
     };
@@ -45,10 +45,10 @@ namespace UnitTesting {
 
     TEST_METHOD(TestAddAssign) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
 
-      Assert::IsTrue(patternStorage.addAssign("2", "x", "1 2 +"));
-      Assert::IsFalse(patternStorage.addAssign("2", "x", "1 2 +"));
+      Assert::IsTrue(patternStorage.addPatternAssign("2", "x", "1 2 +"));
+      Assert::IsFalse(patternStorage.addPatternAssign("2", "x", "1 2 +"));
     }
 
     TEST_METHOD(TestAddPatternIf) {
@@ -69,7 +69,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestGetAssignUnderscoreExact) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = {
         spa::Token(spa::TokenType::TOKEN_NAME, "v"),
         spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
@@ -100,7 +100,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestGetAssignUnderscorePartial) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
@@ -125,7 +125,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestGetAssignUnderscoreAny) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       std::vector<std::pair<int, std::string>> expected = { {1, "a"}, {5, "c"}};
 
@@ -139,7 +139,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestGetAssignVarExact) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = {
         spa::Token(spa::TokenType::TOKEN_NAME, "v"),
         spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
@@ -171,7 +171,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestGetAssignVarPartial) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
@@ -197,7 +197,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestGetAssignVarAny) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       std::vector<std::pair<int, std::string>> expected = { {1, "a"}, {5, "c"} };
 
@@ -212,7 +212,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestGetAssignVarNameExact) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = {
         spa::Token(spa::TokenType::TOKEN_NAME, "v"),
         spa::Token(spa::TokenType::TOKEN_PLUS, "+"),
@@ -250,7 +250,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestGetAssignVarNamePartial) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
@@ -282,7 +282,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestGetAssignVarNameAny) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "v") };
       std::vector<std::pair<int, std::string>> expected = { {1, "a"} };
 
@@ -412,7 +412,7 @@ namespace UnitTesting {
 
     TEST_METHOD(TestPatternContains) {
       spa::PatternStorage patternStorage;
-      patternStorage.setAssignTable(assignTable);
+      patternStorage.setPatternAssignTable(patternAssignTable);
       std::vector<spa::Token> tokens = { spa::Token(spa::TokenType::TOKEN_NAME, "a") };
       std::vector<std::pair<int, std::string>> expected = {};
 
