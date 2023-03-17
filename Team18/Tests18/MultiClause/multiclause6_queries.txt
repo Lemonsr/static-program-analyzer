@@ -1,0 +1,50 @@
+1 - False with statment (instant Termination)
+assign a; variable v; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i;
+Select <s1,s2,a,s6> such that Follows(s1,s2) and Follows*(s3,s4) and Next(s5,s6) pattern a(_,_) and w(_,_) and i(_,_,_) with 1 = 2
+none
+5000
+2 - Follows, Follows*, Next, pattern assign, Calls*, With (find s1,s2,p1 whereby there must be 4 in the same statement, where s1 is a call statment and it's prodcedure call others.)
+assign a; variable v; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i; procedure p1,p2; call c;
+Select <s1,s2,p1> such that Follows(s1,s2) and Follows*(s3,s4) and Next(s2,s3) pattern a(_,_) such that Calls*(p1,p2) with s1.stmt# = c.stmt# and c.procName = p1.procName
+1 2 detectors, 10 11 camera
+5000
+3 - Uses, Modifies, pattern assign, with (find assign statement with it using itself x = x + 1)
+assign a; variable v1, v2; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i; procedure p1,p2; call c;
+Select <s1,s2,v2,a> such that Uses(s1,v1) and Modifies(s2,v2) pattern a (v1,_) with s1.stmt# = s2.stmt# and v1.varName = v2.varName and s1.stmt# = a.stmt#
+46 46 AMCL 46, 50 50 AMCL 50, 54 54 AMCL 54
+5000
+4 - Uses, Modifies, pattern while, Parent, With
+assign a; variable v1, v2; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i; procedure p1,p2; call c;
+Select <s1,s2,v1,v2,w,c.procName> such that Uses(s1,v1) and Modifies(s2,v2) pattern w(_,_) such that Parent(s1,w) with s1.stmt# = s2.stmt# such that Parent(s2,c)
+33 33 RobotSleep cameraImageInBW 36 exitProcedure, 33 33 RobotSleep tag 36 exitProcedure, 33 33 arDetector cameraImageInBW 36 exitProcedure, 33 33 arDetector tag 36 exitProcedure, 33 33 cameraImageInBW cameraImageInBW 36 exitProcedure, 33 33 cameraImageInBW tag 36 exitProcedure, 33 33 closingMsg cameraImageInBW 36 exitProcedure, 33 33 closingMsg tag 36 exitProcedure, 33 33 currentTime cameraImageInBW 36 exitProcedure, 33 33 currentTime tag 36 exitProcedure, 33 33 detector cameraImageInBW 36 exitProcedure, 33 33 detector tag 36 exitProcedure, 33 33 errorDetectorMissingMsg cameraImageInBW 36 exitProcedure, 33 33 errorDetectorMissingMsg tag 36 exitProcedure
+5000
+5 - CallsProc, ModifiesProc, Uses, with
+assign a; variable v1, v2; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i; procedure p1,p2; call c;
+Select <p1,p2,v1,v2> such that Calls(p1,p2) and Modifies(p1,v1) and Uses(p2,v2) with v1.varName = v2.varName
+main detectors arDetector arDetector, main detectors cameraImageInBW cameraImageInBW, main detectors cameraImageInRGB cameraImageInRGB, main detectors cameraParaK0 cameraParaK0, main detectors cameraParam cameraParam, main detectors detector detector, main detectors lidarParam lidarParam, main processLidarReading lidarReading lidarReading, main estimatePose AMCL AMCL, main estimatePose distanceXYZToRobot distanceXYZToRobot, main estimatePose orientationXYZWToRobot orientationXYZWToRobot, main estimatePose tag tag, detectors ARDetector arDetector arDetector, detectors ARDetector cameraImageInBW cameraImageInBW, detectors ARDetector detector detector, detectors camera cameraImageInBW cameraImageInBW, detectors camera cameraImageInRGB cameraImageInRGB, detectors camera cameraParaK0 cameraParaK0,detectors camera cameraParam cameraParam,detectors camera detector detector, detectors lidar lidarParam lidarParam
+5000
+6 - Uses, Modifies, Next, Follows*
+assign a; variable v1, v2; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i; procedure p1,p2; call c;
+Select BOOLEAN such that Modifies(1, "camera") and Uses(5, "lidarReading") and Next(20,26) and Follows*(1, 4)
+TRUE
+5000
+7 - Follows, ModifiesProc, UsesProc, with, Next
+assign a; variable v1, v2; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i; procedure p1,p2; call c1, c2;
+Select <v1,s1,s2> such that Modifies("estimatePose", v1) and Uses("debugger", v2) and Follows(s1, s2) with s1.stmt# = c1.stmt# and s2.stmt# = c2.stmt# such that Next(s1,s2) with v1.varName = v2.varName
+AMCL 3 4, distanceXYZToRobot 3 4, orientationXYZWToRobot 3 4
+50000
+8 - All pattern
+assign a; variable v1, v2; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i; procedure p1,p2; call c;
+Select <i,w,a> pattern i (v1,_,_) and w(v2,_) and a(v1,_) 
+5 26 17, 5 36 17, 5 57 17, 27 26 22, 27 36 22, 27 57 22, 33 26 39, 33 36 39, 33 57 39, 43 26 8, 43 36 8, 43 57 8, 47 26 9, 47 36 9, 47 57 9, 51 26 38, 51 36 38, 51 57 38
+5000
+9 - Parent, Uses, patttern
+assign a; variable v1, v2; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i; procedure p1,p2; call c;
+Select s1 such that Parent(s1,s2) and Parent(s2,s3) and Uses(s1,v1) pattern i(v1,_,_)
+26, 33
+5000
+10 - CallsProc, ModifiesProc, Uses, with
+assign a; variable v1, v2; stmt s1, s2, s3, s4, s5, s6, s7, s8, s9, s10; while w; if i; procedure p1,p2; call c;
+Select <s1,s2,v1,v2> such that Uses(s1,v1) and Modifies(s2,v2) with s1.stmt# = 12 and s2.stmt# = 14 
+12 14 lidarParam arDetector, 12 14 lidarParam cameraImageInBW, 12 14 lidarParam tag, 12 14 averageDev arDetector, 12 14 averageDev cameraImageInBW, 12 14 averageDev tag
+5000

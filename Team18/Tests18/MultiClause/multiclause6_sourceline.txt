@@ -1,0 +1,113 @@
+procedure main {
+  call detectors;                                             //1
+  read lidarReading;                                          //2
+  call processLidarReading;                                   //3
+  call estimatePose;                                          //4
+}
+
+procedure processLidarReading {
+  if (lidarReading == 0) then {                               //5
+	print errorLidarMissingMsg;                               //6
+	call exitProcedure;                                       //7
+  } else {
+	distanceXYZToRobot = lidarReading;                        //8
+	orientationXYZWToRobot = lidarReading;                    //9
+  }
+}
+
+procedure detectors {
+  call camera;                                                //10
+  camera = 1;                                                 //11
+  call lidar;                                                 //12
+  lidar = 1;                                                  //13
+  call ARDetector;                                            //14
+  detector = 1;                                               //15
+}
+
+procedure lidar {
+  read lidarParam;                                            //16
+  lidarReading = lidarParam + averageDev;                     //17
+}
+
+procedure camera {
+  if (cameraParam == 0) then {                                //18
+	print errorCalibrationMissingMsg;                         //19
+	call exitProcedure;                                       //20
+  } else {
+    read cameraParam;                                         //21
+	cameraParaK0 = cameraParam + K0;                          //22
+	cameraParaK1 = cameraParam + K1;                          //23
+	cameraParaK2 = cameraParam + K2;                          //24
+	cameraParaK3 = cameraParam + K3;                          //25
+  }
+  while (currentTime != (RobotSleep + 10)) {                  //26
+	if (cameraParaK0 == 0) then {                             //27
+	  call exitProcedure;                                     //28
+	} else{
+	  read cameraImageInRGB;                                  //29
+	}
+	cameraImageInBW = cameraImageInRGB + (red+green+blue)/3;  //30
+	detectTag = cameraImageInBW + detector;                   //31
+  }
+}
+
+procedure ARDetector {
+  read arDetector;                                            //32
+  if (arDetector == 0) then {                                 //33
+	print errorDetectorMissingMsg;                            //34
+	call exitProcedure;                                       //35
+  } else {
+	while (currentTime != (RobotSleep + 10)) {                //36
+	  read cameraImageInBW;                                   //37
+	  tag = cameraImageInBW + detector;                       //38
+	}
+  }
+  arDetector = 0;                                             //39
+}
+
+procedure estimatePose {
+  read distanceXYZToRobot;                                    //40
+  read orientationXYZWToRobot;                                //41
+  read tag;                                                   //42
+  if (distanceXYZToRobot == 0) then {                         //43
+  	print errorLidarMissingMsg;                               //44
+	call exitProcedure;                                       //45
+  } else {
+	AMCL = AMCL + distanceXYZToRobot;                         //46
+  }
+  if (orientationXYZWToRobot == 0) then {                     //47
+  	print errorLidarMissingMsg;                               //48
+	call exitProcedure;                                       //49
+  } else {
+	AMCL = AMCL + orientationXYZWToRobot;                     //50
+  }
+  if (tag == 0) then {                                        //51
+  	print errorDetectorMissingMsg;                            //52
+	call exitProcedure;                                       //53
+  } else {
+	AMCL = AMCL + tag;                                        //54
+  }
+  print AMCLRESULT;                                           //55
+}
+
+procedure exitProcedure {
+  print closingMsg;                                           //56
+
+}
+
+procedure debugger {
+  while (isRunning == 1) {                                    //57
+	print lidarReading;                                       //58
+	print distanceXYZToRobot;                                 //59
+	print orientationXYZWToRobot;                             //60
+	print cameraParam;                                        //61
+	print cameraParaK0;                                       //62
+	print cameraParaK1;                                       //63
+	print cameraParaK2;                                       //64
+	print cameraParaK3;                                       //65
+	print cameraImageInBW;                                    //66
+	print detectTag;                                          //67
+	print arDetector;                                         //68
+	print AMCL;                                               //69
+  }
+}
