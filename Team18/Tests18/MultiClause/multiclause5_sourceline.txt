@@ -1,0 +1,71 @@
+procedure a {
+    if (x < 0) then { // 1
+        y = 3; // 2
+        read z;  // 3
+        call b; // 4
+        a = 100 / 5; // 5
+        b = 200 / 5; // 6
+        c = 150 / 5; // 7
+        d = 400 / 5; // 8
+    } else {
+        while (b > 5) { // 9
+            a = 5 * y + z; // 10
+            a = 100 % 5; // 11
+            b = 100 % 5; // 12
+            c = 100 % 5; // 13
+            d = 100 % 5; // 14
+        }
+        read x; // 15
+        read y; // 16
+        read b; // 17
+        read c; // 18
+        a = 100 / 5; // 19
+    }
+    z = 5 * y; // 20
+    a = 150 / 5; // 21
+    b = 100 / 5; // 22
+}
+
+procedure b {
+    while ( y != b * b + a) { // 23
+        if ((z > 10) || ( c > a * b)) then { // 24
+            read a; // 25
+            read b; // 26
+            call c; // 27
+        } else {
+            a = 5; // 28
+            b = 10; // 29
+            a = 300 / 5; // 30
+        }
+    }
+}
+
+procedure c {
+    print a; // 31
+    print b; // 32
+    print c; // 33
+    if ( a + b > c) then { // 34
+        a = b * c; // 35
+        c = b * a; // 36
+    } else {
+        call d; // 37
+        a = 400 / 5; // 38
+    }
+}
+
+procedure d {
+    read c; // 39
+    read z; // 40
+    read a; // 41
+    read b; // 42
+    print x; // 43
+    y = b + ( c % d); // 44
+    while ( a >= b * b + c) { // 45
+        b = 10; // 46
+        a = 12; // 47
+        c = 100 / 5; // 48
+        d = 4; // 49
+    }
+    a = 500 / 5; // 50
+    c = 50 / 5; // 51
+}
