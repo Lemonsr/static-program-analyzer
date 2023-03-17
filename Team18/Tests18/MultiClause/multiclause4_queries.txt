@@ -1,0 +1,50 @@
+1 - Modifies, Uses
+stmt s; variable v; assign a;
+Select s such that Modifies(s, v) and Uses(s, v)
+28, 16, 9, 2, 25, 4, 13, 23, 5, 29, 19, 8
+5000
+2 - Modifies, Uses, If, Parent
+stmt s, s1, s2, s3; variable v; assign a; while w;
+Select <a, w> such that Modifies(s, v) and Uses(s1, v) and Next(s1, s2) and Parent(s2, s3)
+42 23, 3 4, 18 23, 3 23, 46 45, 30 4, 3 13, 3 41, 30 13, 3 40, 3 45, 6 13, 6 4, 6 23, 25 40, 6 40, 6 41, 30 45, 38 13, 25 45, 6 45, 22 23, 10 4, 22 4, 10 13, 18 4, 14 41, 10 23,10 40, 10 41, 10 45, 14 4, 30 23, 14 13, 30 40, 14 23, 14 40, 14 45, 18 13, 22 41, 18 40,22 40, 18 41, 18 45, 42 45, 22 13, 22 45, 25 4, 26 23, 25 13, 25 23, 26 40, 25 41, 26 4,38 4, 26 13, 26 41, 30 41, 26 45, 38 23, 38 40, 38 41, 38 45, 42 4, 42 13, 42 40, 42 41,46 4, 46 13, 46 23, 46 40, 46 41, 51 4, 51 13, 51 23, 51 40, 51 41, 51 45
+5000
+3 - Modifies, Uses, Next, Follow
+stmt s, s1, s2, s3; variable v; assign a;
+Select a such that Modifies(s, v) and Uses(s1, v) and Next(s2, s3) and Follows(s2, s3)
+10, 14, 18, 22, 25, 26, 3, 30, 38, 42, 46, 51, 6
+5000
+4 - ModifiesProc, CallsStar, If, WithAttrAttrClauseGroup
+procedure p, q; variable v; stmt s; assign a; if i;
+Select i such that Calls*(p, q) and Modifies(p, v) pattern i(_, _, _) with s.stmt# = a.stmt#
+16, 2, 28, 29, 35, 9
+5000
+5 - Next, Modifies, WithValueValue
+stmt s1, s2; variable v1;
+Select v1 such that Modifies(s1, v1) and Next(s1, s2) with 1 = 1
+n1, g1, g3, u, g7, l, u2, u10, u4, u7, y, x, m1, m3, p, o, k, i
+5000
+6 - UsesProc, PatternAssign, Next, WithAttrAttr
+procedure p; assign a; stmt s, s1; variable v;
+Select s such that Uses(p, v) and Next(s, s1) pattern a(_, _) with s.stmt# = a.stmt#
+10, 14, 18, 22, 25, 3, 30, 38, 42, 46, 6
+5000
+7 - Modifies, FollowsStar, Uses, Parent, 
+read re; assign a; stmt s1, s2; variable v, v1;
+Select <s1, v> such that Modifies(s1, v) and Uses(s1, v1) and Follows*(a, s2) and Parent(s2, re)
+10 y, 11 g1, 11 g3, 11 g7, 11 n1, 12 m1, 12 m3, 13 i, 13 k, 13 l, 13 o, 13 p, 13 u, 13 u10, 13 u2, 13 u4, 13 u7, 16 k, 16 o, 16 p, 16 u, 16 u10, 16 u2, 16 u4, 16 u7, 18 o, 19 u, 19 u10, 19 u2, 19 u4, 19 u7, 2 i, 2 k, 2 l, 2 o, 2 p, 2 u, 2 u10, 2 u2, 2 u4, 2 u7, 2 x, 2 y, 22 k, 23 i, 25 i, 28 u, 28 u2, 28 u4, 28 u7, 29 u, 29 u2, 3 y, 30 u, 38 u7, 4 i, 4 k, 4 l, 4 o, 4 p, 4 u, 4 u10, 4 u2, 4 u4, 4 u7, 40 g1, 40 g3, 40 g7, 40 n1, 41 g1, 41 g3, 42 g1, 45 g7, 45 n1, 46 g7, 5 i, 5 k, 5 l, 5 o, 5 p, 5 u, 5 u10, 5 u2, 5 u4, 5 u7, 51 m3, 6 x, 8 u, 8 u10, 8 u2, 8 u4, 8 u7, 9 g1, 9 g3, 9 g7, 9 m1, 9 m3, 9 n1, 9 y
+5000
+8 - Modifies, Uses
+
+Select BOOLEAN such that Uses(2, "x") and Modifies(6, "x")
+TRUE
+5000
+9 - UsesProc, ModifiesProc, Next, PatternAssign
+procedure p, q; variable v, v1; call c; stmt s; assign a;
+Select v1 such that Modifies(p, v) and Uses(q, v1) and Next(c, s) pattern a(_, _)
+g2, g4, g8, gg, h, h1, h2, h4, h5, i, j, k, m2, m4, m5, n2, o, p, p1, q, r, u1, u2, u3, u5, u6, u7, u8, u9, w, x, y
+5000
+10 - FollowsStar, Modifies, PatternAssign, WithAttrAttr
+procedure p; call c; stmt s, s1; assign a; variable v;
+Select <p, a> such that Follows*(s, s1) and Modifies(p, v) pattern a(_, _) with s.stmt# = a.stmt#
+A 10, A 14, A 18, A 3, A 30, A 42, A 46, B 10, B 14, B 18, B 3, B 30, B 42, B 46, C 10, C 14, C 18, C 3, C 30, C 42, C 46, D 10, D 14, D 18, D 3, D 30, D 42, D 46, E 10, E 14, E 18, E 3, E 30, E 42, E 46
+5000

@@ -1,0 +1,84 @@
+procedure A {
+    print x; 
+    if (!(x == y)) then { 
+        y = x + 1; 
+        while (x == 1) { 
+            call B; 
+        }
+        x = y + 1; 
+    }
+    else {
+        read y; 
+        call C; 
+    }
+    if (x == y) then { 
+        y = x + 1; 
+        call D; 
+    } else {
+        call E; 
+    }
+}
+
+procedure B {
+    while (j > k) { 
+        l = 10; 
+        print j; 
+        if (o > p) then { 
+            read o; 
+            o = 1 / p + i; 
+            call C; 
+        } else {
+            read p; 
+            print o; 
+            k = p + o; 
+        }
+        while (2 > i) { 
+            print i; 
+            i = o + p1 + i; 
+        }
+    }
+    k = 10; 
+}
+
+procedure C {
+    print q; 
+    if (w == 1) then { 
+        if (r >= 1) then { 
+            u = u1 + u2;
+            read u2; 
+        } else {
+            print u1; 
+            print u3; 
+        }
+    } else {
+        read u4; 
+        if (u5 == 1) then { 
+            print u6; 
+        } else {
+            print u7; 
+        }
+        u7 = 1 + u8 / u9; 
+    }
+    read u10; 
+}
+
+procedure D {
+    while (gg == h) { 
+        while (h1 == h2) { 
+            g1 = g2; 
+            read g3; 
+            print g4; 
+        }
+        while (h4 == h5) { 
+            g7 = g8; 
+            read n1;
+            print n2;
+        }
+    }
+}
+
+procedure E {
+    read m1;
+    print m2;
+    m3 = m4 + m5;
+}

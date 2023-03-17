@@ -1,0 +1,84 @@
+procedure A {
+    print x; // 1
+    if (!(x == y)) then { // 2
+        y = x + 1; // 3
+        while (x == 1) { // 4
+            call B; // 5
+        }
+        x = y + 1; // 6
+    }
+    else {
+        read y; // 7
+        call C; // 8
+    }
+    if (x == y) then { // 9
+        y = x + 1; // 10
+        call D; // 11
+    } else {
+        call E; // 12
+    }
+}
+
+procedure B {
+    while (j > k) { // 13
+        l = 10; // 14
+        print j; // 15
+        if (o > p) then { // 16
+            read o; // 17
+            o = 1 / p + i; // 18
+            call C; // 19
+        } else {
+            read p; // 20
+            print o; // 21
+            k = p + o; // 22
+        }
+        while (2 > i) { // 23
+            print i; // 24
+            i = o + p1 + i; // 25
+        }
+    }
+    k = 10; // 26
+}
+
+procedure C {
+    print q; // 27
+    if (w == 1) then { // 28
+        if (r >= 1) then { // 29
+            u = u1 + u2; // 30
+            read u2; // 31
+        } else {
+            print u1; // 32
+            print u3; // 33
+        }
+    } else {
+        read u4; // 34
+        if (u5 == 1) then { // 35
+            print u6; // 36
+        } else {
+            print u7; // 37
+        }
+        u7 = 1 + u8 / u9; // 38
+    }
+    read u10; // 39
+}
+
+procedure D {
+    while (gg == h) { // 40
+        while (h1 == h2) { // 41
+            g1 = g2; // 42
+            read g3; // 43
+            print g4; // 44
+        }
+        while (h4 == h5) { // 45
+            g7 = g8; // 46
+            read n1; // 47
+            print n2; // 48
+        }
+    }
+}
+
+procedure E {
+    read m1; // 49
+    print m2; // 50
+    m3 = m4 + m5; // 51
+}
