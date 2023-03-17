@@ -1,53 +1,9 @@
 import subprocess
 import sys
+import os
 
-test_cases = [
-    'IfinIfElse', 
-    'IfinIfThen', 
-    'IfinWhile', 
-    'NoNesting', 
-    'SingleIfElse',
-    'SingleWhileLoop',
-    'WhileInIfElse',
-    'WhileInIfThen',
-    'WhileinWhile'
-]
-
-query_types = [
-    'Modifies',
-    'ModifiesProc',
-    'Uses',
-    'UsesProc',
-    'Follows',
-    'FollowsStar',
-    'Parent',
-    'ParentStar',
-    'Calls',
-    'CallsStar',
-    'Next'
-]
-
-invalid_query_types = [
-    'General',
-    'Modifies',
-    'Uses',
-    'Follows',
-    'FollowsStar',
-    'Parent',
-    'ParentStar',
-    'Calls',
-    'CallsStar',
-    'Pattern',
-    'MultiClause',
-    'Next'
-]
-
-pattern_types = [
-    'Assign',
-    'If',
-    'While'
-]
-
+ignored_list = ["Sample_queries.txt","Sample_source.txt","SystemTest"]
+unique_txt_counter = {}
 autotester_path = '.\\Team18\\Code18\\Release\\AutoTester.exe'
 test_path = '.\\Team18\\Tests18'
 
@@ -80,26 +36,45 @@ def run_autotester(test_case_prefix):
     else:
         print(f'{test_case_prefix} passed\n')
 
-run_autotester(f'{test_path}\\SimpleSelect\\entities')
+def get_file_names_and_location(location):
+  for detected_item in os.listdir(location):
+      if str(detected_item) in ignored_list:
+          continue
+      try:
+          file_location = location + '\\' + str(detected_item)
+          if os.path.isdir(file_location):
+              get_file_names_and_location(file_location)
+          if detected_item.endswith(".txt") and not detected_item.endswith("line.txt"):
+              file_name = str(detected_item)
+              file_absolute_name = file_name.replace('_source.txt', '').replace('_queries.txt', '')
+              key = (location,file_absolute_name)
+              counter = unique_txt_counter.get(key)
+              if counter:
+                  unique_txt_counter[key] = counter + 1
+              else:
+                  unique_txt_counter[key] = 1
+      except Exception as e:
+          print(location)
+          print("No files found here!")
 
-for pattern in pattern_types:
-  run_autotester(f'{test_path}\\Pattern\\pattern{pattern}')
+def start_test(dict_with_location_name):
+    for key, value in dict_with_location_name.items():
+        location = key[0]
+        txtfileName = key[1]
+        if value == 1:
+            print("Only 1 file is detected at %s for %s" % (location, txtfileName))
+        elif value == 2:
+            run_autotester(location + '\\%s' % txtfileName)
+        else:
+            print("There is more than 2 files at %s for %s" % (location, txtfileName))
 
-for type in query_types:
-    for case in test_cases:
-        test_case_prefix = f'{test_path}\\{type}\\'
-        test_case_prefix += type[0].lower()
-        test_case_prefix += type[1:] + case
-        run_autotester(test_case_prefix)
+if len(sys.argv) == 3:
+  run_autotester(test_path + "\\%s" % sys.argv[1] + '\\%s' % sys.argv[2])
+  quit()
+if len(sys.argv) == 2:
+  test_path = test_path + "\\%s" % sys.argv[1]
+else:
+  test_path = '.\\Team18\\Tests18'
 
-for i in range(1, 4):
-	run_autotester(f'{test_path}\\MultiClause\\multiclause{i}')
-	
-run_autotester(f'{test_path}\\With\\with')
-
-for invalid_type in invalid_query_types :
-  if (invalid_type == 'Pattern'):
-    for pattern in pattern_types: 
-      run_autotester(f'{test_path}\\Invalid\{invalid_type}\invalid{invalid_type}{pattern}') 
-  else:
-    run_autotester(f'{test_path}\\Invalid\{invalid_type}\invalid{invalid_type}')     
+get_file_names_and_location(test_path)
+start_test(unique_txt_counter)
