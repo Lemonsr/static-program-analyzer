@@ -1,4 +1,5 @@
 #include "ParentEvaluator.h"
+#include "UtilsFunction.h"
 
 spa::ParentEvaluator::ParentEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
   firstArg(firstArg), secondArg(secondArg) {
@@ -8,6 +9,10 @@ spa::QpsResultTable spa::ParentEvaluator::evaluate(PKBManager& pkbManager) {
   QpsResultTable table;
   table.addHeader(firstArg);
   table.addHeader(secondArg);
+  if (UtilsFunction::isSameSynonym(firstArg, secondArg)) {
+    return table;
+  }
+
   QueryResult result = pkbManager.getRelationship(PARENT, PKBQueryArg(firstArg), PKBQueryArg(secondArg));
 
   if (result.getQueryResultType() == BOOL) {

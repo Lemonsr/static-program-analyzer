@@ -143,6 +143,10 @@ bool spa::UtilsFunction::isValidExpr(std::vector<spa::Token> tokens) {
   // This means that the operator is surrounded by Parenthesis
 }
 
+bool spa::UtilsFunction::isSameSynonym(PqlArgument& first, PqlArgument& second) {
+  return first.getType() == SYNONYM && second.getType() == SYNONYM && first.getValue() == second.getValue();
+}
+
 int spa::UtilsFunction::getPrecedence(std::string op) {
   if (op == "!") return 6;
   if (op == "*" || op == "/" || op == "%") return 5;

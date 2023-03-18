@@ -6,6 +6,7 @@
 #include <unordered_set>
 
 #include "Token.h"
+#include "PqlArgument.h"
 
 namespace spa {
 class UtilsFunction {
@@ -38,6 +39,8 @@ class UtilsFunction {
   static bool isValidFactor(std::vector<Token> tokens);
   static bool isValidTerm(std::vector<Token> tokens);
   static bool isValidExpr(std::vector<Token> tokens);
+
+  static bool isSameSynonym(PqlArgument& first, PqlArgument& second);
 
   template <typename T>
   static bool isOptionalVectorEqual(std::optional<std::vector<T>>& expected,

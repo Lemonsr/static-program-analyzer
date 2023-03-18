@@ -1,4 +1,5 @@
 #include "FollowsEvaluator.h"
+#include "UtilsFunction.h"
 
 spa::FollowsEvaluator::FollowsEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
   firstArg(firstArg), secondArg(secondArg) {
@@ -8,6 +9,10 @@ spa::QpsResultTable spa::FollowsEvaluator::evaluate(PKBManager& pkbManager) {
   QpsResultTable table;
   table.addHeader(firstArg);
   table.addHeader(secondArg);
+  if (UtilsFunction::isSameSynonym(firstArg, secondArg)) {
+    return table;
+  }
+
   QueryResult result = pkbManager.getRelationship(FOLLOWS,
                                                   PKBQueryArg(firstArg),
                                                   PKBQueryArg(secondArg));
