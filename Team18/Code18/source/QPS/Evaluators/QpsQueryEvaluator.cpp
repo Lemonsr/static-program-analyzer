@@ -1,10 +1,13 @@
 #include "QpsQueryEvaluator.h"
-#include "SimpleEvaluator.h"
 
 #include <vector>
 #include <memory>
 #include <string>
 #include <utility>
+#include <unordered_map>
+#include <unordered_set>
+
+#include "SimpleEvaluator.h"
 
 spa::QpsQueryEvaluator::QpsQueryEvaluator(ParsedQuery& parsedQuery) : parsedQuery(parsedQuery) {
 }
@@ -58,7 +61,8 @@ void spa::QpsQueryEvaluator::unionTable(std::unordered_map<std::string, TableGro
   }
 }
 
-void spa::QpsQueryEvaluator::unionTables(std::unordered_map<std::string, TableGroup>& groupMap, QpsResultTable& result, PKBManager& pkbManager) {
+void spa::QpsQueryEvaluator::unionTables(std::unordered_map<std::string, TableGroup>& groupMap,
+                                         QpsResultTable& result, PKBManager& pkbManager) {
   for (auto& p : parsedQuery.getSelectWithDeclarations()) {
     SimpleEvaluator eval(p.first, p.second);
     unionTable(groupMap, eval.evaluate(pkbManager), result);

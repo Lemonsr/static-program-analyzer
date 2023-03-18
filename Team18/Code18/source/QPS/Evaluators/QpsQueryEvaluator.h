@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include <unordered_map>
+
 #include "ParsedQuery.h"
 #include "QpsResultTable.h"
 #include "PKBManager.h"
