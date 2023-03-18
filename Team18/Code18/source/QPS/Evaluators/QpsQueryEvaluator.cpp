@@ -1,7 +1,5 @@
 #include "QpsQueryEvaluator.h"
 #include "SimpleEvaluator.h"
-#include "NoSynonymClauseGroup.h"
-#include "QueryOptimizer.h"
 
 #include <vector>
 #include <memory>
