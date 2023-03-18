@@ -11,7 +11,6 @@
 spa::QpsQueryEvaluator::QpsQueryEvaluator(ParsedQuery& parsedQuery) : parsedQuery(parsedQuery) {
 }
 
-
 spa::TableGroup::TableGroup() {
   table.addHeader("");
   table.addRow({ QpsValue(0) });
@@ -61,11 +60,7 @@ void spa::QpsQueryEvaluator::unionTable(std::unordered_map<std::string, TableGro
   }
 }
 
-spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
-  std::unordered_map<std::string, TableGroup> groupMap;
-  QpsResultTable result;
-  result.addHeader("");
-  result.addRow({ QpsValue(0) });
+void spa::QpsQueryEvaluator::unionTables(std::unordered_map<std::string, TableGroup>& groupMap, QpsResultTable& result, PKBManager& pkbManager) {
   for (auto& p : parsedQuery.getSelectWithDeclarations()) {
     SimpleEvaluator eval(p.first, p.second);
     unionTable(groupMap, eval.evaluate(pkbManager), result);
@@ -82,16 +77,38 @@ spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
     auto eval = clause.getEvaluator();
     unionTable(groupMap, eval->evaluate(pkbManager), result);
   }
+}
+
+spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
+  std::unordered_map<std::string, TableGroup> groupMap;
+  QpsResultTable result;
+  result.addHeader("");
+  result.addRow({ QpsValue(0) });
+  unionTables(groupMap, result, pkbManager);
+
+  auto& selectWithDeclarations = parsedQuery.getSelectWithDeclarations();
   for (auto& p : groupMap) {
     if (!p.second.isParent()) {
       continue;
     }
     auto table = p.second.getTable();
-    result = result.innerJoin(table);
+    if (table.isEmpty()) {
+      return table;
+    }
+
+    std::vector<std::string> reqColumns;
+    for (auto& header : table.getHeaderNames()) {
+      auto synonym = header.substr(0, header.find('.'));
+      if (selectWithDeclarations.find(synonym) != selectWithDeclarations.end()) {
+        reqColumns.push_back(header);
+      }
+    }
+
+    table = table.getColumns(reqColumns);
+
+    if (!table.isEmpty()) {
+      result = result.innerJoin(table);
+    }
   }
   return result;
-  /*QueryOptimizer optimizer;
-  ClauseGroups groups = optimizer.getGroups(parsedQuery);
-
-  return groups.evaluate(pkbManager, parsedQuery.getSelectWithDeclarations());*/
 }

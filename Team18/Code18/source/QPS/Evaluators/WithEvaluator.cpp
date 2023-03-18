@@ -14,7 +14,7 @@ spa::WithEvaluator::WithEvaluator(WithArgument& firstArg, WithArgument& secondAr
 spa::QpsResultTable spa::WithEvaluator::evaluateAttributes(PKBManager& pkbManager,
                                                            const std::string& first, const std::string& second) {
   std::vector<QpsValue> values;
-  std::string attribute = first.substr(first.find('.'));
+  std::string attribute = first.substr(first.find('.') + 1);
   if (attribute == "stmt#") {
     auto result = pkbManager.getEntity(STMT);
     for (int num : result.getLineNumbers()) {
@@ -25,8 +25,13 @@ spa::QpsResultTable spa::WithEvaluator::evaluateAttributes(PKBManager& pkbManage
     for (auto& constant : result.getNames()) {
       values.push_back(QpsValue(std::stoi(constant)));
     }
-  } else {
+  } else if (attribute == "procName") {
     auto result = pkbManager.getEntity(PROCEDURE);
+    for (auto& name : result.getNames()) {
+      values.push_back(QpsValue(name));
+    }
+  } else {
+    auto result = pkbManager.getEntity(VARIABLE);
     for (auto& name : result.getNames()) {
       values.push_back(QpsValue(name));
     }

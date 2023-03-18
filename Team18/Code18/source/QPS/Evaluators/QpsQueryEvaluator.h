@@ -25,6 +25,8 @@ class QpsQueryEvaluator : public QpsEvaluator {
   ParsedQuery& parsedQuery;
   void unionTable(std::unordered_map<std::string, TableGroup>& groupMap,
                   QpsResultTable& table, QpsResultTable& result);
+  void unionTables(std::unordered_map<std::string, TableGroup>& groupMap,
+                   QpsResultTable& result);
  public:
   explicit QpsQueryEvaluator(ParsedQuery& parsedQuery);
   QpsResultTable evaluate(PKBManager& pkbManager);
