@@ -20,7 +20,7 @@ class Stream {
     }
 
     T& operator[](int64_t offset) {
-      return items[start + offset];
+      return items[static_cast<size_t>(start + offset)];
     }
 
     int64_t remaining() {
@@ -35,7 +35,7 @@ class Stream {
       if (remaining() - offset < compare.size()) {
         return false;
       }
-      for (int64_t i = 0; i < compare.size(); ++i) {
+      for (size_t i = 0; i < compare.size(); ++i) {
         if (this->operator[](offset + i) != compare[i]) {
             return false;
         }
