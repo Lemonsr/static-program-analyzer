@@ -1,4 +1,5 @@
 #include "CallsStarEvaluator.h"
+#include "UtilsFunction.h"
 
 spa::CallsStarEvaluator::CallsStarEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
   firstArg(firstArg), secondArg(secondArg) {
@@ -8,6 +9,10 @@ spa::QpsResultTable spa::CallsStarEvaluator::evaluate(PKBManager& pkbManager) {
   QpsResultTable table;
   table.addHeader(firstArg);
   table.addHeader(secondArg);
+  if (UtilsFunction::isSameSynonym(firstArg, secondArg)) {
+    return table;
+  }
+
   QueryResult result = pkbManager.getRelationship(CALLS_STAR,
                                                   PKBQueryArg(firstArg),
                                                   PKBQueryArg(secondArg));
