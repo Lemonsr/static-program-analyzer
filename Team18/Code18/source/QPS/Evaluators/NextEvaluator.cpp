@@ -1,4 +1,5 @@
 #include "NextEvaluator.h"
+#include "UtilsFunction.h"
 
 spa::NextEvaluator::NextEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
   firstArg(firstArg), secondArg(secondArg) {
@@ -8,6 +9,10 @@ spa::QpsResultTable spa::NextEvaluator::evaluate(PKBManager& pkbManager) {
   QpsResultTable table;
   table.addHeader(firstArg);
   table.addHeader(secondArg);
+  if (UtilsFunction::isSameSynonym(firstArg, secondArg)) {
+    return table;
+  }
+
   QueryResult result = pkbManager.getRelationship(NEXT,
                                                   PKBQueryArg(firstArg),
                                                   PKBQueryArg(secondArg));
