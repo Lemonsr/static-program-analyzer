@@ -43,6 +43,14 @@ spa::QpsResultRow spa::QpsResultTable::concatenateRow(QpsResultRow& row, QpsResu
   return result;
 }
 
+std::vector<std::string> spa::QpsResultTable::getHeaderNames() {
+  std::vector<std::string> result;
+  for (auto& p : headerIndexMap) {
+    result.push_back(p.first);
+  }
+  return result;
+}
+
 void spa::QpsResultTable::addHeader(const std::string& header) {
   if (!header.empty()) {
     headerIndexMap[header].push_back(headers.size());

@@ -70,10 +70,10 @@ void spa::QueryOptimizer::initialize(ParsedQuery& parsedQuery) {
     std::vector<std::string> synonyms = clause.getSynonyms();
     if (synonyms.size() == 0) {
       noSynonymClauseGroup.addClause(clause);
-    } else if (synonyms.size() == 2) {
-      withClauseGroup.addAttrAttrClause(clause);
     } else {
-      withClauseGroup.addAttrValueClause(clause);
+      for (auto& synonym : synonyms) {
+        synonymClauseMap[synonym].push_back(&clause);
+      }
     }
   }
 }
