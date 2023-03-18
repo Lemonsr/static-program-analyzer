@@ -1,0 +1,113 @@
+procedure main {
+  call detectors;
+  read lidarReading;
+  call processLidarReading;
+  call estimatePose;
+
+}
+
+procedure processLidarReading {
+  if (lidarReading == 0) then {
+	print errorLidarMissingMsg;
+	call exitProcedure;
+  } else {
+	distanceXYZToRobot = lidarReading;
+	orientationXYZWToRobot = lidarReading;
+  }
+}
+
+procedure detectors {
+  call camera;
+  camera = 1;
+  call lidar;
+  lidar = 1;
+  call ARDetector;
+  detector = 1;
+}
+
+procedure lidar {
+  read lidarParam;
+  lidarReading = lidarParam + averageDev;
+}
+
+procedure camera {
+  if (cameraParam == 0) then {
+	print errorCalibrationMissingMsg;
+	call exitProcedure;
+  } else {
+    read cameraParam;
+	cameraParaK0 = cameraParam + K0;
+	cameraParaK1 = cameraParam + K1;
+	cameraParaK2 = cameraParam + K2;
+	cameraParaK3 = cameraParam + K3;
+  }
+  while (currentTime != (RobotSleep + 10)) {
+	if (cameraParaK0 == 0) then {
+	  call exitProcedure;
+	} else{
+	  read cameraImageInRGB;
+	}
+	cameraImageInBW = cameraImageInRGB + (red+green+blue)/3;
+	detectTag = cameraImageInBW + detector;
+  }
+}
+
+procedure ARDetector {
+  read arDetector;
+  if (arDetector == 0) then {
+	print errorDetectorMissingMsg;
+	call exitProcedure;
+  } else {
+	while (currentTime != (RobotSleep + 10)) {
+	  read cameraImageInBW;
+	  tag = cameraImageInBW + detector;
+	}
+  }
+  arDetector = 0;
+}
+
+procedure estimatePose {
+  read distanceXYZToRobot;
+  read orientationXYZWToRobot;
+  read tag;
+  if (distanceXYZToRobot == 0) then {
+  	print errorLidarMissingMsg;
+	call exitProcedure;
+  } else {
+	AMCL = AMCL + distanceXYZToRobot;
+  }
+  if (orientationXYZWToRobot == 0) then {
+  	print errorLidarMissingMsg;
+	call exitProcedure;
+  } else {
+	AMCL = AMCL + orientationXYZWToRobot;
+  }
+  if (tag == 0) then {
+  	print errorDetectorMissingMsg;
+	call exitProcedure;
+  } else {
+	AMCL = AMCL + tag;
+  }
+  print AMCLRESULT;
+}
+
+procedure exitProcedure {
+  print closingMsg;
+}
+
+procedure debugger {
+  while (isRunning == 1) {
+  print lidarReading;
+  print distanceXYZToRobot;
+  print orientationXYZWToRobot;
+  print cameraParam;
+  print cameraParaK0;
+  print cameraParaK1;
+  print cameraParaK2;
+  print cameraParaK3;
+  print cameraImageInBW;
+  print detectTag;
+  print arDetector;
+  print AMCL;
+  }
+}

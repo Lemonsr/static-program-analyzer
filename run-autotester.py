@@ -6,9 +6,10 @@ ignored_list = ["Sample_queries.txt","Sample_source.txt","SystemTest"]
 unique_txt_counter = {}
 autotester_path = '.\\Team18\\Code18\\Release\\AutoTester.exe'
 test_path = '.\\Team18\\Tests18'
+out_path = '.\\Team18\\Tests18'
 
 def find_if_fail():
-    with open(f'{test_path}\\out.xml', 'r') as file:
+    with open(f'{out_path}\\out.xml', 'r') as file:
         content = file.read()
         hasFailed = not content.find('failed') < 0
         hasSyntaxError = not content.find('SyntaxError') < 0
@@ -25,7 +26,7 @@ def find_if_fail():
 
 def run_autotester(test_case_prefix):
     cmd = f'{autotester_path} {test_case_prefix}_source.txt {test_case_prefix}_queries.txt '
-    cmd += f'{test_path}\\out.xml'
+    cmd += f'{out_path}\\out.xml'
     status = subprocess.call(cmd, stdout=subprocess.DEVNULL)
     if status:
         print(f'Cant run autotester: {test_case_prefix}')
