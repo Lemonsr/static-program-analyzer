@@ -109,7 +109,7 @@ procedure Affects {
 
 procedure Select {
   Select = 1;
-  while (0213123 != 01312323123131) {
+  while (213123 != 1312323123131) {
 	print Test;
   }
 }
