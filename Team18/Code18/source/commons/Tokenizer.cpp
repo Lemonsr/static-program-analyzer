@@ -50,6 +50,9 @@ void spa::Tokenizer::pushWordToken(spa::Stream<spa::Token>& tokens,
         throw std::runtime_error("Invalid name in SIMPLE code");
       }
     }
+    if (word.size() > 1 && word[0] == '0') {
+      throw std::runtime_error("Leading Zero in Integer");
+    }
     tokens.pushBack({spa::TOKEN_INTEGER, word});
   }
   word.clear();

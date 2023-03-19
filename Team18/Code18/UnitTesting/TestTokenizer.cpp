@@ -175,5 +175,22 @@ public:
     }
     Assert::IsTrue(hasException);
   }
+
+  TEST_METHOD(TestTokenizerTokenizeIntegerLeadingZero) {
+    bool hasException = false;
+    try {
+      std::stringstream srcStream;
+      srcStream << "stmt s;\n";
+      srcStream << "Select s such that Parent(012, s)";
+      spa::Tokenizer tokenizer;
+      spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
+    } catch (const std::runtime_error& runTimeError) {
+      hasException = true;
+      std::string expectedMsg = "Leading Zero in Integer";
+      std::string errorMsg = runTimeError.what();
+      Assert::AreEqual(expectedMsg, errorMsg);
+    }
+    Assert::IsTrue(hasException);
+  }
   };
 }  // namespace UnitTesting
