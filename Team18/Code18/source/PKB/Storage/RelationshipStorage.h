@@ -23,6 +23,7 @@ class RelationshipStorage {
   std::unordered_map<std::string, std::unordered_set<std::string>> callsTable;
   std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable;
   std::unordered_map<int, std::unordered_set<int>> nextTable;
+  std::unordered_map<int, std::unordered_set<int>> nextStarTable;
   std::unordered_map<std::string, std::unordered_set<int>> callsContainerParentsTable;
   std::unordered_map<int, std::string> callsProcTable;
   std::unordered_map<int, StatementType> statementTypeTable;
@@ -140,6 +141,17 @@ class RelationshipStorage {
   QueryResult getNextUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getNextUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
+  bool addNextStar(std::string firstLineNo, std::string secondLineNo);
+  QueryResult getNextStarLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getNextStarLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getNextStarStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getNextStarLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getNextStarUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getNextStarStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getNextStarStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getNextStarUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getNextStarUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+
   bool addCallsContainerParent(std::string procName, std::string lineNo);
   QueryResult getCallsContainerParent(std::string procName);
 
@@ -157,6 +169,7 @@ class RelationshipStorage {
   void setCallsTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsTable);
   void setCallsStarTable(std::unordered_map<std::string, std::unordered_set<std::string>> callsStarTable);
   void setNextTable(std::unordered_map<int, std::unordered_set<int>> nextTable);
+  void setNextStarTable(std::unordered_map<int, std::unordered_set<int>> nextStarTable);
   void setCallsContainerParentsTable(std::unordered_map<std::string,
                                                         std::unordered_set<int>> callsContainerParentsTable);
   void setCallsProcTable(std::unordered_map<int, std::string> statementTypeTable);
