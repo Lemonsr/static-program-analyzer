@@ -202,7 +202,7 @@ public:
     relationshipStorage.setStatementTypeTable(statementTypeTable);
     std::vector<std::pair<int, int>> expected = { {1, 2}, {1, 3}, {1, 4}, {1, 5}, {4, 5} };
 
-    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "read",
+    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "re",
                                                                   spa::DesignEntityType::READ));
     spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
     spa::QueryResult queryResult = relationshipStorage.getNextStarStatementUnderscore(firstArg, secondArg);
