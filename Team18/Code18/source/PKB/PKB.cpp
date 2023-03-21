@@ -199,7 +199,27 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
       &RelationshipStorage::getNextUnderscoreStatement},
     {{RelationshipType::NEXT, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getNextUnderscoreUnderscore}
+      &RelationshipStorage::getNextUnderscoreUnderscore},
+
+    // NextStar
+    {{RelationshipType::NEXT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getNextStarLineLine},
+    {{RelationshipType::NEXT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getNextStarLineStatement},
+    {{RelationshipType::NEXT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getNextStarStatementLine},
+    {{RelationshipType::NEXT_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getNextStarLineUnderscore},
+    {{RelationshipType::NEXT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getNextStarUnderscoreLine},
+    {{RelationshipType::NEXT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getNextStarStatementStatement},
+    {{RelationshipType::NEXT_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getNextStarStatementUnderscore},
+    {{RelationshipType::NEXT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getNextStarUnderscoreStatement},
+    {{RelationshipType::NEXT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getNextStarUnderscoreUnderscore}
   };
 }
 
@@ -272,6 +292,9 @@ const bool spa::PKB::addRelationship(RelationshipType relationshipType,
   }
   case NEXT: {
     return relationshipStorage.addNext(firstArg, secondArg);
+  }
+  case NEXT_STAR: {
+    return relationshipStorage.addNextStar(firstArg, secondArg);
   }
   default: {
     return false;
