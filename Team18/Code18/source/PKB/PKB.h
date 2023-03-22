@@ -65,6 +65,7 @@ class PKB : public PKBManager {
   const bool addCallsContainerParent(std::string procName, std::string lineNo);
   const bool addCallsProc(int lineNumber, std::string procName);
   const bool addStatementType(std::string lineNo, StatementType statementType);
+  const bool setAffectsTable(std::unordered_map<int, std::unordered_set<int>> affectsTable);
 
   // Node methods
   const bool addCfgNode(int lineNo, spa::CFGNode cfgNode);

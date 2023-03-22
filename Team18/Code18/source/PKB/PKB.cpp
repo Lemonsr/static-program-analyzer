@@ -365,6 +365,11 @@ const bool spa::PKB::addStatementType(std::string lineNo, StatementType statemen
   return relationshipStorage.addStatementType(lineNo, statementType);
 }
 
+const bool spa::PKB::setAffectsTable(std::unordered_map<int, std::unordered_set<int>> affectsTable) {
+  relationshipStorage.setAffectsTable(affectsTable);
+  return true;
+}
+
 const bool spa::PKB::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
   return cfgStorage.addCfgNode(lineNumber, cfgNode);
 }
