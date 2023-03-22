@@ -1866,11 +1866,22 @@ spa::QueryResult spa::RelationshipStorage::getNextStarUnderscoreUnderscore(PKBQu
   return queryResult;
 }
 
+bool spa::RelationshipStorage::addAffects(std::string firstLineNo, std::string secondLineNo) {
+  int firstLineNumber = std::stoi(firstLineNo);
+  int secondLineNumber = std::stoi(secondLineNo);
+  if (affectsTable.find(firstLineNumber) != affectsTable.end() &&
+    affectsTable[firstLineNumber].find(secondLineNumber) != affectsTable[firstLineNumber].end()) {
+    return false;
+  }
+
+  affectsTable[firstLineNumber].insert(secondLineNumber);
+  return true;
+}
+
 bool spa::RelationshipStorage::addCallsContainerParent(std::string procName, std::string lineNo) {
   int lineNumber = std::stoi(lineNo);
   if (callsContainerParentsTable.find(procName) != callsContainerParentsTable.end() &&
-    callsContainerParentsTable[procName].find(lineNumber) != callsContainerParentsTable[procName].
-    end()) {
+    callsContainerParentsTable[procName].find(lineNumber) != callsContainerParentsTable[procName].end()) {
     return false;
   }
 
@@ -1917,6 +1928,20 @@ spa::QueryResult spa::RelationshipStorage::getCallsProc() {
 
   queryResult.setLineNumberNamePairs(lineNumberNamePairs);
   return queryResult;
+}
+
+bool spa::RelationshipStorage::populateAffects() {
+  if (!affectsTable.empty()) {
+    return false;
+  }
+  return true;
+}
+
+bool spa::RelationshipStorage::populateAffectsStar() {
+  if (!affectsStarTable.empty()) {
+    return false;
+  }
+  return true;
 }
 
 void spa::RelationshipStorage::setFollowsTable(std::unordered_map<int, int> followsTable) {
@@ -1986,6 +2011,16 @@ void spa::RelationshipStorage::setNextTable(
 void spa::RelationshipStorage::setNextStarTable(
   std::unordered_map<int, std::unordered_set<int>> nextStarTable) {
   this->nextStarTable = nextStarTable;
+}
+
+void spa::RelationshipStorage::setAffectsTable(
+  std::unordered_map<int, std::unordered_set<int>> affectsTable) {
+  this->affectsTable = affectsTable;
+}
+
+void spa::RelationshipStorage::setAffectsStarTable(
+  std::unordered_map<int, std::unordered_set<int>> affectsStarTable) {
+  this->affectsStarTable = affectsStarTable;
 }
 
 void spa::RelationshipStorage::setCallsContainerParentsTable(std::unordered_map<

@@ -296,6 +296,9 @@ const bool spa::PKB::addRelationship(RelationshipType relationshipType,
   case NEXT_STAR: {
     return relationshipStorage.addNextStar(firstArg, secondArg);
   }
+  case AFFECTS: {
+    return relationshipStorage.addAffects(firstArg, secondArg);
+  }
   default: {
     return false;
   }
@@ -380,6 +383,21 @@ const bool spa::PKB::addModifiedVariable(int lineNumber, std::string varName) {
 
 const bool spa::PKB::removeDummyNode() {
   return cfgStorage.removeDummyNode();
+}
+
+const bool spa::PKB::populateAffects() {
+  return relationshipStorage.populateAffects();
+}
+
+const bool spa::PKB::populateAffectsStar() {
+  return relationshipStorage.populateAffectsStar();
+}
+
+const bool spa::PKB::clearAll() {
+  relationshipStorage.setNextStarTable({});
+  relationshipStorage.setAffectsTable({});
+  relationshipStorage.setAffectsStarTable({});
+  return true;
 }
 
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,

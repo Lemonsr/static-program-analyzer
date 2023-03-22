@@ -73,6 +73,10 @@ class PKB : public PKBManager {
   const bool addModifiedVariable(int lineNumber, std::string varName);
   const bool removeDummyNode();
 
+  const bool populateAffects();
+  const bool populateAffectsStar();
+  const bool clearAll();
+
   const QueryResult getRelationship(RelationshipType relationshipType,
                                     PKBQueryArg firstArg, PKBQueryArg secondArg);
   const QueryResult getEntity(DesignEntityType entityType);
