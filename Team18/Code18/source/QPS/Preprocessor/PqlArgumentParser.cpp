@@ -37,7 +37,7 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLineNo(
   return { { LINE_NO, val, {}}};
 }
 
-std::optional<spa::PqlArgument> spa::PqlArgumentParser::getVariableName(
+std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLiteralString(
   Stream<Token>& tokens
 ) {
   bool matchResult = tokens.match({
@@ -69,7 +69,7 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::parse(
   if (lResult) {
     return lResult;
   }
-  std::optional<spa::PqlArgument> vResult = getVariableName(tokens);
+  std::optional<spa::PqlArgument> vResult = getLiteralString(tokens);
   if (vResult) {
     return vResult;
   }
