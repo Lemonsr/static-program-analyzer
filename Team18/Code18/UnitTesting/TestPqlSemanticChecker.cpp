@@ -8,6 +8,16 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 namespace UnitTesting {
   TEST_CLASS(TestPqlSemanticChecker) {
     spa::PqlSemanticChecker semanticChecker;
+    std::vector<spa::RelationshipType> stmtRefRelationships = {
+      spa::PARENT,
+      spa::PARENT_STAR,
+      spa::FOLLOWS,
+      spa::FOLLOWS_STAR,
+      spa::NEXT,
+      spa::NEXT_STAR,
+      spa::AFFECTS,
+      spa::AFFECTS_STAR
+    };
     TEST_METHOD(TestModifiesValid) {
       std::vector<spa::PqlArgument> validFirstArgs = {
         {spa::ArgumentType::LINE_NO, "1", {}},
@@ -65,7 +75,6 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
         {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
         {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
         {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
@@ -163,7 +172,6 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
         {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
         {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
         {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
@@ -204,7 +212,7 @@ namespace UnitTesting {
       }
     }
 
-    TEST_METHOD(TestFollowsValid) {
+    TEST_METHOD(TestStmtRefValid) {
       std::vector<spa::PqlArgument> validFirstArgs = {
         {spa::ArgumentType::LINE_NO, "1", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
@@ -232,20 +240,17 @@ namespace UnitTesting {
       spa::ParsedQuery parsedQuery;
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : validSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsTrue(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsTrue(isValid);
+          for (auto& rel : stmtRefRelationships) {
+            spa::SuchThatClause suchThatClause(rel, firstArg, secondArg);
+            parsedQuery.addSuchThatClause(suchThatClause);
+            bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+            Assert::IsTrue(isValid);
+          }
         }
       }
     }
 
-    TEST_METHOD(TestFollowsInvalid) {
+    TEST_METHOD(TestStmtRefInvalid) {
       std::vector<spa::PqlArgument> validFirstArgs = {
         {spa::ArgumentType::LINE_NO, "1", {}},
         {spa::ArgumentType::WILDCARD, "_", {}},
@@ -271,14 +276,12 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
       };
 
       std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::LITERAL_STRING, "x", {}},
         {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
         {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
         {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
@@ -287,15 +290,12 @@ namespace UnitTesting {
       spa::ParsedQuery parsedQuery;
       for (auto& firstArg : validFirstArgs) {
         for (auto& secondArg : invalidSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
+          for (auto& rel : stmtRefRelationships) {
+            spa::SuchThatClause suchThatClause(rel, firstArg, secondArg);
+            parsedQuery.addSuchThatClause(suchThatClause);
+            bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
+            Assert::IsFalse(isValid);
+          }
         }
       }
 
@@ -321,130 +321,6 @@ namespace UnitTesting {
           Assert::IsFalse(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-        }
-      }
-    }
-
-    TEST_METHOD(TestParentValid) {
-      std::vector<spa::PqlArgument> validFirstArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
-        {spa::ArgumentType::WILDCARD, "_", {}},
-        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
-        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
-        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
-        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
-        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
-        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
-        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
-      };
-
-      std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
-        {spa::ArgumentType::WILDCARD, "_", {}},
-        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
-        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
-        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
-        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
-        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
-        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
-        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
-      };
-
-      spa::ParsedQuery parsedQuery;
-      for (auto& firstArg : validFirstArgs) {
-        for (auto& secondArg : validSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::PARENT, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsTrue(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::PARENT_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsTrue(isValid);
-        }
-      }
-    }
-
-    TEST_METHOD(TestParentInvalid) {
-      std::vector<spa::PqlArgument> validFirstArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
-        {spa::ArgumentType::WILDCARD, "_", {}},
-        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
-        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
-        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
-        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
-        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
-        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
-        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
-      };
-
-      std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
-        {spa::ArgumentType::WILDCARD, "_", {}},
-        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
-        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
-        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
-        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
-        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
-        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
-        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
-      };
-
-      std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::LITERAL_STRING, "x", {}},
-        {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
-        {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
-        {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
-      };
-
-      std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::LITERAL_STRING, "x", {}},
-        {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
-        {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
-        {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
-      };
-
-      spa::ParsedQuery parsedQuery;
-      for (auto& firstArg : validFirstArgs) {
-        for (auto& secondArg : invalidSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::PARENT, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::PARENT_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-        }
-      }
-
-      for (auto& firstArg : invalidFirstArgs) {
-        for (auto& secondArg : validSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::PARENT, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::PARENT_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-        }
-      }
-
-      for (auto& firstArg : invalidFirstArgs) {
-        for (auto& secondArg : invalidSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::PARENT, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::PARENT_STAR, firstArg, secondArg);
           parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
@@ -495,7 +371,6 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
         {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
         {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
         {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
@@ -508,7 +383,6 @@ namespace UnitTesting {
       };
 
       std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
         {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
         {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
         {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
@@ -558,130 +432,6 @@ namespace UnitTesting {
           Assert::IsFalse(isValid);
 
           suchThatClause = spa::SuchThatClause(spa::RelationshipType::CALLS_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-        }
-      }
-    }
-
-    TEST_METHOD(TestNextValid) {
-      std::vector<spa::PqlArgument> validFirstArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
-        {spa::ArgumentType::WILDCARD, "_", {}},
-        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
-        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
-        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
-        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
-        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
-        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
-        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
-      };
-
-      std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
-        {spa::ArgumentType::WILDCARD, "_", {}},
-        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
-        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
-        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
-        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
-        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
-        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
-        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
-      };
-
-      spa::ParsedQuery parsedQuery;
-      for (auto& firstArg : validFirstArgs) {
-        for (auto& secondArg : validSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsTrue(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsTrue(isValid);
-        }
-      }
-    }
-
-    TEST_METHOD(TestNextInvalid) {
-      std::vector<spa::PqlArgument> validFirstArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
-        {spa::ArgumentType::WILDCARD, "_", {}},
-        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
-        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
-        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
-        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
-        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
-        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
-        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
-      };
-
-      std::vector<spa::PqlArgument> validSecondArgs = {
-        {spa::ArgumentType::LINE_NO, "1", {}},
-        {spa::ArgumentType::WILDCARD, "_", {}},
-        {spa::ArgumentType::SYNONYM, "s", {spa::DesignEntityType::STMT}},
-        {spa::ArgumentType::SYNONYM, "re", {spa::DesignEntityType::READ}},
-        {spa::ArgumentType::SYNONYM, "a", {spa::DesignEntityType::ASSIGN}},
-        {spa::ArgumentType::SYNONYM, "pr", {spa::DesignEntityType::PRINT}},
-        {spa::ArgumentType::SYNONYM, "i", {spa::DesignEntityType::IF}},
-        {spa::ArgumentType::SYNONYM, "w", {spa::DesignEntityType::WHILE}},
-        {spa::ArgumentType::SYNONYM, "c", {spa::DesignEntityType::CALL}},
-      };
-
-      std::vector<spa::PqlArgument> invalidFirstArgs = {
-        {spa::ArgumentType::LITERAL_STRING, "x", {}},
-        {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
-        {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
-        {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
-      };
-
-      std::vector<spa::PqlArgument> invalidSecondArgs = {
-        {spa::ArgumentType::LITERAL_STRING, "x", {}},
-        {spa::ArgumentType::SYNONYM, "v", {spa::DesignEntityType::VARIABLE}},
-        {spa::ArgumentType::SYNONYM, "p", {spa::DesignEntityType::PROCEDURE}},
-        {spa::ArgumentType::SYNONYM, "co", {spa::DesignEntityType::CONSTANT}},
-      };
-
-      spa::ParsedQuery parsedQuery;
-      for (auto& firstArg : validFirstArgs) {
-        for (auto& secondArg : invalidSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-        }
-      }
-
-      for (auto& firstArg : invalidFirstArgs) {
-        for (auto& secondArg : validSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-        }
-      }
-
-      for (auto& firstArg : invalidFirstArgs) {
-        for (auto& secondArg : invalidSecondArgs) {
-          spa::SuchThatClause suchThatClause(spa::RelationshipType::FOLLOWS, firstArg, secondArg);
-          parsedQuery.addSuchThatClause(suchThatClause);
-          bool isValid = semanticChecker.isSemanticallyValid(parsedQuery);
-          Assert::IsFalse(isValid);
-
-          suchThatClause = spa::SuchThatClause(spa::RelationshipType::FOLLOWS_STAR, firstArg, secondArg);
           parsedQuery.addSuchThatClause(suchThatClause);
           isValid = semanticChecker.isSemanticallyValid(parsedQuery);
           Assert::IsFalse(isValid);
