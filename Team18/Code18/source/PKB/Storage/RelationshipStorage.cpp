@@ -1930,18 +1930,16 @@ spa::QueryResult spa::RelationshipStorage::getCallsProc() {
   return queryResult;
 }
 
-bool spa::RelationshipStorage::populateAffects() {
-  if (!affectsTable.empty()) {
-    return false;
-  }
-  return true;
+bool spa::RelationshipStorage::isNextStarEmpty() {
+  return nextStarTable.empty();
 }
 
-bool spa::RelationshipStorage::populateAffectsStar() {
-  if (!affectsStarTable.empty()) {
-    return false;
-  }
-  return true;
+bool spa::RelationshipStorage::isAffectsEmpty() {
+  return affectsTable.empty();
+}
+
+bool spa::RelationshipStorage::isAffectsStarEmpty() {
+  return affectsStarTable.empty();
 }
 
 void spa::RelationshipStorage::setFollowsTable(std::unordered_map<int, int> followsTable) {

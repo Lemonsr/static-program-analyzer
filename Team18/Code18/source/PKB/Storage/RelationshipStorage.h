@@ -162,8 +162,9 @@ class RelationshipStorage {
   bool addCallsProc(int lineNumber, std::string procName);
   QueryResult getCallsProc();
 
-  bool populateAffects();
-  bool populateAffectsStar();
+  bool isNextStarEmpty();
+  bool isAffectsEmpty();
+  bool isAffectsStarEmpty();
 
   void setFollowsTable(std::unordered_map<int, int> followsTable);
   void setFollowsStarTable(std::unordered_map<int, std::unordered_set<int>> followsStarTable);

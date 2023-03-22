@@ -30,6 +30,7 @@ class PKBManager {
   virtual const bool removeDummyNode() = 0;
 
   // Next*, Affects, Affects* methods
+  virtual const bool populateNextStar() = 0;
   virtual const bool populateAffects() = 0;
   virtual const bool populateAffectsStar() = 0;
   virtual const bool clearAll() = 0;  // Clears all Next*, Affects and Affects* tables

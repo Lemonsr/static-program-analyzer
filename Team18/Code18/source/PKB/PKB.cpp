@@ -385,12 +385,25 @@ const bool spa::PKB::removeDummyNode() {
   return cfgStorage.removeDummyNode();
 }
 
+const bool spa::PKB::populateNextStar() {
+  if (relationshipStorage.isNextStarEmpty()) {
+    // TODO: add DE.populateNextStar() call
+  }
+  return relationshipStorage.isNextStarEmpty();
+}
+
 const bool spa::PKB::populateAffects() {
-  return relationshipStorage.populateAffects();
+  if (relationshipStorage.isAffectsEmpty()) {
+    // TODO: add DE.populateAffects() call
+  }
+  return relationshipStorage.isAffectsEmpty();
 }
 
 const bool spa::PKB::populateAffectsStar() {
-  return relationshipStorage.populateAffectsStar();
+  if (relationshipStorage.isAffectsStarEmpty()) {
+    // TODO: add DE.populateAffectsStar() call
+  }
+  return relationshipStorage.isAffectsStarEmpty();
 }
 
 const bool spa::PKB::clearAll() {

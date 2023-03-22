@@ -73,6 +73,7 @@ class PKB : public PKBManager {
   const bool addModifiedVariable(int lineNumber, std::string varName);
   const bool removeDummyNode();
 
+  const bool populateNextStar();
   const bool populateAffects();
   const bool populateAffectsStar();
   const bool clearAll();
