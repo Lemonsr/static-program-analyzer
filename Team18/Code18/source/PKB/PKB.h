@@ -87,5 +87,6 @@ class PKB : public PKBManager {
   const QueryResult getCallsProc();
   const QueryResult getCfgNode(int lineNumber);
   const QueryResult getCfgEndNodes();
+  const QueryResult getAffectsTable();
 };
 }  // namespace spa

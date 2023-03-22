@@ -165,6 +165,7 @@ class RelationshipStorage {
   bool isNextStarEmpty();
   bool isAffectsEmpty();
   bool isAffectsStarEmpty();
+  QueryResult getAffectsTable();
 
   void setFollowsTable(std::unordered_map<int, int> followsTable);
   void setFollowsStarTable(std::unordered_map<int, std::unordered_set<int>> followsStarTable);

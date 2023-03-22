@@ -461,3 +461,7 @@ const spa::QueryResult spa::PKB::getCfgNode(int lineNumber) {
 const spa::QueryResult spa::PKB::getCfgEndNodes() {
   return cfgStorage.getCfgEndNodes();
 }
+
+const spa::QueryResult spa::PKB::getAffectsTable() {
+  return relationshipStorage.getAffectsTable();
+}

@@ -44,5 +44,6 @@ class PKBManager {
   virtual const QueryResult getCallsProc() = 0;
   virtual const QueryResult getCfgNode(int lineNumber) = 0;
   virtual const QueryResult getCfgEndNodes() = 0;
+  virtual const QueryResult getAffectsTable() = 0;
 };
 }  // namespace spa

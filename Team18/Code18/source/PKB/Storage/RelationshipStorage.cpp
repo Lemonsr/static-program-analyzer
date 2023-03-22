@@ -1942,6 +1942,13 @@ bool spa::RelationshipStorage::isAffectsStarEmpty() {
   return affectsStarTable.empty();
 }
 
+spa::QueryResult spa::RelationshipStorage::getAffectsTable() {
+  QueryResult queryResult;
+  queryResult.setAffectsTable(&affectsTable);
+
+  return queryResult;
+}
+
 void spa::RelationshipStorage::setFollowsTable(std::unordered_map<int, int> followsTable) {
   this->followsTable = followsTable;
 }
