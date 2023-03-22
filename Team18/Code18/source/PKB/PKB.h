@@ -65,6 +65,7 @@ class PKB : public PKBManager {
   const bool addCallsContainerParent(std::string procName, std::string lineNo);
   const bool addCallsProc(int lineNumber, std::string procName);
   const bool addStatementType(std::string lineNo, StatementType statementType);
+  const bool setAffectsTable(std::unordered_map<int, std::unordered_set<int>> affectsTable);
 
   // Node methods
   const bool addCfgNode(int lineNo, spa::CFGNode cfgNode);
@@ -73,6 +74,11 @@ class PKB : public PKBManager {
   const bool addModifiedVariable(int lineNumber, std::string varName);
   const bool addUsesVariable(int lineNumber, std::string varName);
   const bool removeDummyNode();
+
+  const bool populateNextStar();
+  const bool populateAffects();
+  const bool populateAffectsStar();
+  const bool clearAll();
 
   const QueryResult getRelationship(RelationshipType relationshipType,
                                     PKBQueryArg firstArg, PKBQueryArg secondArg);
@@ -83,5 +89,6 @@ class PKB : public PKBManager {
   const QueryResult getCallsProc();
   const QueryResult getCfgNode(int lineNumber);
   const QueryResult getCfgEndNodes();
+  const QueryResult getAffectsTable();
 };
 }  // namespace spa

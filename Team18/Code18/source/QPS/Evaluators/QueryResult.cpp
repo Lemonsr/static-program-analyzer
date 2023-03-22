@@ -36,6 +36,10 @@ const bool& spa::QueryResult::getIsTrue() {
   return isTrue.value();
 }
 
+const std::unordered_map<int, std::unordered_set<int>>* spa::QueryResult::getAffectsTable() {
+    return affectsTable.value();
+}
+
 void spa::QueryResult::setQueryResultType(QueryResultType queryResultType) {
   this->queryResultType = queryResultType;
 }
@@ -74,4 +78,8 @@ void spa::QueryResult::setCfgNodes(std::vector<spa::CFGNode*> cfgNodes) {
 
 void spa::QueryResult::setCfgEndNodes(std::vector<int> cfgEndNodes) {
   this->cfgEndNodes = cfgEndNodes;
+}
+
+void spa::QueryResult::setAffectsTable(std::unordered_map<int, std::unordered_set<int>>* affectsTable) {
+  this->affectsTable = affectsTable;
 }

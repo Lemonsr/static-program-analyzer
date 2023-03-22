@@ -296,6 +296,9 @@ const bool spa::PKB::addRelationship(RelationshipType relationshipType,
   case NEXT_STAR: {
     return relationshipStorage.addNextStar(firstArg, secondArg);
   }
+  case AFFECTS: {
+    return relationshipStorage.addAffects(firstArg, secondArg);
+  }
   default: {
     return false;
   }
@@ -362,6 +365,11 @@ const bool spa::PKB::addStatementType(std::string lineNo, StatementType statemen
   return relationshipStorage.addStatementType(lineNo, statementType);
 }
 
+const bool spa::PKB::setAffectsTable(std::unordered_map<int, std::unordered_set<int>> affectsTable) {
+  relationshipStorage.setAffectsTable(affectsTable);
+  return true;
+}
+
 const bool spa::PKB::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
   return cfgStorage.addCfgNode(lineNumber, cfgNode);
 }
@@ -384,6 +392,34 @@ const bool spa::PKB::addModifiedVariable(int lineNumber, std::string varName) {
 
 const bool spa::PKB::removeDummyNode() {
   return cfgStorage.removeDummyNode();
+}
+
+const bool spa::PKB::populateNextStar() {
+  if (relationshipStorage.isNextStarEmpty()) {
+    // TODO: add DE.populateNextStar() call
+  }
+  return relationshipStorage.isNextStarEmpty();
+}
+
+const bool spa::PKB::populateAffects() {
+  if (relationshipStorage.isAffectsEmpty()) {
+    // TODO: add DE.populateAffects() call
+  }
+  return relationshipStorage.isAffectsEmpty();
+}
+
+const bool spa::PKB::populateAffectsStar() {
+  if (relationshipStorage.isAffectsStarEmpty()) {
+    // TODO: add DE.populateAffectsStar() call
+  }
+  return relationshipStorage.isAffectsStarEmpty();
+}
+
+const bool spa::PKB::clearAll() {
+  relationshipStorage.setNextStarTable({});
+  relationshipStorage.setAffectsTable({});
+  relationshipStorage.setAffectsStarTable({});
+  return true;
 }
 
 const spa::QueryResult spa::PKB::getRelationship(RelationshipType relationshipType,
@@ -433,4 +469,8 @@ const spa::QueryResult spa::PKB::getCfgNode(int lineNumber) {
 
 const spa::QueryResult spa::PKB::getCfgEndNodes() {
   return cfgStorage.getCfgEndNodes();
+}
+
+const spa::QueryResult spa::PKB::getAffectsTable() {
+  return relationshipStorage.getAffectsTable();
 }
