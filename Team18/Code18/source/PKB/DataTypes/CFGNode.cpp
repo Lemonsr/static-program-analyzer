@@ -13,7 +13,8 @@ spa::CFGNode::CFGNode(int lineNumber, std::string variable) {
   isDummy = false;
 }
 
-spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> modifiedVariables, std::unordered_set<std::string> usesVariables) {
+spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> modifiedVariables,
+                      std::unordered_set<std::string> usesVariables) {
   this->lineNumber = lineNumber;
   this->modifiedVariables.insert(modifiedVariables.begin(), modifiedVariables.end());
   this->usesVariables.insert(usesVariables.begin(), usesVariables.end());
@@ -99,7 +100,7 @@ bool spa::operator==(const CFGNode& s1, const CFGNode& s2) {
   }
   if (s1.usesVariables != s2.usesVariables) {
     return false;
-  } 
+  }
 
   for (auto& itr = s1.modifiedVariables.begin(); itr != s1.modifiedVariables.end(); itr++) {
     if (s2.modifiedVariables.find(*itr) == s2.modifiedVariables.end()) {
