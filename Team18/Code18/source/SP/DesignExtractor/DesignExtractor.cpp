@@ -292,6 +292,17 @@ void spa::DesignExtractor::addUsesModifies(std::string relArg,
                                                   std::vector<std::pair<std::string, std::string>>
                                                   varModifies, bool isCallStmt) {
   for (auto& var : varUses) {
+    if (isCallStmt) {
+      QueryResult queryResult = pkbManager.getCfgNode(stoi(relArg));
+      std::vector<CFGNode*> nodes = queryResult.getCfgNodes();
+      if (!nodes.empty()) {
+        CFGNode* node = nodes[0];
+        node->addUsesVariable(var.second);
+      }
+    } else {
+      QueryResult parentNode = pkbManager.getCfgNode(stoi(relArg));
+      parentNode.getCfgNodes()[0]->addUsesVariable(var.second);
+    }
     pkbManager.addRelationship(USES, relArg, var.second);
   }
   for (auto& var : varModifies) {
@@ -302,6 +313,9 @@ void spa::DesignExtractor::addUsesModifies(std::string relArg,
         CFGNode* node = nodes[0];
         node->addModifiedVariable(var.second);
       }
+    } else {
+      QueryResult parentNode = pkbManager.getCfgNode(stoi(relArg));
+      parentNode.getCfgNodes()[0]->addModifiedVariable(var.second);
     }
     pkbManager.addRelationship(MODIFIES, relArg, var.second);
   }

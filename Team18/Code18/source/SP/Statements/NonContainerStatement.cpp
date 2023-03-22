@@ -100,6 +100,7 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::PrintStatement::processStatement(
   pkbManager.addRelationship(USES_P, parentProcedureVal, variableName);
   addParentUses(pkbManager, variableName);
   CFGNode cfgPrintStmtNode = CFGNode(statementLineNum);
+  cfgPrintStmtNode.addUsesVariable(variableName);
   pkbManager.addCfgNode(statementLineNum, cfgPrintStmtNode);
   return std::make_pair(cfgPrintStmtNode, cfgPrintStmtNode);
 }
@@ -119,14 +120,14 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::CallStatement::processStatement(
 std::pair<spa::CFGNode, spa::CFGNode> spa::AssignStatement::processStatement(
   spa::PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
+  CFGNode cfgAssignStmtNode = CFGNode(statementLineNum, assignVar);
   pkbManager.addEntity(VARIABLE, assignVar);
   pkbManager.addStatementType(stringStmtLineNum, StatementType::ASSIGN);
   pkbManager.addRelationship(MODIFIES, stringStmtLineNum, assignVar);
   pkbManager.addRelationship(MODIFIES_P, parentProcedureVal, assignVar);
   addParentModifies(pkbManager, assignVar);
-  extractUsesFromPostfix(pkbManager, postfixExpr);
+  extractUsesFromPostfix(pkbManager, postfixExpr, cfgAssignStmtNode);
   pkbManager.addPattern(stringStmtLineNum, assignVar, postfixExpr);
-  CFGNode cfgAssignStmtNode = CFGNode(statementLineNum, assignVar);
   pkbManager.addCfgNode(statementLineNum, cfgAssignStmtNode);
   return std::make_pair(cfgAssignStmtNode, cfgAssignStmtNode);
 }
@@ -134,27 +135,27 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::AssignStatement::processStatement(
 std::pair<spa::CFGNode, spa::CFGNode> spa::IfConditionStatement::processStatement(
   PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
-  pkbManager.addStatementType(stringStmtLineNum, StatementType::IF);
-  extractUsesFromPostfix(pkbManager, postfixExpr);
-  extractPatternFromPostfix(pkbManager, stringStmtLineNum, postfixExpr, IF);
   CFGNode cfgIfConditionalStmtNode = CFGNode(statementLineNum);
+  pkbManager.addStatementType(stringStmtLineNum, StatementType::IF);
+  extractUsesFromPostfix(pkbManager, postfixExpr, cfgIfConditionalStmtNode);
   pkbManager.addCfgNode(statementLineNum, cfgIfConditionalStmtNode);
+  extractPatternFromPostfix(pkbManager, stringStmtLineNum, postfixExpr, IF);
   return std::make_pair(cfgIfConditionalStmtNode, cfgIfConditionalStmtNode);
 }
 
 std::pair<spa::CFGNode, spa::CFGNode> spa::WhileConditionStatement::processStatement(
   PKBManager& pkbManager) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
-  pkbManager.addStatementType(stringStmtLineNum, StatementType::WHILE);
-  extractUsesFromPostfix(pkbManager, postfixExpr);
-  extractPatternFromPostfix(pkbManager, stringStmtLineNum, postfixExpr, WHILE);
   CFGNode cfgWhileConditionalStmtNode = CFGNode(statementLineNum);
+  pkbManager.addStatementType(stringStmtLineNum, StatementType::WHILE);
+  extractUsesFromPostfix(pkbManager, postfixExpr, cfgWhileConditionalStmtNode);
   pkbManager.addCfgNode(statementLineNum, cfgWhileConditionalStmtNode);
+  extractPatternFromPostfix(pkbManager, stringStmtLineNum, postfixExpr, WHILE);
   return std::make_pair(cfgWhileConditionalStmtNode, cfgWhileConditionalStmtNode);
 }
 
 void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
-  PKBManager& pkbManager, std::string postfix) {
+  PKBManager& pkbManager, std::string postfix, CFGNode& cfgNode) {
   std::string stringStmtLineNum = std::to_string(statementLineNum);
   postfix += " ";
   std::string expr = "";
@@ -166,6 +167,7 @@ void spa::MultiVarNonContainerStatement::extractUsesFromPostfix(
     if (std::all_of(expr.begin(), expr.end(), ::isdigit)) {
       pkbManager.addEntity(CONSTANT, expr);
     } else if (std::all_of(expr.begin(), expr.end(), ::isalnum)) {
+      cfgNode.addUsesVariable(expr);
       pkbManager.addEntity(VARIABLE, expr);
       pkbManager.addRelationship(USES, stringStmtLineNum, expr);
       pkbManager.addRelationship(USES_P, parentProcedureVal, expr);
@@ -198,10 +200,14 @@ void spa::MultiVarNonContainerStatement::extractPatternFromPostfix(
 void spa::NonContainerStatement::addParentUses(PKBManager& pkbManager, std::string variableName) {
   for (int parent : whileStmtParents) {
     std::string stringParentStmtNum = std::to_string(parent);
+    QueryResult parentNode = pkbManager.getCfgNode(parent);
+    parentNode.getCfgNodes()[0]->addUsesVariable(variableName);
     pkbManager.addRelationship(USES, stringParentStmtNum, variableName);
   }
   for (int parent : ifStmtParents) {
     std::string stringParentStmtNum = std::to_string(parent);
+    QueryResult parentNode = pkbManager.getCfgNode(parent);
+    parentNode.getCfgNodes()[0]->addUsesVariable(variableName);
     pkbManager.addRelationship(USES, stringParentStmtNum, variableName);
   }
 }
@@ -210,10 +216,14 @@ void spa::NonContainerStatement::addParentModifies(PKBManager& pkbManager,
                                                    std::string variableName) {
   for (int parent : whileStmtParents) {
     std::string stringParentStmtNum = std::to_string(parent);
+    QueryResult parentNode = pkbManager.getCfgNode(parent);
+    parentNode.getCfgNodes()[0]->addModifiedVariable(variableName);
     pkbManager.addRelationship(MODIFIES, stringParentStmtNum, variableName);
   }
   for (int parent : ifStmtParents) {
     std::string stringParentStmtNum = std::to_string(parent);
+    QueryResult parentNode = pkbManager.getCfgNode(parent);
+    parentNode.getCfgNodes()[0]->addModifiedVariable(variableName);
     pkbManager.addRelationship(MODIFIES, stringParentStmtNum, variableName);
   }
 }

@@ -374,6 +374,10 @@ const bool spa::PKB::addEdge(int lineNumberOne, int lineNumberTwo) {
   return cfgStorage.addEdge(lineNumberOne, lineNumberTwo, relationshipStorage);
 }
 
+const bool spa::PKB::addUsesVariable(int lineNumber, std::string varName) {
+  return cfgStorage.addUsesVariable(lineNumber, varName);
+}
+
 const bool spa::PKB::addModifiedVariable(int lineNumber, std::string varName) {
   return cfgStorage.addModifiedVariable(lineNumber, varName);
 }

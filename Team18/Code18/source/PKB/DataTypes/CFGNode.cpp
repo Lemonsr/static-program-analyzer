@@ -13,9 +13,11 @@ spa::CFGNode::CFGNode(int lineNumber, std::string variable) {
   isDummy = false;
 }
 
-spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> variables) {
+spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> modifiedVariables,
+                      std::unordered_set<std::string> usesVariables) {
   this->lineNumber = lineNumber;
-  this->modifiedVariables.insert(variables.begin(), variables.end());
+  this->modifiedVariables.insert(modifiedVariables.begin(), modifiedVariables.end());
+  this->usesVariables.insert(usesVariables.begin(), usesVariables.end());
   isDummy = false;
 }
 
@@ -38,6 +40,14 @@ void spa::CFGNode::addModifiedVariable(std::string variable) {
 
 std::unordered_set<std::string> spa::CFGNode::getModifiedVariables() const {
   return modifiedVariables;
+}
+
+void spa::CFGNode::addUsesVariable(std::string variable) {
+  usesVariables.insert(variable);
+}
+
+std::unordered_set<std::string> spa::CFGNode::getUsesVariables() const {
+  return usesVariables;
 }
 
 std::unordered_set<spa::CFGNode*> spa::CFGNode::getIncomingEdges() const {
@@ -88,6 +98,10 @@ bool spa::operator==(const CFGNode& s1, const CFGNode& s2) {
     s1.outgoingEdges.size() != s2.outgoingEdges.size()) {
     return false;
   }
+  if (s1.usesVariables != s2.usesVariables) {
+    return false;
+  }
+
   for (auto& itr = s1.modifiedVariables.begin(); itr != s1.modifiedVariables.end(); itr++) {
     if (s2.modifiedVariables.find(*itr) == s2.modifiedVariables.end()) {
       return false;
