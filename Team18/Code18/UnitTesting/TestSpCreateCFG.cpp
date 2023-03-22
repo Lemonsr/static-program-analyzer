@@ -86,8 +86,8 @@ TEST_CLASS(TestSpCreateCFG) {
       s1->getModifiedVariables() == s2->getModifiedVariables() && s1->getUsesVariables() == s2->getUsesVariables();
   }
 
-  void assertCFGMatch(std::unordered_set<spa::CFGNode*> expectedNodes) {
-    for (auto& expected : expectedNodes) {
+  void assertCFGMatch(std::unordered_set<spa::CFGNode*>& expectedNodes) {
+    for (auto expected : expectedNodes) {
       spa::QueryResult queryResult = pkbManager->getCfgNode(expected->getLineNumber());
       std::vector<spa::CFGNode*> testNodes = queryResult.getCfgNodes();
       if (!testNodes.empty()) {
@@ -753,6 +753,143 @@ public:
     };
     assertCFGMatch(expectedNodes);
     assertEndNodeMatch({4, 8});
+  }
+
+
+  TEST_METHOD(TestNestedMultiWhileProcCFGCreation) {
+    /*
+     *  procedure a {
+     * 1. while (c >= 1) {
+     * 2.   call b;
+     * 3.   print a;
+     *    }
+     *  }
+     *
+     *  procedure b {
+     * 4. c = d - e;
+     * 5. print c;
+     * 6. read g;
+     * 7. g = h;
+     *  }
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenWhile, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenOpenBrace, tokenCall, tokenB, tokenSemiColon,
+      tokenPrint, tokenA, tokenSemiColon, tokenCloseBrace,
+      tokenCloseBrace,
+      tokenProcedure, tokenB, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenPrint, tokenC, tokenSemiColon,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (spa::Token token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 2);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "h", "c", "a"});
+    auto lineTwo = spa::CFGNode(2, {"c", "g"}, {"d", "e", "h", "c"});
+    auto lineThree = spa::CFGNode(3, {}, {"a"});
+    auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"});
+    auto lineFive = spa::CFGNode(5, {}, {"c"});
+    auto lineSix = spa::CFGNode(6, std::string("g"));
+    auto lineSeven = spa::CFGNode(7, {"g"}, {"h"});
+    addEdges(&lineOne, {&lineThree}, {&lineTwo});
+    addEdges(&lineTwo, {&lineOne}, {&lineThree});
+    addEdges(&lineThree, {&lineTwo}, {&lineOne});
+    addEdges(&lineFour, {}, {&lineFive});
+    addEdges(&lineFive, {&lineFour}, {&lineSix});
+    addEdges(&lineSix, {&lineFive}, {&lineSeven});
+    addEdges(&lineSeven, {&lineSix}, {});
+    std::unordered_set<spa::CFGNode*> expectedNodes = {
+      &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix, &lineSeven
+    };
+    assertCFGMatch(expectedNodes);
+    assertEndNodeMatch({1, 7});
+  }
+
+  TEST_METHOD(TestNestedMultiIfProcCFGCreation) {
+    /*
+     *  procedure a {
+     * 1. if (c >= 1) then {
+     * 2.   call b;
+     * 3.   print a;
+     *    } else {
+     * 4.    call c;
+     *    }
+     *  }
+     *
+     *  procedure b {
+     * 5. c = d - e;
+     * 6. read g;
+     * 7. g = h;
+     *  }
+     *
+     *  procedure c {
+     * 8.  read h;
+     * 9.  print f;
+     *  }
+     */
+
+    tokenList = {
+      tokenProcedure, tokenA, tokenOpenBrace,
+      tokenIf, tokenOpenBracket, tokenC, tokenGreaterEqual, tokenConstant,
+      tokenCloseBracket, tokenThen, tokenOpenBrace, tokenCall, tokenB, tokenSemiColon,
+      tokenPrint, tokenA, tokenSemiColon, tokenCloseBrace, tokenElse,
+      tokenOpenBrace, tokenCall, tokenC, tokenSemiColon, tokenCloseBrace,
+      tokenCloseBrace,
+      tokenProcedure, tokenB, tokenOpenBrace,
+      tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
+      tokenRead, tokenG, tokenSemiColon,
+      tokenG, tokenAssign, tokenH, tokenSemiColon,
+      tokenCloseBrace, tokenProcedure, tokenC, tokenOpenBrace,
+      tokenRead, tokenH, tokenSemiColon, tokenPrint, tokenF, tokenSemiColon,
+      tokenCloseBrace
+    };
+    spa::Stream<spa::Token> tokenStream = spa::Stream<spa::Token>();
+    for (spa::Token token : tokenList) {
+      tokenStream.pushBack(token);
+    }
+    auto parser = spa::SpParser(tokenStream);
+    std::vector<std::shared_ptr<spa::ProcedureStatement>>  procedureList = parser.parse();
+    Assert::IsTrue(procedureList.size() == 3);
+
+    spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
+    designExtractor.extractRelationship();
+
+    auto lineOne = spa::CFGNode(1, {"c", "g", "h"}, {"d", "e", "h", "c", "a", "f"});
+    auto lineTwo = spa::CFGNode(2, {"c", "g"}, {"d", "e", "h"});
+    auto lineThree = spa::CFGNode(3, {}, {"a"});
+    auto lineFour = spa::CFGNode(4, {"h"}, {"f"});
+    auto lineFive = spa::CFGNode(5, {"c"}, {"d", "e"});
+    auto lineSix = spa::CFGNode(6, std::string("g"));
+    auto lineSeven = spa::CFGNode(7, {"g"}, {"h"});
+    auto LineEight = spa::CFGNode(8, std::string("h"));
+    auto lineNine = spa::CFGNode(9, {}, {"f"});
+    addEdges(&lineOne, {}, {&lineTwo, &lineFour});
+    addEdges(&lineTwo, {&lineOne}, {&lineThree});
+    addEdges(&lineThree, {&lineTwo}, {});
+    addEdges(&lineFour, {&lineOne}, {});
+    addEdges(&lineFive, {}, {&lineSix});
+    addEdges(&lineSix, {&lineFive}, {&lineSeven});
+    addEdges(&lineSeven, {&lineSix}, {});
+    addEdges(&LineEight, {}, {&lineNine});
+    addEdges(&lineNine, {&LineEight}, {});
+    std::unordered_set<spa::CFGNode*> expectedNodes = {
+      &lineOne, &lineTwo, &lineThree, &lineFour, &lineFive, &lineSix, &lineSeven, &LineEight, &lineNine
+    };
+    assertCFGMatch(expectedNodes);
+    assertEndNodeMatch({3, 4, 7, 9});
   }
 };
 }  // namespace UnitTesting
