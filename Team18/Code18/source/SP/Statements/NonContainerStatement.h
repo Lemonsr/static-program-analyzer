@@ -52,7 +52,7 @@ class CallStatement : public OneVarNonContainerStatement {
 class MultiVarNonContainerStatement : public NonContainerStatement {
  protected:
   std::string postfixExpr;
-  void extractUsesFromPostfix(PKBManager& pkbManager, std::string postfix);
+  void extractUsesFromPostfix(PKBManager& pkbManager, std::string postfix, CFGNode& cfgNode);
   void extractPatternFromPostfix(PKBManager& pkbManager, std::string lineNum,
                                  std::string postfix, spa::DesignEntityType type);
 };

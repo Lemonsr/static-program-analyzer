@@ -11,6 +11,7 @@ class CFGNode {
   int lineNumber = -1;
   bool isDummy = true;
   std::unordered_set<std::string> modifiedVariables;
+  std::unordered_set<std::string> usesVariables;
   std::unordered_set<CFGNode*> incomingEdges;
   std::unordered_set<CFGNode*> outgoingEdges;
 
@@ -18,12 +19,14 @@ class CFGNode {
   CFGNode() = default;
   explicit CFGNode(int lineNumber);
   explicit CFGNode(int lineNumber, std::string modifiedVariable);
-  explicit CFGNode(int lineNumber, std::unordered_set<std::string> variables);
+  explicit CFGNode(int lineNumber, std::unordered_set<std::string> modifiedVariables, std::unordered_set<std::string> usesVariables);
   bool isDummyNode();
   int getLineNumber() const;
   void linkTo(CFGNode* node);
   void addModifiedVariable(std::string variable);
+  void addUsesVariable(std::string variable);
   std::unordered_set<std::string> getModifiedVariables() const;
+  std::unordered_set<std::string> getUsesVariables() const;
   std::unordered_set<CFGNode*> getIncomingEdges() const;
   std::unordered_set<CFGNode*> getOutgoingEdges() const;
   void addIncomingEdges(std::unordered_set<CFGNode*> nodes);

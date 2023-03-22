@@ -119,12 +119,12 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processWhileStatement(
   whileStmtParents,
   std::unordered_set<int> ifStmtParents) {
   int currentLineNum = statementLineNum;
-  whileStmtParents.insert(currentLineNum);
   std::vector<std::shared_ptr<ProgramStatement>> whileStatementBlock{};
   std::shared_ptr<ProgramStatement> whileConditionStatement = processWhileConditionStatement(
     parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
+  whileStmtParents.insert(currentLineNum);
   whileStatementBlock.push_back(whileConditionStatement);
   skipCurrToken();  // Skip over open brace token
   std::vector<std::shared_ptr<ProgramStatement>> whileStatementList = processStmtList(
@@ -164,12 +164,12 @@ std::shared_ptr<spa::ProgramStatement> spa::SpParser::processIfStatement(
   std::unordered_set<int> whileStmtParents,
   std::unordered_set<int> ifStmtParents) {
   int currentLineNum = statementLineNum;
-  ifStmtParents.insert(currentLineNum);
   std::vector<std::shared_ptr<ProgramStatement>> ifStatementBlock{};
   std::shared_ptr<ProgramStatement> ifConditionStatement = processIfConditionStatement(
     parentProcedureVal,
     whileStmtParents,
     ifStmtParents);
+  ifStmtParents.insert(currentLineNum);
   ifStatementBlock.push_back(ifConditionStatement);
   skipCurrToken();  // Skip over then token
   skipCurrToken();  // Skip over open brace token

@@ -62,6 +62,16 @@ bool spa::CFGStorage::addModifiedVariable(int lineNumber, std::string varName) {
   return true;
 }
 
+bool spa::CFGStorage::addUsesVariable(int lineNumber, std::string varName) {
+  if (cfgNodeTable.find(lineNumber) == cfgNodeTable.end()) {
+    return false;
+  }
+
+  CFGNode& node = cfgNodeTable[lineNumber];
+  node.addUsesVariable(varName);
+  return true;
+}
+
 bool spa::CFGStorage::removeDummyNode() {
   if (cfgNodeTable.find(-1) == cfgNodeTable.end()) {
     return false;

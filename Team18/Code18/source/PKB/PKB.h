@@ -71,6 +71,7 @@ class PKB : public PKBManager {
   const bool addCfgEndNode(int lineNumber);
   const bool addEdge(int lineNumberOne, int lineNumberTwo);
   const bool addModifiedVariable(int lineNumber, std::string varName);
+  const bool addUsesVariable(int lineNumber, std::string varName);
   const bool removeDummyNode();
 
   const QueryResult getRelationship(RelationshipType relationshipType,

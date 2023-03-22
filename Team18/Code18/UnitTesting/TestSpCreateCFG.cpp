@@ -83,7 +83,7 @@ TEST_CLASS(TestSpCreateCFG) {
 
   bool isEqualCFG(spa::CFGNode* s1, spa::CFGNode* s2) {
     return s1->getLineNumber() == s2->getLineNumber() && s1->isDummyNode() == s2->isDummyNode() &&
-      s1->getModifiedVariables() == s2->getModifiedVariables();
+      s1->getModifiedVariables() == s2->getModifiedVariables() && s1->getUsesVariables() == s2->getUsesVariables();
   }
 
   void assertCFGMatch(std::unordered_set<spa::CFGNode*> expectedNodes) {
@@ -162,10 +162,10 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, std::string("c"));
-    auto lineTwo = spa::CFGNode(2);
+    auto lineOne = spa::CFGNode(1, {"c"}, {"d", "e"});
+    auto lineTwo = spa::CFGNode(2, {}, {"c"});
     auto lineThree = spa::CFGNode(3, std::string("g"));
-    auto lineFour = spa::CFGNode(4, std::string("g"));
+    auto lineFour = spa::CFGNode(4, {"g"}, {"h"});
     addEdges(&lineOne, {}, {&lineTwo});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineFour});
@@ -207,9 +207,9 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1);
-    auto lineTwo = spa::CFGNode(2, std::string("c"));
-    auto lineThree = spa::CFGNode(3);
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c"});
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
+    auto lineThree = spa::CFGNode(3, {}, {"c"});
     auto lineFour = spa::CFGNode(4, std::string("g"));
     addEdges(&lineOne, {&lineFour}, {&lineTwo});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
@@ -223,7 +223,7 @@ public:
   TEST_METHOD(TestSingleProcCFGCreationWhile) {
       /*
        *  procedure a {
-       * 1. while (1 >= 1) {
+       * 1. while (b >= 1) {
        * 2.   c = d - e;
        * 3.   print c;
        * 4.   read g;
@@ -235,7 +235,7 @@ public:
 
       tokenList = {
         tokenProcedure, tokenA, tokenOpenBrace,
-        tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+        tokenWhile, tokenOpenBracket, tokenB, tokenGreaterEqual, tokenConstant,
         tokenCloseBracket, tokenOpenBrace,
         tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
         tokenPrint, tokenC, tokenSemiColon,
@@ -255,11 +255,11 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = spa::CFGNode(1);
-      auto lineTwo = spa::CFGNode(2, std::string("c"));
-      auto lineThree = spa::CFGNode(3);
+      auto lineOne = spa::CFGNode(1, {"g", "c"}, {"b", "d", "c", "e"});
+      auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
+      auto lineThree = spa::CFGNode(3, {}, {"c"});
       auto lineFour = spa::CFGNode(4, std::string("g"));
-      auto lineFive = spa::CFGNode(5, std::string("g"));
+      auto lineFive = spa::CFGNode(5, {"g"}, {"h"});
       addEdges(&lineOne, {&lineFour}, { &lineTwo, &lineFive });
       addEdges(&lineTwo, { &lineOne }, { &lineThree });
       addEdges(&lineThree, { &lineTwo }, { &lineFour });
@@ -306,11 +306,11 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1);
-    auto lineTwo = spa::CFGNode(2, std::string("c"));
-    auto lineThree = spa::CFGNode(3);
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c"});
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
+    auto lineThree = spa::CFGNode(3, {}, {"c"});
     auto lineFour = spa::CFGNode(4, std::string("g"));
-    auto lineFive = spa::CFGNode(5);
+    auto lineFive = spa::CFGNode(5, {}, {"c"});
     addEdges(&lineOne, {}, {&lineTwo, &lineFour});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {});
@@ -362,12 +362,12 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = spa::CFGNode(1);
-      auto lineTwo = spa::CFGNode(2, std::string("c"));
-      auto lineThree = spa::CFGNode(3);
+      auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c"});
+      auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
+      auto lineThree = spa::CFGNode(3, {}, {"c"});
       auto lineFour = spa::CFGNode(4, std::string("g"));
-      auto lineFive = spa::CFGNode(5);
-      auto lineSix = spa::CFGNode(6, std::string("g"));
+      auto lineFive = spa::CFGNode(5, {}, {"c"});
+      auto lineSix = spa::CFGNode(6, {"g"}, {"h"});
       addEdges(&lineOne, {}, { &lineTwo, &lineFour});
       addEdges(&lineTwo, { &lineOne }, { &lineThree });
       addEdges(&lineThree, { &lineTwo }, { &lineSix });
@@ -388,7 +388,7 @@ public:
        * 2.   c = d - e;
        * 3.   print c;
        * 4.   while (1 >= 1) {
-       * 5.     print c;
+       * 5.     print b;
        * 6.     read g;
        *      }
        *    }
@@ -404,7 +404,7 @@ public:
         tokenPrint, tokenC, tokenSemiColon,
         tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
         tokenCloseBracket, tokenOpenBrace,
-        tokenPrint, tokenC, tokenSemiColon,
+        tokenPrint, tokenB, tokenSemiColon,
         tokenRead, tokenG, tokenSemiColon,
         tokenCloseBrace,
         tokenCloseBrace,
@@ -421,11 +421,11 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = spa::CFGNode(1);
-      auto lineTwo = spa::CFGNode(2, std::string("c"));
-      auto lineThree = spa::CFGNode(3);
-      auto lineFour = spa::CFGNode(4);
-      auto lineFive = spa::CFGNode(5);
+      auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c", "b"});
+      auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
+      auto lineThree = spa::CFGNode(3, {}, {"c"});
+      auto lineFour = spa::CFGNode(4, {"g"}, {"b"});
+      auto lineFive = spa::CFGNode(5, {}, {"b"});
       auto lineSix = spa::CFGNode(6, std::string("g"));
       addEdges(&lineOne, { &lineFour }, { &lineTwo });
       addEdges(&lineTwo, { &lineOne }, { &lineThree });
@@ -450,14 +450,14 @@ public:
        * 5.     print c;
        *      } else {
        * 6.     read g;
-       * 7.     print c;
+       * 7.     print h;
        *      }
        * 8.   print c;
        *    } else {
        * 9.   read g;
-       * 10.  if (1 >= 1) then {
+       * 10.  if (g >= 1) then {
        * 11.     c = d - e;
-       * 12.     print c;
+       * 12.     print b;
        *      } else {
        * 13.     read g;
        * 14.     print c;
@@ -478,15 +478,15 @@ public:
         tokenPrint, tokenC, tokenSemiColon,
         tokenCloseBrace, tokenElse, tokenOpenBrace,
         tokenRead, tokenG, tokenSemiColon,
-        tokenPrint, tokenC, tokenSemiColon,
+        tokenPrint, tokenH, tokenSemiColon,
         tokenCloseBrace,
         tokenPrint, tokenC, tokenSemiColon,
         tokenCloseBrace, tokenElse, tokenOpenBrace,
         tokenRead, tokenG, tokenSemiColon,
-        tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
+        tokenIf, tokenOpenBracket, tokenG, tokenGreaterEqual, tokenConstant,
         tokenCloseBracket, tokenThen, tokenOpenBrace,
         tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
-        tokenPrint, tokenC, tokenSemiColon,
+        tokenPrint, tokenB, tokenSemiColon,
         tokenCloseBrace, tokenElse, tokenOpenBrace,
         tokenRead, tokenG, tokenSemiColon,
         tokenPrint, tokenC, tokenSemiColon,
@@ -505,20 +505,20 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = spa::CFGNode(1);
-      auto lineTwo = spa::CFGNode(2, std::string("c"));
-      auto lineThree = spa::CFGNode(3);
-      auto lineFour = spa::CFGNode(4, std::string("c"));
-      auto lineFive = spa::CFGNode(5);
+      auto lineOne = spa::CFGNode(1, {"c", "g"}, {"c", "d", "b", "h", "g", "e"});
+      auto lineTwo = spa::CFGNode(2,{"c"}, {"d", "e"});
+      auto lineThree = spa::CFGNode(3, {"c", "g"}, {"d", "e", "c", "h"});
+      auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"});
+      auto lineFive = spa::CFGNode(5, {}, {"c"});
       auto lineSix = spa::CFGNode(6, std::string("g"));
-      auto lineSeven = spa::CFGNode(7);
-      auto lineEight = spa::CFGNode(8);
+      auto lineSeven = spa::CFGNode(7, {}, {"h"});
+      auto lineEight = spa::CFGNode(8, {}, {"c"});
       auto lineNine = spa::CFGNode(9, std::string("g"));
-      auto lineTen = spa::CFGNode(10);
-      auto lineEleven = spa::CFGNode(11, std::string("c"));
-      auto lineTwelve = spa::CFGNode(12);
+      auto lineTen = spa::CFGNode(10, {"c", "g"}, {"g", "c", "d", "e", "b"});
+      auto lineEleven = spa::CFGNode(11, {"c"}, {"d", "e"});
+      auto lineTwelve = spa::CFGNode(12, {}, {"b"});
       auto lineThirteen = spa::CFGNode(13, std::string("g"));
-      auto lineFourteen = spa::CFGNode(14);
+      auto lineFourteen = spa::CFGNode(14, {}, {"c"});
       addEdges(&lineOne, {}, { &lineTwo, &lineNine });
       addEdges(&lineTwo, { &lineOne }, { &lineThree });
       addEdges(&lineThree, { &lineTwo }, { &lineFour, &lineSix });
@@ -594,16 +594,16 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = spa::CFGNode(1);
-      auto lineTwo = spa::CFGNode(2, std::string("c"));
-      auto lineThree = spa::CFGNode(3);
-      auto lineFour = spa::CFGNode(4, std::string("c"));
-      auto lineFive = spa::CFGNode(5);
-      auto lineSix = spa::CFGNode(6);
+      auto lineOne = spa::CFGNode(1, {"c", "g"}, {"e", "d", "c"});
+      auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
+      auto lineThree = spa::CFGNode(3, {"c"}, {"d", "e", "c"});
+      auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"});
+      auto lineFive = spa::CFGNode(5, {}, {"c"});
+      auto lineSix = spa::CFGNode(6, {}, {"c"});
       auto lineSeven = spa::CFGNode(7, std::string("g"));
-      auto lineEight = spa::CFGNode(8);
-      auto lineNine = spa::CFGNode(9, std::string("c"));
-      auto lineTen = spa::CFGNode(10);
+      auto lineEight = spa::CFGNode(8, {"c"}, {"c", "d", "e"});
+      auto lineNine = spa::CFGNode(9, {"c"}, {"d", "e"});
+      auto lineTen = spa::CFGNode(10, {}, {"c"});
       addEdges(&lineOne, {}, { &lineTwo, &lineSeven });
       addEdges(&lineTwo, { &lineOne }, { &lineThree });
       addEdges(&lineThree, { &lineTwo, &lineFive}, { &lineFour, &lineSix });
@@ -626,7 +626,7 @@ public:
        *  procedure a {
        * 1. while (1 >= 1) {
        * 2.   c = d - e;
-       * 3.   print c;
+       * 3.   print b;
        * 4.   if (1 >= 1) then {
        * 5.     c = d - e;
        * 6.     print c;
@@ -643,7 +643,7 @@ public:
         tokenWhile, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
         tokenCloseBracket, tokenOpenBrace,
         tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
-        tokenPrint, tokenC, tokenSemiColon,
+        tokenPrint, tokenB, tokenSemiColon,
         tokenIf, tokenOpenBracket, tokenConstant, tokenGreaterEqual, tokenConstant,
         tokenCloseBracket, tokenThen, tokenOpenBrace,
         tokenC, tokenAssign, tokenD, tokenMinusOp, tokenE, tokenSemiColon,
@@ -666,14 +666,14 @@ public:
       spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
       designExtractor.extractRelationship();
 
-      auto lineOne = spa::CFGNode(1);
-      auto lineTwo = spa::CFGNode(2, std::string("c"));
-      auto lineThree = spa::CFGNode(3);
-      auto lineFour = spa::CFGNode(4);
-      auto lineFive = spa::CFGNode(5, std::string("c"));
-      auto lineSix = spa::CFGNode(6);
+      auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c", "b"});
+      auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
+      auto lineThree = spa::CFGNode(3, {}, {"b"});
+      auto lineFour = spa::CFGNode(4, {"c", "g"}, {"d", "e", "c"});
+      auto lineFive = spa::CFGNode(5, {"c"}, {"d", "e"});
+      auto lineSix = spa::CFGNode(6, {}, {"c"});
       auto lineSeven = spa::CFGNode(7, std::string("g"));
-      auto lineEight = spa::CFGNode(8);
+      auto lineEight = spa::CFGNode(8, {}, {"c"});
       addEdges(&lineOne, { &lineSix, &lineEight}, { &lineTwo });
       addEdges(&lineTwo, { &lineOne }, { &lineThree });
       addEdges(&lineThree, { &lineTwo }, { &lineFour });
@@ -731,15 +731,15 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, std::string("c"));
-    auto lineTwo = spa::CFGNode(2);
+    auto lineOne = spa::CFGNode(1, {"c"}, {"d", "e"});
+    auto lineTwo = spa::CFGNode(2, {}, {"c"});
     std::unordered_set<std::string> varModified = {"g", "c"};
-    auto lineThree = spa::CFGNode(3, varModified);
-    auto lineFour = spa::CFGNode(4, std::string("g"));
-    auto lineFive = spa::CFGNode(5, std::string("c"));
-    auto lineSix = spa::CFGNode(6);
+    auto lineThree = spa::CFGNode(3, varModified, {"d", "e", "h", "c"});
+    auto lineFour = spa::CFGNode(4, {"g"}, {"h"});
+    auto lineFive = spa::CFGNode(5, {"c"}, {"d", "e"});
+    auto lineSix = spa::CFGNode(6, {}, {"c"});
     auto lineSeven = spa::CFGNode(7, std::string("g"));
-    auto lineEight = spa::CFGNode(8, std::string("g"));
+    auto lineEight = spa::CFGNode(8, {"g"}, {"h"});
     addEdges(&lineOne, {}, {&lineTwo});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineFour});
