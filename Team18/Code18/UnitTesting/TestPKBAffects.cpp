@@ -16,9 +16,8 @@ namespace UnitTesting {
   TEST_CLASS(TestPKBAffects) {
     std::unordered_map<int, std::unordered_set<int>> affectsTable = {
       {1, {3, 4}},
-      {2, {2, 3}},
-      {3, {3, 4}},
-      {4, {4}}
+      {2, {3}},
+      {3, {4}}
     };
 
     std::unordered_map<int, spa::StatementType> statementTypeTable = {

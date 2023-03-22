@@ -16,9 +16,8 @@ namespace UnitTesting {
   TEST_CLASS(TestPKBAffectsStar) {
     std::unordered_map<int, std::unordered_set<int>> affectsStarTable = {
       {1, {3, 4}},
-      {2, {2, 3, 4}},
-      {3, {3, 4}},
-      {4, {4}}
+      {2, {3, 4}},
+      {3, {4}}
     };
 
     std::unordered_map<int, spa::StatementType> statementTypeTable = {
@@ -27,7 +26,5 @@ namespace UnitTesting {
       {3, spa::StatementType::ASSIGN},
       {4, spa::StatementType::ASSIGN}
     };
-public:
-  
   };
 }  // namespace UnitTesting
