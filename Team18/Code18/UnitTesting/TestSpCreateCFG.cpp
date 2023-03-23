@@ -508,15 +508,16 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"c", "d", "b", "h", "g", "e"}, spa::StatementType::IF);
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"c", "d", "b", "h", "g", "e"},
+      spa::StatementType::IF);
     auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
     auto lineThree = spa::CFGNode(3, {"c", "g"}, {"d", "e", "c", "h"}, spa::StatementType::IF);
     auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
     auto lineFive = spa::CFGNode(5, {}, {"c"}, spa::StatementType::PRINT);
     auto lineSix = spa::CFGNode(6, std::string("g"), spa::StatementType::READ);
     auto lineSeven = spa::CFGNode(7, {}, {"h"}, spa::StatementType::PRINT);
-    auto lineEight = spa::CFGNode(8, {}, {"c"},spa::StatementType::PRINT);
-    auto lineNine = spa::CFGNode(9, std::string("g"),spa::StatementType::READ);
+    auto lineEight = spa::CFGNode(8, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineNine = spa::CFGNode(9, std::string("g"), spa::StatementType::READ);
     auto lineTen = spa::CFGNode(10, {"c", "g"}, {"g", "c", "d", "e", "b"}, spa::StatementType::IF);
     auto lineEleven = spa::CFGNode(11, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
     auto lineTwelve = spa::CFGNode(12, {}, {"b"}, spa::StatementType::PRINT);
@@ -801,7 +802,8 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "h", "c", "a"}, spa::StatementType::WHILE);
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "h", "c", "a"},
+      spa::StatementType::WHILE);
     auto lineTwo = spa::CFGNode(2, {"c", "g"}, {"d", "e", "h", "c"}, spa::StatementType::CALL);
     auto lineThree = spa::CFGNode(3, {}, {"a"}, spa::StatementType::PRINT);
     auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
@@ -871,7 +873,8 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g", "h"}, {"d", "e", "h", "c", "a", "f"}, spa::StatementType::IF);
+    auto lineOne = spa::CFGNode(1, {"c", "g", "h"}, {"d", "e", "h", "c", "a", "f"},
+      spa::StatementType::IF);
     auto lineTwo = spa::CFGNode(2, {"c", "g"}, {"d", "e", "h"}, spa::StatementType::CALL);
     auto lineThree = spa::CFGNode(3, {}, {"a"}, spa::StatementType::PRINT);
     auto lineFour = spa::CFGNode(4, {"h"}, {"f"}, spa::StatementType::CALL);

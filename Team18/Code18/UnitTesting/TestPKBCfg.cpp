@@ -20,7 +20,8 @@ TEST_CLASS(TestPKBCfg) {
   std::unordered_map<int, spa::CFGNode> cfgNodeTable;
 
 public:
-  TestPKBCfg() : cfgNodeOne(1, spa::StatementType::READ), cfgNodeTwo(2, spa::StatementType::READ), cfgNodeThree(3, spa::StatementType::READ) {
+  TestPKBCfg() : cfgNodeOne(1, spa::StatementType::READ), cfgNodeTwo(2, spa::StatementType::READ),
+                 cfgNodeThree(3, spa::StatementType::READ) {
     cfgNodeTable = {
       {1, cfgNodeOne},
       {2, cfgNodeTwo},
