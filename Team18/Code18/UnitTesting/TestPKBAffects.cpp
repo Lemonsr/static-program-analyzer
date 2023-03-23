@@ -150,7 +150,7 @@ public:
     relationshipStorage.setStatementTypeTable(statementTypeTable);
 
     spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
-    spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LINE_NO, "2", {}));
+    spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::LINE_NO, "3", {}));
     spa::QueryResult queryResult = relationshipStorage.getAffectsUnderscoreLine(firstArg, secondArg);
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::BOOL);
@@ -167,7 +167,7 @@ public:
     spa::RelationshipStorage relationshipStorage;
     relationshipStorage.setAffectsTable(affectsTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
-    std::vector<std::pair<int, int>> expected = { {1, 3}, {1, 4}, {2, 3}, {3, 4} } };
+    std::vector<std::pair<int, int>> expected = { {1, 3}, {1, 4}, {2, 3}, {3, 4} };
 
     spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
                                                                   spa::DesignEntityType::STMT));
@@ -189,8 +189,7 @@ public:
     spa::RelationshipStorage relationshipStorage;
     relationshipStorage.setAffectsTable(affectsTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
-    std::vector<std::pair<int, int>> expected = { {1, 3}, {1, 4}, {2, 3}, {3, 4} }
-  };
+    std::vector<std::pair<int, int>> expected = { {1, 3}, {1, 4}, {2, 3}, {3, 4} };
 
     spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "a",
                                                                   spa::DesignEntityType::ASSIGN));
@@ -217,7 +216,7 @@ public:
     spa::RelationshipStorage relationshipStorage;
     relationshipStorage.setAffectsTable(affectsTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
-    std::vector<std::pair<int, int>> expected = { {1, 3}, {1, 4}, {2, 3}, {3, 4} } };
+    std::vector<std::pair<int, int>> expected = { {1, 3}, {1, 4}, {2, 3}, {3, 4} };
 
     spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::WILDCARD, "_", {}));
     spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "a",
@@ -226,7 +225,7 @@ public:
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
-    =
+
     secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s", spa::DesignEntityType::STMT));
     queryResult = relationshipStorage.getAffectsUnderscoreStatement(firstArg, secondArg);
 
@@ -261,9 +260,9 @@ public:
     spa::RelationshipStorage relationshipStorage;
     relationshipStorage.setAffectsTable(affectsTable);
     relationshipStorage.setStatementTypeTable(statementTypeTable);
-    std::vector<std::pair<int, int>> expected = { {1, 3}, {1, 4}, {2, 3}, {3, 4} } };
+    std::vector<std::pair<int, int>> expected = { {1, 3}, {1, 4}, {2, 3}, {3, 4} };
 
-    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "a,
+    spa::PKBQueryArg firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "a",
                                                                   spa::DesignEntityType::ASSIGN));
     spa::PKBQueryArg secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s",
                                                                    spa::DesignEntityType::STMT));
