@@ -84,7 +84,7 @@ TEST_CLASS(TestSpCreateCFG) {
   bool isEqualCFG(spa::CFGNode* s1, spa::CFGNode* s2) {
     return s1->getLineNumber() == s2->getLineNumber() && s1->isDummyNode() == s2->isDummyNode() &&
       s1->getModifiedVariables() == s2->getModifiedVariables() && s1->getUsesVariables() == s2->
-      getUsesVariables();
+      getUsesVariables() && s1->getStatementType() == s2->getStatementType();
   }
 
   void assertCFGMatch(std::unordered_set<spa::CFGNode*>& expectedNodes) {
@@ -163,10 +163,10 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c"}, {"d", "e"});
-    auto lineTwo = spa::CFGNode(2, {}, {"c"});
-    auto lineThree = spa::CFGNode(3, std::string("g"));
-    auto lineFour = spa::CFGNode(4, {"g"}, {"h"});
+    auto lineOne = spa::CFGNode(1, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineTwo = spa::CFGNode(2, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineThree = spa::CFGNode(3, std::string("g"), spa::StatementType::READ);
+    auto lineFour = spa::CFGNode(4, {"g"}, {"h"}, spa::StatementType::ASSIGN);
     addEdges(&lineOne, {}, {&lineTwo});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineFour});
@@ -208,10 +208,10 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c"});
-    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
-    auto lineThree = spa::CFGNode(3, {}, {"c"});
-    auto lineFour = spa::CFGNode(4, std::string("g"));
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c"}, spa::StatementType::WHILE);
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineThree = spa::CFGNode(3, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineFour = spa::CFGNode(4, std::string("g"), spa::StatementType::READ);
     addEdges(&lineOne, {&lineFour}, {&lineTwo});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineFour});
@@ -256,11 +256,11 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"g", "c"}, {"b", "d", "c", "e"});
-    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
-    auto lineThree = spa::CFGNode(3, {}, {"c"});
-    auto lineFour = spa::CFGNode(4, std::string("g"));
-    auto lineFive = spa::CFGNode(5, {"g"}, {"h"});
+    auto lineOne = spa::CFGNode(1, {"g", "c"}, {"b", "d", "c", "e"}, spa::StatementType::WHILE);
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineThree = spa::CFGNode(3, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineFour = spa::CFGNode(4, std::string("g"), spa::StatementType::READ);
+    auto lineFive = spa::CFGNode(5, {"g"}, {"h"}, spa::StatementType::ASSIGN);
     addEdges(&lineOne, {&lineFour}, {&lineTwo, &lineFive});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineFour});
@@ -309,11 +309,11 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c"});
-    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
-    auto lineThree = spa::CFGNode(3, {}, {"c"});
-    auto lineFour = spa::CFGNode(4, std::string("g"));
-    auto lineFive = spa::CFGNode(5, {}, {"c"});
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c"}, spa::StatementType::IF);
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineThree = spa::CFGNode(3, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineFour = spa::CFGNode(4, std::string("g"), spa::StatementType::READ);
+    auto lineFive = spa::CFGNode(5, {}, {"c"}, spa::StatementType::PRINT);
     addEdges(&lineOne, {}, {&lineTwo, &lineFour});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {});
@@ -365,12 +365,12 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c"});
-    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
-    auto lineThree = spa::CFGNode(3, {}, {"c"});
-    auto lineFour = spa::CFGNode(4, std::string("g"));
-    auto lineFive = spa::CFGNode(5, {}, {"c"});
-    auto lineSix = spa::CFGNode(6, {"g"}, {"h"});
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c"}, spa::StatementType::IF);
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineThree = spa::CFGNode(3, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineFour = spa::CFGNode(4, std::string("g"), spa::StatementType::READ);
+    auto lineFive = spa::CFGNode(5, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineSix = spa::CFGNode(6, {"g"}, {"h"}, spa::StatementType::ASSIGN);
     addEdges(&lineOne, {}, {&lineTwo, &lineFour});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineSix});
@@ -424,12 +424,12 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c", "b"});
-    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
-    auto lineThree = spa::CFGNode(3, {}, {"c"});
-    auto lineFour = spa::CFGNode(4, {"g"}, {"b"});
-    auto lineFive = spa::CFGNode(5, {}, {"b"});
-    auto lineSix = spa::CFGNode(6, std::string("g"));
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c", "b"}, spa::StatementType::WHILE);
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineThree = spa::CFGNode(3, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineFour = spa::CFGNode(4, {"g"}, {"b"}, spa::StatementType::WHILE);
+    auto lineFive = spa::CFGNode(5, {}, {"b"}, spa::StatementType::PRINT);
+    auto lineSix = spa::CFGNode(6, std::string("g"), spa::StatementType::READ);
     addEdges(&lineOne, {&lineFour}, {&lineTwo});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineFour});
@@ -508,20 +508,21 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"c", "d", "b", "h", "g", "e"});
-    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
-    auto lineThree = spa::CFGNode(3, {"c", "g"}, {"d", "e", "c", "h"});
-    auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"});
-    auto lineFive = spa::CFGNode(5, {}, {"c"});
-    auto lineSix = spa::CFGNode(6, std::string("g"));
-    auto lineSeven = spa::CFGNode(7, {}, {"h"});
-    auto lineEight = spa::CFGNode(8, {}, {"c"});
-    auto lineNine = spa::CFGNode(9, std::string("g"));
-    auto lineTen = spa::CFGNode(10, {"c", "g"}, {"g", "c", "d", "e", "b"});
-    auto lineEleven = spa::CFGNode(11, {"c"}, {"d", "e"});
-    auto lineTwelve = spa::CFGNode(12, {}, {"b"});
-    auto lineThirteen = spa::CFGNode(13, std::string("g"));
-    auto lineFourteen = spa::CFGNode(14, {}, {"c"});
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"c", "d", "b", "h", "g", "e"},
+      spa::StatementType::IF);
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineThree = spa::CFGNode(3, {"c", "g"}, {"d", "e", "c", "h"}, spa::StatementType::IF);
+    auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineFive = spa::CFGNode(5, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineSix = spa::CFGNode(6, std::string("g"), spa::StatementType::READ);
+    auto lineSeven = spa::CFGNode(7, {}, {"h"}, spa::StatementType::PRINT);
+    auto lineEight = spa::CFGNode(8, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineNine = spa::CFGNode(9, std::string("g"), spa::StatementType::READ);
+    auto lineTen = spa::CFGNode(10, {"c", "g"}, {"g", "c", "d", "e", "b"}, spa::StatementType::IF);
+    auto lineEleven = spa::CFGNode(11, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineTwelve = spa::CFGNode(12, {}, {"b"}, spa::StatementType::PRINT);
+    auto lineThirteen = spa::CFGNode(13, std::string("g"), spa::StatementType::READ);
+    auto lineFourteen = spa::CFGNode(14, {}, {"c"}, spa::StatementType::PRINT);
     addEdges(&lineOne, {}, {&lineTwo, &lineNine});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineFour, &lineSix});
@@ -597,16 +598,16 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"e", "d", "c"});
-    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
-    auto lineThree = spa::CFGNode(3, {"c"}, {"d", "e", "c"});
-    auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"});
-    auto lineFive = spa::CFGNode(5, {}, {"c"});
-    auto lineSix = spa::CFGNode(6, {}, {"c"});
-    auto lineSeven = spa::CFGNode(7, std::string("g"));
-    auto lineEight = spa::CFGNode(8, {"c"}, {"c", "d", "e"});
-    auto lineNine = spa::CFGNode(9, {"c"}, {"d", "e"});
-    auto lineTen = spa::CFGNode(10, {}, {"c"});
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"e", "d", "c"}, spa::StatementType::IF);
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineThree = spa::CFGNode(3, {"c"}, {"d", "e", "c"}, spa::StatementType::WHILE);
+    auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineFive = spa::CFGNode(5, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineSix = spa::CFGNode(6, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineSeven = spa::CFGNode(7, std::string("g"), spa::StatementType::READ);
+    auto lineEight = spa::CFGNode(8, {"c"}, {"c", "d", "e"}, spa::StatementType::WHILE);
+    auto lineNine = spa::CFGNode(9, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineTen = spa::CFGNode(10, {}, {"c"}, spa::StatementType::PRINT);
     addEdges(&lineOne, {}, {&lineTwo, &lineSeven});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo, &lineFive}, {&lineFour, &lineSix});
@@ -670,14 +671,14 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c", "b"});
-    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"});
-    auto lineThree = spa::CFGNode(3, {}, {"b"});
-    auto lineFour = spa::CFGNode(4, {"c", "g"}, {"d", "e", "c"});
-    auto lineFive = spa::CFGNode(5, {"c"}, {"d", "e"});
-    auto lineSix = spa::CFGNode(6, {}, {"c"});
-    auto lineSeven = spa::CFGNode(7, std::string("g"));
-    auto lineEight = spa::CFGNode(8, {}, {"c"});
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "c", "b"}, spa::StatementType::WHILE);
+    auto lineTwo = spa::CFGNode(2, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineThree = spa::CFGNode(3, {}, {"b"}, spa::StatementType::PRINT);
+    auto lineFour = spa::CFGNode(4, {"c", "g"}, {"d", "e", "c"}, spa::StatementType::IF);
+    auto lineFive = spa::CFGNode(5, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineSix = spa::CFGNode(6, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineSeven = spa::CFGNode(7, std::string("g"), spa::StatementType::READ);
+    auto lineEight = spa::CFGNode(8, {}, {"c"}, spa::StatementType::PRINT);
     addEdges(&lineOne, {&lineSix, &lineEight}, {&lineTwo});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineFour});
@@ -735,15 +736,15 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c"}, {"d", "e"});
-    auto lineTwo = spa::CFGNode(2, {}, {"c"});
+    auto lineOne = spa::CFGNode(1, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineTwo = spa::CFGNode(2, {}, {"c"}, spa::StatementType::PRINT);
     std::unordered_set<std::string> varModified = {"g", "c"};
-    auto lineThree = spa::CFGNode(3, varModified, {"d", "e", "h", "c"});
-    auto lineFour = spa::CFGNode(4, {"g"}, {"h"});
-    auto lineFive = spa::CFGNode(5, {"c"}, {"d", "e"});
-    auto lineSix = spa::CFGNode(6, {}, {"c"});
-    auto lineSeven = spa::CFGNode(7, std::string("g"));
-    auto lineEight = spa::CFGNode(8, {"g"}, {"h"});
+    auto lineThree = spa::CFGNode(3, varModified, {"d", "e", "h", "c"}, spa::StatementType::CALL);
+    auto lineFour = spa::CFGNode(4, {"g"}, {"h"}, spa::StatementType::ASSIGN);
+    auto lineFive = spa::CFGNode(5, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineSix = spa::CFGNode(6, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineSeven = spa::CFGNode(7, std::string("g"), spa::StatementType::READ);
+    auto lineEight = spa::CFGNode(8, {"g"}, {"h"}, spa::StatementType::ASSIGN);
     addEdges(&lineOne, {}, {&lineTwo});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineFour});
@@ -801,13 +802,14 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "h", "c", "a"});
-    auto lineTwo = spa::CFGNode(2, {"c", "g"}, {"d", "e", "h", "c"});
-    auto lineThree = spa::CFGNode(3, {}, {"a"});
-    auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"});
-    auto lineFive = spa::CFGNode(5, {}, {"c"});
-    auto lineSix = spa::CFGNode(6, std::string("g"));
-    auto lineSeven = spa::CFGNode(7, {"g"}, {"h"});
+    auto lineOne = spa::CFGNode(1, {"c", "g"}, {"d", "e", "h", "c", "a"},
+      spa::StatementType::WHILE);
+    auto lineTwo = spa::CFGNode(2, {"c", "g"}, {"d", "e", "h", "c"}, spa::StatementType::CALL);
+    auto lineThree = spa::CFGNode(3, {}, {"a"}, spa::StatementType::PRINT);
+    auto lineFour = spa::CFGNode(4, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineFive = spa::CFGNode(5, {}, {"c"}, spa::StatementType::PRINT);
+    auto lineSix = spa::CFGNode(6, std::string("g"), spa::StatementType::READ);
+    auto lineSeven = spa::CFGNode(7, {"g"}, {"h"}, spa::StatementType::ASSIGN);
     addEdges(&lineOne, {&lineThree}, {&lineTwo});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {&lineOne});
@@ -871,15 +873,16 @@ public:
     spa::DesignExtractor designExtractor = spa::DesignExtractor(*pkbManager, procedureList);
     designExtractor.extractRelationship();
 
-    auto lineOne = spa::CFGNode(1, {"c", "g", "h"}, {"d", "e", "h", "c", "a", "f"});
-    auto lineTwo = spa::CFGNode(2, {"c", "g"}, {"d", "e", "h"});
-    auto lineThree = spa::CFGNode(3, {}, {"a"});
-    auto lineFour = spa::CFGNode(4, {"h"}, {"f"});
-    auto lineFive = spa::CFGNode(5, {"c"}, {"d", "e"});
-    auto lineSix = spa::CFGNode(6, std::string("g"));
-    auto lineSeven = spa::CFGNode(7, {"g"}, {"h"});
-    auto LineEight = spa::CFGNode(8, std::string("h"));
-    auto lineNine = spa::CFGNode(9, {}, {"f"});
+    auto lineOne = spa::CFGNode(1, {"c", "g", "h"}, {"d", "e", "h", "c", "a", "f"},
+      spa::StatementType::IF);
+    auto lineTwo = spa::CFGNode(2, {"c", "g"}, {"d", "e", "h"}, spa::StatementType::CALL);
+    auto lineThree = spa::CFGNode(3, {}, {"a"}, spa::StatementType::PRINT);
+    auto lineFour = spa::CFGNode(4, {"h"}, {"f"}, spa::StatementType::CALL);
+    auto lineFive = spa::CFGNode(5, {"c"}, {"d", "e"}, spa::StatementType::ASSIGN);
+    auto lineSix = spa::CFGNode(6, std::string("g"), spa::StatementType::READ);
+    auto lineSeven = spa::CFGNode(7, {"g"}, {"h"}, spa::StatementType::ASSIGN);
+    auto LineEight = spa::CFGNode(8, std::string("h"), spa::StatementType::READ);
+    auto lineNine = spa::CFGNode(9, {}, {"f"}, spa::StatementType::PRINT);
     addEdges(&lineOne, {}, {&lineTwo, &lineFour});
     addEdges(&lineTwo, {&lineOne}, {&lineThree});
     addEdges(&lineThree, {&lineTwo}, {});

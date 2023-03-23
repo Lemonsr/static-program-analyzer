@@ -3,6 +3,8 @@
 #include <string>
 #include <unordered_set>
 
+#include "PKBTypes.h"
+
 namespace spa {
 class PKBManager;
 
@@ -10,6 +12,7 @@ class CFGNode {
  private:
   int lineNumber = -1;
   bool isDummy = true;
+  StatementType statementType;
   std::unordered_set<std::string> modifiedVariables;
   std::unordered_set<std::string> usesVariables;
   std::unordered_set<CFGNode*> incomingEdges;
@@ -17,12 +20,13 @@ class CFGNode {
 
  public:
   CFGNode() = default;
-  explicit CFGNode(int lineNumber);
-  explicit CFGNode(int lineNumber, std::string modifiedVariable);
+  explicit CFGNode(int lineNumber, StatementType statementType);
+  explicit CFGNode(int lineNumber, std::string modifiedVariable, StatementType statementType);
   explicit CFGNode(int lineNumber, std::unordered_set<std::string> modifiedVariables,
-                   std::unordered_set<std::string> usesVariables);
+                   std::unordered_set<std::string> usesVariables, StatementType statementType);
   bool isDummyNode();
   int getLineNumber() const;
+  StatementType getStatementType() const;
   void linkTo(CFGNode* node);
   void addModifiedVariable(std::string variable);
   void addUsesVariable(std::string variable);
