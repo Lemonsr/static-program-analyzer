@@ -2,27 +2,34 @@
 
 #include "PKBManager.h"
 
-spa::CFGNode::CFGNode(int lineNumber) {
+spa::CFGNode::CFGNode(int lineNumber, StatementType statementType) {
   this->lineNumber = lineNumber;
+  this->statementType = statementType;
   isDummy = false;
 }
 
-spa::CFGNode::CFGNode(int lineNumber, std::string variable) {
+spa::CFGNode::CFGNode(int lineNumber, std::string variable, StatementType statementType) {
   this->lineNumber = lineNumber;
   this->modifiedVariables.insert(variable);
+  this->statementType = statementType;
   isDummy = false;
 }
 
 spa::CFGNode::CFGNode(int lineNumber, std::unordered_set<std::string> modifiedVariables,
-                      std::unordered_set<std::string> usesVariables) {
+                      std::unordered_set<std::string> usesVariables, StatementType statementType) {
   this->lineNumber = lineNumber;
   this->modifiedVariables.insert(modifiedVariables.begin(), modifiedVariables.end());
   this->usesVariables.insert(usesVariables.begin(), usesVariables.end());
+  this->statementType = statementType;
   isDummy = false;
 }
 
 int spa::CFGNode::getLineNumber() const {
   return lineNumber;
+}
+
+spa::StatementType spa::CFGNode::getStatementType() const {
+  return statementType;
 }
 
 bool spa::CFGNode::isDummyNode() {
@@ -95,7 +102,7 @@ bool spa::operator==(const CFGNode& s1, const CFGNode& s2) {
   if (s1.lineNumber != s2.lineNumber ||
     s1.modifiedVariables.size() != s2.modifiedVariables.size() ||
     s1.incomingEdges.size() != s2.incomingEdges.size() ||
-    s1.outgoingEdges.size() != s2.outgoingEdges.size()) {
+    s1.outgoingEdges.size() != s2.outgoingEdges.size() || s1.statementType != s2.statementType) {
     return false;
   }
   if (s1.usesVariables != s2.usesVariables) {

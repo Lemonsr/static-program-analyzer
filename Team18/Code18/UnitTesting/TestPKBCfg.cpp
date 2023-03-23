@@ -20,7 +20,7 @@ TEST_CLASS(TestPKBCfg) {
   std::unordered_map<int, spa::CFGNode> cfgNodeTable;
 
 public:
-  TestPKBCfg() : cfgNodeOne(1), cfgNodeTwo(2), cfgNodeThree(3) {
+  TestPKBCfg() : cfgNodeOne(1, spa::StatementType::READ), cfgNodeTwo(2, spa::StatementType::READ), cfgNodeThree(3, spa::StatementType::READ) {
     cfgNodeTable = {
       {1, cfgNodeOne},
       {2, cfgNodeTwo},
@@ -55,8 +55,8 @@ public:
   TEST_METHOD(TestAddCfgNode) {
     spa::CFGStorage cfgStorage;
     cfgStorage.setCfgNodeTable(cfgNodeTable);
-    spa::CFGNode cfgNodeTestOne(4);
-    spa::CFGNode cfgNodeTestTwo(5);
+    spa::CFGNode cfgNodeTestOne(4, spa::StatementType::READ);
+    spa::CFGNode cfgNodeTestTwo(5, spa::StatementType::READ);
 
     Assert::IsTrue(cfgStorage.addCfgNode(4, cfgNodeTestOne));
     Assert::IsFalse(cfgStorage.addCfgNode(4, cfgNodeTestOne));
@@ -141,7 +141,7 @@ public:
     spa::RelationshipStorage relationshipStorage;
     cfgStorage.setCfgNodeTable(cfgNodeTable);
 
-    spa::CFGNode cfgNodeTest(-1);
+    spa::CFGNode cfgNodeTest = spa::CFGNode();
     cfgStorage.addCfgNode(-1, cfgNodeTest);
 
     spa::QueryResult queryResult = cfgStorage.getCfgNode(-1);
