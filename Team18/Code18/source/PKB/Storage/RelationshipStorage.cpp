@@ -2278,9 +2278,16 @@ bool spa::RelationshipStorage::isAffectsStarEmpty() {
   return affectsStarTable.empty();
 }
 
+spa::QueryResult spa::RelationshipStorage::getNextTable() {
+  QueryResult queryResult;
+  queryResult.setIntToSetIntTable(&nextTable);
+
+  return queryResult;
+}
+
 spa::QueryResult spa::RelationshipStorage::getAffectsTable() {
   QueryResult queryResult;
-  queryResult.setAffectsTable(&affectsTable);
+  queryResult.setIntToSetIntTable(&affectsTable);
 
   return queryResult;
 }

@@ -511,6 +511,10 @@ const spa::QueryResult spa::PKB::getCfgEndNodes() {
   return cfgStorage.getCfgEndNodes();
 }
 
+const spa::QueryResult spa::PKB::getNextTable() {
+  return relationshipStorage.getNextTable();
+}
+
 const spa::QueryResult spa::PKB::getAffectsTable() {
   return relationshipStorage.getAffectsTable();
 }

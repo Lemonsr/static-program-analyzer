@@ -26,7 +26,7 @@ class QueryResult {
   std::optional<bool> isTrue;
   std::optional<std::vector<CFGNode*>> cfgNodes;
   std::optional<std::vector<int>> cfgEndNodes;
-  std::optional<std::unordered_map<int, std::unordered_set<int>>*> affectsTable;
+  std::optional<std::unordered_map<int, std::unordered_set<int>>*> intToSetIntTable;
 
  public:
   const QueryResultType& getQueryResultType();
@@ -38,7 +38,7 @@ class QueryResult {
   const std::vector<spa::CFGNode*>& getCfgNodes();
   const std::vector<int>& getCfgEndNodes();
   const bool& getIsTrue();
-  const std::unordered_map<int, std::unordered_set<int>>* getAffectsTable();
+  const std::unordered_map<int, std::unordered_set<int>>* getIntToSetIntTable();
 
   void setQueryResultType(QueryResultType queryResultType);
   void setNames(std::vector<std::string> names);
@@ -49,6 +49,6 @@ class QueryResult {
   void setNameNamePairs(std::vector<std::pair<std::string, std::string>> nameNamePairs);
   void setCfgNodes(std::vector<spa::CFGNode*> cfgNodes);
   void setCfgEndNodes(std::vector<int> cfgEndNodes);
-  void setAffectsTable(std::unordered_map<int, std::unordered_set<int>>* affectsTable);
+  void setIntToSetIntTable(std::unordered_map<int, std::unordered_set<int>>* intToSetIntTable);
 };
 }  // namespace spa
