@@ -172,6 +172,8 @@
     </ClCompile>
     <ClCompile Include="TestAST.cpp" />
     <ClCompile Include="TestDesignExtractorExtractNext.cpp" />
+    <ClCompile Include="TestPKBAffects.cpp" />
+    <ClCompile Include="TestPKBAffectsStar.cpp" />
     <ClCompile Include="TestPKBCfg.cpp" />
     <ClCompile Include="TestDesignExtractorCalls.cpp" />
     <ClCompile Include="TestDesignExtractorCallsStar.cpp" />
