@@ -155,6 +155,25 @@ class RelationshipStorage {
   QueryResult getNextStarUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   bool addAffects(std::string firstLineNo, std::string secondLineNo);
+  QueryResult getAffectsLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+
+  QueryResult getAffectsStarLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStarLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStarStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStarLineUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStarUnderscoreLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStarStatementStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStarStatementUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStarUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
+  QueryResult getAffectsStarUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
   bool addCallsContainerParent(std::string procName, std::string lineNo);
   QueryResult getCallsContainerParent(std::string procName);

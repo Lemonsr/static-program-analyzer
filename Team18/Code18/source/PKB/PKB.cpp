@@ -219,7 +219,47 @@ void spa::PKB::createRelationshipQueryFunctionMap() {
     {{RelationshipType::NEXT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
       &RelationshipStorage::getNextStarUnderscoreStatement},
     {{RelationshipType::NEXT_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
-      &RelationshipStorage::getNextStarUnderscoreUnderscore}
+      &RelationshipStorage::getNextStarUnderscoreUnderscore},
+
+    // Affects
+    {{RelationshipType::AFFECTS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getAffectsLineLine},
+    {{RelationshipType::AFFECTS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getAffectsLineStatement},
+    {{RelationshipType::AFFECTS, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getAffectsStatementLine},
+    {{RelationshipType::AFFECTS, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getAffectsLineUnderscore},
+    {{RelationshipType::AFFECTS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getAffectsUnderscoreLine},
+    {{RelationshipType::AFFECTS, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getAffectsStatementStatement},
+    {{RelationshipType::AFFECTS, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getAffectsStatementUnderscore},
+    {{RelationshipType::AFFECTS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getAffectsUnderscoreStatement},
+    {{RelationshipType::AFFECTS, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getAffectsUnderscoreUnderscore},
+
+    // AffectsStar
+    {{RelationshipType::AFFECTS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getAffectsStarLineLine},
+    {{RelationshipType::AFFECTS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getAffectsStarLineStatement},
+    {{RelationshipType::AFFECTS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getAffectsStarStatementLine},
+    {{RelationshipType::AFFECTS_STAR, PKBQueryArgType::LINE_NUMBER, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getAffectsStarLineUnderscore},
+    {{RelationshipType::AFFECTS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::LINE_NUMBER},
+      &RelationshipStorage::getAffectsStarUnderscoreLine},
+    {{RelationshipType::AFFECTS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getAffectsStarStatementStatement},
+    {{RelationshipType::AFFECTS_STAR, PKBQueryArgType::STATEMENT, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getAffectsStarStatementUnderscore},
+    {{RelationshipType::AFFECTS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::STATEMENT},
+      &RelationshipStorage::getAffectsStarUnderscoreStatement},
+    {{RelationshipType::AFFECTS_STAR, PKBQueryArgType::UNDERSCORE, PKBQueryArgType::UNDERSCORE},
+      &RelationshipStorage::getAffectsStarUnderscoreUnderscore}
   };
 }
 
