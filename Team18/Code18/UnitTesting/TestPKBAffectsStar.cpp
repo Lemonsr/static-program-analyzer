@@ -260,7 +260,7 @@ namespace UnitTesting {
 
     Assert::IsTrue(queryResult.getQueryResultType() == spa::QueryResultType::TUPLE);
     Assert::IsTrue(expected == queryResult.getLineNumberLineNumberPairs());
-    
+
     firstArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s1", spa::DesignEntityType::STMT));
     secondArg = spa::PKBQueryArg(spa::PqlArgument(spa::ArgumentType::SYNONYM, "s2", spa::DesignEntityType::STMT));
     queryResult = relationshipStorage.getAffectsStarStatementStatement(firstArg, secondArg);
