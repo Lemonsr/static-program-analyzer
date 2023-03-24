@@ -2053,7 +2053,7 @@ spa::QueryResult spa::RelationshipStorage::getAffectsUnderscoreUnderscore(PKBQue
 bool spa::RelationshipStorage::addAffectsStar(std::string firstLineNo, std::string secondLineNo) {
   int firstLineNumber = std::stoi(firstLineNo);
   int secondLineNumber = std::stoi(secondLineNo);
-  if (affectsStarTable.find(firstLineNumber) != affectsTable.end() &&
+  if (affectsStarTable.find(firstLineNumber) != affectsStarTable.end() &&
     affectsStarTable[firstLineNumber].find(secondLineNumber) != affectsStarTable[firstLineNumber].end()) {
     return false;
   }
