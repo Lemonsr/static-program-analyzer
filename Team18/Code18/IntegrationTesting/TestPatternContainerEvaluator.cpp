@@ -23,9 +23,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "ifs", { spa::DesignEntityType::IF });
       spa::PqlArgument firstArg(spa::ArgumentType::WILDCARD, "_", {});
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::IF, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -48,9 +48,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "ifs", { spa::DesignEntityType::IF });
       spa::PqlArgument firstArg(spa::ArgumentType::WILDCARD, "_", {});
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::IF, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -69,9 +69,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "ifs", { spa::DesignEntityType::IF });
       spa::PqlArgument firstArg(spa::ArgumentType::SYNONYM, "v", { spa::DesignEntityType::VARIABLE });
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::IF, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -94,9 +94,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "ifs", { spa::DesignEntityType::IF });
       spa::PqlArgument firstArg(spa::ArgumentType::SYNONYM, "v", { spa::DesignEntityType::VARIABLE });
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::IF, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -115,9 +115,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "ifs", { spa::DesignEntityType::IF });
       spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, "x", {});
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::IF, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -139,9 +139,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "ifs", { spa::DesignEntityType::IF });
       spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, "a", {});
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::IF, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -160,9 +160,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "w", { spa::DesignEntityType::WHILE });
       spa::PqlArgument firstArg(spa::ArgumentType::WILDCARD, "_", {});
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::WHILE, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -185,9 +185,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "w", { spa::DesignEntityType::WHILE });
       spa::PqlArgument firstArg(spa::ArgumentType::WILDCARD, "_", {});
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::WHILE, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -206,9 +206,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "w", { spa::DesignEntityType::WHILE });
       spa::PqlArgument firstArg(spa::ArgumentType::SYNONYM, "v", { spa::DesignEntityType::VARIABLE });
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::WHILE, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -231,9 +231,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "w", { spa::DesignEntityType::WHILE });
       spa::PqlArgument firstArg(spa::ArgumentType::SYNONYM, "v", { spa::DesignEntityType::VARIABLE });
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::WHILE, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -252,9 +252,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "w", { spa::DesignEntityType::WHILE });
       spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, "z", {});
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::WHILE, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();
@@ -276,9 +276,9 @@ namespace IntegrationTesting {
 
       spa::PqlArgument synonym(spa::ArgumentType::SYNONYM, "w", { spa::DesignEntityType::WHILE });
       spa::PqlArgument firstArg(spa::ArgumentType::LITERAL_STRING, "a", {});
-
-      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator =
-        std::make_unique<spa::PatternContainerEvaluator>(spa::DesignEntityType::WHILE, synonym, firstArg);
+      spa::Pattern pattern(spa::PatternType::ANY);
+      spa::PatternClause patternClause(synonym, firstArg, pattern, 3);
+      std::unique_ptr<spa::QpsEvaluator> qpsEvaluator = patternClause.getEvaluator();
 
       spa::QpsResultTable resultTable = qpsEvaluator->evaluate(*pkbManager);
       std::vector<std::vector<spa::QpsValue>> rows = resultTable.getRows();

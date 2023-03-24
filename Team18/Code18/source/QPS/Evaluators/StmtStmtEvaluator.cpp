@@ -1,11 +1,12 @@
-#include "FollowsStarEvaluator.h"
+#include "StmtStmtEvaluator.h"
 #include "UtilsFunction.h"
 
-spa::FollowsStarEvaluator::FollowsStarEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
-  firstArg(firstArg), secondArg(secondArg) {
+spa::StmtStmtEvaluator::StmtStmtEvaluator(PqlArgument& firstArg, PqlArgument& secondArg,
+  RelationshipType designAbstraction) : firstArg(firstArg), secondArg(secondArg),
+  designAbstraction(designAbstraction) {
 }
 
-spa::QpsResultTable spa::FollowsStarEvaluator::evaluate(PKBManager& pkbManager) {
+spa::QpsResultTable spa::StmtStmtEvaluator::evaluate(PKBManager& pkbManager) {
   QpsResultTable table;
   table.addHeader(firstArg);
   table.addHeader(secondArg);
@@ -13,7 +14,7 @@ spa::QpsResultTable spa::FollowsStarEvaluator::evaluate(PKBManager& pkbManager) 
     return table;
   }
 
-  QueryResult result = pkbManager.getRelationship(FOLLOWS_STAR,
+  QueryResult result = pkbManager.getRelationship(designAbstraction,
                                                   PKBQueryArg(firstArg),
                                                   PKBQueryArg(secondArg));
   if (result.getQueryResultType() == BOOL) {

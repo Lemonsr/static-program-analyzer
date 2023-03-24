@@ -5,12 +5,13 @@
 #include "QpsResultTable.h"
 
 namespace spa {
-class ParentEvaluator : public QpsEvaluator {
+class EntityEntityEvaluator : public QpsEvaluator {
  private:
   PqlArgument& firstArg;
   PqlArgument& secondArg;
+  RelationshipType designAbstraction;
  public:
-  ParentEvaluator(PqlArgument& firstArg, PqlArgument& secondArg);
+  EntityEntityEvaluator(PqlArgument& firstArg, PqlArgument& secondArg, RelationshipType designAbstraction);
   QpsResultTable evaluate(PKBManager& pkbManager);
 };
 }  // namespace spa

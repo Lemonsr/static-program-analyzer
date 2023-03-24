@@ -1,11 +1,12 @@
-#include "CallsEvaluator.h"
+#include "EntityEntityEvaluator.h"
 #include "UtilsFunction.h"
 
-spa::CallsEvaluator::CallsEvaluator(PqlArgument& firstArg, PqlArgument& secondArg) :
-  firstArg(firstArg), secondArg(secondArg) {
+spa::EntityEntityEvaluator::EntityEntityEvaluator(PqlArgument& firstArg, PqlArgument& secondArg,
+  RelationshipType designAbstraction) : firstArg(firstArg), secondArg(secondArg),
+  designAbstraction(designAbstraction) {
 }
 
-spa::QpsResultTable spa::CallsEvaluator::evaluate(PKBManager& pkbManager) {
+spa::QpsResultTable spa::EntityEntityEvaluator::evaluate(PKBManager & pkbManager) {
   QpsResultTable table;
   table.addHeader(firstArg);
   table.addHeader(secondArg);
@@ -13,7 +14,7 @@ spa::QpsResultTable spa::CallsEvaluator::evaluate(PKBManager& pkbManager) {
     return table;
   }
 
-  QueryResult result = pkbManager.getRelationship(CALLS,
+  QueryResult result = pkbManager.getRelationship(designAbstraction,
                                                   PKBQueryArg(firstArg),
                                                   PKBQueryArg(secondArg));
   if (result.getQueryResultType() == BOOL) {
