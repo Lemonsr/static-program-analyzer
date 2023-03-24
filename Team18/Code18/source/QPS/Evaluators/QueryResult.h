@@ -38,7 +38,7 @@ class QueryResult {
   const std::vector<spa::CFGNode*>& getCfgNodes();
   const std::vector<int>& getCfgEndNodes();
   const bool& getIsTrue();
-  const std::unordered_map<int, std::unordered_set<int>>* getIntToSetIntTable();
+  std::unordered_map<int, std::unordered_set<int>>* getIntToSetIntTable();
 
   void setQueryResultType(QueryResultType queryResultType);
   void setNames(std::vector<std::string> names);

@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include <utility>
 #include <memory>
+#include <queue>
 
 #include "ContainerStatement.h"
 #include "NonContainerStatement.h"
@@ -320,3 +321,93 @@ void spa::DesignExtractor::addUsesModifies(std::string relArg,
     pkbManager.addRelationship(MODIFIES, relArg, var.second);
   }
 }
+
+bool spa::AffectsNodeEquality::operator()(const AffectsNode& first, const AffectsNode& second) {
+  return first.nodeP == second.nodeP && first.usedVariables == second.usedVariables;
+}
+
+size_t spa::AffectsNodeHash::operator()(const AffectsNode& node) {
+  return node.nodeP->getLineNumber();
+}
+
+void spa::DesignExtractor::populateAffectsForNode(CFGNode* initialNode) {
+  std::unordered_set<AffectsNode, AffectsNodeHash, AffectsNodeEquality> seen;
+  std::queue<AffectsNode> affectsNodes;
+  for (auto edge : initialNode->getIncomingEdges()) {
+    affectsNodes.push({ edge, initialNode->getUsesVariables() });
+  }
+  while (!affectsNodes.empty()) {
+    auto affectsNode = affectsNodes.front();
+    affectsNodes.pop();
+    if (seen.find(affectsNode) != seen.end()) {
+      continue;
+    }
+    seen.insert(affectsNode);
+    auto node = affectsNode.nodeP;
+    auto currSet = affectsNode.usedVariables;
+    auto statementType = node->getStatementType();
+    auto modifiedVariables = node->getModifiedVariables();
+    if (statementType == StatementType::ASSIGN) {
+      auto& modifiedVariable = *(modifiedVariables.begin());
+      if (currSet.find(modifiedVariable) != currSet.end()) {
+        pkbManager.addRelationship(AFFECTS,
+                                   std::to_string(node->getLineNumber()),
+                                   std::to_string(initialNode->getLineNumber()));
+      }
+    }
+    if (statementType != StatementType::WHILE && statementType != StatementType::IF) {
+      for (auto& modifiedVariable : modifiedVariables) {
+        currSet.erase(modifiedVariable);
+      }
+    }
+    for (auto edge : node->getIncomingEdges()) {
+      affectsNodes.push({ edge, currSet });
+    }
+  }
+}
+
+void spa::DesignExtractor::populateAffects() {
+  QueryResult result = pkbManager.getCfgEndNodes();
+  auto& endNodes = result.getCfgNodes();
+  std::unordered_set<CFGNode*> seen;
+  std::queue<CFGNode*> nodes;
+  for (auto node : endNodes) {
+    nodes.push(node);
+  }
+  while (!nodes.empty()) {
+    auto node = nodes.front();
+    nodes.pop();
+    if (seen.find(node) != seen.end()) {
+      continue;
+    }
+    seen.insert(node);
+    populateAffectsForNode(node);
+  }
+}
+
+std::unordered_map<int, std::unordered_set<int>> spa::DesignExtractor::extractAffectsStar() {
+  auto affectsResult = pkbManager.getAffectsTable();
+  auto& affectsTable = *(affectsResult.getIntToSetIntTable());
+  std::unordered_map<int, std::unordered_set<int>> result;
+  for (auto& p : affectsTable) {
+    std::unordered_set<int> seen;
+    std::queue<int> lineNos;
+    for (auto lineNo : p.second) {
+      lineNos.push(lineNo);
+    }
+    while (!lineNos.empty()) {
+      int currLineNo = lineNos.front();
+      lineNos.pop();
+      if (seen.find(currLineNo) != seen.end()) {
+        continue;
+      }
+      seen.insert(currLineNo);
+      result[p.first].insert(currLineNo);
+      for (auto lineNo : affectsTable[currLineNo]) {
+        lineNos.push(lineNo);
+      }
+    }
+  }
+  return result;
+}
+

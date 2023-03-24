@@ -1,5 +1,6 @@
 #include "PKB.h"
 #include "PKBQueryTypes.h"
+#include "DesignExtractor.h"
 
 #include <unordered_set>
 
@@ -443,14 +444,18 @@ const bool spa::PKB::populateNextStar() {
 
 const bool spa::PKB::populateAffects() {
   if (relationshipStorage.isAffectsEmpty()) {
-    // TODO: add DE.populateAffects() call
+    std::vector<std::shared_ptr<ProcedureStatement>> dummy;
+    DesignExtractor de(*this, dummy);
+    de.populateAffects();
   }
   return relationshipStorage.isAffectsEmpty();
 }
 
 const bool spa::PKB::populateAffectsStar() {
   if (relationshipStorage.isAffectsStarEmpty()) {
-    // TODO: add DE.populateAffectsStar() call
+    std::vector<std::shared_ptr<ProcedureStatement>> dummy;
+    DesignExtractor de(*this, dummy);
+    relationshipStorage.setAffectsStarTable(de.extractAffectsStar());
   }
   return relationshipStorage.isAffectsStarEmpty();
 }
