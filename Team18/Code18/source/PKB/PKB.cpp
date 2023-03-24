@@ -339,6 +339,9 @@ const bool spa::PKB::addRelationship(RelationshipType relationshipType,
   case AFFECTS: {
     return relationshipStorage.addAffects(firstArg, secondArg);
   }
+  case AFFECTS_STAR: {
+    return relationshipStorage.addAffectsStar(firstArg, secondArg);
+  }
   default: {
     return false;
   }

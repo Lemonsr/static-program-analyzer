@@ -2050,6 +2050,18 @@ spa::QueryResult spa::RelationshipStorage::getAffectsUnderscoreUnderscore(PKBQue
   return queryResult;
 }
 
+bool spa::RelationshipStorage::addAffectsStar(std::string firstLineNo, std::string secondLineNo) {
+  int firstLineNumber = std::stoi(firstLineNo);
+  int secondLineNumber = std::stoi(secondLineNo);
+  if (affectsStarTable.find(firstLineNumber) != affectsTable.end() &&
+    affectsStarTable[firstLineNumber].find(secondLineNumber) != affectsStarTable[firstLineNumber].end()) {
+    return false;
+  }
+
+  affectsStarTable[firstLineNumber].insert(secondLineNumber);
+  return true;
+}
+
 spa::QueryResult spa::RelationshipStorage::getAffectsStarLineLine(PKBQueryArg firstArg,
                                                                   PKBQueryArg secondArg) {
   int firstLineNumber = firstArg.getLineNumber().lineNo;
