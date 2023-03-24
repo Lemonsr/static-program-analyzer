@@ -30,9 +30,11 @@
     <ClInclude Include="..\source\PKB\utils\HashTuple.h" />
     <ClInclude Include="..\source\QPS\Evaluators\CallsEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\CallsStarEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\EntityEntityEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\FollowsEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\FollowsStarEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\ModifiesEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\ModifiesUsesEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\NextEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\ParentEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\ParentStarEvaluator.h" />
@@ -45,6 +47,7 @@
     <ClInclude Include="..\source\QPS\Evaluators\QpsValue.h" />
     <ClInclude Include="..\source\QPS\Evaluators\QueryResult.h" />
     <ClInclude Include="..\source\QPS\Evaluators\SimpleEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\StmtStmtEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\UsesEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\WithEvaluator.h" />
     <ClInclude Include="..\source\QPS\Preprocessor\Clause.h" />
@@ -93,9 +96,11 @@
     <ClCompile Include="..\source\PKB\Storage\RelationshipStorage.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\CallsEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\CallsStarEvaluator.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\EntityEntityEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\FollowsEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\FollowsStarEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\ModifiesEvaluator.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\ModifiesUsesEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\NextEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\ParentEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\ParentStarEvaluator.cpp" />
@@ -107,6 +112,7 @@
     <ClCompile Include="..\source\QPS\Evaluators\QpsValue.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\QueryResult.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\SimpleEvaluator.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\StmtStmtEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\UsesEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\WithEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Preprocessor\ParsedQuery.cpp" />
