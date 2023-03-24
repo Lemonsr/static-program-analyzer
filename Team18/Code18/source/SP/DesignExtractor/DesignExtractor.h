@@ -56,6 +56,7 @@ class DesignExtractor {
   DesignExtractor(PKBManager& pkbManager, std::vector<std::shared_ptr<ProcedureStatement>>& procedureList);
   void extractRelationship();
   void populateAffects();
-  std::unordered_map<int, std::unordered_set<int>> extractAffectsStar();
+  std::unordered_map<int, std::unordered_set<int>> extractNextAffectsStar(
+    std::unordered_map<int, std::unordered_set<int>>& table);
 };
 }  // namespace spa

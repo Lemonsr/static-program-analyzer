@@ -13,7 +13,7 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 namespace UnitTesting {
   TEST_CLASS(TestDesignExtractorAffects) {
 public:
-  TEST_METHOD(TestAffectsAndAffectsStarSimple) {
+  TEST_METHOD(TestAffectsSimple) {
     spa::PKB pkb;
     std::vector<std::shared_ptr<spa::ProcedureStatement>> dummy;
     pkb.addCfgNode(1, spa::CFGNode(1, { "x" }, {}, spa::StatementType::ASSIGN));
@@ -35,15 +35,9 @@ public:
     Assert::IsTrue(affectsTable[3].empty());
     Assert::IsTrue(affectsTable[4] == std::unordered_set<int> { 5 });
     Assert::IsTrue(affectsTable[5].empty());
-    auto affectsStarTable = de.extractAffectsStar();
-    Assert::IsTrue(affectsStarTable[1] == std::unordered_set<int> { 4, 5 });
-    Assert::IsTrue(affectsStarTable[2].empty());
-    Assert::IsTrue(affectsStarTable[3].empty());
-    Assert::IsTrue(affectsStarTable[4] == std::unordered_set<int> { 5 });
-    Assert::IsTrue(affectsStarTable[5].empty());
   }
 
-  TEST_METHOD(TestAffectsAndAffectsStarWhile) {
+  TEST_METHOD(TestAffectsWhile) {
     spa::PKB pkb;
     std::vector<std::shared_ptr<spa::ProcedureStatement>> dummy;
     pkb.addCfgNode(1, spa::CFGNode(1, { "x" }, {}, spa::StatementType::ASSIGN));
@@ -69,16 +63,9 @@ public:
     Assert::IsTrue(affectsTable[4] == std::unordered_set<int> { 4, 5, 6 });
     Assert::IsTrue(affectsTable[5] == std::unordered_set<int> { 6 });
     Assert::IsTrue(affectsTable[6].empty());
-    auto affectsStarTable = de.extractAffectsStar();
-    Assert::IsTrue(affectsStarTable[1] == std::unordered_set<int> { 5, 6 });
-    Assert::IsTrue(affectsStarTable[2] == std::unordered_set<int> { 4, 5, 6 });
-    Assert::IsTrue(affectsStarTable[3].empty());
-    Assert::IsTrue(affectsStarTable[4] == std::unordered_set<int> { 4, 5, 6 });
-    Assert::IsTrue(affectsStarTable[5] == std::unordered_set<int> { 6 });
-    Assert::IsTrue(affectsStarTable[6].empty());
   }
 
-  TEST_METHOD(TestAffectsAndAffectsStarIf) {
+  TEST_METHOD(TestAffectsIf) {
     spa::PKB pkb;
     std::vector<std::shared_ptr<spa::ProcedureStatement>> dummy;
     pkb.addCfgNode(1, spa::CFGNode(1, { "x" }, {}, spa::StatementType::ASSIGN));
@@ -107,14 +94,6 @@ public:
     Assert::IsTrue(affectsTable[5] == std::unordered_set<int> { 6 });
     Assert::IsTrue(affectsTable[6] == std::unordered_set<int> { 7 });
     Assert::IsTrue(affectsTable[7].empty());
-    auto affectsStarTable = de.extractAffectsStar();
-    Assert::IsTrue(affectsStarTable[1] == std::unordered_set<int> { 6, 7 });
-    Assert::IsTrue(affectsStarTable[2] == std::unordered_set<int> { 4, 5, 6, 7 });
-    Assert::IsTrue(affectsStarTable[3].empty());
-    Assert::IsTrue(affectsStarTable[4] == std::unordered_set<int> { 7 });
-    Assert::IsTrue(affectsStarTable[5] == std::unordered_set<int> { 6, 7 });
-    Assert::IsTrue(affectsStarTable[6] == std::unordered_set<int> { 7 });
-    Assert::IsTrue(affectsStarTable[7].empty());
   }
   };
 }

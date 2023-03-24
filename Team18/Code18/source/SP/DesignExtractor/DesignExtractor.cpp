@@ -393,11 +393,10 @@ void spa::DesignExtractor::populateAffects() {
   }
 }
 
-std::unordered_map<int, std::unordered_set<int>> spa::DesignExtractor::extractAffectsStar() {
-  auto affectsResult = pkbManager.getAffectsTable();
-  auto& affectsTable = *(affectsResult.getIntToSetIntTable());
+std::unordered_map<int, std::unordered_set<int>> spa::DesignExtractor::extractNextAffectsStar(
+                                                    std::unordered_map<int, std::unordered_set<int>>& table) {
   std::unordered_map<int, std::unordered_set<int>> result;
-  for (auto& p : affectsTable) {
+  for (auto& p : table) {
     std::unordered_set<int> seen;
     std::queue<int> lineNos;
     for (auto lineNo : p.second) {
@@ -411,11 +410,10 @@ std::unordered_map<int, std::unordered_set<int>> spa::DesignExtractor::extractAf
       }
       seen.insert(currLineNo);
       result[p.first].insert(currLineNo);
-      for (auto lineNo : affectsTable[currLineNo]) {
+      for (auto lineNo : table[currLineNo]) {
         lineNos.push(lineNo);
       }
     }
   }
   return result;
 }
-

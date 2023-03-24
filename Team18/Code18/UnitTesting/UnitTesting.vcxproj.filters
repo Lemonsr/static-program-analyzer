@@ -209,5 +209,8 @@
     <ClCompile Include="TestDesignExtractorAffects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestDesignExtractorNextAffectsStar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

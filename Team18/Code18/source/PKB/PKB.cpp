@@ -437,7 +437,11 @@ const bool spa::PKB::removeDummyNode() {
 
 const bool spa::PKB::populateNextStar() {
   if (relationshipStorage.isNextStarEmpty()) {
-    // TODO: add DE.populateNextStar() call
+    std::vector<std::shared_ptr<ProcedureStatement>> dummy;
+    DesignExtractor de(*this, dummy);
+    auto result = relationshipStorage.getNextTable();
+    auto& table = *(result.getIntToSetIntTable());
+    relationshipStorage.setNextStarTable(de.extractNextAffectsStar(table));
   }
   return relationshipStorage.isNextStarEmpty();
 }
@@ -455,7 +459,9 @@ const bool spa::PKB::populateAffectsStar() {
   if (relationshipStorage.isAffectsStarEmpty()) {
     std::vector<std::shared_ptr<ProcedureStatement>> dummy;
     DesignExtractor de(*this, dummy);
-    relationshipStorage.setAffectsStarTable(de.extractAffectsStar());
+    auto result = relationshipStorage.getAffectsTable();
+    auto& table = *(result.getIntToSetIntTable());
+    relationshipStorage.setAffectsStarTable(de.extractNextAffectsStar(table));
   }
   return relationshipStorage.isAffectsStarEmpty();
 }
