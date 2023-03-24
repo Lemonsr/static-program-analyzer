@@ -122,7 +122,10 @@ std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
   case FOLLOWS_STAR:
   case PARENT:
   case PARENT_STAR:
-  case NEXT: {
+  case NEXT:
+  case NEXT_STAR:
+  case AFFECTS:
+  case AFFECTS_STAR: {
     return std::make_unique<StmtStmtEvaluator>(firstArg, secondArg, designAbstraction);
   }
   default: {

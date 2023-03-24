@@ -10,6 +10,7 @@ class StmtStmtEvaluator : public QpsEvaluator {
   PqlArgument& firstArg;
   PqlArgument& secondArg;
   RelationshipType designAbstraction;
+  bool isValidAffectsArgs();
  public:
   StmtStmtEvaluator(PqlArgument& firstArg, PqlArgument& secondArg, RelationshipType designAbstraction);
   QpsResultTable evaluate(PKBManager& pkbManager);
