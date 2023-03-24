@@ -10,7 +10,7 @@ class ModifiesUsesEvaluator : public QpsEvaluator {
   PqlArgument& firstArg;
   PqlArgument& secondArg;
   RelationshipType designAbstraction;
-public:
+ public:
   ModifiesUsesEvaluator(PqlArgument& firstArg, PqlArgument& secondArg, RelationshipType designAbstraction);
   QpsResultTable evaluate(PKBManager& pkbManager);
 };
