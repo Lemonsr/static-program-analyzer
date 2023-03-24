@@ -176,6 +176,7 @@
     <ClCompile Include="TestFollowsStarEvaluator.cpp" />
     <ClCompile Include="TestFrontEnd.cpp" />
     <ClCompile Include="TestNextEvaluator.cpp" />
+    <ClCompile Include="TestNextStarEvaluator.cpp" />
     <ClCompile Include="TestParentEvaluator.cpp" />
     <ClCompile Include="TestParentStarEvaluator.cpp" />
     <ClCompile Include="TestPatternContainerEvaluator.cpp" />
