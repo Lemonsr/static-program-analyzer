@@ -22,7 +22,7 @@ spa::QpsResultTable spa::StmtStmtEvaluator::evaluate(PKBManager& pkbManager) {
   if (UtilsFunction::isSameSynonym(firstArg, secondArg)) {
     return table;
   }
-  
+
   if (designAbstraction == NEXT_STAR) {
     pkbManager.populateNextStar();
   }
