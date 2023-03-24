@@ -74,5 +74,8 @@
     <ClCompile Include="TestNextStarEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestAffectsEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
