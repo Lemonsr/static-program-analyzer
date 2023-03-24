@@ -322,11 +322,11 @@ void spa::DesignExtractor::addUsesModifies(std::string relArg,
   }
 }
 
-bool spa::AffectsNodeEquality::operator()(const AffectsNode& first, const AffectsNode& second) {
+bool spa::AffectsNodeEquality::operator()(const AffectsNode& first, const AffectsNode& second) const {
   return first.nodeP == second.nodeP && first.usedVariables == second.usedVariables;
 }
 
-size_t spa::AffectsNodeHash::operator()(const AffectsNode& node) {
+size_t spa::AffectsNodeHash::operator()(const AffectsNode& node) const {
   return node.nodeP->getLineNumber();
 }
 
@@ -345,6 +345,9 @@ void spa::DesignExtractor::populateAffectsForNode(CFGNode* initialNode) {
     seen.insert(affectsNode);
     auto node = affectsNode.nodeP;
     auto currSet = affectsNode.usedVariables;
+    if (currSet.empty()) {
+      continue;
+    }
     auto statementType = node->getStatementType();
     auto modifiedVariables = node->getModifiedVariables();
     if (statementType == StatementType::ASSIGN) {
@@ -381,7 +384,12 @@ void spa::DesignExtractor::populateAffects() {
       continue;
     }
     seen.insert(node);
-    populateAffectsForNode(node);
+    if (node->getStatementType() == StatementType::ASSIGN) {
+      populateAffectsForNode(node);
+    }
+    for (auto edge : node->getIncomingEdges()) {
+      nodes.push(edge);
+    }
   }
 }
 

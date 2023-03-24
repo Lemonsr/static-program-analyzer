@@ -171,6 +171,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestAST.cpp" />
+    <ClCompile Include="TestDesignExtractorAffects.cpp" />
     <ClCompile Include="TestDesignExtractorExtractNext.cpp" />
     <ClCompile Include="TestPKBAffects.cpp" />
     <ClCompile Include="TestPKBAffectsStar.cpp" />

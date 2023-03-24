@@ -19,11 +19,11 @@ struct AffectsNode {
 };
 
 struct AffectsNodeEquality {
-  bool operator()(const AffectsNode& first, const AffectsNode& second);
+  bool operator()(const AffectsNode& first, const AffectsNode& second) const;
 };
 
 struct AffectsNodeHash {
-  size_t operator()(const AffectsNode& node);
+  size_t operator()(const AffectsNode& node) const;
 };
 
 class DesignExtractor {
