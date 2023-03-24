@@ -29,4 +29,4 @@ public:
     Assert::IsTrue(result[3] == std::unordered_set<int> { 7, 8 });
   }
   };
-}
+}  // namespace UnitTesting

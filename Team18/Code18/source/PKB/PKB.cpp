@@ -3,6 +3,7 @@
 #include "DesignExtractor.h"
 
 #include <unordered_set>
+#include <memory>
 
 void spa::PKB::createRelationshipQueryFunctionMap() {
   relationshipQueryFunctionMap = {

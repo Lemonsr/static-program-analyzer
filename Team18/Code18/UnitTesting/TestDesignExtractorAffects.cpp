@@ -96,4 +96,4 @@ public:
     Assert::IsTrue(affectsTable[7].empty());
   }
   };
-}
+}  // namespace UnitTesting
