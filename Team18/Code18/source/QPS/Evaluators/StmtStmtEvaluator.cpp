@@ -3,7 +3,7 @@
 
 bool spa::StmtStmtEvaluator::isValidAffectsArgs() {
   for (auto arg : { firstArg, secondArg }) {
-    if (arg.getType() == SYNONYM && (arg.getDesignEntity() != ASSIGN || arg.getDesignEntity() != STMT)) {
+    if (arg.getType() == SYNONYM && arg.getDesignEntity() != ASSIGN && arg.getDesignEntity() != STMT) {
       return false;
     }
   }
