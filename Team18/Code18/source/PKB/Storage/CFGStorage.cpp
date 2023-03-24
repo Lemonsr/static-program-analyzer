@@ -104,13 +104,13 @@ spa::QueryResult spa::CFGStorage::getCfgEndNodes() {
   QueryResult queryResult;
   queryResult.setQueryResultType(TUPLE);
 
-  std::vector<int> cfgEnd;
+  std::vector<CFGNode*> cfgEnd;
 
-  for (auto node : cfgEndNodes) {
-    cfgEnd.push_back(node);
+  for (auto lineNo : cfgEndNodes) {
+    cfgEnd.push_back(&cfgNodeTable[lineNo]);
   }
 
-  queryResult.setCfgEndNodes(cfgEnd);
+  queryResult.setCfgNodes(cfgEnd);
   return queryResult;
 }
 

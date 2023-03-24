@@ -114,8 +114,11 @@ TEST_CLASS(TestSpCreateCFG) {
 
   void assertEndNodeMatch(std::unordered_set<int> expected) {
     spa::QueryResult queryResult = pkbManager->getCfgEndNodes();
-    std::vector<int> endNodes = queryResult.getCfgEndNodes();
-    std::unordered_set<int> test(endNodes.begin(), endNodes.end());
+    std::vector<spa::CFGNode*> endNodes = queryResult.getCfgNodes();
+    std::unordered_set<int> test;
+    for (auto node : endNodes) {
+      test.insert(node->getLineNumber());
+    }
     Assert::IsTrue(expected == test);
   }
 
