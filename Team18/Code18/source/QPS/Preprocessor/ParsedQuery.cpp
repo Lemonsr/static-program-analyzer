@@ -5,18 +5,12 @@
 #include "ParsedQuery.h"
 #include "Token.h"
 #include "QpsEvaluator.h"
-#include "CallsEvaluator.h"
-#include "CallsStarEvaluator.h"
-#include "ModifiesEvaluator.h"
-#include "UsesEvaluator.h"
-#include "FollowsEvaluator.h"
-#include "FollowsStarEvaluator.h"
+#include "EntityEntityEvaluator.h"
+#include "ModifiesUsesEvaluator.h"
 #include "WithEvaluator.h"
-#include "ParentEvaluator.h"
-#include "ParentStarEvaluator.h"
 #include "PatternEvaluator.h"
 #include "PatternContainerEvaluator.h"
-#include "NextEvaluator.h"
+#include "StmtStmtEvaluator.h"
 
 void spa::ParsedQuery::addDeclaration(std::string synonym, DesignEntityType designEntity) {
   declarations[synonym] = designEntity;
@@ -116,32 +110,20 @@ spa::SuchThatClause::SuchThatClause(RelationshipType designAbstraction,
 
 std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
   switch (designAbstraction) {
-  case CALLS: {
-    return std::make_unique<CallsEvaluator>(firstArg, secondArg);
-  }
+  case CALLS:
   case CALLS_STAR: {
-    return std::make_unique<CallsStarEvaluator>(firstArg, secondArg);
+    return std::make_unique<EntityEntityEvaluator>(firstArg, secondArg, designAbstraction);
   }
-  case MODIFIES: {
-    return std::make_unique<ModifiesEvaluator>(firstArg, secondArg);
-  }
+  case MODIFIES:
   case USES: {
-    return std::make_unique<UsesEvaluator>(firstArg, secondArg);
+    return std::make_unique<ModifiesUsesEvaluator>(firstArg, secondArg, designAbstraction);
   }
-  case FOLLOWS: {
-    return std::make_unique<FollowsEvaluator>(firstArg, secondArg);
-  }
-  case FOLLOWS_STAR: {
-    return std::make_unique<FollowsStarEvaluator>(firstArg, secondArg);
-  }
-  case PARENT: {
-    return std::make_unique<ParentEvaluator>(firstArg, secondArg);
-  }
-  case PARENT_STAR: {
-    return std::make_unique<ParentStarEvaluator>(firstArg, secondArg);
-  }
+  case FOLLOWS:
+  case FOLLOWS_STAR:
+  case PARENT:
+  case PARENT_STAR:
   case NEXT: {
-    return std::make_unique<NextEvaluator>(firstArg, secondArg);
+    return std::make_unique<StmtStmtEvaluator>(firstArg, secondArg, designAbstraction);
   }
   default: {
     throw std::runtime_error("Unable to find evaluator");
