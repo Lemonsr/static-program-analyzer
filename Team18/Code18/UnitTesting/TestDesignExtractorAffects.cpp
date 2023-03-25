@@ -12,8 +12,25 @@ using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
 
 namespace UnitTesting {
   TEST_CLASS(TestDesignExtractorAffects) {
+private:
+  std::unordered_set<int> getLineNoSet(const std::unordered_map<int, std::unordered_set<int>>& table, int lineNo) {
+    auto it = table.find(lineNo);
+    if (it == table.end()) {
+      return {};
+    }
+    return it->second;
+  }
 public:
   TEST_METHOD(TestAffectsSimple) {
+    /*
+     procedure dummy {
+       x = 1;
+       v = 1;
+       read v;
+       z = x + v;
+       r = z;
+     }
+   */
     spa::PKB pkb;
     std::vector<std::shared_ptr<spa::ProcedureStatement>> dummy;
     pkb.addCfgNode(1, spa::CFGNode(1, { "x" }, {}, spa::StatementType::ASSIGN));
@@ -30,14 +47,25 @@ public:
     de.populateAffects();
     spa::QueryResult result = pkb.getAffectsTable();
     auto& affectsTable = *(result.getIntToSetIntTable());
-    Assert::IsTrue(affectsTable[1] == std::unordered_set<int> { 4 });
-    Assert::IsTrue(affectsTable[2].empty());
-    Assert::IsTrue(affectsTable[3].empty());
-    Assert::IsTrue(affectsTable[4] == std::unordered_set<int> { 5 });
-    Assert::IsTrue(affectsTable[5].empty());
+    Assert::IsTrue(getLineNoSet(affectsTable, 1) == std::unordered_set<int> { 4 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 2).empty());
+    Assert::IsTrue(getLineNoSet(affectsTable, 3).empty());
+    Assert::IsTrue(getLineNoSet(affectsTable, 4) == std::unordered_set<int> { 5 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 5).empty());
   }
 
   TEST_METHOD(TestAffectsWhile) {
+    /*
+      procedure dummy {
+        x = 1;
+        v = 1;
+        while (v == 1) {
+          v = v;
+        }
+        z = x + v;
+        r = z + v;
+      }
+   */
     spa::PKB pkb;
     std::vector<std::shared_ptr<spa::ProcedureStatement>> dummy;
     pkb.addCfgNode(1, spa::CFGNode(1, { "x" }, {}, spa::StatementType::ASSIGN));
@@ -57,15 +85,28 @@ public:
     de.populateAffects();
     spa::QueryResult result = pkb.getAffectsTable();
     auto& affectsTable = *(result.getIntToSetIntTable());
-    Assert::IsTrue(affectsTable[1] == std::unordered_set<int> { 5 });
-    Assert::IsTrue(affectsTable[2] == std::unordered_set<int> { 4, 5, 6 });
-    Assert::IsTrue(affectsTable[3].empty());
-    Assert::IsTrue(affectsTable[4] == std::unordered_set<int> { 4, 5, 6 });
-    Assert::IsTrue(affectsTable[5] == std::unordered_set<int> { 6 });
-    Assert::IsTrue(affectsTable[6].empty());
+    Assert::IsTrue(getLineNoSet(affectsTable, 1) == std::unordered_set<int> { 5 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 2) == std::unordered_set<int> { 4, 5, 6 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 3).empty());
+    Assert::IsTrue(getLineNoSet(affectsTable, 4) == std::unordered_set<int> { 4, 5, 6 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 5) == std::unordered_set<int> { 6 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 6).empty());
   }
 
   TEST_METHOD(TestAffectsIf) {
+    /*
+      procedure dummy {
+        x = 1;
+        v = 1;
+        if (v == 1) then {
+          y = v;
+        } else {
+          v = v;
+        }
+        z = x + v;
+        r = z + y;
+      }
+    */
     spa::PKB pkb;
     std::vector<std::shared_ptr<spa::ProcedureStatement>> dummy;
     pkb.addCfgNode(1, spa::CFGNode(1, { "x" }, {}, spa::StatementType::ASSIGN));
@@ -87,13 +128,13 @@ public:
     de.populateAffects();
     spa::QueryResult result = pkb.getAffectsTable();
     auto& affectsTable = *(result.getIntToSetIntTable());
-    Assert::IsTrue(affectsTable[1] == std::unordered_set<int> { 6 });
-    Assert::IsTrue(affectsTable[2] == std::unordered_set<int> { 4, 5, 6 });
-    Assert::IsTrue(affectsTable[3].empty());
-    Assert::IsTrue(affectsTable[4] == std::unordered_set<int> { 7 });
-    Assert::IsTrue(affectsTable[5] == std::unordered_set<int> { 6 });
-    Assert::IsTrue(affectsTable[6] == std::unordered_set<int> { 7 });
-    Assert::IsTrue(affectsTable[7].empty());
+    Assert::IsTrue(getLineNoSet(affectsTable, 1) == std::unordered_set<int> { 6 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 2) == std::unordered_set<int> { 4, 5, 6 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 3).empty());
+    Assert::IsTrue(getLineNoSet(affectsTable, 4) == std::unordered_set<int> { 7 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 5) == std::unordered_set<int> { 6 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 6) == std::unordered_set<int> { 7 });
+    Assert::IsTrue(getLineNoSet(affectsTable, 7).empty());
   }
   };
 }  // namespace UnitTesting
