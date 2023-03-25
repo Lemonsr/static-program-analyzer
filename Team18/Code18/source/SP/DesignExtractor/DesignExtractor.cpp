@@ -394,7 +394,7 @@ void spa::DesignExtractor::populateAffects() {
 }
 
 std::unordered_map<int, std::unordered_set<int>> spa::DesignExtractor::extractNextAffectsStar(
-                                                    std::unordered_map<int, std::unordered_set<int>>& table) {
+                                                  const std::unordered_map<int, std::unordered_set<int>>& table) {
   std::unordered_map<int, std::unordered_set<int>> result;
   for (auto& p : table) {
     std::unordered_set<int> seen;
@@ -410,7 +410,11 @@ std::unordered_map<int, std::unordered_set<int>> spa::DesignExtractor::extractNe
       }
       seen.insert(currLineNo);
       result[p.first].insert(currLineNo);
-      for (auto lineNo : table[currLineNo]) {
+      auto it = table.find(currLineNo);
+      if (it == table.end()) {
+        continue;
+      }
+      for (auto lineNo : it->second) {
         lineNos.push(lineNo);
       }
     }

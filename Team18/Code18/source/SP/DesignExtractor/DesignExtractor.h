@@ -58,6 +58,6 @@ class DesignExtractor {
   void extractRelationship();
   void populateAffects();
   std::unordered_map<int, std::unordered_set<int>> extractNextAffectsStar(
-    std::unordered_map<int, std::unordered_set<int>>& table);
+    const std::unordered_map<int, std::unordered_set<int>>& table);
 };
 }  // namespace spa

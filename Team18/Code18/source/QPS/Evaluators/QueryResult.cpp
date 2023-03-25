@@ -36,7 +36,7 @@ const bool& spa::QueryResult::getIsTrue() {
   return isTrue.value();
 }
 
-std::unordered_map<int, std::unordered_set<int>>* spa::QueryResult::getIntToSetIntTable() {
+const std::unordered_map<int, std::unordered_set<int>>* spa::QueryResult::getIntToSetIntTable() {
     return intToSetIntTable.value();
 }
 

@@ -442,9 +442,10 @@ const bool spa::PKB::populateNextStar() {
     DesignExtractor de(*this, dummy);
     auto result = relationshipStorage.getNextTable();
     auto& table = *(result.getIntToSetIntTable());
-    relationshipStorage.setNextStarTable(de.extractNextAffectsStar(table));
+    auto nextStarTable = de.extractNextAffectsStar(table);
+    relationshipStorage.setNextStarTable(nextStarTable);
   }
-  return relationshipStorage.isNextStarEmpty();
+  return true;
 }
 
 const bool spa::PKB::populateAffects() {
@@ -453,18 +454,20 @@ const bool spa::PKB::populateAffects() {
     DesignExtractor de(*this, dummy);
     de.populateAffects();
   }
-  return relationshipStorage.isAffectsEmpty();
+  return true;
 }
 
 const bool spa::PKB::populateAffectsStar() {
+  populateAffects();
   if (relationshipStorage.isAffectsStarEmpty()) {
     std::vector<std::shared_ptr<ProcedureStatement>> dummy;
     DesignExtractor de(*this, dummy);
     auto result = relationshipStorage.getAffectsTable();
     auto& table = *(result.getIntToSetIntTable());
-    relationshipStorage.setAffectsStarTable(de.extractNextAffectsStar(table));
+    auto affectsStarTable = de.extractNextAffectsStar(table);
+    relationshipStorage.setAffectsStarTable(affectsStarTable);
   }
-  return relationshipStorage.isAffectsStarEmpty();
+  return true;
 }
 
 const bool spa::PKB::clearAll() {
