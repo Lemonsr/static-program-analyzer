@@ -5,12 +5,27 @@
 #include <unordered_set>
 #include <utility>
 #include <memory>
+#include <queue>
 
 #include "ContainerStatement.h"
 #include "PKB.h"
 #include "ProcedureStatement.h"
 
 namespace spa {
+
+struct AffectsNode {
+  CFGNode* nodeP;
+  std::unordered_set<std::string> usedVariables;
+};
+
+struct AffectsNodeEquality {
+  bool operator()(const AffectsNode& first, const AffectsNode& second) const;
+};
+
+struct AffectsNodeHash {
+  size_t operator()(const AffectsNode& node) const;
+};
+
 class DesignExtractor {
  private:
   PKBManager& pkbManager;
@@ -36,9 +51,13 @@ class DesignExtractor {
                               std::vector<std::pair<std::string, std::string>> varModifies);
   void addUsesModifies(std::string relArg, std::vector<std::pair<std::string, std::string>> varUses,
                            std::vector<std::pair<std::string, std::string>> varModifies, bool isCallStmt);
+  void populateAffectsForNode(CFGNode* initial);
 
  public:
   DesignExtractor(PKBManager& pkbManager, std::vector<std::shared_ptr<ProcedureStatement>>& procedureList);
   void extractRelationship();
+  void populateAffects();
+  std::unordered_map<int, std::unordered_set<int>> extractNextAffectsStar(
+    const std::unordered_map<int, std::unordered_set<int>>& table);
 };
 }  // namespace spa
