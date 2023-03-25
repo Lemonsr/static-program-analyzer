@@ -165,6 +165,7 @@ class RelationshipStorage {
   QueryResult getAffectsUnderscoreStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getAffectsUnderscoreUnderscore(PKBQueryArg firstArg, PKBQueryArg secondArg);
 
+  bool addAffectsStar(std::string firstLineNo, std::string secondLineNo);
   QueryResult getAffectsStarLineLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getAffectsStarLineStatement(PKBQueryArg firstArg, PKBQueryArg secondArg);
   QueryResult getAffectsStarStatementLine(PKBQueryArg firstArg, PKBQueryArg secondArg);
