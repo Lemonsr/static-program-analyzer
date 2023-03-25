@@ -11,6 +11,7 @@
 #include "PatternEvaluator.h"
 #include "PatternContainerEvaluator.h"
 #include "StmtStmtEvaluator.h"
+#include "CFGEvaluator.h"
 
 void spa::ParsedQuery::addDeclaration(std::string synonym, DesignEntityType designEntity) {
   declarations[synonym] = designEntity;
@@ -122,11 +123,13 @@ std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
   case FOLLOWS_STAR:
   case PARENT:
   case PARENT_STAR:
-  case NEXT:
+  case NEXT: {
+    return std::make_unique<StmtStmtEvaluator>(firstArg, secondArg, designAbstraction);
+  }
   case NEXT_STAR:
   case AFFECTS:
   case AFFECTS_STAR: {
-    return std::make_unique<StmtStmtEvaluator>(firstArg, secondArg, designAbstraction);
+    return std::make_unique<CFGEvaluator>(firstArg, secondArg, designAbstraction);
   }
   default: {
     throw std::runtime_error("Unable to find evaluator");

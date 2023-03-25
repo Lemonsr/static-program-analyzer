@@ -28,6 +28,7 @@
     <ClInclude Include="..\source\PKB\Storage\PatternStorage.h" />
     <ClInclude Include="..\source\PKB\Storage\RelationshipStorage.h" />
     <ClInclude Include="..\source\PKB\utils\HashTuple.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\CFGEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\EntityEntityEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\ModifiesUsesEvaluator.h" />
     <ClInclude Include="..\source\QPS\Evaluators\PatternContainerEvaluator.h" />
@@ -85,6 +86,7 @@
     <ClCompile Include="..\source\PKB\Storage\EntityStorage.cpp" />
     <ClCompile Include="..\source\PKB\Storage\PatternStorage.cpp" />
     <ClCompile Include="..\source\PKB\Storage\RelationshipStorage.cpp" />
+    <ClCompile Include="..\source\QPS\Evaluators\CFGEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\EntityEntityEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\ModifiesUsesEvaluator.cpp" />
     <ClCompile Include="..\source\QPS\Evaluators\PatternContainerEvaluator.cpp" />
