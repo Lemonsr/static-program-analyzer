@@ -1,15 +1,6 @@
 #include "StmtStmtEvaluator.h"
 #include "UtilsFunction.h"
 
-bool spa::StmtStmtEvaluator::isValidAffectsArgs() {
-  for (auto arg : { firstArg, secondArg }) {
-    if (arg.getType() == SYNONYM && arg.getDesignEntity() != ASSIGN && arg.getDesignEntity() != STMT) {
-      return false;
-    }
-  }
-  return true;
-}
-
 spa::StmtStmtEvaluator::StmtStmtEvaluator(PqlArgument& firstArg, PqlArgument& secondArg,
   RelationshipType designAbstraction) : firstArg(firstArg), secondArg(secondArg),
   designAbstraction(designAbstraction) {

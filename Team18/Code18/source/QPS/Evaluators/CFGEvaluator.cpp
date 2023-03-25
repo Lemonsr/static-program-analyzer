@@ -20,16 +20,19 @@ spa::QpsResultTable spa::CFGEvaluator::evaluate(PKBManager& pkbManager) {
   table.addHeader(firstArg);
   table.addHeader(secondArg);
 
-  if (designAbstraction == NEXT_STAR) {
+  switch (designAbstraction) {
+  case NEXT_STAR: {
     pkbManager.populateNextStar();
+    break;
   }
-
-  if (designAbstraction == AFFECTS) {
+  case AFFECTS: {
     pkbManager.populateAffects();
+    break;
   }
-
-  if (designAbstraction == AFFECTS_STAR) {
+  case AFFECTS_STAR: {
     pkbManager.populateAffectsStar();
+    break;
+  }
   }
 
   if (designAbstraction == AFFECTS || designAbstraction == AFFECTS_STAR) {
