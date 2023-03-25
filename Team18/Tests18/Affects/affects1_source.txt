@@ -1,0 +1,27 @@
+procedure a {
+    x = 1;
+    y = 5;
+    z = 6;
+    read x;
+    while (y != 0) {
+        if (y > x) then {
+            x = x + 1;
+            y = y + 1;
+            print y;
+            print z;
+        } else {
+            z = z * 2;
+            print z;
+            y = y - 1;
+        }
+        y = y * 2;
+        x = x + 2;
+    }
+    if (x == z) then {
+        x =  x + 2;
+    } else {
+        while ( x != 0) {
+            z = z + 2;
+        }
+    }
+}
