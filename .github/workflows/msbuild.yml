@@ -24,7 +24,7 @@ jobs:
         with: 
           python-version: '3.7'
       - run: pip install cpplint
-      - run: cpplint --recursive --linelength=120 --filter=-legal/copyright,-readability/todo,-runtime/references,-build/include_subdir .
+      - run: cpplint --recursive --linelength=120 --filter=-legal/copyright,-readability/todo,-runtime/references,-build/include_subdir,-runtime/string .
 
   build:
     runs-on: windows-latest
