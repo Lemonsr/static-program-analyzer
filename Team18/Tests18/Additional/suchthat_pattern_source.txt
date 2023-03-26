@@ -1,0 +1,26 @@
+procedure One {
+	read a;
+	read b;
+	x = (a + b) * 7;
+	x = x + (x * 2);
+	while (x > 0) {
+		if (x % 2 == 0) then {
+			x = x / 2;
+		} else {
+			y = x - 1;
+			x = y;
+		}
+	}
+	call Two;
+}
+
+procedure Two {
+	z = a - b;
+	call Three;
+	p = z + 1;
+	print p;
+}
+
+procedure Three {
+	print z;
+}

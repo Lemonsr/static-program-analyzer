@@ -1,0 +1,10 @@
+1 - Confusing
+variable Select;
+Select Select
+num1, num2, noSwap, temp
+5000
+2 - Confusing
+if pattern;
+Select pattern
+4
+5000

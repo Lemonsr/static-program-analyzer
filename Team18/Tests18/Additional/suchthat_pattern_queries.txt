@@ -1,0 +1,105 @@
+1 - 1 such that, 1 pattern, 0 common synonyms #1
+procedure p; variable v; assign a;
+Select <p, v> such that Calls(p, _) pattern a(v, _)
+One x, One y, One z, One p, Two x, Two y, Two z, Two p
+5000
+2 - 1 such that, 1 pattern, 0 common synonyms #2
+procedure p; variable v; assign a; stmt s1, s2; while w;
+Select BOOLEAN such that Follows(s1, s2) pattern w(v, _)
+TRUE
+5000
+3 - 1 such that, 1 pattern, 0 common synonyms #3
+procedure p; variable v, v1; assign a, a1; stmt s1, s2;
+Select v such that Uses(a, v) pattern a1(v1, _)
+a, b, x, y, z
+5000
+4 - 1 such that, 1 pattern, 0 common synonyms #4
+procedure p; variable v, v1; assign a, a1; stmt s1, s2;
+Select v such that Uses(a, v) pattern a1(v, _)
+x, y, z
+5000
+5 - 1 such that, 1 pattern, 0 common synonyms #5
+procedure p; variable v, v1; assign a, a1; stmt s1, s2; while w;
+Select <v, w> such that Modifies(a, v) pattern w(v, _)
+x 5
+5000
+6 - 1 such that, 1 pattern, 0 common synonyms #6
+procedure p; variable v, v1; assign a, a1; stmt s1, s2; if ifs;
+Select BOOLEAN such that Modifies(ifs, v) pattern ifs(v, _, _)
+TRUE
+5000
+7 - 1 such that, 1 pattern, 0 common synonyms #7
+procedure p; variable v, v1; assign a, a1; stmt s1, s2; if ifs;
+Select <a, v> such that Uses(a, v) pattern a(v, _"2"_)
+4 x, 7 x
+5000
+8 - 2 such that, 0 pattern, #1
+procedure p; variable v, v1; assign a, a1; stmt s, s1, s2; if ifs;
+Select <s, s2> such that Follows(s, s1) and Follows(s1, s2)
+1 3, 2 4, 3 5, 4 10, 11 13, 12 14
+5000
+9 - 2 such that, 1 pattern, #1
+procedure p; variable v, v1; assign a, a1; stmt s, s1, s2; if ifs;
+Select a.stmt# such that Uses(a1, "b") and Next(a1, a) pattern a(v, _"a + b"_)
+none
+5000
+10 - 2 such that, 1 pattern, #2
+procedure p; variable v, v1; assign a, a1, a2; stmt s, s1, s2; if ifs;
+Select a.stmt# such that Uses(a1, "b") and Next(a1, a) pattern a2(v, _"a + b"_)
+4
+5000
+11 - 2 such that, 1 pattern, #3
+procedure p; variable v, v1; assign a, a1, a2; stmt s, s1, s2; if ifs; call cl;
+Select BOOLEAN such that Follows(a, cl) and Uses(a, v) pattern a(v, _)
+FALSE
+5000
+12 - 2 such that, 1 pattern, #4
+procedure p; variable v, v1; assign a, a1, a2; stmt s, s1, s2; if ifs; call cl;
+Select <a, v> such that Affects(a, a) and Uses(a, v) pattern a(v, _)
+7 x
+5000
+13 - 1 such that, 2 pattern, #1
+procedure p; variable v, v1; assign a, a1, a2; stmt s, s1, s2; if ifs; call cl; while w; read rd;
+Select v such that Modifies(a, v) pattern ifs(v, _, _) pattern w(v, _)
+x
+5000
+14 - 1 such that, 2 pattern, #2
+procedure p; variable v, v1; assign a, a1, a2; stmt s, s1, s2; if ifs; call cl; while w; read rd;
+Select s such that Parent*(s, a) pattern a(v, _) and w(v, _)
+5, 6
+5000
+15 - 2 such that, 2 pattern, #1
+procedure p, q; variable v, v1; assign a, a1, a2; stmt s, s1, s2; if ifs; call cl; while w; read rd;
+Select rd.varName such that Next*(rd, cl) and Calls(p, q) pattern a(_, _) and ifs(v, _, _)
+a, b
+5000
+16 - 2 such that, 2 pattern, #2
+procedure p, q; variable v, v1; assign a, a1, a2; stmt s, s1, s2; if ifs; call cl; while w; read rd;
+Select <rd.stmt#, v> such that Modifies(rd, v) and Next(rd, a) pattern a(v1, _"a"_) and a(v1, _"b"_)
+2 b
+5000
+17 - 2 such that, 2 pattern #3
+procedure p, q; variable v, v1; assign a, a1, a2; stmt s, s1, s2; if ifs; call cl; while w; read rd;
+Select <cl.procName, v> pattern ifs(v1, _, _) such that Follows(w, cl) pattern w(v, _) such that Follows(1, 2)
+Two x
+5000
+18 - multiple such that #1
+procedure p, q; variable v, v1; assign a, a1, a2; stmt s, s1, s2; if ifs; call cl; print pr; while w; read rd;
+Select <a, pr.varName> such that Follows(a, cl) and Follows(cl, a1) pattern a1(_, _"z"_) such that Next(a1, pr)
+11 p
+5000
+19 - multiple such that #2
+assign a1, a2, a3; print pr; call cl; if ifs; while w;
+Select <a1, cl.procName, a2, pr.varName> such that Follows(a1, cl) and Follows(a2, pr) and Affects*(a1, a2) and Follows(cl, a2) and Parent(w, ifs) and Parent(ifs, a3)
+11 Three 13 p
+5000
+20 - multiple patterns #1
+variable v1, v2, v3; assign a; while w; if ifs;
+Select <v1, v2.varName, v3> pattern a(v1, _"z"_) and w(v2, _) and ifs(v3, _, _) pattern a(_, _)
+p x x
+5000
+21 - 0 such that, 0 pattern
+print pr; call cl;
+Select <pr, pr, pr.varName, cl, cl, cl.procName>
+14 14 p 10 10 Two, 14 14 p 12 12 Three, 15 15 z 10 10 Two, 15 15 z 12 12 Three
+5000

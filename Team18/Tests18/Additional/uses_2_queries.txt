@@ -1,0 +1,70 @@
+1 - Uses(syn, syn)
+while w; variable v;
+Select v such that Uses(w, v)
+i, x, y, z, v
+5000
+2 - Uses(syn, syn)
+if i; variable v;
+Select v such that Uses(i, v)
+x
+5000
+3 - Uses(syn, _)
+assign a;
+Select a such that Uses(a, _)
+7, 9, 11, 13, 14, 15, 17
+5000
+4 - Uses(syn, IDENT)
+assign a;
+Select a such that Uses(a, "x")
+7, 11, 13, 15
+5000
+5 - Uses(_, syn)
+variable v;
+Select v such that Uses(_, v)
+SemanticError
+5000
+6 - Uses(_, _)
+variable v;
+Select v such that Uses(_, _)
+SemanticError
+5000
+7 - Uses(_, IDENT)
+variable v;
+Select v such that Uses(_, "x")
+SemanticError
+5000
+8 - Uses(StmtNo, syn)
+variable v;
+Select v such that Uses(10, v)
+x
+5000
+9 - Uses(StmtNo, _)
+procedure p;
+Select p such that Uses(18, _)
+First, Second, Third
+5000
+10 - Uses(StmtNo, IDENT)
+print pn;
+Select pn such that Uses(7, "y")
+18
+5000
+11 - Uses(procName, syn)
+procedure p; variable v;
+Select v such that Uses(p, v)
+i, x, y, z, v
+5000
+12 - Uses(procName, _)
+procedure p;
+Select p such that Uses(p, _)
+First, Second, Third
+5000
+13 - Uses(procName, IDENT)
+procedure p;
+Select p such that Uses(p, "v")
+First, Second, Third
+5000
+14 - Uses(...) Uses(...)
+procedure p; print pn;
+Select p such that Uses(p, "v") such that Uses(p, "i")
+First, Second
+5000

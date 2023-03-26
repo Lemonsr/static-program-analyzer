@@ -1,0 +1,365 @@
+1.1 - Select unused tuple
+stmt s, s1, s2;
+Select < s > such that Follows (s1, s2)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
+5000
+1.2 - Select unused tuple
+stmt s, s1; while w;
+Select < s > such that Parent*(w, s1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
+5000
+1.3 - Select unused tuple
+read re; assign a; variable v;
+Select <re > such that Uses(a, v)
+1, 8, 18, 20
+5000
+1.4 - Select unused tuple
+print pn; assign a, a1;
+Select <    pn > such that Follows(a, a1)
+3, 5, 10, 16
+5000
+1.5 - Select unused tuple
+call cl;  while w; assign a;
+Select < cl     > such that Parent(w, a)
+4, 9, 19
+5000
+1.6 - Select unused tuple
+while w; procedure p, q;
+Select < w> such that Calls(p, q)
+2, 6
+5000
+1.7 - Select unused tuple
+if ifs; procedure p, q;
+Select < ifs > such that Calls*(p, q)
+11, 14
+5000
+1.8 - Select unused tuple
+assign a; stmt s, s1;
+Select < a > such that Follows*(s, s1)
+7, 12, 13, 15, 17, 21
+5000
+1.9 - Select unused tuple
+variable v, v1; assign a;
+Select < v > such that Uses(a, v1)
+doberman, germanShepherds, goldenRetrievers, husky, malamute, foxHound, spaniel, australianShepherd, bassetHound, akita, lynx, tiger, lion, cougar, leopard, cheetah, snowLeopard, jaguar, cloudedLeopard, bobtail, ringtail
+5000
+1.10 - Select unused tuple
+constant c; assign a; variable v;
+Select < c > such that Modifies(a, v)
+2, 3, 5, 10, 20
+5000
+1.11 - Select unused tuple
+constant c; assign a; 
+Select < c > pattern a ( _ , _ )
+2, 3, 5, 10, 20
+5000
+1.12 - Select unused tuple
+procedure p; if ifs; variable v;
+Select < p > such that Uses(ifs, v)
+dogs, bigCats, smallCats
+5000
+2.1 - Select 1 tuple used in clause
+stmt s; variable v;
+Select < s > such that Modifies (s, v)
+1, 2, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21
+5000
+2.2 - Select 1 tuple used in clause
+stmt n, n1;
+Select < n > such that Follows(n, n1)
+1, 2, 3, 4, 5, 8, 10, 11, 12, 13, 15, 17
+5000
+2.3 - Select 1 tuple used in clause
+read re;
+Select  <       re      > such that Modifies(re, "doberman")
+1
+5000
+2.4 - Select 1 tuple used in clause
+print pn;
+Select < pn > such that Uses(pn, "husky")
+3
+5000
+2.5 - Select 1 tuple used in clause
+procedure p;
+Select < p > such that Calls(p , "    bigCats  ")
+dogs
+5000
+2.6 - Select 1 tuple used in clause
+call cl; print pn;
+Select < cl > such that Next(cl , pn)
+4
+5000
+2.7 - Select 1 tuple used in clause
+while w; assign a;
+Select < w > such that Parent(w, a)
+6
+5000
+2.8 - Select 1 tuple used in clause
+if ifs; print pn;
+Select < ifs > such that Parent*(ifs, pn)
+11, 14
+5000
+2.9 - Select 1 tuple used in clause
+assign a; 
+Select < a > pattern a (_, _)
+7, 12, 13, 15, 17, 21
+5000
+2.10 - Select 1 tuple used in clause
+variable v; assign a;
+Select < v > such that Modifies(a, v)
+australianShepherd, cougar, cheetah, tiger, jaguar, bobtail
+5000
+2.11 - Select 1 tuple used in clause
+procedure p, q;
+Select < p > such that Calls(p, q)
+dogs, bigCats
+5000
+3.1 - Select 1 duplicate tuple used in clause
+stmt s; variable v;
+Select < s, s > such that Modifies (s, v)
+1 1, 2 2, 4 4, 6 6, 7 7, 8 8, 9 9, 11 11, 12 12, 13 13, 14 14, 15 15, 17 17, 18 18, 19 19, 20 20, 21 21
+5000
+3.2 - Select 1 duplicate tuple used in clause
+stmt n, n1;
+Select < n , n > such that Follows(n, n1)
+1 1, 2 2, 3 3, 4 4, 5 5, 8 8, 10 10, 11 11, 12 12, 13 13, 15 15, 17 17
+5000
+3.3 - Select 1 duplicate tuple used in clause
+read re;
+Select  < re, re> such that Modifies(re, "doberman")
+1 1
+5000
+3.4 - Select 1 duplicate tuple used in clause
+print pn;
+Select < pn, pn > such that Uses(pn, "husky")
+3 3
+5000
+3.5 - Select 1 duplicate tuple used in clause
+call cl; read re;
+Select < cl, cl > such that Next(cl , re)
+19 19
+5000
+	3.6 - Select 1 duplicate tuple used in clause	
+while w; assign a;	
+Select < w, w > such that Parent(w, a)	
+6 6
+5000	
+3.7 - Select 1 duplicate tuple used in clause	
+if ifs; print pn;	
+Select < ifs, ifs > such that Parent*(ifs, pn)	
+11 11, 14 14
+5000	
+3.8 - Select 1 duplicate tuple used in clause	
+assign a; 	
+Select < a, a > pattern a ( _ , _ )	
+7 7, 12 12, 13 13, 15 15, 17 17, 21 21
+5000	
+3.9 - Select 1 duplicate tuple used in clause	
+assign a; 	
+Select < a, a > pattern a ( "bobtail" , _ )	
+21 21
+5000	
+3.10 - Select 1 duplicate tuple used in clause	
+assign a; 	
+Select < a, a > pattern a ( _ , "20" )	
+15 15
+5000	
+3.11 - Select 1 duplicate tuple used in clause	
+assign a; 	
+Select < a, a > pattern a ( _ , _"20"_ )	
+12 12, 15 15
+5000	
+3.12 - Select 1 duplicate tuple used in clause	
+assign a; 	
+Select < a, a > pattern a ( _ , _"bassetHound"_ )	
+7 7
+5000	
+3.13 - Select 1 duplicate tuple used in clause	
+variable v; assign a;	
+Select < v, v > such that Modifies(a, v)	
+australianShepherd australianShepherd, cougar cougar, cheetah cheetah, tiger tiger, jaguar jaguar, bobtail bobtail
+5000	
+3.14 - Select 1 duplicate tuple used in clause	
+procedure p, q;	
+Select < p, p > such that Calls(p, q)	
+dogs dogs, bigCats bigCats
+5000	
+4.1 - Select 2 tuples, only 1 used in clause	
+stmt s, s1, s2;	
+Select < s      ,       s1      > such that Follows(s, s2)	
+1 1, 1 2, 1 3, 1 4, 1 5, 1 6, 1 7, 1 8, 1 9, 1 10, 1 11, 1 12, 1 13, 1 14, 1 15, 1 16, 1 17, 1 18, 1 19, 1 20, 1 21, 2 1, 2 2, 2 3, 2 4, 2 5, 2 6, 2 7, 2 8, 2 9, 2 10, 2 11, 2 12, 2 13, 2 14, 2 15, 2 16, 2 17, 2 18, 2 19, 2 20, 2 21, 3 1, 3 2, 3 3, 3 4, 3 5, 3 6, 3 7, 3 8, 3 9, 3 10, 3 11, 3 12, 3 13, 3 14, 3 15, 3 16, 3 17, 3 18, 3 19, 3 20, 3 21, 4 1, 4 2, 4 3, 4 4, 4 5, 4 6, 4 7, 4 8, 4 9, 4 10, 4 11, 4 12, 4 13, 4 14, 4 15, 4 16, 4 17, 4 18, 4 19, 4 20, 4 21, 5 1, 5 2, 5 3, 5 4, 5 5, 5 6, 5 7, 5 8, 5 9, 5 10, 5 11, 5 12, 5 13, 5 14, 5 15, 5 16, 5 17, 5 18, 5 19, 5 20, 5 21, 8 1, 8 2, 8 3, 8 4, 8 5, 8 6, 8 7, 8 8, 8 9, 8 10, 8 11, 8 12, 8 13, 8 14, 8 15, 8 16, 8 17, 8 18, 8 19, 8 20, 8 21, 10 1, 10 2, 10 3, 10 4, 10 5, 10 6, 10 7, 10 8, 10 9, 10 10, 10 11, 10 12, 10 13, 10 14, 10 15, 10 16, 10 17, 10 18, 10 19, 10 20, 10 21, 11 1, 11 2, 11 3, 11 4, 11 5, 11 6, 11 7, 11 8, 11 9, 11 10, 11 11, 11 12, 11 13, 11 14, 11 15, 11 16, 11 17, 11 18, 11 19, 11 20, 11 21, 12 1, 12 2, 12 3, 12 4, 12 5, 12 6, 12 7, 12 8, 12 9, 12 10, 12 11, 12 12, 12 13, 12 14, 12 15, 12 16, 12 17, 12 18, 12 19, 12 20, 12 21, 13 1, 13 2, 13 3, 13 4, 13 5, 13 6, 13 7, 13 8, 13 9, 13 10, 13 11, 13 12, 13 13, 13 14, 13 15, 13 16, 13 17, 13 18, 13 19, 13 20, 13 21, 15 1, 15 2, 15 3, 15 4, 15 5, 15 6, 15 7, 15 8, 15 9, 15 10, 15 11, 15 12, 15 13, 15 14, 15 15, 15 16, 15 17, 15 18, 15 19, 15 20, 15 21, 17 1, 17 2, 17 3, 17 4, 17 5, 17 6, 17 7, 17 8, 17 9, 17 10, 17 11, 17 12, 17 13, 17 14, 17 15, 17 16, 17 17, 17 18, 17 19, 17 20, 17 21
+5000	
+4.2 - Select 2 tuples, only 1 used in clause	
+prog_line n, n1, n2;	
+Select < n, n1 > such that Follows(n, n2)	
+1 1, 1 2, 1 3, 1 4, 1 5, 1 6, 1 7, 1 8, 1 9, 1 10, 1 11, 1 12, 1 13, 1 14, 1 15, 1 16, 1 17, 1 18, 1 19, 1 20, 1 21, 2 1, 2 2, 2 3, 2 4, 2 5, 2 6, 2 7, 2 8, 2 9, 2 10, 2 11, 2 12, 2 13, 2 14, 2 15, 2 16, 2 17, 2 18, 2 19, 2 20, 2 21, 3 1, 3 2, 3 3, 3 4, 3 5, 3 6, 3 7, 3 8, 3 9, 3 10, 3 11, 3 12, 3 13, 3 14, 3 15, 3 16, 3 17, 3 18, 3 19, 3 20, 3 21, 4 1, 4 2, 4 3, 4 4, 4 5, 4 6, 4 7, 4 8, 4 9, 4 10, 4 11, 4 12, 4 13, 4 14, 4 15, 4 16, 4 17, 4 18, 4 19, 4 20, 4 21, 5 1, 5 2, 5 3, 5 4, 5 5, 5 6, 5 7, 5 8, 5 9, 5 10, 5 11, 5 12, 5 13, 5 14, 5 15, 5 16, 5 17, 5 18, 5 19, 5 20, 5 21, 8 1, 8 2, 8 3, 8 4, 8 5, 8 6, 8 7, 8 8, 8 9, 8 10, 8 11, 8 12, 8 13, 8 14, 8 15, 8 16, 8 17, 8 18, 8 19, 8 20, 8 21, 10 1, 10 2, 10 3, 10 4, 10 5, 10 6, 10 7, 10 8, 10 9, 10 10, 10 11, 10 12, 10 13, 10 14, 10 15, 10 16, 10 17, 10 18, 10 19, 10 20, 10 21, 11 1, 11 2, 11 3, 11 4, 11 5, 11 6, 11 7, 11 8, 11 9, 11 10, 11 11, 11 12, 11 13, 11 14, 11 15, 11 16, 11 17, 11 18, 11 19, 11 20, 11 21, 12 1, 12 2, 12 3, 12 4, 12 5, 12 6, 12 7, 12 8, 12 9, 12 10, 12 11, 12 12, 12 13, 12 14, 12 15, 12 16, 12 17, 12 18, 12 19, 12 20, 12 21, 13 1, 13 2, 13 3, 13 4, 13 5, 13 6, 13 7, 13 8, 13 9, 13 10, 13 11, 13 12, 13 13, 13 14, 13 15, 13 16, 13 17, 13 18, 13 19, 13 20, 13 21, 15 1, 15 2, 15 3, 15 4, 15 5, 15 6, 15 7, 15 8, 15 9, 15 10, 15 11, 15 12, 15 13, 15 14, 15 15, 15 16, 15 17, 15 18, 15 19, 15 20, 15 21, 17 1, 17 2, 17 3, 17 4, 17 5, 17 6, 17 7, 17 8, 17 9, 17 10, 17 11, 17 12, 17 13, 17 14, 17 15, 17 16, 17 17, 17 18, 17 19, 17 20, 17 21
+5000	
+4.3 - Select 2 tuples, only 1 used in clause	
+read re, re1, re2;	
+Select < re, re1 > such that Follows*(re, re2)	
+1 1, 1 8, 1 18, 1 20
+5000
+4.4 - Select 2 tuples, only 1 used in clause
+read re; variable v;
+Select < re, v > such that Modifies(re, "cloudedLeopard")
+20 doberman, 20 germanShepherds, 20 goldenRetrievers, 20 husky, 20 malamute, 20 foxHound, 20 spaniel, 20 australianShepherd, 20 bassetHound, 20 akita, 20 lynx, 20 tiger, 20 lion, 20 cougar, 20 leopard, 20 cheetah, 20 snowLeopard, 20 jaguar, 20 cloudedLeopard, 20 bobtail, 20 ringtail
+5000
+4.5 - Select 2 tuples, only 1 used in clause	
+print pn, pn1, pn2;	
+Select < pn, pn1 > such that Follows*(pn, pn2)	
+3 3, 3 5, 3 10, 3 16
+5000
+4.6 - Select 2 tuples, only 1 used in clause
+print pn; variable v;
+Select < pn, v > such that Uses(pn, "tiger")
+16 doberman, 16 germanShepherds, 16 goldenRetrievers, 16 husky, 16 malamute, 16 foxHound, 16 spaniel, 16 australianShepherd, 16 bassetHound, 16 akita, 16 lynx, 16 tiger, 16 lion, 16 cougar, 16 leopard, 16 cheetah, 16 snowLeopard, 16 jaguar, 16 cloudedLeopard, 16 bobtail, 16 ringtail
+5000
+4.7 - Select 2 tuples, only 1 used in clause	
+call cl, cl1; print pn;	
+Select < cl, cl1 > such that Next(cl, pn)	
+4 4, 4 9, 4 19
+5000	
+4.8 - Select 2 tuples, only 1 used in clause	
+while w, w1, w2;	
+Select < w, w1 > such that Parent(w, w2)	
+2 2, 2 6
+5000	
+4.9 - Select 2 tuples, only 1 used in clause	
+if ifs, ifs1, ifs2;	
+Select < ifs, ifs1> such that Parent*(ifs, ifs2)	
+11 11, 11 14
+5000	
+4.10 - Select 2 tuples, only 1 used in clause	
+assign a, a1, a2;	
+Select < a, a1 > such that Next(a, a2)	
+12 7, 12 12, 12 13, 12 15, 12 17, 12 21
+5000	
+4.11 - Select 2 tuples, only 1 used in clause	
+assign a, a1;	
+Select < a, a1 > pattern a ( "cougar" , _)	
+12 7, 12 12, 12 13, 12 15, 12 17, 12 21
+5000	
+4.12 - Select 2 tuples, only 1 used in clause	
+assign a, a1;	
+Select < a, a1 > pattern a ( _ , _"leopard"_ )	
+12 7, 12 12, 12 13, 12 15, 12 17, 12 21
+5000	
+4.13 - Select 2 tuples, only 1 used in clause	
+procedure p, p1, p2;	
+Select < p, p1 > such that Calls(p, p2)	
+dogs dogs, dogs bigCats, dogs smallCats, bigCats dogs, bigCats bigCats, bigCats smallCats
+5000
+4.14 - Select 2 tuples, only 1 used in clause
+procedure p, p1, p2;
+Select < p, p1 > such that Calls(p, "smallCats")
+dogs dogs, dogs bigCats, dogs smallCats, bigCats dogs, bigCats bigCats, bigCats smallCats
+5000
+	5.1 - Select 2 tuples, 2 used in clause	
+stmt s, s1;	
+Select < s, s1 > such that Follows(s, s1)	
+1 2, 2 8, 3 4, 4 5, 5 6, 8 9, 10 11, 11 20, 12 13, 13 14, 15 16, 17 18
+5000	
+5.2 - Select 2 tuples, 2 used in clause	
+prog_line n, n1;	
+Select < n, n1 > such that Follows*(n, n1)	
+1 2, 1 8, 1 9, 2 8, 2 9, 3 4, 3 5, 3 6, 4 5, 4 6, 5 6, 8 9, 10 11, 10 20, 11 20, 12 13, 12 14, 13 14, 15 16, 17 18
+5000	
+5.3 - Select 2 tuples, 2 used in clause	
+read re, re1;	
+Select < re, re1 > such that Follows*(re, re1)	
+1 8
+5000	
+5.4 - Select 2 tuples, 2 used in clause	
+print pn, pn1;	
+Select < pn, pn1 > such that Follows*(pn, pn1)	
+3 5
+5000	
+5.5 - Select 2 tuples, 2 used in clause	
+call cl; stmt s;	
+Select < cl, s > such that Next(cl, s)	
+4 5, 19 20
+5000	
+5.6 - Select 2 tuples, 2 used in clause	
+while w, w1;	
+Select < w, w1 > such that Parent(w, w1)	
+2 6
+5000	
+5.7 - Select 2 tuples, 2 used in clause	
+if ifs, ifs1;	
+Select < ifs, ifs1> such that Parent*(ifs, ifs1)	
+11 14
+5000	
+5.8 - Select 2 tuples, 2 used in clause	
+assign a, a1;	
+Select < a, a1 > such that Next(a, a1)	
+12 13
+5000	
+5.9 - Select 2 tuples, 2 used in clause	
+procedure p, p1;	
+Select < p, p1 > such that Calls(p, p1)	
+dogs bigCats, dogs smallCats, bigCats smallCats
+5000	
+6.1 - Select 2 mixed tuples, 2 used in clause	
+stmt s; prog_line n;	
+Select < s, n > such that Next(s, n)	
+1 2, 2 3, 2 8, 3 4, 4 5, 5 6, 6 2, 6 7, 7 6, 8 9, 10 11, 11 12, 11 19, 12 13, 13 14, 14 15, 14 17, 15 16, 16 20, 17 18, 18 20, 19 20
+5000	
+6.2 - Select 2 mixed tuples, 2 used in clause	
+prog_line n; assign a;	
+Select <n,a> such that Follows(a, n)	
+13 12, 14 13, 16 15, 18 17
+5000	
+6.3 - Select 2 mixed tuples, 2 used in clause	
+read re; stmt s;	
+Select < re, s > such that Follows*(re, s)	
+1 2, 1 8, 1 9, 8 9
+5000	
+6.4 - Select 2 mixed tuples, 2 used in clause	
+read re; variable v;	
+Select < re, v > such that Modifies(re, v)	
+1 doberman, 8 akita, 18 jaguar, 20 cloudedLeopard
+5000	
+6.5 - Select 2 mixed tuples, 2 used in clause	
+print pn; prog_line n;	
+Select < pn, n > such that Next(pn, n)	
+3 4, 5 6, 10 11, 16 20
+5000	
+6.6 - Select 2 mixed tuples, 2 used in clause	
+print pn; variable v;	
+Select < pn, v > such that Uses(pn, v)	
+3 husky, 5 malamute, 10 lynx, 16 tiger
+5000	
+6.7 - Select 2 mixed tuples, 2 used in clause	
+call cl; stmt s;	
+Select < cl, s > such that Next(cl, s)	
+4 5, 19 20
+5000	
+6.8 - Select 2 mixed tuples, 2 used in clause	
+while w; stmt s;	
+Select < w, s > such that Parent(w, s)	
+2 3, 2 4, 2 5, 2 6, 6 7
+5000	
+6.9 - Select 2 mixed tuples, 2 used in clause	
+if ifs; prog_line n;
+Select < ifs, n > such that Parent*(ifs, n)	
+11 12, 11 13, 11 14, 11 15, 11 16, 11 17, 11 18, 11 19, 14 15, 14 16, 14 17, 14 18
+5000
+6.10 - Select 2 mixed tuples, 2 used in clause	
+assign a; variable v;	
+Select < a, v > such that Uses(a, v)	
+7 bassetHound, 12 leopard, 13 snowLeopard, 21 ringtail
+5000	
+6.11 - Select 2 mixed tuples, 2 used in clause	
+assign a; variable v;	
+Select < a, v > such that Modifies(a, v)	
+7 australianShepherd, 12 cougar, 13 cheetah, 15 tiger, 17 jaguar, 21 bobtail
+5000	
+6.12 - Select 2 mixed tuples, 2 used in clause	
+procedure p; variable v;	
+Select < p, v > such that Uses(p, v)	
+dogs germanShepherds, dogs goldenRetrievers, dogs husky, dogs malamute, dogs foxHound, dogs spaniel, dogs bassetHound, dogs lynx, dogs tiger, dogs lion, dogs leopard, dogs snowLeopard, dogs jaguar, dogs ringtail, bigCats lynx, bigCats tiger, bigCats lion, bigCats leopard, bigCats snowLeopard, bigCats jaguar, bigCats ringtail, smallCats ringtail
+5000	
+6.13 - Select 2 mixed tuples, 2 used in clause	
+procedure p; variable v;	
+Select < p, v > such that Modifies(p, v)	
+dogs doberman, dogs australianShepherd, dogs akita, dogs cougar, dogs cheetah, dogs tiger, dogs jaguar, dogs cloudedLeopard, dogs bobtail, bigCats cougar, bigCats cheetah, bigCats tiger, bigCats jaguar, bigCats cloudedLeopard, bigCats bobtail, smallCats bobtail
+5000

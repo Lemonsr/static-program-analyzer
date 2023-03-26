@@ -1,0 +1,50 @@
+1 - Test
+procedure p, q;
+Select p such that Calls(p, q) with q.procName = "Monkey" such that Modifies(p, "t")
+Monk
+5000
+2 - Test
+call c; while w; assign a;
+Select c such that Parent(w, c) and Follows(a, c) with c.procName = "Monkey"
+11
+5000
+3 - Test
+assign a; variable v; if ifs;
+Select a such that Modifies(a, v) such that Parent(ifs, a) with v.varName = "x"
+15, 16
+5000
+4 - Test
+assign a; variable v; while w;
+Select a such that Modifies(a, v) such that Parent(w, a) with w.stmt# = 6 and v.varName = "d"
+7
+5000
+5 - Test
+call cl; variable v; assign a;
+Select cl such that Modifies(cl, v) and Modifies(a, v) with v.varName = "a"
+4, 18
+5000
+6 - Test
+variable v; while w;
+Select v such that Modifies(w, v) with w.stmt# = 8
+y, x, t 
+5000
+7 - Test
+assign a, a1; while w; variable v, v1;
+Select <a, a1> with v.varName = "y" with w.stmt# = 8 such that Uses(a, v) and Uses(a1, v1) and Parent(w, a) and Parent(w, a1)
+9 9
+5000
+8 - Test
+variable v; procedure p;
+Select BOOLEAN with v.varName = "x" such that Modifies(p, v) with p.procName = "Monkey"
+TRUE
+5000
+9 - Test
+if ifs; variable v; assign a;
+Select a such that Uses(ifs, v) such that Modifies(ifs, v) such that Parent(ifs, a) with v.varName = "x"
+15, 16
+5000
+10 - Test
+if ifs; variable v; assign a;
+Select a such that Uses(a, v) such that Parent(ifs, a) with v.varName = "a" and ifs.stmt# = 14
+15, 16
+5000

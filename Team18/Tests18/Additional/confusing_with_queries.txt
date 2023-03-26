@@ -1,0 +1,85 @@
+1 - Normal
+read rd;
+Select rd with rd.varName = "x"
+1
+5000
+2 - Spaces in var name
+read rd;
+Select rd with rd.varName = "       x"
+1
+5000
+3 - Spaces in var name
+read rd;
+Select rd with rd.varName = "       x     "
+1
+5000
+4 - Spaces in var name
+read rd;
+Select rd with rd.varName = "x     "
+1
+5000
+5 - Spaces in .
+read rd;
+Select rd with rd.     varName = "x"
+1
+5000
+6 - Spaces in .
+read rd;
+Select rd with rd    .     varName = "x"
+1
+5000
+7 - Spaces in .
+read rd;
+Select rd with rd    .varName = "x"
+1
+5000
+8 - no spaces
+read rd;
+Select rd with rd.varName="x"
+1
+5000
+9 - Tuple
+read rd;
+Select <rd> with rd.varName="x"
+1
+5000
+10 - Tuple
+read rd;
+Select <    rd> with rd.varName="x"
+1
+5000
+11 - Tuple
+read rd;
+Select <rd    > with rd.varName="x"
+1
+5000
+12 - Tuple
+read rd;
+Select <     rd    > with rd.varName="x"
+1
+5000
+13 - Tuple
+read rd;
+Select <  rd,    rd.stmt#    > with rd.varName="x"
+1 1
+5000
+14 - Tuple
+read rd;
+Select <  rd,    rd.stmt#   , rd.varName      > with rd.varName="x"
+1 1 x
+5000
+15 - attribute spacing
+read rd;
+Select rd.    varName    with rd.varName="x"
+x
+5000
+16 - attribute spacing and in tuple
+read rd;
+Select <  rd.    varName   > 
+x, y, z  
+5000
+17 - pattern
+assign a; variable v;
+Select <a, v>
+4 a,4 b,4 c,4 x,4 y,4 z,7 a,7 b,7 c,7 x,7 y,7 z
+5000

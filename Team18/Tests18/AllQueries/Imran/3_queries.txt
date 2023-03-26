@@ -1,0 +1,60 @@
+1 - 1 common: 4 clauses - Pick common synonym
+assign a; variable v; while w1, w2; stmt s; if ifs1, ifs2;
+Select v such that Uses(a, v) and Modifies(w1,v) such that Follows*(w2, s) and Parent(ifs1, ifs2)
+length, volume, x, radius, study
+5000
+2 - 1 common: 4 clauses - Pick the uncommon synonym
+assign a; variable v1, v2; while w; if ifs;
+Select w such that Uses(a,v1) such that Modifies(a,v2) such that Follows(a, w) and Parent(ifs, a)
+53
+5000
+3 - 2 common: 4 clauses - Pick the common synonyms
+assign a; variable v; call ca; procedure p, q;
+Select <q, v> such that Modifies(ca, v) and Modifies(a, v) such that Calls(p, q) and Modifies(q, v)
+area57 March, area57 June, area57 December, area57 HappyBirthday, area57 math, notSoMain December, notSoMain HappyBirthday, notSoMain June, notSoMain March, notSoMain math 
+5000
+4 - 2 common: 4 clauses - Pick the uncommon synonym. No answer expected
+assign a; if ifs; while w; variable v;
+Select w such that Parent(w, a) and Follows(ifs, a) such that Modifies(ifs, v) and Uses(ifs, v)
+
+5000
+5 -
+stmt s; assign a1, a2; if ifs; read re;
+Select a2 pattern a1 ("x", _) and a2 (_,_"y"_) such that Parent* (ifs, a2) and Follows* (a1, ifs)
+10, 13, 42
+5000
+6 - 
+while w; assign a; variable v; stmt n;
+Select a such that Parent* (w, a) and Next (7, n) pattern a("x", _) 
+8, 60
+5000
+7 - 
+variable v; assign a; if ifs1, ifs2, ifs3;
+Select <ifs1, ifs2, ifs3> such that Follows* (ifs1, ifs2) and Parent* (ifs2, ifs3) 
+19 26 29, 19 26 35, 23 26 29, 23 26 35, 9 26 29, 9 26 35
+5000
+8 -  
+variable v; if ifs; stmt s; assign a; while w;
+Select a such that Modifies (a, "x") and Parent* (w, a) and Uses (ifs, _)
+8, 60
+5000
+9 - 
+variable v1, v2; assign a; while w; stmt s, s1; 
+Select a such that Follows(_,s) such that Next(s, a) and Uses("area57", v1) pattern a(_,v1) 
+SyntaxError
+5000
+10 -
+variable v; assign a; while w; stmt s1, s2, s3; if ifs;
+Select v such that Parent(s1, s3) and Uses("mainProcedure", v) and Modifies(s1, v) pattern ifs(v,_,_)
+anotherBreadth, english, length, midpoint, squareArea, volume
+5000
+11 - 
+variable v1; if ifs; stmt s1, s2; procedure p, q; while w;
+Select s1 such that Follows(s1, s2) such that Next(s1, w) and Calls(p, q) pattern w(v1,_) 
+6, 32, 44, 52, 79, 82, 83, 100
+5000
+12 - 
+variable v1, v2; assign a; if ifs; stmt s1, s2;
+Select v1 such that Follows*(s2, ifs) such that Parent(s1, s2) and Uses(ifs, v1) pattern ifs(v1,_,_) 
+anotherBreadth, english, volume
+5000

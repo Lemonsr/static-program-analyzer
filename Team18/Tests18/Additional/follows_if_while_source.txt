@@ -1,0 +1,64 @@
+procedure alpha {
+	if (variable != 69) then {
+		print Follows;
+		if (26 >= 77) then {
+			Calls = Select / and;
+			if (!(61 <= Modifies)) then {
+				if (and >= 41) then {
+					if (45 % 21 > 79) then {
+						procedure = 46;
+					} else {
+						read Affects;
+						Calls = 2;
+					}
+					read constant;
+				} else {
+					print Follows;
+				}
+			} else {
+				if (!((variable - ((constant))) % Parent / if != 53)) then {
+					print that;
+					Modifies = 88;
+					while (36 > 7) {
+						read and;
+						pattern = stmt % (stmt);
+					}
+				} else {
+					if (pattern >= constant) then {
+						print = 84 % 85 % 72 + 19 * 86;
+						print Parent;
+						print Modifies;
+					} else {
+						read pattern;
+					}
+					if (35 < and - 4 + 75 + while) then {
+						print variable;
+					} else {
+						call beta;
+						print stmt;
+					}
+					while (with >= 38) {
+						read read;
+						read Parent;
+						print procedure;
+					}
+				}
+				while (such == 53 - Modifies) {
+					read print;
+				}
+				print pattern;
+			}
+		} else {
+			Next = 1;
+			Parent = Modifies;
+			procedure = 1;
+		}
+	} else {
+		with = 96;
+	}
+}
+
+procedure beta {
+	call = 98 * Follows / 79;
+	read read;
+}

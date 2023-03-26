@@ -1,0 +1,425 @@
+1 - 0 common, Uses and uses
+variable v; if ifs; stmt s;
+Select ifs such that Uses(ifs, v) such that Uses(s, _) 
+9, 19, 23, 26, 29, 35, 48, 56, 71, 72, 76, 88
+5000
+2 - 0 common, uses and uses pattern 1 common synonym
+variable v; assign a; while w;
+Select a such that Uses(w, v) such that Uses(a, _) pattern a(_  ,  _"2"_)
+4, 5, 8, 10, 13, 18, 34, 40, 50, 52, 54
+5000
+3 - 0 common, uses and uses, 1 filled in
+variable v; assign a; while w;
+Select a such that Uses(w, "x") such that Uses(a, _) 
+2, 4, 5, 8, 10, 13, 18, 20, 21, 30, 34, 40, 41, 42, 50, 52, 54, 77, 78, 81, 93
+5000
+4 - 0 common, uses and uses, 1 filled in. pattern 1 common synonym
+variable v; if ifs; stmt s;
+Select ifs such that Uses(ifs, "volume") such that Uses(s, _)         pattern ifs(v,_,_)
+26, 29, 35
+5000
+5 - 1 common, uses and uses.
+stmt s; assign a; variable v;
+Select a such that Uses(s, v) such that Uses(a, v) 
+2, 4, 5, 8, 10, 13, 18, 20, 21, 30, 34, 40, 41, 42, 50, 52, 54, 77, 78, 81, 93
+5000
+6 - 1 common, uses and uses. pattern 1 cmmon synonym
+while w; assign a; variable v;
+Select w such that Uses(w, v) such that   Uses(a, v)   pattern w(v,_)
+7, 16, 33, 38, 45, 53
+5000
+7 - 1 common, Uses and uses
+variable v; assign a; if ifs;
+Select v such that Uses(ifs, v) such that Uses(a, v)
+midpoint, x, y, length, anotherBreadth, volume, radius, a, b, c, study, science, April, May, math
+5000
+8 - 1 common, uses and uses. 1 filled in. pattern 1 no common synonym.
+variable v; assign a; if ifs;
+Select v such that Uses(ifs, v) such that Uses(26, v)   pattern ifs("squareArea",_,_)
+squareArea, breadth, anotherBreadth, volume, procedure, a, b, c, x, y, length, rectangleArea, radius
+5000
+9 - 1 common, uses and uses. 1 filled in. 
+while w; assign a; variable v;
+Select v such that Uses(w, v) such that Uses(50, v) 
+study, science
+5000
+10 - 1 common, uses and uses. 1 filled in. pattern 1 common synonym
+stmt s; assign a; variable v;
+Select a such that Uses(45, v) such that Uses(a, v)   pattern a ("study", _)
+50, 52
+5000
+11 - test 1 common synonym, uses such that uses.
+stmt s; assign a; variable v;
+Select a such that Uses(s, v) such that Uses(a, v) 
+2, 4, 5, 8, 10, 13, 18, 20, 21, 30, 34, 40, 41, 42, 50, 52, 54, 77, 78, 81, 93
+5000
+12 - test 1 common synonym, uses such that uses. pattern 1 common synonym
+while w; assign a; variable v;
+Select w such that Uses(w, v) such that Uses(a, v)    pattern a(_, _"3"_)
+7, 16, 45, 53
+5000
+13 - test 1 common synonym, Uses and uses
+variable v; assign a; if ifs;
+Select v such that Uses(ifs, v) such that Uses(a, v) 
+a, b, c, midpoint, length, anotherBreadth, volume, x, y, math, radius, science, study, May, April
+5000
+14 - test 0 common synonym, Uses such that uses  pattern 2 common synonym
+variable v; if ifs; stmt s;
+Select ifs such that Uses(ifs, v) such that Uses(s, _)   pattern ifs(v,_,_)
+9, 19, 23, 26, 29, 35, 48, 56, 71, 72, 76, 88
+5000
+15 - test 0 common synonym, uses such that uses
+variable v; assign a; while w;
+Select a such that Uses(w, v) such that Uses(a, _) 
+2, 4, 5, 8, 10, 13, 18, 20, 21, 30, 34, 40, 41, 42, 50, 52, 54, 77, 78, 81, 93
+5000
+16 - test 0 common synonym, uses and uses, 1 filled in. pattern 0 common synonym 
+variable v; assign a; while w; if ifs;
+Select a such that Uses(w, "x") such that Uses(a, _)      pattern ifs (v,_,_)
+2, 4, 5, 8, 10, 13, 18, 20, 21, 30, 34, 40, 41, 42, 50, 52, 54, 77, 78, 81, 93
+5000
+17 - test 0 common synonym, uses such that uses, 1 filled in
+variable v; if ifs; stmt s;
+Select ifs such that Uses(ifs, "volume") such that Uses(s, _) 
+26, 29, 35
+5000
+18 - test 1 common synonym, uses and uses. 1 filled in. pattern 1 common synonym.
+variable v; assign a; if ifs;
+Select v such that Uses(ifs, v) such that Uses(26, v)  pattern ifs ("volume",_,_)
+volume, procedure
+5000
+19 - test 1 common synonym, uses and uses. 1 filled in
+while w; assign a; variable v;
+Select v such that Uses(w, v) such that Uses(50, v) 
+study, science
+5000
+20 - test 1 common synonym, uses and uses. 1 filled in. pattern 2 common synonym
+stmt s; assign a; variable v;
+Select a such that Uses(45, v) such that Uses(a, v)   pattern a(v, _"study"_)
+50, 52
+5000
+21 - test 1 common synonym, Follows and uses
+assign a1, a2;
+Select a1 such that Follows(a1, a2) such that Uses(a1,_)
+4, 10, 41
+5000
+22 - test 1 common synonym, Follows and uses. pattern 0 common synonym
+assign a1; while w; variable v; if ifs;
+Select w such that Follows(a1, w) such that Uses(w,v)      pattern ifs("haha",_,_)
+53, 33
+5000
+23 - test 1 common synonym, Follows and uses. 
+assign a1; while w; variable v;
+Select v such that Follows(a1, w) such that Uses(w,v)
+rectangleArea, procedure, volume, study, tuition
+5000
+24 - test 1 common synonym, Follows and uses pattern 1 common synonym 
+stmt s; if ifs; variable v; assign a;
+Select ifs such that Follows(s, ifs) such that Uses(ifs, v)  pattern a(v,_)
+9, 19, 26, 29, 35, 48, 23
+5000
+25 - test 1 common synonym, Follows and uses
+stmt s; print pn; 
+Select s such that Follows(s, pn) such that Uses(pn, _)
+5, 11, 14, 30, 54, 60, 66, 67, 69, 71, 80, 97
+5000
+26 - test 0 common synonym, Follows and uses pattern 1 common synonym
+stmt s; read re; if ifs; variable v;
+Select s such that Follows(s, re) such that Uses(ifs, _) pattern ifs(v,_,_)
+2, 13, 43, 46, 65, 68, 72, 85, 99
+5000
+27 - test 0 common synonym, Follows and uses
+assign a; while w; read re;
+Select w such that Follows(re, w) such that Uses(a, _)
+45, 101
+5000
+28 - test 0 common synonym, Follows and Uses. 1 filled in. pattern 0 common synonym
+assign a; while w; read re; if ifs;
+Select w such that Follows(44, w) such that Uses(a, _) pattern ifs("Uranus",_,_)
+45
+5000
+29 - test 0 common synonym, Follows and Uses. 1 filled in
+stmt s; read re; if ifs;
+Select s such that Follows(s, 3) such that Uses(ifs, _)
+2
+5000
+30 - test 1 common synonym, Follows such that Uses. 1 filled in. pattern 0 common synonym
+stmt s; print pn; while w; variable v;
+Select s such that Follows(pn, s) such that Uses(pn, "stupid") pattern w(v,_)
+47
+5000
+31 - test 1 common synonym, Follows and Uses. 1 filled in
+stmt s; if ifs; variable v;
+Select s such that Follows(s, ifs) such that Uses(ifs, "study")
+47
+5000
+32 - test 1 common synonym, Follows such that Uses. 1 filled in. pattern 2 common synonym
+assign a1; while w; variable v;
+Select v such that Follows(52, w) such that Uses(w,v)   pattern w(v,_)
+study
+5000
+33 - test 1 common synonym, Follows and Uses. 1 filled in
+assign a1; while w; variable v;
+Select w such that Follows(32, w) such that Uses(w,v)
+33
+5000
+34 - test 1 common synonym, Follows and Uses. 1 filled in. pattern 1 common synonym
+assign a1, a2;
+Select a1 such that Follows(a1, a2) such that Uses(a1,"y")   pattern a2(_,_"5"_)
+10
+5000
+35 - test 1 common synonym, Parent and uses
+stmt s1, s2;
+Select s1 such that Parent(s1, s2) such that Uses(s1, _)
+7, 9, 16, 19, 23, 26, 29, 33, 35, 38, 45, 48, 53, 56, 59, 71, 72, 76, 80, 83, 85, 88, 91, 101, 102
+5000
+36 - test 1 common synonym, Parent and Uses. pattern 1 common synonym
+stmt s; if ifs;
+Select s such that Parent(ifs, s) such that Uses(s, _)  pattern ifs("Saturn",_,_)
+72, 76
+5000
+37 - test 1 common synonym, Parent and Uses.
+read re; while w; variable v;
+Select v such that Parent(w, re) such that Uses(w, v)
+radius, math, science, stupid, verystupid, study, tuition, english, read
+5000
+38 - test 1 common synonym, Parent and Uses. pattern 2 common synonym
+assign a; stmt s; variable v;
+Select a such that Parent(s, a) such that Uses(a, v)       pattern a (v,_)
+8, 21, 34, 50, 52
+5000
+39 - test 1 common synonym, Parent and Uses
+assign a; stmt s; variable v;
+Select s such that Parent(s, a) such that Uses(a, v)
+7, 9, 16, 19, 26, 29, 33, 38, 48, 53, 76, 80
+5000
+40 - test 0 common synonym, Parent and Uses. pattern 0 common synonym
+if ifs; stmt s; variable v; print pn; while w;
+Select pn such that Parent(ifs, s) such that Uses(pn, v) pattern w(_,_)
+6, 12, 15, 31, 36, 46, 49, 51, 55, 61, 67, 68, 70, 74, 79, 82, 84, 86, 89, 90, 92, 99, 103, 104
+5000
+41 - test 0 common synonym, Parent and Uses
+while w; stmt s; assign a; variable v;
+Select v such that Parent(w, s) such that Uses(a, v)
+x, y, midpoint, length, anotherBreadth, volume, radius, a, b, c, study, science, math, ToYou, Christmas, April, May
+5000
+42 - test 0 common synonym, Parent and Uses
+if ifs; stmt s; assign a;
+Select a such that Parent(ifs, a) such that Uses(s, _)   pattern ifs(_,_,_)
+10, 11, 13, 20, 21, 28, 30, 32, 41, 42, 50, 52, 57, 58, 77, 78
+5000
+43 - test 0 common synonym, Parent and Uses
+while w; stmt s; assign a; 
+Select s such that Parent(s, w) such that Uses(a, _)
+29, 26, 48, 101
+5000
+44 - test 0 common synonym, Parent and Uses. 1 filled in.
+while w; stmt s; assign a; 
+Select s such that Parent(s, 31) such that Uses(a, _) pattern a("March",_)
+29
+5000
+45 - test 0 common synonym, Parent and Uses. 1 filled in.
+if ifs; stmt s; assign a;
+Select a such that Parent(ifs, a) such that Uses(s, "volume")
+10, 11, 13, 20, 21, 28, 30, 32, 41, 42, 50, 52, 57, 58, 77, 78
+5000
+46 - test 0 common synonym, Parent and Uses. 1 filled in.
+while w; stmt s; assign a; variable v;
+Select v such that Parent(26, s) such that Uses(a, v) pattern w("Rudolph",_)
+x, y, midpoint, length, anotherBreadth, volume, radius, a, b, c, study, science, math, April, May, Christmas, ToYou
+5000
+47 - test 0 common synonym, Parent and Uses. 1 filled in.
+if ifs; stmt s; variable v; print pn;
+Select pn such that Parent(ifs, 30) such that Uses(pn, v)
+6, 12, 15, 31, 36, 46, 49, 51, 55, 61, 67, 68, 70, 74, 79, 82, 84, 86, 89, 90, 92, 99, 103, 104
+5000
+48 - test 1 common synonym, Parent and Uses. 1 filled in.
+assign a; stmt s; variable v;
+Select a such that Parent(9, a) such that Uses(a, v) pattern a(v,_)
+
+5000
+49 - test 1 common synonym, Parent and Uses 1 filled in.
+assign a; stmt s; variable v;
+Select s such that Parent(s, a) such that Uses(a, "midpoint") pattern a("result",_)
+19
+5000
+50 - test 1 common synonym, Parent and Uses. 1 filled in
+stmt s1, s2; while w;
+Select s1 such that Parent(s1, w) such that Uses(s1, "length") pattern w("volume",_)
+29
+5000
+51 - test 1 common synonym, Parent and Uses. 1 filled in
+stmt s; if ifs; variable v;
+Select s such that Parent(9, s) such that Uses(ifs, _) pattern ifs(v,_,_)
+10, 11, 12, 13, 14, 15
+5000
+52 - test 1 common synonym, Parent and Uses. 1 filled in.
+while w; variable v;
+Select v such that Parent(w, 39) such that Uses(w, v) pattern w(v,_)
+radius
+5000
+53 - test 1 common synonym, Follows* and uses
+assign a1, a2;
+Select a1 such that Follows*(a1, a2) such that Uses(a1,_) pattern a2(_,_"y"_)
+2, 4, 41
+5000
+54 - test 1 common synonym, Follows* and uses
+assign a1; while w; variable v;
+Select w such that Follows*(a1, w) such that Uses(w,v) pattern w(v,_)
+7, 16, 33, 38, 45, 53, 59, 101
+5000
+55 - test 1 common synonym, Follows* and uses
+assign a1; while w; variable v;
+Select v such that Follows*(a1, w) such that Uses(w,v) pattern a1("math",_)
+math, science, stupid, english, verystupid, study, read, tuition, varOnlyUsedInWhileCond, varUsedInBothIfAndWhileCond, lastPrintInStmtListVar
+5000
+56 - test 1 common synonym, Follows* and uses
+stmt s; if ifs; variable v;
+Select ifs such that Follows*(s, ifs) such that Uses(ifs, v) pattern ifs(_,_,_)
+9, 19, 23, 26, 29, 35, 48, 56, 71, 88
+5000
+57 - test 1 common synonym, Follows* and uses
+stmt s; print pn; while w;
+Select s such that Follows*(s, pn) such that Uses(pn, _) pattern w("wrong",_)
+
+5000
+58 - test 0 common synonym, Follows* and uses
+stmt s; read re; if ifs; assign a;
+Select s such that Follows*(s, re) such that Uses(ifs, _) pattern a("askme", _)
+
+5000
+59 - test 0 common synonym, Follows* and uses
+assign a; while w; read re;
+Select w such that Follows*(re, w) such that Uses(a, _)
+7, 16, 38, 45, 59, 80, 83, 85, 91, 97, 101
+5000
+60 - test 0 common synonym, Follows* and Uses. 1 filled in
+assign a; while w; read re;
+Select w such that Follows*(44, w) such that Uses(a, _)
+45, 59
+5000
+61 - test 0 common synonym, Follows* and Uses. 1 filled in
+stmt s; read re; if ifs;
+Select s such that Follows*(s, 3) such that Uses(ifs, _)
+1, 2
+5000
+62 - test 1 common synonym, Follows* and Uses. 1 filled in
+stmt s; print pn; if ifs;
+Select ifs such that Follows*(pn, ifs) such that Uses(pn, "stupid") pattern ifs("english",_,_)
+48
+5000
+63 - test 1 common synonym, Follows* and Uses. 1 filled in
+stmt s; if ifs; variable v;
+Select ifs such that Follows*(s, ifs) such that Uses(ifs, "study") pattern ifs(_,_,_)
+48
+5000
+64 - test 1 common synonym, Follows* and Uses. 1 filled in
+assign a1; while w; variable v;
+Select v such that Follows*(52, w) such that Uses(w,v) pattern w(v,_)
+study
+5000
+65 - test 1 common synonym, Follows* and Uses. 1 filled in
+assign a1; while w; variable v;
+Select w such that Follows*(26, w) such that Uses(w,v) pattern w("science",_)
+45
+5000
+66 - test 1 common synonym, Follows* and Uses. 1 filled in
+assign a1, a2;
+Select a1 such that Follows*(a1, a2) such that Uses(a2,"y") pattern a1(_,"x+1")
+2
+5000
+67 - test 1 common synonym, Parent* and uses
+stmt s1, s2; assign a;
+Select s1 such that Parent*(s1, a) such that Uses(a, _) pattern a(_,_"y"_)
+9, 16, 26
+5000
+68 - test 1 common synonym, Parent* and Uses
+stmt s; if ifs;
+Select s such that Parent*(ifs, s) such that Uses(s, _) pattern ifs("thisIfDoesNotModifyAnything",_,_)
+89, 90
+5000
+69 - test 1 common synonym, Parent* and Uses.
+read re; while w; variable v;
+Select v such that Parent*(w, re) such that Uses(w, v) pattern w("radius", _)
+radius
+5000
+70 - test 1 common synonym, Parent* and Uses
+assign a; stmt s; variable v;
+Select a such that Parent*(s, a) such that Uses(a, v) pattern a(_,_)
+8, 10, 13, 18, 20, 21, 30, 34, 40, 41, 42, 50, 52, 54, 77, 78, 81
+5000
+71 - test 1 common synonym, Parent* and Uses
+assign a; stmt s; variable v;
+Select s such that Parent*(s, a) such that Uses(a, v) pattern a(v,_)
+7, 19, 26, 29, 33, 45, 48
+5000
+72 - test 0 common synonym, Parent* and Uses
+if ifs; stmt s; variable v; print pn;
+Select pn such that Parent*(ifs, s) such that Uses(pn, v) pattern ifs("maturity",_,_)
+
+5000
+73 - test 0 common synonym, Parent* and Uses
+while w; stmt s; assign a; variable v;
+Select v such that Parent*(w, s) such that Uses(a, v) pattern w("maturity",_)
+x, y, midpoint, length, anotherBreadth, volume, radius, a, b, c, study, science, math, April, May, Christmas, ToYou
+5000
+74 - test 0 common synonym, Parent* and Uses
+if ifs; stmt s; assign a;
+Select a such that Parent*(ifs, a) such that Uses(s, _)
+10, 11, 13, 20, 21, 28, 30, 32, 34, 40, 41, 42, 50, 52, 54, 57, 58, 77, 78
+5000
+75 - test 0 common synonym, Parent* and Uses
+while w; stmt s; assign a; 
+Select s such that Parent*(s, w) such that Uses(a, _) 
+29, 26, 48, 45, 101
+5000
+76 - test 0 common synonym, Parent* and Uses. 1 filled in.
+while w; stmt s; assign a; 
+Select s such that Parent*(s, 31) such that Uses(a, _)
+26, 29
+5000
+77 - test 0 common synonym, Parent* and Uses. 1 filled in.
+if ifs; stmt s; assign a;
+Select a such that Parent*(ifs, a) such that Uses(s, "volume") pattern ifs(_,_,_)
+10, 11, 13, 20, 21, 28, 30, 32, 34, 40, 41, 42, 50, 52, 54, 57, 58, 77, 78
+5000
+78 - test 0 common synonym, Parent* and Uses. 1 filled in.
+while w; stmt s; assign a; variable v;
+Select v such that Parent*(26, s) such that Uses(a, v)
+x, y, midpoint, length, anotherBreadth, volume, radius, a, b, c, study, science, math, April, May, Christmas, ToYou
+5000
+79 - test 0 common synonym, Parent* and Uses. 1 filled in.
+if ifs; stmt s; variable v; print pn;
+Select pn such that Parent*(ifs, 30) such that Uses(pn, v) pattern ifs("squareArea",_,_)
+6, 12, 15, 31, 36, 46, 49, 51, 55, 61, 67, 68, 70, 74, 79, 82, 84, 86, 89, 90, 92, 99, 103, 104
+5000
+80 - test 1 common synonym, Parent* and Uses. 1 filled in.
+assign a; stmt s; variable v;
+Select a such that Parent*(26, a) such that Uses(a, v) pattern a("volume",_)
+30, 34
+5000
+81 - test 1 common synonym, Parent* and Uses 1 filled in.
+assign a; stmt s; variable v;
+Select s such that Parent*(s, a) such that Uses(a, "volume") pattern a(_,_)
+26, 29, 33
+5000
+82 - test 1 common synonym, Parent* and Uses. 1 filled in
+stmt s1, s2; while w;
+Select s1 such that Parent*(w, s2) such that Uses(s1, "length")  pattern w("midpoint",_)
+18, 23, 16, 30, 29, 26
+5000
+83 - test 1 common synonym, Parent* and Uses. 1 filled in
+stmt s; if ifs;
+Select s such that Parent*(45, ifs) such that Uses(s, _) pattern ifs("english",_,_)
+2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 15, 16, 18, 19, 20, 21, 23, 26, 29, 30, 31, 33, 34, 35, 36, 38, 40, 41, 42, 45, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 59, 61, 62, 63, 64, 67, 68, 70, 71, 72, 74, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 89, 90, 91, 92, 93, 99, 101, 102, 103, 104
+5000
+84 - test 1 common synonym, Parent* and Uses. 1 filled in.
+stmt s; variable v; while w;
+Select BOOLEAN such that Parent*(w, 39) such that Uses(w, v) pattern w(_,_)
+TRUE
+5000
+85 - test 1 common synonym, Parent* and Uses. 1 filled in.
+stmt s; variable v; while w;
+Select BOOLEAN such that Parent*(w, 39) and Uses(w, v) pattern w("useIf",_)
+FALSE
+5000
