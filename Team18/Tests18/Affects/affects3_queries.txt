@@ -50,7 +50,7 @@ none
 5000
 11 - Affects(assignSyn, stmt)
 assign asgn; stmt s;
-Select asgn such that Affects(a, s)
+Select asgn such that Affects(asgn, s)
 none
 5000
 12 - Affects(assignSyn, assignSyn)
@@ -74,7 +74,7 @@ Select asgn such that Affects(asgn,_)
 none
 5000
 16 - Affects(stmt, assignSyn)
-assign asgn; stmt s
+assign asgn; stmt s;
 Select asgn such that Affects(s, asgn)
 none
 5000
@@ -141,7 +141,7 @@ FALSE
 29 - Select Bool, Affects(_, v)
 variable v;
 Select BOOLEAN such that Affects(_, v)
-FALSE
+SemanticError
 5000
 30 - Select Bool, Affects(_, _)
 
@@ -166,7 +166,7 @@ FALSE
 34 - Select Bool, Affects(assignSyn, assignSyn) with const 
 assign asgn1, asgn2; constant c;
 Select BOOLEAN such that Affects(asgn1, asgn2) with c.value = asgn.stmt#
-FALSE
+SemanticError
 5000
 35 - Stmt#, Affects(assignSyn, assignSyn)
 assign asgn1,asgn2;
@@ -176,7 +176,7 @@ none
 36 - Affects(assignSyn, assignSyn) with const
 assign asgn1,asgn2; constant c;
 Select asgn1 such that Affects(asgn1, asgn2) with c.value = asgn.stmt#
-none
+SemanticError
 5000
 37 - Affects(assignSyn, assignSyn) with const
 assign asgn1,asgn2; constant c;
@@ -201,7 +201,7 @@ none
 41 - Tuple Affects(stmtNo, assignSyn)
 assign assgn1; 
 Select <assgn1, assgn1> such that Affects(15, assgn)
-none
+SemanticError
 5000
 42 - Tuple Affects(stmtNo, assignSyn) with stmt#
 constant c; assign assgn1, assgn2;
@@ -296,7 +296,7 @@ none
 60 - Affects(assignSyn, assignSyn), Affects(assgnSyn, assgnSyn)
 assign assgn1, assgn2;
 Select assgn1 such that Affects(assgn1, assgn2) and Affects(assg12, assgn1)
-none
+SemanticError
 5000
 61 - Affects(assignSyn, assignSyn) such that Affects(assignSyn, assignSyn)
 assign assgn1, assgn2;
