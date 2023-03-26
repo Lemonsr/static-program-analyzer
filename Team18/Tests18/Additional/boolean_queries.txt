@@ -1,0 +1,55 @@
+1 - BOOLEAN with int
+assign a;
+Select BOOLEAN such that Follows(3,4)
+FALSE
+5000
+2 - BOOLEAN with wildcards
+assign a;
+Select BOOLEAN such that Follows(_,_)
+TRUE
+5000
+3 - BOOLEAN with int and wildcard
+assign a;
+Select BOOLEAN such that Follows(3,_)
+FALSE
+5000
+4 - BOOLEAN with int and wildcard
+assign a;
+Select BOOLEAN such that Follows(_,3)
+TRUE
+5000
+5 - BOOLEAN with syn and int
+assign a;
+Select BOOLEAN such that Follows(a,3)
+FALSE
+5000
+6 - BOOLEAN with syn and int
+assign a;
+Select BOOLEAN such that Follows(4,a)
+TRUE
+5000
+7 - BOOLEAN with syn and wildcard
+assign a;
+Select BOOLEAN such that Follows(a,_)
+TRUE
+5000
+8 - BOOLEAN with syn and syn
+assign a;
+Select BOOLEAN such that Follows(a,a)
+FALSE
+5000
+9 - BOOLEAN with Pattern
+assign a;
+Select BOOLEAN pattern a (_, _"b + 2"_)
+TRUE
+5000
+10 - BOOLEAN with 2 such that clauses
+assign a;
+Select BOOLEAN such that Follows(4,5) and Follows(a,4)
+FALSE
+5000
+11 - BOOLEAN with Pattern
+assign a, a1;
+Select BOOLEAN pattern a ("x", _"b + 2"_) and a1("y", _"b + 2"_)
+FALSE
+5000

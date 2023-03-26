@@ -1,0 +1,20 @@
+procedure compute {
+    read number;
+    sum = 0;
+
+    while (number >= 0) {
+        if (number == 0) then {
+            temp = 1 + 2 + 3 * 5 / 10;
+        } else {
+            read x;
+        }
+        while (temp > 0) {
+            temp = temp - 1;
+        }
+        digit = number % 10;
+        sum = sum + digit;
+        number = number / 10;
+    }
+
+    print sum;
+}

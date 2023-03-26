@@ -1,0 +1,6 @@
+procedure Jay {
+	print Gloria;
+	x = y + 1;
+	a = b + 1;
+	m = n + 1;
+}

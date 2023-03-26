@@ -1,0 +1,320 @@
+1 - test basic pattern partial
+assign a;
+Select a pattern a(_, _"May"_)
+78
+5000
+2 - test basic pattern exact 
+assign a;
+Select a pattern a(_, "April - 1")
+77
+5000
+3 - test while pattern select w
+variable v; while w;
+Select w pattern w (v, _)
+7, 16, 33, 38, 45, 53, 59, 80, 83, 85, 91, 101, 102
+5000
+4 - test while pattern select v
+variable v; while w;
+Select v pattern w (v, _)
+x, y, midpoint, result, volume, rectangleArea, radius, math, science, study, varOnlyUsedInWhileCond, varUsedInBothIfAndWhileCond, AuGuSt, September9, Oc10ber, November, Reindeer, Rudolph, BoxingDay, NewYearsEve, thisWhileDoesNotModifyAnything, YouAreBornInTheZoo, maturity
+5000
+5 - test while pattern blank both
+variable v; while w;
+Select w pattern w (_, _)
+7, 16, 33, 38, 45, 53, 59, 80, 83, 85, 91, 101, 102
+5000
+6 - test while pattern one filled in
+variable v; while w;
+Select w pattern w ("Rudolph", _)
+83
+5000
+7 - test if pattern select v
+variable v; if ifs;
+Select v pattern ifs (v, _, _)
+midpoint, length, breadth, squareArea, anotherBreadth, volume, english, varOnlyUsedInIfCond, varUsedInBothIfAndWhileCond, haha, Jupiter, Saturn, Uranus, January, February, thisIfDoesNotModifyAnything
+5000
+8 - test if pattern select ifs
+variable v; if ifs;
+Select ifs pattern ifs (v, _, _)
+9, 19, 23, 26, 29, 35, 48, 56, 71, 72, 76, 88
+5000
+9 - test if pattern select ifs, all blank
+variable v; if ifs;
+Select ifs pattern ifs (_, _, _)
+9, 19, 23, 26, 29, 35, 48, 56, 71, 72, 76, 88
+5000
+10 - test if pattern select ifs, variable filled in. 
+variable v; if ifs;
+Select ifs pattern ifs ("Uranus", _, _)
+71, 72
+5000
+11 - Two pattern clauses 0 common synonym
+assign a; if ifs; while w; variable v1, v2;
+Select a pattern a (v1, _"April"_) and ifs (v2, _, _) 
+77
+5000
+12 - Two pattern clauses 1 common synonym
+assign a; if ifs; while w; variable v1, v2;
+Select v1 pattern a (v1,_) and ifs (v1, _, _) 
+midpoint, length, volume, breadth
+5000
+13 - Two pattern clauses 1 common synonym, 1 filled in
+assign a; if ifs; while w; variable v1, v2;
+Select ifs pattern a (v1, _"midpoint"_) and ifs (v1, _, _) 
+9, 19
+5000
+14 - Two pattern clauses 1 common synonym, 1 filled in, select BOOLEAN
+assign a; if ifs; while w; variable v1, v2;
+Select BOOLEAN pattern a (v1, "5") and ifs (v1, _, _) 
+TRUE
+5000
+15 - Two pattern clauses 1 common synonym, select non common
+assign a; if ifs; while w; variable v1, v2;
+Select a pattern a (v1,_) and ifs (v1, _, _) 
+5, 17, 21, 22, 28, 30, 32, 34
+5000
+16 - Two pattern clauses 0 common synonym
+assign a; if ifs; while w; variable v1, v2;
+Select a pattern a (v1, _"study"_) and w (v2, _) 
+50, 52, 54
+5000
+17 - Two pattern clauses 1 common synonym
+assign a; if ifs; while w; variable v1, v2;
+Select v1 pattern a (v1,_) and w (v1, _) 
+math, x, y, midpoint, result, volume, study
+5000
+18 - Two pattern clauses 1 common synonym, 1 filled in
+assign a; if ifs; while w; variable v1, v2;
+Select w pattern a (v1, _"x"_) and w (v1, _) 
+7, 16
+5000
+19 - Two pattern clauses 1 common synonym, 1 filled in, select BOOLEAN
+assign a; if ifs; while w; variable v1, v2;
+Select BOOLEAN pattern a (v1, _"midpoint"_) and w (v1, _) 
+TRUE
+5000
+20 - Two pattern clauses 1 common synonym, select non common
+assign a; if ifs; while w; variable v1, v2;
+Select w pattern a (v1,_) and w (v1, _) 
+7, 16, 33, 45, 53
+5000
+21 - Two pattern clauses 0 common synonym
+assign a; if ifs; while w; variable v1, v2;
+Select ifs pattern w (v1, _) and ifs (v2, _, _) 
+9, 19, 23, 26, 29, 35, 48, 56, 71, 72, 76, 88
+5000
+22 - Two pattern clauses 1 common synonym
+assign a; if ifs; while w; variable v1, v2;
+Select v1 pattern ifs (v1,_,_) and w (v1, _) 
+midpoint, volume, varUsedInBothIfAndWhileCond
+5000
+23 - Two pattern clauses 1 common synonym. Select non common
+assign a; if ifs; while w; variable v1, v2;
+Select ifs pattern ifs (v1,_,_) and w (v1, _) 
+9, 19, 35, 56
+5000
+24 - Two pattern clauses 1 common synonym, Select non common
+assign a; if ifs; while w; variable v1, v2;
+Select w pattern ifs (v1,_,_) and w (v1, _) 
+16, 33, 59
+5000
+25 - Two pattern clauses 1 common synonym, 1 filled in, select BOOLEAN
+assign a; if ifs; while w; variable v1, v2;
+Select BOOLEAN pattern ifs (v1,_,_) and w (v1, _) 
+TRUE
+5000
+26 - Two pattern clauses 0 common synonym, select non common
+assign a; if ifs; while w; variable v1, v2;
+Select ifs pattern ifs (_,_,_) and w (v1, _) 
+9, 19, 23, 26, 29, 35, 48, 56, 71, 72, 76, 88
+5000
+27 - Three pattern clauses with and
+if ifs1, ifs2; while w; variable v; assign a;
+Select v pattern ifs1 (v, _, _) and a (v, _) and w (v, _)
+midpoint, volume
+5000
+28 - three pattern clauses pattern connector
+if ifs; while w; variable v; assign a;
+Select v pattern ifs (v, _, _) pattern a (v, _) pattern w (v, _)
+midpoint, volume
+5000
+29 - Select boolean 3 pattern clauses
+if ifs; while w; variable v; assign a;
+Select BOOLEAN pattern a (v, _) and ifs ("breadth", _, _) and w (v, _)
+TRUE
+5000
+30 - test while pattern + parent. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select w such that Parent(s, a) pattern w("maturity",_)
+102
+5000
+31 - test while pattern + parent. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select w such that Parent(w, a) pattern w(v,_)
+7, 16, 33, 38, 53, 59, 80
+5000
+32 - test while pattern + follows. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select w such that Follows(s, a) pattern w("x",_)
+7
+5000
+33 - test while pattern + follows. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select s such that Follows(s, w) pattern w(v,_)
+6, 9, 29, 32, 44, 52, 56, 79, 82, 83, 88, 100 
+5000
+34 - test while pattern + Parent*. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select w such that Parent*(s, a) pattern w("maturity",_)
+102
+5000
+35 - test while pattern + Parent*. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select v such that Parent*(s, w) pattern w(v,_)
+volume, rectangleArea, radius, study, maturity
+5000
+36 - test while pattern + Follows*. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select w such that Follows*(s, a) pattern w("Reindeer",_)
+83
+5000
+37 - test while pattern + Follows*. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select w such that Follows*(s, w) pattern w(v,_)
+7, 16, 33, 38, 45, 53, 59, 80, 83, 85, 91, 101
+5000
+38 - test while pattern + Uses. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select w such that Uses(s, _) pattern w("study",_)
+53
+5000
+39 - test while pattern + Uses. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select w such that Uses(w, _) pattern w(v,_)
+7, 16, 33, 38, 45, 53, 59, 80, 83, 85, 91, 101, 102
+5000
+40 - test while pattern + Modifies. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select v such that Modifies(s, v) pattern w(v,_)
+x, y, midpoint, result, volume , radius, study, math, rectangleArea, science
+5000
+41 - test while pattern + Modifies. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select w such that Modifies(s, _) pattern w("BoxingDay",_)
+85
+5000
+42 - test if pattern + parent. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select ifs such that Parent(s, a) pattern ifs("Jupiter",_,_)
+71
+5000
+43 - test if pattern + parent. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select ifs such that Parent(ifs, a) pattern ifs(v,_,_)
+9, 19, 26, 29, 48, 56, 76
+5000
+44 - test if pattern + follows. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select ifs such that Follows(s, a) pattern ifs("midpoint",_,_)
+9, 19
+5000
+45 - test if pattern + follows. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select s such that Follows(s, ifs) pattern ifs(v,_,_)
+7, 16, 22, 23, 28, 34, 47, 45, 70, 87
+5000
+46 - test if pattern + Parent*. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select ifs such that Parent*(s, a) pattern ifs("January",_,_)
+76
+5000
+47 - test if pattern + Parent*. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select v such that Parent*(s, ifs) pattern ifs(v,_,_)
+anotherBreadth, volume, english, haha, Uranus, January, February
+5000
+48 - test if pattern + Follows*. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select ifs such that Follows*(s, a) pattern ifs("February",_,_)
+76
+5000
+49 - test if pattern + Follows*. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select ifs such that Follows*(s, ifs) pattern ifs(v,_,_)
+9, 19, 23, 26, 29, 35, 48, 56, 71, 88
+5000
+50 - test if pattern + Uses. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select ifs such that Uses(s, _) pattern ifs("english",_,_)
+48
+5000
+51 - test if pattern + Uses. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select ifs such that Uses(ifs, _) pattern ifs(v,_,_)
+9, 19, 23, 26, 29, 35, 48, 56, 71, 72, 76, 88
+5000
+52 - test if pattern + Modifies. 1 common synonym
+assign a; stmt s; if ifs; while w; variable v;
+Select v such that Modifies(s, v) pattern ifs(v,_,_)
+midpoint, anotherBreadth, breadth, english, length, squareArea, volume
+5000
+53 - test if pattern + Modifies. 0 common synonym
+assign a; stmt s; if ifs; while w;
+Select ifs such that Modifies(s, _) pattern ifs("Saturn",_,_)
+71
+5000
+54 - test basic while pattern, invalid syntax
+while w;
+Select w pattern w("May", "May")
+SemanticError
+5000
+55 - test basic while pattern, invalid syntax
+while w;
+Select BOOLEAN pattern w("May", "May")
+SemanticError
+5000
+56 - test basic while pattern, semantic error
+while w; assign a;
+Select BOOLEAN pattern w(a, _)
+SemanticError
+5000
+57 - test basic while pattern, semantic error
+while w; assign a;
+Select a pattern a(w, _)
+SemanticError
+5000
+58 - test basic if pattern, invalid syntax
+if ifs;
+Select ifs pattern ifs("May", "May", _)
+SyntaxError
+5000
+59 - test basic if pattern, invalid syntax
+if ifs;
+Select ifs pattern ifs("May", _, "May")
+SyntaxError
+5000
+60 - test basic if pattern, invalid syntax
+if ifs;
+Select BOOLEAN pattern ifs("May", "May", _)
+SyntaxError
+5000
+61 - test basic if pattern, invalid syntax
+if ifs;
+Select BOOLEAN pattern ifs("May", _, "May")
+SyntaxError
+5000
+62 - test basic if pattern, semantic error
+if ifs; assign a;
+Select BOOLEAN pattern ifs(a, _, _)
+SemanticError
+5000
+63 - test basic if pattern, semantic error
+if ifs; assign a;
+Select a pattern ifs(a, _, _)
+SemanticError
+5000
+64 - test basic if pattern, semantic error
+if ifs; assign a;
+Select a pattern a(ifs, _, _)
+SemanticError
+5000

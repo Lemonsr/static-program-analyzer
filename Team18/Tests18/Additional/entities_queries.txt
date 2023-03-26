@@ -1,0 +1,105 @@
+1 - proc
+procedure p;
+Select p
+computeCentroid
+5000
+2 - stmt
+stmt s;
+Select s
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+5000
+3 - read
+read r;
+Select r
+4
+5000
+4 - print
+print p;
+Select p
+9
+5000
+5 - assign
+assign a;
+Select a
+1, 2, 3, 6, 7, 8, 11, 12, 13, 14
+5000
+6 - while
+while w;
+Select w
+5
+5000
+7 - if
+if i;
+Select i
+10
+5000
+8 - variable
+variable v;
+Select v
+flag, x, y, cenX, cenY, normSq, count
+5000
+9 - constant
+constant c;
+Select c
+0, 1
+5000
+10 - pattern 1
+assign a;
+Select a pattern a(_, _"count"_)
+6, 12, 13
+5000
+11 - pattern 2
+assign a;
+Select a pattern a(_, _"0"_)
+1, 2, 3
+5000
+12 - pattern 3
+assign a;
+Select a pattern a(_, _)
+1, 2, 3, 6, 7, 8, 11, 12, 13, 14
+5000
+13 - pattern 4
+read re; assign a;
+Select re pattern a("cenX", _)
+4
+5000
+14 - Extra 1
+stmt s;
+Select s such that Follows* (6, s)
+7, 8, 9
+5000
+15 - Extra 2
+variable v;
+Select v such that Modifies(6,v)
+count
+5000
+16 - Extra 3
+variable v1;
+Select v1 such that Uses (14, v1)
+cenX, cenY
+5000
+17 - Extra 4
+assign a; while w;
+Select a such that Parent*(w, a)
+6, 7, 8
+5000
+18 - Extra 5
+stmt s;
+Select s such that Parent (s, 7)
+5
+5000
+19 - Extra 6
+assign a; variable v;
+Select a such that Uses(a, _)
+6, 7, 8, 12, 13, 14
+5000
+20 - Extra 7
+assign a; variable v;
+Select a such that Uses(a,v) pattern a(v,_)
+6, 7, 8, 12, 13
+5000
+21 - Extra 8
+assign a; while w;
+Select w such that Parent* (w,a) pattern a("count", _)
+5
+5000

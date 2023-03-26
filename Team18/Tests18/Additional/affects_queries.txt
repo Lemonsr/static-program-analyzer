@@ -1,0 +1,65 @@
+1 - Affects(stmtNo, stmtNo)
+print pn;
+Select pn such that Affects(2, 6)
+8, 13
+5000
+2 - Affects(assign-syn, stmtNo)
+assign a;
+Select a such that Affects(a, 7)
+1, 5, 7
+5000
+3 - Affects(assign-syn, stmtNo)
+assign a;
+Select a such that Affects(a, 11)
+1, 7
+5000
+4 - Affects(stmtNo, assign-syn)
+assign a;
+Select a such that Affects(1, a)
+5, 7, 11, 14
+5000
+5 - Affects(stmtNo, assign-syn)
+assign a;
+Select a such that Affects(14, a)
+14
+5000
+6 - Affects(assign-syn, assign-syn)
+assign a1, a2;
+Select a1 such that Affects(a1, a2)
+1, 2, 5, 6, 7, 9, 14
+5000
+7 - Tuple and Affects(assign-syn, assign-syn)
+assign a1, a2;
+Select <a1, a2> such that Affects(a1, a2)
+1 5, 1 7, 1 11, 1 14, 2 6, 2 9, 5 7, 7 5, 7 7, 7 11, 6 9, 7 14, 9 6, 9 9, 14 14
+5000
+8 - Affects(_, stmtNo)
+assign a;
+Select a such that Affects(_, 2)
+none
+5000
+9 - Affects(_, stmtNo)
+assign a;
+Select a such that Affects(_, 6)
+1, 2, 5, 6, 7, 9, 11, 14
+5000
+10 - Affects(stmtNo, _)
+print pn;
+Select pn such that Affects(14, _)
+8, 13
+5000
+11 - Affects(_, assign-syn)
+assign a;
+Select a such that Affects(_, a)
+5, 6, 7, 9, 11, 14
+5000
+12 - Affects(assign-syn, _)
+assign a;
+Select a such that Affects(a, _)
+1, 2, 5, 6, 7, 9, 14
+5000
+13 - Affects(_, _)
+print pn;
+Select pn such that Affects(_, _)
+8, 13
+5000

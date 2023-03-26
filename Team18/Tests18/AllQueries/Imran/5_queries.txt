@@ -1,0 +1,55 @@
+1 - Uses relationship: Line number that Uses variable not in program
+
+Select BOOLEAN such that Uses(61, "Procedure")
+FALSE
+5000
+2 - Uses relationship: Line number that Uses variable in program
+
+Select BOOLEAN such that Uses(5, "midpoint")
+FALSE
+5000
+3 - Uses relationship: Line number that Uses variable in program
+
+Select BOOLEAN such that Uses(5, "x")
+TRUE
+5000
+4 - Uses relationship: Line number that Uses any variable
+variable v;
+Select BOOLEAN such that Uses(16, v)
+TRUE
+5000
+5 - Uses relationship: Select true line that Uses
+
+Select BOOLEAN such that Uses(2, _)
+TRUE
+5000
+6 - Uses relationship: Select false line that Uses
+
+Select BOOLEAN such that Uses(3, _)
+FALSE
+5000
+7 - Uses relationship: Procedure does not exist - False
+
+Select BOOLEAN such that Uses("main", _)
+FALSE
+5000
+8 - Uses relationship: Invalid number in right param
+
+Select BOOLEAN such that Uses(5, 5)
+SyntaxError
+5000
+9 - Uses relationship: Invalid wild card on LHS (Semantic Error)
+
+Select BOOLEAN such that Uses(_, "x")
+SemanticError
+5000
+10 - Uses relationship: Both synonyms - True
+while w; variable v;
+Select BOOLEAN such that Uses(w, v)
+TRUE
+5000
+11 - Uses relationship: Both synonyms - False (semantically incorrect)
+while w; variable v;
+Select BOOLEAN such that Uses(v, w)
+SemanticError
+5000

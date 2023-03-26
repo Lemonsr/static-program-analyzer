@@ -1,0 +1,85 @@
+1 - Modifies relationship: Select procedure, given variable
+procedure p;
+Select p such that Modifies(p, "thisProcedureOnlyHasOneLine")
+bermudaTriangle, notSoMain, mainProcedure
+5000
+2 - Modifies relationship: Select procedure, any variable
+procedure p;
+Select p such that Modifies(p, _)
+bermudaTriangle, notSoMain, mainProcedure, area57
+5000
+3 - Modifies relationship: Select procedure, variable synonym
+procedure p; variable v;
+Select p such that Modifies(p, v)
+bermudaTriangle, notSoMain, mainProcedure, area57
+5000
+4 - Modifies relationship: Select variable, given procedure
+variable v;
+Select v such that Modifies("notSoMain", v)
+sun, Earth, Pluto, solarSystem, March, June, December, moon, openPresents, HappyBirthday, thisIfDoesNotUseAnything, stillNotUsingAnything, thisWhileDoesNotUseAnything, math, thisProcedureOnlyHasOneLine
+5000
+5 - Modifies relationship: Select variable, given procedure
+variable v;
+Select v such that Modifies("hello", v)
+
+5000
+6 - Modifies relationship: Select variable, procedure synonym
+variable v; procedure p;
+Select v such that Modifies(p, v)
+sun, Earth, Pluto, solarSystem, March, June, December, openPresents, HappyBirthday, thisIfDoesNotUseAnything, stillNotUsingAnything, thisWhileDoesNotUseAnything, math, thisProcedureOnlyHasOneLine, x, y, midpoint, result, print, Print, RESULT, length, breadth, squareArea, rectangleArea, anotherBreadth, volume, procedure, radius, diameter, var, moon, science, english, study, tuition
+5000
+7 - Modifies relationship: Select call statement, given variable
+call cl;
+Select cl such that Modifies(cl, "thisProcedureOnlyHasOneLine")
+62, 64
+5000
+8 - Modifies relationship: Select call statement, any variable
+call cl;
+Select cl such that Modifies(cl, _)
+62, 63, 64
+5000
+9 - Modifies relationship: Select call statement, variable synonym
+call cl; variable v;
+Select cl such that Modifies(cl, v)
+62, 63, 64
+5000
+10 - Modifies relationship: Select variable, given call statement
+variable v;
+Select v such that Modifies(64, v)
+thisProcedureOnlyHasOneLine
+5000
+11 - Modifies relationship: Select variable, call statement synonym
+variable v; call cl;
+Select v such that Modifies(cl, v)
+sun, Earth, Pluto, solarSystem, March, June, December, moon, openPresents, HappyBirthday, thisIfDoesNotUseAnything, stillNotUsingAnything, thisWhileDoesNotUseAnything, math, thisProcedureOnlyHasOneLine
+5000
+12 - Modifies relationship: Select statement, given variable
+stmt s;
+Select s such that Modifies(s, "thisProcedureOnlyHasOneLine")
+62, 64, 104
+5000
+13 - Modifies relationship: Both present, evaluate to true
+procedure p;
+Select p such that Modifies("mainProcedure", "thisProcedureOnlyHasOneLine")
+mainProcedure, notSoMain, area57, bermudaTriangle, hello
+5000
+14 - Modifies relationship: Both present, evaluate to false
+procedure p;
+Select p such that Modifies("notSoMain", "x")
+
+5000
+15 - Modifies relationship: Both present, evaluate to true
+call cl;
+Select cl such that Modifies(62, "thisProcedureOnlyHasOneLine")
+62, 63, 64, 105
+5000
+16 - Modifies relationship: Both present, evaluate to false
+procedure p;
+Select p such that Modifies(62, "x")
+
+5000
+17 - Modifies relationship: Absent procedure
+procedure p;
+Select p such that Modifies("main", "x")
+
+5000

@@ -1,0 +1,105 @@
+1 - Parent(_, _)
+print pn;
+Select pn such that Parent(_,_)
+8, 9, 10, 11
+5000
+2 - Parent*(_, _)
+stmt s;
+Select s such that Parent* (_,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
+5000
+3 - Parent(_, syn)
+assign a;
+Select a such that Parent(_,a)
+3, 5, 7, 13
+5000
+4 - Parent*(_, syn)
+print pn;
+Select pn such that Parent*(_, pn)
+8, 9, 10, 11
+5000
+5 - Parent(syn, _)
+if ifs;
+Select ifs such that Parent(ifs, _)
+2, 4, 6
+5000
+6 - Parent(StmtNo, _)
+while w;
+Select w such that Parent(2, _)
+12
+5000
+7 - Parent*(StmtNo, _)
+while w;
+Select w such that Parent* (2, _)
+12
+5000
+8 - Parent(_, StmtNo)
+while w;
+Select w such that Parent (_, 1)
+none
+5000
+9 - Parent*(_, StmtNo)
+while w;
+Select w such that Parent*(_, 11)
+12
+5000
+10 - Parent(StmtNo, StmtNo)
+if ifs;
+Select ifs such that Parent(2,4)
+2, 4, 6
+5000
+11 - Parent(StmtNo, StmtNo)
+if ifs;
+Select ifs such that Parent (2, 5)
+none
+5000
+12 - Parent(StmtNo, StmtNo)
+if ifs;
+Select ifs such that Parent* (2, 8)
+2, 4, 6
+5000
+13 - Parent(StmtNo, StmtNo)
+if ifs;
+Select ifs such that Parent*(4, 11)
+2, 4, 6
+5000
+14 - Parent(syn, StmtNo)
+while w;
+Select w such that Parent(w, 13)
+12
+5000
+15 - Parent(syn, StmtNo)
+if ifs;
+Select ifs such that Parent*(ifs, 9)
+2, 4, 6
+5000
+16 - Parent(StmtNo, syn)
+assign a;
+Select a such that Parent (6, a)
+7
+5000
+17 - Parent(StmtNo, syn)
+assign a;
+Select a such that Parent*(2, a)
+3, 5, 7
+5000
+18 - Parent(...) pattern a(_, _)
+if ifs; print pn;
+Select pn such that Parent*(ifs, pn)
+8, 9, 10, 11
+5000
+19 - Parent(...) pattern a(_, _)
+assign a; if ifs;
+Select a such that Parent*(ifs, a) pattern a("z", _)
+7
+5000
+20 - Parent(...) pattern a(_, _)
+assign a; while w;
+Select w such that Parent(w, a) pattern a ("a", _)
+12
+5000
+21 - Parent(...)
+stmt s;
+Select s such that Parent(s, s)
+none
+5000

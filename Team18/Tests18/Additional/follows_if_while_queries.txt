@@ -1,0 +1,70 @@
+1 - Pattern syn-if(_, _, _)
+if ifs;
+Select ifs pattern ifs(_, _, _)
+1, 5, 6, 13, 19, 24
+5000
+2 - Pattern syn-if(_, _, _)
+if if;
+Select if pattern if(_, _, _)
+1, 5, 6, 13, 19, 24
+5000
+3 - Pattern syn-if(syn-var, _, _)
+if ifs; variable v;
+Select ifs pattern ifs(v, _, _)
+1, 5, 6, 13, 19, 24
+5000
+4 - Pattern syn-if(syn-var, _, _)
+if ifs; variable v;
+Select v pattern ifs(v, _, _)
+variable, Modifies, and, constant, Parent, if, pattern, while
+5000
+5 - Pattern syn-if(syn-var, _, _)
+if ifs; assign v;
+Select v pattern ifs(v, _, _)
+SemanticError
+5000
+6 - Pattern syn-if(IDENT, _, _)
+if ifs;
+Select ifs pattern ifs("variable", _, _)
+1, 13
+5000
+7 - Pattern syn-if(IDENT, _, _)
+if ifs;
+Select ifs pattern ifs("if", _, _)
+13
+5000
+8 - Pattern syn-while(_, _)
+while w;
+Select w pattern w(_, _)
+28, 32
+5000
+9 - Pattern syn-while(_, _)
+while while;
+Select while pattern while(_, _)
+28, 32
+5000
+10 - Pattern syn-while(syn-var, _)
+while w; variable v;
+Select v pattern w(v, _)
+with, such, Modifies
+5000
+11 - Pattern syn-while(syn-var, _)
+while w; assign v;
+Select v pattern w(v, _)
+SemanticError
+5000
+12 - Pattern syn-while(IDENT, _)
+while w;
+Select w pattern w("with", _)
+28
+5000
+13 - Pattern syn-while(IDENT, _)
+while w;
+Select w pattern w("Modifies", _)
+32
+5000
+14 - Pattern syn-while(IDENT, _)
+while w;
+Select w pattern w("w", _)
+none
+5000

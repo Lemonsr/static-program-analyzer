@@ -1,0 +1,39 @@
+procedure stressed {
+	while (1 > x) {
+		if (1 > x) then {
+			b = a;
+			if (1 > x) then {
+				c = b;
+				if (1 > x) then {
+					f = e;
+				} else {
+					h = g;
+				}
+			} else {
+				j = i;
+				if (1 > x) then {
+					l = k;
+				} else {
+					n = m;
+				}
+			}
+		} else {
+			d = c;
+			if (1 > x) then {
+				e = d;
+				if (1 > x) then {
+					g = f;
+				} else {
+					i = h;
+				}
+			} else {
+				k = j;
+				if (1 > x) then {
+					m = l;
+				} else {
+					o = n;
+				}
+			}
+		}
+	}
+}

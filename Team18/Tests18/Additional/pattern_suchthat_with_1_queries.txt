@@ -1,0 +1,50 @@
+1 - pattern pattern
+assign a; while w; 
+Select a pattern a ("present", _) pattern w (_,_)
+9, 16
+5000
+2 - pattern such that with
+assign a; while w; procedure p;
+Select a pattern a (_, _"x"_) such that Next*(w, a) with p.procName = "Peter"
+9, 10, 13
+5000
+3 - such that pattern with
+assign a1, a2; if ifs; variable v;
+Select a1 such that Follows*(a1, a2) and Next*(ifs, a2) pattern a1(v, _"8 * present"_)
+2
+5000
+4 - such that pattern with
+assign a1, a2, a3;
+Select a1 such that Next*(a1, a2) pattern a2(_, _"y"_) such that Follows*(a1, a3) with a3.stmt# = 13
+2, 4, 5
+5000
+5 - such that pattern with
+assign a1, a2; print pr; call c;
+Select a1 pattern a1 (_, _) pattern a2 (_, _) such that Next*(a1, a2) and Modifies(a1, _) such that Follows(a2, c) 
+2, 7, 10, 11, 4, 5, 9
+5000
+6 - such that pattern with
+assign a1, a2, a3; procedure p; if ifs; call c;
+Select a1 such that Next* (a1, a2) and Next*(a1, a3) with c.procName = "Stephen" such that Next*(a1, c) pattern ifs (_, _, _) such that Follows*(a3, ifs)
+2, 4, 5, 10 ,11, 7, 9
+5000
+7 - such that pattern with
+stmt s1, s2; assign a; call c; variable v;
+Select s2 such that Next*(s1, s2) and Uses(a, v) and Modifies(a, v) and Uses(c, v) and Modifies(c, v) with c.procName = "Stephen" pattern a(_, _) such that Follows(a, s2)
+14, 12
+5000
+8 - such that pattern with
+procedure p, q; call c; print pr; if ifs;
+Select c such that Calls* (p, q) such that Modifies(q, "x") pattern ifs (_, _, _) with p.procName = "Peter" and q.procName = "Wong" such that Uses(pr, _) 
+3, 12, 18
+5000
+9 - such that pattern with
+stmt s1, s2; assign a1, a2;
+Select BOOLEAN such that Uses(s1, _) and Uses(s2, _) and Modifies(a1, _) and Modifies(a2, _) with a1.stmt# = 7 and a2.stmt# = 11 pattern a1(_, _) and a2 (_, _) such that Next(s1, s2) and Parent (s1, a1) and Next(s2, s1)
+FALSE
+5000
+10 - such that pattern with
+if ifs; while w; assign a; variable v;
+Select <ifs, w> such that Uses(ifs, v) and Modifies(w, v) and Parent(w, a) with a.stmt# = 7 pattern w (v, _) such that Uses (a, v)
+8 6, 15 6
+5000

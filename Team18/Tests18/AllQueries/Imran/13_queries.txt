@@ -1,0 +1,2040 @@
+23a - Simple Queries (Multiple): Declare 3 statement, Select 1 statement
+stmt s1, s2, s3;
+Select s1
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+5000
+23b - Simple Queries (Multiple): Declare 3 statement, Select 1 statement
+stmt s1, s2, s3;
+Select s2
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+5000
+23c - Simple Queries (Multiple): Declare 3 statements, Select 1 statement
+stmt s1, s2, s3;
+Select s3
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+5000
+24a - Simple Queries (Multiple): Declare 3 reads, Select 1 read
+read r1, r2, r3;
+Select r1
+1, 3, 14, 24, 25, 27, 37, 39, 44, 47
+5000
+24b - Simple Queries (Multiple): Declare 3 reads, Select 1 read
+read r1, r2, r3;
+Select r2
+1, 3, 14, 24, 25, 27, 37, 39, 44, 47
+5000
+24c - Simple Queries (Multiple): Declare 3 reads, Select 1 read
+read r1, r2, r3;
+Select r3
+1, 3, 14, 24, 25, 27, 37, 39, 44, 47
+5000
+25a - Simple Queries (Multiple): Declare 3 prints, Select 1 print
+print p1, p2, p3;
+Select p1
+6, 12, 15, 31, 36, 46, 49, 51, 55
+5000
+25b - Simple Queries (Multiple): Declare 3 prints, Select 1 print
+print p1, p2, p3;
+Select p2
+6, 12, 15, 31, 36, 46, 49, 51, 55
+5000
+25c - Simple Queries (Multiple): Declare 3 prints, Select 1 print
+print p1, p2, p3;
+Select p3
+6, 12, 15, 31, 36, 46, 49, 51, 55
+5000
+26a - Simple Queries (Multiple): Declare 3 whiles, Select 1 while
+while w1, w2, w3;
+Select w1
+7, 16, 33, 38, 45, 53, 59
+5000
+26b - Simple Queries (Multiple): Declare 3 whiles, Select 1 while
+while w1, w2, w3;
+Select w2
+7, 16, 33, 38, 45, 53, 59
+5000
+26c - Simple Queries (Multiple): Declare 3 whiles, Select 1 while
+while w1, w2, w3;
+Select w3
+7, 16, 33, 38, 45, 53, 59
+5000
+27a - Simple Queries (Multiple): Declare 3 ifs, Select 1 if
+if ifs1, ifs2, ifs3;
+Select ifs1
+9, 19, 23, 26, 29, 35, 48, 56
+5000
+27b - Simple Queries (Multiple): Declare 3 ifs, Select 1 if
+if ifs1, ifs2, ifs3;
+Select ifs2
+9, 19, 23, 26, 29, 35, 48, 56
+5000
+27c - Simple Queries (Multiple): Declare 3 ifs, Select 1 if
+if ifs1, ifs2, ifs3;
+Select ifs3
+9, 19, 23, 26, 29, 35, 48, 56
+5000
+28a - Simple Queries (Multiple): Declare 3 variables, Select 1 variable
+variable v1, v2, v3;
+Select v1
+Print, RESULT, a, anotherBreadth, b, breadth, c, diameter, english, length, math, midpoint, print, procedure, radius, read, rectangleArea, result, science, squareArea, study, stupid, tuition, var, verystupid, volume, x, y, varOnlyUsedInIfCond, varUsedInBothIfAndWhileCond, varOnlyUsedInWhileCond
+5000
+28b - Simple Queries (Multiple): Declare 3 variables, Select 1 variable
+variable v1, v2, v3;
+Select v2
+Print, RESULT, a, anotherBreadth, b, breadth, c, diameter, english, length, math, midpoint, print, procedure, radius, read, rectangleArea, result, science, squareArea, study, stupid, tuition, var, verystupid, volume, x, y, varOnlyUsedInIfCond, varUsedInBothIfAndWhileCond, varOnlyUsedInWhileCond
+5000
+28c - Simple Queries (Multiple): Declare 3 variables, Select 1 variable
+variable v1, v2, v3;
+Select v3
+Print, RESULT, a, anotherBreadth, b, breadth, c, diameter, english, length, math, midpoint, print, procedure, radius, read, rectangleArea, result, science, squareArea, study, stupid, tuition, var, verystupid, volume, x, y, varOnlyUsedInIfCond, varUsedInBothIfAndWhileCond, varOnlyUsedInWhileCond
+5000
+29a - Simple Queries (Multiple): Declare 3 constants, Select 1 constant
+constant c1, c2, c3;
+Select c1
+1, 2, 3, 4, 5, 10, 12, 13, 15, 19, 25, 35, 50, 60, 75, 100
+5000
+29b - Simple Queries (Multiple): Declare 3 constants, Select 1 constant
+constant c1, c2, c3;
+Select c2
+1, 2, 3, 4, 5, 10, 12, 13, 15, 19, 25, 35, 50, 60, 75, 100
+5000
+29c - Simple Queries (Multiple): Declare 3 constants, Select 1 constant
+constant c1, c2, c3;
+Select c3
+1, 2, 3, 4, 5, 10, 12, 13, 15, 19, 25, 35, 50, 60, 75, 100
+5000
+30a - Simple Queries (Multiple): Declare 3 procedures, Select 1 procedure
+procedure p1, p2, p3;
+Select p1
+mainProcedure
+5000
+30b - Simple Queries (Multiple): Declare 3 procedures, Select 1 procedure
+procedure p1, p2, p3;
+Select p2
+mainProcedure
+5000
+30c - Simple Queries (Multiple): Declare 3 procedures, Select 1 procedure
+procedure p1, p2, p3;
+Select p3
+mainProcedure
+5000
+31a - Unlinked Entities: One pattern evaluates to true (Select if statements)
+if ifs; assign a;
+Select ifs pattern a(_, _"radius"_)
+9, 19, 23, 26, 29, 35, 48, 56
+5000
+31b - Unlinked Entities: One pattern evaluates to true (Select while statements)
+while w; assign a;
+Select w pattern a(_, _"radius"_)
+59, 53, 45, 38, 33, 16, 7
+5000
+31c - Unlinked Entities: One pattern evaluates to true (Select print statements)
+print pn; assign a;
+Select pn pattern a(_, _"radius"_)
+6, 12, 15, 31, 36, 46, 49, 51, 55
+5000
+31d - Unlinked Entities: One pattern evaluates to true (Select read statements)
+read r; assign a;
+Select r pattern a(_, _"radius"_)
+47, 44, 39, 37, 27, 25, 24, 14, 3, 1
+5000
+31e - Unlinked Entities: One pattern evaluates to true (Select assign statements)
+assign a, a1;
+Select a1 pattern a(_, _"radius"_)
+2, 4, 5, 8, 10, 11, 13, 17, 18, 20, 21, 22, 28, 30, 32, 34, 40, 41, 42, 43, 50, 52, 54, 57, 58, 60
+5000
+31f - Unlinked Entities: One pattern evaluates to true (Select statements)
+stmt s; assign a;
+Select s pattern a(_, _"radius"_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+5000
+31g - Unlinked Entities: One pattern evaluates to true (Select variables)
+variable v; assign a;
+Select v pattern a(_, _"radius"_)
+x, y, midpoint, result, print, Print, RESULT, length, breadth, squareArea, rectangleArea, anotherBreadth, volume, procedure, radius, diameter, math, science, stupid, english, verystupid, read, study, tuition, var, varOnlyUsedInIfCond, varUsedInBothIfAndWhileCond, varOnlyUsedInWhileCond, a, b, c
+5000
+32 - Unlinked Entities: One pattern evaluates to false
+assign a, a1;
+Select a pattern a1(_,_"y%2"_)
+
+5000
+33a - Unlinked Entities: One such that evaluates to true (Select if statements)
+if ifs; assign a;
+Select ifs such that Parent(29, a)
+9, 19, 23, 26, 29, 35, 48, 56
+5000
+33b - Unlinked Entities: One such that evaluates to true (Select while statements)
+while w; assign a;
+Select w such that Parent(29, a)
+59, 53, 45, 38, 33, 16, 7
+5000
+33c - Unlinked Entities: One such that evaluates to true (Select print statements)
+print pn; assign a;
+Select pn such that Parent(29, a)
+6, 12, 15, 31, 36, 46, 49, 51, 55
+5000
+33d - Unlinked Entities: One such that evaluates to true (Select read statements)
+read r; assign a;
+Select r such that Parent(29, a)
+47, 44, 39, 37, 27, 25, 24, 14, 3, 1
+5000
+33e - Unlinked Entities: One such that evaluates to true (Select assign statements)
+assign a, a1;
+Select a1 such that Parent(29, a)
+2, 4, 5, 8, 10, 11, 13, 17, 18, 20, 21, 22, 28, 30, 32, 34, 40, 41, 42, 43, 50, 52, 54, 57, 58, 60
+5000
+33f - Unlinked Entities: One such that evaluates to true (Select statements)
+stmt s; assign a;
+Select s such that Parent(29, a)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+5000
+33g - Unlinked Entities: One such that evaluates to true (Select variables)
+variable v; assign a;
+Select v such that Parent(29, a)
+x, y, midpoint, result, print, Print, RESULT, length, breadth, squareArea, rectangleArea, anotherBreadth, volume, procedure, radius, diameter, math, science, stupid, english, verystupid, read, study, tuition, var, varOnlyUsedInIfCond, varUsedInBothIfAndWhileCond, varOnlyUsedInWhileCond, a, b, c
+5000
+35 - Unlinked Entities: One pattern false + One such that true = Evaluates to false
+variable v; assign a; stmt s;
+Select s pattern a(_,_"y%2"_) such that Uses(a,"x")
+
+5000
+36 - Unlinked Entities: One pattern true + One such that false = Evaluates to false
+variable v; assign a; stmt s;
+Select s pattern a("study", _"study*3"_) such that Follows(a,5)
+
+5000
+38a - Unlinked Entities: One pattern true + One such that true = Evaluates to true (Select if statements)
+if ifs; assign a;
+Select ifs pattern a(_,_"2*5"_) such that Follows(a,14)
+9, 19, 23, 26, 29, 35, 48, 56
+5000
+38b - Unlinked Entities: One pattern true + One such that true = Evaluates to true (Select while statements)
+while w; assign a;
+Select w pattern a(_,_"2*5"_) such that Follows(a,14)
+59, 53, 45, 38, 33, 16, 7
+5000
+38c - Unlinked Entities: One pattern true + One such that true = Evaluates to true (Select print statements)
+print pn; assign a;
+Select pn pattern a(_,_"2*5"_) such that Follows(a,14)
+6, 12, 15, 31, 36, 46, 49, 51, 55
+5000
+38d - Unlinked Entities: One pattern true + One such that true = Evaluates to true (Select read statements)
+read r; assign a;
+Select r pattern a(_,_"2*5"_) such that Follows(a,14)
+47, 44, 39, 37, 27, 25, 24, 14, 3, 1
+5000
+38e - Unlinked Entities: One pattern true + One such that true = Evaluates to true (Select assign statements)
+assign a, a1;
+Select a1 pattern a(_,_"2*5"_) such that Follows(a,14)
+2, 4, 5, 8, 10, 11, 13, 17, 18, 20, 21, 22, 28, 30, 32, 34, 40, 41, 42, 43, 50, 52, 54, 57, 58, 60
+5000
+38f - Unlinked Entities: One pattern true + One such that true = Evaluates to true (Select statements)
+stmt s; assign a;
+Select s pattern a(_,_"2*5"_) such that Follows(a,14)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+5000
+38g - Unlinked Entities: One pattern true + One such that true = Evaluates to true (Select variables)
+variable v; assign a;
+Select v pattern a(_,_"2*5"_) such that Follows(a,14)
+x, y, midpoint, result, print, Print, RESULT, length, breadth, squareArea, rectangleArea, anotherBreadth, volume, procedure, radius, diameter, math, science, stupid, english, verystupid, read, study, tuition, var, varOnlyUsedInIfCond, varUsedInBothIfAndWhileCond, varOnlyUsedInWhileCond, a, b, c
+5000
+58 - Unlinked Entities: One pattern false + One such that false = Evaluates to false
+variable v; if ifs; stmt s;
+Select s pattern a(_,_"y%2"_) such that Follows(a,1)
+SemanticError
+5000
+73 - Follows relationship and pattern: Select statements that follow assignment with any pattern
+assign a; stmt s;
+Select s pattern a(_,_) such that Follows(a,s)
+3, 5, 6, 11, 12, 14, 18, 23, 29, 31, 33, 35, 42, 44, 53, 55
+5000
+74 - Follows relationship and pattern: Select read statements that follow assignment with any pattern
+assign a; read re;
+Select re pattern a(_,_) such that Follows(a,re)
+3, 14, 44
+5000
+75 - Follows relationship and pattern: Select print statements that follow assignment with any pattern
+assign a; print pn;
+Select pn pattern a(_,_) such that Follows(a,pn)
+6, 12, 31, 55
+5000
+76 - Follows relationship and pattern: Select while statements that follow assignment with any pattern
+assign a; while w;
+Select w pattern a(_,_) such that Follows(a,w)
+33, 53
+5000
+77 - Follows relationship and pattern: Select if statements that follow assignment with any pattern
+assign a; if ifs;
+Select ifs pattern a(_,_) such that Follows(a,ifs)
+23, 29, 35
+5000
+78 - Follows relationship and pattern: Select assign statements that follow assignment with any pattern
+assign a, a1;
+Select a1 pattern a(_,_) such that Follows(a,a1)
+5, 11, 18, 42
+5000
+79 - Follows relationship and exact match pattern: Select statements that follow assignment with exact pattern
+assign a; stmt s;
+Select s pattern a(_,"5") such that Follows(a,s)
+12, 18, 23
+5000
+80 - Follows relationship and pattern: Select read statements that follow assignment with exact pattern
+assign a; read re;
+Select re pattern a(_,"x+1") such that Follows(a,re)
+3
+5000
+81 - Follows relationship and pattern: Select print statements that follow assignment with exact pattern
+assign a; print pn;
+Select pn pattern a(_,"study * 3 - 2") such that Follows(a,pn)
+55
+5000
+82 - Follows relationship and pattern: Select while statements that follow assignment with exact pattern
+assign a; while w;
+Select w pattern a(_,"25") such that Follows(a,w)
+33
+5000
+83 - Follows relationship and pattern: Select if statements that follow assignment with exact pattern
+assign a; if ifs;
+Select ifs pattern a(_,"19") such that Follows(a,ifs)
+29
+5000
+84 - Follows relationship and pattern: Select assign statements that follow assignment with exact pattern
+assign a, a1;
+Select a1 pattern a(_,"y + 2") such that Follows(a,a1)
+5
+5000
+85 - Follows relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s pattern a(_,_"y"_) such that Follows(a,s)
+5, 6, 11, 14
+5000
+86 - Follows relationship and pattern: Select read statements that follow assignment with partial match pattern
+assign a; read re;
+Select re pattern a(_,_"x"_) such that Follows(a,re)
+3, 14
+5000
+87 - Follows relationship and pattern: Select print statements that follow assignment with partial match pattern
+assign a; print pn;
+Select pn pattern a(_,_"study"_) such that Follows(a,pn)
+55
+5000
+88 - Follows relationship and pattern: Select while statements that follow assignment with partial match pattern
+assign a; while w;
+Select w pattern a(_,_"study"_) such that Follows(a,w)
+53
+5000
+89 - Follows relationship and pattern: Select if statements that follow assignment with partial match pattern
+assign a; if ifs;
+Select ifs pattern a(_,_"volume"_) such that Follows(a,ifs)
+35
+5000
+90 - Follows relationship and pattern: Select assign statements that follow assignment with partial match pattern
+assign a, a1;
+Select a1 pattern a(_,_"y"_) such that Follows(a,a1)
+5, 11
+5000
+91 - Invalid Follows relationship and pattern: Select statements that follow assignment with partial match left pattern
+assign a; stmt s;
+Select s pattern a(_,_"xy") such that Follows(a,s)
+SyntaxError
+5000
+92 - Invalid Follows relationship and pattern: Select statements that follow assignment with partial match right pattern
+assign a; statement s;
+Select s pattern a(_,"xy"_) such that Follows(a,s)
+SyntaxError
+5000
+93 - Empty Follows relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s pattern a(_,_"xy"_) such that Follows(a,s)
+
+5000
+94 - Invalid pattern single quote: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s pattern a(_,'x') such that Follows(a,s)
+SyntaxError
+5000
+95 - Invalid pattern no quote: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s pattern a(_,x) such that Follows(a,s)
+SyntaxError
+5000
+96 - Invalid Follows relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; statement s; variable v;
+Select s pattern a(_,_) such that Follows(v,s)
+SyntaxError
+5000
+97 - Invalid Follows relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s; variable v;
+Select s pattern a(_,_) such that Follows(s,v)
+SemanticError
+5000
+98 - Follows relationship and pattern: Select statements that follow assignment with exact variable pattern
+assign a; stmt s;
+Select s pattern a("x",_) such that Follows(a,s)
+3
+5000
+99 - Follows relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re pattern a("RESULT",_) such that Follows(a,re)
+14
+5000
+100 - Follows relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn pattern a("tuition",_) such that Follows(a,pn)
+55
+5000
+101 - Follows relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w pattern a("study",_) such that Follows(a,w)
+53
+5000
+102 - Follows relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs pattern a("volume",_) such that Follows(a,ifs)
+29, 35
+5000
+103 - Follows relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 pattern a("y",_) such that Follows(a,a1)
+5
+5000
+104 - Follows relationship and pattern: Select statements that follow assignment with exact variable exact pattern
+assign a; stmt s;
+Select s pattern a("y","y+2") such that Follows(a,s)
+5
+5000
+105 - Follows relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re pattern a("x","x+1") such that Follows(a,re)
+3
+5000
+106 - Follows relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn pattern a("volume","anotherBreadth * length") such that Follows(a,pn)
+31
+5000
+107 - Follows relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w pattern a("volume","25") such that Follows(a,w)
+33
+5000
+108 - Follows relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs pattern a("volume","19") such that Follows(a,ifs)
+29
+5000
+109 - Follows relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 pattern a("length","5") such that Follows(a,a1)
+18
+5000
+110 - Follows relationship and pattern: Select statements that follow assignment with exact variable exact pattern
+assign a; stmt s;
+Select s pattern a("y",_"y"_) such that Follows(a,s)
+5
+5000
+111 - Follows relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re pattern a("x",_"x"_) such that Follows(a,re)
+3
+5000
+112 - Follows relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn pattern a("volume",_"length"_) such that Follows(a,pn)
+31
+5000
+113 - Follows relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w pattern a("study",_"math"_) such that Follows(a,w)
+53
+5000
+114 - Follows relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs pattern a("volume",_"volume"_) such that Follows(a,ifs)
+35
+5000
+115 - Follows relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 pattern a("y",_"2"_) such that Follows(a,a1)
+5
+5000
+116 - Invalid pattern single quotes: Select all statements that follow assignment with exact variable pattern
+assign a; stmt s;
+Select s pattern a('volume',_) such that Follows(a,s)
+SyntaxError
+5000
+117 - Invalid pattern single quotes: Select while statements that follow assignment with exact variable pattern
+assign a; stmt s;
+Select w pattern a('y','y+2') such that Follows(a,s)
+SyntaxError
+5000
+118 - Invalid pattern partial match on left: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs pattern a(_"volume"_,"volume") such that Follows(a,ifs)
+SyntaxError
+5000
+119 - No result but valid Follows relationship and pattern : Select statements that follow assignment with partial match pattern
+assign a; stmt s; variable v;
+Select s pattern a(_,"science") such that Follows(s,v)
+SemanticError
+5000
+120 - Follows relationship and pattern: Select statements that follow assignment with any pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a(_,_)
+3, 5, 6, 11, 12, 14, 18, 23, 29, 31, 33, 35, 42, 44, 53, 55
+5000
+121 - Follows relationship and pattern: Select read statements that follow assignment with any pattern
+assign a; read re;
+Select re such that Follows(a,re) pattern a(_,_)
+3, 14, 44
+5000
+122 - Follows relationship and pattern: Select print statements that follow assignment with any pattern
+assign a; print pn;
+Select pn such that Follows(a,pn) pattern a(_,_)
+6, 12, 31, 55
+5000
+123 - Follows relationship and pattern: Select while statements that follow assignment with any pattern
+assign a; while w;
+Select w such that Follows(a,w) pattern a(_,_)
+33, 53
+5000
+124 - Follows relationship and pattern: Select if statements that follow assignment with any pattern
+assign a; if ifs;
+Select ifs such that Follows(a,ifs) pattern a(_,_)
+23, 29, 35
+5000
+125 - Follows relationship and pattern: Select assign statements that follow assignment with any pattern
+assign a, a1;
+Select a1 such that Follows(a,a1) pattern a(_,_)
+5, 11, 18, 42
+5000
+126 - Follows relationship and exact match pattern: Select statements that follow assignment with exact pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a(_,"5")
+12, 18, 23
+5000
+127 - Follows relationship and pattern: Select read statements that follow assignment with exact pattern
+assign a; read re;
+Select re such that Follows(a,re) pattern a(_,"x+1")
+3
+5000
+128 - Follows relationship and pattern: Select print statements that follow assignment with exact pattern
+assign a; print pn;
+Select pn such that Follows(a,pn) pattern a(_,"study * 3 - 2")
+55
+5000
+129 - Follows relationship and pattern: Select while statements that follow assignment with exact pattern
+assign a; while w;
+Select w such that Follows(a,w) pattern a(_,"25")
+33
+5000
+130 - Follows relationship and pattern: Select if statements that follow assignment with exact pattern
+assign a; if ifs;
+Select ifs pattern a(_,"19") such that Follows(a,ifs)
+29
+5000
+131 - Follows relationship and pattern: Select assign statements that follow assignment with exact pattern
+assign a, a1;
+Select a1 such that Follows(a,a1) pattern a(_,"y + 2")
+5
+5000
+132 - Follows relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s pattern a(_,_"y"_) such that Follows(a,s)
+5, 6, 11, 14
+5000
+133 - Follows relationship and pattern: Select read statements that follow assignment with partial match pattern
+assign a; read re;
+Select re such that Follows(a,re) pattern a(_,_"x"_)
+3, 14
+5000
+134 - Follows relationship and pattern: Select print statements that follow assignment with partial match pattern
+assign a; print pn;
+Select pn such that Follows(a,pn) pattern a(_,_"study"_)
+55
+5000
+135 - Follows relationship and pattern: Select while statements that follow assignment with partial match pattern
+assign a; while w;
+Select w such that Follows(a,w) pattern a(_,_"study"_)
+53
+5000
+136 - Follows relationship and pattern: Select if statements that follow assignment with partial match pattern
+assign a; if ifs;
+Select ifs such that Follows(a,ifs) pattern a(_,_"volume"_)
+35
+5000
+137 - Follows relationship and pattern: Select assign statements that follow assignment with partial match pattern
+assign a, a1;
+Select a1 such that Follows(a,a1) pattern a(_,_"y"_)
+5, 11
+5000
+138 - Invalid Follows relationship and pattern: Select statements that follow assignment with partial match left pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a(_,_"xy")
+SyntaxError
+5000
+139 - Invalid Follows relationship and pattern: Select statements that follow assignment with partial match right pattern
+assign a; statement s;
+Select s such that Follows(a,s) pattern a(_,"xy"_)
+SyntaxError
+5000
+140 - Invalid Follows relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a(_,_"xy"_)
+
+5000
+141 - Invalid pattern single quote: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a(_,'x')
+SyntaxError
+5000
+142 - Invalid pattern no quote: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a(_,x)
+SyntaxError
+5000
+143 - Invalid Follows relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; statement s; variable v;
+Select s pattern a(_,_) such that Follows(v,s)
+SyntaxError
+5000
+144 - Invalid Follows relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s; variable v;
+Select s such that Follows(s,v) pattern a(_,_)
+SemanticError
+5000
+145 - Follows relationship and pattern: Select statements that follow assignment with exact variable pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a("x",_)
+3
+5000
+146 - Follows relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re such that Follows(a,re) pattern a("RESULT",_)
+14
+5000
+147 - Follows relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn such that Follows(a,pn) pattern a("tuition",_)
+55
+5000
+148 - Follows relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w such that Follows(a,w) pattern a("study",_)
+53
+5000
+149 - Follows relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs such that Follows(a,ifs) pattern a("volume",_)
+29, 35
+5000
+150 - Follows relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 such that Follows(a,a1) pattern a("y",_)
+5
+5000
+151 - Follows relationship and pattern: Select statements that follow assignment with exact variable exact pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a("y","y+2")
+5
+5000
+152 - Follows relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re such that Follows(a,re) pattern a("x","x+1")
+3
+5000
+153 - Follows relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn such that Follows(a,pn) pattern a("volume","anotherBreadth * length")
+31
+5000
+154 - Follows relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w such that Follows(a,w) pattern a("volume","25")
+33
+5000
+155 - Follows relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs such that Follows(a,ifs) pattern a("volume","19")
+29
+5000
+156 - Follows relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 such that Follows(a,a1) pattern a("length","5")
+18
+5000
+157 - Follows relationship and pattern: Select statements that follow assignment with exact variable exact pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a("y",_"y"_)
+5
+5000
+158 - Follows relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re such that Follows(a,re) pattern a("x",_"x"_)
+3
+5000
+159 - Follows relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn  such that Follows(a,pn) pattern a("volume",_"length"_)
+31
+5000
+160 - Follows relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w such that Follows(a,w) pattern a("study",_"math"_)
+53
+5000
+161 - Follows relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs such that Follows(a,ifs) pattern a("volume",_"volume"_)
+35
+5000
+162 - Follows relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 such that Follows(a,a1) pattern a("y",_"2"_)
+5
+5000
+163 - Invalid pattern single quotes: Select all statements that follow assignment with exact variable pattern
+assign a; stmt s;
+Select s such that Follows(a,s) pattern a('volume',_)
+SyntaxError
+5000
+164 - Invalid pattern single quotes: Select while statements that follow assignment with exact variable pattern
+assign a; stmt s;
+Select w such that Follows(a,s) pattern a('y','y+2')
+SyntaxError
+5000
+165 - Invalid pattern partial match on left: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs such that Follows(a,ifs) pattern a(_"volume"_,"volume")
+SyntaxError
+5000
+166 - No result but valid Follows relationship and pattern : Select statements that follow assignment with partial match pattern
+assign a; stmt s; variable v;
+Select s such that Follows(s,v) pattern a(_,"science")
+SemanticError
+5000
+167 - Follows* relationship and pattern: Select statements that follow assignment with any pattern
+assign a; stmt s;
+Select s pattern a(_,_) such that Follows*(a,s)
+3, 4, 5, 6, 7, 9, 11, 12, 14, 15, 16, 18, 19, 22, 23, 26, 29, 31, 33, 35, 38, 42, 43, 44, 45, 53, 55, 56, 59
+5000
+168 - Follows* relationship and pattern: Select read statements that follow assignment with any pattern
+assign a; read re;
+Select re pattern a(_,_) such that Follows*(a,re)
+3, 14, 44
+5000
+169 - Follows* relationship and pattern: Select print statements that follow assignment with any pattern
+assign a; print pn;
+Select pn pattern a(_,_) such that Follows*(a,pn)
+6, 12, 15, 31, 55
+5000
+170 - Follows* relationship and pattern: Select while statements that follow assignment with any pattern
+assign a; while w;
+Select w pattern a(_,_) such that Follows*(a,w)
+7, 16, 33, 38, 45, 53, 59
+5000
+171 - Follows* relationship and pattern: Select if statements that follow assignment with any pattern
+assign a; if ifs;
+Select ifs pattern a(_,_) such that Follows*(a,ifs)
+9, 19, 23, 26, 29, 35, 56
+5000
+172 - Follows* relationship and pattern: Select assign statements that follow assignment with any pattern
+assign a, a1;
+Select a1 pattern a(_,_) such that Follows*(a,a1)
+4, 5, 11, 18, 22, 42, 43
+5000
+173 - Follows* relationship and exact match pattern: Select statements that follow assignment with exact pattern
+assign a; stmt s;
+Select s pattern a(_,"5") such that Follows*(a,s)
+12, 18, 23, 26, 43, 44, 45, 56, 59
+5000
+174 - Follows* relationship and pattern: Select read statements that follow assignment with exact pattern
+assign a; read re;
+Select re pattern a(_,"x+1") such that Follows*(a,re)
+3, 44
+5000
+175 - Follows* relationship and pattern: Select print statements that follow assignment with exact pattern
+assign a; print pn;
+Select pn pattern a(_,"study * 3 - 2") such that Follows*(a,pn)
+55
+5000
+176 - Follows* relationship and pattern: Select while statements that follow assignment with exact pattern
+assign a; while w;
+Select w pattern a(_,"25") such that Follows*(a,w)
+33
+5000
+177 - Follows* relationship and pattern: Select if statements that follow assignment with exact pattern
+assign a; if ifs;
+Select ifs pattern a(_,"19") such that Follows*(a,ifs)
+29
+5000
+178 - Follows* relationship and pattern: Select assign statements that follow assignment with exact pattern
+assign a, a1;
+Select a1 pattern a(_,"y + 2") such that Follows*(a,a1)
+5, 22, 43
+5000
+179 - Follows* relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s pattern a(_,_"y"_) such that Follows*(a,s)
+5, 6, 7, 9, 11, 12, 14, 15, 16, 19, 22, 23, 26, 43, 44, 45, 56, 59
+5000
+180 - Follows* relationship and pattern: Select read statements that follow assignment with partial match pattern
+assign a; read re;
+Select re pattern a(_,_"x"_) such that Follows*(a,re)
+3, 14, 44
+5000
+181 - Follows* relationship and pattern: Select print statements that follow assignment with partial match pattern
+assign a; print pn;
+Select pn pattern a(_,_"study"_) such that Follows*(a,pn)
+55
+5000
+182 - Follows* relationship and pattern: Select while statements that follow assignment with partial match pattern
+assign a; while w;
+Select w pattern a(_,_"study"_) such that Follows*(a,w)
+53
+5000
+183 - Follows* relationship and pattern: Select if statements that follow assignment with partial match pattern
+assign a; if ifs;
+Select ifs pattern a(_,_"volume"_) such that Follows*(a,ifs)
+35
+5000
+184 - Follows* relationship and pattern: Select assign statements that follow assignment with partial match pattern
+assign a, a1;
+Select a1 pattern a(_,_"y"_) such that Follows*(a,a1)
+5, 11, 22, 43
+5000
+185 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match left pattern
+assign a; stmt s;
+Select s pattern a(_,_"xy") such that Follows*(a,s)
+SyntaxError
+5000
+186 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match right pattern
+assign a; stmt s;
+Select s pattern a(_,"xy"_) such that Follows*(a,s)
+SyntaxError
+5000
+187 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s pattern a(_,_"xy"_) such that Follows*(a,s)
+
+5000
+188 - Invalid no quotes in pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s pattern a(_,y) such that Follows*(a,s)
+SyntaxError
+5000
+189 - Invalid single quotes in pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s pattern a(_,'y') such that Follows*(a,s)
+SyntaxError
+5000
+190 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; statement s; variable v;
+Select s pattern a(_,_) such that Follows*(v,s)
+SyntaxError
+5000
+191 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s; variable v;
+Select s pattern a(_,_) such that Follows*(s,v)
+SemanticError
+5000
+192 - No result but valid Follows* relationship and pattern : Select statements that follow assignment with partial match pattern
+assign a; stmt s; variable v;
+Select s pattern a(_,"science") such that Follows*(s,v)
+SemanticError
+5000
+193 - Follows* relationship and pattern: Select statements that follow assignment with exact variable pattern
+assign a; stmt s;
+Select s pattern a("x",_) such that Follows*(a,s)
+3, 4, 5, 6, 7, 9, 16, 19, 22, 23, 26, 43, 44, 45, 56, 59
+5000
+194 - Follows* relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re pattern a("RESULT",_) such that Follows*(a,re)
+14
+5000
+195 - Follows* relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn pattern a("tuition",_) such that Follows*(a,pn)
+55
+5000
+196 - Follows* relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w pattern a("study",_) such that Follows*(a,w)
+53
+5000
+197 - Follows* relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs pattern a("volume",_) such that Follows*(a,ifs)
+29, 35
+5000
+198 - Follows* relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 pattern a("y",_) such that Follows*(a,a1)
+5, 22, 43
+5000
+199 - Follows* relationship and pattern: Select statements that follow assignment with exact variable exact pattern
+assign a; stmt s;
+Select s pattern a("y","y+2") such that Follows*(a,s)
+5, 6, 7, 9, 16, 19, 22, 23, 26, 43, 44, 45, 56, 59
+5000
+200 - Follows* relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re pattern a("x","x+1") such that Follows*(a,re)
+3, 44
+5000
+201 - Follows* relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn pattern a("volume","anotherBreadth * length") such that Follows*(a,pn)
+31
+5000
+202 - Follows* relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w pattern a("volume","25") such that Follows*(a,w)
+33
+5000
+203 - Follows* relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs pattern a("volume","19") such that Follows*(a,ifs)
+29
+5000
+204 - Follows* relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 pattern a("length","5") such that Follows*(a,a1)
+18
+5000
+205 - Follows* relationship and pattern: Select statements that follow assignment with exact variable exact pattern
+assign a; stmt s;
+Select s pattern a("study",_"study"_) such that Follows*(a,s)
+53
+5000
+206 - Follows* relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re pattern a("x",_"x"_) such that Follows*(a,re)
+3, 44
+5000
+207 - Follows* relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn pattern a("volume", _"length"_) such that Follows*(a,pn)
+31
+5000
+208 - Follows* relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w pattern a("volume",_"25"_) such that Follows*(a,w)
+33
+5000
+209 - Follows* relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs pattern a("y",_"y"_) such that Follows*(a,ifs)
+9, 19, 23, 26, 56
+5000
+210 - Follows* relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 pattern a("result",_"5"_) such that Follows*(a,a1)
+11
+5000
+211 - Invalid single quotes: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn pattern a('volume', "length") such that Follows*(a,pn)
+SyntaxError
+5000
+212 - Invalid single quotes: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w pattern a("volume",'25') such that Follows*(a,w)
+SyntaxError
+5000
+213 - Invalid partial match on left: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs pattern a(_"y"_,_) such that Follows*(a,ifs)
+SyntaxError
+5000
+214 - Follows* relationship and pattern: Select statements that follow assignment with any pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a(_,_)
+3, 4, 5, 6, 7, 9, 11, 12, 14, 15, 16, 18, 19, 22, 23, 26, 29, 31, 33, 35, 38, 42, 43, 44, 45, 53, 55, 56, 59
+5000
+215 - Follows* relationship and pattern: Select read statements that follow assignment with any pattern
+assign a; read re;
+Select re such that Follows*(a,re) pattern a(_,_)
+3, 14, 44
+5000
+216 - Follows* relationship and pattern: Select print statements that follow assignment with any pattern
+assign a; print pn;
+Select pn such that Follows*(a,pn) pattern a(_,_)
+6, 12, 15, 31, 55
+5000
+217 - Follows* relationship and pattern: Select while statements that follow assignment with any pattern
+assign a; while w;
+Select w such that Follows*(a,w) pattern a(_,_)
+7, 16, 33, 38, 45, 53, 59
+5000
+218 - Follows* relationship and pattern: Select if statements that follow assignment with any pattern
+assign a; if ifs;
+Select ifs such that Follows*(a,ifs) pattern a(_,_)
+9, 19, 23, 26, 29, 35, 56
+5000
+219 - Follows* relationship and pattern: Select assign statements that follow assignment with any pattern
+assign a, a1;
+Select a1 such that Follows*(a,a1) pattern a(_,_)
+4, 5, 11, 18, 22, 42, 43
+5000
+220 - Follows* relationship and exact match pattern: Select statements that follow assignment with exact pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a(_,"5")
+12, 18, 23, 26, 43, 44, 45, 56, 59
+5000
+221 - Follows* relationship and pattern: Select read statements that follow assignment with exact pattern
+assign a; read re;
+Select re such that Follows*(a,re) pattern a(_,"x+1")
+3, 44
+5000
+222 - Follows* relationship and pattern: Select print statements that follow assignment with exact pattern
+assign a; print pn;
+Select pn such that Follows*(a,pn) pattern a(_,"study * 3 - 2")
+55
+5000
+223 - Follows* relationship and pattern: Select while statements that follow assignment with exact pattern
+assign a; while w;
+Select w such that Follows*(a,w) pattern a(_,"25")
+33
+5000
+224 - Follows* relationship and pattern: Select if statements that follow assignment with exact pattern
+assign a; if ifs;
+Select ifs such that Follows*(a,ifs) pattern a(_,"19")
+29
+5000
+225 - Follows* relationship and pattern: Select assign statements that follow assignment with exact pattern
+assign a, a1;
+Select a1 such that Follows*(a,a1) pattern a(_,"y + 2")
+5, 22, 43
+5000
+226 - Follows* relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a(_,_"y"_)
+5, 6, 7, 9, 11, 12, 14, 15, 16, 19, 22, 23, 26, 43, 44, 45, 56, 59
+5000
+227 - Follows* relationship and pattern: Select read statements that follow assignment with partial match pattern
+assign a; read re;
+Select re such that Follows*(a,re) pattern a(_,_"x"_)
+3, 14, 44
+5000
+228 - Follows* relationship and pattern: Select print statements that follow assignment with partial match pattern
+assign a; print pn;
+Select pn such that Follows*(a,pn) pattern a(_,_"study"_)
+55
+5000
+229 - Follows* relationship and pattern: Select while statements that follow assignment with partial match pattern
+assign a; while w;
+Select w such that Follows*(a,w) pattern a(_,_"study"_)
+53
+5000
+230 - Follows* relationship and pattern: Select if statements that follow assignment with partial match pattern
+assign a; if ifs;
+Select ifs such that Follows*(a,ifs) pattern a(_,_"volume"_)
+35
+5000
+231 - Follows* relationship and pattern: Select assign statements that follow assignment with partial match pattern
+assign a, a1;
+Select a1 such that Follows*(a,a1) pattern a(_,_"y"_)
+5, 11, 22, 43
+5000
+232 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match left pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a(_,_"xy")
+SyntaxError
+5000
+233 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match right pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a(_,"xy"_)
+SyntaxError
+5000
+234 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a(_,_"xy"_)
+
+5000
+235 - Invalid no quotes in pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a(_,y)
+SyntaxError
+5000
+236 - Invalid single quotes in pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a(_,'y')
+SyntaxError
+5000
+237 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; statement s; variable v;
+Select s such that Follows*(v,s) pattern a(_,_)
+SyntaxError
+5000
+238 - Invalid Follows* relationship and pattern: Select statements that follow assignment with partial match pattern
+assign a; stmt s; variable v;
+Select s such that Follows*(s,v) pattern a(_,_)
+SemanticError
+5000
+239 - No result but valid Follows* relationship and pattern : Select statements that follow assignment with partial match pattern
+assign a; stmt s; variable v;
+Select s such that Follows*(s,v) pattern a(_,"science")
+SemanticError
+5000
+240 - Follows* relationship and pattern: Select statements that follow assignment with exact variable pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a("x",_)
+3, 4, 5, 6, 7, 9, 16, 19, 22, 23, 26, 43, 44, 45, 56, 59
+5000
+241 - Follows* relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re such that Follows*(a,re) pattern a("RESULT",_)
+14
+5000
+242 - Follows* relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn such that Follows*(a,pn) pattern a("tuition",_)
+55
+5000
+243 - Follows* relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w such that Follows*(a,w) pattern a("study",_)
+53
+5000
+244 - Follows* relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs such that Follows*(a,ifs) pattern a("volume",_)
+29, 35
+5000
+245 - Follows* relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 such that Follows*(a,a1) pattern a("y",_)
+5, 22, 43
+5000
+246 - Follows* relationship and pattern: Select statements that follow assignment with exact variable exact pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a("y","y+2")
+5, 6, 7, 9, 16, 19, 22, 23, 26, 43, 44, 45, 56, 59
+5000
+247 - Follows* relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re such that Follows*(a,re) pattern a("x","x+1")
+3, 44
+5000
+248 - Follows* relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn such that Follows*(a,pn) pattern a("volume","anotherBreadth * length")
+31
+5000
+249 - Follows* relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w such that Follows*(a,w) pattern a("volume","25")
+33
+5000
+250 - Follows* relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs such that Follows*(a,ifs) pattern a("volume","19")
+29
+5000
+251 - Follows* relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 such that Follows*(a,a1) pattern a("length","5")
+18
+5000
+252 - Follows* relationship and pattern: Select statements that follow assignment with exact variable exact pattern
+assign a; stmt s;
+Select s such that Follows*(a,s) pattern a("study",_"study"_)
+53
+5000
+253 - Follows* relationship and pattern: Select read statements that follow assignment with exact variable pattern
+assign a; read re;
+Select re such that Follows*(a,re) pattern a("x",_"x"_)
+3, 44
+5000
+254 - Follows* relationship and pattern: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn such that Follows*(a,pn) pattern a("volume", _"length"_)
+31
+5000
+255 - Follows* relationship and pattern: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w such that Follows*(a,w) pattern a("volume",_"25"_)
+33
+5000
+256 - Follows* relationship and pattern: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs such that Follows*(a,ifs) pattern a("y",_"y"_)
+9, 19, 23, 26, 56
+5000
+257 - Follows* relationship and pattern: Select assign statements that follow assignment with exact variable pattern
+assign a, a1;
+Select a1 such that Follows*(a,a1) pattern a("result",_"5"_)
+11
+5000
+258 - Invalid single quotes: Select print statements that follow assignment with exact variable pattern
+assign a; print pn;
+Select pn such that Follows*(a,pn) pattern a('volume', "length")
+SyntaxError
+5000
+259 - Invalid single quotes: Select while statements that follow assignment with exact variable pattern
+assign a; while w;
+Select w such that Follows*(a,w) pattern a("volume",'25')
+SyntaxError
+5000
+260 - Invalid partial match on left: Select if statements that follow assignment with exact variable pattern
+assign a; if ifs;
+Select ifs such that Follows*(a,ifs) pattern a(_"y"_,_)
+SyntaxError
+5000
+261 - Invalid test case to test query validation by PQL
+procedure p1, p2;
+Select p2;
+SyntaxError
+5000
+300.1 - Pattern and Uses: Pattern true + Uses false
+assign a; variable v;
+Select a such that Uses(26, "math") pattern a(_, "radius*2")
+
+5000
+300.2 - Pattern and Uses: Pattern true + Uses false
+assign a; variable v;
+Select a pattern a(_, "radius*2") such that Uses(26, "math")
+
+5000
+301.1 - Pattern and Uses: Pattern false + Uses true
+assign a; variable v;
+Select a pattern a(_, _"b+c"_) such that Uses(26, v)
+
+5000
+301.2 - Pattern and Uses: Pattern false + Uses true
+assign a; variable v;
+Select a such that Uses(26, v) pattern a(_, _"b+c"_)
+
+5000
+302.1 - Pattern and Uses: Pattern false and Uses false
+assign a; variable v;
+Select a pattern a(_, _"b+c"_) such that Uses(26, "math")
+
+5000
+302.2 - Pattern and Uses: Pattern false and Uses false
+assign a; variable v;
+Select a such that Uses(26, "math") pattern a(_, _"b+c"_)
+
+5000
+303a.1 - Pattern and Uses: Pattern true + Uses true - RHS Pattern Partial match
+assign a; variable v;
+Select a such that Uses(26, v) pattern a(_, _"a+b"_)
+41
+5000
+303a.2 - Pattern and Uses: Pattern true + Uses true - RHS Pattern Partial match
+assign a; variable v;
+Select a pattern a(_, _"a+b"_) such that Uses(26, v)
+41
+5000
+303a.3 - Pattern and Uses: Pattern true + Uses true - RHS Pattern Partial match
+assign a; variable v;
+Select v such that Uses(26, v) pattern a(_, _"a+b"_)
+squareArea, breadth, anotherBreadth, length, volume, rectangleArea, procedure, radius, a, b, c, x, y
+5000
+303a.4 - Pattern and Uses: Pattern true + Uses true - RHS Pattern Partial match
+assign a; variable v;
+Select v pattern a(_, _"a+b"_) such that Uses(26, v)
+squareArea, breadth, anotherBreadth, length, volume, rectangleArea, procedure, radius, a, b, c, x, y
+5000
+303b.1 - Pattern and Uses: Pattern true + Uses true - RHS Pattern Complete match
+assign a; variable v;
+Select a such that Uses(26, v) pattern a(_, "study*3-2-science")
+50
+5000
+303b.2 - Pattern and Uses: Pattern true + Uses true - RHS Pattern Complete match
+assign a; variable v;
+Select a pattern a(_, "study*3-2-science") such that Uses(26, v)
+50
+5000
+303b.3 - Pattern and Uses: Pattern true + Uses true - RHS Pattern Complete match
+assign a; variable v;
+Select v such that Uses(26, v) pattern a(_, "study*3-2-science")
+squareArea, breadth, anotherBreadth, length, volume, rectangleArea, procedure, radius, a, b, c, x, y
+5000
+303b.4 - Pattern and Uses: Pattern true + Uses true - RHS Pattern Complete match
+assign a; variable v;
+Select v pattern a(_, "study*3-2-science") such that Uses(26, v)
+squareArea, breadth, anotherBreadth, length, volume, rectangleArea, procedure, radius, a, b, c, x, y
+5000
+303c.1 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match
+if ifs; assign a;
+Select ifs pattern a("result",_) such that Uses(ifs,"midpoint")
+9, 19
+5000
+303c.2 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match
+if ifs; assign a;
+Select ifs such that Uses(ifs,"midpoint") pattern a("result",_)
+9, 19
+5000
+303c.3 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match
+if ifs; assign a;
+Select a pattern a("result",_) such that Uses(ifs,"midpoint")
+10, 18, 20
+5000
+303c.4 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match
+if ifs; assign a;
+Select a such that Uses(ifs,"midpoint") pattern a("result",_)
+10, 18, 20
+5000
+303d.1 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match + RHS Pattern Partial match
+if ifs; assign a;
+Select ifs such that Uses(ifs, "midpoint") pattern a("study", _"study*3"_)
+9, 19
+5000
+303d.2 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match + RHS Pattern Partial match
+if ifs; assign a;
+Select ifs pattern a("study", _"study*3"_) such that Uses(ifs, "midpoint")
+9, 19
+5000
+303d.3 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match + RHS Pattern Partial match
+if ifs; assign a;
+Select a such that Uses(ifs, "midpoint") pattern a("study", _"study*3"_)
+50, 52
+5000
+303d.4 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match + RHS Pattern Partial match
+if ifs; assign a;
+Select a pattern a("study", _"study*3"_) such that Uses(ifs, "midpoint")
+50, 52
+5000
+303e.1 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match + RHS Pattern Complete match
+stmt s; assign a;
+Select s such that Uses(s, "Print") pattern a("tuition", "study*3-2")
+9, 15
+5000
+303e.2 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match + RHS Pattern Complete match
+stmt s; assign a;
+Select s pattern a("tuition", "study*3-2") such that Uses(w, "Print")
+SemanticError
+5000
+303e.3 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match + RHS Pattern Complete match
+stmt s; assign a;
+Select a such that Uses(s, "Print") pattern a("tuition", "study*3-2")
+54
+5000
+303e.4 - Pattern and Uses: Pattern true + Uses true - LHS Pattern exact match + RHS Pattern Complete match
+stmt s; assign a;
+Select a pattern a("tuition", "study*3-2") such that Uses(s, "Print")
+54
+5000
+304 - Pattern: Select all assignment patterns without restriction
+assign a;
+Select a pattern a(_, _) 
+2, 4, 5, 8, 10, 13, 18, 20, 21, 30, 34, 40, 41, 42, 50, 52, 54, 11, 17, 22, 28, 32, 43, 57, 58, 60
+5000
+305 - Pattern: Select all assignment patterns without restriction. Invalidated by single quotes in left parameter
+assign a;
+Select a pattern a('_', _) 
+SyntaxError
+5000
+306 - Pattern: Select all assignment patterns without restriction. Invalidated by double quotes in left parameter
+assign a;
+Select a pattern a("_", _) 
+SyntaxError
+5000
+307 - Pattern: Select all assignment patterns without restriction. Invalidated by single quotes in left parameter
+assign a;
+Select a pattern a('_', _) 
+SyntaxError
+5000
+308 - Pattern: Select all assignment patterns without restriction. Invalidated by double quotes in left parameter
+assign a;
+Select a pattern a("_", _) 
+SyntaxError
+5000
+309 - Pattern: Select all assignment patterns with exact constant on right parameter
+assign a;
+Select a pattern a(_, "19") 
+28
+5000
+310 - Pattern: Select all assignment patterns with exact variable on right parameter
+assign a;
+Select a pattern a(_, "midpoint") 
+20
+5000
+311 - Pattern: Select all assignment patterns with exact addition on right parameter
+assign a;
+Select a pattern a(_, "x+1") 
+2
+5000
+312 - Pattern: Select all assignment patterns with exact subtraction on right parameter
+assign a;
+Select a pattern a(_, "midpoint - 1") 
+21
+5000
+313 - Pattern: Select all assignment patterns with exact multiplication on right parameter
+assign a;
+Select a pattern a(_, "radius * 2") 
+40
+5000
+314 - Pattern: Select all assignment patterns with exact division on right parameter
+assign a;
+Select a pattern a(_, "volume / 2") 
+34
+5000
+315 - Pattern: Select all assignment patterns with exact multiple operations on right parameter
+assign a;
+Select a pattern a(_, "x*x + y / 2 * 5") 
+10
+5000
+316 - Pattern: Select all assignment patterns with exact match on right parameter that doesn't exist
+assign a;
+Select a pattern a(_, "varDoesNotExist") 
+
+5000
+317 - Pattern: Select all assignment patterns with partial constant on right parameter
+assign a;
+Select a pattern a(_, _"25"_) 
+32
+5000
+318 - Pattern: Select all assignment patterns with partial variable on right parameter
+assign a;
+Select a pattern a(_, _"length"_) 
+18, 30
+5000
+319 - Pattern: Select all assignment patterns with partial addition on right parameter
+assign a;
+Select a pattern a(_, _"a+b"_) 
+41
+5000
+320 - Pattern: Select all assignment patterns with partial subtraction on right parameter
+assign a;
+Select a pattern a(_, _"midpoint - 1"_) 
+21
+5000
+321 - Pattern: Select all assignment patterns with partial multiplication on right parameter
+assign a;
+Select a pattern a(_, _"x*x"_) 
+10, 13, 42
+5000
+322 - Pattern: Select all assignment patterns with partial division on right parameter
+assign a;
+Select a pattern a(_, _"y/2"_) 
+10
+5000
+323 - Pattern: Select all assignment patterns with partial multiple operations on right parameter
+assign a;
+Select a pattern a(_, _"2 * 5"_) 
+13
+5000
+324 - Pattern: Select all assignment patterns with partial match on right parameter that doesn't exist
+assign a;
+Select a pattern a(_, _"varDoesNotExist"_) 
+
+5000
+325 - Pattern: Invalid usage of variable synonym in right parameter
+assign a; variable v;
+Select a pattern a(_, v)
+SyntaxError
+5000
+326 - Pattern: Invalid usage of constant synonym in right parameter
+assign a; constant c;
+Select a pattern a(_, c)
+SyntaxError
+5000
+327 - Pattern: Invalid usage of undeclared synonym in right parameter
+assign a;
+Select a pattern a(_, ifs)
+SyntaxError
+5000
+328 - Pattern: Invalid usage of partial match on LHS of right parameter
+assign a;
+Select a pattern a(_, _"midpoint")
+SyntaxError
+5000
+329 - Pattern: Invalid usage of partial match on RHS of right parameter
+assign a;
+Select a pattern a(_, "midpoint"_)
+SyntaxError
+5000
+330 - Pattern: Select all assignment patterns with exact variable on left parameter
+assign a;
+Select a pattern a("result", _) 
+10, 18, 20
+5000
+331 - Pattern: Invalid partial match on LHS of left parameter
+assign a;
+Select a pattern a(_"result", _) 
+SyntaxError
+5000
+332 - Pattern: Invalid partial match on RHS of left parameter
+assign a;
+Select a pattern a("result"_, _) 
+SyntaxError
+5000
+333 - Pattern: Invalid partial match in left parameter
+assign a;
+Select a pattern a(_"result"_, _) 
+SyntaxError
+5000
+334 - Pattern: Select all assignment patterns with exact variable that does not exist on left parameter
+assign a;
+Select a pattern a("varDoesNotExist", _) 
+
+5000
+335 - Pattern: Select all assignment patterns with exact variable that does not exist on both parameters
+assign a;
+Select a pattern a("varDoesNotExist", "varDoesNotExist1") 
+
+5000
+336 - Pattern: Select all assignment patterns with exact match on left parameter and partial constant on right parameter
+assign a;
+Select a pattern a("volume", _"25"_) 
+32
+5000
+337 - Pattern: Select all assignment patterns with exact match on left parameter and partial variable on right parameter
+assign a;
+Select a pattern a("result", _"length"_) 
+18
+5000
+338 - Pattern: Select all assignment patterns exact match on left parameter and with partial addition on right parameter
+assign a;
+Select a pattern a("var", _"a+b"_) 
+41
+5000
+339 - Pattern: Select all assignment patterns exact match on left parameter and with partial subtraction on right parameter
+assign a;
+Select a pattern a("midpoint", _"midpoint - 1"_) 
+21
+5000
+340 - Pattern: Select all assignment patterns exact match on left parameter and with partial multiplication on right parameter
+assign a;
+Select a pattern a("var", _"x*x"_) 
+42
+5000
+341 - Pattern: Select all assignment patterns exact match on left parameter and with partial division on right parameter
+assign a;
+Select a pattern a("result", _"y/2"_) 
+10
+5000
+342 - Pattern: Invalid partial match on LHS of right parameter
+assign a;
+Select a pattern a("volume", _"25") 
+SyntaxError
+5000
+343 - Pattern: Invalid partial match on LHS of right parameter
+assign a;
+Select a pattern a("result", _"length") 
+SyntaxError
+5000
+344 - Pattern: Invalid partial match on LHS of right parameter
+assign a;
+Select a pattern a("var", _"a+b") 
+SyntaxError
+5000
+345 - Pattern: Invalid partial match on LHS of right parameter
+assign a;
+Select a pattern a("midpoint", _"midpoint - 1") 
+SyntaxError
+5000
+346 - Pattern: Invalid partial match on LHS of right parameter
+assign a;
+Select a pattern a("var", _"x*x") 
+SyntaxError
+5000
+347 - Pattern: Invalid partial match on LHS of right parameter
+assign a;
+Select a pattern a("result", _"y/2") 
+SyntaxError
+5000
+348 - Pattern: Invalid partial match on RHS of right parameter
+assign a;
+Select a pattern a("volume", "25"_) 
+SyntaxError
+5000
+349 - Pattern: Invalid partial match on RHS of right parameter
+assign a;
+Select a pattern a("result", "length"_) 
+SyntaxError
+5000
+350 - Pattern: Invalid partial match on RHS of right parameter
+assign a;
+Select a pattern a("var", "a+b"_) 
+SyntaxError
+5000
+351 - Pattern: Invalid partial match on RHS of right parameter
+assign a;
+Select a pattern a("midpoint", "midpoint - 1"_) 
+SyntaxError
+5000
+352 - Pattern: Invalid partial match on RHS of right parameter
+assign a;
+Select a pattern a("var", "x*x"_) 
+SyntaxError
+5000
+353 - Pattern: Invalid partial match on RHS of right parameter
+assign a;
+Select a pattern a("result", "y/2"_) 
+SyntaxError
+5000
+354 - Pattern: Invalid missing variable in right parameter
+assign a;
+Select a pattern a("result", "varDoesNotExist") 
+
+5000
+355 - Pattern: Invalid partial match on LHS of left parameter
+assign a;
+Select a pattern a(_"volume", _) 
+SyntaxError
+5000
+356 - Pattern: Invalid partial match on RHS of left parameter
+assign a;
+Select a pattern a("result"_, _) 
+SyntaxError
+5000
+357 - Pattern: Invalid partial match in left parameter
+assign a;
+Select a pattern a(_"var"_, _) 
+SyntaxError
+5000
+442a - Pattern and Modifies: Pattern true + Modifies false
+procedure p; assign a;
+Select a such that Modifies(p, "a") pattern a(_, "x+2")
+
+5000
+442b - Pattern and Modifies: Pattern true + Modifies false
+procedure p; assign a;
+Select a pattern a(_, "x+2") such that Modifies(p, "a")
+
+5000
+442c - Pattern and Modifies: Pattern true + Modifies false
+procedure p; assign a;
+Select p such that Modifies(p, "a") pattern a(_, "x+2")
+
+5000
+442d - Pattern and Modifies: Pattern true + Modifies false
+procedure p; assign a;
+Select p pattern a(_, "x+2") such that Modifies(p, "a")
+
+5000
+443a - Pattern and Modifies: Pattern false + Modifies true
+assign a;
+Select a such that Modifies(a, "Print") pattern a(_, _"midpoint"_)
+
+5000
+443b - Pattern and Modifies: Pattern false + Modifies true
+assign a;
+Select a pattern a(_, _"midpoint"_) such that Modifies(a, "Print")
+
+5000
+443c - Pattern and Modifies: Pattern false + Modifies true
+assign a;
+Select a such that Modifies(a, "Print") pattern a(_, _"midpoint"_)
+
+5000
+443d - Pattern and Modifies: Pattern false + Modifies true
+assign a;
+Select a pattern a(_, _"midpoint"_) such that Modifies(a, "Print")
+
+5000
+444a - Pattern and Modifies: Pattern false + Modifies false
+assign a;
+Select a such that Modifies(a, "result") pattern a(_, _"5 + 3"_)
+
+5000
+444b - Pattern and Modifies: Pattern false + Modifies false
+assign a;
+Select a pattern a(_, _"5 + 3"_) such that Modifies(a, "result")
+
+5000
+444c - Pattern and Modifies: Pattern false + Modifies false
+assign a;
+Select a such that Modifies(a, "result") pattern a(_, _"5 + 3"_)
+
+5000
+444d - Pattern and Modifies: Pattern false + Modifies false
+assign a;
+Select a pattern a(_, _"5 + 3"_) such that Modifies(a, "result")
+
+5000
+445a - Pattern and Modifies: Pattern true + Modifies true - Pattern both empty - Pick statement
+assign a; stmt s;
+Select s such that Modifies(s, "result") pattern a(_,_)
+9, 10, 18, 16, 20, 19
+5000
+445b - Pattern and Modifies: Pattern true + Modifies true - Pattern both empty - Pick statement
+assign a; stmt s;
+Select s pattern a(_,_)  such that Modifies(s, "result")
+9, 10, 18, 16, 20, 19
+5000
+445c - Pattern and Modifies: Pattern true + Modifies true - Pattern both empty - Pick procedure
+assign a; procedure p;
+Select p such that Modifies(p, "result") pattern a(_,_)
+mainProcedure
+5000
+445d - Pattern and Modifies: Pattern true + Modifies true - Pattern both empty - Pick procedure
+assign a; procedure p;
+Select p pattern a(_,_)  such that Modifies(p, "result")
+mainProcedure
+5000
+446a - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick statement
+assign a; if ifs;
+Select ifs such that Modifies(ifs, "anotherBreadth") pattern a(_,_"2*5"_)
+26
+5000
+446b - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick statement
+assign a; if ifs;
+Select ifs pattern a(_,_"2*5"_) such that Modifies(ifs, "anotherBreadth")
+26
+5000
+446c - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick statement
+assign a; if ifs;
+Select a such that Modifies(ifs, "anotherBreadth") pattern a(_,_"2*5"_)
+13
+5000
+446d - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick statement
+assign a; if ifs;
+Select a pattern a(_,_"2*5"_) such that Modifies(ifs, "anotherBreadth")
+13
+5000
+447a - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern exact match - Pick statement
+assign a;
+Select a pattern a(_,"1") such that Modifies(a, "x")
+57, 60
+5000
+447b - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern exact match - Pick statement
+assign a;
+Select a such that Modifies(a, "x") pattern a(_,"1")
+57, 60
+5000
+448a - Pattern and Modifies: Pattern true + Modifies true - Pattern both empty - Pick variable
+variable v; assign a;
+Select v such that Modifies(a, v) pattern a(_,_)
+x, y, midpoint, print, RESULT, length, result, breadth, volume, diameter, var, math, study, tuition
+5000
+448b - Pattern and Modifies: Pattern true + Modifies true - Pattern both empty - Pick variable
+variable v; assign a;
+Select v pattern a(_,_) such that Modifies(a, v)
+x, y, midpoint, print, RESULT, length, result, breadth, volume, diameter, var, math, study, tuition
+5000
+449a - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick variable
+variable v; assign a;
+Select v pattern a(_,_"y/2"_) such that Modifies(a,v)
+result
+5000
+449b - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick variable
+variable v; assign a;
+Select v such that Modifies(a,v) pattern a(_,_"y/2"_)
+result
+5000
+450a - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern exact match - Pick variable
+variable v; assign a;
+Select v such that Modifies(a,v) pattern a(_, "x*x + y/2*5")
+result
+5000
+450b - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern exact match - Pick variable
+variable v; assign a;
+Select v pattern a(_, "x*x + y/2*5") such that Modifies(a,v)
+result
+5000
+451 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern exact match - Pick assignment statement
+assign a; variable v;
+Select a such that Modifies(a, v) pattern a("length", "5")
+17
+5000
+452 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern exact match - Pick assignment statement
+assign a; variable v;
+Select a pattern a("length", "5") such that Modifies(a, v)
+17
+5000
+453 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick assignment statement
+assign a; variable v;
+Select a such that Modifies(a, v) pattern a("RESULT", _"2*5"_)
+13
+5000
+454 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick assignment statement
+assign a; variable v;
+Select a pattern a("RESULT", _"2*5"_) such that Modifies(a, v)
+13
+5000
+455 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern empty - Pick assignment statement
+assign a; variable v;
+Select a pattern a("result", _) such that Modifies(a, v)
+10, 18, 20
+5000
+456 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern empty - Pick assignment statement
+assign a; variable v;
+Select a such that Modifies(a, v) pattern a("result", _)
+10, 18, 20
+5000
+457 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern exact match - Pick variable
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a("length", "5")
+length
+5000
+458 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern exact match - Pick variable
+assign a; variable v;
+Select v pattern a("length", "5") such that Modifies(a, v)
+length
+5000
+459 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick variable
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a("RESULT", _"2*5"_)
+RESULT
+5000
+460 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern partial match - Pick variable
+assign a; variable v;
+Select a pattern a("RESULT", _"2*5"_) such that Modifies(a, v)
+13
+5000
+461 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern empty - Pick variable
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a("result", _)
+result
+5000
+462 - Pattern and Modifies: Pattern true + Modifies true - RHS Pattern empty - Pick variable
+assign a; variable v;
+Select v pattern a("result", _) such that Modifies(a, v)
+result
+5000
+463 - Pattern and Modifies: Always return empty
+assign a; variable v;
+Select a pattern a("length", 5) such that Modifies(a, "print")
+SyntaxError
+5000
+464 - Pattern and Modifies: Always return empty
+assign a; variable v;
+Select a such that Modifies(a, "print") pattern a("length", 5)
+SyntaxError
+5000
+465 - Pattern and Follows: Pick a
+assign a;
+Select a such that Follows(a, 42) pattern a(_,_"a+b"_)
+41
+5000
+466 - Pattern and Follows: Pick a
+assign a;
+Select a pattern a(_,_"a+b"_) such that Follows(a, 42)
+41
+5000
+467 - Pattern and Follows*: Pick a
+assign a;
+Select a such that Follows*(2, a) pattern a(_,_"x+y"_)
+5
+5000
+468 - Pattern and Follows*: Pick a
+assign a;
+Select a pattern a(_,_"x+y"_) such that Follows*(2, a)
+5
+5000
+469 - Pattern and Modifies: Pick a
+assign a;
+Select a pattern a("study",_) such that Modifies(a, "tuition")
+
+5000
+470 - Pattern and Modifies: Pick a
+assign a;
+Select a such that Modifies(a, "tuition") pattern a("study",_)
+
+5000
+471 - Pattern and Modifies: Pick a
+assign a; variable v;
+Select a pattern a(_,_"study*3"_) such that Modifies(a, v)
+50, 52, 54
+5000
+472 - Pattern and Modifies: Pick a
+assign a; variable v;
+Select a pattern a(_,_"study*3"_) such that Modifies(a, v)
+50, 52, 54
+5000
+473 - Pattern and Modifies: Pick a
+assign a; variable v;
+Select a pattern a(_,_"study*3"_) such that Modifies(a, "study")
+50, 52
+5000
+474 - Pattern and Modifies: Pick a
+assign a; variable v;
+Select a pattern a(_,_"study*3"_) such that Modifies(a, "study")
+50, 52
+5000
+475 - Pattern and Uses: Pick a
+assign a;
+Select a pattern a(_,_"study*3"_) such that Uses(a, "science")
+50
+5000
+476 - Pattern and Uses: Pick a
+assign a;
+Select a such that Uses(a, "science") pattern a(_,_"study*3"_)
+50
+5000
+477 - Pattern and Uses: Pick a
+assign a; variable v;
+Select a pattern a(_,_"study*3"_) such that Uses(a, v)
+50, 52, 54
+5000
+478 - Pattern and Uses: Pick a
+assign a; variable v;
+Select a such that Uses(a, v) pattern a(_,_"study*3"_)
+50, 52, 54
+5000
+562 - Parent* and Pattern: Parent* false + Pattern true
+while w;
+Select a such that Parent*(w, 10) pattern a("y",_)
+SemanticError
+5000
+563 - Parent* and Pattern: Parent* false + Pattern true
+while w;
+Select a pattern a("y",_) such that Parent*(w, 10)
+SemanticError
+5000
+564 - Parent* and Pattern: Parent* true + Pattern false
+assign a;
+Select a pattern a("varDoesNotExist", _) such that Parent*(26, a)
+
+5000
+565 - Parent* and Pattern: Parent* true + Pattern false
+assign a;
+Select a such that Parent*(26, a) pattern a("varDoesNotExist", _)
+
+5000
+566 - Parent* and Pattern: Parent* false + Pattern false
+assign a; if ifs;
+Select a such that Parent*(ifs, a) pattern a("length", _"18"_)
+
+5000
+567 - Parent* and Pattern: Parent* false + Pattern false
+assign a; if ifs;
+Select a pattern a("length", _"18"_) such that Parent*(ifs, a)
+
+5000
+568 - Parent* and Pattern: Parent* false + Pattern invalid
+assign a; if ifs;
+Select a such that Parent*(ifs, a) pattern a(_"length"_, _"18"_)
+SyntaxError
+5000
+569 - Parent* and Pattern: Parent* false + Pattern invalid
+assign a; if ifs;
+Select a pattern a(_"length"_, _"18"_) such that Parent*(ifs, a)
+SyntaxError
+5000
+570 - Parent* and Pattern: Parent true + Pattern true - Select if parent statement with specific LHS
+assign a; if ifs;
+Select ifs pattern a("print",_) such that Parent*(ifs, a)
+9
+5000
+571 - Parent* and Pattern: Parent true + Pattern true - Select if parent statement with specific LHS
+assign a; if ifs;
+Select ifs such that Parent*(ifs, a) pattern a("print",_)
+9
+5000
+572 - Parent* and Pattern: Parent true + Pattern true - Select while parent statement with specific LHS
+assign a; while w;
+Select w pattern a("volume",_) such that Parent*(w, a)
+33
+5000
+573 - Parent* and Pattern: Parent true + Pattern true - Select while parent statement with specific LHS
+assign a; while w;
+Select w such that Parent*(w, a) pattern a("volume",_)
+33
+5000
+574 - Parent* and Pattern: Parent true + Pattern invalid
+assign a; while w;
+Select w pattern a(_"volume",_) such that Parent*(w, a)
+SyntaxError
+5000
+575 - Parent* and Pattern: Parent true + Pattern invalid
+assign a; while w;
+Select w such that Parent*(w, a) pattern a(_"volume",_)
+SyntaxError
+5000
+576 - Parent* and Pattern: Parent true + Pattern true - Select parent statement with specific LHS
+assign a; stmt s;
+Select s pattern a("diameter",_) such that Parent*(s, a)
+26, 38
+5000
+577 - Parent* and Pattern: Parent true + Pattern true - Select parent statement with specific LHS
+assign a; stmt s;
+Select s such that Parent*(s, a) pattern a("diameter",_)
+26, 38
+5000
+578 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS exact match, RHS partial match)
+assign a; if ifs;
+Select ifs pattern a("volume", _"volume/2"_) such that Parent*(ifs, a)
+26, 29
+5000
+579 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS exact match, RHS partial match)
+assign a; if ifs;
+Select ifs such that Parent*(ifs, a) pattern a("volume", _"volume/2"_)
+26, 29
+5000
+580 - Parent* and Pattern: Parent true + Pattern invalid
+assign a; if ifs;
+Select ifs pattern a("volume"_, _"volume/2"_) such that Parent*(ifs, a)
+SyntaxError
+5000
+581 - Parent* and Pattern: Parent true + Pattern invalid
+assign a; if ifs;
+Select ifs such that Parent*(ifs, a) pattern a("volume"_, _"volume/2"_)
+SyntaxError
+5000
+582 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS exact match, RHS partial match)
+assign a; while w;
+Select w pattern a("volume", _"volume/2"_) such that Parent*(w, a)
+33
+5000
+583 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS exact match, RHS partial match)
+assign a; while w;
+Select w such that Parent*(w, a) pattern a("volume", _"volume/2"_)
+33
+5000
+584 - Parent* and Pattern: Parent true + Pattern invalid
+assign a; while w;
+Select w pattern a(_"volume"_, _"volume/2"_) such that Parent*(w, a)
+SyntaxError
+5000
+585 - Parent* and Pattern: Parent true + Pattern invalid
+assign a; while w;
+Select w such that Parent*(w, a) pattern a(_"volume"_, _"volume/2"_)
+SyntaxError
+5000
+586 - Parent* and Pattern: Parent true + Pattern invalid single quotes
+assign a; stmt s;
+Select s pattern a('volume', _"volume/2"_) such that Parent*(s, a)
+SyntaxError
+5000
+587 - Parent* and Pattern: Parent true + Pattern invalid single quotes
+assign a; stmt s;
+Select s such that Parent*(s, a) pattern a('volume', _"volume/2"_)
+SyntaxError
+5000
+588 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS exact match, RHS exact match)
+assign a; if ifs;
+Select ifs pattern a("study", "study*3-2-science") such that Parent*(ifs, a)
+48
+5000
+589 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS exact match, RHS exact match)
+assign a; if ifs;
+Select ifs such that Parent*(ifs, a) pattern a("study", "study*3-2-science")
+48
+5000
+590 - Parent* and Pattern: Parent true + Pattern invalid LHS no quotes
+assign a; if ifs;
+Select ifs pattern a(study, "study*3-2-science") such that Parent*(ifs, a)
+SemanticError
+5000
+591 - Parent* and Pattern: Parent true + Pattern invalid LHS no quotes
+assign a; if ifs;
+Select ifs such that Parent*(ifs, a) pattern a(study, "study*3-2-science")
+SemanticError
+5000
+592 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS, RHS exact match)
+assign a; while w;
+Select w pattern a("tuition", "study*3-2") such that Parent*(w, a)
+45, 53
+5000
+593 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS, RHS exact match)
+assign a; while w;
+Select w such that Parent*(w, a) pattern a("tuition", "study*3-2")
+45, 53
+5000
+594 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS, RHS exact match)
+assign a; stmt s;
+Select s pattern a("tuition", "study*3-2") such that Parent*(s, a)
+45, 48, 53
+5000
+595 - Parent* and Pattern: Parent true + Pattern true - Select parent statement (Pattern LHS, RHS exact match)
+assign a; stmt s;
+Select s such that Parent*(s, a) pattern a("tuition", "study*3-2")
+45, 48, 53
+5000

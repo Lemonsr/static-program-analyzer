@@ -1,0 +1,105 @@
+1 - Follows(_, _)
+read re;
+Select re such that Follows(_, _)
+9
+5000
+2 - Follows*(_, _)
+read re;
+Select re such that Follows*(_, _)
+9
+5000
+3 - Follows(_, syn)
+assign a;
+Select a such that Follows(_, a)
+5, 6, 8
+5000
+4 - Follows*(_, syn)
+if ifs; print pn;
+Select ifs such that Follows*(_, pn)
+2
+5000
+5 - Follows(syn, _)
+if ifs;
+Select ifs such that Follows*(ifs, _)
+2
+5000
+6 - Follows(StmtNo, _)
+while w;
+Select w such that Follows(5, _)
+1
+5000
+7 - Follows*(StmtNo, _)
+while w;
+Select w such that Follows*(2, _)
+1
+5000
+8 - Follows(_, StmtNo)
+while w;
+Select w such that Follows(_, 2)
+none
+5000
+9 - Follows*(_, StmtNo)
+while w;
+Select w such that Follows* (_, 6)
+1
+5000
+10 - Follows(StmtNo, StmtNo)
+if ifs;
+Select ifs such that Follows(4, 5)
+2
+5000
+11 - Follows(StmtNo, StmtNo)
+if ifs;
+Select ifs such that Follows(4,6)
+none
+5000
+12 - Follows(StmtNo, StmtNo)
+if ifs;
+Select ifs such that Follows*(2,8)
+2
+5000
+13 - Follows(StmtNo, StmtNo)
+if ifs;
+Select ifs such that Follows*(1,8)
+none
+5000
+14 - Follows(syn, StmtNo)
+print pn; assign a;
+Select a such that Follows(pn, a)
+8
+5000
+15 - Follows(syn, StmtNo)
+if ifs;
+Select ifs such that Follows* (ifs, 8)
+2
+5000
+16 - Follows(StmtNo, syn)
+assign a;
+Select a such that Follows(5, a)
+6
+5000
+17 - Follows(StmtNo, syn)
+stmt s;
+Select s such that Follows* (2, s)
+7, 8
+5000
+18 - Follows(syn, syn)
+print pn; assign a;
+Select a such that Follows* (pn, a)
+8
+5000
+19 - Follows(...) pattern a(_, _)
+assign a, a1;
+Select a such that Follows* (a, a1) pattern a(_, _"3"_)
+5
+5000
+20 - Follows(...) pattern a(_, _)
+assign a, a1;
+Select a such that Follows (a, a1) pattern a(_, _"a"_)
+4
+5000
+21 - Follows(...)
+stmt s;
+Select s such that Follows (s, s)
+none
+5000

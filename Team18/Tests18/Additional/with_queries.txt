@@ -1,0 +1,65 @@
+1 - with syn-NAME = syn-NAME
+read r; print p;
+Select r with r.varName = p.varName
+25
+5000
+2 - with syn-NAME = syn-NAME
+procedure p; call c;
+Select p with p.procName = c.procName
+alpha
+5000
+3 - with syn-NAME = NAME
+assign a; variable v;
+Select a pattern a(v, _) with v.varName = "while"
+18
+5000
+4 - with syn-NAME = NAME
+print p;
+Select p with p.varName = "that"
+24
+5000
+5 - with NAME = syn-NAME
+variable v;
+Select v with "variable" = v.varName
+variable
+5000
+6 - with NAME = NAME
+assign placeholder;
+Select BOOLEAN with "hello" = "world"
+FALSE
+5000
+7 - with NAME = NAME
+assign placeholder;
+Select BOOLEAN with "test123" = "test123"
+TRUE
+5000
+8 - with syn-INTEGER = syn-INTEGER
+stmt s; constant c;
+Select s with s.stmt# = c.value
+2, 4, 12, 16, 20
+5000
+9 - with syn-INTEGER = INTEGER
+if ifs;
+Select ifs with ifs.stmt# = 2
+2
+5000
+10 - with INTEGER = syn-INTEGER
+assign a;
+Select a with 20 = a.stmt#
+20
+5000
+11 - with INTEGER = INTEGER
+assign placeholder;
+Select BOOLEAN with 1 = 2
+FALSE
+5000
+12 - invalid with
+assign placeholder;
+Select BOOLEAN with 1 = "1"
+SyntaxError
+5000
+13 - invalid with
+stmt s;
+Select s with s.stmt# = "5"
+SyntaxError
+5000

@@ -1,0 +1,45 @@
+1 - Test
+procedure p; assign a; while w, w1;
+Select BOOLEAN pattern a(_, _) pattern w("d", _) pattern w1("c", _) with p.procName = "Monk"
+TRUE
+5000
+2 - Test
+procedure p; call c; if ifs; variable v;
+Select c pattern ifs(v, _, _) with c.procName = "Kappa"
+18
+5000
+3 - Test
+if ifs; variable v;
+Select ifs pattern ifs(v, _, _) with v.varName = "a"
+14
+5000
+4 - Test
+assign a, a1; read r; variable v;
+Select r.varName pattern a(v, _"1"_) with r.varName = v.varName
+t
+5000
+5 - Test
+print pn; variable v; assign a, a1;
+Select pn.varName pattern a(v, _"a"_) pattern a1(v, _"5 * y"_) with pn.varName = v.varName
+x
+5000
+6 - Test
+if ifs; stmt s; variable v;
+Select s pattern ifs("a", _, _) and ifs(v, _, _) with s.stmt# = ifs.stmt#
+14
+5000
+7 - Test
+while w; stmt s; variable v;
+Select s pattern w(v, _) with s.stmt# = w.stmt#
+6, 8
+5000
+8 - Test
+constant c; call cl; assign a;
+Select c with c.value = cl.stmt# pattern a("c", _"3 * a"_)
+4, 11, 18
+5000
+9 - Test
+while w; assign a; if ifs; variable v;
+Select w pattern w("d", _) pattern ifs("a", _, _) pattern a(v, "d + 25") with w.stmt# = 6 and ifs.stmt# = 14 and a.stmt# = 12
+6
+5000

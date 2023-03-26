@@ -1,0 +1,50 @@
+1 - Tuple for single such that
+assign s1, s2;
+Select <s1, s2> such that Follows(s1,s2)
+1 2, 4 5 
+5000
+2 - Tuple for single Pattern
+assign a; variable v;
+Select <a, v> pattern a (v, _"b + 2"_)
+2 x, 4 x
+5000
+3 - Tuple for single with clause
+stmt s; constant c;
+Select <s, c> with s.stmt# = c.value
+2 2
+5000
+4 - Tuple for multiple such that
+stmt s1, s2;
+Select <s1, s2> such that Follows(s1,s2) and Follows(s1, s1)
+none
+5000
+5 - Tuple for multiple such that
+stmt s1, s2; assign a;
+Select <s1, s2> such that Follows(s1,s2) and Follows(s1, a)
+1 2, 4 5
+5000
+6 - Tuple for multiple pattern
+assign a, a1; variable v;
+Select <a, v> pattern a (v, _"b + 2"_) and a1(v, _"b * 2"_)
+none
+5000
+7 - Tuple for pattern and such that clause
+assign a, a1; variable v, v1; read rd1, rd2;
+Select <a, v> pattern a (v, _"b + 2"_) and a1(v1, _"b + 2"_) such that Follows(a, 3) and Modifies(a, v) and Follows(rd1, rd2)
+2 x
+5000
+8 - Tuple for pattern and such that clause
+assign a, a1; variable v;
+Select <a, v> pattern a (v, _"b + 2"_) such that Follows(a, 3) and Modifies(a, v)
+2 x
+5000
+9 - Tuple for such that and with clause
+assign a, a1; variable v;
+Select <a, v> such that Follows(a, 3) and Modifies(a, v) with v.varName = "x"
+2 x
+5000
+10 - Tuple for pattern, with and such that clause
+assign a, a1; variable v, v1; read rd1, rd2; stmt s1, s2; constant c1, c2;
+Select <a, v> pattern a (v, _"b + 2"_) and a1(v1, _"b + 2"_) such that Follows(a, 3) and Modifies(a, v) and Follows(rd1, rd2) with s1.stmt# = c1.value and s2.stmt# = c2.value and s1.stmt# = c2.value
+2 x
+5000

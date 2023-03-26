@@ -1,0 +1,11 @@
+procedure Mitch {
+	read x;
+	print y;
+	while (x > y) {
+		x = b + 2 + y;		
+		y = x + b + 2;
+
+	}
+
+
+} 

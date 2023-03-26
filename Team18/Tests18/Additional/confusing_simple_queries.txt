@@ -1,0 +1,5 @@
+1 - Confusing
+variable v;
+Select v
+read, print, assign, variable, while, constant, procedure, stmt, if, then
+5000
