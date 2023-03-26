@@ -1,0 +1,60 @@
+1 - Modifies(syn, syn)
+while w; variable v;
+Select v such that Modifies(w, v)
+temp, digit, sum, number, x
+5000
+2 - Modifies(syn, syn)
+if i; variable v;
+Select v such that Modifies(i, v)
+x, temp
+5000
+3 - Modifies(syn, _)
+assign a;
+Select a such that Modifies(a, _)
+2, 5, 8, 9, 10, 11
+5000
+4 - Modifies(syn, IDENT)
+assign a;
+Select a such that Modifies(a, "number")
+11
+5000
+5 - Modifies(_, syn)
+variable v;
+Select v such that Modifies(_, v)
+SemanticError
+5000
+6 - Modifies(_, _)
+variable v;
+Select v such that Modifies(_, _)
+SemanticError
+5000
+7 - Modifies(_, IDENT)
+variable v;
+Select v such that Modifies(_, "x")
+SemanticError
+5000
+8 - Modifies(StmtNo, syn)
+variable v;
+Select v such that Modifies(1, v)
+number
+5000
+9 - Modifies(StmtNo, _)
+print pn;
+Select pn such that Modifies(1, _)
+12
+5000
+10 - Modifies(StmtNo, IDENT)
+while w;
+Select w such that Modifies(10, "sum")
+3, 7
+5000
+11 - Modifies(...) pattern a(_, _)
+assign a; variable v;
+Select a such that Modifies(a, v) pattern a(_, _"number"_)
+9, 11
+5000
+12 - Modifies(...) pattern a(_, _)
+assign a; variable v;
+Select a such that Modifies(a,v) pattern a(_, _"y"_)
+none
+5000

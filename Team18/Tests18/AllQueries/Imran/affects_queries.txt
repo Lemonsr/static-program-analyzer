@@ -1,0 +1,235 @@
+1 - boolean no control flow
+
+Select BOOLEAN such that Affects(1,1)
+FALSE
+5000
+2 - boolean, broken control flow due to read stmt
+
+Select BOOLEAN such that Affects(1, 3)
+FALSE
+5000
+3 - boolean, got control flow
+
+Select BOOLEAN such that Affects(3, 5)
+TRUE
+5000
+4 - boolean, stmt is not assign stmt
+
+Select BOOLEAN such that Affects(8, 9)
+FALSE
+5000
+5 - boolean, got control flow
+
+Select BOOLEAN such that Affects(28, 36)
+TRUE
+5000
+6 - boolean, same variable in assign stmt in while loop
+
+Select BOOLEAN such that Affects(5, 5)
+TRUE
+5000
+7 - boolean, same variable in assign stmt in while loop
+
+Select BOOLEAN such that Affects(33, 33)
+TRUE
+5000
+8 - boolean, diff variable in assign stmt in while loop
+
+Select BOOLEAN such that Affects(35, 35)
+FALSE
+5000
+9 - boolean, no control flow
+
+Select BOOLEAN such that Affects(31, 42)
+FALSE
+5000
+10 - boolean, no control flow
+
+Select BOOLEAN such that Affects(15, 17)
+FALSE
+5000
+11 - boolean, first number bigger than second number
+
+Select BOOLEAN such that Affects(36, 31)
+TRUE
+5000
+12 - number + stmt synonym
+stmt s;
+Select s such that Affects(1, s)
+none
+5000
+13 - number + stmt synonym
+stmt s;
+Select s such that Affects(3, s)
+5
+5000
+14 - multiselect, assign synonym + assign synonym
+stmt a, a1;
+Select <a, a1> such that Affects(a, a1)
+19 24,22 23,26 28,28 31,28 36,3 5,33 33,33 34,34 40,36 31,36 36,5 5,5 6,5 9,6 6,9 5
+5000
+15 - prog_line synonym + wildcard
+stmt n;
+Select n such that Affects(n, _)
+19,22,26,28,3,33,34,36,5,6,9
+5000
+16 - assign synonym + assign synonym, same synonym
+assign a;
+Select a such that Affects(a, a)
+33,36,5,6
+5000
+17 - stmt synonym + prog_line synonym
+stmt s1, s2;
+Select <s1, s2> such that Affects(s1, s2)
+19 24,22 23,26 28,28 31,28 36,3 5,33 33,33 34,34 40,36 31,36 36,5 5,5 6,5 9,6 6,9 5
+5000
+18 - assign synonym + number
+assign a;
+Select a such that Affects(a, 34)
+33
+5000
+19 - assign synonym + number
+assign a;
+Select a such that Affects(a, 19)
+none
+5000
+20 - boolean, number + number, variable used in if statement
+
+Select BOOLEAN such that Affects(1, 4)
+FALSE
+5000
+21 - boolean, number + number, no control flow for normal affects
+
+Select BOOLEAN such that Affects(42, 14)
+FALSE
+5000
+22 - semantically invalid while synonym
+while w;
+Select BOOLEAN such that Affects(1, w)
+FALSE
+5000
+23 - semantically invalid print synonym
+print p;
+Select BOOLEAN such that Affects(p, 13)
+FALSE
+5000
+24 - semantically invalid calls synonym
+call c;
+Select BOOLEAN such that Affects(c, _)
+FALSE
+5000
+25 - boolean, no control flow - AFFECTS*
+
+Select BOOLEAN such that Affects*(3, 3)
+FALSE
+5000
+26 - boolean, with control flow
+
+Select BOOLEAN such that Affects*(5, 5)
+TRUE
+5000
+27 - boolean, with control flow
+
+Select BOOLEAN such that Affects*(26, 31)
+TRUE
+5000
+28 - boolean, with control flow
+
+Select BOOLEAN such that Affects*(33, 40)
+TRUE
+5000
+29 - boolean, with control flow but modified by read
+
+Select BOOLEAN such that Affects*(18, 22)
+FALSE
+5000
+30 - boolean, with control flow but modified by calls which modifies the variable
+
+Select BOOLEAN such that Affects*(1, 6)
+FALSE
+5000
+31 - boolean, with control flow but different proc
+
+Select BOOLEAN such that Affects*(1, 16)
+FALSE
+5000
+32 - number + stmt synonym
+stmt s;
+Select s such that Affects*(1, s)
+none
+5000
+33 - number + stmt synonym
+stmt s;
+Select s such that Affects*(3, s)
+5,6,9
+5000
+34 - multiselect, assign synonym + assign synonym
+stmt a, a1;
+Select <a, a1> such that Affects*(a, a1)
+19 24,22 23,26 28,26 31,26 36,28 31,28 36,3 5,3 6,3 9,33 33,33 34,33 40,34 40,36 31,36 36,5 5,5 6,5 9,6 6,9 5,9 6,9 9
+5000
+35 - prog_line synonym + wildcard
+stmt n;
+Select n such that Affects*(n, _)
+19,22,26,28,3,33,34,36,5,6,9
+5000
+36 - assign synonym + assign synonym, same synonym
+assign a;
+Select a such that Affects*(a, a)
+33,36,5,6,9
+5000
+37 - stmt synonym + prog_line synonym
+stmt s1, s2;
+Select <s1, s2> such that Affects*(s1, s2)
+19 24,22 23,26 28,26 31,26 36,28 31,28 36,3 5,3 6,3 9,33 33,33 34,33 40,34 40,36 31,36 36,5 5,5 6,5 9,6 6,9 5,9 6,9 9
+5000
+38 - assign synonym + number
+assign a;
+Select a such that Affects*(a, 36)
+26,28,36
+5000
+73 - chaining for same Affects relationship to test for performance of cache
+stmt s, s1, s2, s3; assign a, a1, a2, a3;
+Select s.stmt# such that Affects(a, s) and Affects(a1, s1) such that Affects(a2, s2) and Affects(a3, s3) with s.stmt# = s1.stmt#
+5, 6, 9, 23, 24, 28, 31, 33, 34, 36, 40
+5000
+74 - chaining for same Affects* relationship to test for performance of cache
+stmt s, s1, s2, s3; assign a, a1, a2, a3;
+Select s.stmt# such that Affects*(a, s) and Affects*(a1, s1) such that Affects*(a2, s2) and Affects*(a3, s3) with s.stmt# = s1.stmt#
+5, 6, 9, 23, 24, 28, 31, 33, 34, 36, 40
+5000
+75 - chaining for same AffectsBip* relationship to test for performance of cache
+stmt s, s1, s2, s3; assign a, a1, a2, a3;
+Select s.stmt# such that Affects*(a, s) and Affects*(a1, s1) such that Affects*(a2, s2) and Affects*(a3, s3) with s.stmt# = s1.stmt#
+5, 6, 9, 23, 24, 28, 31, 33, 34, 36, 40
+5000
+76 - assign pattern and Affects
+assign a; variable v;
+Select a such that Affects(a, _) pattern a(v, _"bottle"_)
+33,5,6,9
+5000
+77 - assign pattern and Affects
+assign a; variable v;
+Select <a, v> such that Affects(a, _) pattern a(v, "prepare + shake")
+3 bottle
+5000
+78 - assign pattern and Affects
+assign a; variable v;
+Select <a, v> such that Affects(_, a) pattern a(v, "happy")
+none
+5000
+79 - assign pattern and Affects*
+assign a; variable v;
+Select a such that Affects*(a, _) pattern a(v, _"bottle"_)
+33,5,6,9
+5000
+80 - assign pattern and Affects*
+assign a; variable v;
+Select <a, v> such that Affects*(a, _) pattern a(v, "prepare + shake")
+3 bottle
+5000
+81 - assign pattern and Affects*
+assign a; variable v;
+Select <a, v> such that Affects*(_, a) pattern a(v, _"happy"_)
+23 cat
+5000

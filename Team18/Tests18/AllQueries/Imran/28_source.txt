@@ -1,0 +1,106 @@
+procedure mainProcedure { read x;
+	x = x + 1;
+	read y;
+	y = y + 2;
+	midpoint = ( x + y ) / 2;
+	print midpoint;
+	while ( x < y ) {
+		x = x + 2;}
+	if ( midpoint < 10 ) then {
+		result = x*x + y / 2 * 5;
+		print = 5;
+		print print;
+	} else { RESULT = x*x + y / (2 * 5);
+		read Print;
+		print Print; }
+	while ( midpoint < result ) {
+		length = 5;
+		result = length * y / 2 * 5 + 3; }
+	if (midpoint < 3) then {
+		result = midpoint;
+	} else { midpoint = midpoint - 1; }
+	breadth = 5;
+	if (length == breadth) then {
+		read squareArea;
+	} else { read rectangleArea; }
+	if ((squareArea < 15) && (breadth > 5)) then {
+		read anotherBreadth;
+		volume = 19;
+		if (!(anotherBreadth > 4)) then {
+			volume = anotherBreadth * length;
+			print volume;
+		} else { volume =  25;
+			while (volume >= rectangleArea) {
+				volume = volume / 2;
+				if (volume == 5) then {
+					print procedure;
+				} else { read procedure; }}}
+		while (radius != 5) {
+			read radius;
+			diameter = radius * 2;}
+	} else { var = a + b + c;
+		var = x*x + y*y; }
+	math = 35;
+	read science;
+	while ((math <= 75) || (!(science > 60))) {
+		print stupid;
+		read english;
+		if (english != 100) then {
+			print verystupid;
+			study = study * 3 - 2 - science;
+		} else { print read;
+			study = math + study * 3 - 2;
+			while (study < 50) {
+				tuition = study * 3 - 2;
+				print tuition; }}}			
+	if ((varOnlyUsedInIfCond < 13) && (varUsedInBothIfAndWhileCond >= 12)) then {
+		x = 1;
+	} else { y = 1; }
+	while ((varOnlyUsedInWhileCond != 15) || (varUsedInBothIfAndWhileCond <= 12))  {
+		x = 1;
+		print lastPrintInStmtListVar;}
+	call notSoMain;}
+procedure notSoMain { call area57;
+	call bermudaTriangle; }
+procedure area57 { read moon;
+	read sun;
+	print Mercury;
+	print Venus;
+	read Earth;
+	print Mars;
+	if (!(Jupiter % Saturn >= Uranus)) then {
+		if (haha != Uranus) then {
+			read Pluto;
+		} else { print Pluto; }
+		read solarSystem;
+	} else { if (January >= February) then {
+		March = April - 1;
+		} else { June = May 	+ 1;}}
+	print July; 
+	while (!((AuGuSt != September9	) || (	Oc10ber <= November))) {
+		December = Christmas; }
+	print SantaIsComing;
+	while (Reindeer == Rudolph) {
+		print 	PRESENTS;	}
+	while (BoxingDay >= 	NewYearsEve) {
+		print sendPostCards; }
+	read openPresents;
+	if (thisIfDoesNotModifyAnything >= 0) then  {
+		print 	HappyNewYear;
+	} else { print PullYourEar; }
+	while (thisWhileDoesNotModifyAnything < 5) {
+		print While;	}
+	HappyBirthday = ToYou;
+	if (5 > 6) then {
+		read thisIfDoesNotUseAnything;
+	} else { read stillNotUsingAnything		; }
+	while ((7 > 8) && (9 != 10)) {
+		read thisWhileDoesNotUseAnything; }
+	print volume;
+	read math;
+	while (YouAreBornInTheZoo > 5) {
+		while (maturity < 10) {
+			print hehe;}}}
+procedure bermudaTriangle { print thisProcedureOnlyHasOneLine;}
+
+procedure hello {read thisProcedureOnlyModifiesStuff;}

@@ -1,0 +1,85 @@
+1 - Calls(syn, syn)
+procedure p1, p2;
+Select p1 such that Calls(p1, p2)
+A, B, C, E
+5000
+2 - Calls*(syn, syn)
+procedure p1, p2;
+Select p2 such that Calls*(p1, p2)
+B, C, D
+5000
+3 - Calls(syn, _)
+procedure p1;
+Select p1 such that Calls(p1, _)
+A, B, C, E
+5000
+4 - Calls*(syn, _)
+procedure p1;
+Select p1 such that Calls*(p1, _)
+A, B, C, E
+5000
+5 - Calls(syn, IDENT)
+procedure p1;
+Select p1 such that Calls(p1, "D")
+B, C, E
+5000
+6 - Calls*(syn, IDENT)
+procedure p1;
+Select p1 such that Calls*(p1, "D")
+A, B, C, E
+5000
+7 - Calls(_, _)
+assign a;
+Select a such that Calls(_, _)
+6, 7
+5000
+8 - Calls*(_, _)
+call c;
+Select c such that Calls*(_, _)
+1, 2, 3, 4, 5
+5000
+9 - Calls(_, IDENT)
+assign a;
+Select a such that Calls(_, "C")
+6,7
+5000
+10 - Calls*(_, IDENT)
+assign a;
+Select a such that Calls(_, "A")
+none
+5000
+11 - Calls(IDENT, _)
+assign a;
+Select a such that Calls("A", _)
+6, 7
+5000
+12 - Calls*(IDENT, _)
+assign a;
+Select a such that Calls("F", _)
+none
+5000
+13 - Calls(IDENT, syn)
+procedure p1;
+Select p1 such that Calls("F", p1)
+none
+5000
+14 - Calls*(IDENT, syn)
+procedure p1;
+Select p1 such that Calls*("A", p1)
+B, C, D
+5000
+15 - Calls(IDENT, IDENT)
+assign a;
+Select a such that Calls("A", "D")
+none
+5000
+16 - Calls*(IDENT, IDENT)
+assign a;
+Select a such that Calls*("E", "D")
+6, 7
+5000
+17 - Calls(...) pattern a(_, _)
+assign a;
+Select a such that Calls*("A", "D") pattern a("x", _)
+7
+5000

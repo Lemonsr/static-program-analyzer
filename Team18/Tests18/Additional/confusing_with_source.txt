@@ -1,0 +1,12 @@
+procedure Alez {
+	read x;
+	read y;
+	read z;
+	y = a + b + c;
+	print z;
+	call Hayley;
+}
+
+procedure Hayley {
+	a = 1;
+}

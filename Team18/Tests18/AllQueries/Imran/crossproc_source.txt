@@ -1,0 +1,60 @@
+procedure applyJob {
+    call prepInterview;   
+    call goInterview;   
+    success = prepare + perform;
+    print results;
+    read salary;
+}
+
+procedure prepInterview {
+    study = ((study / 3) + 6 * (8 + 3)) % 5;
+    research = a * a + 2 * a * b + b * b;
+}
+
+procedure goInterview {
+    read interviewers;
+    print greeting;
+    read questions;
+    while (questions > 0) {
+        if (answered == good) then {
+            good = good + 1;
+        } else {
+            print oops;
+        }
+        questions = questions - 1;
+    }
+    if (good > questions / 2) then {
+        happy = 1;
+        call acceptOffer;
+    } else {
+        sad = 1;
+        call rejOffer;
+    }
+}
+
+procedure acceptOffer {
+    read salary;
+}
+
+procedure rejOffer {
+    read leetCode;
+    print plan;
+    stress = examsComing + deadlineComing;
+}
+
+procedure dropOut {
+    print phd;
+    stress = stress * stress * stress;
+}
+
+procedure goSleep {
+    z = z + zz;
+    zz = z + zz + zzz;
+    zzz = z + zz + zzz + zzzz;
+    zzzz = z + zz + zzz + zzzz + zzzzz;
+}
+
+procedure leaveOfAbsence {
+    bankAccount = (money + savedSchoolFees) * interestRate;
+    scholarship = ((1200 + benefits) / 4) * 0;
+}

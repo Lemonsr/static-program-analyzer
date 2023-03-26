@@ -1,0 +1,18 @@
+procedure printConfusing {
+    read read;
+    print = 0;
+
+    if (then > while) then {
+      assign = if + variable;
+      constant = 1;
+      procedure = assign + constant;
+    } else {
+      print stmt;
+    }
+
+    print read;
+    print assign;
+    print constant;
+		print procedure;
+		print stmt;
+}

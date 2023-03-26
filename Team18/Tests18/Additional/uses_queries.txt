@@ -1,0 +1,105 @@
+1 - Uses(syn, syn)
+while w; variable v;
+Select v such that Uses(w, v)
+i, x, y
+5000
+2 - Uses(syn, syn)
+if i; variable v;
+Select v such that Uses(i, v)
+x
+5000
+3 - Uses(syn, _)
+assign a;
+Select a such that Uses(a, _)
+4, 5, 7, 9, 10, 11
+5000
+4 - Uses(syn, IDENT)
+assign a;
+Select a such that Uses(a, "x")
+4, 7, 9, 11
+5000
+5 - Uses(_, syn)
+variable v;
+Select v such that Uses(_, v)
+SemanticError
+5000
+6 - Uses(_, _)
+variable v;
+Select v such that Uses(_, _)
+SemanticError
+5000
+7 - Uses(_, IDENT)
+variable v;
+Select v such that Uses(_, "x")
+SemanticError
+5000
+8 - Uses(StmtNo, syn)
+variable v;
+Select v such that Uses(10, v)
+z
+5000
+9 - Uses(StmtNo, _)
+if i;
+Select i such that Uses(2, _)
+none
+5000
+10 - Uses(StmtNo, IDENT)
+while w;
+Select w such that Uses(7, "y")
+none
+5000
+11 - Uses(...) pattern a(_, _)
+assign a; variable v;
+Select a such that Uses(a, v) pattern a(v, _)
+4, 5, 7, 9, 11
+5000
+12 - Uses(...) pattern a(_, _)
+assign a; variable v;
+Select a such that Uses(a,v) pattern a(_, _"y"_)
+4, 11
+5000
+13 - Uses(...) pattern a(_, _)
+assign a; variable v, v1;
+Select a such that Uses(a,v) pattern a(v1, _"x"_)
+4, 7, 9, 11
+5000
+14 - Uses(...) pattern a(_, _)
+assign a, a1; variable v;
+Select v such that Uses(a,v) pattern a1(v, _"z"_)
+x, y, z
+5000
+15 - Uses(...) pattern a(_, _)
+assign a, a1; variable v, v1;
+Select v such that Uses(a,v) pattern a1(v1, _"2"_)
+x, y, i, z
+5000
+16 - Uses(...) pattern a(_, _)
+assign a, a1; variable v, v1;
+Select v such that Uses(a,v) pattern a1(v1, _"            2   "_)
+x, y, i, z
+5000
+17 - Uses(...) pattern a(_, _)
+assign a, a1; variable v, v1;
+Select v such that Uses(a,v) pattern a1(v1, _"            2 "_)
+x, y, i, z
+5000
+18 - Uses(...) pattern a(_, _)
+assign a, a1; variable v, v1;
+Select v such that Uses(a,v) pattern a1(v1, _" 2" _)
+x, y, i, z
+5000
+19 - Uses(...) pattern a(_, _)
+assign a, a1; variable v, v1;
+Select v such that Uses(a,v) pattern a1(v1, _" er2"_)
+none
+5000
+20 - pattern a(_, _)
+assign a; variable v;
+Select v pattern a(v, _"x"_)
+x, z
+5000
+21 - Uses
+assign a, a1; variable v, v1;
+Select a such that Uses(a1,v) pattern a(v, _)
+1, 2, 4, 5, 7, 8, 9, 10, 11
+5000

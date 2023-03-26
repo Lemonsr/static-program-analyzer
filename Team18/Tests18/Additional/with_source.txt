@@ -1,0 +1,41 @@
+procedure alpha {
+	if (12 >= Select) then {
+		if ((91 < 2) && (2 <= read % 20)) then {
+			assign = 59 + Select - Uses % ((Parent) / 36) % (89);
+			print BOOLEAN;
+		} else {
+			read procedure;
+			such = 16 * 72 - (variable * 86 * constant) - 41;
+		}
+		variable = assign;
+	} else {
+		read = 49;
+		print BOOLEAN;
+	}
+	while (if <= variable * 67) {
+		read Parent;
+	}
+	if (!(and >= 70)) then {
+		print variable;
+		while (81 >= 36) {
+			read if;
+			print pattern;
+			while (procedure >= (4 % and)) {
+				while = while * with;
+			}
+		}
+	} else {
+		if = (Affects) + Affects + 33 / while;
+		Affects = stmt / 49 / (such / (Calls + constant));
+	}
+}
+
+procedure beta {
+	while (72 >= variable) {
+		call alpha;
+		while (Affects != 49 - if % 0) {
+			print that;
+			read BOOLEAN;
+		}
+	}
+}

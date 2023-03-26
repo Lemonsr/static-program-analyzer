@@ -1,0 +1,45 @@
+1 - Syn normal query
+assign a;
+Select a such that Follows(3,4)
+2, 3, 4
+5000
+2 - Syn space such that
+assign a;
+Select a such        that Follows(3,4)
+2, 3, 4
+5000
+3 - Syn tab such that
+assign a;
+Select a such		that Follows(3,4)
+2, 3, 4
+5000
+4 - Syn space clause
+assign a;
+Select a such that Follows    (   3    ,   4   )
+2, 3, 4
+5000
+4 - Syn tab clause
+assign a;
+Select a such that Follows		(	3		,	4	)
+2, 3, 4
+5000
+5 - Syn space between everything
+assign a;
+Select     a       such       that       Follows   (   3  ,    4    )     
+2, 3, 4
+5000
+5 - Syn tabs between everything
+assign a;
+Select		a		such		that		Follows		(	3	,	4	)     
+2, 3, 4
+5000
+6 - Syn space and tabs between everything
+assign a;
+Select		    a		     such		   		   that	   	  		Follows	   	   	  	(	  	  			3   			,		     4		    		    	)	         
+2, 3, 4
+5000
+7 - boolean
+assign a;
+Select		    BOOLEAN		     such		   		   that	   	  		Follows	   	   	  	(	  	  			3   			,		     4		    		    	)	         
+TRUE
+5000

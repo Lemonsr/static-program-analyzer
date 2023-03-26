@@ -1,0 +1,235 @@
+1 - 0 Common: Follows, Parent, While Pattern
+while w; stmt s; read r;
+Select s such that Follows(s,7) pattern w("midpoint", _) such that Parent(9, r) 
+6
+5000
+2 - 0 common: Follows, Parent*, Assign Pattern
+assign a; stmt s; print pr;
+Select BOOLEAN such that Follows(s,7) pattern a("midpoint", _) such that Parent*(26, pr)
+TRUE
+5000
+3 - 0 Common: Follows, Parent*, If Pattern
+if ifs; stmt s; read r;
+Select BOOLEAN such that Follows(s,7) pattern ifs("procedure", _, _) such that Parent*(9, r)
+FALSE
+5000
+4 - 0 Common: Follows, Parent*, While Pattern
+while w; stmt s; assign a;
+Select a such that Follows(s,40) pattern w("volume", _) such that Parent*(_, a) 
+8, 10, 11, 13, 17, 18, 20, 21, 28, 30, 32, 34, 40, 41, 42, 50, 52, 54, 57, 58, 60, 77, 78, 81
+5000
+5 - 0 Common: Follows*, Parent, Assign Pattern
+assign a; stmt s; read r;
+Select BOOLEAN such that Follows*(48,_) pattern a("study", _"study * 3"_) such that Parent(9, r)
+FALSE
+5000
+6 - 0 Common: Follows*, Parent, If Pattern
+if ifs; read r;
+Select r such that Parent(45, r) pattern ifs("varOnlyUsedInIfCond", _, _) such that Follows*(29,38)
+47
+5000
+7 - 0 Common: Follows*, Parent, While Pattern
+while w; stmt s; read r;
+Select s such that Follows*(s,7) pattern w("midpoint", _) such that Parent(9, r) 
+1, 2, 3, 4, 5, 6
+5000
+8 - 0 Common: Follows*, Parent*, Assign Pattern
+assign a; stmt s; call ca;
+Select s such that Parent*(26, ca) pattern a(_, _"a +b"_) such that Follows*(s,7) 
+
+5000
+9 - 0 Common: Follows*, Parent*, If Pattern
+if ifs; read re; print pr;
+Select BOOLEAN such that Follows*(re,7) pattern ifs("length", _, _) such that Parent*(26, pr) 
+TRUE
+5000
+10 - 0 Common: Follows*, Parent*, While Pattern
+while w;
+Select w such that Follows*(1,7) pattern w("radius", _) such that Parent*(26, 33) 
+38
+5000
+11 - 0 Common: Follows*, Parent*, While Pattern - Semantically invalid
+while w; variable v;
+Select w such that Follows*(1,v) pattern w("radius", _) such that Parent*(26, 33)
+SemanticError
+5000
+12 - 1 Common: Follows, Parent, Assign Pattern
+assign a; read r;
+Select a such that Parent(9, r) pattern a(_, "study *3") such that Follows(a,7) 
+
+5000
+13 - 1 Common: Follows, Parent, If Pattern
+if ifs; stmt s; read r;
+Select r such that Follows(s,7) pattern ifs("midpoint", _, _) such that Parent(ifs, r)
+14
+5000
+14 - 1 Common: Follows, Parent, While Pattern
+while w; stmt s; read r;
+Select s such that Follows(23, s) pattern w("midpoint", _) such that Parent(s, r) 
+26
+5000
+15 - 1 common: Follows, Parent*, Assign Pattern
+assign a; stmt s; print pr;
+Select BOOLEAN such that Follows(s, a) pattern a(_, _"study * 3 -2"_) such that Parent*(45, pr)
+TRUE
+5000
+16 - 1 Common: Follows, Parent*, If Pattern
+if ifs; stmt s; read r;
+Select BOOLEAN such that Follows(s,60) pattern ifs("english", _, _) such that Parent*(ifs, r)
+FALSE
+5000
+17 - 1 Common: Follows, Parent*, While Pattern
+while w; stmt s; assign a;
+Select a such that Follows(s,40) pattern w("volume", _) such that Parent*(w, a) 
+34
+5000
+18 - 1 Common: Follows*, Parent, Assign Pattern
+assign a; stmt s; read r;
+Select BOOLEAN such that Parent(9, a) pattern a("study", _"study * 3"_) such that Follows*(48,_)
+FALSE
+5000
+19 - 1 Common: Follows*, Parent, If Pattern
+while w; stmt s; read r;
+Select s such that Follows*(s,7) pattern w("x", _) such that Parent(w, r)
+
+5000
+20 - 1 Common: Follows*, Parent, While Pattern
+while w; stmt s; assign a;
+Select w such that Follows*(s,7) pattern w("midpoint", _) such that Parent(w, a) 
+16
+5000
+21 - 1 Common: Follows*, Parent*, Assign Pattern
+assign a; stmt s;
+Select a such that Follows*(s,7) pattern a(_, _"a +b"_) such that Parent*(26, a)
+41
+5000
+22 - 1 Common: Follows*, Parent*, If Pattern
+if ifs; read re; print pr;
+Select BOOLEAN such that Follows*(re, pr) pattern ifs("length", _, _) such that Parent*(26, re) 
+FALSE
+5000
+23 - 1 Common: Follows*, Parent*, While Pattern
+while w;
+Select w such that Follows*(1,7) pattern w("stupid", _) such that Parent*(w, _)
+
+5000
+24 - 1 Common: Follows, Parent, Assign Pattern
+assign a; read r; stmt s1, s2;
+Select a such that Follows(a,s1) pattern a(_, _"study *3"_) such that Parent(s2, r)
+52, 54
+5000
+25 - 1 Common: Follows, Parent, If Pattern
+if ifs; stmt s; read r;
+Select r such that Follows(s,ifs) pattern ifs("midpoint", _, _) such that Parent(ifs, r)
+14
+5000
+26 - 1 Common: Follows, Parent, While Pattern
+while w; stmt s1, s2; read r;
+Select w such that Follows(s1, s2) pattern w("midpoint", _) such that Parent(s1, r)
+16
+5000
+27 - 1 common: Follows, Parent*, Assign Pattern
+assign a; stmt s; while w;
+Select BOOLEAN such that Follows(s, a) pattern a(_, _"study * 3 -2"_) such that Parent*(w, a)
+TRUE
+5000
+28 - 1 Common: Follows, Parent*, If Pattern
+if ifs; stmt s; read r; variable v;
+Select BOOLEAN such that Follows(s,_) pattern ifs(v, _, _) such that Parent*(ifs, r) 
+TRUE
+5000
+29 - 1 Common: Follows*, Parent, Assign Pattern
+assign a; stmt s; variable v;
+Select v such that Follows*(a,_) pattern a(v, _"study * 3"_) such that Parent(s, a)
+study, tuition
+5000
+30 - 1 Common: Follows*, Parent, If Pattern
+while w; stmt s; read r; variable v;
+Select w such that Follows*(s,w) pattern w(v, _) such that Parent(w, r) 
+38, 45
+5000
+31 - 1 Common: Follows*, Parent, While Pattern
+while w; stmt s; read r; variable v;
+Select w such that Follows*(w, s) pattern w(v, _) such that Parent(w, r) 
+45
+5000
+32 - 1 Common: Follows*, Parent*, Assign Pattern
+assign a; stmt s; while w;
+Select BOOLEAN such that Follows*(s,_) pattern a(_, _"a +b"_) such that Parent*(w, a)
+FALSE
+5000
+33 - 1 Common: Follows*, Parent*, If Pattern
+if ifs; read re; assign a; while w;
+Select BOOLEAN such that Follows*(re, a) pattern ifs(w, _, _) such that Parent*(w, re) 
+SemanticError
+5000
+34 - 1 Common: Follows*, Parent*, While Pattern
+while w; variable v; assign a;
+Select v such that Follows*(w, _) pattern w(v, _) such that Parent*(w, _) 
+x, y, midpoint, result, math, science, varOnlyUsedInWhileCond, varUsedInBothIfAndWhileCond, AuGuSt, September9, Oc10ber, November, Reindeer, Rudolph, BoxingDay, NewYearsEve, thisWhileDoesNotModifyAnything
+5000
+35 - 2 Common: Follows, Parent, Assign Pattern
+assign a; print pr; while w; if ifs;
+Select a such that Parent(ifs, pr) pattern a(_, _"study *3"_) such that Follows(pr, a) 
+50, 52
+5000
+36 - 2 Common: Follows, Parent, If Pattern
+if ifs; stmt s; read r;
+Select r such that Parent(ifs, r) pattern ifs("midpoint", _, _) such that Follows(s,r) 
+14
+5000
+37 - 2 Common: Follows, Parent, While Pattern
+while w; stmt s; read r; variable v;
+Select s such that Follows(s, r) pattern w(v, _) such that Parent(s, r)
+
+5000
+38 - 2 common: Follows, Parent*, Assign Pattern
+assign a; stmt s; print pr;
+Select BOOLEAN such that Follows(s, a) pattern a(_, _"35"_) such that Parent*(s, pr)
+TRUE
+5000
+39 - 2 Common: Follows, Parent*, If Pattern
+if ifs; stmt s; read r; variable v;
+Select v such that Follows(s,ifs) pattern ifs(v, _, _) such that Parent*(ifs, r) 
+midpoint, length, breadth, squareArea, anotherBreadth, volume, Jupiter, Saturn, Uranus
+5000
+40 - 2 Common: Follows, Parent*, While Pattern
+while w; stmt s; print pr; assign a;
+Select BOOLEAN such that Parent*(w, a) pattern w("volume", _) such that Follows(pr,a) 
+FALSE
+5000
+41 - 2 Common: Follows*, Parent, Assign Pattern
+assign a; read r; while w;
+Select BOOLEAN such that Parent(w, a) pattern a("study", _"study * 3"_) such that Follows*(w,a) 
+FALSE
+5000
+42 - 2 Common: Follows*, Parent, If Pattern
+while w; stmt s; read r;
+Select s such that Follows*(s,w) pattern w("x", _) such that Parent(w, r)
+
+5000
+43 - 2 Common: Follows*, Parent, While Pattern
+while w, w1; stmt s; read r;
+Select r such that Follows*(s,w) pattern w("radius", _) such that Parent(w, r) 
+39
+5000
+44 - 2 Common: Follows*, Parent*, Assign Pattern
+assign a; stmt s; variable v;
+Select a such that Follows*(s,45) pattern a(v, _"radius"_) such that Parent*(s, a)
+40
+5000
+45 - 2 Common: Follows*, Parent*, Assign Pattern
+assign a; stmt s; variable v;
+Select v such that Follows*(s,45) pattern a(v, _"radius"_) such that Parent*(s, a)
+diameter
+5000
+46 - 2 Common: Follows*, Parent*, If Pattern
+if ifs; read re; print pr;
+Select ifs such that Follows*(re, ifs) pattern ifs("anotherBreadth", _, _) such that Parent*(26, re) 
+29
+5000
+47 - 2 Common: Follows*, Parent*, While Pattern
+while w; assign a; variable v;
+Select BOOLEAN such that Follows*(w,a) pattern w(v, _) such that Parent*(w, v) 
+SemanticError
+5000

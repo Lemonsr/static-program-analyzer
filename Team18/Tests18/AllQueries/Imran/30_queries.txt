@@ -1,0 +1,50 @@
+1 - Mixing attributes (same attribute, different synonym)
+procedure p; call ca;
+Select p with p.procName = ca.procName
+notSoMain, area57, bermudaTriangle, hello
+5000
+2 - Mixing attributes (same attribute, different synonym)
+stmt s; print pr;
+Select pr with pr.stmt# = s.stmt#
+6, 12, 15, 31, 36, 46, 49, 51, 55, 61, 67, 68, 70, 74, 79, 82, 84, 86, 89, 90, 92, 99, 103, 107, 108
+5000
+3 - Mixing attributes (same attribute, different synonym)
+stmt s; if ifs;
+Select ifs with ifs.stmt# = s.stmt#
+9, 19, 23, 26, 29, 35, 48, 56, 71, 72, 76, 88, 94
+5000
+4 - Mixing attributes (different attribute)
+procedure p; variable v;
+Select p with p.procName = v.varName
+hello
+5000
+5 - Mixing attributes (different attributes)
+constant c; stmt s;
+Select s with s.stmt# = c.value
+1, 2, 5, 3, 15, 19, 4, 25, 35, 60, 75, 100, 50, 13, 12, 6, 7, 8, 9, 10
+5000
+6 - Mixing attributes (different attributes)
+constant c; assign a;
+Select a with a.stmt# = c.value
+2, 5, 4, 60, 50, 13, 8, 10
+5000
+7 - Mixing attributes (different attributes) - Semantic error
+constant c; variable v;
+Select BOOLEAN with c.value = v.varName
+SemanticError
+5000
+8 - Mixing attributes (different attributes) - Semantic Error
+stmt s; procedure p;
+Select BOOLEAN with s.stmt# = p.procName
+SemanticError
+5000
+9 - Mixing attributes (different attributes) - Syntax Error
+assign a; procedure p;
+Select BOOLEAN with a.varName = p.procName
+SyntaxError
+5000
+10 - Mixing attributes (different attributes) - Syntax Error
+assign a; constant c;
+Select BOOLEAN with c.stmt# = a.value
+SyntaxError
+5000

@@ -1,0 +1,125 @@
+procedure makeCake {
+	call gatherIngredients;
+	call mix;
+	print cake;
+	if ((cake <= 0) ||( burntCake == true)) then {
+		invalidCake = 1;
+		print invalidCake;
+		if (invalidCake == 1) then {
+			if (sad > 5) then {
+				angry = 1;
+			} else {
+				cry = 1;
+			}
+		} else {
+			happy = 1;
+		}
+	} else {
+		sad = sad + burntCake;
+	}
+}
+
+procedure gatherIngredients {
+	read flour;
+	flour = flour - (1000 % 23 + 4) * (((1 / 4) * 100) % (7 + 5)) + 50;
+	read milk;
+	milk = (milk / 1760 + 5) % 3;
+	read egg;
+	egg = (egg - 32) / 9 * 5;
+	read sugar;
+	sugar = 5 * (1 / 2);
+	bowl = 1;
+}
+
+procedure mix {
+	while (flour > 0) {
+		while (milk > 0) {
+			while (egg > 0) {
+				while (sugar > 0) {
+					if (sugar > 1000) then {
+						print tooSweet;
+					} else {
+						dough = dough + 1;
+						sugar = sugar - 1;
+					}
+				}
+				dough = dough + 1;
+				egg = egg -1;
+			}
+			dough = dough+1;
+			milk = milk-1;
+		}
+		dough = dough + 1;
+		flour = flour - 1;
+	}
+	print dough;
+	flour = milk;	
+	milk = egg;
+	egg = sugar;
+	sugar = 0;
+	call putInOven;
+}
+
+procedure putInOven {
+	read timer;
+	minimumTimer = 60;
+	if ((!(!(timer < minimumTimer))) || (timer <= 0)) then {
+		timer = minimumTimer + dough;
+	} else {
+		timer = timer + dough;
+	}
+	elapsed = 0;
+	read temperature;
+	desiredTemperature = 200;
+	cake = 0;
+	while (elapsed < timer) {
+		if (elapsed < 60) then {
+			call heatUp;
+		} else {
+			call bake;
+		}
+		elapsed = elapsed + 1;
+		print elapsed;
+		print cake;
+	}
+}
+
+procedure heatUp {
+	if (temperature < desiredTemperature) then {
+		temperature = temperature + (desiredTemperature - temperature) / (60 - elapsed);
+	} else {
+		temperature = temperature - 1;
+	}
+}
+
+procedure bake {
+	if (dough > 0) then {
+		dough = dough - 1;
+		cake = cake + 1;
+	} else {
+		call burnCake;
+	}
+}
+
+procedure burnCake {
+	cake = cake - 1;
+	call burnCakeAgain;
+}
+
+procedure burnCakeAgain {
+	burntCake = burntCake + 1;
+}
+
+procedure eat {
+	while (cake > 0) {
+		cake = cake - 1;
+		fat = fat + 1;
+		print cake;
+	}
+	print fat;
+	if (fat >= 7) then {
+		exercise = 1;
+	} else {
+		goSleep = 1;
+	}
+}

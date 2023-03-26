@@ -1,0 +1,61 @@
+procedure beta {
+	BOOLEAN = Calls * (((Follows)) + 63 - (47) + 15) % assign + 81;
+	Select = constant;
+	while (!(23 > Affects)) {
+		print Next;
+		that = procedure;
+		if (stmt == procedure) then {
+			print if;
+			that = if - assign % 98;
+			print assign;
+		} else {
+			while ((!((25 % 36) != assign)) || (procedure <= call)) {
+				while (!(stmt <= procedure)) {
+					print with;
+				}
+			}
+		}
+	}
+}
+
+procedure charlie {
+	while = Select;
+}
+
+procedure alpha {
+	print assign;
+	read that;
+	if (62 == Select) then {
+		while (if <= 63) {
+			while ((Uses > 95) || (such > 26)) {
+				if (!(Affects > print)) then {
+					print Calls;
+				} else {
+					Calls = 32 - print - (4);
+					print variable;
+					procedure = 96;
+				}
+				call charlie;
+				read that;
+			}
+			if (print < Select) then {
+				read print;
+				and = 20 * 63 - with;
+				Select = 15 - with * print;
+			} else {
+				read assign;
+			}
+		}
+		while (print == stmt + 97) {
+			read Select;
+			pattern = ((54 - 89) * 16 / such);
+		}
+		such = Affects;
+	} else {
+		while (50 != 8) {
+			variable = Parent + while;
+		}
+		read assign;
+		if = 69 * 38;
+	}
+}
