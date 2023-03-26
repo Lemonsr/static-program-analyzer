@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\commons\Argument.h" />
+    <ClInclude Include="..\source\commons\Literal.h" />
     <ClInclude Include="..\source\commons\Stream.h" />
     <ClInclude Include="..\source\commons\Token.h" />
     <ClInclude Include="..\source\commons\Tokenizer.h" />
