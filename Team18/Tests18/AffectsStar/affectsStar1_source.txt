@@ -1,0 +1,47 @@
+procedure a {
+    x = 1;
+    y = 5;
+    z = 6;
+    read x;
+    while (y != 0) {
+        if (y > x) then {
+            x = x + 1;
+            y = y + 1;
+            print y;
+            print z;
+        } else {
+            z = z * 2;
+            print z;
+            y = y - 1;
+            call b;
+        }
+        y = y * 2;
+        x = x + 2;
+    }
+    if (x == z) then {
+        x =  x + 2;
+    } else {
+        while (x != 0) {
+            z = z + 2;
+        }
+    }
+}
+
+procedure b{
+    z = 6;
+    x = x * 2;
+    y = 5;
+    if (y > 0) then {
+        y =  y + 1;
+    } else {
+        x = 1;
+        read x;
+        print x;
+        while (x != 1) {
+            z = x + 2;
+            print y;
+            print z;
+            y = y + 2;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+procedure While {
+  x = 5;
+  while (x != 0) {
+	call B;
+	call C;
+	x = x - 1;
+  }
+}
+
+procedure B {
+  print y;
+}
+
+procedure C {
+  call D;
+  call E;
+}
+
+procedure D {
+  x = x + 1;
+}
+
+procedure E {
+  y = 2;
+}

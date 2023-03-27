@@ -1,0 +1,34 @@
+procedure A {
+  read x;                         //1
+  while (x != 0) {                //2
+	if (x != 1) then {            //3
+	  call B;                     //4
+	} else {
+	  call D;                     //5
+	}
+	call C;                       //6
+	x = x - 1;                    //7
+  }
+}
+
+procedure B {
+  call E;                         //8
+  print y;                        //9
+}
+
+procedure C {
+  print x;                        //10
+}
+
+procedure D {
+  x = x + 1;                      //11
+}
+
+procedure E {
+  y = 2;                          //12
+  call F;                         //13
+}
+
+procedure F {
+  print y;                        //14
+}
