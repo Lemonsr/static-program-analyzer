@@ -1,0 +1,205 @@
+1.1 - 0 common synonym. Follows and Next
+read re; print pn; stmt n, n1;
+Select re such that Follows(re, pn) and Next(n, n1)
+1
+5000
+1.2 - 0 common synonym. Follows and Next. 1 blank param
+read re; print pn; stmt n;
+Select n such that Follows(re, pn) and Next(n, _)
+1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 15, 16, 17
+5000
+1.3 - 0 common synonym. Follows and Next. Fixed param
+if ifs; stmt s;
+Select s such that Follows(2, ifs) and Next(s, 5)
+3
+5000
+1.4 - 0 common synonym. Invalid variable
+if ifs; stmt s; variable a;
+Select ifs such that Follows(2, ifs) and Next(s, a)
+SemanticError
+5000
+1.5 - 1 common synonym. Follows and Next
+read re; stmt n, n1;
+Select n such that Follows(re, n) and Next(n, n1)
+2
+5000
+1.6 - 1 common synonym. Follows and Next. 1 blank param
+read re; stmt n, n1;
+Select re such that Follows(re, n) and Next(n, _)
+1
+5000
+1.7 - 1 common synonym. Follows and Next. Fixed param
+if ifs; stmt s;
+Select ifs such that Follows(2, ifs) and Next(ifs, s)
+3
+5000
+1.8 - 1 common synonym. Invalid
+if ifs; procedure a;
+Select ifs such that Follows(2, ifs) and Next(ifs, a)
+SemanticError
+5000
+2.1 - 0 common synonym. Follows* and Next
+read re; print pn; stmt n, n1;
+Select re such that Follows*(re, pn) and Next(n, n1)
+1
+5000
+2.2 - 0 common synonym. Follows* and Next. 1 blank param
+read re; print pn; stmt n;
+Select n such that Follows*(re, pn) and Next(n, _)
+1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 15, 16, 17
+5000
+2.3 - 0 common synonym. Follows* and Next. Fixed param
+if ifs; stmt s;
+Select s such that Follows*(2, ifs) and Next(s, 6)
+4, 5
+5000
+2.4 - 0 common synonym. Invalid variable
+if ifs; stmt s; variable a;
+Select ifs such that Follows*(2, ifs) and Next(s, a)
+SemanticError
+5000
+2.5 - 1 common synonym. Follows* and Next
+read re; stmt n, n1;
+Select n such that Follows*(re, n) and Next(n, n1)
+2, 3
+5000
+2.6 - 1 common synonym. Follows* and Next. 1 blank param
+read re; stmt n, n1;
+Select re such that Follows*(re, n) and Next(n, _)
+1
+5000
+2.7 - 1 common synonym. Follows* and Next. Fixed param
+if ifs; stmt s;
+Select ifs such that Follows*(1, ifs) and Next(ifs, s)
+3
+5000
+2.8 - 1 common synonym. Invalid
+if ifs; procedure a;
+Select ifs such that Follows*(2, ifs) and Next(ifs, a)
+SemanticError
+5000
+3.1 - 0 common synonym. Modifies and Next
+variable v; read re; stmt n, n1;
+Select re such that Modifies(re, v) and Next(n, n1)
+1, 18
+5000
+3.2 - 0 common synonym. Modifies and Next. 1 blank param
+variable v; stmt n, n1;
+Select n such that Modifies(n, v) and Next(n1, _)
+1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 18
+5000
+3.3 - 0 common synonym. Modifies and Next. Fixed param
+procedure p; variable v; stmt s;
+Select p such that Modifies(p, v) and Next(s, 5)
+one, two, three, four, five
+5000
+3.4 - 0 common synonym. Invalid variable
+if ifs; stmt s; variable a, v;
+Select ifs such that Modifies(ifs, v) and Next(s, a)
+SemanticError
+5000
+3.5 - 1 common synonym. Modifies and Next
+stmt n, n1; variable v;
+Select n such that Modifies(n, v) and Next(n, n1)
+1, 3, 4, 5, 7, 8, 9, 11, 13, 14, 16
+5000
+3.6 - 1 common synonym. Modifies and Next. 1 blank param
+stmt n, n1; variable v;
+Select v such that Modifies(n, v) and Next(n, _)
+me, ten, six, spring, cs3203, summer, thisProcedureDoesNotUseAnything
+5000
+3.7 - 1 common synonym. Modifies and Next. Fixed param
+if ifs; stmt s; variable v;
+Select ifs such that Modifies(ifs, v) and Next(ifs, s)
+3
+5000
+3.8 - 1 common synonym. Invalid
+if ifs; variable v; stmt s; procedure a;
+Select ifs such that Modifies(ifs, v) and Next(s, a)
+SemanticError
+5000
+4.1 - 0 common synonym. Uses and Next
+variable v; print pn; stmt n, n1;
+Select pn such that Uses(pn, v) and Next(n, n1)
+2, 15, 19
+5000
+4.2 - 0 common synonym. Uses and Next. 1 blank param
+variable v; stmt n, n1;
+Select n such that Uses(n, v) and Next(n1, _)
+2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19
+5000
+4.3 - 0 common synonym. Uses and Next. Fixed param
+procedure p; variable v; stmt s;
+Select p such that Uses(p, v) and Next(s, 5)
+one, two, three, four, six
+5000
+4.4 - 0 common synonym. Invalid variable
+if ifs; stmt s; variable a, v;
+Select ifs such that Uses(ifs, v) and Next(s, a)
+SemanticError
+5000
+4.5 - 1 common synonym. Uses and Next
+stmt n, n1; variable v;
+Select n such that Uses(n, v) and Next(n, n1)
+2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 15, 17
+5000
+4.6 - 1 common synonym. Uses and Next. 1 blank param
+stmt n, n1; variable v;
+Select v such that Uses(n, v) and Next(n, _)
+you, x, y, five, two, nine, three, fall, cs3230, cs27, windows, macOS, linux, hot, thisProcedureDoesNotModifyAnything
+5000
+4.7 - 1 common synonym. Uses and Next. Fixed param
+if ifs; stmt s; variable v;
+Select ifs such that Uses(ifs, v) and Next(ifs, s)
+3
+5000
+4.8 - 1 common synonym. Invalid
+if ifs; variable v; stmt s; procedure a;
+Select ifs such that Uses(ifs, v) and Next(s, a)
+SemanticError
+5000
+5.1 - 0 common synonym. Parent and Next
+while w; call cl; stmt n, n1;
+Select cl such that Parent(w, cl) and Next(n, n1)
+16, 17
+5000
+5.2 - 0 common synonym. Parent and Next. 1 blank param
+stmt s; print pn; stmt n;
+Select n such that Parent(s, pn) and Next(n, _)
+1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 15, 16, 17
+5000
+5.3 - 0 common synonym. Parent and Next. Fixed param
+if ifs; stmt s;
+Select s such that Parent(ifs, 4) and Next(s, 5)
+3
+5000
+5.4 - 0 common synonym. Invalid variable
+if ifs; stmt s; variable a;
+Select ifs such that Parent(2, ifs) and Next(s, a)
+SemanticError
+5000
+5.5 - 1 common synonym. Parent and Next
+stmt n, n1, n2;
+Select n1 such that Parent(n, n1) and Next(n1, n2)
+4, 5, 15, 16, 17
+5000
+5.6 - 1 common synonym. Parent and Next. 1 blank param
+stmt n, n1;
+Select n1 such that Parent(n, n1) and Next(n1, _)
+4, 5, 15, 16, 17
+5000
+5.7 - 1 common synonym. Parent and Next. Fixed param
+stmt n, n1;
+Select n such that Parent(n, n1) and Next(n1, 14)
+14
+5000
+5.8 - 1 common synonym. Parent and Next. No expected answer
+stmt n, n1; print pn;
+Select n such that Parent(n, n1) and Next(n1, pn)
+
+5000
+5.9 - 1 common synonym. Parent and Next. Invalid
+if ifs; procedure a;
+Select ifs such that Parent(2, ifs) and Next(ifs, a)
+SemanticError
+5000

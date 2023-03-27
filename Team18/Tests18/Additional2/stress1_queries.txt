@@ -1,0 +1,140 @@
+1 - Parent, Follows*, Affects,  2 pattern
+assign a1, a2; while w1, w2;
+Select a2 pattern a1 ("x", _) and a2 ("x",_"x"_) such that Affects (a1, a2) and Parent (w2, a2) and Follows* (w2, w1)
+147
+5000
+2 - Modifies, Parent*, Uses, 1 Pattern
+variable v; if ifs; while w; assign a;
+Select a such that Modifies (a, "x") and Parent* (w, a) and Uses (ifs, _) pattern w("i",_)
+456
+5000
+3 - Follows, Uses, Modifies, Calls
+variable v1, v2; assign a; if ifs; stmt s1, s2; procedure p, q;
+Select v1 such that Follows(s2, ifs) pattern ifs(v1,_,_) such that Calls(p, q) and Uses(p, v1)
+FarrerPark, RAM, GPU, motherboard, displayPort, coke, pepsi, lemonTea, LittleIndia, chrysanthemum, kickapoo, qwe, rty, Tampines, PasirRis, Yishun, Khatib, YCK, AMK, Bishan, midpoint, length, breadth, squareArea, anotherBreadth, english, varOnlyUsedInIfCond, varUsedInBothIfAndWhileCond, Jupiter, Saturn, Uranus, thisIfDoesNotModifyAnything, tiger, lion, jaguar, Myanmar, Indonesia, abc, def, Woodleigh, Serangoon, Wales, Scotland, count, flag, volume, five, six, trainerBMoney, authenticated, x, a, b, c
+5000
+4 - follows* next* uses wpattern parent apattern 3 common
+stmt s1, s2; while w; if ifs; variable v; assign a;
+Select <s2, w, s1> such that Follows*(s2,_) and Next*(s1, s2) and Uses(s2, "displayPort") pattern w(v,_) such that Parent(w, s1) pattern a(_,_)
+21 10 11, 21 10 12, 21 10 13, 21 10 14, 21 10 15, 21 10 16, 21 10 17, 21 10 18, 21 10 19, 21 10 20, 31 31 32, 31 32 33, 31 33 34, 31 35 36, 31 36 37
+5000
+5 - follows* next* uses wpattern parent apattern 3 common
+stmt s1, s2; while w; if ifs; variable v; assign a;
+Select <ifs, w> such that Follows*(s2,_) and Next*(s1, s2) and Uses(s2, "displayPort") pattern w(v,_) such that Parent(ifs, w) pattern a(_,_)
+5 10, 5 31, 73 80, 97 104, 168 172, 165 177, 187 192, 285 286, 285 288, 296 300, 316 318, 345 347, 348 352, 360 361, 360 366, 402 403, 419 421
+5000
+6 - Parent* affects modifies pattern if pattern apattern 0 common
+stmt s1, s2; while w; if ifs; variable v; assign a, a1; read re; print pn;
+Select pn such that Parent*(s2,_) and Affects(a, a1) and Uses(s1, _) pattern a(v,_) such that Follows(pn, _) pattern ifs(_,_,_)
+11, 40, 95, 117, 118, 145, 185, 188, 190, 206, 207, 209, 218, 221, 238, 242, 249, 251, 256, 269, 275, 279, 324, 328, 350, 355, 359, 379, 495, 498, 499, 506, 515
+5000
+7 - 2 diff groups synonym Affects* 
+stmt s, s2; while w; if ifs; variable v; assign a, a1; read re; print pn;
+Select s such that Parent(s, _) and Modifies(s, v) and Affects*(a1,a) pattern a(_, _) such that Parent*(ifs, a1)
+5, 8, 10, 21, 31, 32, 33, 34, 35, 36, 43, 47, 51, 55, 56, 70, 73, 80, 83, 97, 104, 129, 132, 146, 148, 155, 158, 162, 165, 168, 172, 174, 177, 184, 187, 192, 195, 198, 210, 211, 215, 219, 233, 236, 240, 241, 248, 252, 257, 260, 272, 276, 277, 285, 286, 288, 296, 300, 303, 306, 316, 318, 326, 332, 339, 345, 347, 348, 352, 360, 361, 366, 372, 377, 391, 392, 402, 403, 404, 419, 421, 422, 425, 430, 434, 438, 455, 459, 470, 481, 507, 516
+5000
+8 - Simple affects*
+stmt s1, s2; while w; if ifs; variable v; assign a, a1; read re; print pn; procedure p, q;
+Select a1 such that Affects*(a1,a)
+1, 2, 3, 6, 7, 13, 14, 16, 19, 20, 22, 23, 24, 29, 41, 42, 44, 46, 48, 50, 59, 62, 64, 65, 68, 71, 72, 74, 77, 78, 79, 81, 82, 84, 91, 98, 102, 103, 105, 106, 107, 108, 109, 111, 112, 114, 115, 121, 127, 130, 131, 137, 138, 141, 143, 144, 147, 156, 171, 173, 182, 189, 191, 293, 294, 295, 299, 301, 304, 305, 307, 309, 311, 312, 314, 317, 319, 321, 325, 327, 341, 346, 349, 353, 371, 380, 381, 390, 393, 394, 395, 396, 397, 399, 400, 401, 439, 453, 454, 456, 458, 460, 461, 462, 463, 465, 466, 467, 469, 471, 472, 473, 475, 476, 477, 478, 480, 482, 483, 484, 487, 488, 489
+5000
+9 - Calls* Next Uses Modifies pattern a pattern w pattern 4 common
+stmt s1, s2; while w; if ifs; variable v; assign a, a1; read re; print pn; procedure p, q;
+Select q such that Calls*(p,q) and Next(a, a1) and Uses(p, v) pattern a1(v,_) such that Modifies(a1, v) pattern a(v,_)
+First, Second, Third, SoftDrinks, NorthSouthLine, mainProcedure, notSoMain, area57, bermudaTriangle, hello, NorthEastLine
+5000
+10 - Calls* affects* Uses Modifies pattern a pattern w pattern 4 common
+stmt s1, s2; while w; if ifs; variable v; assign a, a1; read re; print pn; procedure p, q;
+Select q such that Calls*(p,q) and Affects*(a, a1) and Uses(p, v) pattern w(v,_) such that Modifies(a1, v) pattern a(v,_)
+SoftDrinks, NorthEastLine, NorthSouthLine, battleground, notSoMain, area57, bermudaTriangle, hello, one, six, two, five, Second, First, garchomp, hydreigon, mainProcedure, Third
+5000
+11 - Follows, pattern, Next, Uses, Calls
+variable v1, v2; assign a; while w; stmt s, s1; procedure p, q;
+Select a such that Follows(_,s) pattern a(v1,_) such that Next(s, a) and Uses(p, v1) and Calls(p,"SoftDrinks")
+3, 4, 6, 13, 14, 16, 17, 18, 19, 20, 22, 24, 25, 26, 28, 29, 30, 41, 42, 44, 46, 48, 50, 52, 60, 62, 64, 65, 67, 71, 74, 76, 77, 79, 81, 84, 89
+5000
+12 -  Modifies, Parent*, Uses, Pattern
+variable v; if ifs; stmt s; assign a; while w;
+Select a such that Modifies (a, v) and Parent* (w, a) and Uses (ifs, _) pattern ifs(v,_,_)
+74, 77, 81, 82, 87, 131, 156, 173, 305, 329, 362, 367, 381, 396, 397, 400, 401, 439, 456, 147, 199
+5000
+13 - next* follows* pattern while modifies
+stmt n, n1; while w; variable v;
+Select v such that Next*(n, n1) and Follows*(w, n) pattern w(v,_) such that Modifies(w, v)
+mouse, keyboard, Canberra, x, result, three, five, i
+5000
+14 - 2modifies parent pattern modifies
+while w; read rd; variable v; if ifs;
+Select w such that Modifies(ifs, _) such that Parent(w, rd) pattern w(v,_) such that Modifies(rd, v)
+10, 177
+5000
+15  test calls 2uses follows
+procedure p; variable v; stmt s; print pn;
+Select s such that Calls(_, p) and Uses(p, v) and Uses(s, v) and Follows(pn, s)
+41, 146, 189, 191, 207, 210, 219, 222, 243, 250, 257, 276, 329, 351, 356, 360, 380, 500, 507, 516 
+5000
+16 - cache speed test Affects Uses pattern
+assign a1,a2,a3,a4,a5,a6; variable v; 
+Select a3 such that Uses(a1, v) pattern a1(v,_) such that Affects(a1, a2) and Affects(a2, a3)
+14, 16, 19, 20, 23, 25, 147, 149, 152, 159, 160, 173, 181, 189, 191, 193, 301, 319, 327, 329, 341, 353, 378, 380, 381, 384, 385, 393, 396, 397, 400, 401, 405, 406, 439, 458, 456, 460, 462, 463,  464, 472, 473, 474, 477, 478, 479, 483, 484, 485, 488, 489, 490
+5000
+17 - cache speed test next* modifies pattern
+stmt s1, s2, s3; stmt n1, n2; variable v; assign a; if ifs;
+Select v such that Modifies(s1, v) and Next*(s1, n1) and Next(n1, n2) pattern ifs(v,_,_) 
+a, accountNo, authenticated, chrysanthemum, pin, kickapoo, Belgrade, Madrid, RAM, GPU, coke, pepsi, lemonTea, Serangoon, Woodleigh, LittleIndia, FarrerPark, Tampines, PasirRis, Yishun, midpoint, length, squareArea, breadth,anotherBreadth, volume, english, tiger, jaguar, count, flag, val1, five, six, hydreigonHP, garchompHP, trainerBMoney, trainerAMoney, option, amount, balance, x
+5000
+18 - test parents modifies with uses parent
+stmt s; variable v; assign a; if ifs;
+Select s such that Parent(ifs, s) and Modifies(s, v) and Uses(a,v) such that Parent*(_, ifs)
+22, 23, 24, 25, 26, 28, 29, 48, 49, 50, 52, 53, 51, 55, 56, 57, 59, 60, 74, 75, 76, 77, 78, 79, 80, 84, 87, 169, 171, 172, 189, 191, 307, 349, 352, 393, 394, 395, 396, 397, 399, 423, 424, 425, 426, 427
+5000
+19 - test prog line modifies uses parent* with progline 
+variable v; stmt n; while w;
+Select n such that Modifies(n, "x") and Uses(n, v) and Parent*(_, n) pattern w(v,_)
+147, 456, 460, 135
+5000
+20 - test Affects pattern Uses Follows*
+stmt s; assign a1, a2; variable v;
+Select a1 such that Affects*(a1, a2) pattern a1(_,_"coke"_) such that Uses(a2, v) and Follows*(s, a2)
+41, 44, 46
+5000
+21 - test modifies Next Next* pattern next* valid
+while w; read rd; variable v; assign a;
+Select <w, rd> such that Modifies(w, v) and Next(w, rd) and Next*(rd, _) pattern w(v,_) such that Next*(a, rd)
+177 178, 339 340 
+5000
+22 - test affects*, uses, next*, calls
+assign a; variable v; call cl; procedure p, q;
+Select v such that Affects*(a, a) and Uses(a, v) and Next*(a, cl) such that Calls(p, q)
+Canberra, Yishun, mouse, keyboard, x, volume, study, math, Flag, three, five, hydreigonHP, garchompHP, i, count, flag1, flag2, time, science, scoreA, scoreB,y 
+5000
+23 - test parents modifies pattern parent*
+stmt s; variable v; assign a; if ifs; while w; procedure p, q;
+Select s such that Parent(w, s) and Modifies(s, v) pattern w(v, _) such that Parent*(ifs, s) such that Calls*(p,q)
+12, 20, 173, 319, 353, 363, 368, 178, 364, 369, 404
+5000
+24 - test follows* next* uses pattern parent
+stmt s1, s2; while w; if ifs; variable v;
+Select w such that Follows*(s2,_) and Next*(s1, s2) and Uses(s2, v) pattern w(v,_) such that Parent(ifs, w)
+10, 31, 80, 104, 172, 177, 192, 286, 288, 300, 318, 347, 352, 361, 366, 403
+5000
+25 - test modifies uses pattern pattern next* affects
+assign a, a1; variable v, v1; if ifs; stmt s;
+Select v such that Modifies(a, v) and Uses(a, v) pattern ifs(v,_ , _) such that Next*(a,s) and Affects(a, a1)
+RAM, balance, count, five, garchompHP, hydreigonHP, x, volume
+5000
+26 - test modifies follows follows* pattern 
+while w; read rd; assign a, a1;
+Select <w, rd> such that Modifies(w, "procedure") and Follows(_, w) and Next*(rd, w) pattern w("volume",_) such that Affects*(a, a1)
+172 140, 172 142, 172 153, 172 163, 172 166, 172 176, 172 164
+5000
+27 - test modifies uses procedure affects* pattern
+variable v1, v2; procedure p; assign a, a1; while w;
+Select p such that Modifies(p, v1) and Uses(p, v2) pattern a(v2, _) pattern w(v1, _) such that Next*(a, a1)
+ComputerStuff, NorthEastLine, NorthSouthLine, EastWestLine, mainProcedure, CapitalCitiesEurope, one, two, three, four, five, six, battle, Second, Nineth, First, Fourth, SoftDrinks, area57, battleground, main, notSoMain
+5000
+28 - backwards affect with 2 pattern and with clause not related uses
+variable v1, v2; procedure p; assign a, a1; while w; if ifs; constant c;
+Select a such that Affects(_, a) and Uses(p, v2) with ifs.stmt# = c.value pattern w(v2, _) pattern ifs(v1, _, _) such that Parent(w, a)
+13, 14, 16, 18, 19, 20, 72, 81, 82, 106, 107, 130, 131, 147, 157, 173, 193, 301, 304, 305, 309, 319, 327, 329, 341, 353, 378, 380, 381, 400, 401, 439, 456, 458
+5000

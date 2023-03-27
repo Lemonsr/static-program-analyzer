@@ -1,0 +1,45 @@
+1 - Select variable used in a program line that is executed after a statement that follows an ifs
+variable v; if ifs; stmt s; stmt n;
+Select v such that Follows(ifs, s) and Next(s, n) and Uses(n, v)
+midpoint, a, b, c, length, breadth
+5000
+2 - Select a statement that follows another statement which modifies a variable and is executed immediately after its parent
+stmt s, s1, s2; variable v;
+Select s2 such that Parent(s, s1) and Next(s, s1) and Modifies(s1, v) and Follows(s1, s2)
+11, 14, 18, 28, 31, 33, 35, 40, 42, 55
+5000
+2.1A - Select a read statement that follows another statement which modifies a variable and is executed immediately after its parent
+stmt s, s1; variable v; read re;
+Select re such that Parent(s, s1) and Next(s, s1) and Modifies(s1, v) and Follows(s1, re)
+14
+5000
+2.1B - Select a read statement that follows another statement which modifies a variable and is executed immediately after its parent
+stmt s, s1; variable v; read re;
+Select re.varName such that Parent(s, s1) and Next(s, s1) and Modifies(s1, v) and Follows(s1, re)
+Print
+5000
+3 - Select a statement that modifies and uses the same variable, and this statement is a direct child of s1 and an indirect child of s
+stmt s, s1, s2; variable v;
+Select s2 such that Parent*(s, s1) and Parent(s1, s2) and Uses(s2, v) and Modifies(s2, v)
+33, 34, 35, 50, 52, 53
+5000
+4 - Select an assignment that uses a variable, and is executed indirectly after another assignment that follows an if indirectly
+variable v; if ifs; assign a, a1;
+Select v.varName such that Follows*(ifs, a) and Next*(a, a1) and Uses(a1, v)
+anotherBreadth, length, volume, a, b, c, x, y, study, science, math, radius
+5000
+5 - Select a print variable that is used in an assignment, that is affected by another assignment that is a child of an if
+print pn; assign a, a1; if ifs; variable v;
+Select pn.varName such that Parent(ifs, a) and Affects(a, a1) and Uses(a1, v) and Uses(pn, v)
+volume
+5000
+6 - Select a statement that is executed indirectly after an assignment statement that is affected indirectly by another assignment inside a while statement
+stmt s; while w; assign a, a1; if ifs;
+Select s.stmt# such that Parent*(w, a) and Affects*(a, a1) and Follows*(a1, ifs) and Next(ifs, s)
+36, 37
+5000
+7 - Select statements executed indirectly after a while, that is a child of an if and a grandchild of another while
+stmt s; while w, w1; if ifs;
+Select s such that Parent(w, ifs) and Parent(ifs, w1) and Next*(w1, s)
+45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+5000

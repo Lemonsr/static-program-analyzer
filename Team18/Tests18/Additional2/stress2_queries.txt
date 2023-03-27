@@ -1,0 +1,40 @@
+1.1A - 2 separate groups with no common synonym between the 2 groups
+assign a, a1, a2; variable v, v1, v2; if ifs; procedure p, q; while w; 
+Select a such that Modifies(a, v) and Next(a, a1) and Parent(ifs, a) pattern a (v, _"4*3"_) and ifs(v1, _, _) with a1.stmt# = 24 and v.varName = "bluetooth"
+23
+5000
+1.1B - 2 separate groups with no common synonym between the 2 groups
+assign a, a1, a2; variable v, v1, v2; if ifs; procedure p, q; while w; 
+Select v2 such that Calls(p, q) and Modifies(a2, v2) with q.procName = v2.varName such that Parent(w, a2) pattern w(v2, _) 
+two, five
+5000
+1.1C - 2 separate groups with no common synonym between the 2 groups
+assign a, a1, a2; variable v, v1, v2; if ifs; procedure p, q; while w; 
+Select < p.procName, v2, a2 > such that Calls(p, q) and Modifies(a2, v2) with q.procName = v2.varName such that Parent(w, a2) pattern w(v2, _) 
+three five 381, four five 381, one two 327, three two 327, five two 327, six two 327
+5000
+2.1A - 2 separate groups with no common synonym between the 2 groups
+while w, w1; assign a, a1; variable v, v1; constant c;
+Select w such that Next(a, w) and Parent(w, a) pattern w( v, _ ) with v.varName = "Italy" and a.stmt# = 284 such that Parent(w1, a1) with w1.stmt# = c.value pattern w1 (v1, _) pattern a1 (v1, _ )
+276
+5000
+2.1B - 2 separate groups with no common synonym between the 2 groups
+while w, w1; assign a, a1; variable v, v1; constant c;
+Select v1 such that Next(a, w) and Parent(w, a) pattern w( v, _ ) with v.varName = "Italy" and a.stmt# = 284 such that Parent(w1, a1) with w1.stmt# = c.value pattern w1 (v1, _) pattern a1 (v1, _ )
+mouse
+5000
+2.1C - 2 separate groups with no common synonym between the 2 groups
+while w, w1; assign a, a1; variable v, v1; constant c;
+Select < c, v, a > such that Next(a, w) and Parent(w, a) pattern w( v, _ ) with v.varName = "Italy" and a.stmt# = 284 such that Parent(w1, a1) with w1.stmt# = c.value pattern w1 (v1, _) pattern a1 (v1, _ )
+10 Italy 284
+5000
+3.1A - If statement that contains 2 assignments. first assignment modifies a variable used in the condexp, second assignment uses the variable and must be affected by first assignment
+if ifs; assign a, a1, a2; variable v, v1; stmt n; procedure p; while w;
+Select < ifs, a, a1 > such that Parent*(ifs, a) and Parent*(ifs, a1) pattern a (v, _ ) with a.stmt# = n.stmt# such that Affects*(a, a1) and Uses(a1, v) pattern ifs (v, _ , _) such that Uses(p, v1) and Modifies(p, v1) with p.procName = v1.varName such that Uses(w, v1) and Modifies(w, v1) and Parent(w, a2) and Uses(a2, v1) pattern a2 (v1, _ )
+5 7 13, 5 7 18, 47 48 49, 73 74 75, 73 74 76, 73 77 79, 316 321 322, 392 396 396, 392 397 397, 43 59 61, 5 6 13, 5 6 18, 73 74 82
+5000
+3.1B - Assignment in a while statement that modifies and uses a variable that is the same as the procedure name
+if ifs; assign a, a1, a2; variable v, v1; stmt n; procedure p; while w;
+Select p such that Parent*(ifs, a) and Parent*(ifs, a1) pattern a (v, _ ) with a.stmt# = n.stmt# such that Affects*(a, a1) and Uses(a1, v) pattern ifs (v, _ , _) such that Uses(p, v1) and Modifies(p, v1) with p.procName = v1.varName such that Uses(w, v1) and Modifies(w, v1) and Parent(w, a2) and Uses(a2, v1) pattern a2 (v1, _ )
+two, five, three
+5000

@@ -1,0 +1,405 @@
+1 - 0 common, Follows and uses
+stmt s; read re; if ifs;
+Select s such that Follows(s, re) and Uses(ifs, _)
+2, 13, 43, 46
+5000
+2 - 0 common, Follows and uses
+assign a; while w; read re;
+Select w such that Follows(re, w) and Uses(a, _)
+45
+5000
+3 - 0 common, Follows and Uses. 1 filled in
+assign a; while w; read re;
+Select w such that Follows(44, w) and Uses(a, _)
+45
+5000
+4 - 0 common, Follows and Uses. 1 filled in
+stmt s; read re; if ifs;
+Select s such that Follows(s, 3) and Uses(ifs, _)
+2
+5000
+5 - 0 common, Follows and Uses. Invalid
+stmt s; read re; variable ifs;
+Select s such that Follows(s, 3) and Uses(ifs, _)
+SemanticError
+5000
+6 - 0 common, Follows and Modifies
+stmt s; print pn; while w;
+Select s such that Follows(s, pn) and Modifies(w, _)
+5, 11, 14, 30, 54
+5000
+7 - 0 common, Follows and Modifies
+assign a, a1; while w;
+Select w such that Follows(a1, w) and Modifies(a, _)
+33, 53
+5000
+8 - 0 common, Follows and Modifies. 1 filled in
+while w; read re;
+Select w such that Follows(56, w) and Modifies(re, _)
+59
+5000
+9 - 0 common, Follows and Modifies. 1 filled in
+if ifs; while w;
+Select ifs such that Follows(ifs, 16) and Modifies(w, _)
+9
+5000
+10 - 0 common, Follows and Modifies. Invalid
+if ifs; print w;
+Select ifs such that Follows(ifs, 16) and Modifies(w, _)
+SemanticError
+5000
+11 - 0 common, Follows and Follows
+stmt s; assign a; while w;
+Select s such that Follows(s, a) and Follows(w, _)
+1, 3, 4, 10, 17, 19, 26, 27, 39, 41, 49, 51
+5000
+12 - 0 common, Follows and Follows
+while w; if ifs; assign a;
+Select w such that Follows(w, ifs) and Follows(a, _)
+7, 16, 45
+5000
+13 - 0 common, Follows and Follows. 1 filled in
+assign a; stmt s; read re;
+Select a such that Follows(a, s) and Follows(re, _)
+2, 4, 5, 10, 11, 13, 17, 22, 28, 30, 32, 34, 41, 43, 52, 54
+5000
+14 - 0 common, Follows and Follows. 1 filled in
+assign a; if ifs; while w;
+Select ifs such that Follows(a, ifs) and Follows(w, _)
+23, 29, 35
+5000
+15 - 0 common, Follows and Follows. Invalid
+assign a; if ifs; procedure w;
+Select ifs such that Follows(a, ifs) and Follows(w, _)
+SemanticError
+5000
+16 - 0 common, Follows and FollowsT
+assign a1,a2; while w;
+Select a1 such that Follows(a1, a2) and Follows*(w, _)
+4, 10, 17, 41
+5000
+17 - 0 common, Follows and FollowsT
+while w; if ifs; assign a;
+Select w such that Follows(w, ifs) and Follows*(a, _)
+7, 16, 45
+5000
+18 - 0 common, Follows and FollowsT. 1 filled in
+if ifs; stmt s; read re;
+Select s such that Follows(ifs, s) and Follows*(re, _)
+16, 22, 26, 38, 43, 59
+5000
+19 - 0 common, Follows and FollowsT. 1 filled in
+if ifs1, ifs2;while w;
+Select ifs1 such that Follows(ifs1, ifs2) and Follows*(w, _)
+23
+5000
+20 - 0 common, Follows and FollowsT. Invalid (w not declared)
+assign a; if ifs;
+Select ifs such that Follows(a, ifs) and Follows*(w, _)
+SemanticError
+5000
+21 - 0 common, Follows and Parent
+      while w,w1; if ifs;
+Select w such that Follows(ifs, w) and Parent(w1, _)
+16, 38, 59
+5000
+22 - 0 common, Follows and Parent
+    if ifs,ifs1; assign a;
+Select ifs such that Follows(ifs, 16) and Parent(ifs1, _)
+9
+5000
+23 - 0 common, Follows and Parent. 1 filled in
+if ifs; stmt s;   while w;
+Select w such that Follows(w, ifs) and Parent(s, _)
+7, 16, 45
+5000
+24 - 0 common, Follows and Parent. 1 filled in
+stmt s; assign a;   while w;
+Select s such that Follows(a, s) and Parent(w, _)
+3, 5, 6, 11, 12, 14, 18, 23, 29, 31, 33, 35, 42, 44, 53, 55
+5000
+25 - 0 common, Follows and Parent. Invalid
+assign a    , w; if ifs     ; 
+Select ifs such that Follows(a, ifs) and Parent(w, _)
+
+5000
+26 - 0 common, Follows and Parent*
+read re; assign a; while w;
+Select re such that Follows     (a, re) and Parent*(w, _)
+3, 14, 44
+5000
+27 - 0 common, Follows and Parent*
+read re; assign a; if ifs;
+Select a such that Follows( a    , re) and Parent*(ifs, _)
+2, 13, 43
+5000
+28 - 0 common, Follows and Parent*. 1 filled in
+assign a; if ifs; stmt s;
+Select ifs such that Follows(a,     ifs     ) and Parent*(s, _)
+23, 29, 35
+5000
+29 - 0 common, Follows and Parent*. 1 filled in
+assign a; while w, w1;
+Select a such that Follows(a, w) and Parent*(w1,    _   )
+32, 52
+5000
+30 - 0 common, Follows and Parent*. Invalid spacing between * and Parent
+assign a ; if ifs     ; while w;
+Select ifs such that Follows(a, ifs) and Parent *(w, _)
+23,29,35
+5000
+31 - 1 common, Follows and uses
+assign a1, a2;
+Select a1 such that Follows(a1, a2) and Uses(a1,_)
+4, 10, 41
+5000
+32 - 1 common, Follows and uses
+assign a1; while w; variable v;
+Select w such that Follows(a1, w) and Uses(w,v)
+53, 33
+5000
+33 - 1 common, Follows and uses
+assign a1; while w; variable v;
+Select v such that Follows(a1, w) and Uses(w,v)
+rectangleArea, procedure, volume, study, tuition
+5000
+34 - 1 common, Follows and uses
+stmt s; if ifs; variable v;
+Select ifs such that Follows(s, ifs) and Uses(ifs, v)
+9, 19, 23, 26, 29, 35, 48, 56
+5000
+35 - 1 common, Follows and uses
+stmt s; print pn; 
+Select s such that Follows(s, pn) and Uses(pn, _)
+5, 11, 14, 30, 54
+5000
+36 - 1 common, Follows and Modifies. Select common synonym, 1 blank param
+assign a1, a2;
+Select a1 such that Follows(a1, a2) and Modifies(a1,_)
+4, 10, 17, 41
+5000
+37 - 1 common, Follows and Modifies. Select common synonym
+stmt s; read re;
+Select re such that Follows(s, re) and Modifies(re, "  y   ")
+3
+5000
+38 - 1 common, Follows and Modifies. Select non-common synonym
+assign a1; while w; variable v;
+Select v such that Follows(a1, w) and Modifies(w,v)
+procedure, volume, tuition
+5000
+39 - 1 common, Follows and Modifies. Invalid
+stmt s; print pn; 
+Select s such that Follows(s, pn) and Modifies(pn, _)
+SemanticError
+5000
+40 - 1 common, Follows and Follows. Select common synonym, 1 blank param
+assign a1, a2;
+Select a2 such that Follows(a1, a2) and Follows(a1,_)
+5, 11, 18, 42
+5000
+41 - 1 common, Follows and Follows. Select common synonym
+assign a1, a2; print pn;
+Select a2 such that Follows(a1, a2) and Follows(a2, pn)
+5, 11
+5000
+42 - 1 common, Follows and Follows. Select non-common synonym
+assign a1, a2; print pn;
+Select pn such that Follows(a1, a2) and Follows(a2, pn)
+6, 12
+5000
+43 - 1 common, Follows and Follows. Invalid
+stmt s; variable pn; 
+Select s such that Follows(s, pn) and Follows(pn, _)
+SemanticError
+5000
+43A - 1 common, Follows and Follows*. Select common synonym, 1 blank param
+stmt s; assign a;
+Select a such that Follows(a, s) and Follows*(s,_)
+    2, 4, 5, 10, 13, 22, 28, 43
+5000
+44 - 1 common, Follows and Follows*. Select common synonym
+stmt s; assign a; print pn;
+Select a such that Follows(a, s) and Follows*(s, pn)
+2, 4, 10, 13
+5000
+45 - 1 common, Follows and Follows*. Select non-common synonym
+stmt s; assign a; print pn;
+Select pn such that Follows(a, s) and Follows*(s, pn)
+6, 12, 15
+5000
+46 - 1 common, Follows and Follows*. Invalid
+stmt s; print pn; 
+Select s such that Follows(s, pn) and Follows*("pn", _)
+SyntaxError
+5000
+47 - 1 common, Follows and Parent. Select common synonym, 1 blank param
+stmt s; if ifs;
+Select ifs such that Follows(ifs, s) and Parent(ifs, _)
+9, 19, 23, 26, 29, 56
+5000
+48 - 1 common, Follows and Parent. Select common synonym
+stmt s; if ifs; print pn;
+Select ifs such that Follows(ifs, s) and Parent(ifs, pn)
+9, 29
+5000
+49 - 1 common, Follows and Parent. Select non-common synonym
+stmt s; if ifs; print pn;
+Select s such that Follows(ifs, s) and Parent(ifs, pn)
+16, 38
+5000
+50 - 1 common, Follows and Parent. Invalid
+stmt s; print pn; assign a;
+Select s such that Follows(s, pn) and Parent(a, _)
+
+5000
+51 - 1 common, Follows and Parent*. Select common synonym, 1 blank param
+stmt s; if ifs;
+Select ifs such that Follows(ifs, s) and Parent*(ifs, _)
+9, 19, 23, 26, 29, 56
+5000
+52 - 1 common, Follows and Parent*. Select common synonym
+stmt s; if ifs; print pn;
+Select ifs such that Follows(ifs, s) and Parent*(ifs, pn)
+9, 26, 29
+5000
+53 - 1 common, Follows and Parent*. Select non-common synonym
+stmt s; if ifs; print pn;
+Select s such that Follows(ifs, s) and Parent*(ifs, pn)
+16, 38, 43
+5000
+54 - 1 common, Follows and Parent*. Valid but no answer expected
+stmt s; print pn; assign a;
+Select s such that Follows(s, pn) and Parent*(1, _)
+
+5000
+55 - 1 common, Follows and Uses. 1 filled in
+stmt s; print pn; 
+Select s such that Follows(pn, s) and Uses(pn, "stupid")
+47
+5000
+56 - 1 common, Follows and Uses. 1 filled in
+stmt s; if ifs; variable v;
+Select s such that Follows(s, ifs) and Uses(ifs, "study")
+47
+5000
+57 - 1 common, Follows and Uses. 1 filled in
+assign a1; while w; variable v;
+Select v such that Follows(52, w) and Uses(w,v)
+tuition, study
+5000
+58 - 1 common, Follows and Uses. 1 filled in
+assign a1; while w; variable v;
+Select w such that Follows(32, w) and Uses(w,v)
+33
+5000
+59 - 1 common, Follows and Uses. 1 filled in
+assign a1, a2;
+Select a1 such that Follows(a1, a2) and Uses(a1,"y")
+4, 10
+5000
+60 - 1 common, Follows and Modifies. 1 filled in
+stmt s; read re;
+Select s such that Follows(re, s) and Modifies(re, "english")
+48
+5000
+61 - 1 common, Follows and Modifies. 1 filled in
+stmt s; if ifs; variable v;
+Select s such that Follows(s, ifs) and Modifies(ifs, "study")
+47
+5000
+62 - 1 common, Follows and Modifies. 1 filled in
+assign a1; while w; variable v;
+Select v such that Follows(52, w) and Modifies(w,v)
+tuition
+5000
+63 - 1 common, Follows and Modifies. 1 filled in
+assign a1; while w; variable v;
+Select w such that Follows(32, w) and Modifies(w,v)
+33
+5000
+64 - 1 common, Follows and Modifies. 1 filled in
+assign a1, a2;
+Select a1 such that Follows(a1, a2) and Modifies(a1,"y")
+4
+5000
+65 - 1 common, Follows and Follows. 1 filled in
+stmt s; read re;
+Select s such that Follows(s, re) and Follows(re, 15)
+13
+5000
+66 - 1 common, Follows and Follows. 1 filled in
+stmt s; if ifs; variable v;
+Select s such that Follows(s, ifs) and Follows(ifs, 38)
+28
+5000
+67 - 1 common, Follows and Follows. 1 filled in
+if ifs, ifs1; while w;
+Select w such that Follows(ifs, w) and Follows(w, ifs1)
+16
+5000
+68 - 1 common, Follows and Follows. 1 filled in
+if ifs, ifs1; assign a;
+Select ifs such that Follows(a, ifs) and Follows(ifs, ifs1)
+23
+5000
+69 - 1 common, Follows and Follows. 1 filled in
+assign a1, a2; read re;
+Select a1 such that Follows(a1, a2) and Follows(re, a1)
+4
+5000
+70 - 1 common, Follows and Follows*. 1 filled in
+stmt s; read re;
+Select s such that Follows(s, re) and Follows*(re, 45)
+2, 43
+5000
+71 - 1 common, Follows and Follows*. 1 filled in
+read re; assign a;
+Select a such that Follows(re, a) and Follows*(a, 38)
+28
+5000
+72 - 1 common, Follows and Follows*. 1 filled in
+if ifs, ifs1; while w; assign a;
+Select w such that Follows(ifs, w) and Follows*(w, ifs1)
+16
+5000
+73 - 1 common, Follows and Follows*. 1 filled in
+if ifs, ifs1; assign a;
+Select ifs such that Follows(a, ifs) and Follows*(ifs, ifs1)
+23
+5000
+74 - 1 common, Follows and Follows*. 1 filled in
+assign a1, a2, a3;
+Select a2 such that Follows(a1, a2) and Follows*(a2, a3)
+5
+5000
+75 - 1 common, Follows and Parent. 1 filled in
+stmt s; while w;
+Select w such that Follows(s, w) and Parent(w, 8)
+7
+5000
+76 - 1 common, Follows and Parent. 1 filled in
+stmt s; while w;
+Select s such that Follows(s, w) and Parent(w, 8)
+6
+5000
+77 - 1 common, Follows and Parent. 1 filled in
+if ifs; while w; assign a;
+Select w such that Follows(ifs, w) and Parent(w, _)
+16, 38, 59
+5000
+78 - 1 common, Follows and Parent*. 1 filled in
+stmt s; while w;
+Select w such that Follows(s, w) and Parent*(w, 36)
+33
+5000
+79 - 1 common, Follows and Parent*. 1 filled in
+stmt s; while w;
+Select s such that Follows(s, w) and Parent*(w, 36)
+32
+5000
+80 - 1 common, Follows and Parent*. 1 filled in
+if ifs; while w; assign a;
+Select w such that Follows(ifs, w) and Parent*(w, _)
+16, 38, 59
+5000

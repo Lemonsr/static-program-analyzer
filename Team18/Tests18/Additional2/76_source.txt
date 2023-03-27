@@ -1,0 +1,25 @@
+procedure AsianCountries { read Singapore;
+    print Malaysia;
+    China = India - Korea;
+    call EuropeanCountries;
+    if (Myanmar != Indonesia) then {
+        SriLanka = 1; } 
+    else { Cambodia = 2; }}
+procedure EuropeanCountries { print England;
+    while (Italy == France) {
+        if (Germany != Spain) then {
+            Poland = 3; 
+            print Denmark;
+            call NorthAmericanCountries; }
+        else { Finland = 4;
+            read Norway;
+            call SouthAmericanCountries; } 
+        Russia = 5; }  
+    if (Wales > Scotland) then {
+        while (Belgium < 6) {
+            Romania = Turkey - 7; }}
+    else { while (Ireland >= Switzerland) {
+            Greece = 8; }
+    Sweden = 9; }}
+procedure NorthAmericanCountries { read USA; }
+procedure SouthAmericanCountries { print Brazil; }
