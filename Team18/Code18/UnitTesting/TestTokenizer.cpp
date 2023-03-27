@@ -45,7 +45,7 @@ public:
   TEST_METHOD(TestTokenizerTokenizeSuchThat) {
     std::stringstream srcStream;
     srcStream << "variable v;\n";
-    srcStream << "Select v such that Modifies (6, v)";
+    srcStream << "Select v such that Modifies * (6, v)";
     spa::Tokenizer tokenizer;
     spa::Stream<spa::Token> tokenStream = tokenizer.tokenize(srcStream);
     bool matchResult = tokenStream.match({
@@ -57,6 +57,7 @@ public:
       { spa::TOKEN_NAME, "such" },
       { spa::TOKEN_NAME, "that" },
       { spa::TOKEN_NAME, "Modifies" },
+      { spa::TOKEN_MULTIPLY, "*" },
       { spa::TOKEN_OPEN_BRACKET, "(" },
       { spa::TOKEN_INTEGER, "6" },
       { spa::TOKEN_COMMA, "," },
@@ -64,6 +65,8 @@ public:
       { spa::TOKEN_CLOSE_BRACKET, ")" },
       });
     Assert::IsTrue(matchResult);
+    Assert::IsTrue(tokenStream[7].getIndex() == 31);
+    Assert::IsTrue(tokenStream[8].getIndex() == 40);
   }
 
   TEST_METHOD(TestTokenizerTokenizeSuchThatAndPattern) {

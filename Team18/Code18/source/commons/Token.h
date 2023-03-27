@@ -50,11 +50,14 @@ class Token {
  private:
     TokenType type;
     std::string value;
+    int index;
  public:
     Token(TokenType type, std::string value);
     Token(TokenType type, char c);
+    Token(TokenType type, std::string value, int index);
     const TokenType& getType();
     const std::string& getValue();
+    int getIndex();
 
     friend bool operator==(const Token& t1, const Token& t2);
     friend bool operator!=(const Token& t1, const Token& t2);

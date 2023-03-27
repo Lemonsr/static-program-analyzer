@@ -44,13 +44,13 @@ public:
 
   TEST_METHOD(TestParentStar) {
     spa::Stream<spa::Token> tokens;
-    tokens.pushBack({ spa::TOKEN_NAME, "Parent" });
-    tokens.pushBack({ spa::TOKEN_MULTIPLY, "*" });
-    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
-    tokens.pushBack({ spa::TOKEN_NAME, "s" });
-    tokens.pushBack({ spa::TOKEN_COMMA, "," });
-    tokens.pushBack({ spa::TOKEN_NAME, "s1" });
-    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")" });
+    tokens.pushBack({ spa::TOKEN_NAME, "Parent", 0 });
+    tokens.pushBack({ spa::TOKEN_MULTIPLY, "*", 6 });
+    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(", 7 });
+    tokens.pushBack({ spa::TOKEN_NAME, "s", 8 });
+    tokens.pushBack({ spa::TOKEN_COMMA, ",", 9 });
+    tokens.pushBack({ spa::TOKEN_NAME, "s1", 10 });
+    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")", 12 });
     spa::ParsedQuery query;
     query.addDeclaration("s", spa::STMT);
     query.addDeclaration("s1", spa::STMT);
@@ -68,10 +68,26 @@ public:
     Assert::AreEqual(tokens.remaining(), int64_t(0));
   }
 
+  TEST_METHOD(TestStarAfterSpace) {
+    spa::Stream<spa::Token> tokens;
+    tokens.pushBack({ spa::TOKEN_NAME, "Follows", 0 });
+    tokens.pushBack({ spa::TOKEN_MULTIPLY, "*", 8 });
+    tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(", 9 });
+    tokens.pushBack({ spa::TOKEN_NAME, "s", 10 });
+    tokens.pushBack({ spa::TOKEN_COMMA, ",", 11 });
+    tokens.pushBack({ spa::TOKEN_NAME, "s1", 12 });
+    tokens.pushBack({ spa::TOKEN_CLOSE_BRACKET, ")", 14 });
+    spa::ParsedQuery query;
+    query.addDeclaration("s", spa::STMT);
+    query.addDeclaration("s1", spa::STMT);
+    spa::PqlSuchThatSubParser parser;
+    spa::PqlParseStatus status = parser.parse(tokens, query);
+    Assert::IsTrue(status == spa::PQL_PARSE_SYNTAX_ERROR);
+  }
+
   TEST_METHOD(TestFirstArgMismatch) {
     spa::Stream<spa::Token> tokens;
     tokens.pushBack({ spa::TOKEN_NAME, "Follows" });
-    tokens.pushBack({ spa::TOKEN_MULTIPLY, "*" });
     tokens.pushBack({ spa::TOKEN_OPEN_BRACKET, "(" });
     tokens.pushBack({ spa::TOKEN_DOUBLE_QUOTES, "\"" });
     tokens.pushBack({ spa::TOKEN_NAME, "s" });

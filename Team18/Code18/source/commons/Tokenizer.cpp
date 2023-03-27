@@ -38,12 +38,12 @@ const std::unordered_map<std::string, spa::TokenType> tokenTypes{
 };
 
 void spa::Tokenizer::pushWordToken(spa::Stream<spa::Token>& tokens,
-                                   std::string& word) {
+                                   std::string& word, int index) {
   if (word.empty()) {
     return;
   }
   if (std::isalpha(word[0])) {
-    tokens.pushBack({spa::TOKEN_NAME, word});
+    tokens.pushBack({spa::TOKEN_NAME, word, index - static_cast<int>(word.size())});
   } else {
     for (char c : word) {
       if (!std::isdigit(c)) {
@@ -53,22 +53,23 @@ void spa::Tokenizer::pushWordToken(spa::Stream<spa::Token>& tokens,
     if (word.size() > 1 && word[0] == '0') {
       throw std::runtime_error("Leading Zero in Integer");
     }
-    tokens.pushBack({spa::TOKEN_INTEGER, word});
+    tokens.pushBack({spa::TOKEN_INTEGER, word, index - static_cast<int>(word.size())});
   }
   word.clear();
 }
 
 void spa::Tokenizer::pushSymbolToken(std::istream& srcStream,
                                      spa::Stream<spa::Token>& tokens,
-                                     char c) {
+                                     char c, int& index) {
   std::string s(1, c);
   int next = srcStream.peek();
   if (next != EOF) {
     s.push_back(static_cast<char>(next));
     auto it = tokenTypes.find(s);
     if (it != tokenTypes.end()) {
-      tokens.pushBack({it->second, it->first});
+      tokens.pushBack({it->second, it->first, index});
       srcStream.get();
+      ++index;
       return;
     }
     s.pop_back();
@@ -77,23 +78,25 @@ void spa::Tokenizer::pushSymbolToken(std::istream& srcStream,
   if (it == tokenTypes.end()) {
     throw std::runtime_error(std::string("Unknown Symbol: ").append(s));
   }
-  tokens.pushBack({it->second, it->first});
+  tokens.pushBack({it->second, it->first, index});
 }
 
 spa::Stream<spa::Token> spa::Tokenizer::tokenize(std::istream& srcStream) {
   std::string word;
   Stream<Token> tokens;
   char c;
+  int index = 0;
   while (!srcStream.get(c).eof()) {
     if (std::isspace(c)) {
-      pushWordToken(tokens, word);
+      pushWordToken(tokens, word, index);
     } else if (std::isalnum(c)) {
       word.push_back(c);
     } else {
-      pushWordToken(tokens, word);
-      pushSymbolToken(srcStream, tokens, c);
+      pushWordToken(tokens, word, index);
+      pushSymbolToken(srcStream, tokens, c, index);
     }
+    ++index;
   }
-  pushWordToken(tokens, word);
+  pushWordToken(tokens, word, index);
   return tokens;
 }
