@@ -13,8 +13,6 @@ spa::QpsQueryEvaluator::QpsQueryEvaluator(ParsedQuery& parsedQuery) : parsedQuer
 }
 
 spa::TableGroup::TableGroup() {
-  table.addHeader("");
-  table.addRow({ QpsValue(0) });
   parent = nullptr;
 }
 
@@ -31,15 +29,46 @@ spa::TableGroup* spa::TableGroup::getParent() {
 
 void spa::TableGroup::unionChild(TableGroup* child) {
   child->parent = this;
-  table = table.innerJoin(child->table);
+  children.insert(child);
 }
 
-void spa::TableGroup::innerJoin(QpsResultTable& other) {
-  table = table.innerJoin(other);
+void spa::TableGroup::addTable(QpsResultTable& other) {
+  tables.insert(&other);
 }
 
-const spa::QpsResultTable& spa::TableGroup::getTable() {
-  return table;
+void spa::TableGroup::innerJoin(QpsResultTable& table, QpsResultTable& result, bool& init) {
+  if (!init) {
+    result = table;
+    init = true;
+    return;
+  }
+  if (result.isEmpty()) {
+    return;
+  }
+  if (table.isEmpty()) {
+    result = table;
+  } else if (!table.getHeaderNames().empty()) {
+    result = result.innerJoin(table);
+  }
+}
+
+spa::QpsResultTable spa::TableGroup::getTable() {
+  QpsResultTable result;
+  bool init = false;
+  for (auto it = tables.begin(); it != tables.end(); ++it) {
+    innerJoin(*(*it), result, init);
+  }
+  for (auto child : children) {
+    auto temp = child->getTable();
+    innerJoin(temp, result, init);
+  }
+  if (!init) {
+    QpsResultTable dummy;
+    dummy.addHeader("");
+    dummy.addRow({ QpsValue(0) });
+    return dummy;
+  }
+  return result;
 }
 
 void spa::QpsQueryEvaluator::unionTable(std::unordered_map<std::string, TableGroup>& groupMap,
@@ -49,51 +78,58 @@ void spa::QpsQueryEvaluator::unionTable(std::unordered_map<std::string, TableGro
     result = result.innerJoin(table);
     return;
   }
-  std::unordered_set<TableGroup*> groups;
+  groupMap[headerNames[0]].addTable(table);
+  std::unordered_set<TableGroup*> parents;
   for (auto& header : headerNames) {
-    groups.insert(groupMap[header].getParent());
+    parents.insert(groupMap[header].getParent());
   }
-  auto parent = *groups.begin();
-  parent->innerJoin(table);
-  auto it = groups.begin();
-  for (++it; it != groups.end(); ++it) {
+  auto parent = *parents.begin();
+  auto it = parents.begin();
+  for (++it; it != parents.end(); ++it) {
     parent->unionChild(*it);
   }
 }
 
-void spa::QpsQueryEvaluator::unionTables(std::unordered_map<std::string, TableGroup>& groupMap,
-                                         QpsResultTable& result, PKBManager& pkbManager) {
+void spa::QpsQueryEvaluator::extractTables(std::vector<QpsResultTable>& tables, PKBManager& pkbManager) {
   for (auto& p : parsedQuery.getSelectWithDeclarations()) {
     SimpleEvaluator eval(p.first, p.second);
-    unionTable(groupMap, eval.evaluate(pkbManager), result);
+    tables.push_back(eval.evaluate(pkbManager));
   }
   for (auto& clause : parsedQuery.getSuchThatClauses()) {
     auto eval = clause.getEvaluator();
-    unionTable(groupMap, eval->evaluate(pkbManager), result);
+    tables.push_back(eval->evaluate(pkbManager));
   }
   for (auto& clause : parsedQuery.getPatternClauses()) {
     auto eval = clause.getEvaluator();
-    unionTable(groupMap, eval->evaluate(pkbManager), result);
+    tables.push_back(eval->evaluate(pkbManager));
   }
   for (auto& clause : parsedQuery.getWithClauses()) {
     auto eval = clause.getEvaluator();
-    unionTable(groupMap, eval->evaluate(pkbManager), result);
+    tables.push_back(eval->evaluate(pkbManager));
   }
 }
 
 spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   std::unordered_map<std::string, TableGroup> groupMap;
+  std::vector<QpsResultTable> tables;
   QpsResultTable result;
   result.addHeader("");
   result.addRow({ QpsValue(0) });
-  unionTables(groupMap, result, pkbManager);
+  
+  extractTables(tables, pkbManager);
+
+  for (auto& table : tables) {
+    unionTable(groupMap, table, result);
+  }
 
   auto& selectWithDeclarations = parsedQuery.getSelectWithDeclarations();
   for (auto& p : groupMap) {
-    if (!p.second.isParent()) {
+    auto& group = p.second;
+    if (!group.isParent()) {
       continue;
     }
-    auto table = p.second.getTable();
+
+    QpsResultTable table = group.getTable();
     if (table.isEmpty()) {
       return table;
     }
