@@ -5,6 +5,7 @@
 #include <string>
 #include <optional>
 #include <memory>
+#include <unordered_set>
 
 #include "PqlArgument.h"
 #include "Token.h"
@@ -131,6 +132,7 @@ class ParsedQuery {
   SelectClauseType selectType;
   PqlClauseType lastAddedClause;
   std::vector<std::string> selectColumns;
+  std::unordered_set<std::string> selectColumnsSet;
   std::vector<PatternClause> patternClauses;
   std::vector<SuchThatClause> suchThatClauses;
   std::vector<WithClause> withClauses;
@@ -149,6 +151,7 @@ class ParsedQuery {
   PqlClauseType getLastAddedClause();
   void addSelectColumn(std::string selectColumn);
   std::vector<std::string>& getSelectColumns();
+  bool hasSelectColumn(const std::string& selectColumn);
   void addSuchThatClause(SuchThatClause clause);
   std::vector<SuchThatClause>& getSuchThatClauses();
   void addPatternClause(PatternClause clause);

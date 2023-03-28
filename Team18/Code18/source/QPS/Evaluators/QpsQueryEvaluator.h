@@ -10,11 +10,24 @@
 
 namespace spa {
 
+struct OrderedTable {
+  QpsResultTable* tableP = nullptr;
+  std::string compareHeader;
+  int compareUsage = 0;
+
+  OrderedTable() = default;
+  OrderedTable(QpsResultTable& table, std::unordered_map<std::string, int>& headerUsageMap);
+};
+
+struct OrderedTablePriority {
+  constexpr bool operator()(const OrderedTable& lhs, const OrderedTable& rhs) const;
+};
+
 class TableGroup {
  private:
   TableGroup* parent;
+  std::unordered_map<std::string, int> headerUsageMap;
   std::unordered_set<QpsResultTable*> tables;
-  std::unordered_set<TableGroup*> children;
   void innerJoin(QpsResultTable& table, QpsResultTable& result, bool& init);
  public:
   TableGroup();
@@ -22,7 +35,7 @@ class TableGroup {
   TableGroup* getParent();
   void unionChild(TableGroup* child);
   void addTable(QpsResultTable& other);
-  QpsResultTable getTable();
+  QpsResultTable getTable(ParsedQuery& parsedQuery);
 };
 
 class QpsQueryEvaluator : public QpsEvaluator {
