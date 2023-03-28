@@ -76,11 +76,11 @@ spa::OrderedTable::OrderedTable(QpsResultTable& table,
   }
 }
 
-constexpr bool spa::OrderedTablePriority::operator()(const OrderedTable& lhs, const OrderedTable& rhs) const {
+bool spa::OrderedTablePriority::operator()(const OrderedTable& lhs, const OrderedTable& rhs) const {
   if (lhs.compareUsage != rhs.compareUsage) {
     return lhs.compareUsage < rhs.compareUsage;
   }
-  return lhs.compareHeader < rhs.compareHeader;
+  return lhs.compareHeader > rhs.compareHeader;
 }
 
 spa::QpsResultTable spa::TableGroup::getTable(ParsedQuery& parsedQuery) {
@@ -102,7 +102,7 @@ spa::QpsResultTable spa::TableGroup::getTable(ParsedQuery& parsedQuery) {
         tableSelectColumns.push_back(header);
       }
     }
-    if (tableSelectColumns.size() > 0 && tableSelectColumns.size() < tableHeaders.size()) {
+    if (!tableSelectColumns.empty() && tableSelectColumns.size() < tableHeaders.size()) {
       table = table.getColumns(tableSelectColumns);
     }
     innerJoin(table, result, init);
@@ -113,7 +113,7 @@ spa::QpsResultTable spa::TableGroup::getTable(ParsedQuery& parsedQuery) {
         resultSelectColumns.push_back(header);
       }
     }
-    if (resultSelectColumns.size() > 0 && resultSelectColumns.size() < resultHeaders.size()) {
+    if (!resultSelectColumns.empty() && resultSelectColumns.size() < resultHeaders.size()) {
       result = result.getColumns(resultSelectColumns);
     }
   }

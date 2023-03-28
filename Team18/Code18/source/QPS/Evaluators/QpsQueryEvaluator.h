@@ -12,15 +12,15 @@ namespace spa {
 
 struct OrderedTable {
   QpsResultTable* tableP = nullptr;
-  std::string compareHeader;
   int compareUsage = 0;
+  std::string compareHeader;
 
   OrderedTable() = default;
   OrderedTable(QpsResultTable& table, std::unordered_map<std::string, int>& headerUsageMap);
 };
 
 struct OrderedTablePriority {
-  constexpr bool operator()(const OrderedTable& lhs, const OrderedTable& rhs) const;
+  bool operator()(const OrderedTable& lhs, const OrderedTable& rhs) const;
 };
 
 class TableGroup {
