@@ -1,0 +1,19 @@
+procedure Intermediate {
+	x = 0;
+	y = 15;
+	while (x < 15) {
+		x = x + 1;
+		print x; }
+	read i;
+	read j;
+	x = y;
+	if (i < j) then {
+		print i; } 
+	else { y = i + x + 2;
+		print j; }
+	if (x == y) then {
+		j = y * x + (i + j) * 2;
+		print x; }
+	else { print y; }
+	x = i + j + y + 32;
+}

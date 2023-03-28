@@ -1,0 +1,171 @@
+1 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses (5, "x")
+TRUE
+5000
+2 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses (12, _)
+TRUE
+5000
+3 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses ("a", "x")
+FALSE
+5000
+4 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses ("b", _)
+FALSE
+5000
+5 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses(9, v)
+TRUE
+5000
+6 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses(re, v)
+SemanticError
+5000
+7 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select v such that Uses (10, v)
+y, length
+5000
+8 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select v such that Uses (26, v)
+area
+5000
+9 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select v such that Uses ("a", v)
+none
+5000
+10 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select v such that Uses ("proc1", v)
+none
+5000
+11 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select s such that Uses (s, "x")
+3, 5, 23, 7, 24, 8, 25, 9, 11, 12, 13, 15, 17, 20, 22
+5000
+12 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select ifs such that Uses (ifs, "x1")
+none
+5000
+13 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select s such that Uses (s, _)
+3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 23, 24, 25, 26
+5000
+14 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select ifs such that Uses (ifs, _)
+7, 23, 13
+5000
+15 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select v such that Uses (cl, v)
+area, x, y, length, pi, sin, cos, tan
+5000
+16 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select v such that Uses (ifs, v)
+x, area, y, length, pi, sin, cos, tan
+5000
+17 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select <s, v> such that Uses (s, v)
+5 area, 7 area, 8 area, 13 sin, 12 area, 17 x, 23 area, 26 area, 5 length, 3 x, 5 x, 13 y, 8 y, 7 x, 14 y, 7 y, 8 x, 10 y, 9 x, 8 tan, 7 sin, 10 length, 11 x, 7 tan, 8 sin, 12 x, 8 length, 13 x, 15 x, 20 x, 22 x, 23 x, 23 y, 24 x, 25 x, 3 y, 6 length, 5 y, 13 tan, 11 length, 12 y, 9 y, 17 y, 20 y, 22 y, 25 y, 7 length, 5 pi, 8 cos, 7 pi, 7 cos, 8 pi, 13 cos, 12 pi, 22 pi, 5 sin, 5 cos, 5 tan
+5000
+18 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select p such that Uses (p, "x")
+foo, ellipse, bar
+5000
+19 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select p such that Uses (p, _)
+foo, ellipse, bar
+5000
+20 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select <p, v> such that Uses (p, v)
+foo area, bar area, ellipse area, bar y, foo x, foo y, bar x, bar cos, foo pi, ellipse x, foo tan, bar sin, ellipse y, foo length, bar length, foo cos, bar pi, ellipse pi, bar tan, foo sin
+5000
+21 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select v such that Uses (p, v)
+area, x, y, length, pi, sin, cos, tan
+5000
+22 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses (5, "x") and Uses("a","x")
+FALSE
+5000
+23 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses (12, _) and Uses("b", _)
+FALSE
+5000
+24 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses(9, v) and Uses(pn, v)
+FALSE
+5000
+25 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select BOOLEAN such that Uses(cl, v1) and Uses(pn, v)
+TRUE
+5000
+26 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select p such that Uses (10, v) and Uses(p, v)
+foo, ellipse, bar
+5000
+27 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select n such that Uses (26, v) and Uses(s, v)
+SemanticError
+5000
+28 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select v such that Uses (s, "x") and Uses(s, v)
+area,x,length,y,sin,cos,tan,pi
+5000
+29 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select ifs such that Uses (ifs, "x1") such that Uses(w, "x1")
+none
+5000
+30 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select a such that Uses (ifs,v) and Uses(a, v)
+3,11,17,9,22,24,25,15,20,10,14
+5000
+31 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select v such that Uses (cl, v) and Uses(s, v1)
+area,x,y,length,pi,sin,cos,tan
+5000
+32 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select <s, ifs, v> such that Uses (s, v) and Uses(ifs, v)
+20 23 x,5 23 area,7 23 area,8 23 area,5 7 area,12 23 area,23 23 area,26 23 area,3 23 x,13 23 y,5 23 x,7 23 x,5 13 tan,8 23 x,9 23 x,11 23 x,12 23 x,25 13 x,13 23 x,25 23 y,15 23 x,17 23 x,17 7 y,22 23 x,23 23 x,24 23 x,25 23 x,3 23 y,5 23 y,7 23 y,5 13 sin,8 23 y,9 23 y,10 23 y,12 23 y,13 7 cos,14 23 y,22 7 x,17 23 y,20 23 y,22 23 y,23 23 y,7 7 area,23 7 area,8 7 area,8 13 sin,12 7 area,13 7 tan,26 7 area,3 7 x,5 7 x,24 7 x,7 7 x,23 7 x,8 7 x,9 7 x,15 7 x,11 7 x,12 7 x,17 7 x,13 7 x,20 7 x,25 7 x,3 7 y,5 7 y,7 7 y,8 7 y,9 7 y,10 7 y,8 13 tan,12 7 y,13 7 y,14 7 y,20 7 y,22 7 y,23 7 y,25 7 y,5 7 length,6 7 length,7 7 length,8 7 length,10 7 length,7 7 cos,11 7 length,5 7 pi,7 7 pi,20 13 y,8 7 pi,8 13 cos,12 7 pi,9 13 y,22 7 pi,5 7 sin,7 7 sin,8 7 sin,13 7 sin,5 7 cos,8 7 cos,5 7 tan,7 7 tan,8 7 tan,3 13 x,14 13 y,5 13 x,7 13 x,8 13 x,9 13 x,11 13 x,12 13 x,13 13 x,15 13 x,17 13 x,20 13 x,22 13 x,23 13 x,24 13 x,3 13 y,5 13 y,7 13 y,23 13 y,8 13 y,25 13 y,10 13 y,12 13 y,13 13 y,17 13 y,22 13 y,7 13 sin,13 13 sin,5 13 cos,7 13 cos,13 13 cos,7 13 tan,13 13 tan
+5000
+33 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select <s, v> such that Uses(pn, v) and Uses(s, v) and Uses(s, "x")
+11 length,12 area,23 area,7 length,7 area,8 length,8 area,5 length,5 area
+5000
+34 - comment
+stmt s, s1, s2; assign a, a1; while w, w1; if ifs, ifs1; variable v, v1; procedure p, q, p1; constant c, c1; call cl; print pn; read re;  
+Select < cl,p, v> such that Uses (p, v) and Uses(cl, v)
+12 ellipse pi,12 foo area,12 bar area,12 ellipse area,5 bar x,12 foo x,12 ellipse y,12 bar x,12 bar y,12 ellipse x,5 foo x,12 foo y,12 bar pi,12 foo pi,5 bar sin,5 foo area,5 foo sin,5 ellipse pi,5 bar area,5 foo cos,5 bar pi,5 ellipse area,5 ellipse x,5 bar tan,5 foo y,5 foo tan,5 bar y,5 bar length,5 ellipse y,5 foo length,5 bar cos,5 foo pi
+5000
+

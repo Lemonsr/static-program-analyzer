@@ -1,0 +1,126 @@
+procedure Singapore {
+    read majulah;
+    read singapura;
+    anthem = majulah + singapura + 1;
+    if (anthem == majulah) then {
+        read onward;
+        onward = anthem + onward + 32 * (48 + anthem); }
+    else {
+        print majulah;
+        print singapura;
+        call Malaysia;
+        parliament = majulah + singapura; }
+}
+
+procedure Malaysia {
+    call Laos;
+    print singapura;
+    read x;
+    read y;
+    read z;
+    if ((x == y) && ((z != y) || ((x > x) || ((y == z) && ((x + 32 * y) == 42))))) then {
+        print x;
+        x = x + y;
+        x = 10 + 20 + 30;
+        y = 20 + 30 - x;
+        z = x * y + 20;
+        anthem = singapore + majulah / x + y / z; } 
+    else {
+        print z;
+        call Laos;
+        majulah = x + y + z + 30;
+        majulah = (majulah - z + y) * (4 + (20 - z)); }
+    johor = 5;
+    bahru = 6;
+    if (johor == bahru) then {
+        if (x == y) then {
+            if (z == y) then {
+                print z;
+                print y;
+                read p;
+                read q;
+                q = p + q + q + p + 88;
+                p = q + p + a + anthem + 99;
+                p = 0; } 
+            else {
+                p = 32;
+                q = 32;
+                majulah = 32; }} 
+        else {
+            x = 9;
+            y = 10;
+            z = 32 + 9 + 10;
+            z = 32 * 9 / 10;
+            z = y + x + z; }} 
+    else {
+        print x;
+        call Laos;
+        while ((y != x) || (majulah != singapura)) {
+            x = 32;
+            y = 9 * 4;
+            z = x + y + y + y + y + x;
+            read n;
+            n = 3;
+            n = n * 3 + z + y; }}
+}
+
+procedure Indonesia {
+    call Malaysia;
+    call Singapore;
+    a = 5;
+    b = 6;
+    c = 7;
+    while (((a + b * c) >= 45) && ((a - b / c) < 99)) {
+        while (a == 3) {
+            while (b == 4) {
+                while (c != 5) {
+                    a = b + c;
+                    c = b + a;
+                    call Laos;
+                    print majulah;
+                    print Singapura; }}}}
+    a = 6;
+    b = 7;
+    c = 6 - 7 + a + b;
+    read jakarta;
+    jakarta = a + b * c;
+    c = jakarta * 10000;
+}
+
+procedure Laos {
+    call Cambodia;
+}
+
+procedure Thailand {
+    g = 5;
+    h = 10;
+    k = 15;
+    read bangkok;
+    if ((bangkok + 5 + 10 + 15 + h) > 0) then {
+        read l;
+        read m;
+        read o;
+        o = m - l + 32;
+        o = m / g;
+        g = m + o; }
+    else {
+        read m;
+        read o;
+        g = m * o * o * o * o;
+        print o; }
+}
+
+procedure Cambodia {
+    call Thailand;
+}
+
+procedure Myanmar {
+    w = 5;
+    o = 10;
+    r = 30;
+    d = 80 * 32 / (24 - 3) + w * o * r * 5;
+}
+
+procedure Vietnam {
+    read hanoi;
+}

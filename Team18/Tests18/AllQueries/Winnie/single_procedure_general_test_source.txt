@@ -1,0 +1,25 @@
+procedure C {
+    p = 0;
+    q= 1 + p;
+    while ((q!= p) &&(p!=q)) {
+    q=q-1;
+        if (q >=p) then {
+    p = q *        q-1 / 1 % 1;
+        } else {
+            q=p;
+        }
+        p      =p - 1;
+        print p;
+    }
+    if ((a<=0)|| (a==0)) then {
+        read a;
+    } else {
+        print a;
+    }
+    a = p * (q % 3) * q % 3;
+            b = q / (p % 3) / p %3;
+    c = a + b * a + b / p - q;
+    C = c +b*a / c / p / q;
+    print C;
+read C;
+}

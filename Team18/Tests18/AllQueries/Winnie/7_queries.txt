@@ -1,0 +1,680 @@
+1-comment
+stmt s;
+Select s such that Follows(3, s)
+4
+5000
+2-comment
+assign a;
+Select a such that Follows(a, _)
+9,10,11,19,3,4,14,18,21,24,22
+5000
+3-comment
+while w;
+Select w such that Follows*(w, _)
+none
+5000
+4-comment
+while w;
+Select w such that Parent(_, w)
+8
+5000
+5-comment
+while w; if ifs;
+Select ifs such that Parent(w, ifs)
+13
+5000
+6-comment
+if ifs;
+Select ifs such that Parent(ifs, 61)
+none
+5000
+7-comment
+if ifs;
+Select ifs such that Parent*(ifs, 80)
+none
+5000
+8-comment
+if ifs; while w;
+Select w such that Parent*(ifs, w)
+8
+5000
+9-comment
+assign a;
+Select a such that Parent*(_, _)
+11,3,4,9,10,14,15,16,17,18,19,20,21,22,24,25
+5000
+10-comment
+procedure p;
+Select p such that Uses(p, "b")
+none
+5000
+11-comment
+variable v; while w;
+Select v such that Uses(w, v)
+x,area,y,length,pi,sin,cos,tan
+5000
+12-comment
+variable v;
+Select v such that Uses(_, v)
+SemanticError
+5000
+13-comment
+if ifs; variable v;
+Select v such that Uses(ifs, v)
+x,area,y,length,pi,sin,cos,tan
+5000
+14-comment
+procedure p;
+Select p such that Modifies("main", "w")
+none
+5000
+15-comment
+stmt s;
+Select s such that Modifies(s, _)
+1,17,9,2,10,3,4,8,11,21,22,24,23,25,12,14,13,15,16,7,18,19,20,5
+5000
+16-comment
+variable v;
+Select v such that Modifies(75, v)
+none
+5000
+17-comment
+assign a; variable v;
+Select v such that Modifies(a, v)
+length,cos,t,tan,sin,x,y,pi,area
+5000
+18-comment
+assign a;
+Select a such that Next(a, _)
+19,3,11,4,9,10,14,15,16,17,18,21,22,24
+5000
+19-comment
+stmt s; 
+Select BOOLEAN such that Next(19, 20)
+TRUE
+5000
+20-comment
+stmt s; 
+Select BOOLEAN such that Next(19, 24)
+FALSE
+5000
+21-comment
+stmt s; 
+Select BOOLEAN such that Next(19, 19)
+FALSE
+5000
+22-comment
+stmt s; 
+Select s such that Next(2, s)
+3
+5000
+23-comment
+stmt s; 
+Select s such that Next(5, s)
+6
+5000
+24-comment
+stmt s; 
+Select s such that Next(8, s)
+9
+5000
+25-comment
+stmt s; 
+Select s such that Next(9, s)
+10
+5000
+26-comment
+stmt s; 
+Select s such that Next(18, s)
+19
+5000
+27-comment
+stmt s; 
+Select s such that Next(23, s)
+24,26
+5000
+28-comment
+stmt s; 
+Select s such that Next(19, s)
+20
+5000
+29-comment
+stmt s; 
+Select s such that Next(40, s)
+none
+5000
+30-comment
+stmt s; 
+Select s such that Next(41, s)
+none
+5000
+31-comment
+stmt s; 
+Select s such that Next(s, 62)
+none
+5000
+32-comment
+stmt s; 
+Select s such that Next(s, 41)
+none
+5000
+33-comment
+stmt s; 
+Select s such that Next(s, 53)
+none
+5000
+34-comment
+stmt s; 
+Select s such that Next(s, 34)
+none
+5000
+35-comment
+stmt s; 
+Select s such that Next(s, 24)
+23
+5000
+36-comment
+stmt s; 
+Select s such that Next(s, 15)
+14
+5000
+37-comment
+stmt s; 
+Select s such that Next(s, 5)
+4
+5000
+38-comment
+while w; if ifs;
+Select w such that Next(w, ifs)
+none
+5000
+39-comment
+while w1, w2;
+Select w1 such that Next(w1, w2)
+none
+5000
+40-comment
+stmt s;
+Select BOOLEAN such that Next*(75, 76)
+FALSE
+5000
+41-comment
+stmt s;
+Select BOOLEAN such that Next*(75, 75)
+FALSE
+5000
+42-comment
+stmt s;
+Select s such that Next*(75, s)
+none
+5000
+43-comment
+stmt s;
+Select s such that Next*(71, s)
+none
+5000
+44-comment
+stmt s;
+Select s such that Next*(72, s)
+none
+5000
+45-comment
+stmt s;
+Select s such that Next*(s, s)
+8,9,10,11,12,13,14,15,16,17
+5000
+46-comment
+stmt s;
+Select s such that Next*(s, 13)
+7,8,9,10,11,12,13,14,15,16,17
+5000
+47-comment
+stmt s;
+Select s such that Next*(s, 15)
+7,8,9,10,11,12,13,14,15,16,17
+5000
+48-comment
+while w; if ifs; assign a; variable v; stmt s; read r;
+Select BOOLEAN such that Follows(w, ifs) and Uses(ifs, v) such that Modifies(r, v) and Parent*(ifs, r)
+FALSE
+5000
+49-comment
+while w; if ifs; assign a; variable v; stmt s; read r;
+Select <w, ifs, v> such that Follows(w, ifs) and Uses(ifs, v) such that Modifies(r, v) with v.varName = "x"
+none
+5000
+50-comment
+while w; if ifs; assign a; variable v; stmt s; read r;
+Select <w, ifs> such that Follows(w, ifs) and Uses(ifs, v) such that Modifies(r, v) with v.varName = "x"
+none
+5000
+51-comment
+while w; if ifs; assign a; variable v; stmt s; read r;
+Select <w, v> such that Follows(w, ifs) and Uses(ifs, v) such that Modifies(r, v) with v.varName = "x"
+none
+5000
+52-comment
+while w; if ifs; assign a; variable v; stmt s; read r;
+Select BOOLEAN such that Follows(w, ifs) and Uses(ifs, v) such that Modifies(r, v) with v.varName = "x"
+FALSE
+5000
+53-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;
+Select <r, p, v.varName> with r.varName = v.varName and p.varName = v.varName such that Parent(ifs, r) pattern ifs("x", _, _)
+none
+5000
+54-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;
+Select <r, p> with r.varName = v.varName and p.varName = v.varName such that Parent(ifs, r) pattern ifs("x", _, _)
+none
+5000
+55-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;
+Select <r, v.varName> with r.varName = v.varName and p.varName = v.varName such that Parent(ifs, r) pattern ifs("x", _, _)
+none
+5000
+56-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;
+Select <p, v.varName> with r.varName = v.varName and p.varName = v.varName such that Parent(ifs, r) pattern ifs("x", _, _)
+none
+5000
+57-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;
+Select r with r.varName = v.varName and p.varName = v.varName such that Parent(ifs, r) pattern ifs("x", _, _)
+none
+5000
+58-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;
+Select BOOLEAN with r.varName = v.varName and p.varName = v.varName such that Parent(ifs, r) pattern ifs("x", _, _)
+FALSE
+5000
+59-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;
+Select ifs such that Next(s, 15) and Parent(ifs, s) pattern ifs(v, _, _) with v.varName = "x" such that Uses(s, v)
+none
+5000
+60-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p; 
+Select n pattern w(v, _) with w.stmt# = n and v.varName = "x" such that Modifies(w, v) and Modifies(n, v)
+SyntaxError
+5000
+61-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p; 
+Select <a, w, p.varName> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(_,_) and ifs(_,_,_) such that Uses(s, "x") with p.varName = "y"
+SyntaxError
+5000
+62-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p; 
+Select <a, w> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(_,_) and ifs(_,_,_) such that Uses(s, "x") with p.varName = "y"
+SyntaxError
+5000
+63-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p; 
+Select <w, p.varName> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(_,_) and ifs(_,_,_) such that Uses(s, "x") with p.varName = "y"
+SyntaxError
+5000
+64-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p; 
+Select BOOLEAN such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(_,_) and ifs(_,_,_) such that Uses(s, "x") with p.varName = "y"
+SyntaxError
+5000
+65-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;  constant c;
+Select <c, v> with s.stmt# = c.value such that Modifies(s, v) pattern ifs(v, _, _)
+2 y,1 x,10 sin
+5000
+66-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;  constant c;
+Select v pattern w(v, _) such that Parent(ifs, w) pattern ifs(_, _, _) with ifs.stmt# = n
+SyntaxError
+5000
+67-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;  constant c;
+Select <w, v> such that Next(w, ifs) and Uses(w, v) and Modifies(r, v) with p.varName = v.varName
+none
+5000
+68-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;  constant c;
+Select <w> such that Next(w, ifs) and Uses(w, v) and Modifies(r, v) with p.varName = v.varName
+none
+5000
+69-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;  constant c;
+Select v such that Uses(w, v) and Modifies(w, v) pattern a(_, _"b"_)
+none
+5000
+70-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;  constant c;
+Select v such that Uses(w, v) and Modifies(ifs, v) pattern a(_, _"b"_)
+none
+5000
+71-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;  constant c;
+Select <v, a> such that Uses(w, v) and Modifies(ifs, v) pattern a(_, _"b"_) such that Modifies(a, "a")
+none
+5000
+72-comment
+while w; if ifs, ifs2; assign a; variable v; stmt s; read r; print p;  constant c;
+Select <v, a, ifs2> such that Uses(w, v) and Modifies(ifs, v) pattern a(_, _"b"_) such that Modifies(a, "a") such that Parent(ifs2, a)
+none
+5000
+73-comment
+while w; if ifs; assign a; variable v; stmt s; read r; print p;  constant c;
+Select v such that Uses(ifs, v) and Modifies(ifs, v) pattern a(_, _"b"_)
+none
+5000
+74-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s, s1> such that Next*(s, s1) and Next*(s1, s) 
+17 14,11 13,9 8,15 16,13 11,12 15,16 10,14 17,16 15,12 12,14 10,8 9,16 14,14 13,10 10,8 8,12 11,11 15,17 12,15 10,13 17,12 13,14 11,8 10,10 8,16 16,15 14,13 13,17 16,9 10,11 11,10 13,14 8,8 11,16 17,16 13,14 12,12 10,10 9,11 14,17 11,15 9,13 16,8 13,12 8,10 11,9 13,13 8,15 17,17 15,15 13,13 12,11 10,9 9,12 14,16 9,14 16,10 14,14 9,8 12,11 8,17 17,9 11,8 14,10 12,12 9,9 12,11 9,15 15,17 13,11 12,13 10,9 14,13 9,17 8,9 16,15 8,11 17,13 15,15 12,17 10,11 16,13 14,15 11,17 9,10 16,16 8,12 16,14 14,16 11,12 17,14 15,16 12,8 16,10 17,8 15,9 15,8 17,10 15,9 17
+5000
+75-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s, s1> such that Next*(s, s1) and Next*(s1, s) and Parent*(w, s) such that Parent*(w, s1) with w.stmt# = 19
+none
+5000
+76-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s, s1> such that Next*(s, s1) and Next*(s1, s) and Affects(s, s1) and Affects(s1,s)
+none
+5000
+77-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s, s1> such that Affects(s, s1)
+14 15,24 25,18 20,15 17,14 9,21 22,19 20,17 11,14 17,15 9,15 10,16 9,16 17,14 11,17 10,16 11
+5000
+78-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s> such that Affects(s, _)
+14,15,16,17,18,19,21,24
+5000
+79-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s> such that Affects(_, s)
+25,9,10,11,15,17,20,22
+5000
+80-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s1> such that Affects(18, s1)
+20
+5000
+81-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s> such that Affects(s, 17)
+14,15,16
+5000
+82-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s> such that Affects(s, _)
+14,15,16,17,18,19,21,24
+5000
+83-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select BOOLEAN such that Affects(_, 17)
+TRUE
+5000
+84-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s, s1> such that Affects*(s, s1)
+15 11,14 15,24 25,18 20,15 17,14 9,17 11,16 10,14 17,15 9,15 10,16 9,16 17,14 10,16 11,17 10,14 11,21 22,19 20
+5000
+85-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s> such that Affects*(s, _)
+14,15,16,17,18,19,21,24
+5000
+86-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s> such that Affects*(_, s)
+9,10,11,15,17,20,22,25
+5000
+87-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s> such that Affects*(100, s)
+none
+5000
+88-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select <s> such that Affects*(s, 94)
+none
+5000
+89-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select BOOLEAN such that Affects*(103, 94)
+FALSE
+5000
+90-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select s such that Affects*(s, s)
+none
+5000
+91-comment
+while w; if ifs; assign a; variable v; stmt s, s1; read r; print p;  constant c;
+Select s such that Affects(s, s)
+none
+5000
+92-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select a pattern a("n", " (o + p - (q + r)) / s - t % (u * v - w) % (x * y / z)")
+none
+5000
+93-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select BOOLEAN pattern a("n", " ((o + p) - (q + r)) / s - t % ((u * v) - w) % ((x *  y )  /  z)")
+FALSE
+5000
+94-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select a pattern a("n", " (o + p - (q + r)) / s - t % (u * (v - w)) % (x * y / z)")
+none
+5000
+95-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select a pattern a("n", " ((o + p - (q + r)) / s - t % (u * v - w) % (x * y / z)")
+SyntaxError
+5000
+96-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select a pattern a("n", " ((o + p - (q + r)) / s - t % (u * v - w) % (x * y / z)")
+SyntaxError
+5000
+97-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select a pattern a("n", _" ((o + p - (q + r)) / s - t % (u * v - w) % (x * y / z)"_)
+SyntaxError
+5000
+98-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select a pattern a("n", _" t %(u *v- w)"_)
+none
+5000
+99-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select BOOLEAN pattern a("n", _"o+P"_)
+FALSE
+5000
+100-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select BOOLEAN pattern a("n", _"p-(q+r)"_)
+FALSE
+5000
+101-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select a pattern a("n", _"o+p-(q+r)"_)
+none
+5000
+102-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select a pattern a("n", _"t % (u * v - w) % (x * y / z)"_)
+none
+5000
+103-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select a pattern a(_, _"(a % b) - (a * b)"_)
+none
+5000
+104-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select v pattern w(v, _) with w.stmt# = 83
+none
+5000
+105-comment
+while w; if ifs; assign a;  procedure p; variable v; constant cons; call c;
+Select v pattern ifs(v, _,_) with ifs.stmt# = 114
+none
+5000
+106-comment
+while w; if ifs, ifs1; assign a; variable v; stmt s; read r; print p; 
+Select <a, w, p.varName> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p)
+SyntaxError
+5000
+107-comment
+while w, w1; if ifs, ifs1; assign a, a1; variable v, v1; stmt s,s1,s2; read r; print p; 
+Select <a, w, p.varName> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p) and Affects*(s1, _) and Follows*(s1, a1) pattern a1(v1,_) such that Uses(s2, v1)
+SyntaxError
+5000
+108-comment
+while w, w1; if ifs, ifs1; assign a, a1; variable v, v1; stmt s,s1,s2; read r; print p; 
+Select <a, w, p.varName, v1> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p) and Affects*(s1, _) and Follows*(s1, a1) pattern a1(v1,_) such that Uses(s2, v1)
+SyntaxError
+5000
+109-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select <a, w, p.varName, v1> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p) and Affects*(s1, _) and Follows*(s1, a1) pattern a1(v1,_) such that Uses(s2, v1) such that Modifies(r, v2) and Next*(r, _) and Affects*(a2,a3)
+SyntaxError
+5000
+110-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select <a, w, p.varName, v1,v2> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p) and Affects*(s1, _) and Follows*(s1, a1) pattern a1(v1,_) such that Uses(s2, v1) such that Modifies(r, v2) and Next*(r, _) and Affects*(a2,a3)
+SyntaxError
+5000
+111-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select <a, w, p.varName, v1, s1> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p) and Affects*(s1, _) and Follows*(s1, a1) pattern a1(v1,_) such that Uses(s2, v1) 
+SyntaxError
+5000
+112-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select <v2> such that Modifies(r, v2) and Next*(r, _) and Affects*(a2,a3)
+x,y
+5000
+113-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select <v2> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p) and Affects*(s1, _) and Follows*(s1, a1) pattern a1(v1,_) such that Uses(s2, v1) such that Modifies(r, v2) and Next*(r, _) and Affects*(a2,a3)
+SyntaxError
+5000
+114-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select <a,w> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p) and Affects*(s1, _) and Follows*(s1, a1) pattern a1(v1,_) such that Uses(s2, v1) such that Modifies(r, v2) and Next*(r, _) and Affects*(a2,a3)
+SyntaxError
+5000
+115-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select <p> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p) and Affects*(s1, _) and Follows*(s1, a1) pattern a1(v1,_) such that Uses(s2, v1) such that Modifies(r, v2) and Next*(r, _) and Affects*(a2,a3)
+SyntaxError
+5000
+116-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select <v1> such that Next(a,_) with a.stmt# = n such that Parent*(w, a) pattern w(v,_) and ifs(v,_,_) such that Parent(ifs1,w) such that Uses(s, "x") with p.varName = "y" such that Affects*(a, _) and Next*(s,a) and Next*(30,p) and Affects*(s1, _) and Follows*(s1, a1) pattern a1(v1,_) such that Uses(s2, v1) such that Modifies(r, v2) and Next*(r, _) and Affects*(a2,a3)
+SyntaxError
+5000
+117-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(121,a)
+none
+5000
+118-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(122,a)
+none
+5000
+119-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(124,a)
+none
+5000
+120-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(125,a)
+none
+5000
+121-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(128,a)
+none
+5000
+122-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(131,a)
+none
+5000
+123-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(132,a)
+none
+5000
+124-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(134,a)
+none
+5000
+125-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(138,a)
+none
+5000
+126-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(144,a)
+none
+5000
+127-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(150,a)
+none
+5000
+128-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(155,a)
+none
+5000
+129-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(157,a)
+none
+5000
+130-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(162,a)
+none
+5000
+131-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(170,a)
+none
+5000
+132-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(175,a)
+none
+5000
+133-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(179,a)
+none
+5000
+134-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(185,a)
+none
+5000
+135-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(188,a)
+none
+5000
+136-comment
+while w, w1; if ifs, ifs1; assign a, a1,a2, a3; variable v, v1, v2; stmt s,s1,s2; read r; print p; 
+Select a such that Affects(193,a)
+none
+5000

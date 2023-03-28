@@ -1,0 +1,125 @@
+1 - Basic: select entities without relation (read)
+read x;
+Select x
+1, 3, 4, 6
+5000
+2 - Basic: select entities without relation (print)
+print xxXxx;
+Select xxXxx
+2, 5
+5000
+3 - Basic: select entities without relation (assign)
+assign x;
+Select x
+7
+5000
+4 - Basic: select entities without relation (statement)
+stmt s;
+Select s
+1, 2, 3, 4, 5, 6, 7
+5000
+5 - Basic: select entities without relation (non-existent)
+if i;
+Select i
+none
+5000
+6 - Basic: Modifies relation not involving selected entity (false)
+assign a;
+Select a such that Modifies(2, "x")
+none
+5000
+7 - Basic: Modifies relation not involving selected entity (true)
+print p;
+Select p such that Modifies(1, "x")
+2, 5
+5000
+8 - Basic: Uses relation not involving selected entity (false)
+read r;
+Select r such that Uses(2, "xxXxx");
+SyntaxError
+5000
+9 - Basic: Uses relation not involving selected entity (true)
+read r;
+Select r such that Uses(7, "yyYyyY")
+1, 3, 4, 6
+5000
+10 - Basic: Follows relation not involving selected entity (false)
+read r;
+Select r such that Follows(1, 3)
+none
+5000
+11 - Basic: Follows relation not involving selected entity (true)
+read r;
+Select r such that Follows(1, 2)
+1, 3, 4, 6
+5000
+12 - Basic: Parent relation not involving selected entity (false)
+stmt s;
+Select s such that Parent(1, 2)
+none
+5000
+13 - Basic: pattern clause not involving selected entity (false)
+stmt s; assign a;
+Select s pattern a("y", _)
+none
+5000
+14 - Basic: pattern clause not involving selected entity (true)
+stmt s; assign a;
+Select s pattern a("x", _)
+1, 2, 3, 4, 5, 6, 7
+5000
+15 - Intermediate: Uses involving selected entity
+stmt s;
+Select s such that Uses(s, "x")
+2, 7
+5000
+16 - Intermediate: Follows involving selected entity
+print p;
+Select p such that Follows(p, 7)
+none
+5000
+17 - Intermediate: Follows involving selected entity
+print p;
+Select p such that Follows(1, p)
+2
+5000
+18 - Intermediate: Pattern involving selected entity
+assign a;
+Select a pattern a("x", _"x"_)
+7
+5000
+19 - Intermediate: Pattern involving selected entity
+variable v; assign a;
+Select v pattern a(v, _"10"_)
+x
+5000
+20 - Intermediate: Follows* involving selected entity
+print p;
+Select p such that Follows*(p, 5)
+2
+5000
+21 - Intermediate: Follows* involving selected entity
+read r;
+Select r such that Follows*(1, r)
+3, 4, 6
+5000
+22 - Advanced: Pattern + Follows, Follows involves selected entity (other clause is nonempty)
+assign a; variable v; print p;
+Select p pattern a(v, _"xxXxx"_) such that Follows(4, p)
+5
+5000
+23 - Advanced: Pattern + Modifies, Modifies involves selected entity (other clause is empty)
+assign a; stmt s;
+Select s pattern a("y", _) such that Modifies(s, "x")
+none
+5000
+24 - Advanced: Pattern + Modifies both with same entity
+assign a; variable v; stmt s;
+Select s such that Modifies(s, v) pattern a(v, _)
+1, 7
+5000
+25 - Advanced: Follows involving multiple entities
+print p; read r;
+Select r such that Follows(r, p)
+1, 4
+5000
