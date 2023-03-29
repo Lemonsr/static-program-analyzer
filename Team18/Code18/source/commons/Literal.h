@@ -29,17 +29,31 @@ const std::string AND_LITERAL = "and";
 
 // OEPRATOR_LITERALS
 const std::string EMPTY_LITERAL = "";
-const std::string UNDERSCORE_LITERAL = "_";
-const std::string DOUBLE_QUOTES_LITERAL = "\"";
-const std::string HASH_LITERAL = "#";
-const std::string FULL_STOP_LITERAL = ".";
-const std::string COMMA_LITERAL = ",";
+const std::string OPEN_BRACE_LITERAL = "{";
+const std::string CLOSE_BRACE_LITERAL = "}";
 const std::string OPEN_BRACKET_LITERAL = "(";
 const std::string CLOSE_BRACKET_LITERAL = ")";
-const std::string LESS_THAN_LITERAL = "<";
-const std::string MORE_THAN_LITERAL = ">";
+const std::string SEMICOLON_LITERAL = ";";
+const std::string PLUS_LITERAL = "+";
+const std::string MINUS_LITERAL = "-";
+const std::string DIVIDE_LITERAL = "/";
 const std::string MULTIPLY_LITERAL = "*";
+const std::string MODULO_LITERAL = "%";
 const std::string EQUAL_LITERAL = "=";
+const std::string COND_EQ_LITERAL = "==";
+const std::string COND_NEQ_LITERAL = "!=";
+const std::string COND_LT_LITERAL = "<";
+const std::string COND_LTE_LITERAL = "<=";
+const std::string COND_GT_LITERAL = ">";
+const std::string COND_GTE_LITERAL = ">=";
+const std::string BOOL_NOT_LITERAL = "!";
+const std::string BOOL_AND_LITERAL = "&&";
+const std::string BOOL_OR_LITERAL = "||";
+const std::string COMMA_LITERAL = ",";
+const std::string UNDERSCORE_LITERAL = "_";
+const std::string DOUBLE_QUOTES_LITERAL = "\"";
+const std::string FULL_STOP_LITERAL = ".";
+const std::string HASH_LITERAL = "#";
 
 // ENTITY LITERALS
 const std::string PROCEDURE_LITERAL = "procedure";
@@ -71,3 +85,7 @@ const std::string AFFECTS_STAR_LITERAL = "Affects*";
 
 // CFG LITERALS
 const int DUMMY_NODE_VAL = -1;
+
+// OTHER LITERALS
+const std::string ZERO_LITERAL = "0";
+const std::string SPACE_LITERAL = " ";
