@@ -32,7 +32,8 @@ class DesignExtractor {
   std::vector<std::shared_ptr<ProcedureStatement>>& procedureList;
   std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
 
-  void buildProcCallMap(std::shared_ptr<ProcedureStatement>procedure, std::vector<std::shared_ptr<ProgramStatement>>statements);
+  void buildProcCallMap(std::shared_ptr<ProcedureStatement>procedure,
+                        std::vector<std::shared_ptr<ProgramStatement>> statements);
   void extractDesignAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
   void extractParentAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
   void extractFollows(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
@@ -49,9 +50,9 @@ class DesignExtractor {
   std::vector<std::pair<std::string, std::string>> getResFromPkbHelper(
     std::string procName, std::string synonym, DesignEntityType type, RelationshipType relType);
   void addUsesModifies(std::string relArg, std::vector<std::pair<std::string, std::string>> varUses,
-                              std::vector<std::pair<std::string, std::string>> varModifies);
+                       std::vector<std::pair<std::string, std::string>> varModifies);
   void addUsesModifies(std::string relArg, std::vector<std::pair<std::string, std::string>> varUses,
-                           std::vector<std::pair<std::string, std::string>> varModifies, bool isCallStmt);
+                       std::vector<std::pair<std::string, std::string>> varModifies, bool isCallStmt);
   void populateAffectsForNode(CFGNode* initial);
 
  public:
