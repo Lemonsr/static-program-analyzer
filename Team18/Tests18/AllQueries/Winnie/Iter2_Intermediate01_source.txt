@@ -1,0 +1,34 @@
+
+procedure Voltron {
+     while (49 == 3) {
+         print X;
+         z = 49 + 3 * (2 - X) / 100;
+         if ((x + 19 == 10) && (!(x > 10))) then {
+             x = 10;
+        } else {
+             x = y;
+        }
+     }
+}
+procedure Microtron {
+     y = x + 19 - x * x;
+     x = y * y + x + 19;
+     call Voltron;
+     print x;
+     print y;
+}
+
+procedure Megatron {
+    if (x >= 20) then {
+          x = x - y;
+    } else {
+          call Voltron;
+          print Megatron;
+    }
+    while (y == x) {
+          print y;
+          read x;
+          call Microtron;
+          x = x - y + x - y;
+    }
+}

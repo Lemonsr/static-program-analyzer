@@ -1,0 +1,600 @@
+1 - Basic: Syntactically Invalid: Relationship Constraint (Follows) Args
+assign a;
+Select a such that Follows("x", 2)
+SyntaxError
+5000
+2 - Basic: Syntactically Invalid: Relationship Constraint (Follows) Args
+assign a;
+Select a such that Follows(2, "x")
+SyntaxError
+5000
+3 - Basic: Syntactically Invalid: Relationship Constraint (Follows) Args
+assign a;
+Select a such that Follows("x", 2)
+SyntaxError
+5000
+4 - Basic: Syntactically Invalid: Relationship Constraint (Follows) Args
+assign a;
+Select a such that Follows("", 2)
+SyntaxError
+5000
+5 - Basic: Syntactically Invalid: Relationship Constraint (Follows) Args
+assign a;
+Select a such that Follows(", 2)
+SyntaxError
+5000
+6 - Basic: Syntactically Invalid: Relationship Constraint (Follows*) Args
+assign a;
+Select a such that Follows*("x", 2)
+SyntaxError
+5000
+7 - Basic: Syntactically Invalid: Relationship Constraint (Follows*) Args
+assign a;
+Select a such that Follows*(2, "x")
+SyntaxError
+5000
+8 - Basic: Syntactically Invalid: Relationship Constraint (Follows*) Args
+assign a;
+Select a such that Follows*("x", 2)
+SyntaxError
+5000
+9 - Basic: Syntactically Invalid: Relationship Constraint (Follows*) Args
+assign a;
+Select a such that Follows*("", 2)
+SyntaxError
+5000
+10 - Basic: Syntactically Invalid: Relationship Constraint (Follows*) Args
+assign a;
+Select a such that Follows*(", 2)
+SyntaxError
+5000
+11 - Basic: Syntactically Invalid: Relationship Constraint (Parent) Args
+assign a;
+Select a such that Parent("x", 2)
+SyntaxError
+5000
+12 - Basic: Syntactically Invalid: Relationship Constraint (Parent) Args
+assign a;
+Select a such that Parent(2, "x")
+SyntaxError
+5000
+13 - Basic: Syntactically Invalid: Relationship Constraint (Parent) Args
+assign a;
+Select a such that Parent("x", 2)
+SyntaxError
+5000
+14 - Basic: Syntactically Invalid: Relationship Constraint (Parent) Args
+assign a;
+Select a such that Parent("", 2)
+SyntaxError
+5000
+15 - Basic: Syntactically Invalid: Relationship Constraint (Parent) Args
+assign a;
+Select a such that Parent(", 2)
+SyntaxError
+5000
+16 - Basic: Syntactically Invalid: Relationship Constraint (Parent*) Args
+assign a;
+Select a such that Parent*("x", 2)
+SyntaxError
+5000
+17 - Basic: Syntactically Invalid: Relationship Constraint (Parent*) Args
+assign a;
+Select a such that Parent*(2, "x")
+SyntaxError
+5000
+18 - Basic: Syntactically Invalid: Relationship Constraint (Parent*) Args
+assign a;
+Select a such that Parent*("x", 2)
+SyntaxError
+5000
+19 - Basic: Syntactically Invalid: Relationship Constraint (Parent*) Args
+assign a;
+Select a such that Parent*("", 2)
+SyntaxError
+5000
+20 - Basic: Syntactically Invalid: Relationship Constraint (Parent*) Args
+assign a;
+Select a such that Parent*(", 2)
+SyntaxError
+5000
+21 - Basic: Syntactically Invalid: Relationship Constraint (Uses_S) Args
+assign a; variable v;
+Select a such that Uses(a, 2)
+SyntaxError
+5000
+22 - Basic: Syntactically Invalid: Relationship Constraint (Uses_S) Args
+assign a; variable v;
+Select a such that Uses(2, 2)
+SyntaxError
+5000
+23 - Basic: Syntactically Invalid: Relationship Constraint (Uses_S) Args
+assign a; variable v;
+Select a such that Uses(02, v)
+SyntaxError
+5000
+24 - Basic: Syntactically Invalid: Relationship Constraint (Uses_S) Args
+assign a; variable v;
+Select a such that Uses(a, "")
+SyntaxError
+5000
+25 - Basic: Syntactically Invalid: Relationship Constraint (Uses_S) Args
+assign a; variable v;
+Select a such that Uses(a, ")
+SyntaxError
+5000
+26 - Basic: Syntactically Invalid: Relationship Constraint (Uses_P) Args
+assign a; variable v;
+Select a such that Uses("x", 2)
+SyntaxError
+5000
+27 - Basic: Syntactically Invalid: Relationship Constraint (Uses_P) Args
+procedure p; variable v;
+Select p such that Uses(p, 2)
+SyntaxError
+5000
+28 - Basic: Syntactically Invalid: Relationship Constraint (Uses_P) Args
+assign a; variable v;
+Select a such that Uses("x", "v)
+SyntaxError
+5000
+29 - Basic: Syntactically Invalid: Relationship Constraint (Uses_P) Args
+assign a; variable v;
+Select a such that Uses("", v)
+SyntaxError
+5000
+30 - Basic: Syntactically Invalid: Relationship Constraint (Uses_P) Args
+assign a; variable v;
+Select a such that Uses(", v)
+SyntaxError
+5000
+31 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_S) Args
+assign a; variable v;
+Select a such that Modifies(a, 2)
+SyntaxError
+5000
+32 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_S) Args
+assign a; variable v;
+Select a such that Modifies(2, 2)
+SyntaxError
+5000
+33 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_S) Args
+assign a; variable v;
+Select a such that Modifies(02, v)
+SyntaxError
+5000
+34 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_S) Args
+assign a; variable v;
+Select a such that Modifies(a, "")
+SyntaxError
+5000
+35 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_S) Args
+assign a; variable v;
+Select a such that Modifies(a, ")
+SyntaxError
+5000
+36 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_P) Args
+assign a; variable v;
+Select a such that Modifies("x", 2)
+SyntaxError
+5000
+37 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_P) Args
+procedure p; variable v;
+Select p such that Modifies(p, 2)
+SyntaxError
+5000
+38 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_P) Args
+assign a; variable v;
+Select a such that Modifies("x", "v)
+SyntaxError
+5000
+39 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_P) Args
+assign a; variable v;
+Select a such that Modifies("", v)
+SyntaxError
+5000
+40 - Basic: Syntactically Invalid: Relationship Constraint (Modifies_P) Args
+assign a; variable v;
+Select a such that Modifies(", v)
+SyntaxError
+5000
+41 - Basic: Syntactically Invalid: Relationship Constraint (Calls) Args
+procedure p1;
+Select p1 such that Calls(p1, 2)
+SyntaxError
+5000
+42 - Basic: Syntactically Invalid: Relationship Constraint (Calls) Args
+procedure p1;
+Select p1 such that Calls(2, p1)
+SyntaxError
+5000
+43 - Basic: Syntactically Invalid: Relationship Constraint (Calls) Args
+procedure p1;
+Select p1 such that Calls(2, "v")
+SyntaxError
+5000
+44 - Basic: Syntactically Invalid: Relationship Constraint (Calls) Args
+procedure p1;
+Select p1 such that Calls(p1, "")
+SyntaxError
+5000
+45 - Basic: Syntactically Invalid: Relationship Constraint (Calls) Args
+procedure p1;
+Select p1 such that Calls(p1, ")
+SyntaxError
+5000
+46 - Basic: Syntactically Invalid: Relationship Constraint (Calls*) Args
+procedure p1;
+Select p1 such that Calls*(p1, 2)
+SyntaxError
+5000
+47 - Basic: Syntactically Invalid: Relationship Constraint (Calls*) Args
+procedure p1;
+Select p1 such that Calls*(2, p1)
+SyntaxError
+5000
+48 - Basic: Syntactically Invalid: Relationship Constraint (Calls*) Args
+procedure p1;
+Select p1 such that Calls*(2, "v")
+SyntaxError
+5000
+49 - Basic: Syntactically Invalid: Relationship Constraint (Calls*) Args
+procedure p1;
+Select p1 such that Calls*(p1, "")
+SyntaxError
+5000
+50 - Basic: Syntactically Invalid: Relationship Constraint (Calls*) Args
+procedure p1;
+Select p1 such that Calls*(p1, ")
+SyntaxError
+5000
+51 - Basic: Syntactically Invalid: Relationship Constraint (Next) Args
+assign a;
+Select a such that Next("x", 2)
+SyntaxError
+5000
+52 - Basic: Syntactically Invalid: Relationship Constraint (Next) Args
+assign a;
+Select a such that Next(2, "x")
+SyntaxError
+5000
+53 - Basic: Syntactically Invalid: Relationship Constraint (Next) Args
+assign a;
+Select a such that Next("x", 2)
+SyntaxError
+5000
+54 - Basic: Syntactically Invalid: Relationship Constraint (Next) Args
+assign a;
+Select a such that Next("", 2)
+SyntaxError
+5000
+55 - Basic: Syntactically Invalid: Relationship Constraint (Next) Args
+assign a;
+Select a such that Next(", 2)
+SyntaxError
+5000
+56 - Basic: Syntactically Invalid: Relationship Constraint (Next*) Args
+assign a;
+Select a such that Next*("x", 2)
+SyntaxError
+5000
+57 - Basic: Syntactically Invalid: Relationship Constraint (Next*) Args
+assign a;
+Select a such that Next*(2, "x")
+SyntaxError
+5000
+58 - Basic: Syntactically Invalid: Relationship Constraint (Next*) Args
+assign a;
+Select a such that Next*("x", 2)
+SyntaxError
+5000
+59 - Basic: Syntactically Invalid: Relationship Constraint (Next*) Args
+assign a;
+Select a such that Next*("", 2)
+SyntaxError
+5000
+60 - Basic: Syntactically Invalid: Relationship Constraint (Next*) Args
+assign a;
+Select a such that Next*(", 2)
+SyntaxError
+5000
+61 - Basic: Syntactically Invalid: Relationship Constraint (Affects) Args
+assign a;
+Select a such that Affects("x", 2)
+SyntaxError
+5000
+62 - Basic: Syntactically Invalid: Relationship Constraint (Affects) Args
+assign a;
+Select a such that Affects(2, "x")
+SyntaxError
+5000
+63 - Basic: Syntactically Invalid: Relationship Constraint (Affects) Args
+assign a;
+Select a such that Affects("x", 2)
+SyntaxError
+5000
+64 - Basic: Syntactically Invalid: Relationship Constraint (Affects) Args
+assign a;
+Select a such that Affects("", 2)
+SyntaxError
+5000
+65 - Basic: Syntactically Invalid: Relationship Constraint (Affects) Args
+assign a;
+Select a such that Affects(", 2)
+SyntaxError
+5000
+66 - Basic: Syntactically Invalid: Relationship Constraint (Affects*) Args
+assign a;
+Select a such that Affects*("x", 2)
+SyntaxError
+5000
+67 - Basic: Syntactically Invalid: Relationship Constraint (Affects*) Args
+assign a;
+Select a such that Affects*(2, "x")
+SyntaxError
+5000
+68 - Basic: Syntactically Invalid: Relationship Constraint (Affects*) Args
+assign a;
+Select a such that Affects*("x", 2)
+SyntaxError
+5000
+69 - Basic: Syntactically Invalid: Relationship Constraint (Affects*) Args
+assign a;
+Select a such that Affects*("", 2)
+SyntaxError
+5000
+70 - Basic: Syntactically Invalid: Relationship Constraint (Affects*) Args
+assign a;
+Select a such that Affects*(", 2)
+SyntaxError
+5000
+71 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a;
+Select a pattern a(2, _)
+SyntaxError
+5000
+72 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a;
+Select a pattern a(_, 2)
+SyntaxError
+5000
+73 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a; variable v;
+Select a pattern a("x", v)
+SyntaxError
+5000
+74 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a; variable v;
+Select a pattern a("1", _)
+SyntaxError
+5000
+75 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a;
+Select a pattern a("x", _""_)
+SyntaxError
+5000
+76 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a;
+Select a pattern a("x", _"_)
+SyntaxError
+5000
+77 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a;
+Select a pattern a("x", ""_)
+SyntaxError
+5000
+78 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a;
+Select a pattern a("x", _"")
+SyntaxError
+5000
+79 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a;
+Select a pattern a("x", "")
+SyntaxError
+5000
+80 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a;
+Select a pattern a("x", ")
+SyntaxError
+5000
+81 - Basic: Syntactically Invalid: Pattern Constraint (assign) Args
+assign a;
+Select a pattern a("x",)
+SyntaxError
+5000
+82 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w;
+Select w pattern w(2, _)
+SyntaxError
+5000
+83 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w;
+Select w pattern w(_, 2)
+SyntaxError
+5000
+84 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w; variable v;
+Select w pattern w("x", v)
+SyntaxError
+5000
+85 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w; variable v;
+Select w pattern w("1", _)
+SyntaxError
+5000
+86 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w;
+Select w pattern w("x", _""_)
+SyntaxError
+5000
+87 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w;
+Select w pattern w("x", _"_)
+SyntaxError
+5000
+88 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w;
+Select w pattern w("x", ""_)
+SyntaxError
+5000
+89 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w;
+Select w pattern w("x", _"")
+SyntaxError
+5000
+90 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w;
+Select w pattern w("x", "")
+SyntaxError
+5000
+91 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w;
+Select w pattern w("x", ")
+SyntaxError
+5000
+92 - Basic: Syntactically Invalid: Pattern Constraint (while) Args
+while w;
+Select w pattern w("x",)
+SyntaxError
+5000
+93 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if;
+Select if pattern if(2, _, _)
+SyntaxError
+5000
+94 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if;
+Select if pattern if(_, 2, _)
+SyntaxError
+5000
+95 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if; variable v;
+Select if pattern if("x", v, _)
+SyntaxError
+5000
+96 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if; variable v;
+Select if pattern if("1", _, _)
+SyntaxError
+5000
+97 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if;
+Select if pattern if("x", 2, _)
+SyntaxError
+5000
+98 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if;
+Select if pattern if("x", _, 2)
+SyntaxError
+5000
+99 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if;
+Select if pattern if("x", ""_, _)
+SyntaxError
+5000
+100 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if;
+Select if pattern if("", _, _)
+SyntaxError
+5000
+101 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if;
+Select if pattern if(", _, _)
+SyntaxError
+5000
+102 - Basic: Syntactically Invalid: Pattern Constraint (if) Args
+if if;
+Select if pattern if("x",, _)
+SyntaxError
+5000
+103 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.varname = proc.procName
+SyntaxError
+5000
+104 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.varName = proc.procname
+SyntaxError
+5000
+105 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with .varName = proc.procName
+SyntaxError
+5000
+106 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.varname = "proc".procName
+SyntaxError
+5000
+107 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.varname = 2.procName
+SyntaxError
+5000
+108 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with _.varname = proc.procName
+SyntaxError
+5000
+109 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.varName == proc.procName
+SyntaxError
+5000
+110 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.stmt # = 3
+SyntaxError
+5000
+111 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with 3 = p.stmt #
+SyntaxError
+5000
+112 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.varName = proc
+SyntaxError
+5000
+113 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.varName = c
+SyntaxError
+5000
+114 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.name = "n"
+SyntaxError
+5000
+114 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with "n" = r.name
+SyntaxError
+5000
+114 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with 3 = p.Stmt
+SyntaxError
+5000
+115 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with 3 = p.stmt
+SyntaxError
+5000
+116 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with 3 = c.Value
+SyntaxError
+5000
+117 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.varName = "1"
+SyntaxError
+5000
+118 - Basic: Syntactically Invalid: With Constraint Args
+read r; print p; constant c; proc proc;
+Select r with r.varName - proc.procName
+SyntaxError
+5000
