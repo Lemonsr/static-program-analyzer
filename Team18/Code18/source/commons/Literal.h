@@ -6,6 +6,7 @@
 const std::string READ_SYNONYM_LITERAL = "re";
 const std::string VARIABLE_SYNONYM_LITERAL = "v";
 const std::string PRINT_SYNONYM_LITERAL = "pr";
+const std::string PROC_SYNONYM_LITERAL = "p";
 
 // ATTRIBUTES
 const std::string STMT_NUM_ATTR_LITERAL = "stmt#";
