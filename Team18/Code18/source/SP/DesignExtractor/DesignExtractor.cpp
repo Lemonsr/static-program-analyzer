@@ -21,20 +21,25 @@ spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
   pkbManager(pkbManager), procedureList(procedureList) {
   for (auto& procedure : procedureList) {
     auto& statements = procedure->getStatementLst();
-    for (auto& statement : statements) {
-      if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
-        auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
-        procedure->addCalledVars(callStatement->getVariableName());
-      } else if (std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
-        auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statement);
-        std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
-        for (auto& called : calledSet) {
-          procedure->addCalledVars(called);
-        }
-      }
-    }
+    buildProcCallMap(procedure, statements);
     procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
       procedure->getCalledVars());
+  }
+}
+
+void spa::DesignExtractor::buildProcCallMap(std::shared_ptr<ProcedureStatement>procedure, std::vector<std::shared_ptr<ProgramStatement>>statements) {
+  for (auto& statement : statements) {
+    if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+      auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+      procedure->addCalledVars(callStatement->getVariableName());
+    }
+    else if (std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
+      auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statement);
+      std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
+      for (auto& called : calledSet) {
+        procedure->addCalledVars(called);
+      }
+    }
   }
 }
 
