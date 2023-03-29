@@ -21,16 +21,12 @@ spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
                                       procedureList) :
   pkbManager(pkbManager), procedureList(procedureList) {
   for (auto& procedure : procedureList) {
-    auto& statements = procedure->getStatementLst();
-    buildProcCallMap(procedure, statements);
-    procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
-      procedure->getCalledVars());
+    buildProcCallMap(procedure);
   }
 }
 
-void spa::DesignExtractor::buildProcCallMap(std::shared_ptr<ProcedureStatement> procedure,
-                                            std::vector<std::shared_ptr<ProgramStatement>>
-                                            statements) {
+void spa::DesignExtractor::buildProcCallMap(std::shared_ptr<ProcedureStatement> procedure) {
+  auto& statements = procedure->getStatementLst();
   for (auto& statement : statements) {
     if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
       auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
@@ -43,6 +39,7 @@ void spa::DesignExtractor::buildProcCallMap(std::shared_ptr<ProcedureStatement> 
       }
     }
   }
+  procCallMap.emplace(procedure->getProcedureVarToken().getValue(), procedure->getCalledVars());
 }
 
 void spa::DesignExtractor::extractRelationship() {
