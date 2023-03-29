@@ -5,8 +5,7 @@
 #include <utility>
 
 #include "NonContainerStatement.h"
-
-constexpr int DUMMY_NODE_VAL = -1;
+#include "Literal.h"
 
 std::vector<std::shared_ptr<spa::ProgramStatement>>& spa::ContainerStatement::getStatementList() {
   return statementList;

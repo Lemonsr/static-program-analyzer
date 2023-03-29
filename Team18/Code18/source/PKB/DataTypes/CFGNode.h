@@ -4,13 +4,14 @@
 #include <unordered_set>
 
 #include "PKBTypes.h"
+#include "Literal.h"
 
 namespace spa {
 class PKBManager;
 
 class CFGNode {
  private:
-  int lineNumber = -1;
+  int lineNumber = DUMMY_NODE_VAL;
   bool isDummy = true;
   StatementType statementType;
   std::unordered_set<std::string> modifiedVariables;

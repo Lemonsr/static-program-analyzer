@@ -68,3 +68,6 @@ const std::string NEXT_LITERAL = "Next";
 const std::string NEXT_STAR_LITERAL = "Next*";
 const std::string AFFECTS_LITERAL = "Affects";
 const std::string AFFECTS_STAR_LITERAL = "Affects*";
+
+// CFG LITERALS
+const int DUMMY_NODE_VAL = -1;
