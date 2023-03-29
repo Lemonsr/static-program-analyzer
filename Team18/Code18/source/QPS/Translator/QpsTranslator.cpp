@@ -1,4 +1,5 @@
 #include "QpsTranslator.h"
+#include "Literal.h"
 
 #include <unordered_set>
 #include <sstream>
@@ -10,7 +11,7 @@ std::string spa::QpsTranslator::rowToString(QpsResultRow row) {
   std::stringstream ss;
   for (auto& itr = row.begin(); itr != row.end(); itr++) {
     if (itr != row.begin()) {
-      ss << " ";
+      ss << SPACE_LITERAL;
     }
     ss << (*itr).toString();
   }
@@ -22,9 +23,9 @@ std::list<std::string> spa::QpsTranslator::translate(SelectClauseType selectType
   std::list<std::string> translatedResult;
   if (selectType == SelectClauseType::SELECT_BOOLEAN) {
     if (result.isEmpty()) {
-      translatedResult.push_back("FALSE");
+      translatedResult.push_back(FALSE_LITERAL);
     } else {
-      translatedResult.push_back("TRUE");
+      translatedResult.push_back(TRUE_LITERAL);
     }
     return translatedResult;
   }

@@ -4,6 +4,8 @@
 #include <string>
 #include <unordered_map>
 
+#include "Literal.h"
+
 bool spa::PqlSemanticChecker::isSemanticallyValid(ParsedQuery& parsedQuery) {
   for (auto& p : parsedQuery.getDeclarationsCount()) {
     if (p.second > 1) {
@@ -179,10 +181,10 @@ bool spa::PqlSemanticChecker::checkCallsArguments(PqlArgument& firstArg, PqlArgu
 
 spa::QpsValueType spa::PqlSemanticChecker::getWithArgumentType(WithArgument& withArgument) {
   std::unordered_map<std::string, QpsValueType> attributeNameTypeMap = {
-    {"stmt#", QpsValueType::INTEGER},
-    {"value", QpsValueType::INTEGER},
-    {"procName", QpsValueType::STRING},
-    {"varName", QpsValueType::STRING},
+    {STMT_NUM_ATTR_LITERAL, QpsValueType::INTEGER},
+    {VALUE_ATTR_LITERAL, QpsValueType::INTEGER},
+    {PROC_NAME_ATTR_LITERAL, QpsValueType::STRING},
+    {VAR_NAME_ATTR_LITERAL, QpsValueType::STRING},
   };
 
   if (withArgument.getType() == WithArgumentType::WITH_VALUE) {

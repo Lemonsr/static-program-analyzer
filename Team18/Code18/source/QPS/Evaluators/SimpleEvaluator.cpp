@@ -1,5 +1,6 @@
 #include "SimpleEvaluator.h"
 #include "PqlAttributes.h"
+#include "Literal.h"
 
 spa::SimpleEvaluator::SimpleEvaluator(std::string selectSynonym, DesignEntityType designEntityType) :
   selectSynonym(selectSynonym), designEntityType(designEntityType) {
@@ -35,12 +36,12 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluate(PKBManager& pkbManager) {
 }
 
 spa::QpsResultTable spa::SimpleEvaluator::evaluateRead(PKBManager& pkbManager) {
-  PKBQueryArg readSynonymArg(PqlArgument(ArgumentType::SYNONYM, "re", designEntityType));
-  PKBQueryArg varSynonymArg(PqlArgument(ArgumentType::SYNONYM, "v", DesignEntityType::VARIABLE));
+  PKBQueryArg readSynonymArg(PqlArgument(ArgumentType::SYNONYM, READ_SYNONYM_LITERAL, designEntityType));
+  PKBQueryArg varSynonymArg(PqlArgument(ArgumentType::SYNONYM, VARIABLE_SYNONYM_LITERAL, DesignEntityType::VARIABLE));
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym + "." + attr);
+    resultTable.addHeader(selectSynonym + FULL_STOP_LITERAL + attr);
   }
 
   QueryResult result = pkbManager.getRelationship(RelationshipType::MODIFIES, readSynonymArg, varSynonymArg);
@@ -54,12 +55,12 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateRead(PKBManager& pkbManager) {
 }
 
 spa::QpsResultTable spa::SimpleEvaluator::evaluatePrint(PKBManager& pkbManager) {
-  PKBQueryArg printSynonymArg(PqlArgument(ArgumentType::SYNONYM, "pr", designEntityType));
-  PKBQueryArg varSynonymArg(PqlArgument(ArgumentType::SYNONYM, "v", DesignEntityType::VARIABLE));
+  PKBQueryArg printSynonymArg(PqlArgument(ArgumentType::SYNONYM, PRINT_SYNONYM_LITERAL, designEntityType));
+  PKBQueryArg varSynonymArg(PqlArgument(ArgumentType::SYNONYM, VARIABLE_SYNONYM_LITERAL, DesignEntityType::VARIABLE));
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym + "." + attr);
+    resultTable.addHeader(selectSynonym + FULL_STOP_LITERAL + attr);
   }
 
   QueryResult result = pkbManager.getRelationship(RelationshipType::USES, printSynonymArg, varSynonymArg);
@@ -76,7 +77,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateCall(PKBManager& pkbManager) {
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym + "." + attr);
+    resultTable.addHeader(selectSynonym + FULL_STOP_LITERAL + attr);
   }
 
   QueryResult result = pkbManager.getCallsProc();
@@ -93,7 +94,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateStatementNumbers(PKBManager& p
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym + "." + attr);
+    resultTable.addHeader(selectSynonym + FULL_STOP_LITERAL + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);
@@ -108,7 +109,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateNames(PKBManager& pkbManager) 
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym + "." + attr);
+    resultTable.addHeader(selectSynonym + FULL_STOP_LITERAL + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);
@@ -123,7 +124,7 @@ spa::QpsResultTable spa::SimpleEvaluator::evaluateConstants(PKBManager& pkbManag
   QpsResultTable resultTable;
   resultTable.addHeader(selectSynonym);
   for (auto& attr : pqlAttributesMap[designEntityType]) {
-    resultTable.addHeader(selectSynonym + "." + attr);
+    resultTable.addHeader(selectSynonym + FULL_STOP_LITERAL + attr);
   }
 
   QueryResult result = pkbManager.getEntity(designEntityType);

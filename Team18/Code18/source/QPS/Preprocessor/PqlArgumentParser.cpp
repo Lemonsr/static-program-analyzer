@@ -2,11 +2,13 @@
 
 #include <string>
 
+#include "Literal.h"
+
 std::optional<spa::PqlArgument> spa::PqlArgumentParser::getSynonym(
     Stream<Token>& tokens,
     ParsedQuery& query
 ) {
-  if (!tokens.match({ { TOKEN_NAME, ""} })) {
+  if (!tokens.match({ { TOKEN_NAME, EMPTY_LITERAL} })) {
     return {};
   }
   std::string val = tokens[0].getValue();
@@ -19,17 +21,17 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getSynonym(
 std::optional<spa::PqlArgument> spa::PqlArgumentParser::getWildcard(
     Stream<Token>& tokens
 ) {
-  if (!tokens.match({ { TOKEN_UNDERSCORE, "_"} })) {
+  if (!tokens.match({ { TOKEN_UNDERSCORE, UNDERSCORE_LITERAL} })) {
     return {};
   }
   tokens.seek(1);
-  return { { WILDCARD, "_", {} } };
+  return { { WILDCARD, UNDERSCORE_LITERAL, {} } };
 }
 
 std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLineNo(
   Stream<Token>& tokens
 ) {
-  if (!tokens.match({ { TOKEN_INTEGER, ""} })) {
+  if (!tokens.match({ { TOKEN_INTEGER, EMPTY_LITERAL} })) {
     return {};
   }
   std::string val = tokens[0].getValue();
@@ -41,9 +43,9 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLiteralString(
   Stream<Token>& tokens
 ) {
   bool matchResult = tokens.match({
-    {TOKEN_DOUBLE_QUOTES, "\""},
-    {TOKEN_NAME, ""},
-    {TOKEN_DOUBLE_QUOTES, "\""}
+    {TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL},
+    {TOKEN_NAME, EMPTY_LITERAL},
+    {TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL}
   });
   if (!matchResult) {
     return {};
