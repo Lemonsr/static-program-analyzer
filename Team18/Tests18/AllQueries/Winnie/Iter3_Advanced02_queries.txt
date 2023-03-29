@@ -167,3 +167,4 @@ none
 stmt s1; assign a1a, a2a, a2b, a2c; if i1; variable v1; call c2a, c2b;
 Select <v1, a2a> such that Affects(a1a, s1) pattern a1a(_, _"58"_) such that Next*(i1, s1) pattern i1(v1, _, _) such that Modifies(a1a, v1) such that Affects(a2a, a2b) and Next*(a2a, c2a) and Next*(c2a, c2b) and Next*(c2b, a2b)
 nwRMADrc 49,v 119,xbllq 60,nwRMADrc 88,nwRMADrc 60,xbllq 88,xbllq 67,v 60,nwRMADrc 119,nwRMADrc 92,v 88,xbllq 119,v 67,nwRMADrc 67,v 49,xbllq 116,v 116,xbllq 92,nwRMADrc 116,nwRMADrc 71,xbllq 65,v 65,nwRMADrc 65,v 92,xbllq 71,v 71,xbllq 109,xbllq 52,v 109,v 52,nwRMADrc 109,nwRMADrc 52,xbllq 89,v 89,nwRMADrc 89,xbllq 132,v 132,nwRMADrc 132,xbllq 68,v 68,nwRMADrc 68,xbllq 49
+5000
