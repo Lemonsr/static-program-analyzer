@@ -76,8 +76,9 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::parse(Stream<Token>& tokens,
     return PQL_PARSE_SYNTAX_ERROR;
   }
   std::string relationship = tokens[0].getValue();
+  int index = tokens[0].getIndex();
   tokens.seek(1);
-  if (tokens.match({ { TOKEN_MULTIPLY, "*" } })) {
+  if (tokens.match({ { TOKEN_MULTIPLY, "*" } }) && tokens[0].getIndex() == index + relationship.size()) {
     relationship.push_back('*');
     tokens.seek(1);
   }
