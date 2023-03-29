@@ -9,8 +9,6 @@ spa::WithEvaluator::WithEvaluator(WithArgument& firstArg, WithArgument& secondAr
                                                                                     secondArg(secondArg) {
 }
 
-
-
 spa::QpsResultTable spa::WithEvaluator::evaluateAttributes(PKBManager& pkbManager,
                                                            const std::string& first, const std::string& second) {
   std::vector<QpsValue> values;
