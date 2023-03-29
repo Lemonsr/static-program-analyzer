@@ -1,0 +1,240 @@
+1A - Affects relationship: Invalid single quotes in right param (Syntactic err)
+print pn;
+Select pn such that Affects(pn, 'volume')
+SyntaxError
+5000
+1B - Affects relationship: Invalid single quotes in right param (Syntactic err)
+print pn;
+Select BOOLEAN such that Affects(pn, 'volume')
+SyntaxError
+5000
+2A - Affects relationship: Invalid undeclared synonym in right param (Syntactic err)
+print pn;
+Select pn such that Affects(pn, volume)
+SemanticError
+5000
+2B - Affects relationship: Invalid undeclared synonym in right param (Syntactic err)
+print pn;
+Select BOOLEAN such that Affects(pn, volume)
+SemanticError
+5000
+3A - Affects relationship: Invalid name in right param with name not in program (Syntactic err)
+print pn;
+Select pn such that Affects(pn, "thisDoesNotExist")
+SyntaxError
+5000
+3B - Affects relationship: Invalid name in right param with name not in program (Syntactic err)
+print pn;
+Select BOOLEAN such that Affects(pn, "thisDoesNotExist")
+SyntaxError
+5000
+4A - Affects relationship: Invalid name in right param with name in program (Syntactic err)
+print pn;
+Select pn such that Affects(pn, "volume")
+SyntaxError
+5000
+4B - Affects relationship: Invalid name in right param with name in program (Syntactic err)
+print pn;
+Select BOOLEAN such that Affects(pn, "volume")
+SyntaxError
+5000
+5A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; variable v;
+Select pn such that Affects(pn, v)
+SemanticError
+5000
+5B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; variable v;
+Select v such that Affects(pn, v)
+SemanticError
+5000
+5C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; variable v;
+Select BOOLEAN such that Affects(pn, v)
+SemanticError
+5000
+6A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; stmt s;
+Select pn such that Affects(pn, s)
+
+5000
+6B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; stmt s;
+Select s such that Affects(pn, s)
+
+5000
+6C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; stmt s;
+Select BOOLEAN such that Affects(pn, s)
+FALSE
+5000
+7A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; stmt n;
+Select pn such that Affects(pn, n)
+
+5000
+7B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; stmt n;
+Select n such that Affects(pn, n)
+
+5000
+7C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; stmt n;
+Select BOOLEAN such that Affects(pn, n)
+FALSE
+5000
+9A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn;
+Select pn such that Affects(pn, pn)
+
+5000
+9B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn;
+Select BOOLEAN such that Affects(pn, pn)
+FALSE
+5000
+9A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn, pn1;
+Select pn such that Affects(pn, pn1)
+
+5000
+9B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn, pn1;
+Select pn1 such that Affects(pn, pn1)
+
+5000
+9C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn, pn1;
+Select BOOLEAN such that Affects(pn, pn1)
+FALSE
+5000
+10A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; read re;
+Select pn such that Affects(pn, re)
+
+5000
+10B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; read re;
+Select re such that Affects(pn, re)
+
+5000
+10C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; read re;
+Select BOOLEAN such that Affects(pn, re)
+FALSE
+5000
+11A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; if ifs;
+Select pn such that Affects(pn, ifs)
+
+5000
+11B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; if ifs;
+Select ifs such that Affects(pn, ifs)
+
+5000
+11C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; if ifs;
+Select BOOLEAN such that Affects(pn, ifs)
+FALSE
+5000
+12A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; while w;
+Select pn such that Affects(pn, w)
+
+5000
+12B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; while w;
+Select w such that Affects(pn, w)
+
+5000
+12C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; while w;
+Select BOOLEAN such that Affects(pn, w)
+FALSE
+5000
+13A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; assign a;
+Select pn such that Affects(pn, a)
+
+5000
+13B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; assign a;
+Select a such that Affects(pn, a)
+
+5000
+13C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; assign a;
+Select BOOLEAN such that Affects(pn, a)
+FALSE
+5000
+14A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn;
+Select pn such that Affects(pn, 16)
+
+5000
+14B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn;
+Select BOOLEAN such that Affects(pn, 16)
+FALSE
+5000
+14C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn;
+Select BOOLEAN such that Affects(pn, 1)
+FALSE
+5000
+15A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; constant c;
+Select pn such that Affects(pn, c)
+SemanticError
+5000
+15B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; constant c;
+Select c such that Affects(pn, c)
+SemanticError
+5000
+15C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; constant c;
+Select BOOLEAN such that Affects(pn, c)
+SemanticError
+5000
+16A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; procedure p;
+Select pn such that Affects(pn, p)
+SemanticError
+5000
+16B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; procedure p;
+Select p such that Affects(pn, p)
+SemanticError
+5000
+16C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; procedure p;
+Select BOOLEAN such that Affects(pn, p)
+SemanticError
+5000
+17A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; call cl;
+Select pn such that Affects(pn, cl)
+
+5000
+17B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; call cl;
+Select cl such that Affects(pn, cl)
+
+5000
+17C - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn; call cl;
+Select BOOLEAN such that Affects(pn, cl)
+FALSE
+5000
+18A - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn;
+Select pn such that Affects(pn, _)
+
+5000
+18B - Affects relationship: Invalid print synonym in left param (Semantic err)
+print pn;
+Select BOOLEAN such that Affects(pn, _)
+FALSE
+5000

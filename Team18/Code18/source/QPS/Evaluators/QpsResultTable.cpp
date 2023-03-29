@@ -65,6 +65,10 @@ void spa::QpsResultTable::addHeader(PqlArgument arg) {
   addHeader(arg.getValue());
 }
 
+bool spa::QpsResultTable::hasHeader(const std::string& header) {
+  return headerIndexMap.find(header) != headerIndexMap.end();
+}
+
 std::pair<int, int> spa::QpsResultTable::getDimension() {
   return { headers.size(), rows.size() };
 }

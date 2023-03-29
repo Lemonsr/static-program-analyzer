@@ -201,6 +201,9 @@
     <ClInclude Include="..\source\QPS\Evaluators\StmtStmtEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\commons\Literal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\PKB\PKB.cpp">

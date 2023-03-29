@@ -9,7 +9,11 @@
 #include <cctype>
 #include <unordered_map>
 
-const std::unordered_map<std::string, spa::TokenType> tokenTypes{
+const std::string INVALID_NAME_ERROR = "Invalid name in SIMPLE code";
+const std::string LEADING_ZERO_ERROR = "Leading Zero in Integer";
+const std::string UNKNOWN_SYMBOL_ERROR = "Unknown Symbol: ";
+
+const std::unordered_map<std::string, spa::TokenType> tokenTypes {
   {"{", spa::TOKEN_OPEN_BRACE},
   {"}", spa::TOKEN_CLOSE_BRACE},
   {"(", spa::TOKEN_OPEN_BRACKET},
@@ -47,11 +51,11 @@ void spa::Tokenizer::pushWordToken(spa::Stream<spa::Token>& tokens,
   } else {
     for (char c : word) {
       if (!std::isdigit(c)) {
-        throw std::runtime_error("Invalid name in SIMPLE code");
+        throw std::runtime_error(INVALID_NAME_ERROR);
       }
     }
     if (word.size() > 1 && word[0] == '0') {
-      throw std::runtime_error("Leading Zero in Integer");
+      throw std::runtime_error(LEADING_ZERO_ERROR);
     }
     tokens.pushBack({spa::TOKEN_INTEGER, word, index - static_cast<int>(word.size())});
   }
@@ -76,7 +80,7 @@ void spa::Tokenizer::pushSymbolToken(std::istream& srcStream,
   }
   auto it = tokenTypes.find(s);
   if (it == tokenTypes.end()) {
-    throw std::runtime_error(std::string("Unknown Symbol: ").append(s));
+    throw std::runtime_error(std::string(UNKNOWN_SYMBOL_ERROR).append(s));
   }
   tokens.pushBack({it->second, it->first, index});
 }
