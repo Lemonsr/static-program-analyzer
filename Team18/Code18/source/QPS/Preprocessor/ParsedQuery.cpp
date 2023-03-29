@@ -53,10 +53,15 @@ spa::PqlClauseType spa::ParsedQuery::getLastAddedClause() {
 
 void spa::ParsedQuery::addSelectColumn(std::string selectColumn) {
   selectColumns.push_back(selectColumn);
+  selectColumnsSet.insert(selectColumn);
 }
 
 std::vector<std::string>& spa::ParsedQuery::getSelectColumns() {
   return selectColumns;
+}
+
+bool spa::ParsedQuery::hasSelectColumn(const std::string& selectColumn) {
+  return selectColumnsSet.find(selectColumn) != selectColumnsSet.end();
 }
 
 void spa::ParsedQuery::addSuchThatClause(SuchThatClause clause) {

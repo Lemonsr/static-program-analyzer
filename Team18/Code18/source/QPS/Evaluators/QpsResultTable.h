@@ -48,6 +48,7 @@ class QpsResultTable {
   void fillQpsRowMap(QpsRowMap& m, QpsResultTable& table, std::vector<int>& selectedColumns);
  public:
   std::vector<std::string> getHeaderNames();
+  bool hasHeader(const std::string& header);
   void addHeader(const std::string& header);
   void addHeader(PqlArgument header);
   std::pair<int, int> getDimension();
