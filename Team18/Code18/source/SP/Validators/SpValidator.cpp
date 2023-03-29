@@ -2,9 +2,10 @@
 #include <unordered_set>
 #include <iostream>
 #include <vector>
+#include "literal.h"
+#include "PKB.h"
 #include "SpValidator.h"
 #include "Stream.h"
-#include "PKB.h"
 #include "UtilsFunction.h"
 
 const std::string INVALID_SRC_CODE_ERROR = "Invalid Source Code: ";
@@ -39,10 +40,10 @@ bool spa::SpValidator::validateGrammar() {
   try {
     while (hasRemaining()) {
       Token currToken = getToken();
-      if (currToken.getValue() != "procedure") {
+      if (currToken.getValue() != PROCEDURE_LITERAL) {
         throw std::exception(NOT_STARTING_WITH_PROC_ERROR.data());
       }
-      tokens[idx - 1] = Token(TOKEN_PROCEDURE, "procedure");
+      tokens[idx - 1] = Token(TOKEN_PROCEDURE, PROCEDURE_LITERAL);
       validateProcedure();
     }
     validateCallExists();
@@ -178,12 +179,12 @@ void spa::SpValidator::validateEqual() {
 void spa::SpValidator::validateReadPrintCall() {
   Token currToken = getToken();
   std::string currTokenValue = currToken.getValue();
-  if (currTokenValue == "read") {
-    tokens[idx - 1] = Token(TOKEN_READ, "read");
-  } else if (currTokenValue == "print") {
-    tokens[idx - 1] = Token(TOKEN_PRINT, "print");
-  } else if (currTokenValue == "call") {
-    tokens[idx - 1] = Token(TOKEN_CALL, "call");
+  if (currTokenValue == READ_LITERAL) {
+    tokens[idx - 1] = Token(TOKEN_READ, READ_LITERAL);
+  } else if (currTokenValue == PRINT_LITERAL) {
+    tokens[idx - 1] = Token(TOKEN_PRINT, PRINT_LITERAL);
+  } else if (currTokenValue == CALL_LITERAL) {
+    tokens[idx - 1] = Token(TOKEN_CALL, CALL_LITERAL);
     std::string callValue = peekNextToken(0).getValue();
     callNames.insert(callValue);
   } else {
@@ -208,10 +209,10 @@ void spa::SpValidator::validateCallExists() {
 
 void spa::SpValidator::validateWhileIf() {
   std::string nextTokenValue = peekNextToken().getValue();
-  if (nextTokenValue == "if") {
+  if (nextTokenValue == IF_LITERAL) {
     tokens[idx] = Token(TOKEN_IF, nextTokenValue);
     validateIf();
-  } else if (nextTokenValue == "while") {
+  } else if (nextTokenValue == WHILE_LITERAL) {
     tokens[idx] = Token(TOKEN_WHILE, nextTokenValue);
     validateWhile();
   } else {
@@ -251,11 +252,11 @@ void spa::SpValidator::validateIf() {
     throw std::exception(MISSING_IF_CLOSE_BRACKET_ERROR.data());
   }
 
-  if (!hasRemaining() || getToken().getValue() != "then") {
+  if (!hasRemaining() || getToken().getValue() != THEN_LITERAL) {
     throw std::exception(MISSING_THEN_ERROR.data());
   }
 
-  tokens[idx - 1] = Token(TOKEN_THEN, "then");
+  tokens[idx - 1] = Token(TOKEN_THEN, THEN_LITERAL);
 
   if (!hasRemaining() || !UtilsFunction::isValidOpenBrace(getToken())) {
     throw std::exception(MISSING_THEN_OPEN_BRACE_ERROR.data());
@@ -267,11 +268,11 @@ void spa::SpValidator::validateIf() {
     throw std::exception(MISSING_THEN_CLOSE_BRACE_ERROR.data());
   }
 
-  if (!hasRemaining() || getToken().getValue() != "else") {
+  if (!hasRemaining() || getToken().getValue() != ELSE_LITERAL) {
     throw std::exception(MISSING_ELSE_ERROR.data());
   }
 
-  tokens[idx - 1] = Token(TOKEN_ELSE, "else");
+  tokens[idx - 1] = Token(TOKEN_ELSE, ELSE_LITERAL);
 
   if (!hasRemaining() || !UtilsFunction::isValidOpenBrace(getToken())) {
     throw std::exception(MISSING_ELSE_OPEN_BRACE_ERROR.data());
