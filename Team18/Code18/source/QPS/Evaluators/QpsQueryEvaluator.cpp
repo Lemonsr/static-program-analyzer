@@ -99,34 +99,49 @@ std::vector<spa::QpsResultTable*> spa::TableGroup::getBestPlan() {
   return result;
 }
 
+void spa::TableGroup::dropColumns(QpsResultTable& table,
+                                  std::vector<std::string>& headers,
+                                  std::vector<std::string>& selectColumns) {
+  if (!selectColumns.empty() && selectColumns.size() < headers.size()) {
+    table = table.getColumns(selectColumns);
+  }
+}
+
+void spa::TableGroup::dropIncomingTableColumns(QpsResultTable& table,
+                                               QpsResultTable& result,
+                                               ParsedQuery& parsedQuery) {
+  auto tableHeaders = table.getHeaderNames();
+  std::vector<std::string> tableSelectColumns;
+  for (auto& header : tableHeaders) {
+    int usage = --headerUsageMap[header];
+    if (usage > 0 || result.hasHeader(header) || parsedQuery.hasSelectColumn(header)) {
+      tableSelectColumns.push_back(header);
+    }
+  }
+  dropColumns(table, tableHeaders, tableSelectColumns);
+}
+
+void spa::TableGroup::dropResultTableColumns(QpsResultTable& result,
+                                               ParsedQuery& parsedQuery) {
+  auto resultHeaders = result.getHeaderNames();
+  std::vector<std::string> resultSelectColumns;
+  for (auto& header : resultHeaders) {
+    if (headerUsageMap[header] > 0 || parsedQuery.hasSelectColumn(header)) {
+      resultSelectColumns.push_back(header);
+    }
+  }
+  dropColumns(result, resultHeaders, resultSelectColumns);
+}
+
 spa::QpsResultTable spa::TableGroup::getTable(ParsedQuery& parsedQuery) {
   QpsResultTable result;
   bool init = false;
   auto tables = getBestPlan();
   for (auto tableP : tables) {
     auto& table = *tableP;
-    auto tableHeaders = table.getHeaderNames();
-    std::vector<std::string> tableSelectColumns;
-    for (auto& header : tableHeaders) {
-      int usage = --headerUsageMap[header];
-      if (usage > 0 || result.hasHeader(header) || parsedQuery.hasSelectColumn(header)) {
-        tableSelectColumns.push_back(header);
-      }
-    }
-    if (!tableSelectColumns.empty() && tableSelectColumns.size() < tableHeaders.size()) {
-      table = table.getColumns(tableSelectColumns);
-    }
+    dropIncomingTableColumns(table, result, parsedQuery);
     innerJoin(table, result, init);
-    auto resultHeaders = result.getHeaderNames();
-    std::vector<std::string> resultSelectColumns;
-    for (auto& header : resultHeaders) {
-      if (headerUsageMap[header] > 0 || parsedQuery.hasSelectColumn(header)) {
-        resultSelectColumns.push_back(header);
-      }
-    }
-    if (!resultSelectColumns.empty() && resultSelectColumns.size() < resultHeaders.size()) {
-      result = result.getColumns(resultSelectColumns);
-    }
+    dropResultTableColumns(result, parsedQuery);
   }
   if (!init) {
     QpsResultTable dummy;
@@ -181,7 +196,7 @@ spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   QpsResultTable result;
   result.addHeader("");
   result.addRow({ QpsValue(0) });
-  
+
   extractTables(tables, pkbManager);
 
   for (auto& table : tables) {
