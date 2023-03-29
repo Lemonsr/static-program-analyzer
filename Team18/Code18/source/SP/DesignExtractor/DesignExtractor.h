@@ -32,8 +32,7 @@ class DesignExtractor {
   std::vector<std::shared_ptr<ProcedureStatement>>& procedureList;
   std::unordered_map<std::string, std::unordered_set<std::string>> procCallMap;
 
-  void buildProcCallMap(std::shared_ptr<ProcedureStatement>procedure,
-                        std::vector<std::shared_ptr<ProgramStatement>> statements);
+  void buildProcCallMap(std::shared_ptr<ProcedureStatement>procedure);
   void extractDesignAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
   void extractParentAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
   void extractFollows(std::vector<std::shared_ptr<ProgramStatement>>& statementList);
