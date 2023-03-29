@@ -31,8 +31,10 @@ spa::TableGroup* spa::TableGroup::getParent() {
 
 void spa::TableGroup::unionChild(TableGroup* child) {
   child->parent = this;
-  for (auto table : child->tables) {
-    tables.insert(table);
+  for (auto& p : child->headerTablesMap) {
+    for (auto tableP : p.second) {
+      headerTablesMap[p.first].insert(tableP);
+    }
   }
   for (auto& p : child->headerUsageMap) {
     headerUsageMap[p.first] += p.second;
@@ -40,8 +42,8 @@ void spa::TableGroup::unionChild(TableGroup* child) {
 }
 
 void spa::TableGroup::addTable(QpsResultTable& other) {
-  tables.insert(&other);
   for (auto& header : other.getHeaderNames()) {
+    headerTablesMap[header].insert(&other);
     ++headerUsageMap[header];
   }
 }
@@ -62,38 +64,47 @@ void spa::TableGroup::innerJoin(QpsResultTable& table, QpsResultTable& result, b
   }
 }
 
-spa::OrderedTable::OrderedTable(QpsResultTable& table,
-                                std::unordered_map<std::string, int>& headerUsageMap) {
-  tableP = &table;
-  for (auto& header : table.getHeaderNames()) {
-    int usage = headerUsageMap[header];
-    if (usage > compareUsage) {
-      compareUsage = usage;
-      compareHeader = header;
-    } else if (usage == compareUsage && header < compareHeader) {
-      compareHeader = header;
+std::vector<spa::QpsResultTable*> spa::TableGroup::getBestPlan() {
+  std::string startingHeader;
+  int startingHeaderUsage = INT_MAX;
+  for (auto& p : headerUsageMap) {
+    if (p.second < startingHeaderUsage) {
+      startingHeaderUsage = p.second;
+      startingHeader = p.first;
     }
   }
-}
-
-bool spa::OrderedTablePriority::operator()(const OrderedTable& lhs, const OrderedTable& rhs) const {
-  if (lhs.compareUsage != rhs.compareUsage) {
-    return lhs.compareUsage < rhs.compareUsage;
+  std::vector<QpsResultTable*> result;
+  std::unordered_set<QpsResultTable*> usedTables;
+  std::unordered_set<std::string> seenHeaders;
+  std::queue<std::string> headers;
+  headers.push(startingHeader);
+  while (!headers.empty()) {
+    auto header = headers.front();
+    headers.pop();
+    if (seenHeaders.find(header) != seenHeaders.end()) {
+      continue;
+    }
+    seenHeaders.insert(header);
+    for (auto tableP : headerTablesMap[header]) {
+      if (usedTables.find(tableP) != usedTables.end()) {
+        continue;
+      }
+      usedTables.insert(tableP);
+      result.push_back(tableP);
+      for (auto& header : tableP->getHeaderNames()) {
+        headers.push(header);
+      }
+    }
   }
-  return lhs.compareHeader > rhs.compareHeader;
+  return result;
 }
 
 spa::QpsResultTable spa::TableGroup::getTable(ParsedQuery& parsedQuery) {
   QpsResultTable result;
   bool init = false;
-  std::priority_queue<OrderedTable, std::vector<OrderedTable>, OrderedTablePriority> orderedTables;
-  for (auto it = tables.begin(); it != tables.end(); ++it) {
-    orderedTables.push({ *(*it), headerUsageMap });
-  }
-  while (!orderedTables.empty()) {
-    auto orderedTable = orderedTables.top();
-    orderedTables.pop();
-    auto& table = *(orderedTable.tableP);
+  auto tables = getBestPlan();
+  for (auto tableP : tables) {
+    auto& table = *tableP;
     auto tableHeaders = table.getHeaderNames();
     std::vector<std::string> tableSelectColumns;
     for (auto& header : tableHeaders) {

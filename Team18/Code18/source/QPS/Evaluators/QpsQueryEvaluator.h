@@ -10,25 +10,13 @@
 
 namespace spa {
 
-struct OrderedTable {
-  QpsResultTable* tableP = nullptr;
-  int compareUsage = 0;
-  std::string compareHeader;
-
-  OrderedTable() = default;
-  OrderedTable(QpsResultTable& table, std::unordered_map<std::string, int>& headerUsageMap);
-};
-
-struct OrderedTablePriority {
-  bool operator()(const OrderedTable& lhs, const OrderedTable& rhs) const;
-};
-
 class TableGroup {
  private:
   TableGroup* parent;
   std::unordered_map<std::string, int> headerUsageMap;
-  std::unordered_set<QpsResultTable*> tables;
+  std::unordered_map<std::string, std::unordered_set<QpsResultTable*>> headerTablesMap;
   void innerJoin(QpsResultTable& table, QpsResultTable& result, bool& init);
+  std::vector<QpsResultTable*> getBestPlan();
  public:
   TableGroup();
   bool isParent();
