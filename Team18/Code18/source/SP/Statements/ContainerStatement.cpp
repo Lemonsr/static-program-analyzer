@@ -6,6 +6,8 @@
 
 #include "NonContainerStatement.h"
 
+constexpr int DUMMY_NODE_VAL = -1;
+
 std::vector<std::shared_ptr<spa::ProgramStatement>>& spa::ContainerStatement::getStatementList() {
   return statementList;
 }
@@ -75,7 +77,7 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::IfContainerStatement::processStatemen
   pkbManager.addEdge(cfgIfConditionNodeLineNum, cfgThenInnerBlkNodeStart);
   pkbManager.addEdge(cfgIfConditionNodeLineNum, cfgElseInnerBlkNodeStart);
   QueryResult res = pkbManager.getCfgNode(cfgIfConditionNodeLineNum);
-  if (cfgThenInnerBlkNodeEnd == -1) {
+  if (cfgThenInnerBlkNodeEnd == DUMMY_NODE_VAL) {
     for (auto& incomingNode : cfgThenInnerBlockNode.second.getIncomingEdges()) {
       QueryResult then = pkbManager.getCfgNode(incomingNode->getLineNumber());
       dummyNode.addIncomingEdge(then.getCfgNodes()[0]);
@@ -84,7 +86,7 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::IfContainerStatement::processStatemen
     QueryResult then = pkbManager.getCfgNode(cfgThenInnerBlkNodeEnd);
     dummyNode.addIncomingEdge(then.getCfgNodes()[0]);
   }
-  if (cfgElseInnerBlkNodeEnd == -1) {
+  if (cfgElseInnerBlkNodeEnd == DUMMY_NODE_VAL) {
     for (auto& incomingNode : cfgElseInnerBlockNode.second.getIncomingEdges()) {
       QueryResult e = pkbManager.getCfgNode(incomingNode->getLineNumber());
       dummyNode.addIncomingEdge(e.getCfgNodes()[0]);
@@ -108,7 +110,7 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::WhileContainerStatement::processState
   int const cfgWhileInnerBlkNodeStart = cfgWhileInnerBlockNode.first.getLineNumber();
   int const cfgWhileInnerBlkNodeEnd = cfgWhileInnerBlockNode.second.getLineNumber();
   pkbManager.addEdge(cfgWhileConditionNodeLineNum, cfgWhileInnerBlkNodeStart);
-  if (cfgWhileInnerBlkNodeEnd == -1) {
+  if (cfgWhileInnerBlkNodeEnd == DUMMY_NODE_VAL) {
     for (auto& incomingNode : cfgWhileInnerBlockNode.second.getIncomingEdges()) {
       pkbManager.addEdge(incomingNode->getLineNumber(), cfgWhileConditionNodeLineNum);
     }
@@ -142,7 +144,7 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::InnerBlockStatement::processStatement
     }
     prevStmtEndNode = cfgStmtNode.second;
   }
-  if (blockStmtHeadNode.getLineNumber() == -1 && prevStmtEndNode.getLineNumber() == -1) {
+  if (blockStmtHeadNode.getLineNumber() == DUMMY_NODE_VAL && prevStmtEndNode.getLineNumber() == DUMMY_NODE_VAL) {
     return std::make_pair(CFGNode(), CFGNode());
   }
   return std::make_pair(blockStmtHeadNode, prevStmtEndNode);

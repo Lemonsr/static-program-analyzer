@@ -51,6 +51,8 @@ const std::string WHILE_LITERAL = "while";
 const std::string IF_LITERAL = "if";
 const std::string VARIABLE_LITERAL = "variable";
 const std::string CONSTANT_LITERAL = "constant";
+const std::string THEN_LITERAL = "then";
+const std::string ELSE_LITERAL = "else";
 
 // RELATIONSHIP LITERALS
 const std::string FOLLOWS_LITERAL = "Follows";
