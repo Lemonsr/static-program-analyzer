@@ -1,0 +1,140 @@
+1.1 - keyword BOOLEAN with declaration
+stmt BOOLEAN, s, s1;
+Select BOOLEAN such that Follows(s, s1)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22
+5000
+1.2 - keyword BOOLEAN with declaration
+stmt BOOLEAN; constant c;
+Select BOOLEAN with BOOLEAN.stmt# = c.value
+2, 3, 5, 7
+5000
+1.3 - keyword BOOLEAN with declaration
+assign BOOLEAN; variable v;
+Select BOOLEAN pattern BOOLEAN ( v, _ )
+4, 6, 9, 13, 16, 18, 19
+5000
+2.1 - keyword BOOLEAN without declaration
+stmt s, s1;
+Select BOOLEAN such that Next*(s, s1)
+TRUE
+5000
+2.2 - keyword BOOLEAN without declaration
+while w; if ifs;
+Select BOOLEAN such that Parent(w, ifs)
+FALSE
+5000
+2.3 - keyword BOOLEAN without declaration
+while w;  variable v;
+Select BOOLEAN pattern w ( v, _ )
+TRUE
+5000
+2.4 - keyword BOOLEAN without declaration
+while w; if ifs; variable v;
+Select BOOLEAN pattern w ( v, _ ) pattern ifs ( v, _, _ )
+FALSE
+5000
+2.5 - keyword BOOLEAN without declaration (syntactic error)
+assign a; variable v;
+Select BOOLEAN pattern a ( v, _"/5"_ )
+SyntaxError
+5000
+2.6 - keyword BOOLEAN without declaration
+
+Select BOOLEAN with 1 = 1 and "a" = "a"
+TRUE
+5000
+2.7 - keyword BOOLEAN without declaration
+
+Select BOOLEAN with 1 = 2
+FALSE
+5000
+2.8 - keyword BOOLEAN without declaration
+
+Select BOOLEAN with "b" = "B"
+FALSE
+5000
+3.1 - keyword boolean with declaration
+read boolean; stmt s, s1;
+Select boolean such that Parent(s, s1)
+1, 22
+5000
+3.2 - keyword boolean with declaration
+call boolean; 
+Select boolean with boolean.procName = "firePokemon"
+5
+5000
+3.3 - keyword boolean with declaration
+while boolean;
+Select boolean pattern boolean ("bayleef", _ )
+11
+5000
+4.1 - keyword boolean without declaration (semantic error) 
+procedure p, q;
+Select boolean such that Calls(p, q)
+SemanticError
+5000
+4.2 - keyword boolean without declaration (semantic error) 
+assign a;
+Select boolean pattern a ( _, _ )
+SemanticError
+5000
+4.3 - keyword boolean without declaration (semantic error) 
+procedure p, q;
+Select boolean with "P" = "P"
+SemanticError
+5000
+5 - keyword BOOLEAN boolean with declaration, tuple
+procedure BOOLEAN; variable boolean;
+Select < BOOLEAN, boolean > such that Modifies(BOOLEAN, boolean)
+waterPokemon squirtle, waterPokemon suicune, waterPokemon totodile, waterPokemon caterpie, waterPokemon elekid, waterPokemon raichu, waterPokemon zapdos, waterPokemon meganium, waterPokemon charmeleon, firePokemon charmeleon, firePokemon caterpie, bugPokemon caterpie, grassPokemon elekid, grassPokemon raichu, grassPokemon zapdos, grassPokemon meganium, electricPokemon elekid, electricPokemon raichu, electricPokemon zapdos
+5000
+6 - BOOLEAN declared, boolean undeclared (semantic error)
+while BOOLEAN;
+Select < BOOLEAN, boolean > such that Parent*(BOOLEAN, boolean)
+SemanticError
+5000
+7 - BOOLEAN undeclared, boolean declared (semantic error)
+if boolean; variable v;
+Select < BOOLEAN, boolean > pattern boolean ( v, _ , _)
+SemanticError
+5000
+8 - BOOLEAN undeclared, boolean undeclared (semantic error)
+variable v;
+Select < BOOLEAN, boolean > pattern boolean ( v, _ , _)
+SemanticError
+5000
+9 - keyword synonym
+print assign, pn; variable v;
+Select assign such that Uses(pn, v)
+2, 14, 21
+5000
+10 - keyword clause with
+call with;
+Select with with 1 = 1
+5, 7, 10, 12, 15, 20
+5000
+11 - keyword clause such that
+while suchThat, w; stmt s;
+Select suchThat such that Parent(w, s)
+11
+5000
+12 - keyword clause pattern
+if pattern; variable v;
+Select pattern pattern pattern (v, _, _)
+3, 8, 17
+5000
+13 - keyword clause Next
+stmt s; stmt Next;
+Select Next such that Next(s, Next)
+2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19
+5000
+14 - keyword clause Next* (syntactic error)
+stmt s; stmt Next*;
+Select Next* such that Next(s, Next*)
+SyntaxError
+5000
+15 - keyword clause Affects (no ans expected)
+assign a, Affects;
+Select Affects such that Affects(a, Affects)
+
+5000

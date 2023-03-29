@@ -1,0 +1,85 @@
+1A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a;
+Select BOOLEAN such that Affects*('a', 'volume')
+SyntaxError
+5000
+2A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a;
+Select BOOLEAN such that Affects*('a', volume)
+SyntaxError
+5000
+3A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a;
+Select BOOLEAN such that Affects*('a', 'thisDoesNotExist')
+SyntaxError
+5000
+4A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a;
+Select BOOLEAN such that Affects*('a', 'volume')
+SyntaxError
+5000
+5A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a;
+Select BOOLEAN such that Affects*('a', v)
+SyntaxError
+5000
+6A - Affects* relationship: Invalid single quotes in left param (Semantic err)
+assign a; stmt s;
+Select BOOLEAN such that Affects*('a', s)
+SyntaxError
+5000
+7A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; stmt n;
+Select BOOLEAN such that Affects*('a', n)
+SyntaxError
+5000
+8A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; print pn;
+Select BOOLEAN such that Affects*('a', pn)
+SyntaxError
+5000
+9A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; read re;
+Select BOOLEAN such that Affects*('a', re)
+SyntaxError
+5000
+10A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; if ifs;
+Select BOOLEAN such that Affects*('a', ifs)
+SyntaxError
+5000
+11A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; while w;
+Select BOOLEAN such that Affects*('a', w)
+SyntaxError
+5000
+12A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; 
+Select BOOLEAN such that Affects*('a', a)
+SyntaxError
+5000
+13A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; 
+Select BOOLEAN such that Affects*('a', 16)
+SyntaxError
+5000
+14A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; constant c;
+Select BOOLEAN such that Affects*('a', c)
+SyntaxError
+5000
+16A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; procedure p;
+Select BOOLEAN such that Affects*('a', p)
+SyntaxError
+5000
+17A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; call cl;
+Select BOOLEAN such that Affects*('a', cl)
+SyntaxError
+5000
+18A - Affects* relationship: Invalid single quotes in left param (Syntactic err)
+assign a; 
+Select BOOLEAN such that Affects*('a', _)
+SyntaxError
+5000
