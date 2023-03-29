@@ -1,0 +1,18 @@
+procedure vegetables {  print vegetables; 
+    asparagus = asparagus - 1;
+    beetroot = 3 * 2;
+    brussels = cabbages / cauliflower;
+    if (brussels != capsicums) then {
+        read capsicums; 
+        cucumber = 4; 
+        capsicums = cucumber; }
+    else { brussels = brussels - 200; }
+    while (beetroot == 5) {
+        call meat; 
+        cucumber = eggplant - cucumber + 6; }
+    while (leeks != lettuce) {
+        capsicums = 8;    }
+    vegetables = 12 % garlic;
+    print beetroot;
+    read beetroot; }
+procedure meat { print beef; }

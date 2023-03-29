@@ -1,0 +1,235 @@
+1A - Affects relationship: Invalid single quotes in right param (Syntactic err)
+variable v;
+Select v such that Affects(v, 'volume')
+SyntaxError
+5000
+1B - Affects relationship: Invalid single quotes in right param (Syntactic err)
+variable v;
+Select BOOLEAN such that Affects(v, 'volume')
+SyntaxError
+5000
+2A - Affects relationship: Invalid undeclared synonym in right param (Syntactic err)
+variable v;
+Select v such that Affects(v, volume)
+SemanticError
+5000
+2B - Affects relationship: Invalid undeclared synonym in right param (Syntactic err)
+variable v;
+Select BOOLEAN such that Affects(v, volume)
+SemanticError
+5000
+3A - Affects relationship: Invalid name in right param with name not in program (Syntactic err)
+variable v;
+Select v such that Affects(v, "thisDoesNotExist")
+SyntaxError
+5000
+3B - Affects relationship: Invalid name in right param with name not in program (Syntactic err)
+variable v;
+Select BOOLEAN such that Affects(v, "thisDoesNotExist")
+SyntaxError
+5000
+4A - Affects relationship: Invalid name in right param with name in program (Syntactic err)
+variable v;
+Select v such that Affects(v, "volume")
+SyntaxError
+5000
+4B - Affects relationship: Invalid name in right param with name in program (Syntactic err)
+variable v;
+Select BOOLEAN such that Affects(v, "volume")
+SyntaxError
+5000
+5A - Affects relationship: Invalid variable synonym in left param - Select v (Semantic err)
+variable v;
+Select v such that Affects(v, v)
+SemanticError
+5000
+5B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select BOOLEAN such that Affects(v, v)
+SemanticError
+5000
+6A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v1, v2;
+Select v1 such that Affects(v1, v2)
+SemanticError
+5000
+6B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v1, v2;
+Select v2 such that Affects(v1, v2)
+SemanticError
+5000
+6C - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v1, v2;
+Select BOOLEAN such that Affects(v1, v2)
+SemanticError
+5000
+7A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt s;
+Select v such that Affects(v, s)
+SemanticError
+5000
+7B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt s;
+Select s such that Affects(v, s)
+SemanticError
+5000
+7C- Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt s;
+Select BOOLEAN such that Affects(v, s)
+SemanticError
+5000
+8A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt n;
+Select v such that Affects(v, n)
+SemanticError
+5000
+8B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt n;
+Select n such that Affects(v, n)
+SemanticError
+5000
+8C - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt n;
+Select BOOLEAN such that Affects(v, n)
+SemanticError
+5000
+9A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; print pn;
+Select v such that Affects(v, pn)
+SemanticError
+5000
+9B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; print pn;
+Select vn such that Affects(v, pn)
+SemanticError
+5000
+9C - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; print pn;
+Select BOOLEAN such that Affects(v, pn)
+SemanticError
+5000
+10A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; read re;
+Select v such that Affects(v, re)
+SemanticError
+5000
+10B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; read re;
+Select re such that Affects(v, re)
+SemanticError
+5000
+10C- Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; read re;
+Select BOOLEAN such that Affects(v, re)
+SemanticError
+5000
+11A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; if ifs;
+Select v such that Affects(v, ifs)
+SemanticError
+5000
+11B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; if ifs;
+Select ifs such that Affects(v, ifs)
+SemanticError
+5000
+11C- Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; if ifs;
+Select BOOLEAN such that Affects(v, ifs)
+SemanticError
+5000
+12A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; while w;
+Select v such that Affects(v, w)
+SemanticError
+5000
+12B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; while w;
+Select w such that Affects(v, w)
+SemanticError
+5000
+12C- Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; while w;
+Select BOOLEAN such that Affects(v, w)
+SemanticError
+5000
+13A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select v such that Affects(v, a)
+SemanticError
+5000
+13B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select a such that Affects(v, a)
+SemanticError
+5000
+13C - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; assign a;
+Select BOOLEAN such that Affects(v, a)
+SemanticError
+5000
+14A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select v such that Affects(v, 16)
+SemanticError
+5000
+14B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select BOOLEAN such that Affects(v, 16)
+SemanticError
+5000
+15A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; constant c;
+Select v such that Affects(v, c)
+SemanticError
+5000
+15B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; constant c;
+Select c such that Affects(v, c)
+SemanticError
+5000
+15B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; constant c;
+Select BOOLEAN such that Affects(v, c)
+SemanticError
+5000
+16A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; procedure p;
+Select v such that Affects(v, p)
+SemanticError
+5000
+16B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; procedure p;
+Select p such that Affects(v, p)
+SemanticError
+5000
+16C - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; procedure p;
+Select BOOLEAN such that Affects(v, p)
+SemanticError
+5000
+17A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; call cl;
+Select n such that Affects(v, cl)
+SemanticError
+5000
+17B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; call cl;
+Select v such that Affects(v, cl)
+SemanticError
+5000
+17C - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v; call cl;
+Select BOOLEAN such that Affects(v, cl)
+SemanticError
+5000
+18A - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select v such that Affects(v, _)
+SemanticError
+5000
+18B - Affects relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select BOOLEAN such that Affects(v, _)
+SemanticError
+5000

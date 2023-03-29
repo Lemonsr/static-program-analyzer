@@ -1,0 +1,235 @@
+1A - Affects relationship: Invalid single quotes in right param (Syntactic err)
+procedure p;
+Select p such that Affects(p, 'volume')
+SyntaxError
+5000
+1B - Affects relationship: Invalid single quotes in right param (Syntactic err)
+procedure p;
+Select BOOLEAN such that Affects(p, 'volume')
+SyntaxError
+5000
+2A - Affects relationship: Invalid undeclared synonym in right param (Syntactic err)
+procedure p;
+Select p such that Affects(p, volume)
+SemanticError
+5000
+2B - Affects relationship: Invalid undeclared synonym in right param (Syntactic err)
+procedure p;
+Select BOOLEAN such that Affects(p, volume)
+SemanticError
+5000
+3A - Affects relationship: Invalid name in right param with name not in program (Syntactic err)
+procedure p;
+Select p such that Affects(p, "thisDoesNotExist")
+SyntaxError
+5000
+3B - Affects relationship: Invalid name in right param with name not in program (Syntactic err)
+procedure p;
+Select BOOLEAN such that Affects(p, "thisDoesNotExist")
+SyntaxError
+5000
+4A - Affects relationship: Invalid name in right param with name in program (Syntactic err)
+procedure p;
+Select p such that Affects(p, "volume")
+SyntaxError
+5000
+4B - Affects relationship: Invalid name in right param with name in program (Syntactic err)
+procedure p;
+Select BOOLEAN such that Affects(p, "volume")
+SyntaxError
+5000
+5A - Affects relationship: Invalid procedure synonym in left param - Select p (Semantic err)
+procedure p; variable v;
+Select p such that Affects(p, v)
+SemanticError
+5000
+5B - Affects relationship: Invalid procedure synonym in left param - Select p (Semantic err)
+procedure p; variable v;
+Select v such that Affects(p, v)
+SemanticError
+5000
+5C- Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; variable v;
+Select BOOLEAN such that Affects(p, v)
+SemanticError
+5000
+6A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; stmt s;
+Select p such that Affects(p, s)
+SemanticError
+5000
+6B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; stmt s;
+Select s such that Affects(p, s)
+SemanticError
+5000
+6C - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; stmt s;
+Select BOOLEAN such that Affects(p, s)
+SemanticError
+5000
+7A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; stmt n;
+Select p such that Affects(p, n)
+SemanticError
+5000
+7B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; stmt n;
+Select n such that Affects(p, n)
+SemanticError
+5000
+7C- Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; stmt n;
+Select BOOLEAN such that Affects(p, n)
+SemanticError
+5000
+8A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; print pn;
+Select p such that Affects(p, pn)
+SemanticError
+5000
+8B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; print pn;
+Select pn such that Affects(p, pn)
+SemanticError
+5000
+8C- Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; print pn;
+Select BOOLEAN such that Affects(p, pn)
+SemanticError
+5000
+9A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; read re;
+Select p such that Affects(p, re)
+SemanticError
+5000
+9B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; read re;
+Select re such that Affects(p, re)
+SemanticError
+5000
+9C- Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; read re;
+Select BOOLEAN such that Affects(p, re)
+SemanticError
+5000
+10A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; if ifs;
+Select p such that Affects(p, ifs)
+SemanticError
+5000
+10B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; if ifs;
+Select ifs such that Affects(p, ifs)
+SemanticError
+5000
+10C- Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; if ifs;
+Select BOOLEAN such that Affects(p, ifs)
+SemanticError
+5000
+11A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; while w;
+Select p such that Affects(p, w)
+SemanticError
+5000
+11B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; while w;
+Select w such that Affects(p, w)
+SemanticError
+5000
+11C- Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; while w;
+Select BOOLEAN such that Affects(p, w)
+SemanticError
+5000
+12A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p;
+Select p such that Affects(p, a)
+SemanticError
+5000
+12B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p;
+Select a such that Affects(p, a)
+SemanticError
+5000
+12C - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; assign a;
+Select BOOLEAN such that Affects(p, a)
+SemanticError
+5000
+13A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p;
+Select p such that Affects(p, 16)
+SemanticError
+5000
+13B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p;
+Select BOOLEAN such that Affects(p, 16)
+SemanticError
+5000
+14A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; constant c;
+Select p such that Affects(p, c)
+SemanticError
+5000
+14B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; constant c;
+Select c such that Affects(p, c)
+SemanticError
+5000
+14B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; constant c;
+Select BOOLEAN such that Affects(p, c)
+SemanticError
+5000
+15A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p;
+Select p such that Affects(p, p)
+SemanticError
+5000
+15B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; 
+Select BOOLEAN such that Affects(p, p)
+SemanticError
+5000
+16A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p1, p2;
+Select p1 such that Affects(p1, p2)
+SemanticError
+5000
+16B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p1, p2;
+Select p2 such that Affects(p1, p2)
+SemanticError
+5000
+16C - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p1, p2;
+Select BOOLEAN such that Affects(p1, p2)
+SemanticError
+5000
+17A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; call cl;
+Select n such that Affects(p, cl)
+SemanticError
+5000
+17B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; call cl;
+Select p such that Affects(p, cl)
+SemanticError
+5000
+17C - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p; call cl;
+Select BOOLEAN such that Affects(p, cl)
+SemanticError
+5000
+18A - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p;
+Select p such that Affects(p, _)
+SemanticError
+5000
+18B - Affects relationship: Invalid procedure synonym in left param (Semantic err)
+procedure p;
+Select BOOLEAN such that Affects(p, _)
+SemanticError
+5000
