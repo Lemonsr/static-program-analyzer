@@ -13,6 +13,9 @@
 #include "ProcedureStatement.h"
 #include "SpCyclicValidator.h"
 
+const std::string CYCLIC_CALL_ERROR = "Cyclic calls detected";
+const std::string CONTAINER_STMT_LINE_NUM = "-1";
+
 spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
                                       std::vector<std::shared_ptr<ProcedureStatement>>& procedureList) :
   pkbManager(pkbManager), procedureList(procedureList) {
@@ -38,7 +41,7 @@ spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
 void spa::DesignExtractor::extractRelationship() {
   spa::SpCyclicValidator cyclicValidator(procCallMap);
   if (cyclicValidator.validateCyclic()) {
-    std::cerr << "Cyclic calls detected" << std::endl;
+    std::cerr << CYCLIC_CALL_ERROR << std::endl;
     exit(1);
   }
   for (auto& procedure : procedureList) {
@@ -76,7 +79,7 @@ void spa::DesignExtractor::extractFollows(std::vector<std::shared_ptr<spa::Progr
       std::string followStmtOne = std::to_string(statementList[i]->getStatementLineNum());
       std::string followStmtTwo = std::to_string(statementList[i + 1]->getStatementLineNum());
 
-      if (followStmtOne != "-1" && followStmtTwo != "-1") {
+      if (followStmtOne != CONTAINER_STMT_LINE_NUM && followStmtTwo != CONTAINER_STMT_LINE_NUM) {
         pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
       }
     }
@@ -94,7 +97,7 @@ void spa::DesignExtractor::extractFollowsStar(std::vector<std::shared_ptr<spa::P
         std::string followStarStmtOne = std::to_string(statementList[i]->getStatementLineNum());
         std::string followStarStmtTwo = std::to_string(statementList[j]->getStatementLineNum());
 
-        if (followStarStmtOne != "-1" && followStarStmtTwo != "-1") {
+        if (followStarStmtOne != CONTAINER_STMT_LINE_NUM && followStarStmtTwo != CONTAINER_STMT_LINE_NUM) {
           pkbManager.addRelationship(spa::FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
         }
       }
@@ -142,7 +145,7 @@ void spa::DesignExtractor::extractParentStar(std::shared_ptr<ContainerStatement>
     if (parentStmtOne == parentStmtTwo) {
       continue;
     }
-    if (parentStmtTwo != "-1") {
+    if (parentStmtTwo != CONTAINER_STMT_LINE_NUM) {
       pkbManager.addRelationship(PARENT_STAR, ancestorLineNum, parentStmtTwo);
       continue;
     }
