@@ -1,0 +1,58 @@
+procedure Toyota {
+  x = 15;
+  while (x == 15) {
+    read y;
+    print x;
+    z = x + y * (42 / 6) + 22;
+    if (z == 30) then {
+      print z; }
+    else {
+      z = x + y; }
+    y = 32 + x * 8 / 22; }
+  print x;
+  print y;
+}
+
+procedure Mitsubishi {
+  call Toyota;
+  x = 22;
+  call Toyota;
+  print y;
+  print z;
+  while ((13 == 57) || (z >= 50)) {
+     g = 30;
+     if (g <= 30) then {
+        g = x + y + (z / 3 + 2); }
+     else {
+        g = g + z + x; }
+     g = x + 30; }
+  print x;
+  call Toyota;
+}
+
+procedure Suzuki {
+   call Mitsubishi;
+   a = x + 32;
+   b = y + 34;
+   c = (x - y) + (z + 8) * 2;
+   if ((a == b) && (b == c)) then {
+     print a;
+     print b;
+     read d; 
+     read X; 
+     X = a + b + g + d * c; }
+   else {
+     print b;
+     print c;
+     read d;
+     d = d + 64; }
+   call Toyota;
+}
+
+procedure Hyundai {
+   call Mitsubishi;
+}
+
+procedure Dummy {
+   print x;
+}

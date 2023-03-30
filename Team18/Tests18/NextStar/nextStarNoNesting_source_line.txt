@@ -1,0 +1,24 @@
+procedure A {
+  x = 1;           //1
+  call B;          //2
+  call D;          //3
+}
+
+procedure B {
+  read x;          //4
+  call C;          //5
+  call D;          //6
+}
+
+procedure C {
+  call E;          //7
+}
+
+procedure D {
+  call C;          //8
+}
+
+procedure E {
+  y = 2;           //9
+  print  x;        //10
+}

@@ -1,0 +1,123 @@
+procedure procA {
+    x = 2 + 9 - (6 % 4 * 2 - 2626 + (4 / 3 + 1) /10 + 2);
+    y = x - 7 % (2 * 9);
+    z = 999 / (x - a * b);
+    s = 2;
+    a = x + y - z;
+    b = 0 + b;
+    c = 12345 - 1 * 2 * 9 % (999 / (x - a * b));
+    while (((x * y) > (y % x)) || ((z - x) == (z + x))) {
+        if ((!(c != c)) || ((y - 4) > (0))) then {
+            z = 6 % (4 * 7) + 4 / 3 - z;
+            while ((!(1 == 2)) || ((2 != 99) && (4 > 5))) {
+                y = 6 % 4 + 4 / 3 + (9) - 2;
+                read z;
+            }
+            s = 3 + 4;
+        } else {
+            x = 1;
+            d = 2626 + 4;
+            b = b + 9 - y / 2 * (4 / 3);
+            if (((d * d) <= (b * 4)) && ((!(b > c)) || ((a + x) >= (b * y)))) then {
+                read d;
+            } else {
+                c = 2 * (7 - 421 % c) / d;
+                while (x != y) {
+                    deepVariable = 2;
+                    print deepVariable;
+                    while (2 == 5) {
+                        if (x > 3) then {
+                            x = y;
+                        } else {
+                            x = x + 1;
+                        }
+                        deeperVariable = 4 / 3 - 9 % 2 - (6 % 4 * 2);
+                        while ((x != deepVariable) && (s == 2)) {
+                            call procB;
+                        }
+                        s = 17 / x - 7 % (2 * 9);
+                        while (x != deepVariable) {
+                            d = deeperVariable + d * d;
+                        }
+                    }
+                }
+            }
+            read a;
+            w = 999;
+            while (!(x > x)) {
+                call procC;
+            }
+        }
+    }
+}
+
+procedure procB {
+    if ((x >= z) || (!(a < b))) then {
+        x = z - a % b;
+    } else {
+        if (y == c) then {
+                read f;
+            if (a == 4) then {
+                if (((f * e) <= (c / 4)) && ((!(b >= c)) || ((a % x) >= (b * y)))) then {
+                    while (s < 4 + b) {
+                        while (deepVariable >= 4) {
+                            call procC;
+                        }
+                        e = 22;
+                    }
+                } else {
+                x = 7 * 7 - 4;
+                    while ((!(deeperVariable == 0)) && (z - 7 % 4 > z + 3 / deepVariable) ) {
+                        call procC;
+                        deepVariable = 9 + deeperVariable + 6 % 4 - 4 / 3;
+                        if (a > b) then {
+                            a = a;
+                        } else {
+                            b = 999 / (x - a * b);
+                        }
+                    }
+                }
+            } else {
+                call procC;
+            }
+        } else {
+            while (e < 4) {
+                e = e * 4;
+            }
+        }
+    }
+}
+
+procedure procC {
+    e = 7 * 7 * 7 - 6 * 6 + 7;
+    while (e > z) {
+        while ((y == 4) && (deeperVariable <= 99)) {
+            while ((x == 3) || (!((deepVariable * 7 != 9 - 4 + a) && (z - y == 2)))) {
+                f = 7 * 7;
+                while ((s * s > 94) && (e + x <= a + y)) {
+                    if ((s < 12) && (b >= 4)) then {
+                        deeperVariable = 4;
+                        while (z < 0) {
+                            s = 22;
+                        }
+                    } else {
+                        while (6 < 4) {
+                            if (f >= 7 * 7) then {
+                                call procD;
+                            } else {
+                                read deepVariable;
+                            }
+                        }
+                        h = 9 % (999 / x);
+                    }
+                }
+            }
+            x = y + z / 2626 + 4;
+        }
+        s = 7 * 7 + e;
+    }
+}
+
+procedure procD {
+    print z;
+}

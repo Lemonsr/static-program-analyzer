@@ -1,0 +1,19 @@
+procedure One {
+    read x;
+    read y;
+    print x;
+    print y;
+    call Two;
+    call Three;
+}
+
+procedure Two {
+    read a;
+    print b;
+    call Three;
+}
+
+procedure Three {
+    read b;
+    print a;
+}

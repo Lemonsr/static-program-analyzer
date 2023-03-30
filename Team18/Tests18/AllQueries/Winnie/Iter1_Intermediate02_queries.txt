@@ -1,0 +1,40 @@
+1 - Basic: select entities without relation (const)
+constant const;
+Select const
+1, 2, 7, 10
+5000
+2 - Basic: select with 1 non-transitive relation that does not involve the selected entity (follows)
+read r;
+Select r such that Follows (3, 6)
+6
+5000
+3 - Intermediate: select with 1 non-transitive relation that involves a selected entity (parent)
+stmt s;
+Select s such that Parent (1, s)
+none
+5000
+4 - Intermediate: select with pattern that involves a selected entity (uses)
+variable v; assign a;
+Select v such that Modifies(a, v) pattern a(v, _)
+a, b, c, e, g
+5000
+5 - Intermediate: select with 1 transitive relation that involves the selected entity (follows*)
+if i; stmt s;
+Select s such that Follows* (i,s)
+6, 7, 10, 11
+5000
+6 - Advanced: select with pattern + relation (one involves the selected entity) (parent, pattern)
+assign a; while w;
+Select a such that Parent(w, a) pattern a (_,_)
+8
+5000
+7 - Advanced: select with pattern + relation that both involve the selected entity (uses, pattern)
+variable v; assign a;
+Select a such that Follows(a, 2) pattern a("a", _"1"_)
+1
+5000
+8 - Advanced: select with relation that involves multiple declared entities (follows*, pattern)
+print p; assign a; 
+Select a such that Follows*(a, p) pattern a("e", _"d"_)
+8
+5000

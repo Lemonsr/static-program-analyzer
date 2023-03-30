@@ -1,0 +1,170 @@
+1 - Basic: Next
+stmt s1, s2;
+Select <s1, s2> such that Next(s1, s2)
+2 3, 96 97, 137 138, 118 119, 105 106, 86 102, 45 46, 45 79, 122 123, 63 59, 139 140, 170 171, 37 38, 42 43, 44 45, 16 17, 169 170, 19 20, 15 16, 166 167, 164 161, 117 122, 8 1, 103 104, 69 47, 66 67, 30 31, 24 25, 98 99, 48 49, 173 174, 159 160, 54 55, 73 74, 53 54, 86 87, 174 175, 62 63, 120 121, 85 86, 110 111, 138 139, 154 155, 43 39, 152 153, 131 132, 4 5, 34 35, 151 152, 34 165, 20 22, 47 48, 59 60, 161 160, 156 157, 124 125, 108 109, 158 159, 123 124, 81 82, 61 62, 128 129, 28 29, 136 137, 76 77, 163 164, 21 29, 22 23, 13 14, 41 42, 29 13, 35 36, 64 65, 97 98, 77 78, 114 115, 18 19, 71 72, 6 7, 129 130, 171 172, 31 32, 99 100, 113 114, 162 163, 39 44, 75 76, 115 116, 112 113, 55 56, 57 58, 65 66, 144 145, 146 147, 161 162, 132 133, 143 144, 101 122, 175 176, 149 154, 13 30, 52 53, 145 146, 150 151, 50 51, 56 57, 134 123, 142 143, 87 88, 51 52, 90 91, 133 134, 49 50, 148 149, 92 93, 58 55, 27 28, 74 75, 20 21, 100 101, 72 73, 155 136, 39 40, 11 12, 106 107, 121 122, 123 135, 157 158, 107 108, 93 94, 126 127, 40 41, 119 120, 149 150, 91 92, 1 9, 1 2, 3 4, 26 27, 78 123, 141 142, 60 61, 17 18, 136 156, 115 118, 130 131, 47 70, 82 83, 89 90, 116 117, 55 59, 147 148, 70 71, 140 141, 68 69, 102 103, 10 11, 153 149, 109 110, 127 128, 84 85, 125 126, 80 81, 36 37, 160 34, 79 80, 7 8, 160 161, 23 24, 32 33, 83 84, 46 47, 33 34, 94 95, 168 169, 59 64, 38 39, 14 15, 5 6, 135 136, 67 68, 95 96, 88 89, 111 112, 104 105, 25 26
+5000
+2 - Basic: Next*
+if i; read r; assign a;
+Select <i, r> such that Next*(i, a) and Next*(a, r)
+115 94, 115 125, 115 98, 115 69, 115 40, 115 106, 115 162, 115 144, 115 110, 115 43, 115 113, 115 117, 115 62, 115 108, 86 106, 86 137, 86 61, 86 98, 86 69, 86 40, 86 162, 115 96, 86 62, 86 110, 115 126, 86 151, 86 150, 86 124, 115 118, 86 134, 86 122, 86 63, 86 43, 86 79, 86 96, 45 106, 45 94, 45 125, 20 80, 20 40, 86 108, 20 162, 20 97, 86 117, 20 144, 86 118, 20 151, 20 69, 115 80, 86 113, 20 27, 20 117, 20 124, 20 94, 45 96, 115 79, 45 63, 115 124, 20 32, 45 62, 20 110, 86 94, 20 137, 20 31, 86 111, 20 96, 115 134, 86 144, 45 43, 20 150, 115 63, 115 97, 20 19, 45 117, 20 43, 20 134, 20 63, 20 79, 45 137, 45 61, 20 122, 45 151, 20 111, 20 108, 115 137, 115 111, 20 98, 115 61, 45 122, 20 118, 115 122, 45 97, 45 126, 20 24, 20 113, 86 97, 45 124, 115 150, 20 126, 86 125, 45 108, 20 61, 45 162, 20 106, 20 14, 45 80, 20 62, 45 144, 20 125, 45 118, 45 79, 86 80, 45 98, 45 111, 45 150, 86 126, 45 134, 45 40, 115 151, 45 110, 45 69, 45 113
+5000
+3 - Basic: Next* with literal (backwards)
+call c; 
+Select c such that Next*(c, 100)
+54, 152, 66, 156, 42, 81, 120, 84, 129, 90, 15, 147, 157, 107, 87, 56, 140, 100, 25, 16, 74, 103, 28, 158, 46, 121, 44, 104, 23, 85, 37, 30, 142
+5000
+4 - Basic: Next* with literal (forwards)
+read r;
+Select r such that Next*(40, r)
+111, 79, 97, 69, 62, 150, 134, 113, 126, 125, 94, 118, 98, 43, 117, 122, 124, 63, 108, 106, 40, 80, 110, 61, 162, 96, 144, 137, 151
+5000
+5 - Basic: Select attribute
+print p;
+Select <p.stmt#, p.varName> such that Parent*(_, p)
+131 FnYS4CcH5, 155 w, 159 YUTqrXj2G, 76 nPfMyhUg8EqSOz, 148 jSBmJ, 53 gxW, 112 Mj4, 70 CwCFOIQXXi, 18 rlS, 41 xbllq, 64 jxcea, 105 w, 36 ID1o, 95 rlS, 82 jSBmJ, 51 v, 21 nwRMADrc, 135 Zi, 130 ID1o, 48 jOt, 143 YfxWb2, 102 aUcJuJ, 29 jOt, 93 CwCFOIQXXi, 146 rlS, 26 xg6M52WW4ED3G4SVE, 139 FnYS4CcH5, 141 B, 163 P, 114 w, 58 w, 50 ID1o
+5000
+6 - Basic: Affects
+stmt s1;
+Select s1 such that Affects(s1, 133)
+71
+5000
+7 - Basic: Affects
+stmt s1; assign a1;
+Select <s1, a1> such that Affects(s1, a1)
+119 128, 119 71, 49 67, 49 65, 67 154, 67 75, 67 164, 67 138, 67 127, 67 89, 67 77, 132 75, 132 164, 132 127, 71 133, 132 49, 71 65, 89 75, 71 75, 88 145, 92 91, 52 75, 52 127, 119 35, 52 77, 71 35, 67 99, 52 132, 71 89, 109 91, 52 145, 52 164, 65 35, 67 132, 89 49, 67 145, 89 132, 52 49, 65 71, 71 77, 65 128, 89 127, 132 77, 71 128, 89 145, 71 132, 89 164, 71 49, 65 67, 71 145, 88 132, 67 35, 71 127, 71 71, 88 109, 71 154, 88 72, 71 99, 67 49, 88 164, 88 77, 116 128, 88 119, 88 89, 116 65, 71 138, 88 49, 88 73, 88 127, 67 128, 60 65, 116 35, 71 67, 88 138, 88 75, 132 145, 71 68, 89 77, 88 99, 119 65, 132 132, 65 65, 71 164, 116 71, 67 71, 68 60
+5000
+8 - Basic: Affects (self)
+stmt s;
+Select s such that Affects(s, s)
+71, 65, 132
+5000
+9 - Basic: Affects* (2 synonym)
+assign a1, a2;
+Select <a1, a2> such that Affects*(a1, a2)
+52 75, 52 138, 52 67, 52 132, 52 133, 52 128, 52 89, 52 49, 67 67, 67 133, 67 128, 67 71, 67 77, 89 99, 89 154, 89 138, 52 145, 89 35, 67 68, 89 127, 89 133, 89 68, 89 71, 89 77, 89 60, 49 99, 49 75, 49 67, 52 77, 49 60, 49 127, 49 145, 49 128, 49 89, 67 49, 49 49, 49 65, 92 91, 49 68, 49 77, 116 164, 116 138, 116 67, 116 35, 116 75, 116 60, 89 128, 116 145, 49 164, 116 132, 116 133, 116 128, 52 60, 116 89, 116 49, 116 65, 116 68, 116 71, 116 127, 119 99, 67 60, 119 75, 119 138, 89 65, 119 67, 119 35, 119 60, 119 127, 119 133, 71 164, 119 65, 71 35, 71 145, 52 154, 88 132, 119 154, 71 89, 67 138, 49 154, 71 133, 71 68, 132 145, 88 99, 88 145, 67 154, 132 154, 65 127, 49 132, 132 75, 132 164, 68 71, 132 60, 71 138, 116 77, 88 138, 119 77, 52 127, 67 127, 132 127, 132 133, 88 65, 132 71, 119 68, 132 128, 119 164, 88 154, 88 73, 88 77, 88 164, 88 89, 68 132, 67 35, 132 68, 88 128, 89 164, 132 35, 67 99, 71 71, 52 164, 119 145, 88 109, 88 72, 71 132, 132 138, 68 127, 89 145, 116 99, 65 75, 88 119, 67 164, 67 89, 49 35, 71 67, 65 133, 71 128, 88 127, 88 35, 68 75, 88 49, 71 49, 68 77, 132 89, 89 132, 65 67, 67 75, 71 127, 89 67, 132 65, 71 65, 132 49, 132 67, 68 145, 67 132, 116 154, 132 132, 88 91, 60 67, 132 77, 49 71, 60 154, 67 65, 71 75, 71 154, 65 164, 68 68, 71 60, 71 99, 68 89, 49 133, 68 65, 65 132, 65 65, 68 128, 68 49, 68 133, 132 99, 88 60, 68 60, 68 35, 68 67, 65 128, 68 138, 68 99, 52 68, 68 164, 65 49, 89 75, 68 154, 65 77, 52 35, 60 68, 60 132, 65 71, 60 127, 65 68, 52 99, 60 133, 88 71, 65 89, 49 138, 65 145, 52 71, 88 133, 65 60, 65 35, 119 128, 52 65, 89 49, 65 154, 65 99, 88 75, 60 77, 60 71, 67 145, 60 65, 65 138, 60 49, 119 132, 60 75, 60 89, 88 68, 60 128, 60 60, 71 77, 88 67, 60 145, 60 35, 60 138, 60 164, 60 99, 109 91, 119 71, 119 49, 89 89, 119 89
+5000
+10 - Basic: Affects* (literal-literal)
+
+Select BOOLEAN such that Affects*(52, 89)
+TRUE
+5000
+11 - Basic: Affects* (literal-literal)
+stmt s1;
+Select s1 such that Affects*(138, 138)
+none
+5000
+12 - Basic: Affects* (literal-literal)
+stmt s1;
+Select BOOLEAN such that Affects*(75, 78)
+FALSE
+5000
+13 - Basic: Affects* (literal-literal)
+
+Select BOOLEAN such that Affects*(172, 168)
+FALSE
+5000
+14 - Basic: Affects* (synonym-literal)
+stmt s1;
+Select s1 such that Affects*(164, s1)
+none
+5000
+15 - Basic: Affects*(synonym-literal)
+stmt s1;
+Select s1 such that Affects*(s1, 133)
+116, 49, 67, 60, 65, 88, 52, 71, 89, 68, 132, 119
+5000
+16 - Basic: With - attribute = attribute
+constant c; stmt s;
+Select <c, s> with c.value = s.stmt#
+46 46, 73 73, 58 58, 96 96, 36 36, 16 16, 100 100, 99 99, 60 60, 43 43, 90 90
+5000
+17 - Basic: With - attribute = literal
+call c;
+Select c with c.procName = "cMBdGP6"
+175, 156, 173, 28, 46, 16, 152, 104, 44, 90, 100, 158, 103, 107, 87, 15, 140, 23
+5000
+18 - Basic: Select attribute - deduplication
+call c;
+Select c.procName with c.procName = "cMBdGP6"
+cMBdGP6
+5000
+19 - Basic: Select attribute
+call c; read r; print p; procedure procedure; variable v;
+Select <c.procName, procedure.procName, c.stmt#> with c.procName = procedure.procName
+cMBdGP6 cMBdGP6 15, cMBdGP6 cMBdGP6 173, cMBdGP6 cMBdGP6 140, cMBdGP6 cMBdGP6 152, cMBdGP6 cMBdGP6 175, cMBdGP6 cMBdGP6 16, cMBdGP6 cMBdGP6 103, AhfW AhfW 54, AhfW AhfW 56, AhfW AhfW 121, MZMR0IL3RQ2N6KT MZMR0IL3RQ2N6KT 174, cMBdGP6 cMBdGP6 44, cMBdGP6 cMBdGP6 23, AhfW AhfW 74, AhfW AhfW 142, AhfW AhfW 157, AhfW AhfW 129, cMBdGP6 cMBdGP6 107, AhfW AhfW 84, cMBdGP6 cMBdGP6 90, cMBdGP6 cMBdGP6 87, cMBdGP6 cMBdGP6 158, AhfW AhfW 25, AhfW AhfW 42, AhfW AhfW 165, cMBdGP6 cMBdGP6 156, cMBdGP6 cMBdGP6 28, AhfW AhfW 30, AhfW AhfW 8, AhfW AhfW 147, AhfW AhfW 81, AhfW AhfW 4, AhfW AhfW 37, AhfW AhfW 85, AhfW AhfW 120, cMBdGP6 cMBdGP6 46, AhfW AhfW 66, cMBdGP6 cMBdGP6 104, cMBdGP6 cMBdGP6 100
+5000
+20 - Intermediate: Multiple select attributes
+call c; read r; print p; procedure proc; variable v;
+Select <c.stmt#, proc.procName, r, v.varName> such that Follows*(c, 100) with c.procName = proc.procName such that Next*(r, p) with r.varName = p.varName and v.varName = p.varName 
+90 cMBdGP6 151 B, 90 cMBdGP6 106 P, 90 cMBdGP6 124 YUTqrXj2G, 90 cMBdGP6 113 YfxWb2, 90 cMBdGP6 137 rlS, 90 cMBdGP6 32 v, 90 cMBdGP6 144 v, 90 cMBdGP6 117 Zi, 87 cMBdGP6 144 v, 87 cMBdGP6 117 Zi, 87 cMBdGP6 96 gxW, 87 cMBdGP6 32 v, 87 cMBdGP6 134 aUcJuJ, 87 cMBdGP6 162 jSBmJ, 87 cMBdGP6 98 Mj4, 90 cMBdGP6 69 ID1o, 87 cMBdGP6 124 YUTqrXj2G, 87 cMBdGP6 97 Zi, 90 cMBdGP6 126 P, 90 cMBdGP6 80 Mj4, 90 cMBdGP6 98 Mj4, 87 cMBdGP6 43 jSBmJ, 87 cMBdGP6 118 FnYS4CcH5, 87 cMBdGP6 151 B, 87 cMBdGP6 137 rlS, 90 cMBdGP6 43 jSBmJ, 87 cMBdGP6 106 P, 87 cMBdGP6 27 xg6M52WW4ED3G4SVE, 90 cMBdGP6 27 xg6M52WW4ED3G4SVE, 87 cMBdGP6 69 ID1o, 90 cMBdGP6 134 aUcJuJ, 87 cMBdGP6 80 Mj4, 87 cMBdGP6 113 YfxWb2, 90 cMBdGP6 162 jSBmJ, 90 cMBdGP6 118 FnYS4CcH5, 87 cMBdGP6 126 P, 90 cMBdGP6 96 gxW, 90 cMBdGP6 97 Zi
+5000
+21 - Intermediate: Parent* Affects*
+stmt s1, s2;
+Select <s1, s2> such that Parent*(s1, s2) and Affects*(89, s2)
+45 89, 45 75, 45 67, 45 60, 45 65, 45 99, 45 68, 47 67, 47 60, 47 65, 34 35, 45 71, 47 49, 34 154, 34 77, 34 60, 34 67, 86 99, 123 127, 47 68, 34 128, 45 77, 136 154, 34 164, 136 145, 161 164, 34 138, 123 132, 34 71, 34 145, 86 89, 59 60, 136 138, 160 164, 34 65, 123 128, 34 68, 45 49, 34 132, 34 133, 34 127, 34 49, 34 99, 34 75, 123 133, 34 89
+5000
+22 - Intermediate: Calls* and with
+procedure p1, p2, p3;
+Select p2 such that Calls*(p1, p2) and Calls*(p2, p3) with p3.procName = "AhfW"
+MZMR0IL3RQ2N6KT, cMBdGP6
+5000
+23 - Intermediate: assign pattern and Affects
+assign a; stmt s;
+Select s pattern a(_, _"(a337 % (16 - w))"_) such that Affects(a, s)
+132, 49, 75, 127, 164, 77, 145
+5000
+24 - Intermediate: assign pattern, Uses, Next*
+assign a; variable v; stmt s;
+Select <a,v,s> pattern a(v, _"16 - (w)"_) such that Uses(s, v) and Next*(a, s)
+17 v 45, 17 v 47, 17 v 13, 17 v 128, 17 v 34, 17 v 55, 17 v 51, 119 v 47, 119 v 59, 119 v 35, 119 v 71, 119 v 160, 119 v 67, 119 v 34, 119 v 51, 73 FnYS4CcH5 45, 73 FnYS4CcH5 104, 73 FnYS4CcH5 46, 73 FnYS4CcH5 149, 73 FnYS4CcH5 103, 73 FnYS4CcH5 87, 73 FnYS4CcH5 107, 17 v 35, 73 FnYS4CcH5 90, 73 FnYS4CcH5 152, 119 v 55, 73 FnYS4CcH5 131, 119 v 128, 73 FnYS4CcH5 140, 73 FnYS4CcH5 86, 73 FnYS4CcH5 34, 73 FnYS4CcH5 123, 73 FnYS4CcH5 136, 119 v 65, 109 CwCFOIQXXi 45, 109 CwCFOIQXXi 86, 109 CwCFOIQXXi 93, 99 aUcJuJ 45, 99 aUcJuJ 86, 77 aUcJuJ 45, 77 aUcJuJ 86, 132 gxCa 161, 132 gxCa 158, 132 gxCa 77, 132 gxCa 104, 132 gxCa 140, 89 gxCa 47, 132 gxCa 145, 132 gxCa 86, 75 Zi 135, 17 v 59, 132 gxCa 39, 119 v 161, 132 gxCa 46, 132 gxCa 136, 89 gxCa 152, 145 ID1o 123, 73 FnYS4CcH5 44, 132 gxCa 123, 17 v 161, 132 gxCa 87, 17 v 123, 99 aUcJuJ 34, 72 aUcJuJ 34, 132 gxCa 115, 49 xbllq 39, 77 aUcJuJ 102, 89 gxCa 132, 89 gxCa 46, 132 gxCa 152, 132 gxCa 90, 73 FnYS4CcH5 158, 89 gxCa 75, 145 ID1o 45, 89 gxCa 86, 17 v 67, 89 gxCa 34, 89 gxCa 136, 89 gxCa 123, 89 gxCa 45, 49 xbllq 89, 49 xbllq 164, 109 CwCFOIQXXi 70, 132 gxCa 164, 49 xbllq 138, 164 gxW 34, 109 CwCFOIQXXi 34, 132 gxCa 103, 109 CwCFOIQXXi 91, 89 gxCa 44, 89 gxCa 107, 127 jOt 45, 132 gxCa 160, 49 xbllq 132, 127 jOt 47, 119 v 45, 89 gxCa 55, 49 xbllq 127, 89 gxCa 87, 127 jOt 34, 49 xbllq 45, 72 aUcJuJ 86, 164 gxW 47, 132 gxCa 127, 17 v 65, 49 xbllq 67, 49 xbllq 47, 73 FnYS4CcH5 156, 89 gxCa 158, 73 FnYS4CcH5 139, 89 gxCa 149, 127 jOt 48, 89 gxCa 90, 132 gxCa 149, 73 FnYS4CcH5 100, 49 xbllq 115, 132 gxCa 34, 89 gxCa 127, 89 gxCa 145, 164 gxW 53, 89 gxCa 77, 164 gxW 45, 89 gxCa 115, 89 gxCa 156, 49 xbllq 104, 17 v 20, 89 gxCa 39, 99 aUcJuJ 102, 89 gxCa 164, 132 gxCa 55, 89 gxCa 103, 132 gxCa 44, 132 gxCa 100, 17 v 160, 49 xbllq 145, 49 xbllq 100, 132 gxCa 132, 49 xbllq 55, 89 gxCa 160, 132 gxCa 47, 89 gxCa 104, 132 gxCa 45, 132 gxCa 75, 132 gxCa 156, 49 xbllq 136, 145 ID1o 130, 49 xbllq 77, 17 v 71, 132 gxCa 49, 145 ID1o 36, 145 ID1o 50, 89 gxCa 100, 145 ID1o 34, 49 xbllq 90, 145 ID1o 47, 49 xbllq 123, 49 xbllq 160, 17 v 33, 49 xbllq 86, 49 xbllq 140, 49 xbllq 49, 49 xbllq 128, 49 xbllq 65, 49 xbllq 41, 49 xbllq 34, 49 xbllq 46, 49 xbllq 152, 89 gxCa 49, 49 xbllq 154, 49 xbllq 71, 49 xbllq 99, 119 v 123, 49 xbllq 158, 132 gxCa 107, 49 xbllq 35, 49 xbllq 107, 77 aUcJuJ 34, 49 xbllq 161, 49 xbllq 87, 89 gxCa 140, 89 gxCa 161, 49 xbllq 103, 49 xbllq 149, 49 xbllq 59, 49 xbllq 156, 49 xbllq 75, 75 Zi 34, 49 xbllq 44, 72 aUcJuJ 102, 72 aUcJuJ 45
+5000
+25 - Intermediate: while pattern, parent, follows*, affects*
+while w; print p; assign a; stmt s;
+Select <a, s> pattern w("v", _) such that Parent(w, p) and Follows*(a, p) such that Affects*(s, a)
+35 67, 35 132, 35 88, 35 89, 35 49, 35 119, 35 60, 35 116, 35 68, 35 71, 35 52, 35 65
+5000
+26 - Intermediate: unrelated synonyms - Next*, UsesP, if pattern
+if i; procedure proc; variable v; call c; 
+Select <i, c> pattern i(v, _, _) such that Uses("v1kVieu", v) and Next*(c, i) and Uses(c, v)
+115 100, 115 103, 115 46, 115 104, 115 156, 115 28, 86 100, 86 103, 86 23, 86 46, 115 158, 115 90, 115 140, 115 107, 86 15, 86 158, 45 87, 20 15, 115 152, 45 16, 45 156, 45 15, 86 140, 45 28, 115 23, 45 140, 45 152, 45 107, 115 15, 45 100, 115 44, 20 16, 45 90, 45 104, 86 44, 20 28, 115 16, 86 107, 115 87, 45 158, 45 44, 45 23, 45 103, 20 23, 45 46, 86 28, 86 16, 86 90, 86 156, 86 104, 86 87, 86 152
+5000
+27 - Intermediate: Affects and with
+assign a1, a2;
+Select <a1, a2> such that Affects(a1, a2) with a1.stmt# = a2.stmt#
+132 132, 65 65, 71 71
+5000
+28 - Advanced: Testing Optimization of Next* (single Next*)
+stmt s;
+Select s such that Next*(35, s)
+96, 151, 150, 118, 149, 98, 145, 61, 103, 143, 115, 38, 67, 75, 59, 159, 50, 79, 56, 129, 35, 78, 37, 46, 83, 138, 156, 106, 107, 90, 141, 122, 164, 91, 87, 155, 62, 55, 113, 41, 161, 49, 93, 42, 124, 135, 110, 137, 88, 133, 127, 73, 82, 71, 77, 165, 111, 163, 39, 158, 157, 80, 81, 95, 72, 65, 104, 117, 128, 58, 134, 146, 66, 142, 132, 123, 101, 140, 147, 48, 85, 162, 152, 36, 130, 40, 144, 70, 120, 63, 136, 148, 97, 112, 57, 154, 45, 53, 69, 114, 102, 92, 54, 64, 125, 109, 44, 89, 126, 84, 60, 99, 139, 108, 76, 153, 105, 68, 100, 43, 74, 47, 94, 121, 51, 160, 116, 131, 34, 119, 52, 86
+5000
+29 - Advanced: Testing Optimization of Next* (Next* with cached result) (linked to #26)
+stmt s;
+Select s such that Next*(35, s) and Next*(96, s) and Next*(61, s)
+125, 96, 37, 46, 144, 40, 130, 90, 141, 120, 70, 63, 136, 49, 42, 127, 133, 98, 145, 149, 82, 103, 61, 111, 163, 126, 35, 150, 129, 113, 78, 106, 156, 36, 152, 71, 92, 102, 151, 146, 57, 45, 154, 86, 62, 55, 72, 53, 148, 66, 142, 38, 67, 107, 83, 138, 137, 88, 122, 164, 91, 109, 50, 159, 147, 73, 123, 101, 140, 119, 110, 161, 41, 54, 52, 59, 75, 143, 153, 105, 134, 58, 85, 99, 139, 165, 77, 95, 80, 81, 117, 128, 104, 155, 87, 65, 115, 34, 74, 47, 100, 43, 162, 160, 89, 44, 39, 158, 157, 76, 108, 48, 56, 79, 84, 60, 135, 124, 93, 69, 114, 132, 97, 112, 116, 131, 64, 68, 121, 94, 51, 118
+5000
+30 - Advanced: Testing Optimization of Next* (Next* with cached result) (linked to #26)
+stmt s1, s2;
+Select s1 such that Next*(35, s1) and Next*(111, s2) and Next*(134, 129) and Next*(163, 98)
+96, 61, 118, 73, 103, 115, 134, 58, 129, 35, 150, 78, 38, 67, 91, 122, 164, 37, 46, 90, 141, 87, 155, 126, 85, 59, 75, 143, 116, 131, 156, 106, 107, 83, 138, 39, 158, 157, 146, 113, 74, 47, 148, 149, 98, 145, 142, 66, 71, 111, 163, 95, 65, 104, 81, 80, 127, 133, 49, 93, 42, 124, 135, 110, 48, 55, 62, 112, 97, 162, 147, 43, 100, 54, 56, 79, 140, 151, 128, 117, 45, 57, 154, 144, 70, 120, 160, 161, 41, 68, 84, 60, 92, 102, 53, 137, 88, 130, 40, 72, 108, 76, 119, 64, 69, 114, 63, 136, 86, 82, 153, 105, 44, 89, 123, 165, 77, 36, 152, 94, 121, 51, 52, 34, 125, 109, 132, 50, 159, 101, 139, 99
+5000
+31 - Advanced: Testing Optimization of Next*
+stmt s1, s2, s3, s4, s5, s6;
+Select s1 such that Next*(s1, s2) and Next*(s3, s4) and Next*(s5, s6)
+11, 27, 170, 118, 7, 61, 73, 6, 111, 163, 148, 50, 159, 62, 8, 39, 77, 152, 147, 37, 151, 24, 92, 102, 106, 156, 78, 42, 5, 144, 86, 35, 129, 150, 107, 33, 57, 31, 154, 45, 13, 122, 91, 164, 52, 83, 138, 110, 55, 30, 134, 169, 58, 87, 155, 98, 149, 145, 174, 85, 22, 14, 20, 2, 54, 173, 72, 23, 141, 90, 103, 28, 157, 158, 46, 36, 47, 74, 32, 139, 99, 29, 89, 44, 10, 166, 3, 104, 117, 128, 34, 109, 125, 97, 112, 143, 123, 16, 115, 18, 15, 168, 140, 101, 56, 79, 40, 130, 171, 88, 137, 121, 94, 51, 48, 71, 146, 26, 153, 105, 21, 75, 59, 38, 17, 67, 64, 84, 60, 162, 120, 70, 133, 127, 69, 114, 175, 95, 80, 81, 108, 76, 113, 1, 68, 132, 41, 161, 93, 124, 135, 100, 43, 96, 126, 19, 116, 131, 65, 160, 25, 82, 4, 49, 119, 63, 136, 66, 142, 53
+5000
+32 - Advanced: Multiple groups
+stmt s1, s2; variable v1a, v1b, v2; call c1; print pr1; assign a2;
+Select <c1, s2> such that Next*(c1, pr1) and Uses(c1, v1a) and Uses(pr1, v1b) with v1a.varName = v1b.varName such that Next*(s2, a2) pattern a2(v2, _"96 % (100 % Ofq0NLk4Qw1ikYqYo43POp7Jo)"_) such that Modifies(s2, v2)
+15 124, 15 153, 15 149, 15 123, 100 124, 140 57, 15 5, 15 1, 175 86, 16 5, 16 1, 44 136, 104 5, 104 1, 90 124, 103 124, 152 1, 107 136, 173 88, 100 86, 158 153, 174 1, 103 123, 140 5, 103 1, 23 57, 152 47, 15 47, 140 153, 46 1, 152 123, 46 5, 44 5, 158 1, 158 55, 23 149, 28 5, 28 1, 87 5, 15 86, 16 136, 15 88, 100 123, 23 5, 140 1, 158 124, 15 45, 15 34, 87 45, 156 5, 140 124, 100 88, 46 124, 158 86, 140 55, 16 86, 140 136, 15 55, 90 57, 28 149, 140 123, 16 88, 152 153, 16 149, 16 34, 104 86, 152 124, 107 55, 16 153, 100 153, 104 88, 87 1, 44 123, 104 34, 23 34, 173 86, 90 47, 90 88, 44 45, 158 88, 103 86, 28 88, 28 45, 152 5, 103 45, 173 5, 107 1, 28 34, 103 5, 140 34, 175 1, 175 47, 158 34, 90 123, 44 34, 140 45, 46 45, 174 124, 175 57, 46 86, 107 149, 173 1, 156 1, 140 88, 152 88, 87 86, 107 57, 87 88, 23 88, 28 124, 140 86, 46 153, 107 34, 175 5, 104 55, 100 45, 158 45, 174 86, 87 123, 100 1, 28 86, 174 55, 90 5, 90 34, 156 45, 173 34, 103 149, 175 45, 140 47, 107 124, 90 45, 23 123, 44 86, 100 47, 107 88, 156 88, 16 45, 156 86, 104 45, 152 45, 23 45, 158 47, 103 34, 23 86, 156 124, 44 1, 90 1, 156 136, 87 124, 103 47, 44 88, 152 136, 46 88, 87 136, 158 149, 23 1, 103 88, 90 86, 104 124, 152 149, 156 34, 173 45, 107 123, 174 88, 23 47, 174 57, 16 47, 174 45, 100 149, 87 34, 175 34, 158 5, 16 55, 158 136, 15 136, 152 34, 46 55, 175 88, 87 47, 104 57, 107 47, 90 55, 90 136, 90 149, 90 153, 87 55, 23 55, 87 149, 87 153, 87 57, 175 136, 175 153, 28 123, 28 55, 28 57, 158 123, 107 45, 103 136, 28 136, 28 153, 152 55, 28 47, 23 124, 152 57, 173 47, 44 55, 44 153, 15 57, 100 34, 44 47, 44 124, 156 153, 156 149, 107 86, 46 123, 156 55, 156 47, 23 136, 23 153, 175 55, 44 57, 46 149, 46 136, 103 55, 100 136, 173 149, 46 57, 103 153, 152 86, 46 34, 174 153, 107 5, 103 57, 173 123, 173 55, 156 57, 173 136, 173 153, 173 57, 107 153, 173 124, 174 123, 174 5, 44 149, 46 47, 174 149, 100 57, 174 136, 174 47, 175 123, 175 149, 158 57, 175 124, 104 123, 156 123, 104 149, 104 136, 174 34, 104 153, 100 5, 104 47, 16 123, 16 57, 140 149, 16 124, 100 55
+5000
+33 - Advanced: Multiple groups (empty result) (linked to #30)
+stmt s1, s2; variable v1a, v1b, v2; call c1; print pr1; assign a2;
+Select <c1, s2> such that Next*(c1, pr1) and Uses(c1, v1a) and Uses(pr1, v1b) with v1a.varName = v1b.varName such that Next*(s2, a2) pattern a2(v2, _"96 % (100 % Ofq0NLk4Qw1ikYqYo43POp7Jo)"_) such that Modifies(s2, v2) and Next*(165, s2)
+none
+5000
+34 - Advanced: Multiple groups, large intermediate results (>500 rows)
+stmt s1; assign a1a, a2a, a2b, a2c; if i1; variable v1; call c2a, c2b;
+Select <v1, a2a> such that Affects(a1a, s1) pattern a1a(_, _"58"_) such that Next*(i1, s1) pattern i1(v1, _, _) such that Modifies(a1a, v1) such that Affects(a2a, a2b) and Next*(a2a, c2a) and Next*(c2a, c2b) and Next*(c2b, a2b)
+nwRMADrc 49,v 119,xbllq 60,nwRMADrc 88,nwRMADrc 60,xbllq 88,xbllq 67,v 60,nwRMADrc 119,nwRMADrc 92,v 88,xbllq 119,v 67,nwRMADrc 67,v 49,xbllq 116,v 116,xbllq 92,nwRMADrc 116,nwRMADrc 71,xbllq 65,v 65,nwRMADrc 65,v 92,xbllq 71,v 71,xbllq 109,xbllq 52,v 109,v 52,nwRMADrc 109,nwRMADrc 52,xbllq 89,v 89,nwRMADrc 89,xbllq 132,v 132,nwRMADrc 132,xbllq 68,v 68,nwRMADrc 68,xbllq 49
+5000

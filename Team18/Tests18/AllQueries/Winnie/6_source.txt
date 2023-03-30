@@ -1,0 +1,116 @@
+procedure A {
+	print x;
+	if (x == 1) then {
+		read y;
+	} else {
+		read z;
+	}
+	while (x == 0) {
+		read a;
+	}
+	if (x == 0) then {
+		while (x == 0) {
+			read b;
+		}
+	} else {
+		read c;
+	}
+	if (x == 0) then {
+		read c;
+	} else {
+		while (x == 0) {
+			read b;
+		}
+	}
+	while (x == 1) {
+		if (y == 2) then {
+			z = 3 + 2 - x;
+		} else {
+			x = 5;
+		}
+	}
+	while (x == 0) {
+		if (x == 0) then {
+			read x;
+		} else {
+			read d;
+		}
+		print k;
+	}
+	if (x == 0) then {
+		if (x == 0) then {
+			read y;
+		} else {
+			read z;
+		}
+	} else {
+		read z;
+	}
+	if (x == 0) then {
+		read x;
+	} else {
+		if (x == 0) then {
+			read y;
+		} else {
+			read z;
+		}
+	}
+	if (x == 0) then {
+		if (q == 213) then {
+			read y;
+		} else {
+			read z;
+		}
+	} else {
+		if (r == 22) then {
+			print y;
+		} else {
+			read z;
+		}
+	}
+	if (x == 0) then {
+		if (x == 0) then {
+			read y;
+		} else {
+			read z;
+		}
+		print xyz;
+	} else {
+		read z;
+	}
+	if (x == 0) then {
+		read x;
+	} else {
+		if (x == 0) then {
+			read y;
+		} else {
+			read z;
+		}
+		print xyz;
+	}
+	while (p == (10 + l)) {
+		if ((o == 0) && (b == 6)) then {
+			if (k == 1) then {
+				fas = 0;
+			} else {
+				fass = 1;
+			}
+		} else {
+			if (q == 2) then {
+				foo = 2;
+			} else {
+				bar = 3;
+			}
+		}
+	}
+	if (x == h) then {
+		while (w == 3) {
+			while (f != 3243) {
+				read s;
+			}
+		}
+	} else {
+		print k;
+	}
+}
+

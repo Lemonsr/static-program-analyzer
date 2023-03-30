@@ -1,0 +1,180 @@
+1 - Basic: Select all entities without relations (variables)
+variable v;
+Select v
+i, j, x, y
+5000
+2 - Basic: Select all entities without relations (constants)
+constant c;
+Select c
+0, 1, 2, 15, 32
+5000
+3 - Basic: Select all entities without relations (reads)
+read r;
+Select r
+6, 7
+5000
+4 - Basic: Select all entities without relations (prints)
+print pr;
+Select pr
+5, 10, 12, 15, 16
+5000
+5 - Basic: Select all entities without relations (whiles)
+while w;
+Select w
+3
+5000
+6 - Basic: Select all entities without relations (ifs)
+if i;
+Select i
+9, 13
+5000
+7 - Basic: Select all entities without relations (assigns)
+assign a;
+Select a
+1, 2, 4, 8, 11, 14, 17
+5000
+8 - Basic: Select all entities without relations (procedures)
+procedure p;
+Select p
+Intermediate
+5000
+9 - Basic: Select entities with unrelated relationship = True (Parent)
+variable v;
+Select v such that Parent(3, 4)
+i, j, x, y
+5000
+10 - Basic: Select entities with unrelated Relationship = True (Modifies)
+read r;
+Select r such that Modifies(4, "x")
+6, 7
+5000
+11 - Basic: Select entities with unrelated relationship = False (Follows)
+read r;
+Select r such that Follows(3, 4)
+none
+5000
+12 - Basic: Select entities with unrelated relationship = False (Uses)
+if i;
+Select i such that Follows(4, "y")
+SyntaxError
+5000
+13 - Intermediate: Select entities involved in a relationship (Parent)
+if i; print pr;
+Select i such that Parent(i, pr)
+9, 13
+5000
+14 - Intermediate: Select entities involved in a relationship (Parent)
+while w;
+Select w such that Parent(w, 4)
+3
+5000
+15 - Intermediate: Select entities involved in a relationship (Follows)
+while w; read r;
+Select r such that Follows(w, r)
+6
+5000
+16 - Intermediate: Select entities involved in a relationship (Uses)
+if i;
+Select i such that Uses(i, "x")
+9, 13
+5000
+17 - Intermediate: Select entities involved in a relationship (Modifies)
+variable v;
+Select v such that Modifies(2, v)
+y
+5000
+18 - Intermediate: Select entities involved in a relationship (Uses)
+variable v;
+Select v such that Uses(9, v)
+i, j, x
+5000
+19 - Intermediate: Select entities involved in a transitive relationship (Follows*)
+while w; read r;
+Select r such that Follows*(w, r)
+6, 7
+5000
+20 - Intermediate: Select entities involved in a transitive relationship (Parent*)
+if i; print p;
+Select p such that Parent*(i, p)
+10, 12, 15, 16
+5000
+21 - Intermediate: Select entities involved in pattern
+assign a;
+Select a pattern a("x", _"1"_)
+4
+5000
+22 - Intermediate: Select entities involved in pattern
+assign a;
+Select a pattern a(_, _"x"_)
+4, 11, 14
+5000
+23 - Intermediate: Select entities involved in pattern
+assign a;
+Select a pattern a(_, _"2"_)
+11, 14
+5000
+24 - Intermediate: Select entities not involved in pattern
+assign a; assign a1;
+Select a1 pattern a(_, _"x"_)
+1, 2, 4, 8, 11, 14, 17
+5000
+25 - Advanced: Select entities with relation and pattern (Parent and Pattern, one involves selected)
+assign a;
+Select a such that Uses(4, "x") pattern a(_, _"1"_)
+4
+5000
+26 - Advanced: Select entities with relation and pattern (Parent and Pattern, both involves selected)
+if i; assign a;
+Select a such that Parent(i, a) pattern a(_, _"x"_)
+11, 14
+5000
+27 - Advanced: Select entities with relation and pattern (Follows and Pattern, one involves selected)
+if i; assign a; variable v;
+Select v such that Follows(i, a) pattern a(v, _"i"_)
+x
+5000
+28 - Advanced: Select entities with relation and pattern (Follows and Pattern, both involves selected)
+if i; assign a;
+Select a such that Follows(i, a) pattern a("x", _)
+17
+5000
+29 - Advanced: Select entities with relation and pattern (Uses and Pattern, one involves selected)
+print pr; assign a; variable v;
+Select a such that Uses(pr, v) pattern a(v, _"2"_)
+11, 14
+5000
+30 - Advanced: Select entities with relation and pattern (Uses and Pattern, both involves selected)
+variable v; assign a;
+Select v such that Uses(16, v) pattern a(v, _"i"_)
+y
+5000
+31 - Advanced: Select entities with relation and pattern (Modifies and Pattern, one involves selected)
+read r; variable v; assign a;
+Select v such that Modifies(r, v) pattern a(v, _)
+j
+5000
+31 - Advanced: Select entities with relation and pattern (Modifies and Pattern, both involves selected)
+variable v; assign a;
+Select a such that Modifies(4, v) pattern a(v, _)
+1, 4, 8, 17
+5000
+32 - Advanced: Select entities with relation and pattern (Follows* and Pattern, one involves selected)
+stmt s; assign a;
+Select a such that Follows*(4, s) pattern a(_, _)
+1, 2, 4, 8, 11, 14, 17
+5000
+33 - Advanced: Select entities with relation and pattern (Follows* and Pattern, both involves selected)
+assign a; variable v;
+Select v such that Follows*(1, a) pattern a(v, _)
+x, y	
+5000
+34 - Advanced: Select entities with relation and pattern (Parent* and Pattern, one involves selected)
+variable v; assign a; if i; stmt s;
+Select v such that Parent*(i, s) pattern a(v, _"2"_)
+j, y
+5000
+35 - Advanced: Select entities with relation and pattern (Parent* and Pattern, both involves selected)
+variable v; assign a; while w;
+Select w such that Parent(w, a) pattern a(v, _"x"_)
+3
+5000

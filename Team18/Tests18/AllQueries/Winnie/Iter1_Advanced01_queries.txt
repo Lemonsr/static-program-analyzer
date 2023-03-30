@@ -1,0 +1,125 @@
+1 - Basic: Select all entity
+variable v;
+Select v
+i, j, k
+5000
+2 - Basic: Select all entity with unrelated relationship = True
+read r;
+Select r such that Parent(5, 6)
+1, 2
+5000
+3 - Basic: Select all entity with unrelated relationship = False
+while w;
+Select w such that Parent(4, _)
+none
+5000
+4 - Intermediate: Select all entity involved in non-transitive relationship
+read r;
+Select r such that Modifies(r, "i")
+1
+5000
+5 - Intermediate: Select all entity involved in non-transitive relationship (no results)
+read r;
+Select r such that Modifies(r, "x")
+none
+5000
+6 - Intermediate: Select assign involved in pattern
+assign a;
+Select a pattern a (_, _"1"_)
+4, 10, 11
+5000
+7 - Intermediate: Select var involved in pattern
+assign a; variable v;
+Select v pattern a (v, _)
+i, j
+5000
+8 - Intermediate: Select entity involved in transitive relationship
+stmt s;
+Select s such that Parent*(3, s)
+4, 5, 6, 7, 8
+5000
+9 - Intermediate: Select entity involved in transitive relationship (no results)
+read r;
+Select r such that Follows*(2, r)
+none
+5000
+10 - Advanced: Select assign involved in pattern, with unrelated relationship
+assign a;
+Select a such that Follows(4, 5) pattern a (_, _"k"_)
+14
+5000
+11 - Advanced: Select assign involved in pattern, with unrelated relationship (no results)
+assign a;
+Select a such that Follows*(5, 6) pattern a (_, _"k"_)
+none
+5000
+12 - Advanced: Select entity involved in relationship, with unrelated pattern
+while w; assign a;
+Select w such that Follows*(1, w) pattern a ("i", _"k"_)
+3, 9
+5000
+13 - Advanced: Select entity involved in relationship, with unrelated pattern (no results)
+while w; assign a;
+Select w such that Follows*(1, w) pattern a (_, _"10000"_)
+none
+5000
+14 - Advanced: Select entity involved in relationship and pattern
+assign a;
+Select a such that Parent*(5, a) pattern a ("j", _)
+7, 8
+5000
+15 - Advanced: Select entity involved in relationship and pattern (no results)
+assign a;
+Select a such that Parent*(5, a) pattern a (_, _"10000"_)
+none
+5000
+16 - Advanced: Select entity involved in relationship that has multiple entities involved
+stmt s; while w;
+Select s such that Parent*(s, w)
+3, 5, 9
+5000
+17 - Advanced: Select entity involved in relationship that has multiple entities involved (no results)
+print p; while w;
+Select p such that Parent*(w, p)
+none
+5000
+18 - Advanced: Select entity involved in relationship and pattern that has multiple entities involved
+assign a; while w;
+Select a such that Parent*(w, a) pattern a ("i", _)
+4, 10
+5000
+19 - Advanced: Select relationship(s, s) where s is the same identifier
+stmt s;
+Select s such that Parent(s, s)
+none
+5000
+20 - Advanced: Uses and Pattern share two identifiers (select a, AnyPattern)
+assign a; variable v;
+Select a such that Uses(a, v) pattern a (v, _)
+4, 7, 8, 10, 13
+5000
+21 - Advanced: Uses and Pattern share two identifiers (select v, AnyPattern)
+assign a; variable v;
+Select v such that Uses(a, v) pattern a (v, _)
+i, j
+5000
+22 - Advanced: Uses and Pattern share two identifiers (select a, _const_)
+assign a; variable v;
+Select a such that Uses(a, v) pattern a (v, _"1"_)
+4, 10
+5000
+23 - Advanced: Uses and Pattern share two identifiers (select v, _const_)
+assign a; variable v;
+Select v such that Uses(a, v) pattern a (v, _"1"_)
+i
+5000
+24 - Advanced: Uses and Pattern share two identifiers (select a, _var_)
+assign a; variable v;
+Select a such that Uses(a, v) pattern a (v, _"i"_)
+4, 10
+5000
+25 - Advanced: Uses and Pattern share two identifiers (select v, _var_)
+assign a; variable v;
+Select v such that Uses(a, v) pattern a (v, _"i"_)
+i
+5000

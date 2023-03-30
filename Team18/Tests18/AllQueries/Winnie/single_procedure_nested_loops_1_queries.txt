@@ -1,0 +1,175 @@
+1
+if i;
+Select i such that Parent(i, 6)
+5
+5000
+2
+if i;
+Select i such that Parent(i, 7)
+5
+5000
+3
+if i;
+Select i such that Parent(i, 8)
+none
+5000
+4
+if i;
+Select i such that Parent(i, 5)
+none
+5000
+5
+if i;
+Select i such that Parent(i, 4)
+1
+5000
+6
+if i;
+Select i such that Parent(i, 10)
+1
+5000
+7
+if i;
+Select i such that Parent(i, 3)
+1
+5000
+8
+if i;
+Select i such that Parent*(i, 5)
+1
+5000
+9
+if i;
+Select i such that Parent*(i, 6)
+1, 5
+5000
+10
+if i;
+Select i such that Parent*(i, 7)
+1, 5
+5000
+11
+if i;
+Select i such that Parent*(i, 8)
+1, 5
+5000
+12
+while w;
+Select w such that Parent(w, 3)
+none
+5000
+13
+while w;
+Select w such that Parent(w, 4)
+none
+5000
+14
+while w;
+Select w such that Parent(w, 5)
+4
+5000
+15
+while w;
+Select w such that Parent(w, 6)
+none
+5000
+16
+while w;
+Select w such that Parent(w, 7)
+none
+5000
+17
+while w;
+Select w such that Parent(w, 8)
+7
+5000
+18
+while w;
+Select w such that Parent*(w, 8)
+4, 7
+5000
+19
+while w;
+Select w such that Parent*(w, 7)
+4
+5000
+20
+while w; if i;
+Select w such that Parent(w, i)
+4
+5000
+21
+while w;
+Select w such that Parent(w, w)
+none
+5000
+22
+while w; if i;
+Select i such that Parent(i, w)
+1, 5
+5000
+23
+if i;
+Select i such that Parent(i, i)
+none
+5000
+24
+if i;
+Select i such that Parent*(i, i)
+none
+5000
+25
+while w;
+Select w such that Parent*(w, w)
+none
+5000
+26
+if i1; if i2;
+Select i1 such that Parent*(i1, i2)
+1
+5000
+27
+while w1; while w2;
+Select w1 such that Parent*(w1, w2)
+4
+5000
+28
+if i1; if i2;
+Select i2 such that Parent*(i1, i2)
+5
+5000
+29
+while w1; while w2;
+Select w2 such that Parent*(w1, w2)
+7
+5000
+30
+assign a; variable v; if i;
+Select i such that Uses(i, v) pattern a(v, "x")
+1,5
+5000
+31
+assign a; variable v; if i;
+Select i such that Uses(i, v) pattern a(v, "y")
+1,5
+5000
+32
+assign a; variable v; stmt s;
+Select s such that Uses(s, v) pattern a(v, "y")
+1,3,4,5,6,7,9
+5000
+33
+assign a; variable v; stmt s;
+Select s such that Uses(s, v) pattern a(v, "x")
+1,4,5,6,9
+5000
+34
+assign a; variable v; stmt s;
+Select s such that Uses(s, v) pattern a(v, "0")
+1,3,4,5,7
+5000
+35
+assign a; variable v; stmt s;
+Select s such that Modifies(s, v) pattern a(v, "y")
+1,2,3,4,5,6,7,8,9,10
+5000
