@@ -63,8 +63,7 @@ void spa::QueryResult::setIsTrue(bool isTrue) {
 }
 
 void spa::QueryResult::setNameNamePairs(std::vector<std::pair<std::string,
-                                                              std::string>>
-  nameNamePairs) {
+                                                              std::string>> nameNamePairs) {
   this->nameNamePairs = nameNamePairs;
 }
 
