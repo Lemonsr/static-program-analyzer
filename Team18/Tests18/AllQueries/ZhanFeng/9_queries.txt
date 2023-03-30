@@ -1,0 +1,95 @@
+36 - Follows Case 1
+stmt s, s1, s2; assign a, a1; while w; if ifs; variable v; procedure p, q; constant c; call cl; print pn; read re;
+Select s such that Follows(s, 26)
+none
+5000
+37 - Follows Case 2
+stmt s, s1, s2; assign a, a1; while w; if ifs; variable v; procedure p, q; constant c; call cl; print pn; read re;
+Select s such that Follows(s, 17)
+13
+5000
+38 - Follows Case 3
+stmt s, s1, s2; assign a, a1; while w; if ifs; variable v; procedure p, q; constant c; call cl; print pn; read re;
+Select s such that Follows*(s, 16)
+none
+5000
+39 - Follows Case 4
+stmt s, s1, s2; assign a, a1; while w; if ifs; variable v; procedure p, q; constant c; call cl; print pn; read re;
+Select s such that Follows(7, s)
+none
+5000
+40 - Follows Case 5
+stmt s, s1, s2; assign a, a1; while w; if ifs; variable v; procedure p, q; constant c; call cl; print pn; read re;
+Select s such that Follows*(12, s)
+13, 17
+5000
+41 - Follows Case 6
+stmt s, s1, s2; assign a, a1; while w; if ifs; variable v; procedure p, q; constant c; call cl; print pn; read re;
+Select s such that Follows(s, 10) such that Follows(8, s)
+none
+5000
+42 - Follows Case 7
+stmt s, s1, s2; assign a, a1; while w; if ifs; variable v; procedure p, q; constant c; call cl; print pn; read re;
+Select s such that Follows*(s, 17) such that Follows*(9, s)
+10, 11, 12, 13
+5000
+43 - Follows Case 8
+stmt s, s1, s2; assign a, a1; while w; if ifs; variable v; procedure p, q; constant c; call cl; print pn; read re;
+Select a such that Follows(s, a)
+3, 4, 10, 11, 15, 17, 19, 20, 22, 25
+5000
+44 - Follows Case 9
+stmt s, s1, s2; assign a, a1; while w; if ifs; variable v; procedure p, q; constant c; call cl; print pn; read re;
+Select w such that Follows(s, w) such that Follows*(w, pn)
+none
+5000
+56 - Mix Case 5
+stmt s; assign a, a1; call cl; variable v, v1; procedure p; if ifs;
+Select ifs such that Follows(s, cl) pattern a1(v,  _)
+7, 13, 23
+5000
+57 - Mix Case 6
+stmt s; assign a, a1; call cl; variable v, v1; procedure p; if ifs;
+Select cl such that Follows*(s, a) pattern a1(v1, _)
+5, 12
+5000
+65 - Mix Case 14
+stmt s; assign a, a1; call cl; variable v, v1; while w; if ifs; print pn; procedure p;
+Select v such that Follows*(w, cl) pattern a(v,  _)
+none
+5000
+66 - Mix Case 15
+stmt s; assign a, a1; call cl; variable v, v1; while w; if ifs; print pn; procedure p;
+Select cl such that Follows*(cl, a) pattern a1(v1, _)
+12
+5000
+77 - Edge Case 7
+stmt s; assign a; variable v; procedure p; constant c;
+Select s such that Follows(s, s)
+none
+5000
+78 - Edge Case 8
+stmt s; assign a; variable v; procedure p; constant c;
+Select s such that Follows*(s, s)
+none
+5000
+79 - Edge Case 9
+stmt s;
+Select a
+SemanticError
+5000
+80 - Edge Case 10
+stmt s;
+Select s such that Follows(s, a)
+SemanticError
+5000
+81 - Edge Case 11
+stmt s; assign a; variable v; procedure p;
+Select s Follows(s, a)
+SyntaxError
+5000
+86 - Edge Case 16
+stmt s;
+Select      s	  such	 that Follows (     s		, 	 17			)
+13
+5000

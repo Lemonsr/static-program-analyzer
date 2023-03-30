@@ -1,0 +1,320 @@
+1- wildcards
+assign a, a1, a3;
+Select a such that Affects(_,_)
+1,10,11,15,16,17,19,2,21,23,25,27,29,3,30,31,32,33,34,35,39,4,40,41,43,47,48,49,5,50,51,53,54,56,57,59,6,61
+5000
+2- wildcard
+assign a, a1, a3;
+Select a such that Affects(a,_)
+1,10,11,15,19,2,21,3,39,4,40,41,47,48,49,5,51,53,56
+5000
+3- wildcard
+assign a, a1, a3;
+Select a such that Affects(_,a)
+2,3,4,5,6,11,16,17,30,31,32,40,41,48,49,50,51,53,59
+5000
+3- assign and assign
+assign a, a1, a3;
+Select a such that Affects(a, a1)
+1,2,3,4,5,10,11,15,19,21,39,40,41,47,48,49,51,53,56
+5000
+4- assign and assign
+assign a, a1, a3;
+Select a1 such that Affects(a,a1)
+2,3,4,5,6,11,16,17,30,31,32,40,41,48,49,50,51,53,59
+5000
+5- self mod and use
+assign a, a1, a3;
+Select BOOLEAN such that Affects(53,53)
+TRUE
+5000
+6- valid
+assign a, a1, a3;
+Select BOOLEAN such that Affects(40, 48)
+TRUE
+5000
+7- stmt# not assign
+assign a, a1, a3;
+Select BOOLEAN such that Affects(3, 99)
+FALSE
+5000
+8- stmt# in different procedure
+assign a, a1, a3;
+Select BOOLEAN such that Affects(5, 19)
+FALSE
+5000
+9- different var
+assign a, a1, a3;
+Select BOOLEAN such that Affects(2,4)
+FALSE
+5000
+10- nested if-loops
+assign a, a1, a3;
+Select BOOLEAN such that Affects(19, 31)
+TRUE
+5000
+11- different vars
+assign a, a1, a3;
+Select BOOLEAN such that Affects(27, 30)
+FALSE
+5000
+12- affects stmt no and assign
+assign a, a1, a3;
+Select BOOLEAN such that Affects(39, a)
+TRUE
+5000
+13- affects stmt no and assign
+assign a, a1, a3;
+Select a such that Affects(39, a)
+40,49,50
+5000
+14- affects assign and stmt no
+assign a, a1, a3;
+Select BOOLEAN such that Affects(a, 6)
+TRUE
+5000
+15- affects assign and stmt no
+assign a, a1, a3;
+Select a such that Affects(a, 6)
+5
+5000
+16-  diff var affects stmt no and stmt no with call in between
+assign a, a1, a3;
+Select BOOLEAN such that Affects(54,56)
+FALSE
+5000
+17- nested while-loops, var not modified
+assign a, a1, a3;
+Select BOOLEAN such that Affects(47, 40)
+TRUE
+5000
+18- nested while-if-if-while-loops
+assign a, a1, a3;
+Select BOOLEAN such that Affects(49, 41)
+TRUE
+5000
+19- while-loop
+assign a, a1, a3;
+Select BOOLEAN such that Affects(39,40)
+TRUE
+5000
+20- while-loop
+assign a, a1, a3;
+Select BOOLEAN such that Affects(10,11)
+TRUE
+5000
+21- affects stmt no and stmt
+assign a, a1, a3; stmt s;
+Select BOOLEAN such that Affects(6, s)
+FALSE
+5000
+22- affect stmt no and stmt
+assign a, a1, a3; stmt s;
+Select s such that Affects(6, s)
+none
+5000
+23- affect stmt no and stmt
+assign a, a1, a3; stmt s;
+Select BOOLEAN such that Affects(1,s)
+TRUE
+5000
+24- affect stmt no and stmt
+assign a, a1, a3; stmt s;
+Select s such that Affects(1,s)
+2
+5000
+25- affects stmt and stmt no
+assign a, a1, a3; stmt s;
+Select BOOLEAN such that Affects(s,50)
+TRUE
+5000
+26- affects stmt and stmt no
+assign a, a1, a3; stmt s;
+Select s such that Affects(s,50)
+39,41,47,48,49,51
+5000
+27- affects stmt and stmt no
+assign a, a1, a3; stmt s;
+Select BOOLEAN such that Affects(s,16)
+TRUE
+5000
+28- affects stmt and stmt no
+assign a, a1, a3; stmt s;
+Select s such that Affects(s,16)
+11
+5000
+37- wildcards
+assign a, a1, a3;
+Select a such that Affects*(_,_)
+1,2,3,4,5,6,10,11,15,16,17,19,21,23,25,27,29,30,31,32,33,34,35,39,40,41,43,47,48,49,50,51,53,54,56,57,59,61
+5000
+38- wildcard
+assign a, a1, a3;
+Select a such that Affects*(a,_)
+1,2,3,4,5,10,11,15,19,21,39,40,41,47,48,49,51,53,56
+5000
+39- wildcard
+assign a, a1, a3;
+Select a such that Affects*(_,a)
+2,3,4,5,6,11,16,17,30,31,32,40,41,48,49,50,51,53,59
+5000
+40- assign and assign
+assign a, a1, a3;
+Select a such that Affects*(a, a1)
+1,2,3,4,5,10,11,15,19,21,39,40,41,47,48,49,51,53,56
+5000
+41- assign and assign
+assign a, a1, a3;
+Select a1 such that Affects*(a,a1)
+2,3,4,5,6,11,16,17,30,31,32,40,41,48,49,50,51,53,59
+5000
+42- valid
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(1,6)
+TRUE
+5000
+43- valid
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(16, 10)
+FALSE
+5000
+44- stmt# not assign
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(17, 99)
+FALSE
+5000
+45- stmt# in different procedure
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(2, 17)
+FALSE
+5000
+46- assign affect while stmt num
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(10,12)
+FALSE
+5000
+47- while affect assign stmt num
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(14, 15)
+FALSE
+5000
+48- different vars
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(15, 16)
+TRUE
+5000
+49- affects stmt no and assign
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(16, a)
+FALSE
+5000
+50- affects stmt no and assign
+assign a, a1, a3;
+Select a such that Affects*(16, a)
+none
+5000
+51- affects assign and stmt no
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(a, 51)
+TRUE
+5000
+52- affects assign and stmt no
+assign a, a1, a3;
+Select a such that Affects*(a, 51)
+39,49
+5000
+53-  diff var affects stmt no and stmt no with call in between
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(54, 56)
+FALSE
+5000
+54- nested while-loops, var not modified
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(49, 39)
+FALSE
+5000
+55- nested while-if-if-while-loops
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(49, 40)
+FALSE
+5000
+56- while-loop
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(11,16)
+TRUE
+5000
+57- while-loop
+assign a, a1, a3;
+Select BOOLEAN such that Affects*(48,50)
+TRUE
+5000
+58- affects stmt no and stmt
+assign a, a1, a3; stmt s;
+Select BOOLEAN such that Affects*(8, s)
+FALSE
+5000
+59- affect stmt no and stmt
+assign a, a1, a3; stmt s;
+Select s such that Affects*(8, s)
+none
+5000
+60- affect stmt no and stmt
+assign a, a1, a3; stmt s;
+Select BOOLEAN such that Affects*(47,s)
+TRUE
+5000
+61- affect stmt no and stmt
+assign a, a1, a3; stmt s;
+Select s such that Affects*(47,s)
+40,48,50
+5000
+62- affects stmt and stmt no
+assign a, a1, a3; stmt s;
+Select BOOLEAN such that Affects*(s,59)
+TRUE
+5000
+63- affects stmt and stmt no
+assign a, a1, a3; stmt s;
+Select s such that Affects*(s,59)
+56
+5000
+64- affects stmt and stmt no
+assign a, a1, a3; stmt s;
+Select BOOLEAN such that Affects*(s,6)
+TRUE
+5000
+65- affects stmt and stmt no
+assign a, a1, a3; stmt s;
+Select s such that Affects*(s,6)
+1,2,3,4,5
+5000
+74- affect stmt and with clause
+assign a, a1, a3; stmt s; 
+Select a such that Affects*(_,_) with a.stmt# = s.stmt#
+1,10,11,15,16,17,19,2,21,23,25,27,29,3,30,31,32,33,34,35,39,4,40,41,43,47,48,49,5,50,51,53,54,56,57,59,6,61
+5000
+75- affect stmt and with clause
+assign a, a1, a3; stmt s; 
+Select a such that Affects*(_,_) with a.stmt# = 51
+51
+5000
+76- affect stmt and with clause
+assign a, a1, a3; stmt s;  procedure p;
+Select a such that Affects*(_,a) with "D" = p.procName
+2,3,4,5,6,11,16,17,30,31,32,40,41,48,49,50,51,53,59
+5000
+77- affect stmt and with clause
+assign a, a1, a3; call c;
+Select c.stmt# such that Affects*(a, a1) with c.procName = "C"
+60
+5000
+78- affect stmt and with clause
+assign a, a1, a3;
+Select a.stmt# such that Affects*(a,a1)
+1,2,3,4,5,10,11,15,19,21,39,40,41,47,48,49,51,53,56
+5000
+79- affect stmt and with clause
+assign a, a1; call c; variable var;
+Select a such that Affects(_,_) with c.procName = var.varName
+none
+5000

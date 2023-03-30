@@ -1,0 +1,610 @@
+Select synonym, calls wildcard wildcard
+stmt s1;
+Select s1 such that Calls(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,6,7,8,9
+5000
+Select synonym, calls wildcard synonym
+procedure p1,p2;
+Select p2 such that Calls(_,p2)
+B,C,D,E,F,G,H
+5000
+Select synonym, calls wildcard identifier
+stmt s1;
+Select s1 such that Calls(_,"F")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,6,7,8,9
+5000
+Select synonym, calls synonym wildcard
+procedure p1;
+Select p1 such that Calls(p1, _)
+A,B,C,D,E,F,G
+5000
+Select synonym, calls synonym synonym
+procedure p1,p2;
+Select p1 such that Calls(p1, p2)
+A,B,C,D,E,F,G
+5000
+Select synonym, calls synonym identifier1
+procedure p1;
+Select p1 such that Calls(p1, "H")
+E,F
+5000
+Select synonym, calls synonym identifier2
+procedure p1;
+Select p1 such that Calls(p1, "G")
+C
+5000
+Select synonym, calls synonym identifier3
+procedure p1;
+Select p1 such that Calls(p1, "F")
+C,G
+5000
+Select synonym, calls synonym identifier4
+procedure p1;
+Select p1 such that Calls(p1, "E")
+B,D
+500
+Select synonym, calls synonym identifier5
+procedure p1;
+Select p1 such that Calls(p1, "D")
+B
+5000
+Select synonym, calls synonym identifier6
+procedure p1;
+Select p1 such that Calls(p1, "C")
+A
+5000
+Select synonym, calls synonym identifier7
+procedure p1;
+Select p1 such that Calls(p1, "B")
+A
+5000
+Select synonym, calls synonym identifier8
+procedure p1;
+Select p1 such that Calls(p1, "A")
+none
+5000
+Select synonym, calls identifier1 wildcard
+procedure p1;
+Select p1 such that Calls("A", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls identifier2 wildcard
+procedure p1;
+Select p1 such that Calls("B", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls identifier3 wildcard
+procedure p1;
+Select p1 such that Calls("C", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls identifier4 wildcard
+procedure p1;
+Select p1 such that Calls("D", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls identifier5 wildcard
+procedure p1;
+Select p1 such that Calls("E", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls identifier6 wildcard
+procedure p1;
+Select p1 such that Calls("F", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls identifier7 wildcard
+procedure p1;
+Select p1 such that Calls("G", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls identifier8 wildcard
+procedure p1;
+Select p1 such that Calls("H", _)
+none
+5000
+Select synonym, calls identifier1 synonym
+procedure p1;
+Select p1 such that Calls("A", p1)
+B,C
+5000
+Select synonym, calls identifier2 synonym
+procedure p1;
+Select p1 such that Calls("B", p1)
+D,E
+5000
+Select synonym, calls identifier3 synonym
+procedure p1;
+Select p1 such that Calls("C", p1)
+F,G
+5000
+Select synonym, calls identifier4 synonym
+procedure p1;
+Select p1 such that Calls("D", p1)
+E
+5000
+Select synonym, calls identifier5 synonym
+procedure p1;
+Select p1 such that Calls("E", p1)
+H
+5000
+Select synonym, calls identifier6 synonym
+procedure p1;
+Select p1 such that Calls("F", p1)
+H
+5000
+Select synonym, calls identifier7 synonym
+procedure p1;
+Select p1 such that Calls("G", p1)
+F
+5000
+Select synonym, calls identifier8 synonym
+procedure p1;
+Select p1 such that Calls("H", p1)
+none
+5000
+Select synonym, calls identifier identifier1
+stmt s1, s2;
+Select s1 such that Calls("A", "B")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,6,7,8,9
+5000
+Select synonym, calls identifier identifier2
+stmt s1, s2;
+Select s1 such that Calls("B", "C")
+none
+5000
+Select synonym, calls identifier identifier3
+stmt s1, s2;
+Select s1 such that Calls("C", "D")
+none
+5000
+Select synonym, calls identifier identifier4
+stmt s1, s2;
+Select s1 such that Calls("D", "E")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,6,7,8,9
+5000
+Select synonym, calls identifier identifier5
+stmt s1, s2;
+Select s1 such that Calls("E", "F")
+none
+5000
+Select synonym, calls identifier identifier6
+stmt s1, s2;
+Select s1 such that Calls("F", "G")
+none
+5000
+Select synonym, calls identifier identifier7
+stmt s1, s2;
+Select s1 such that Calls("G", "H")
+none
+5000
+Select BOOLEAN, calls identifier identifier1
+
+Select BOOLEAN such that Calls("A", "B")
+TRUE
+500
+Select BOOLEAN, calls identifier identifier2
+
+Select BOOLEAN such that Calls("B", "C")
+FALSE
+5000
+Select BOOLEAN, calls identifier identifier3
+
+Select BOOLEAN such that Calls("C", "D")
+FALSE
+5000
+Select BOOLEAN, calls identifier identifier4
+
+Select BOOLEAN such that Calls("D", "E")
+TRUE
+5000
+Select BOOLEAN, calls identifier identifier5
+
+Select BOOLEAN such that Calls("E", "F")
+FALSE
+5000
+Select BOOLEAN, calls identifier identifier6
+
+Select BOOLEAN such that Calls("F", "G")
+FALSE
+5000
+Select BOOLEAN, calls identifier identifier7
+
+Select BOOLEAN such that Calls("G", "H")
+FALSE
+5000
+Select tuple, calls wildcard wildcard
+constant c; assign a;
+Select <a,c.value> such that Calls(_,_)
+1 2,1 3,1 3820,1 392,1 423,1 832,1 930
+5000
+Select tuple, calls wildcard synonym
+assign a; variable v; procedure p1;
+Select <a.stmt#, v.varName> such that Calls(_,p1)
+1 H,1 ahoc,1 ando,1 asd,1 daj,1 dajpd,1 danl,1 dh328,1 dj1,1 djao,1 dnal,1 fan,1 fano,1 fje9313,1 fna,1 hdo,1 naw,1 ngsi03,1 sjf3,1 x,1 xdj,1 y,1 z
+5000
+Select tuple, calls wildcard identifier
+while w; constant c;
+Select <w.stmt#, c.value> such that Calls(_, "C")
+17 2,17 3,17 3820,17 392,17 423,17 832,17 930,18 2,18 3,18 3820,18 392,18 423,18 832,18 930,2 2,2 3,2 3820,2 392,2 423,2 832,2 930,22 2,22 3,22 3820,22 392,22 423,22 832,22 930,34 2,34 3,34 3820,34 392,34 423,34 832,34 930,36 2,36 3,36 3820,36 392,36 423,36 832,36 930,43 2,43 3,43 3820,43 392,43 423,43 832,43 930,45 2,45 3,45 3820,45 392,45 423,45 832,45 930,48 2,48 3,48 3820,48 392,48 423,48 832,48 930,50 2,50 3,50 3820,50 392,50 423,50 832,50 930,9 2,9 3,9 3820,9 392,9 423,9 832,9 930
+5000
+Select tuple, calls synonym wildcard
+assign a; read r; procedure p1;
+Select <a.stmt#, r.varName> such that Calls(p1, _)
+1 ngsi03,1 y,1 z
+5000
+Select tuple, calls synonym synonym
+procedure p1, p2;
+Select <p1.procName, p2.procName> such that Calls(p1, p2)
+A B,A C,B D,B E,C F,C G,D E,E H,F H,G F
+5000
+Select tuple, calls synonym identifier
+while w; constant c; procedure p1;
+Select <p1.procName, w.stmt#, c.value> such that Calls(p1, "H")
+E 17 2,E 17 3,E 17 3820,E 17 392,E 17 423,E 17 832,E 17 930,E 18 2,E 18 3,E 18 3820,E 18 392,E 18 423,E 18 832,E 18 930,E 2 2,E 2 3,E 2 3820,E 2 392,E 2 423,E 2 832,E 2 930,E 22 2,E 22 3,E 22 3820,E 22 392,E 22 423,E 22 832,E 22 930,E 34 2,E 34 3,E 34 3820,E 34 392,E 34 423,E 34 832,E 34 930,E 36 2,E 36 3,E 36 3820,E 36 392,E 36 423,E 36 832,E 36 930,E 43 2,E 43 3,E 43 3820,E 43 392,E 43 423,E 43 832,E 43 930,E 45 2,E 45 3,E 45 3820,E 45 392,E 45 423,E 45 832,E 45 930,E 48 2,E 48 3,E 48 3820,E 48 392,E 48 423,E 48 832,E 48 930,E 50 2,E 50 3,E 50 3820,E 50 392,E 50 423,E 50 832,E 50 930,E 9 2,E 9 3,E 9 3820,E 9 392,E 9 423,E 9 832,E 9 930,F 17 2,F 17 3,F 17 3820,F 17 392,F 17 423,F 17 832,F 17 930,F 18 2,F 18 3,F 18 3820,F 18 392,F 18 423,F 18 832,F 18 930,F 2 2,F 2 3,F 2 3820,F 2 392,F 2 423,F 2 832,F 2 930,F 22 2,F 22 3,F 22 3820,F 22 392,F 22 423,F 22 832,F 22 930,F 34 2,F 34 3,F 34 3820,F 34 392,F 34 423,F 34 832,F 34 930,F 36 2,F 36 3,F 36 3820,F 36 392,F 36 423,F 36 832,F 36 930,F 43 2,F 43 3,F 43 3820,F 43 392,F 43 423,F 43 832,F 43 930,F 45 2,F 45 3,F 45 3820,F 45 392,F 45 423,F 45 832,F 45 930,F 48 2,F 48 3,F 48 3820,F 48 392,F 48 423,F 48 832,F 48 930,F 50 2,F 50 3,F 50 3820,F 50 392,F 50 423,F 50 832,F 50 930,F 9 2,F 9 3,F 9 3820,F 9 392,F 9 423,F 9 832,F 9 930
+5000
+Select tuple, calls identifier wildcard
+if if; variable v; procedure p1;
+Select <p1.procName, if.stmt#, v.varName> such that Calls(p1, _)
+A 11 H,A 11 ahoc,A 11 ando,A 11 asd,A 11 daj,A 11 dajpd,A 11 danl,A 11 dh328,A 11 dj1,A 11 djao,A 11 dnal,A 11 fan,A 11 fano,A 11 fje9313,A 11 fna,A 11 hdo,A 11 naw,A 11 ngsi03,A 11 sjf3,A 11 x,A 11 xdj,A 11 y,A 11 z,A 21 H,A 21 ahoc,A 21 ando,A 21 asd,A 21 daj,A 21 dajpd,A 21 danl,A 21 dh328,A 21 dj1,A 21 djao,A 21 dnal,A 21 fan,A 21 fano,A 21 fje9313,A 21 fna,A 21 hdo,A 21 naw,A 21 ngsi03,A 21 sjf3,A 21 x,A 21 xdj,A 21 y,A 21 z,A 31 H,A 31 ahoc,A 31 ando,A 31 asd,A 31 daj,A 31 dajpd,A 31 danl,A 31 dh328,A 31 dj1,A 31 djao,A 31 dnal,A 31 fan,A 31 fano,A 31 fje9313,A 31 fna,A 31 hdo,A 31 naw,A 31 ngsi03,A 31 sjf3,A 31 x,A 31 xdj,A 31 y,A 31 z,A 37 H,A 37 ahoc,A 37 ando,A 37 asd,A 37 daj,A 37 dajpd,A 37 danl,A 37 dh328,A 37 dj1,A 37 djao,A 37 dnal,A 37 fan,A 37 fano,A 37 fje9313,A 37 fna,A 37 hdo,A 37 naw,A 37 ngsi03,A 37 sjf3,A 37 x,A 37 xdj,A 37 y,A 37 z,A 4 H,A 4 ahoc,A 4 ando,A 4 asd,A 4 daj,A 4 dajpd,A 4 danl,A 4 dh328,A 4 dj1,A 4 djao,A 4 dnal,A 4 fan,A 4 fano,A 4 fje9313,A 4 fna,A 4 hdo,A 4 naw,A 4 ngsi03,A 4 sjf3,A 4 x,A 4 xdj,A 4 y,A 4 z,A 41 H,A 41 ahoc,A 41 ando,A 41 asd,A 41 daj,A 41 dajpd,A 41 danl,A 41 dh328,A 41 dj1,A 41 djao,A 41 dnal,A 41 fan,A 41 fano,A 41 fje9313,A 41 fna,A 41 hdo,A 41 naw,A 41 ngsi03,A 41 sjf3,A 41 x,A 41 xdj,A 41 y,A 41 z,A 42 H,A 42 ahoc,A 42 ando,A 42 asd,A 42 daj,A 42 dajpd,A 42 danl,A 42 dh328,A 42 dj1,A 42 djao,A 42 dnal,A 42 fan,A 42 fano,A 42 fje9313,A 42 fna,A 42 hdo,A 42 naw,A 42 ngsi03,A 42 sjf3,A 42 x,A 42 xdj,A 42 y,A 42 z,A 47 H,A 47 ahoc,A 47 ando,A 47 asd,A 47 daj,A 47 dajpd,A 47 danl,A 47 dh328,A 47 dj1,A 47 djao,A 47 dnal,A 47 fan,A 47 fano,A 47 fje9313,A 47 fna,A 47 hdo,A 47 naw,A 47 ngsi03,A 47 sjf3,A 47 x,A 47 xdj,A 47 y,A 47 z,B 11 H,B 11 ahoc,B 11 ando,B 11 asd,B 11 daj,B 11 dajpd,B 11 danl,B 11 dh328,B 11 dj1,B 11 djao,B 11 dnal,B 11 fan,B 11 fano,B 11 fje9313,B 11 fna,B 11 hdo,B 11 naw,B 11 ngsi03,B 11 sjf3,B 11 x,B 11 xdj,B 11 y,B 11 z,B 21 H,B 21 ahoc,B 21 ando,B 21 asd,B 21 daj,B 21 dajpd,B 21 danl,B 21 dh328,B 21 dj1,B 21 djao,B 21 dnal,B 21 fan,B 21 fano,B 21 fje9313,B 21 fna,B 21 hdo,B 21 naw,B 21 ngsi03,B 21 sjf3,B 21 x,B 21 xdj,B 21 y,B 21 z,B 31 H,B 31 ahoc,B 31 ando,B 31 asd,B 31 daj,B 31 dajpd,B 31 danl,B 31 dh328,B 31 dj1,B 31 djao,B 31 dnal,B 31 fan,B 31 fano,B 31 fje9313,B 31 fna,B 31 hdo,B 31 naw,B 31 ngsi03,B 31 sjf3,B 31 x,B 31 xdj,B 31 y,B 31 z,B 37 H,B 37 ahoc,B 37 ando,B 37 asd,B 37 daj,B 37 dajpd,B 37 danl,B 37 dh328,B 37 dj1,B 37 djao,B 37 dnal,B 37 fan,B 37 fano,B 37 fje9313,B 37 fna,B 37 hdo,B 37 naw,B 37 ngsi03,B 37 sjf3,B 37 x,B 37 xdj,B 37 y,B 37 z,B 4 H,B 4 ahoc,B 4 ando,B 4 asd,B 4 daj,B 4 dajpd,B 4 danl,B 4 dh328,B 4 dj1,B 4 djao,B 4 dnal,B 4 fan,B 4 fano,B 4 fje9313,B 4 fna,B 4 hdo,B 4 naw,B 4 ngsi03,B 4 sjf3,B 4 x,B 4 xdj,B 4 y,B 4 z,B 41 H,B 41 ahoc,B 41 ando,B 41 asd,B 41 daj,B 41 dajpd,B 41 danl,B 41 dh328,B 41 dj1,B 41 djao,B 41 dnal,B 41 fan,B 41 fano,B 41 fje9313,B 41 fna,B 41 hdo,B 41 naw,B 41 ngsi03,B 41 sjf3,B 41 x,B 41 xdj,B 41 y,B 41 z,B 42 H,B 42 ahoc,B 42 ando,B 42 asd,B 42 daj,B 42 dajpd,B 42 danl,B 42 dh328,B 42 dj1,B 42 djao,B 42 dnal,B 42 fan,B 42 fano,B 42 fje9313,B 42 fna,B 42 hdo,B 42 naw,B 42 ngsi03,B 42 sjf3,B 42 x,B 42 xdj,B 42 y,B 42 z,B 47 H,B 47 ahoc,B 47 ando,B 47 asd,B 47 daj,B 47 dajpd,B 47 danl,B 47 dh328,B 47 dj1,B 47 djao,B 47 dnal,B 47 fan,B 47 fano,B 47 fje9313,B 47 fna,B 47 hdo,B 47 naw,B 47 ngsi03,B 47 sjf3,B 47 x,B 47 xdj,B 47 y,B 47 z,C 11 H,C 11 ahoc,C 11 ando,C 11 asd,C 11 daj,C 11 dajpd,C 11 danl,C 11 dh328,C 11 dj1,C 11 djao,C 11 dnal,C 11 fan,C 11 fano,C 11 fje9313,C 11 fna,C 11 hdo,C 11 naw,C 11 ngsi03,C 11 sjf3,C 11 x,C 11 xdj,C 11 y,C 11 z,C 21 H,C 21 ahoc,C 21 ando,C 21 asd,C 21 daj,C 21 dajpd,C 21 danl,C 21 dh328,C 21 dj1,C 21 djao,C 21 dnal,C 21 fan,C 21 fano,C 21 fje9313,C 21 fna,C 21 hdo,C 21 naw,C 21 ngsi03,C 21 sjf3,C 21 x,C 21 xdj,C 21 y,C 21 z,C 31 H,C 31 ahoc,C 31 ando,C 31 asd,C 31 daj,C 31 dajpd,C 31 danl,C 31 dh328,C 31 dj1,C 31 djao,C 31 dnal,C 31 fan,C 31 fano,C 31 fje9313,C 31 fna,C 31 hdo,C 31 naw,C 31 ngsi03,C 31 sjf3,C 31 x,C 31 xdj,C 31 y,C 31 z,C 37 H,C 37 ahoc,C 37 ando,C 37 asd,C 37 daj,C 37 dajpd,C 37 danl,C 37 dh328,C 37 dj1,C 37 djao,C 37 dnal,C 37 fan,C 37 fano,C 37 fje9313,C 37 fna,C 37 hdo,C 37 naw,C 37 ngsi03,C 37 sjf3,C 37 x,C 37 xdj,C 37 y,C 37 z,C 4 H,C 4 ahoc,C 4 ando,C 4 asd,C 4 daj,C 4 dajpd,C 4 danl,C 4 dh328,C 4 dj1,C 4 djao,C 4 dnal,C 4 fan,C 4 fano,C 4 fje9313,C 4 fna,C 4 hdo,C 4 naw,C 4 ngsi03,C 4 sjf3,C 4 x,C 4 xdj,C 4 y,C 4 z,C 41 H,C 41 ahoc,C 41 ando,C 41 asd,C 41 daj,C 41 dajpd,C 41 danl,C 41 dh328,C 41 dj1,C 41 djao,C 41 dnal,C 41 fan,C 41 fano,C 41 fje9313,C 41 fna,C 41 hdo,C 41 naw,C 41 ngsi03,C 41 sjf3,C 41 x,C 41 xdj,C 41 y,C 41 z,C 42 H,C 42 ahoc,C 42 ando,C 42 asd,C 42 daj,C 42 dajpd,C 42 danl,C 42 dh328,C 42 dj1,C 42 djao,C 42 dnal,C 42 fan,C 42 fano,C 42 fje9313,C 42 fna,C 42 hdo,C 42 naw,C 42 ngsi03,C 42 sjf3,C 42 x,C 42 xdj,C 42 y,C 42 z,C 47 H,C 47 ahoc,C 47 ando,C 47 asd,C 47 daj,C 47 dajpd,C 47 danl,C 47 dh328,C 47 dj1,C 47 djao,C 47 dnal,C 47 fan,C 47 fano,C 47 fje9313,C 47 fna,C 47 hdo,C 47 naw,C 47 ngsi03,C 47 sjf3,C 47 x,C 47 xdj,C 47 y,C 47 z,D 11 H,D 11 ahoc,D 11 ando,D 11 asd,D 11 daj,D 11 dajpd,D 11 danl,D 11 dh328,D 11 dj1,D 11 djao,D 11 dnal,D 11 fan,D 11 fano,D 11 fje9313,D 11 fna,D 11 hdo,D 11 naw,D 11 ngsi03,D 11 sjf3,D 11 x,D 11 xdj,D 11 y,D 11 z,D 21 H,D 21 ahoc,D 21 ando,D 21 asd,D 21 daj,D 21 dajpd,D 21 danl,D 21 dh328,D 21 dj1,D 21 djao,D 21 dnal,D 21 fan,D 21 fano,D 21 fje9313,D 21 fna,D 21 hdo,D 21 naw,D 21 ngsi03,D 21 sjf3,D 21 x,D 21 xdj,D 21 y,D 21 z,D 31 H,D 31 ahoc,D 31 ando,D 31 asd,D 31 daj,D 31 dajpd,D 31 danl,D 31 dh328,D 31 dj1,D 31 djao,D 31 dnal,D 31 fan,D 31 fano,D 31 fje9313,D 31 fna,D 31 hdo,D 31 naw,D 31 ngsi03,D 31 sjf3,D 31 x,D 31 xdj,D 31 y,D 31 z,D 37 H,D 37 ahoc,D 37 ando,D 37 asd,D 37 daj,D 37 dajpd,D 37 danl,D 37 dh328,D 37 dj1,D 37 djao,D 37 dnal,D 37 fan,D 37 fano,D 37 fje9313,D 37 fna,D 37 hdo,D 37 naw,D 37 ngsi03,D 37 sjf3,D 37 x,D 37 xdj,D 37 y,D 37 z,D 4 H,D 4 ahoc,D 4 ando,D 4 asd,D 4 daj,D 4 dajpd,D 4 danl,D 4 dh328,D 4 dj1,D 4 djao,D 4 dnal,D 4 fan,D 4 fano,D 4 fje9313,D 4 fna,D 4 hdo,D 4 naw,D 4 ngsi03,D 4 sjf3,D 4 x,D 4 xdj,D 4 y,D 4 z,D 41 H,D 41 ahoc,D 41 ando,D 41 asd,D 41 daj,D 41 dajpd,D 41 danl,D 41 dh328,D 41 dj1,D 41 djao,D 41 dnal,D 41 fan,D 41 fano,D 41 fje9313,D 41 fna,D 41 hdo,D 41 naw,D 41 ngsi03,D 41 sjf3,D 41 x,D 41 xdj,D 41 y,D 41 z,D 42 H,D 42 ahoc,D 42 ando,D 42 asd,D 42 daj,D 42 dajpd,D 42 danl,D 42 dh328,D 42 dj1,D 42 djao,D 42 dnal,D 42 fan,D 42 fano,D 42 fje9313,D 42 fna,D 42 hdo,D 42 naw,D 42 ngsi03,D 42 sjf3,D 42 x,D 42 xdj,D 42 y,D 42 z,D 47 H,D 47 ahoc,D 47 ando,D 47 asd,D 47 daj,D 47 dajpd,D 47 danl,D 47 dh328,D 47 dj1,D 47 djao,D 47 dnal,D 47 fan,D 47 fano,D 47 fje9313,D 47 fna,D 47 hdo,D 47 naw,D 47 ngsi03,D 47 sjf3,D 47 x,D 47 xdj,D 47 y,D 47 z,E 11 H,E 11 ahoc,E 11 ando,E 11 asd,E 11 daj,E 11 dajpd,E 11 danl,E 11 dh328,E 11 dj1,E 11 djao,E 11 dnal,E 11 fan,E 11 fano,E 11 fje9313,E 11 fna,E 11 hdo,E 11 naw,E 11 ngsi03,E 11 sjf3,E 11 x,E 11 xdj,E 11 y,E 11 z,E 21 H,E 21 ahoc,E 21 ando,E 21 asd,E 21 daj,E 21 dajpd,E 21 danl,E 21 dh328,E 21 dj1,E 21 djao,E 21 dnal,E 21 fan,E 21 fano,E 21 fje9313,E 21 fna,E 21 hdo,E 21 naw,E 21 ngsi03,E 21 sjf3,E 21 x,E 21 xdj,E 21 y,E 21 z,E 31 H,E 31 ahoc,E 31 ando,E 31 asd,E 31 daj,E 31 dajpd,E 31 danl,E 31 dh328,E 31 dj1,E 31 djao,E 31 dnal,E 31 fan,E 31 fano,E 31 fje9313,E 31 fna,E 31 hdo,E 31 naw,E 31 ngsi03,E 31 sjf3,E 31 x,E 31 xdj,E 31 y,E 31 z,E 37 H,E 37 ahoc,E 37 ando,E 37 asd,E 37 daj,E 37 dajpd,E 37 danl,E 37 dh328,E 37 dj1,E 37 djao,E 37 dnal,E 37 fan,E 37 fano,E 37 fje9313,E 37 fna,E 37 hdo,E 37 naw,E 37 ngsi03,E 37 sjf3,E 37 x,E 37 xdj,E 37 y,E 37 z,E 4 H,E 4 ahoc,E 4 ando,E 4 asd,E 4 daj,E 4 dajpd,E 4 danl,E 4 dh328,E 4 dj1,E 4 djao,E 4 dnal,E 4 fan,E 4 fano,E 4 fje9313,E 4 fna,E 4 hdo,E 4 naw,E 4 ngsi03,E 4 sjf3,E 4 x,E 4 xdj,E 4 y,E 4 z,E 41 H,E 41 ahoc,E 41 ando,E 41 asd,E 41 daj,E 41 dajpd,E 41 danl,E 41 dh328,E 41 dj1,E 41 djao,E 41 dnal,E 41 fan,E 41 fano,E 41 fje9313,E 41 fna,E 41 hdo,E 41 naw,E 41 ngsi03,E 41 sjf3,E 41 x,E 41 xdj,E 41 y,E 41 z,E 42 H,E 42 ahoc,E 42 ando,E 42 asd,E 42 daj,E 42 dajpd,E 42 danl,E 42 dh328,E 42 dj1,E 42 djao,E 42 dnal,E 42 fan,E 42 fano,E 42 fje9313,E 42 fna,E 42 hdo,E 42 naw,E 42 ngsi03,E 42 sjf3,E 42 x,E 42 xdj,E 42 y,E 42 z,E 47 H,E 47 ahoc,E 47 ando,E 47 asd,E 47 daj,E 47 dajpd,E 47 danl,E 47 dh328,E 47 dj1,E 47 djao,E 47 dnal,E 47 fan,E 47 fano,E 47 fje9313,E 47 fna,E 47 hdo,E 47 naw,E 47 ngsi03,E 47 sjf3,E 47 x,E 47 xdj,E 47 y,E 47 z,F 11 H,F 11 ahoc,F 11 ando,F 11 asd,F 11 daj,F 11 dajpd,F 11 danl,F 11 dh328,F 11 dj1,F 11 djao,F 11 dnal,F 11 fan,F 11 fano,F 11 fje9313,F 11 fna,F 11 hdo,F 11 naw,F 11 ngsi03,F 11 sjf3,F 11 x,F 11 xdj,F 11 y,F 11 z,F 21 H,F 21 ahoc,F 21 ando,F 21 asd,F 21 daj,F 21 dajpd,F 21 danl,F 21 dh328,F 21 dj1,F 21 djao,F 21 dnal,F 21 fan,F 21 fano,F 21 fje9313,F 21 fna,F 21 hdo,F 21 naw,F 21 ngsi03,F 21 sjf3,F 21 x,F 21 xdj,F 21 y,F 21 z,F 31 H,F 31 ahoc,F 31 ando,F 31 asd,F 31 daj,F 31 dajpd,F 31 danl,F 31 dh328,F 31 dj1,F 31 djao,F 31 dnal,F 31 fan,F 31 fano,F 31 fje9313,F 31 fna,F 31 hdo,F 31 naw,F 31 ngsi03,F 31 sjf3,F 31 x,F 31 xdj,F 31 y,F 31 z,F 37 H,F 37 ahoc,F 37 ando,F 37 asd,F 37 daj,F 37 dajpd,F 37 danl,F 37 dh328,F 37 dj1,F 37 djao,F 37 dnal,F 37 fan,F 37 fano,F 37 fje9313,F 37 fna,F 37 hdo,F 37 naw,F 37 ngsi03,F 37 sjf3,F 37 x,F 37 xdj,F 37 y,F 37 z,F 4 H,F 4 ahoc,F 4 ando,F 4 asd,F 4 daj,F 4 dajpd,F 4 danl,F 4 dh328,F 4 dj1,F 4 djao,F 4 dnal,F 4 fan,F 4 fano,F 4 fje9313,F 4 fna,F 4 hdo,F 4 naw,F 4 ngsi03,F 4 sjf3,F 4 x,F 4 xdj,F 4 y,F 4 z,F 41 H,F 41 ahoc,F 41 ando,F 41 asd,F 41 daj,F 41 dajpd,F 41 danl,F 41 dh328,F 41 dj1,F 41 djao,F 41 dnal,F 41 fan,F 41 fano,F 41 fje9313,F 41 fna,F 41 hdo,F 41 naw,F 41 ngsi03,F 41 sjf3,F 41 x,F 41 xdj,F 41 y,F 41 z,F 42 H,F 42 ahoc,F 42 ando,F 42 asd,F 42 daj,F 42 dajpd,F 42 danl,F 42 dh328,F 42 dj1,F 42 djao,F 42 dnal,F 42 fan,F 42 fano,F 42 fje9313,F 42 fna,F 42 hdo,F 42 naw,F 42 ngsi03,F 42 sjf3,F 42 x,F 42 xdj,F 42 y,F 42 z,F 47 H,F 47 ahoc,F 47 ando,F 47 asd,F 47 daj,F 47 dajpd,F 47 danl,F 47 dh328,F 47 dj1,F 47 djao,F 47 dnal,F 47 fan,F 47 fano,F 47 fje9313,F 47 fna,F 47 hdo,F 47 naw,F 47 ngsi03,F 47 sjf3,F 47 x,F 47 xdj,F 47 y,F 47 z,G 11 H,G 11 ahoc,G 11 ando,G 11 asd,G 11 daj,G 11 dajpd,G 11 danl,G 11 dh328,G 11 dj1,G 11 djao,G 11 dnal,G 11 fan,G 11 fano,G 11 fje9313,G 11 fna,G 11 hdo,G 11 naw,G 11 ngsi03,G 11 sjf3,G 11 x,G 11 xdj,G 11 y,G 11 z,G 21 H,G 21 ahoc,G 21 ando,G 21 asd,G 21 daj,G 21 dajpd,G 21 danl,G 21 dh328,G 21 dj1,G 21 djao,G 21 dnal,G 21 fan,G 21 fano,G 21 fje9313,G 21 fna,G 21 hdo,G 21 naw,G 21 ngsi03,G 21 sjf3,G 21 x,G 21 xdj,G 21 y,G 21 z,G 31 H,G 31 ahoc,G 31 ando,G 31 asd,G 31 daj,G 31 dajpd,G 31 danl,G 31 dh328,G 31 dj1,G 31 djao,G 31 dnal,G 31 fan,G 31 fano,G 31 fje9313,G 31 fna,G 31 hdo,G 31 naw,G 31 ngsi03,G 31 sjf3,G 31 x,G 31 xdj,G 31 y,G 31 z,G 37 H,G 37 ahoc,G 37 ando,G 37 asd,G 37 daj,G 37 dajpd,G 37 danl,G 37 dh328,G 37 dj1,G 37 djao,G 37 dnal,G 37 fan,G 37 fano,G 37 fje9313,G 37 fna,G 37 hdo,G 37 naw,G 37 ngsi03,G 37 sjf3,G 37 x,G 37 xdj,G 37 y,G 37 z,G 4 H,G 4 ahoc,G 4 ando,G 4 asd,G 4 daj,G 4 dajpd,G 4 danl,G 4 dh328,G 4 dj1,G 4 djao,G 4 dnal,G 4 fan,G 4 fano,G 4 fje9313,G 4 fna,G 4 hdo,G 4 naw,G 4 ngsi03,G 4 sjf3,G 4 x,G 4 xdj,G 4 y,G 4 z,G 41 H,G 41 ahoc,G 41 ando,G 41 asd,G 41 daj,G 41 dajpd,G 41 danl,G 41 dh328,G 41 dj1,G 41 djao,G 41 dnal,G 41 fan,G 41 fano,G 41 fje9313,G 41 fna,G 41 hdo,G 41 naw,G 41 ngsi03,G 41 sjf3,G 41 x,G 41 xdj,G 41 y,G 41 z,G 42 H,G 42 ahoc,G 42 ando,G 42 asd,G 42 daj,G 42 dajpd,G 42 danl,G 42 dh328,G 42 dj1,G 42 djao,G 42 dnal,G 42 fan,G 42 fano,G 42 fje9313,G 42 fna,G 42 hdo,G 42 naw,G 42 ngsi03,G 42 sjf3,G 42 x,G 42 xdj,G 42 y,G 42 z,G 47 H,G 47 ahoc,G 47 ando,G 47 asd,G 47 daj,G 47 dajpd,G 47 danl,G 47 dh328,G 47 dj1,G 47 djao,G 47 dnal,G 47 fan,G 47 fano,G 47 fje9313,G 47 fna,G 47 hdo,G 47 naw,G 47 ngsi03,G 47 sjf3,G 47 x,G 47 xdj,G 47 y,G 47 z
+5000
+Select tuple, calls identifier synonym
+call c; procedure p1;
+Select <p1.procName, c.procName> such that Calls("A", p1)
+B B,B C,B D,B E,B F,B G,B H,C B,C C,C D,C E,C F,C G,C H
+5000
+Select tuple, calls identifier identifier
+read r; print p;
+Select <p.varName, r.varName> such that Calls("A", "C")
+H ngsi03,H y,H z,fan ngsi03,fan y,fan z,sjf3 ngsi03,sjf3 y,sjf3 z,x ngsi03,x y,x z,y ngsi03,y y,y z,z ngsi03,z y,z z
+5000
+Select with, calls wildcard wildcard
+print p; procedure pr; read r;
+Select pr such that Calls(_,_) with p.varName = r.varName
+A,B,C,D,E,F,G,H
+5000
+Select with, calls wildcard synonym
+print p; procedure pr;
+Select pr such that Calls(_,pr) with pr.procName = p.varName
+H
+5000
+Select with, calls wildcard identifier
+procedure pr;
+Select pr such that Calls(_,"H") with pr.procName = pr.procName
+A,B,C,D,E,F,G,H
+5000
+Select with, calls synonym wildcard
+procedure pr;
+Select pr such that Calls(pr,_) with pr.procName = p.varName
+SemanticError
+5000
+Select with, calls synonym synonym
+procedure pr1, pr2; print p;
+Select pr2 such that Calls(pr1,pr2) with pr2.procName = p.varName with p.varName = p.varName
+H
+5000
+Select with, calls synonym identifier
+procedure pr1; print p; read r;
+Select pr1 such that Calls(pr1, "H") with p.varName = r.varName
+E,F
+5000
+Select with, calls identifier wildcard
+print p; read r; constant c; while w;
+Select c such that Calls("A", _) with c.value = w.stmt#
+2
+5000
+Select with, calls identifier synonym
+procedure pr; print p; read r;
+Select r such that Calls("A", pr) with p.varName = r.varName
+10,14
+5000
+Select with, calls identifier identifier
+print p; read r;
+Select p such that Calls("A", "B") with p.varName = r.varName
+16,52
+5000
+Select synonym, calls* wildcard wildcard
+stmt s1;
+Select s1 such that Calls*(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,6,7,8,9
+5000
+Select synonym, calls* wildcard synonym
+procedure p1,p2;
+Select p2 such that Calls*(_,p2)
+B,C,D,E,F,G,H
+5000
+Select synonym, calls* wildcard identifier
+stmt s1;
+Select s1 such that Calls*(_,"F")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,6,7,8,9
+5000
+Select synonym, calls* synonym wildcard
+procedure p1;
+Select p1 such that Calls*(p1, _)
+A,B,C,D,E,F,G
+5000
+Select synonym, calls* synonym synonym
+procedure p1,p2;
+Select p1 such that Calls*(p1, p2)
+A,B,C,D,E,F,G
+5000
+Select synonym, calls* synonym identifier1
+procedure p1;
+Select p1 such that Calls*(p1, "H")
+A,B,C,D,G,E,F
+5000
+Select synonym, calls* synonym identifier2
+procedure p1;
+Select p1 such that Calls*(p1, "G")
+A,C
+5000
+Select synonym, calls* synonym identifier3
+procedure p1;
+Select p1 such that Calls*(p1, "F")
+C,G,A
+5000
+Select synonym, calls* synonym identifier4
+procedure p1;
+Select p1 such that Calls*(p1, "E")
+B,D,A
+500
+Select synonym, calls* synonym identifier5
+procedure p1;
+Select p1 such that Calls*(p1, "D")
+B,A
+5000
+Select synonym, calls* synonym identifier6
+procedure p1;
+Select p1 such that Calls*(p1, "C")
+A
+5000
+Select synonym, calls* synonym identifier7
+procedure p1;
+Select p1 such that Calls*(p1, "B")
+A
+5000
+Select synonym, calls* synonym identifier8
+procedure p1;
+Select p1 such that Calls*(p1, "A")
+none
+5000
+Select synonym, calls* identifier1 wildcard
+procedure p1;
+Select p1 such that Calls*("A", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls* identifier2 wildcard
+procedure p1;
+Select p1 such that Calls*("B", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls* identifier3 wildcard
+procedure p1;
+Select p1 such that Calls*("C", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls* identifier4 wildcard
+procedure p1;
+Select p1 such that Calls*("D", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls* identifier5 wildcard
+procedure p1;
+Select p1 such that Calls*("E", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls* identifier6 wildcard
+procedure p1;
+Select p1 such that Calls*("F", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls* identifier7 wildcard
+procedure p1;
+Select p1 such that Calls*("G", _)
+A,B,C,D,E,F,G,H
+5000
+Select synonym, calls* identifier8 wildcard
+procedure p1;
+Select p1 such that Calls*("H", _)
+none
+5000
+Select synonym, calls* identifier1 synonym
+procedure p1;
+Select p1 such that Calls*("A", p1)
+B,C,D,E,F,G,H
+5000
+Select synonym, calls* identifier2 synonym
+procedure p1;
+Select p1 such that Calls*("B", p1)
+D,E,H
+5000
+Select synonym, calls* identifier3 synonym
+procedure p1;
+Select p1 such that Calls*("C", p1)
+F,G,H
+5000
+Select synonym, calls* identifier4 synonym
+procedure p1;
+Select p1 such that Calls*("D", p1)
+E,H
+5000
+Select synonym, calls* identifier5 synonym
+procedure p1;
+Select p1 such that Calls*("E", p1)
+H
+5000
+Select synonym, calls* identifier6 synonym
+procedure p1;
+Select p1 such that Calls*("F", p1)
+H
+5000
+Select synonym, calls* identifier7 synonym
+procedure p1;
+Select p1 such that Calls*("G", p1)
+F, H
+5000
+Select synonym, calls* identifier8 synonym
+procedure p1;
+Select p1 such that Calls*("H", p1)
+none
+5000
+Select synonym, calls* identifier identifier1
+stmt s1, s2;
+Select s1 such that Calls*("A", "B")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,6,7,8,9
+5000
+Select synonym, calls* identifier identifier2
+stmt s1, s2;
+Select s1 such that Calls*("B", "C")
+none
+5000
+Select synonym, calls* identifier identifier3
+stmt s1, s2;
+Select s1 such that Calls*("C", "D")
+none
+5000
+Select synonym, calls* identifier identifier4
+stmt s1, s2;
+Select s1 such that Calls*("D", "E")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,6,7,8,9
+5000
+Select synonym, calls* identifier identifier5
+stmt s1, s2;
+Select s1 such that Calls*("E", "F")
+none
+5000
+Select synonym, calls* identifier identifier6
+stmt s1, s2;
+Select s1 such that Calls*("F", "G")
+none
+5000
+Select synonym, calls* identifier identifier7
+stmt s1, s2;
+Select s1 such that Calls*("G", "H")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,6,7,8,9
+5000
+Select BOOLEAN, calls* identifier identifier1
+
+Select BOOLEAN such that Calls*("A", "B")
+TRUE
+500
+Select BOOLEAN, calls* identifier identifier2
+
+Select BOOLEAN such that Calls*("B", "C")
+FALSE
+5000
+Select BOOLEAN, calls* identifier identifier3
+
+Select BOOLEAN such that Calls*("C", "D")
+FALSE
+5000
+Select BOOLEAN, calls* identifier identifier4
+
+Select BOOLEAN such that Calls*("D", "E")
+TRUE
+5000
+Select BOOLEAN, calls* identifier identifier5
+
+Select BOOLEAN such that Calls*("E", "F")
+FALSE
+5000
+Select BOOLEAN, calls* identifier identifier6
+
+Select BOOLEAN such that Calls*("F", "G")
+FALSE
+5000
+Select BOOLEAN, calls* identifier identifier7
+
+Select BOOLEAN such that Calls*("G", "H")
+TRUE
+5000
+Select tuple, calls* wildcard wildcard
+constant c; assign a;
+Select <a,c.value> such that Calls*(_,_)
+1 2,1 3,1 3820,1 392,1 423,1 832,1 930
+5000
+Select tuple, calls* wildcard synonym
+assign a; variable v; procedure p1;
+Select <a.stmt#, v.varName> such that Calls*(_,p1)
+1 H,1 ahoc,1 ando,1 asd,1 daj,1 dajpd,1 danl,1 dh328,1 dj1,1 djao,1 dnal,1 fan,1 fano,1 fje9313,1 fna,1 hdo,1 naw,1 ngsi03,1 sjf3,1 x,1 xdj,1 y,1 z
+5000
+Select tuple, calls* wildcard identifier
+while w; constant c;
+Select <w.stmt#, c.value> such that Calls*(_, "C")
+17 2,17 3,17 3820,17 392,17 423,17 832,17 930,18 2,18 3,18 3820,18 392,18 423,18 832,18 930,2 2,2 3,2 3820,2 392,2 423,2 832,2 930,22 2,22 3,22 3820,22 392,22 423,22 832,22 930,34 2,34 3,34 3820,34 392,34 423,34 832,34 930,36 2,36 3,36 3820,36 392,36 423,36 832,36 930,43 2,43 3,43 3820,43 392,43 423,43 832,43 930,45 2,45 3,45 3820,45 392,45 423,45 832,45 930,48 2,48 3,48 3820,48 392,48 423,48 832,48 930,50 2,50 3,50 3820,50 392,50 423,50 832,50 930,9 2,9 3,9 3820,9 392,9 423,9 832,9 930
+5000
+Select tuple, calls* synonym wildcard
+assign a; read r; procedure p1;
+Select <a.stmt#, r.varName> such that Calls*(p1, _)
+1 ngsi03,1 y,1 z
+5000
+Select tuple, calls* synonym synonym
+procedure p1, p2;
+Select <p1.procName, p2.procName> such that Calls*(p1, p2)
+A D,A E,A F,A G,A H,B H,C H,D H,G H,A B,A C,B D,B E,C F,C G,D E,E H,F H,G F
+5000
+Select tuple, calls* synonym identifier
+while w; constant c; procedure p1;
+Select <p1.procName, w.stmt#, c.value> such that Calls*(p1, "H")
+A 17 2,A 17 3,A 17 3820,A 17 392,A 17 423,A 17 832,A 17 930,A 18 2,A 18 3,A 18 3820,A 18 392,A 18 423,A 18 832,A 18 930,A 2 2,A 2 3,A 2 3820,A 2 392,A 2 423,A 2 832,A 2 930,A 22 2,A 22 3,A 22 3820,A 22 392,A 22 423,A 22 832,A 22 930,A 34 2,A 34 3,A 34 3820,A 34 392,A 34 423,A 34 832,A 34 930,A 36 2,A 36 3,A 36 3820,A 36 392,A 36 423,A 36 832,A 36 930,A 43 2,A 43 3,A 43 3820,A 43 392,A 43 423,A 43 832,A 43 930,A 45 2,A 45 3,A 45 3820,A 45 392,A 45 423,A 45 832,A 45 930,A 48 2,A 48 3,A 48 3820,A 48 392,A 48 423,A 48 832,A 48 930,A 50 2,A 50 3,A 50 3820,A 50 392,A 50 423,A 50 832,A 50 930,A 9 2,A 9 3,A 9 3820,A 9 392,A 9 423,A 9 832,A 9 930,B 17 2,B 17 3,B 17 3820,B 17 392,B 17 423,B 17 832,B 17 930,B 18 2,B 18 3,B 18 3820,B 18 392,B 18 423,B 18 832,B 18 930,B 2 2,B 2 3,B 2 3820,B 2 392,B 2 423,B 2 832,B 2 930,B 22 2,B 22 3,B 22 3820,B 22 392,B 22 423,B 22 832,B 22 930,B 34 2,B 34 3,B 34 3820,B 34 392,B 34 423,B 34 832,B 34 930,B 36 2,B 36 3,B 36 3820,B 36 392,B 36 423,B 36 832,B 36 930,B 43 2,B 43 3,B 43 3820,B 43 392,B 43 423,B 43 832,B 43 930,B 45 2,B 45 3,B 45 3820,B 45 392,B 45 423,B 45 832,B 45 930,B 48 2,B 48 3,B 48 3820,B 48 392,B 48 423,B 48 832,B 48 930,B 50 2,B 50 3,B 50 3820,B 50 392,B 50 423,B 50 832,B 50 930,B 9 2,B 9 3,B 9 3820,B 9 392,B 9 423,B 9 832,B 9 930,C 17 2,C 17 3,C 17 3820,C 17 392,C 17 423,C 17 832,C 17 930,C 18 2,C 18 3,C 18 3820,C 18 392,C 18 423,C 18 832,C 18 930,C 2 2,C 2 3,C 2 3820,C 2 392,C 2 423,C 2 832,C 2 930,C 22 2,C 22 3,C 22 3820,C 22 392,C 22 423,C 22 832,C 22 930,C 34 2,C 34 3,C 34 3820,C 34 392,C 34 423,C 34 832,C 34 930,C 36 2,C 36 3,C 36 3820,C 36 392,C 36 423,C 36 832,C 36 930,C 43 2,C 43 3,C 43 3820,C 43 392,C 43 423,C 43 832,C 43 930,C 45 2,C 45 3,C 45 3820,C 45 392,C 45 423,C 45 832,C 45 930,C 48 2,C 48 3,C 48 3820,C 48 392,C 48 423,C 48 832,C 48 930,C 50 2,C 50 3,C 50 3820,C 50 392,C 50 423,C 50 832,C 50 930,C 9 2,C 9 3,C 9 3820,C 9 392,C 9 423,C 9 832,C 9 930,D 17 2,D 17 3,D 17 3820,D 17 392,D 17 423,D 17 832,D 17 930,D 18 2,D 18 3,D 18 3820,D 18 392,D 18 423,D 18 832,D 18 930,D 2 2,D 2 3,D 2 3820,D 2 392,D 2 423,D 2 832,D 2 930,D 22 2,D 22 3,D 22 3820,D 22 392,D 22 423,D 22 832,D 22 930,D 34 2,D 34 3,D 34 3820,D 34 392,D 34 423,D 34 832,D 34 930,D 36 2,D 36 3,D 36 3820,D 36 392,D 36 423,D 36 832,D 36 930,D 43 2,D 43 3,D 43 3820,D 43 392,D 43 423,D 43 832,D 43 930,D 45 2,D 45 3,D 45 3820,D 45 392,D 45 423,D 45 832,D 45 930,D 48 2,D 48 3,D 48 3820,D 48 392,D 48 423,D 48 832,D 48 930,D 50 2,D 50 3,D 50 3820,D 50 392,D 50 423,D 50 832,D 50 930,D 9 2,D 9 3,D 9 3820,D 9 392,D 9 423,D 9 832,D 9 930,E 17 2,E 17 3,E 17 3820,E 17 392,E 17 423,E 17 832,E 17 930,E 18 2,E 18 3,E 18 3820,E 18 392,E 18 423,E 18 832,E 18 930,E 2 2,E 2 3,E 2 3820,E 2 392,E 2 423,E 2 832,E 2 930,E 22 2,E 22 3,E 22 3820,E 22 392,E 22 423,E 22 832,E 22 930,E 34 2,E 34 3,E 34 3820,E 34 392,E 34 423,E 34 832,E 34 930,E 36 2,E 36 3,E 36 3820,E 36 392,E 36 423,E 36 832,E 36 930,E 43 2,E 43 3,E 43 3820,E 43 392,E 43 423,E 43 832,E 43 930,E 45 2,E 45 3,E 45 3820,E 45 392,E 45 423,E 45 832,E 45 930,E 48 2,E 48 3,E 48 3820,E 48 392,E 48 423,E 48 832,E 48 930,E 50 2,E 50 3,E 50 3820,E 50 392,E 50 423,E 50 832,E 50 930,E 9 2,E 9 3,E 9 3820,E 9 392,E 9 423,E 9 832,E 9 930,F 17 2,F 17 3,F 17 3820,F 17 392,F 17 423,F 17 832,F 17 930,F 18 2,F 18 3,F 18 3820,F 18 392,F 18 423,F 18 832,F 18 930,F 2 2,F 2 3,F 2 3820,F 2 392,F 2 423,F 2 832,F 2 930,F 22 2,F 22 3,F 22 3820,F 22 392,F 22 423,F 22 832,F 22 930,F 34 2,F 34 3,F 34 3820,F 34 392,F 34 423,F 34 832,F 34 930,F 36 2,F 36 3,F 36 3820,F 36 392,F 36 423,F 36 832,F 36 930,F 43 2,F 43 3,F 43 3820,F 43 392,F 43 423,F 43 832,F 43 930,F 45 2,F 45 3,F 45 3820,F 45 392,F 45 423,F 45 832,F 45 930,F 48 2,F 48 3,F 48 3820,F 48 392,F 48 423,F 48 832,F 48 930,F 50 2,F 50 3,F 50 3820,F 50 392,F 50 423,F 50 832,F 50 930,F 9 2,F 9 3,F 9 3820,F 9 392,F 9 423,F 9 832,F 9 930,G 17 2,G 17 3,G 17 3820,G 17 392,G 17 423,G 17 832,G 17 930,G 18 2,G 18 3,G 18 3820,G 18 392,G 18 423,G 18 832,G 18 930,G 2 2,G 2 3,G 2 3820,G 2 392,G 2 423,G 2 832,G 2 930,G 22 2,G 22 3,G 22 3820,G 22 392,G 22 423,G 22 832,G 22 930,G 34 2,G 34 3,G 34 3820,G 34 392,G 34 423,G 34 832,G 34 930,G 36 2,G 36 3,G 36 3820,G 36 392,G 36 423,G 36 832,G 36 930,G 43 2,G 43 3,G 43 3820,G 43 392,G 43 423,G 43 832,G 43 930,G 45 2,G 45 3,G 45 3820,G 45 392,G 45 423,G 45 832,G 45 930,G 48 2,G 48 3,G 48 3820,G 48 392,G 48 423,G 48 832,G 48 930,G 50 2,G 50 3,G 50 3820,G 50 392,G 50 423,G 50 832,G 50 930,G 9 2,G 9 3,G 9 3820,G 9 392,G 9 423,G 9 832,G 9 930
+5000
+Select tuple, calls* identifier wildcard
+if if; variable v; procedure p1;
+Select <p1.procName, if.stmt#, v.varName> such that Calls*(p1, _)
+A 11 H,A 11 ahoc,A 11 ando,A 11 asd,A 11 daj,A 11 dajpd,A 11 danl,A 11 dh328,A 11 dj1,A 11 djao,A 11 dnal,A 11 fan,A 11 fano,A 11 fje9313,A 11 fna,A 11 hdo,A 11 naw,A 11 ngsi03,A 11 sjf3,A 11 x,A 11 xdj,A 11 y,A 11 z,A 21 H,A 21 ahoc,A 21 ando,A 21 asd,A 21 daj,A 21 dajpd,A 21 danl,A 21 dh328,A 21 dj1,A 21 djao,A 21 dnal,A 21 fan,A 21 fano,A 21 fje9313,A 21 fna,A 21 hdo,A 21 naw,A 21 ngsi03,A 21 sjf3,A 21 x,A 21 xdj,A 21 y,A 21 z,A 31 H,A 31 ahoc,A 31 ando,A 31 asd,A 31 daj,A 31 dajpd,A 31 danl,A 31 dh328,A 31 dj1,A 31 djao,A 31 dnal,A 31 fan,A 31 fano,A 31 fje9313,A 31 fna,A 31 hdo,A 31 naw,A 31 ngsi03,A 31 sjf3,A 31 x,A 31 xdj,A 31 y,A 31 z,A 37 H,A 37 ahoc,A 37 ando,A 37 asd,A 37 daj,A 37 dajpd,A 37 danl,A 37 dh328,A 37 dj1,A 37 djao,A 37 dnal,A 37 fan,A 37 fano,A 37 fje9313,A 37 fna,A 37 hdo,A 37 naw,A 37 ngsi03,A 37 sjf3,A 37 x,A 37 xdj,A 37 y,A 37 z,A 4 H,A 4 ahoc,A 4 ando,A 4 asd,A 4 daj,A 4 dajpd,A 4 danl,A 4 dh328,A 4 dj1,A 4 djao,A 4 dnal,A 4 fan,A 4 fano,A 4 fje9313,A 4 fna,A 4 hdo,A 4 naw,A 4 ngsi03,A 4 sjf3,A 4 x,A 4 xdj,A 4 y,A 4 z,A 41 H,A 41 ahoc,A 41 ando,A 41 asd,A 41 daj,A 41 dajpd,A 41 danl,A 41 dh328,A 41 dj1,A 41 djao,A 41 dnal,A 41 fan,A 41 fano,A 41 fje9313,A 41 fna,A 41 hdo,A 41 naw,A 41 ngsi03,A 41 sjf3,A 41 x,A 41 xdj,A 41 y,A 41 z,A 42 H,A 42 ahoc,A 42 ando,A 42 asd,A 42 daj,A 42 dajpd,A 42 danl,A 42 dh328,A 42 dj1,A 42 djao,A 42 dnal,A 42 fan,A 42 fano,A 42 fje9313,A 42 fna,A 42 hdo,A 42 naw,A 42 ngsi03,A 42 sjf3,A 42 x,A 42 xdj,A 42 y,A 42 z,A 47 H,A 47 ahoc,A 47 ando,A 47 asd,A 47 daj,A 47 dajpd,A 47 danl,A 47 dh328,A 47 dj1,A 47 djao,A 47 dnal,A 47 fan,A 47 fano,A 47 fje9313,A 47 fna,A 47 hdo,A 47 naw,A 47 ngsi03,A 47 sjf3,A 47 x,A 47 xdj,A 47 y,A 47 z,B 11 H,B 11 ahoc,B 11 ando,B 11 asd,B 11 daj,B 11 dajpd,B 11 danl,B 11 dh328,B 11 dj1,B 11 djao,B 11 dnal,B 11 fan,B 11 fano,B 11 fje9313,B 11 fna,B 11 hdo,B 11 naw,B 11 ngsi03,B 11 sjf3,B 11 x,B 11 xdj,B 11 y,B 11 z,B 21 H,B 21 ahoc,B 21 ando,B 21 asd,B 21 daj,B 21 dajpd,B 21 danl,B 21 dh328,B 21 dj1,B 21 djao,B 21 dnal,B 21 fan,B 21 fano,B 21 fje9313,B 21 fna,B 21 hdo,B 21 naw,B 21 ngsi03,B 21 sjf3,B 21 x,B 21 xdj,B 21 y,B 21 z,B 31 H,B 31 ahoc,B 31 ando,B 31 asd,B 31 daj,B 31 dajpd,B 31 danl,B 31 dh328,B 31 dj1,B 31 djao,B 31 dnal,B 31 fan,B 31 fano,B 31 fje9313,B 31 fna,B 31 hdo,B 31 naw,B 31 ngsi03,B 31 sjf3,B 31 x,B 31 xdj,B 31 y,B 31 z,B 37 H,B 37 ahoc,B 37 ando,B 37 asd,B 37 daj,B 37 dajpd,B 37 danl,B 37 dh328,B 37 dj1,B 37 djao,B 37 dnal,B 37 fan,B 37 fano,B 37 fje9313,B 37 fna,B 37 hdo,B 37 naw,B 37 ngsi03,B 37 sjf3,B 37 x,B 37 xdj,B 37 y,B 37 z,B 4 H,B 4 ahoc,B 4 ando,B 4 asd,B 4 daj,B 4 dajpd,B 4 danl,B 4 dh328,B 4 dj1,B 4 djao,B 4 dnal,B 4 fan,B 4 fano,B 4 fje9313,B 4 fna,B 4 hdo,B 4 naw,B 4 ngsi03,B 4 sjf3,B 4 x,B 4 xdj,B 4 y,B 4 z,B 41 H,B 41 ahoc,B 41 ando,B 41 asd,B 41 daj,B 41 dajpd,B 41 danl,B 41 dh328,B 41 dj1,B 41 djao,B 41 dnal,B 41 fan,B 41 fano,B 41 fje9313,B 41 fna,B 41 hdo,B 41 naw,B 41 ngsi03,B 41 sjf3,B 41 x,B 41 xdj,B 41 y,B 41 z,B 42 H,B 42 ahoc,B 42 ando,B 42 asd,B 42 daj,B 42 dajpd,B 42 danl,B 42 dh328,B 42 dj1,B 42 djao,B 42 dnal,B 42 fan,B 42 fano,B 42 fje9313,B 42 fna,B 42 hdo,B 42 naw,B 42 ngsi03,B 42 sjf3,B 42 x,B 42 xdj,B 42 y,B 42 z,B 47 H,B 47 ahoc,B 47 ando,B 47 asd,B 47 daj,B 47 dajpd,B 47 danl,B 47 dh328,B 47 dj1,B 47 djao,B 47 dnal,B 47 fan,B 47 fano,B 47 fje9313,B 47 fna,B 47 hdo,B 47 naw,B 47 ngsi03,B 47 sjf3,B 47 x,B 47 xdj,B 47 y,B 47 z,C 11 H,C 11 ahoc,C 11 ando,C 11 asd,C 11 daj,C 11 dajpd,C 11 danl,C 11 dh328,C 11 dj1,C 11 djao,C 11 dnal,C 11 fan,C 11 fano,C 11 fje9313,C 11 fna,C 11 hdo,C 11 naw,C 11 ngsi03,C 11 sjf3,C 11 x,C 11 xdj,C 11 y,C 11 z,C 21 H,C 21 ahoc,C 21 ando,C 21 asd,C 21 daj,C 21 dajpd,C 21 danl,C 21 dh328,C 21 dj1,C 21 djao,C 21 dnal,C 21 fan,C 21 fano,C 21 fje9313,C 21 fna,C 21 hdo,C 21 naw,C 21 ngsi03,C 21 sjf3,C 21 x,C 21 xdj,C 21 y,C 21 z,C 31 H,C 31 ahoc,C 31 ando,C 31 asd,C 31 daj,C 31 dajpd,C 31 danl,C 31 dh328,C 31 dj1,C 31 djao,C 31 dnal,C 31 fan,C 31 fano,C 31 fje9313,C 31 fna,C 31 hdo,C 31 naw,C 31 ngsi03,C 31 sjf3,C 31 x,C 31 xdj,C 31 y,C 31 z,C 37 H,C 37 ahoc,C 37 ando,C 37 asd,C 37 daj,C 37 dajpd,C 37 danl,C 37 dh328,C 37 dj1,C 37 djao,C 37 dnal,C 37 fan,C 37 fano,C 37 fje9313,C 37 fna,C 37 hdo,C 37 naw,C 37 ngsi03,C 37 sjf3,C 37 x,C 37 xdj,C 37 y,C 37 z,C 4 H,C 4 ahoc,C 4 ando,C 4 asd,C 4 daj,C 4 dajpd,C 4 danl,C 4 dh328,C 4 dj1,C 4 djao,C 4 dnal,C 4 fan,C 4 fano,C 4 fje9313,C 4 fna,C 4 hdo,C 4 naw,C 4 ngsi03,C 4 sjf3,C 4 x,C 4 xdj,C 4 y,C 4 z,C 41 H,C 41 ahoc,C 41 ando,C 41 asd,C 41 daj,C 41 dajpd,C 41 danl,C 41 dh328,C 41 dj1,C 41 djao,C 41 dnal,C 41 fan,C 41 fano,C 41 fje9313,C 41 fna,C 41 hdo,C 41 naw,C 41 ngsi03,C 41 sjf3,C 41 x,C 41 xdj,C 41 y,C 41 z,C 42 H,C 42 ahoc,C 42 ando,C 42 asd,C 42 daj,C 42 dajpd,C 42 danl,C 42 dh328,C 42 dj1,C 42 djao,C 42 dnal,C 42 fan,C 42 fano,C 42 fje9313,C 42 fna,C 42 hdo,C 42 naw,C 42 ngsi03,C 42 sjf3,C 42 x,C 42 xdj,C 42 y,C 42 z,C 47 H,C 47 ahoc,C 47 ando,C 47 asd,C 47 daj,C 47 dajpd,C 47 danl,C 47 dh328,C 47 dj1,C 47 djao,C 47 dnal,C 47 fan,C 47 fano,C 47 fje9313,C 47 fna,C 47 hdo,C 47 naw,C 47 ngsi03,C 47 sjf3,C 47 x,C 47 xdj,C 47 y,C 47 z,D 11 H,D 11 ahoc,D 11 ando,D 11 asd,D 11 daj,D 11 dajpd,D 11 danl,D 11 dh328,D 11 dj1,D 11 djao,D 11 dnal,D 11 fan,D 11 fano,D 11 fje9313,D 11 fna,D 11 hdo,D 11 naw,D 11 ngsi03,D 11 sjf3,D 11 x,D 11 xdj,D 11 y,D 11 z,D 21 H,D 21 ahoc,D 21 ando,D 21 asd,D 21 daj,D 21 dajpd,D 21 danl,D 21 dh328,D 21 dj1,D 21 djao,D 21 dnal,D 21 fan,D 21 fano,D 21 fje9313,D 21 fna,D 21 hdo,D 21 naw,D 21 ngsi03,D 21 sjf3,D 21 x,D 21 xdj,D 21 y,D 21 z,D 31 H,D 31 ahoc,D 31 ando,D 31 asd,D 31 daj,D 31 dajpd,D 31 danl,D 31 dh328,D 31 dj1,D 31 djao,D 31 dnal,D 31 fan,D 31 fano,D 31 fje9313,D 31 fna,D 31 hdo,D 31 naw,D 31 ngsi03,D 31 sjf3,D 31 x,D 31 xdj,D 31 y,D 31 z,D 37 H,D 37 ahoc,D 37 ando,D 37 asd,D 37 daj,D 37 dajpd,D 37 danl,D 37 dh328,D 37 dj1,D 37 djao,D 37 dnal,D 37 fan,D 37 fano,D 37 fje9313,D 37 fna,D 37 hdo,D 37 naw,D 37 ngsi03,D 37 sjf3,D 37 x,D 37 xdj,D 37 y,D 37 z,D 4 H,D 4 ahoc,D 4 ando,D 4 asd,D 4 daj,D 4 dajpd,D 4 danl,D 4 dh328,D 4 dj1,D 4 djao,D 4 dnal,D 4 fan,D 4 fano,D 4 fje9313,D 4 fna,D 4 hdo,D 4 naw,D 4 ngsi03,D 4 sjf3,D 4 x,D 4 xdj,D 4 y,D 4 z,D 41 H,D 41 ahoc,D 41 ando,D 41 asd,D 41 daj,D 41 dajpd,D 41 danl,D 41 dh328,D 41 dj1,D 41 djao,D 41 dnal,D 41 fan,D 41 fano,D 41 fje9313,D 41 fna,D 41 hdo,D 41 naw,D 41 ngsi03,D 41 sjf3,D 41 x,D 41 xdj,D 41 y,D 41 z,D 42 H,D 42 ahoc,D 42 ando,D 42 asd,D 42 daj,D 42 dajpd,D 42 danl,D 42 dh328,D 42 dj1,D 42 djao,D 42 dnal,D 42 fan,D 42 fano,D 42 fje9313,D 42 fna,D 42 hdo,D 42 naw,D 42 ngsi03,D 42 sjf3,D 42 x,D 42 xdj,D 42 y,D 42 z,D 47 H,D 47 ahoc,D 47 ando,D 47 asd,D 47 daj,D 47 dajpd,D 47 danl,D 47 dh328,D 47 dj1,D 47 djao,D 47 dnal,D 47 fan,D 47 fano,D 47 fje9313,D 47 fna,D 47 hdo,D 47 naw,D 47 ngsi03,D 47 sjf3,D 47 x,D 47 xdj,D 47 y,D 47 z,E 11 H,E 11 ahoc,E 11 ando,E 11 asd,E 11 daj,E 11 dajpd,E 11 danl,E 11 dh328,E 11 dj1,E 11 djao,E 11 dnal,E 11 fan,E 11 fano,E 11 fje9313,E 11 fna,E 11 hdo,E 11 naw,E 11 ngsi03,E 11 sjf3,E 11 x,E 11 xdj,E 11 y,E 11 z,E 21 H,E 21 ahoc,E 21 ando,E 21 asd,E 21 daj,E 21 dajpd,E 21 danl,E 21 dh328,E 21 dj1,E 21 djao,E 21 dnal,E 21 fan,E 21 fano,E 21 fje9313,E 21 fna,E 21 hdo,E 21 naw,E 21 ngsi03,E 21 sjf3,E 21 x,E 21 xdj,E 21 y,E 21 z,E 31 H,E 31 ahoc,E 31 ando,E 31 asd,E 31 daj,E 31 dajpd,E 31 danl,E 31 dh328,E 31 dj1,E 31 djao,E 31 dnal,E 31 fan,E 31 fano,E 31 fje9313,E 31 fna,E 31 hdo,E 31 naw,E 31 ngsi03,E 31 sjf3,E 31 x,E 31 xdj,E 31 y,E 31 z,E 37 H,E 37 ahoc,E 37 ando,E 37 asd,E 37 daj,E 37 dajpd,E 37 danl,E 37 dh328,E 37 dj1,E 37 djao,E 37 dnal,E 37 fan,E 37 fano,E 37 fje9313,E 37 fna,E 37 hdo,E 37 naw,E 37 ngsi03,E 37 sjf3,E 37 x,E 37 xdj,E 37 y,E 37 z,E 4 H,E 4 ahoc,E 4 ando,E 4 asd,E 4 daj,E 4 dajpd,E 4 danl,E 4 dh328,E 4 dj1,E 4 djao,E 4 dnal,E 4 fan,E 4 fano,E 4 fje9313,E 4 fna,E 4 hdo,E 4 naw,E 4 ngsi03,E 4 sjf3,E 4 x,E 4 xdj,E 4 y,E 4 z,E 41 H,E 41 ahoc,E 41 ando,E 41 asd,E 41 daj,E 41 dajpd,E 41 danl,E 41 dh328,E 41 dj1,E 41 djao,E 41 dnal,E 41 fan,E 41 fano,E 41 fje9313,E 41 fna,E 41 hdo,E 41 naw,E 41 ngsi03,E 41 sjf3,E 41 x,E 41 xdj,E 41 y,E 41 z,E 42 H,E 42 ahoc,E 42 ando,E 42 asd,E 42 daj,E 42 dajpd,E 42 danl,E 42 dh328,E 42 dj1,E 42 djao,E 42 dnal,E 42 fan,E 42 fano,E 42 fje9313,E 42 fna,E 42 hdo,E 42 naw,E 42 ngsi03,E 42 sjf3,E 42 x,E 42 xdj,E 42 y,E 42 z,E 47 H,E 47 ahoc,E 47 ando,E 47 asd,E 47 daj,E 47 dajpd,E 47 danl,E 47 dh328,E 47 dj1,E 47 djao,E 47 dnal,E 47 fan,E 47 fano,E 47 fje9313,E 47 fna,E 47 hdo,E 47 naw,E 47 ngsi03,E 47 sjf3,E 47 x,E 47 xdj,E 47 y,E 47 z,F 11 H,F 11 ahoc,F 11 ando,F 11 asd,F 11 daj,F 11 dajpd,F 11 danl,F 11 dh328,F 11 dj1,F 11 djao,F 11 dnal,F 11 fan,F 11 fano,F 11 fje9313,F 11 fna,F 11 hdo,F 11 naw,F 11 ngsi03,F 11 sjf3,F 11 x,F 11 xdj,F 11 y,F 11 z,F 21 H,F 21 ahoc,F 21 ando,F 21 asd,F 21 daj,F 21 dajpd,F 21 danl,F 21 dh328,F 21 dj1,F 21 djao,F 21 dnal,F 21 fan,F 21 fano,F 21 fje9313,F 21 fna,F 21 hdo,F 21 naw,F 21 ngsi03,F 21 sjf3,F 21 x,F 21 xdj,F 21 y,F 21 z,F 31 H,F 31 ahoc,F 31 ando,F 31 asd,F 31 daj,F 31 dajpd,F 31 danl,F 31 dh328,F 31 dj1,F 31 djao,F 31 dnal,F 31 fan,F 31 fano,F 31 fje9313,F 31 fna,F 31 hdo,F 31 naw,F 31 ngsi03,F 31 sjf3,F 31 x,F 31 xdj,F 31 y,F 31 z,F 37 H,F 37 ahoc,F 37 ando,F 37 asd,F 37 daj,F 37 dajpd,F 37 danl,F 37 dh328,F 37 dj1,F 37 djao,F 37 dnal,F 37 fan,F 37 fano,F 37 fje9313,F 37 fna,F 37 hdo,F 37 naw,F 37 ngsi03,F 37 sjf3,F 37 x,F 37 xdj,F 37 y,F 37 z,F 4 H,F 4 ahoc,F 4 ando,F 4 asd,F 4 daj,F 4 dajpd,F 4 danl,F 4 dh328,F 4 dj1,F 4 djao,F 4 dnal,F 4 fan,F 4 fano,F 4 fje9313,F 4 fna,F 4 hdo,F 4 naw,F 4 ngsi03,F 4 sjf3,F 4 x,F 4 xdj,F 4 y,F 4 z,F 41 H,F 41 ahoc,F 41 ando,F 41 asd,F 41 daj,F 41 dajpd,F 41 danl,F 41 dh328,F 41 dj1,F 41 djao,F 41 dnal,F 41 fan,F 41 fano,F 41 fje9313,F 41 fna,F 41 hdo,F 41 naw,F 41 ngsi03,F 41 sjf3,F 41 x,F 41 xdj,F 41 y,F 41 z,F 42 H,F 42 ahoc,F 42 ando,F 42 asd,F 42 daj,F 42 dajpd,F 42 danl,F 42 dh328,F 42 dj1,F 42 djao,F 42 dnal,F 42 fan,F 42 fano,F 42 fje9313,F 42 fna,F 42 hdo,F 42 naw,F 42 ngsi03,F 42 sjf3,F 42 x,F 42 xdj,F 42 y,F 42 z,F 47 H,F 47 ahoc,F 47 ando,F 47 asd,F 47 daj,F 47 dajpd,F 47 danl,F 47 dh328,F 47 dj1,F 47 djao,F 47 dnal,F 47 fan,F 47 fano,F 47 fje9313,F 47 fna,F 47 hdo,F 47 naw,F 47 ngsi03,F 47 sjf3,F 47 x,F 47 xdj,F 47 y,F 47 z,G 11 H,G 11 ahoc,G 11 ando,G 11 asd,G 11 daj,G 11 dajpd,G 11 danl,G 11 dh328,G 11 dj1,G 11 djao,G 11 dnal,G 11 fan,G 11 fano,G 11 fje9313,G 11 fna,G 11 hdo,G 11 naw,G 11 ngsi03,G 11 sjf3,G 11 x,G 11 xdj,G 11 y,G 11 z,G 21 H,G 21 ahoc,G 21 ando,G 21 asd,G 21 daj,G 21 dajpd,G 21 danl,G 21 dh328,G 21 dj1,G 21 djao,G 21 dnal,G 21 fan,G 21 fano,G 21 fje9313,G 21 fna,G 21 hdo,G 21 naw,G 21 ngsi03,G 21 sjf3,G 21 x,G 21 xdj,G 21 y,G 21 z,G 31 H,G 31 ahoc,G 31 ando,G 31 asd,G 31 daj,G 31 dajpd,G 31 danl,G 31 dh328,G 31 dj1,G 31 djao,G 31 dnal,G 31 fan,G 31 fano,G 31 fje9313,G 31 fna,G 31 hdo,G 31 naw,G 31 ngsi03,G 31 sjf3,G 31 x,G 31 xdj,G 31 y,G 31 z,G 37 H,G 37 ahoc,G 37 ando,G 37 asd,G 37 daj,G 37 dajpd,G 37 danl,G 37 dh328,G 37 dj1,G 37 djao,G 37 dnal,G 37 fan,G 37 fano,G 37 fje9313,G 37 fna,G 37 hdo,G 37 naw,G 37 ngsi03,G 37 sjf3,G 37 x,G 37 xdj,G 37 y,G 37 z,G 4 H,G 4 ahoc,G 4 ando,G 4 asd,G 4 daj,G 4 dajpd,G 4 danl,G 4 dh328,G 4 dj1,G 4 djao,G 4 dnal,G 4 fan,G 4 fano,G 4 fje9313,G 4 fna,G 4 hdo,G 4 naw,G 4 ngsi03,G 4 sjf3,G 4 x,G 4 xdj,G 4 y,G 4 z,G 41 H,G 41 ahoc,G 41 ando,G 41 asd,G 41 daj,G 41 dajpd,G 41 danl,G 41 dh328,G 41 dj1,G 41 djao,G 41 dnal,G 41 fan,G 41 fano,G 41 fje9313,G 41 fna,G 41 hdo,G 41 naw,G 41 ngsi03,G 41 sjf3,G 41 x,G 41 xdj,G 41 y,G 41 z,G 42 H,G 42 ahoc,G 42 ando,G 42 asd,G 42 daj,G 42 dajpd,G 42 danl,G 42 dh328,G 42 dj1,G 42 djao,G 42 dnal,G 42 fan,G 42 fano,G 42 fje9313,G 42 fna,G 42 hdo,G 42 naw,G 42 ngsi03,G 42 sjf3,G 42 x,G 42 xdj,G 42 y,G 42 z,G 47 H,G 47 ahoc,G 47 ando,G 47 asd,G 47 daj,G 47 dajpd,G 47 danl,G 47 dh328,G 47 dj1,G 47 djao,G 47 dnal,G 47 fan,G 47 fano,G 47 fje9313,G 47 fna,G 47 hdo,G 47 naw,G 47 ngsi03,G 47 sjf3,G 47 x,G 47 xdj,G 47 y,G 47 z
+5000
+Select tuple, calls* identifier synonym
+call c; procedure p1;
+Select <p1.procName, c.procName> such that Calls*("A", p1)
+B B,B C,B D,B E,B F,B G,B H,C B,C C,C D,C E,C F,C G,C H,D B,D C,D D,D E,D F,D G,D H,E B,E C,E D,E E,E F,E G,E H,F B,F C,F D,F E,F F,F G,F H,G B,G C,G D,G E,G F,G G,G H,H B,H C,H D,H E,H F,H G,H H
+5000
+Select tuple, calls* identifier identifier
+read r; print p;
+Select <p.varName, r.varName> such that Calls*("A", "C")
+H ngsi03,H y,H z,fan ngsi03,fan y,fan z,sjf3 ngsi03,sjf3 y,sjf3 z,x ngsi03,x y,x z,y ngsi03,y y,y z,z ngsi03,z y,z z
+5000
+Select with, calls* wildcard wildcard
+print p; procedure pr; read r;
+Select pr such that Calls*(_,_) with p.varName = r.varName
+A,B,C,D,E,F,G,H
+5000
+Select with, calls* wildcard synonym
+print p; procedure pr;
+Select pr such that Calls*(_,pr) with pr.procName = p.varName
+H
+5000
+Select with, calls* wildcard identifier
+procedure pr;
+Select pr such that Calls*(_,"H") with pr.procName = pr.procName
+A,B,C,D,E,F,G,H
+5000
+Select with, calls* synonym wildcard
+procedure pr;
+Select pr such that Calls*(pr,_) with pr.procName = p.varName
+SemanticError
+5000
+Select with, calls* synonym synonym
+procedure pr1, pr2; print p;
+Select pr2 such that Calls*(pr1,pr2) with pr2.procName = p.varName with p.varName = p.varName
+H
+5000
+Select with, calls* synonym identifier
+procedure pr1; print p; read r;
+Select pr1 such that Calls*(pr1, "H") with p.varName = r.varName
+E,F,A,B,C,D,G
+5000
+Select with, calls* identifier wildcard
+print p; read r; constant c; while w;
+Select c such that Calls*("A", _) with c.value = w.stmt#
+2
+5000
+Select with, calls* identifier synonym
+procedure pr; print p; read r;
+Select r such that Calls*("A", pr) with p.varName = r.varName
+10,14
+5000
+Select with, calls* identifier identifier
+print p; read r;
+Select p such that Calls*("A", "B") with p.varName = r.varName
+16,52
+5000

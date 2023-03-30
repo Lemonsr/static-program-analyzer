@@ -1,0 +1,410 @@
+Select synonym, next wildcard wildcard
+stmt s1, s2;
+Select s1 such that Next(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next wildcard synonym
+stmt s1, s2;
+Select s1 such that Next(_,s1)
+10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next wildcard undeclared synonym
+stmt s1, s2;
+Select s1 such that Next(_,s3)
+SemanticError
+5000
+Select synonym, next synonym wildcard
+stmt s1, s2;
+Select s1 such that Next(s1,_)
+1,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,6,61,62,63,64,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next undeclared synonym wildcard
+stmt s1, s2;
+Select s1 such that Next(s3,_)
+SemanticError
+5000
+Select synonym, next wildcard stmtNum
+stmt s1, s2;
+Select s1 such that Next(_,2)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next wildcard missing stmtNum
+stmt s1, s2;
+Select s1 such that Next(_,999)
+none
+5000
+Select synonym, next stmtNum wildcard
+stmt s1, s2;
+Select s1 such that Next(1,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next missing stmtNum wildcard
+stmt s1, s2;
+Select s1 such that Next(999,_)
+none
+5000
+Select synonym, next synonym stmtNum
+stmt s1, s2;
+Select s1 such that Next(s1,43)
+42
+5000
+Select synonym, next synonym stmtNum
+stmt s1, s2;
+Select s1 such that Next(s1,47)
+46
+5000
+Select synonym, next synonym stmtNum
+stmt s1, s2;
+Select s1 such that Next(s1,28)
+27
+5000
+Select synonym, next synonym stmtNum
+stmt s1, s2;
+Select s1 such that Next(s1,43)
+42
+5000
+Select synonym, next synonym stmtNum
+print pr;
+Select pr such that Next(pr,15)
+14
+5000
+Select synonym, next synonym stmtNum
+read re;
+Select re such that Next(re,36)
+39
+5000
+Select synonym, next synonym stmtNum
+read re;
+Select s1 such that Next(re,48)
+SemanticError
+5000
+Select synonym, next synonym stmtNum
+call c;
+Select c such that Next(c,41)
+45
+5000
+Select synonym, next synonym stmtNum
+if ifs;
+Select ifs such that Next(ifs,31)
+30
+5000
+Select synonym, next synonym stmtNum
+while w;
+Select w such that Next(w,19)
+18
+5000
+Select synonym, next synonym stmtNum
+stmt s1; constant const;
+Select const such that Next(s1,35)
+0,1,2,3,4,5,67
+5000
+Select synonym, next synonym stmtNum
+stmt s1; constant const;
+Select const such that Next(s1,71)
+0,1,2,3,4,5,67
+5000
+Select synonym, next stmtNum synonym
+stmt s1, s2;
+Select s1 such that Next(28,s1)
+29
+5000
+Select synonym, next stmtNum synonym
+print pr;
+Select pr such that Next(56,pr)
+none
+5000
+Select synonym, next stmtNum synonym
+read re;
+Select re such that Next(67,re)
+71
+5000
+Select synonym, next stmtNum synonym
+assign a; if ifs;
+Select a such that Next(79,ifs)
+16,22,27,3,34,38,42,54,59,64,70,74,83,85,86
+5000
+Select synonym, next stmtNum synonym
+call c;
+Select c such that Next(34,c)
+35
+5000
+Select synonym, next stmtNum synonym
+while w;
+Select w such that Next(72,w)
+73
+5000
+Select synonym, next stmtNum synonym
+stmt s1; constant const;
+Select const such that Next(28,s1)
+0,1,2,3,4,5,67
+5000
+Select synonym, next stmtNum stmtNum (if, else)
+stmt s1, s2;
+Select s1 such that Next(20,23)
+none
+5000
+Select synonym, next missing stmtNum undeclared synonym
+stmt s1, s2;
+Select s1 such that Next(999,s3)
+SemanticError
+5000
+Select synonym, next undeclared synonym missing stmtNum
+stmt s1, s2;
+Select s1 such that Next(s3,999)
+SemanticError
+5000
+Select synonym, next missing stmtNum missing stmtNum
+stmt s1, s2;
+Select s1 such that Next(999,999)
+none
+5000
+Select synonym, next synonym synonym
+stmt s1, s2;
+Select s1 such that Next(s1,s2)
+1,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,6,61,62,63,64,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next undeclared synonym synonym
+stmt s1, s2;
+Select s1 such that Next(s3,s1)
+SemanticError
+5000
+Select synonym, next synonym undeclared synonym
+stmt s1, s2;
+Select s1 such that Next(s1,s3)
+SemanticError
+5000
+Select synonym, next synonym synonym
+stmt s1, s2;
+Select s2 such that Next(s1,s2)
+10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next synonym synonym
+if ifs; call c;
+Select c such that Next(ifs,c)
+2,20,24,62,7
+5000
+Select synonym, next synonym synonym
+stmt s; assign a; print pr; read re; if ifs; while w; constant const; call c;
+Select a such that Next(a, pr)
+none
+5000
+Select synonym, next synonym synonym
+if ifs; call c;
+Select ifs such that Next(ifs, c)
+1,19,61
+5000
+Select synonym, next synonym synonym
+read re; while w;
+Select w such that Next(w, re)
+46,67
+5000
+Select synonym, next synonym synonym
+print pr; read re;
+Select re such that Next(pr, re)
+none
+5000
+Select synonym, next synonym synonym
+assign a; call c;
+Select a such that Next(c, a)
+16,27,3,34,38,70
+5000
+Select synonym, next synonym synonym
+read re; if ifs;
+Select ifs such that Next(re, ifs)
+none
+5000
+Select synonym, next synonym synonym
+assign a; if ifs;
+Select a such that Next(a, ifs)
+none
+5000
+Select synonym, next synonym synonym
+if ifs; while w; constant cons;
+Select cons such that Next(ifs, w)
+0,1,2,3,4,5,67
+5000
+Select synonym, next synonym synonym
+stmt s; print pr;
+Select s such that Next(s, pr)
+13,28,31,43,57,61,7,77,81
+5000
+Select synonym, next synonym synonym
+call c1, c2;
+Select c2 such that Next(c1, c2)
+10,13,25,26,49,65
+5000
+Select synonym, next* wildcard wildcard
+stmt s1, s2;
+Select s1 such that Next*(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next* wildcard synonym
+stmt s1, s2;
+Select s1 such that Next*(_,s1)
+10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next* wildcard undeclared synonym
+stmt s1, s2;
+Select s1 such that Next*(_,s3)
+SemanticError
+5000
+Select synonym, next* synonym wildcard
+stmt s1, s2;
+Select s1 such that Next*(s1,_)
+1,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,6,61,62,63,64,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next* undeclared synonym wildcard
+stmt s1, s2;
+Select s1 such that Next*(s3,_)
+SemanticError
+5000
+Select synonym, next* wildcard stmtNum
+stmt s1, s2;
+Select s1 such that Next*(_,2)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next* wildcard missing stmtNum
+stmt s1, s2;
+Select s1 such that Next*(_,999)
+none
+5000
+Select synonym, next* stmtNum wildcard
+stmt s1, s2;
+Select s1 such that Next*(1,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,80,81,82,83,84,85,86,9
+5000
+Select synonym, next* missing stmtNum wildcard
+stmt s1, s2;
+Select s1 such that Next*(999,_)
+none
+5000
+Select synonym, next* stmtNum synonym
+stmt s1;
+Select s1 such that Next*(1, s1)
+10,2,3,4,5,6,7,8,9
+5000
+Select synonym, next stmtNum synonym
+stmt s1;
+Select s1 such that Next*(7, s1)
+10,8,9
+5000
+Select synonym, next stmtNum synonym
+stmt s1;
+Select s1 such that Next*(26, s1)
+18,19,20,21,22,23,24,25,26,27,28,29
+5000
+Select synonym, next stmtNum synonym
+stmt s1;
+Select s1 such that Next*(29, s1)
+18,19,20,21,22,23,24,25,26,27,28,29
+5000
+Select synonym, next synonym stmtNum
+stmt s1;
+Select s1 such that Next*(30, s1)
+31,32,33,34,35,36,37,38,39,40
+5000
+Select synonym, next synonym stmtNum
+stmt s1;
+Select s1 such that Next*(32, s1)
+31,32,33,34,35
+5000
+Select synonym, next synonym stmtNum
+stmt s1;
+Select s1 such that Next*(39, s1)
+36,37,38,39,40
+5000
+Select synonym, next synonym stmtNum
+stmt s1;
+Select s1 such that Next*(40, s1)
+none
+5000
+Select synonym, next synonym stmtNum 3 nested loops
+stmt s1;
+Select s1 such that Next*(67, s1)
+66,67,68,69,70,71
+5000
+Select synonym, next synonym stmtNum
+stmt s1;
+Select s1 such that Next*(s1, 68)
+66,67,68,69,70,71
+5000
+Select synonym, next synonym stmtNum
+stmt s1;
+Select s1 such that Next*(s1, 66)
+66,67,68,69,70,71
+5000
+Select synonym, next synonym stmtNum
+assign a;
+Select a such that Next*(a, 28)
+22,27
+5000
+Select synonym, next synonym stmtNum
+print pr;
+Select pr such that Next*(54,pr)
+none
+5000
+Select synonym, next synonym stmtNum
+if ifs;
+Select ifs such that Next*(ifs, 69)
+none
+5000
+Select synonym, next stmtNum synonym
+while w;
+Select w such that Next*(46, w)
+46
+5000
+Select synonym, next synonym synonym
+stmt s; assign a; print pr; read re; if ifs; while w; constant const; call c;
+Select a such that Next*(a, pr)
+16,22,27,34,42,74,83,85,86
+5000
+Select synonym, next synonym synonym
+if ifs; call c;
+Select c such that Next*(ifs, c)
+10,2,20,23,24,25,26,28,33,35,37,4,40,6,62,65,7,9
+5000
+Select synonym, next synonym synonym
+read re; while w;
+Select w such that Next*(w, re)
+18,36,41,46,50,51,66,67,68,72,73,77,79,84
+5000
+Select synonym, next synonym synonym
+stmt s; assign a; print pr; read re; if ifs; while w; constant const; call c;
+Select re such that Next*(pr, re)
+21,47,75,81
+5000
+Select synonym, next synonym synonym
+stmt s; assign a; print pr; read re; if ifs; while w; constant const; call c;
+Select a such that Next*(c, a)
+16,22,27,3,34,38,42,54,70,74
+5000
+Select synonym, next synonym synonym
+stmt s; assign a; print pr; read re; if ifs; while w; constant const; call c;
+Select ifs such that Next*(re, ifs)
+19,80
+5000
+Select synonym, next synonym synonym
+stmt s; assign a; print pr; read re; if ifs; while w; constant cons; call c;
+Select a such that Next*(a, ifs)
+22,27,83,85,86
+5000
+Select synonym, next synonym synonym
+if ifs; while w; constant const;
+Select const such that Next*(ifs, w)
+0,1,2,3,4,5,67
+5000
+Select synonym, next synonym synonym
+stmt s; print pr;
+Select s such that Next*(s, pr)
+1,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,41,42,43,44,45,56,57,61,7,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86
+5000
+Select synonym, next undeclared synonym and synonym
+stmt s; assign a; print pr; read re; if ifs; while w; constant cons; call c;
+Select c such that Next*(pi, c)
+SemanticError
+5000
+Select synonym, next synonym synonym
+stmt s; assign a; print pr; read re; if ifs; while w; call c1, c2;
+Select c2 such that Next*(c1, c2)
+10,12,13,15,17,20,23,24,25,26,28,33,35,37,4,40,43,45,48,49,52,55,6,65,69,76,9
+5000

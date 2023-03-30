@@ -1,0 +1,840 @@
+1 - IDENT = IDENT
+Select
+BOOLEAN with "Hello" = "Hello"
+TRUE
+5000
+2- IDENT != IDENT
+Select
+BOOLEAN with "Hello" = "Hello2"
+FALSE
+5000
+3 - INT = INT
+Select
+BOOLEAN with 5 = 5
+TRUE
+5000
+4- INT != INT
+Select
+BOOLEAN with 5 = 6
+FALSE
+5000
+5 - IDENT = INT
+Select
+BOOLEAN with "Hello" = 5
+SemanticError
+5000
+6 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select BOOLEAN with p.procName = p.procName
+TRUE
+5000
+7 - attrRef = attrRef
+procedure p, p2; call c; variable v; read r; print pr;
+Select <p, p2.procName> with p.procName = p2.procName
+er er,san san,yi yi
+5000
+8 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <p, c> with p.procName = c.procName
+er 5,er 16,san 73
+5000
+9 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <p, v> with p.procName = v.varName
+none
+5000
+10 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <p.procName, r> with p.procName = r.varName
+none
+5000
+11 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <p, pr.varName> with p.procName = pr.varName
+none
+5000
+12 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select BOOLEAN with c.procName = c.procName
+TRUE
+5000
+13 - attrRef = attrRef
+procedure p; call c, c2; variable v; read r; print pr;
+Select <c, c2.procName> with c.procName = c2.procName
+5 er,16 er,73 san
+5000
+13.1 - attrRef = attrRef
+procedure p; call c, c2; variable v; read r; print pr;
+Select <c, c2> with c.procName = c2.procName
+5 5,5 16,16 5,16 16,73 73
+5000
+14 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <c, v> with c.procName = v.varName
+none
+5000
+15 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <c, r> with c.procName = r.varName
+none
+5000
+16 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <c.procName, pr> with c.procName = pr.varName
+none
+5000
+17 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select BOOLEAN with v.varName = v.varName
+TRUE
+5000
+18 - attrRef = attrRef
+procedure p; call c; variable v, v2; read r; print pr;
+Select <v, v2.varName> with v.varName = v2.varName
+a a,alt alt,america america,b b,brazil brazil,c c,d d,denmark denmark,e e,egypt egypt,f f,g g,i i,j j,o o,p p,t t,u u,x x,xx xx,y y,z z
+5000
+19 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <v.varName, r.varName, r> with v.varName = r.varName
+x x 1
+5000
+20 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <v, pr, pr.varName, v.varName> with v.varName = pr.varName
+a 4 a a
+5000
+21 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select BOOLEAN with r.varName = r.varName
+TRUE
+5000
+23 - attrRef = attrRef
+procedure p; call c; variable v; read r, r2; print pr;
+Select <r.varName, r2.varName> with r.varName = r2.varName
+x x
+5000
+24 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr;
+Select <r.varName, p.varName> with r.varName = pr.varName
+SyntaxError
+5000
+25 - attrRef = attrRef
+procedure p, p2; call c; variable v; read r; print pr;
+Select BOOLEAN with pr.varName = pr.varName
+TRUE
+5000
+26 - attrRef = attrRef
+procedure p; call c; variable v; read r; print pr, pr2;
+Select <pr, pr2, pr.varName, pr2.varName> with pr.varName = pr2.varName
+4 4 a a
+5000
+27 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select BOOLEAN with c.value = c.value
+FALSE
+5000
+28 - attrRef = attrRef
+constant c, c2; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <c, c2> with c2.value = c.value
+none
+5000
+29 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <c, s> with c.value = s.stmt#
+none
+5000
+30 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <c, s> with c.value = r.stmt#
+none
+5000
+31 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <c, pr.stmt#> with c.value = pr.stmt#
+none
+5000
+32 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <c.value, ca.stmt#> with c.value = ca.stmt#
+none
+5000
+33 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <c, w, w.stmt#> with c.value = w.stmt#
+none
+5000
+34 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <c, ifs> with c.value = ifs.stmt#
+none
+5000
+35 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <c, a> with c.value = a.stmt#
+none
+5000
+36 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select BOOLEAN with s.stmt# = s.stmt#
+TRUE
+5000
+37 - attrRef = attrRef
+constant c; stmt s, s2; read r; print pr; call ca; while w; if ifs; assign a;
+Select <s, s2> with s.stmt# = s2.stmt#
+1 1,10 10,11 11,12 12,13 13,14 14,15 15,16 16,17 17,18 18,19 19,2 2,20 20,21 21,22 22,23 23,24 24,25 25,26 26,27 27,28 28,29 29,3 3,30 30,31 31,32 32,33 33,34 34,35 35,36 36,37 37,38 38,39 39,4 4,40 40,41 41,42 42,43 43,44 44,45 45,46 46,47 47,48 48,49 49,5 5,50 50,51 51,52 52,53 53,54 54,55 55,56 56,57 57,58 58,59 59,6 6,60 60,61 61,62 62,63 63,64 64,65 65,66 66,67 67,68 68,69 69,7 7,70 70,71 71,72 72,73 73,74 74,75 75,8 8,9 9
+5000
+38 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <s, r> with s.stmt# = r.stmt#
+1 1
+5000
+39 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <s, pr.varName> with s.stmt# = pr.stmt#
+4 a
+5000
+40 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <s, ca.varName> with s.stmt# = ca.stmt#
+SyntaxError
+5000
+41 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <s, w> with s.stmt# = w.stmt#
+11 11,19 19,30 30,40 40,43 43,45 45,47 47,49 49,50 50,51 51,52 52,53 53,54 54,6 6
+5000
+42 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <s, ifs> with s.stmt# = ifs.stmt#
+14 14,17 17,41 41,42 42,58 58,59 59,60 60,61 61,62 62,63 63
+5000
+43 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <s, a> with s.stmt# = a.stmt#
+10 10,12 12,13 13,15 15,18 18,2 2,20 20,21 21,22 22,23 23,24 24,25 25,26 26,27 27,28 28,29 29,3 3,31 31,32 32,33 33,34 34,35 35,36 36,37 37,38 38,39 39,44 44,46 46,48 48,55 55,56 56,57 57,64 64,65 65,66 66,67 67,68 68,69 69,7 7,70 70,71 71,72 72,74 74,75 75,8 8,9 9
+5000
+44 - attrRef = attrRef
+constant c; stmt s; read r, r2; print pr; call ca; while w; if ifs; assign a;
+Select BOOLEAN with r.stmt# = r.stmt#
+TRUE
+5000
+45 - attrRef = attrRef
+constant c; stmt s; read r, r2; print pr; call ca; while w; if ifs; assign a;
+Select <r, r2> with r.stmt# = r2.stmt#
+1 1
+5000
+46 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <r, pr> with s.stmt# = pr.stmt#
+1 4
+5000
+47 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <r, ca> with r.stmt# = ca.stmt#
+none
+5000
+48 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <r, w> with r.stmt# = w.stmt#
+none
+5000
+49 - attrRef = attrRef
+constant c, stmt s, read r, print pr, call ca, while w, if ifs, assign a
+Select <r, ifs> with r.stmt# = ifs.stmt#
+SyntaxError
+5000
+50 - attrRef = attrRef
+constant c, stmt s, read r, print pr, call ca, while w, if ifs, assign a
+Select <r, a> with r.stmt# = a.stmt#
+SyntaxError
+5000
+51 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select BOOLEAN with pr.stmt# = pr.stmt#
+TRUE
+5000
+52 - attrRef = attrRef
+constant c; stmt s; read r; print pr, pr2; call ca; while w; if ifs; assign a;
+Select <pr, pr2> with pr.stmt# = pr2.stmt#
+4 4
+5000
+53 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <pr, ca> with pr.stmt# = ca.stmt#
+none
+5000
+54 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <pr, w> with pr.stmt# = w.stmt#
+none
+5000
+55 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <pr, ifs> with pr.stmt# = ifs.stmt#
+none
+5000
+56 - attrRef = attrRef
+constant c, stmt s, read r, print pr, call ca, while w, if ifs, assign a
+Select <pr, a> with pr.stmt# = a.stmt#
+SyntaxError
+5000
+57 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select BOOLEAN with ca.stmt# = ca.stmt#
+TRUE
+5000
+58 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca, ca2; while w; if ifs; assign a;
+Select <ca, ca2> with ca.stmt# = ca2.stmt#
+16 16,5 5,73 73
+5000
+59 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <ca, w> with ca.stmt# = w.stmt#
+none
+5000
+60 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <ca, ifs> with ca.stmt# = ifs.stmt#
+none
+5000
+61 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <ca, a> with ca.stmt# = a.stmt#
+none
+5000
+62 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select BOOLEAN with w.stmt# = w.stmt#
+TRUE
+5000
+63 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w, w2; if ifs; assign a;
+Select <w, w2> with w.stmt# = w2.stmt#
+11 11,19 19,30 30,40 40,43 43,45 45,47 47,49 49,50 50,51 51,52 52,53 53,54 54,6 6
+5000
+64 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <w, ifs> with w.stmt# = ifs.stmt#
+none
+5000
+65 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <w, a> with w.stmt# = a.stmt#
+none
+5000
+66 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select BOOLEAN with ifs.stmt# = ifs.stmt#
+TRUE
+5000
+67 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w, w2; if ifs, ifs2; assign a;
+Select <w, w2> with ifs.stmt# = ifs2.stmt#
+11 11,11 19,11 30,11 40,11 43,11 45,11 47,11 49,11 50,11 51,11 52,11 53,11 54,11 6,19 11,19 19,19 30,19 40,19 43,19 45,19 47,19 49,19 50,19 51,19 52,19 53,19 54,19 6,30 11,30 19,30 30,30 40,30 43,30 45,30 47,30 49,30 50,30 51,30 52,30 53,30 54,30 6,40 11,40 19,40 30,40 40,40 43,40 45,40 47,40 49,40 50,40 51,40 52,40 53,40 54,40 6,43 11,43 19,43 30,43 40,43 43,43 45,43 47,43 49,43 50,43 51,43 52,43 53,43 54,43 6,45 11,45 19,45 30,45 40,45 43,45 45,45 47,45 49,45 50,45 51,45 52,45 53,45 54,45 6,47 11,47 19,47 30,47 40,47 43,47 45,47 47,47 49,47 50,47 51,47 52,47 53,47 54,47 6,49 11,49 19,49 30,49 40,49 43,49 45,49 47,49 49,49 50,49 51,49 52,49 53,49 54,49 6,50 11,50 19,50 30,50 40,50 43,50 45,50 47,50 49,50 50,50 51,50 52,50 53,50 54,50 6,51 11,51 19,51 30,51 40,51 43,51 45,51 47,51 49,51 50,51 51,51 52,51 53,51 54,51 6,52 11,52 19,52 30,52 40,52 43,52 45,52 47,52 49,52 50,52 51,52 52,52 53,52 54,52 6,53 11,53 19,53 30,53 40,53 43,53 45,53 47,53 49,53 50,53 51,53 52,53 53,53 54,53 6,54 11,54 19,54 30,54 40,54 43,54 45,54 47,54 49,54 50,54 51,54 52,54 53,54 54,54 6,6 11,6 19,6 30,6 40,6 43,6 45,6 47,6 49,6 50,6 51,6 52,6 53,6 54,6 6
+5000
+68 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <ifs, a> with ifs.stmt# = a.stmt#
+none
+5000
+69 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select BOOLEAN with a.stmt# = a.stmt#
+TRUE
+5000
+70 - attrRef = attrRef
+constant c; stmt s; read r; print pr; call ca; while w; if ifs, ifs2; assign a, a2;
+Select <a, a2> with a.stmt# = a2.stmt#
+10 10,12 12,13 13,15 15,18 18,2 2,20 20,21 21,22 22,23 23,24 24,25 25,26 26,27 27,28 28,29 29,3 3,31 31,32 32,33 33,34 34,35 35,36 36,37 37,38 38,39 39,44 44,46 46,48 48,55 55,56 56,57 57,64 64,65 65,66 66,67 67,68 68,69 69,7 7,70 70,71 71,72 72,74 74,75 75,8 8,9 9
+5000
+71 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; procedure p;
+Select <p> with p.procName = p.procName
+er, san, yi
+5000
+72 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; procedure p;
+Select <p, v.varName> with p.procName = v
+SyntaxError
+5000
+73 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; procedure p;
+Select <ca, p> with ca.procName = p
+SyntaxError
+5000
+74 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; procedure p;
+Select <ca.procName, ca, v> with p.procName = v
+SyntaxError
+5000
+75 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; procedure p;
+Select <v, p> with v.varName = p
+SyntaxError
+5000
+76 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; procedure p;
+Select <v> with v.varName = v
+SyntaxError
+5000
+77 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; procedure p;
+Select <p, r> with r.varName = p
+SyntaxError
+5000
+78 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <r, v> with r.varName = v
+SyntaxError
+5000
+79 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; procedure p;
+Select <pr> with pr.varName = p
+SyntaxError
+5000
+80 - attrRef(ident) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <pr.varName, v.varName> with pr.varName = v
+SyntaxError
+5000
+81 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <s> with s = 5
+SyntaxError
+5000
+82 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <r.varName, r> with r = 18 with r = 15
+SyntaxError
+5000
+83 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <r.varName, r> with r = 36
+SyntaxError
+5000
+84 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select pr with pr = 20
+SyntaxError
+5000
+85 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select w with c = 18
+SyntaxError
+5000
+86 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select <w, c, r> with w = 4
+SyntaxError
+5000
+87 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select BOOLEAN with ifs = 10
+SyntaxError
+5000
+88 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select a with 14 = a
+SyntaxError
+5000
+90 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;
+Select c with 6 = c
+SyntaxError
+5000
+91 - syn - ident
+procedure p; constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select BOOLEAN with p = "A"
+SyntaxError
+5000
+92 - syn - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs, w.stmt#> with v = "c"
+SyntaxError
+5000
+93 - attrRef - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <pr, pr> with c.value = 10
+none
+5000
+95 - attrRef - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <r> with r.stmt# = 3
+none
+5000
+96 - attrRef - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select pr.varName with pr.stmt# = 4
+a
+5000
+97 - attrRef - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select ca with 10 = ca.stmt#
+none
+5000
+98 - attrRef - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select w with 11 = w.stmt#
+11
+5000
+99 - attrRef - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select ifs with 15 = ifs.stmt#
+none
+5000
+100 - attrRef - int
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select a with 36 = a.stmt#
+36
+5000
+101 - attrRef - ident
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;  procedure p;
+Select <p, p.procName, p, p.procName> with "yi" = p.procName
+yi yi yi yi
+5000
+102 - attrRef - ident
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select ca with "B" = ca.procName
+none
+5000
+103 - attrRef - ident
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a;  variable v;
+Select v with "c" = v.varName
+c
+5000
+104 - attrRef - ident
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select v with r.varName = "d"
+SemanticError
+5000
+105 - attrRef - ident
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs, n> with pr.varName = "e"
+SemanticError
+5000
+106 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <c, s> with c.value = s
+SyntaxError
+5000
+107 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <c, r> with c.value = r
+SyntaxError
+5000
+108 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <c, pr> with c.value = pr
+SyntaxError
+5000
+109 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <c, ca> with c.value = ca
+SyntaxError
+5000
+110 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <c, w> with c.value = w
+SyntaxError
+5000
+111 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <c, ifs> with c.value = ifs
+SyntaxError
+5000
+112 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <c, a> with c.value = a
+SyntaxError
+5000
+113 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <c, n> with c.value = n
+SyntaxError
+5000
+114 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <c> with c.value = c
+SyntaxError
+5000
+115 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <s, s> with s.stmt# = s
+SyntaxError
+5000
+116 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <s, r> with s.stmt# = r
+SyntaxError
+5000
+117 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <s, pr> with s.stmt# = pr
+SyntaxError
+5000
+118 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <s, ca> with s.stmt# = ca
+SyntaxError
+5000
+119 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <s.stmt#, w> with s.stmt# = w
+SyntaxError
+5000
+120 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <s.stmt#, ifs> with s.stmt# = ifs
+SyntaxError
+5000
+121 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <s, a> with s.stmt# = a
+SyntaxError
+5000
+123 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <s.stmt#> with s.stmt# = c
+SyntaxError
+5000
+124 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <r, s> with r.stmt# = s
+SyntaxError
+5000
+125 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <r, r> with r.stmt# = r
+SyntaxError
+5000
+126 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <r, pr> with r.stmt# = pr
+SyntaxError
+5000
+127 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <r, ca> with r.stmt# = ca
+SyntaxError
+5000
+128 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <r.stmt#, w> with r.stmt# = w
+SyntaxError
+5000
+129 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <r.stmt#, ifs> with r.stmt# = ifs
+SyntaxError
+5000
+130 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <r, a> with r.stmt# = a
+SyntaxError
+5000
+132 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <r.stmt#> with r.stmt# = c
+SyntaxError
+5000
+133 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <pr, s> with pr.stmt# = s
+SyntaxError
+5000
+134 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <pr, r> with pr.stmt# = r
+SyntaxError
+5000
+135 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <pr, pr> with pr.stmt# = pr
+SyntaxError
+5000
+136 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <pr, ca> with pr.stmt# = ca
+SyntaxError
+5000
+137 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <pr.stmt#, w> with pr.stmt# = w
+SyntaxError
+5000
+138 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <pr.stmt#, ifs> with pr.stmt# = ifs
+SyntaxError
+5000
+139 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <pr, a> with pr.stmt# = a
+SyntaxError
+5000
+141 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <pr.stmt#> with pr.stmt# = c
+SyntaxError
+5000
+142 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ca, s> with ca.stmt# = s
+SyntaxError
+5000
+143 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ca, r> with ca.stmt# = r
+SyntaxError
+5000
+144 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ca, pr> with ca.stmt# = pr
+SyntaxError
+5000
+145 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ca, ca> with ca.stmt# = ca
+SyntaxError
+5000
+146 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ca.stmt#, w> with ca.stmt# = w
+SyntaxError
+5000
+147 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ca.stmt#, ifs> with ca.stmt# = ifs
+SyntaxError
+5000
+148 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ca, a> with ca.stmt# = a
+SyntaxError
+5000
+150 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ca.stmt#> with ca.stmt# = c
+SyntaxError
+5000
+151 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <w, s> with w.stmt# = s
+SyntaxError
+5000
+152 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <w, r> with w.stmt# = r
+SyntaxError
+5000
+153 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <w, pr> with w.stmt# = pr
+SyntaxError
+5000
+154 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <w, ca> with w.stmt# = ca
+SyntaxError
+5000
+155 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <w.stmt#, w> with w.stmt# = w
+SyntaxError
+5000
+156 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <w.stmt#, ifs> with w.stmt# = ifs
+SyntaxError
+5000
+157 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <w, a> with w.stmt# = a
+SyntaxError
+5000
+159 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <w.stmt#> with w.stmt# = c
+SyntaxError
+5000
+160 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs, s> with ifs.stmt# = s
+SyntaxError
+5000
+161 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs, r> with ifs.stmt# = r
+SyntaxError
+5000
+162 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs, pr> with ifs.stmt# = pr
+SyntaxError
+5000
+163 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs, ca> with ifs.stmt# = ca
+SyntaxError
+5000
+164 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs.stmt#, w> with ifs.stmt# = w
+SyntaxError
+5000
+165 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs.stmt#, ifs> with ifs.stmt# = ifs
+SyntaxError
+5000
+166 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs, a> with ifs.stmt# = a
+SyntaxError
+5000
+168 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <ifs.stmt#> with ifs.stmt# = c
+SyntaxError
+5000
+169 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <a, s> with a.stmt# = s
+SyntaxError
+5000
+170 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <a, r> with a.stmt# = r
+SyntaxError
+5000
+171 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <a, pr> with a.stmt# = pr
+SyntaxError
+5000
+172 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <a, ca> with a.stmt# = ca
+SyntaxError
+5000
+173 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <a.stmt#, w> with a.stmt# = w
+SyntaxError
+5000
+174 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <a.stmt#, ifs> with a.stmt# = ifs
+SyntaxError
+5000
+175 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <a, a> with a.stmt# = a
+SyntaxError
+5000
+177 - attrRef(int) - syn
+constant c; stmt s; read r; print pr; call ca; while w; if ifs; assign a; 
+Select <a.stmt#> with a.stmt# = c
+SyntaxError
+5000

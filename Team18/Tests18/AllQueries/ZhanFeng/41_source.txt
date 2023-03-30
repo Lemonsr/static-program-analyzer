@@ -1,0 +1,145 @@
+procedure uno {
+	if (shirt == pants) then {
+		call diez;
+		tank = top / (2 + tip/toe);
+		call cuatro;
+		read cinos;
+		call dos;
+	} else {
+		call tres;
+		print flips;
+		call cinco;
+	}
+	call siete;
+}
+
+procedure dos {
+	while (((!(a > div + 2 / (a + 2))) || (a <= div)) || ((!((a / div >= 2) && (a + div < 2))) && ((a - div) != (a * (div + a) - (div - a)/2 + a % div)))) {
+		call ocho;
+		call seis;
+		print crab;
+		call cuatro;
+		prawn = mee + kia;
+		call cinco;
+	}
+}
+
+procedure tres {
+	while (teacher < student) {
+		if (b<=times) then {
+			call dos;
+			read teacher;
+			student =  nus;
+			call cuatro;
+		} else {
+			call seis;
+		}
+		call cinco;
+		call siete;
+		student = nus + 1;
+		call nueve;
+		print nus;
+	}
+}
+
+procedure cuatro {
+	if (a>=div) then {
+		while (b != div) {
+			print times;
+			call nueve;
+			times = times * 2;
+			call ocho;
+		}
+	} else {
+		while (3 == div) {
+			call seis;
+			div = div;
+			read div;
+		}
+		call cinco;
+	}
+}
+
+procedure cinco {
+	while (plus != minus) {
+		times = div;
+		call seis;
+		print plus;
+		call ocho;
+	}
+	while (plus == minus) {
+		read plus;
+		call siete;
+		call nueve;
+	}
+}
+
+procedure seis {
+	while (fruits < veg) {
+		while (apple == brocolli) {
+			call nueve;
+			read fruits;
+			veg = brocolli + grass;
+		}
+		call ocho;
+	}
+}
+
+procedure siete {
+	if ((((b>=c) && (b>a)) && ((a==1) && (a!=2))) && (a != ((0+(0*0)/4)%1))) then {
+		if ((b - c) == 3) then {
+			read a;
+			b = a / c;
+		} else {
+			print a;
+		}
+	} else {
+		if (c == c) then {
+			call seis;
+		} else {
+			print c;
+			b = c + a;
+		}
+		call ocho;
+	}
+}
+
+procedure ocho {
+	while (china < 1) {
+		while (usa == vietnam) {
+			while (((apple > grape) && (grape > apple)) || (call > print)) {
+				call nueve;
+				vietnam = china;
+			}
+		}
+		read china;
+	}
+}
+
+procedure nueve {
+	while ((kiwi > 67) && (orange > (pear * 3 % 2 + banana))) {
+		while (pear == pear) {
+			kiwi = kiwi + 3;
+			read orange;
+			call diez;
+		}
+		while (kiwi >= (banana + 5)) {
+			print orange;
+		}
+	}
+}
+
+procedure diez {
+	while (print != ((print % 1) + print)) {
+		if (code == 5) then {
+			read code;
+			print print;
+		} else {
+			java = python;
+		}
+		while (snakes != ladders) {
+			games = snakes + ladders;
+			snakes = tiger;
+		}
+	}
+}

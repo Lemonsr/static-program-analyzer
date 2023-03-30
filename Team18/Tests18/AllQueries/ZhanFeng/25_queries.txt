@@ -1,0 +1,405 @@
+1- Such that w/o space
+assign a; stmt s;
+Select s suchthat Follows(s,a)
+SyntaxError
+5000
+2- Such that w/o space
+stmt s;
+Select s such thatFollows(1,2)
+SyntaxError
+5000
+3- Such that w/o space
+stmt S;
+Select Ssuch that Follows(1,2)
+SyntaxError
+5000
+4- Such that extra comma
+stmt s;
+Select s such that Follows(1,2,)
+SyntaxError
+5000
+5- Such that missing comma
+stmt s;
+Select s such that Follows(1 2)
+SyntaxError
+5000
+6- Such that missing bracket
+stmt s;
+Select s such that Follows(1,2
+SyntaxError
+5000
+7- such that missing bracket
+stmt    s;
+Select s such that Follows s,2)
+SyntaxError
+5000
+8- Such that invalid and such that
+stmt s;
+Select s such that Follows(1,2) and such that Follows(s,2)
+SyntaxError
+5000
+9- Such that invalid and
+stmt s; assign a;
+Select s such that Follows  (1,         2       ) and                pattern a Follows (s,2)
+SyntaxError
+5000
+10- Such that invalid and
+stmt s; assign a;
+Select s such that Follows(1, 2 ) and a(_,_)
+SyntaxError
+5000
+11- Such that invalid and
+stmt s; assign a;
+Select s such that Follows(1, 2 ) and pattern a(_,_)
+SyntaxError
+5000
+12- pattern invalid and
+stmt s; assign a; while w;
+Select s pattern a(_,_) and pattern w(_,_)
+SyntaxError
+5000
+13- pattern invalid missing _
+stmt s; assign a; while w; if ifs;
+Select s pattern ifs(_,_)
+SemanticError
+5000
+14- Such that synonym name
+stmt Select;
+Select Select such that Follows(s,2)
+SemanticError
+5000
+15- Such that extra word
+stmt s;
+Select s such such that Follows(s,2)
+SyntaxError
+5000
+16- Such that extra word
+stmt s;
+Select s such that that Follows(s,2)
+SyntaxError
+5000
+17- such that Follow w/o s
+stmt s;
+Select s such that Follow(s,2)
+SyntaxError
+5000
+18- such that Follow missing letter
+stmt s;
+Select s such that Folows(s,2)
+SyntaxError
+5000
+19- such that invalid Uses(stmtRef, stmtRef)
+stmt s,s1;
+Select s such that Uses(s,s1)
+SemanticError
+5000
+20- such that invalid Uses
+stmt s,s1; variable v, r;
+Select s such that Uses(v,r)
+SemanticError
+5000
+21- such that extra comma in declarations
+stmt s  ,;
+Select s such that Follows( s, 2)
+SyntaxError
+5000
+22- such that missing semicolon in declaration
+stmt s
+Select s such that Follows( s, 2)
+SyntaxError
+5000
+23- such that extra spaces
+stmt s;
+Select s such that Follows * (s, 2)
+SyntaxError
+5000
+24- such that with, invalid equation
+stmt s;
+Select s such that Follows(s,2) with 1=1=1
+SyntaxError
+5000
+25- pattern invalid pattern assign parameter (stmtref,_)
+stmt s; assign a; variable v;
+Select BOOLEAN pattern a(s,_)
+SemanticError
+5000
+26- such that invalid Follows parameter(entref, int)
+stmt s; procedure p;
+Select BOOLEAN Follows(p,2)
+SyntaxError
+5000
+27- invalid .stmt#
+stmt s; assign a; 
+Select s such that Follows(_,_) with n.smt# = s.stmt#
+SyntaxError
+5000
+28- white space valid
+stmt s; assign a; 
+Select BOOLEAN such that Follows(s       ,              _ )
+TRUE
+5000
+29- such that invalid Follows parameter
+procedure p, q;
+Select BOOLEAN such that Follows(p,q)
+SemanticError
+5000
+30- such that invalid Follows* parameter
+procedure p, q;
+Select BOOLEAN such that Follows*(p,q)
+SemanticError
+5000
+31- such that invalid Follows parameter
+procedure p, q; variable v; stmt s;
+Select BOOLEAN such that Follows(s,v)
+SemanticError
+5000
+32- such that invalid Follows parameter
+procedure p, q; variable v; stmt s;
+Select BOOLEAN such that Follows(v,s)
+SemanticError
+5000
+33- such that invalid Parent parameter
+procedure p, q;
+Select BOOLEAN such that Parent(p,q)
+SemanticError
+5000
+34- such that invalid Parent parameter
+procedure p, q; variable v; stmt s;
+Select BOOLEAN such that Parent(s,v)
+SemanticError
+5000
+35- such that invalid Parent parameter
+procedure p, q; variable v; stmt s;
+Select BOOLEAN such that Parent(v,s)
+SemanticError
+5000
+36- such that invalid Parent* parameter
+procedure p, q;
+Select BOOLEAN such that Parent*(p,q)
+SemanticError
+5000
+37- such that invalid Calls parameter
+stmt s,s1;
+Select BOOLEAN such that Calls(s,s1)
+SemanticError
+5000
+38- such that invalid Calls parameter
+stmt s,s1; variable v;
+Select BOOLEAN such that Calls(s,v)
+SemanticError
+5000
+39- such that invalid Calls parameter
+stmt s,s1; variable v;
+Select BOOLEAN such that Calls(v,s1)
+SemanticError
+5000
+40- such that invalid Next parameter
+procedure p, q;
+Select BOOLEAN such that Next(p,q)
+SemanticError
+5000
+41- such that invalid Next parameter
+procedure p, q; variable v; stmt s;
+Select BOOLEAN such that Next(s,v)
+SemanticError
+5000
+42- such that invalid Next parameter
+procedure p, q; variable v; stmt  s;
+Select BOOLEAN such that Next(s,v)
+SemanticError
+5000
+43- such that invalid Next* parameter
+procedure p, q;
+Select BOOLEAN such that Next*(p,q)
+SemanticError
+5000
+44- such that invalid Affects parameter
+procedure p, q;
+Select BOOLEAN such that Affects(p,q)
+SemanticError
+5000
+45- such that invalid Affects parameter
+procedure p, q; variable v; stmt s;
+Select BOOLEAN such that Affects(s,v)
+SemanticError
+5000
+46- such that invalid Affects parameter
+procedure p, q; variable v; stmt s;
+Select BOOLEAN such that Affects(v,s)
+SemanticError
+5000
+47- such that invalid Affects* parameter
+procedure p, q;
+Select BOOLEAN such that Affects*(p,q)
+SemanticError
+5000
+48- such that invalid ModifiesP parameter
+procedure p, q; stmt s;
+Select BOOLEAN such that Modifies(p,s)
+SemanticError
+5000
+49- such that invalid ModifiesS parameter
+procedure p, q; stmt s, s1;
+Select BOOLEAN such that Modifies(s,s1)
+SemanticError
+5000
+50- such that invalid ModifiesS parameter
+procedure p, q; stmt s, s1; variable v;
+Select BOOLEAN such that Modifies(v,s1)
+SemanticError
+5000
+51- such that invalid UsesP parameter
+procedure p, q; stmt s;
+Select BOOLEAN such that Uses(p,s)
+SemanticError
+5000
+52- such that invalid UsesS parameter
+procedure p, q; stmt s, s1;
+Select BOOLEAN such that Uses(s,s1)
+SemanticError
+5000
+53- Invalid with clause IDENT with space
+Select
+BOOLEAN with "hello" = "he llo"
+SyntaxError
+5000
+54- Invalid pattern and such that
+stmt s, s1; assign a, a1;
+Select BOOLEAN pattern a(_,_) and Follows(s,s1)
+SyntaxError
+5000
+55- Invalid pattern such that and with
+stmt s, s1; assign a, a1;
+Select BOOLEAN pattern a(_,_) such that Follows(s,s1) and with 1 = 1
+SyntaxError
+5000
+56- Invalid while pattern
+while w; stmt s;
+Select s pattern w(_,_,_)
+SemanticError
+5000
+57- Invalid while pattern extra comma
+while w; stmt s;
+Select s pattern w(_,_,)
+SyntaxError
+5000
+58- Invalid while pattern stmtref parameter
+while w; stmt s;
+Select s pattern w(s, _)
+SemanticError
+5000
+59- Invalid while pattern second parameter not underscore
+while w; stmt s; variable v;
+Select s pattern w(v, s)
+SyntaxError
+5000
+60- Invalid while pattern assign missing one underscore
+assign a; stmt s; variable v;
+Select BOOLEAN pattern a(v,_"x")
+SyntaxError
+5000
+61- Invalid while pattern assign missing one underscore
+assign a; stmt s; variable v;
+Select BOOLEAN pattern a(v,"x"_)
+SyntaxError
+5000
+62- Invalid while pattern assign missing one underscore
+assign a; stmt s; variable v;
+Select BOOLEAN pattern a(v,_"x")
+SyntaxError
+5000
+63- invalid pattern while
+stmt s; while w; if ifs;
+Select BOOLEAN pattern w(_, _"x"_)
+SemanticError
+5000
+64- invalid pattern if
+stmt s; while w; if ifs;
+Select BOOLEAN pattern ifs(_, _"x"_, _)
+SyntaxError
+5000
+65- invalid pattern if
+stmt s; while w; if ifs;
+Select BOOLEAN pattern ifs(_, _,_"x"_)
+SyntaxError
+5000
+66- Invalid attribute names in such that Follows
+stmt s, s1;
+Select BOOLEAN such that Follows(s.stmt#, s1.stmt#)
+SyntaxError
+5000
+67- Invalid attribute names in such that Calls
+call c, c1; variable v;
+Select BOOLEAN such that Calls(c.procName,v.varName)
+SyntaxError
+5000
+68- Invalid ref compare type  int to string
+stmt s; variable v;
+Select BOOLEAN with s.stmt# = v.varName
+SemanticError
+5000
+69- Invalid ref compare type  int to string
+stmt s; variable v;
+Select BOOLEAN with 1 = "hello"
+SemanticError
+5000
+70- Invalid ref compare type  string to int
+stmt s; variable v;
+Select BOOLEAN with "hello" = 1
+SemanticError
+5000
+71- Invalid ref compare type procName = int
+stmt s; variable v; call c;
+Select BOOLEAN with c.procName = 1
+SemanticError
+5000
+72- Invalid attribute ref
+stmt s; variable v; constant const
+Select const.stmt#
+SyntaxError
+5000
+73- Invalid attribute ref
+stmt s; variable v; constant const; procedure p;
+Select p.stmt#
+SyntaxError
+5000
+74- Invalid attribute ref
+stmt s; variable v; constant const; procedure p; assign a;
+Select a.varName
+SyntaxError
+5000
+75- Invalid attribute ref
+stmt s; variable v; constant const; procedure p; assign a;
+Select s.varName
+SyntaxError
+5000
+76- Invalid attribute ref
+stmt s; variable v; constant const; procedure p; assign a; while w;
+Select w.varName
+SyntaxError
+5000
+77- Invalid attribute ref
+stmt s; variable v; constant const; procedure p; assign a; while w; call c;
+Select c.varName
+SyntaxError
+5000
+78- Invalid attribute ref
+stmt s; variable v; constant const; procedure p; assign a; while w; read r;
+Select r.procName
+SyntaxError
+5000
+79- Invalid attribute ref
+stmt s; variable v; constant const; procedure p; assign a; while w; print pr; read r;
+Select pr.procName
+SyntaxError
+5000
+80- Invalid attribute ref
+stmt s; variable v; constant const; procedure p; assign a; while w; print pr; read r; if ifs;
+Select ifs.value
+SyntaxError
+5000
+81- Invalid attribute ref
+stmt s; variable v; constant const; procedure p; assign a; while w; print pr; read r; if ifs;
+Select v.value
+SyntaxError
+5000

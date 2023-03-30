@@ -1,0 +1,21 @@
+procedure A {
+    z = 3;
+    while (x == 42) {
+        z = a * b / ( c - a ) / b / c - z;
+        z= 42 + 3;
+        x = a / b;}
+    call B;
+    read r; }
+
+procedure B {
+    x = 4;
+    y = 1;
+  print A;
+  call C;
+}
+
+procedure C {
+    g = x;
+    h = 4;
+    print B;
+}

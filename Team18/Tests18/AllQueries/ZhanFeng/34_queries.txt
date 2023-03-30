@@ -1,0 +1,915 @@
+1- select syn 1 clause
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v;
+Select s such that Follows(s,_)
+1,10,12,13,2,3,4,6,8,9
+5000
+2- select syn 1 clause
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Parent(_,a)
+3,4,5
+5000
+3- select syn 1 clause
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select v such that Modifies(p, v)
+z, x, y, g, h,r
+5000
+4- select syn 1 clause
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Uses(pr,"B")
+TRUE
+5000
+5- select syn 1 clause
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Uses(pr,"B")
+14
+5000
+7- select syn 1 clause + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v;
+Select s such that Follows(s,_) pattern a(_, "x")
+1,2,3,4,6,8,9,10,12,13
+5000
+8- select syn 1 clause + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Parent(_,a) pattern a ("x",_)
+5
+5000
+9- select syn 1 clause + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Modifies(p, v) pattern w(_,_)
+A,B,C
+5000
+10- select syn 1 clause + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Modifies(p, v) pattern w(_,_)
+TRUE
+5000
+11- select syn 1 clause + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Uses(pr,"B") pattern ifs(_,"x",_)
+SyntaxError
+5000
+13- select syn 2 clause (such that) unrelated
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Follows(a,s) such that Uses(a1,v)
+10,13,14,2,4,5,9
+5000
+14- select syn 2 clause (such that) unrelated
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Follows(a,s) such that Uses(a1,v)
+TRUE
+5000
+15- select syn 2 clause (such that) related
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Calls(p,"B") such that Modifies(p, v)
+A
+5000
+16- select syn 2 clause (such that) related
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w such that Follows*(w,_) such that Next(w,_)
+2
+5000
+17- select syn 2 clause (such that) related
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Uses(a,"b") such that Follows*(a, a1)
+3
+5000
+18- select syn 2 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Follows(a,s) such that Uses(a1,v) pattern a(_, _"a * b"_)
+4
+5000
+19- select syn 2 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Calls(p,"B") pattern a("y", "1") such that Modifies(p, v)
+A
+5000
+20- select syn 2 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Calls(p,"B") pattern a("y", "1") such that Modifies(p, v)
+TRUE
+5000
+21- select syn 2 clause (such that)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w such that Follows*(w,_) such that Next(w,_) pattern w("x",_)
+2
+5000
+22- select syn 2 clause (such that)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Uses(a,"b") such that Follows*(a, a1) pattern a1("g",_)
+none
+5000
+23- Select syn 2 clause (such that, and) related
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Follows(a, s) and Modifies (a, v)
+4,5, 9,13,10,14,2
+5000
+24- Select syn 2 clause (such that, and) related
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Follows(a, s) and Modifies (a, v)
+TRUE
+5000
+25- Select syn 2 clause (such that, and) unrelated
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p;
+Select a such that Uses(a, _) and Parent*(w, _)
+3,5,12
+5000
+26- Select syn 2 clause (such that, and) related
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p;
+Select s such that Next(4,s) and Follows*(s, _)
+none
+5000
+27- Select syn 2 clause (such that, and) related
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select n such that Next(5,n) and Next(n,13)
+SemanticError
+5000
+28- Select syn 2 clause (such that, and) related
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select re such that Calls*(p,"g") and Modifies(p, re)
+SemanticError
+5000
+29- Select syn 2 clause (such that, and) related
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(p,n) and Calls(p,_)
+SemanticError
+5000
+30- Select syn 2 clause (such that, and) unrelated
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(p,_) and Calls(_,q)
+SemanticError
+5000
+31- Select syn 2 clause (such that, and) + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Follows(a, s) and Modifies (a, v) pattern a("z",_)
+2,4,5,
+5000
+32- Select syn 2 clause (such that, and) + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p;
+Select a such that Uses(a, _) and Parent*(w, _) pattern w(_,_)
+3,5,12
+5000
+33- Select syn 2 clause (such that, and) + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p;
+Select s such that Next(4,s) pattern ifs(v,_,_) and Follows*(s, _)
+SyntaxError
+5000
+34- Select syn 2 clause (such that, and) + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p;
+Select BOOLEAN such that Next(4,s) pattern ifs(_,_,_) and Follows*(s, _)
+SyntaxError
+5000
+35- Select syn 2 clause (such that, and) + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select n such that Next(5,n) and Next(n,13) pattern a1(_,"b / (c - a)")
+SemanticError
+5000
+36- Select syn 2 clause (such that, and) + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select re such that Calls*(p,"g") pattern a("h",_) and Modifies(p, re)
+SyntaxError
+5000
+37- Select syn 2 clause (such that, and) + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(p,n) and Calls(p,_) pattern a("k",_)
+SemanticError
+5000
+38- Select syn 2 clause (such that, and) + Pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(p,_) and Calls(_,q) pattern w(_,_)
+SemanticError 
+5000
+39- Select syn 3 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Follows(s,_) such that Uses(s,_) such that Next(s,_)
+10,12,2,3,6
+5000
+40- Select syn 3 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Parent*(w,_) such that Calls(p, "A") such that Uses(pr, _)
+none
+5000
+41- Select syn 3 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Parent*(pr,_) such that Calls(p, "A") such that Uses(pr, _)
+FALSE
+5000
+42- Select syn 3 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Uses(a, "b") such that Next(a, _) such that Follows(a1, a)
+5
+5000
+43- Select syn 3 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select const such that Next(5,_) such that Calls*("B",_) such that Modifies(r, v)
+1,3,4,42
+5000
+44- Select syn 3 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Calls*(p,_) such that Calls(p,_) such that Calls(_,p)
+B
+5000
+45- Select syn 3 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r such that Modifies(r, "r") such that Parent(s, s1) such that Follows(w, c)
+7
+5000
+46- Select syn 3 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Follows(s,_) such that Uses(s,_) such that Next(s,_) pattern a("z", _"b/c"_)
+none
+5000
+47- Select syn 3 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr pattern a1("x", "b") such that Parent*(w,_) such that Calls(p, "A") such that Uses(pr, _)
+none
+5000
+48- Select syn 3 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Uses(a, "b") pattern a("z", _"a * b / ( c - a ) / b / c - z"_) such that Next(a, _) such that Follows(a1, a)
+none
+5000
+49- Select syn 3 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select const such that Next(4,_) such that Calls*("B",_) such that Modifies(r, v) pattern w(_,_)
+1,3,4,42
+5000
+50- Select syn 3 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Calls*(p,_) pattern ifs(_, "x",_) such that Calls(p,_) such that Calls(_,p)
+SyntaxError
+5000
+51- Select syn 3 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r such that Modifies(r, "r") pattern a("k", _) such that Parent(s, s1) such that Follows(w, c)
+none
+5000
+52- Select syn 3 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Modifies(r, "r") pattern a("k", _) such that Parent(s, r) such that Follows(w, a)
+FALSE
+5000
+53- Select syn 3 clause (such that, such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows(a, r) such that Modifies(r, v) and Uses(a,v)
+none
+5000
+54- Select syn 3 clause (such that, such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select v such that Calls*(p, "C") such that Uses(p, v) and Next(c,_)
+A,B,a,b,c,x,z
+5000
+55- Select syn 3 clause (such that, such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Calls*(p, "C") such that Uses(p, v) and Next(c,_)
+TRUE
+5000
+56- Select syn 3 clause (such that, such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s1 such that Follows*(s,s1) such that Next(s,s1) and Uses(s, "b")
+4,6
+5000
+57- Select syn 3 clause (such that, such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select v such that Parent*(s,_) such that Modifies(c, v) and Uses(a,v)
+x
+5000
+58- Select syn 3 clause (such that, such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Next(c, _) such that Modifies(p,"g") and Next(_,_)
+6
+5000
+59- Select syn 3 clause (such that, such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Next(_,s) such that Follows(a,s) and Modifies(a, "z")
+1,3,4
+5000
+60- Select syn 3 clause (such that, such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows(a, r) such that Modifies(r, v) pattern a1("g",_"x"_) and pattern a("z",_)
+SyntaxError
+5000
+61- Select syn 3 clause (such that, such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Follows(a, r) such that Modifies(r, v) pattern a1("g",_"x"_) and a("z",_)
+FALSE
+5000
+62- Select syn 3 clause (such that, such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select v pattern a(_,"b") such that Calls*(p, "C")  such that Uses(p, v) and Next(c,_)
+none
+5000
+63- Select syn 3 clause (such that, such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s1 such that Follows*(s,s1) pattern a(_,_) such that Next(s,s1) and Uses(s, "b")
+4,6
+5000
+64- Select syn 3 clause (such that, such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select v such that Parent*(c,_) such that Modifies(c, v) pattern w(v,_) and Uses(a,v)
+SyntaxError
+5000
+65- Select syn 3 clause (such that, such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Next(c, _) pattern ifs(_,_,_) such that Modifies(p,"g") and Next(_,_)
+none
+5000
+66- Select syn 3 clause (such that, such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a pattern a("z", _"42"_) such that Next(_,s) such that Follows(a,s) and Modifies(a, "z")
+4
+5000
+67- Select syn 3 clause (such that, and, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Modifies(s, v) and Follows*(s, c) and Uses(s, "b")
+2
+5000
+68- Select tuples 3 clause (such that, and, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select <s, s>  such that Modifies(s, v) and Follows*(s, c) and Uses(s, "b")
+2 2
+5000
+69- Select syn 3 clause (such that, and, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(s, p) and Next(p, _) and Uses(p,_)
+SemanticError
+5000
+70- Select syn 3 clause (such that, and, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows*(a, a1) and Uses(a, v) and Parent(s, a)
+3
+5000
+71- Select syn 3 clause (such that, and, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Follows*(a, a1) and Uses(a, v) and Parent(w, _)
+TRUE
+5000
+72- Select syn 3 clause (such that, and, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Follows*(c, 14) and Next(c, _) and Calls*(c, p)
+SemanticError
+5000
+73- Select syn 3 clause (such that, and, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w such that Parent*(w,_) and Uses(w, "a") and Modifies(w, "z")
+2
+5000
+75- Select syn 3 clause (such that, and, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Next(s,_) and Follows*(_,13) and Calls(s,_)
+SemanticError
+5000
+76- Select syn 3 clause (such that, and, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s pattern a("g",_) pattern a(_, _"b"_) such that Modifies(s, v) and Follows*(s, c) and Uses(s, "b")
+none
+5000
+77- Select syn 3 clause (such that, and, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(s, n) and Next(p, _) pattern w(_,_) and Uses(p,_)
+SemanticError
+5000
+78- Select syn 3 clause (such that, and, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Next(s, p) and Next(p, _) pattern w(_,_) and Uses(p,_)
+SemanticError
+5000
+79- Select syn 3 clause (such that, and, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows*(a, a1) and Uses(a, v) and Parent(s, a) pattern a1("z", _"c - z"_)
+none
+5000
+80- Select syn 3 clause (such that, and, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Follows*(c, 14) and Next(c, _) and Calls*(c, p) pattern a1("h",_)
+SemanticError
+5000
+81- Select syn 3 clause (such that, and, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w such that Parent*(w,_) pattern w("x", _) and Uses(w, "a") and Modifies(w, "z")
+SemanticError
+5000
+82- Select syn 3 clause (such that, and, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r pattern a("z", "a") such that Parent(s, _) and Calls(p,_) and Next(_,n)
+SemanticError
+5000
+83- Select syn 3 clause (such that, and, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Next(s,_) and Follows*(_,13) and Calls(s,_) pattern ifs(_,_,_)
+SemanticError
+5000
+84- Select syn 4 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Modifies(s,_) such that Follows(s,_) such that Uses(s,_) such that Next(s,_)
+12,2,3,6
+5000
+85- Select syn 4 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Modifies(s,_) such that Follows(s,_) such that Uses(s,_) such that Next(s,_)
+TRUE
+5000
+86- Select syn 4 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Parent*(pr,_) such that Calls(p, "C") such that Uses(pr, _) such that Follows*(_,10)
+none
+5000
+87- Select syn 4 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Uses(a, "b") such that Next(a, _) such that Follows(a1, a) such that Next(a,_)
+5
+5000
+88- Select syn 4 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select const such that Next(5,_) such that Calls*("B",_) such that Follows(s, _) such that Modifies(r, v)
+1,3,4,42
+5000
+89- Select syn 4 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Calls*(p,_) such that Calls(p,_) such that Calls(_,p) such that Calls*(_,p)
+B
+5000
+90- Select syn 4 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r such that Modifies(r, "r") such that Next(r,_) such that Parent(w, r) such that Follows(w, a)
+none
+5000
+91- Select syn 4 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Follows(s,_) such that Uses(s,_) such that Uses(p, s) such that Next(s,_) pattern a("z", _"b/c"_)
+SemanticError
+5000
+92- Select syn 4 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr pattern a1("x", "b") such that Parent*(s,pr) such that Next(n, 5) such that Calls(p, "A") such that Uses(pr, _)
+SemanticError
+5000
+93- Select syn 4 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN pattern a1("x", "b") such that Parent*(s,a1) such that Next(n, 5) such that Calls(p, "A") such that Uses(pr, _)
+SemanticError
+5000
+94- Select syn 4 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Uses(a, "b") pattern a("z", _"a * b / ( c - a ) / b / c - z"_) such that Parent*(w,_) such that Next(a, _) such that Follows(a1, a)
+none
+5000
+95- Select syn 4 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select const such that Follows*(_,r) such that Next(5,_) such that Calls*("B",_) such that Modifies(r, v) pattern w(_,_)
+1,3,4,42
+5000
+96- Select syn 4 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Calls*(p,_) pattern ifs(_, "x",_) such that Next(p,_) such that Calls(p,_) such that Calls(_,p)
+SyntaxError
+5000
+97- Select syn 4 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r such that Modifies(r, "r") pattern a("k", _) such that Parent(ifs, s) such that Uses(s, _) such that Follows(w, a)
+none
+5000
+98- Select syn 4 clause (such that x3, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows(a, r) such that Modifies(r, v) such that Parent*(_, a) and Uses(a,v)
+none
+5000
+99- Select syn 4 clause (such that x3, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select <w,a> such that Follows(a, r) such that Modifies(r, v) such that Parent*(_, a) and Uses(a,v)
+none
+5000
+100- Select syn 4 clause (such that x3, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p, p1; 
+Select v such that Calls*(p, "C") such that Uses(p, v) such that Calls(p, p1)and Next(c,_)
+A,B,a,b,c,x,z
+5000
+101- Select syn 4 clause (such that x3, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s1 such that Parent(s1, a) such that Follows*(s,s1) such that Next(s,s1) and Uses(s, "b")
+none
+5000
+102- Select syn 4 clause (such that x3, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select v such that Parent*(_,_) such that Next(2,_) such that Modifies(c, v) and Uses(a,v)
+x
+5000
+103- Select syn 4 clause (such that x3, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Next(c, _) such that Next(2,_) such that Modifies(p,"g") and Next(_,_)
+6
+5000
+104- Select syn 4 clause (such that x3, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Next(c, _) such that Next(2,_) such that Modifies(p,"g") and Next(_,_)
+TRUE
+5000
+105- Select syn 4 clause (such that x3, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Next(_,s) such that Follows(a,s) such that Parent*(w,_) and Modifies(a, "z")
+1,3,4
+5000
+106- Select syn 4 clause (such that x3, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows(a, r) such that Modifies(r, v) Parent*(_,a) pattern a1("g",_"x"_) and pattern a("z", _"b"_)
+SyntaxError
+5000
+107- Select syn 4 clause (such that x3, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p, p1; 
+Select v pattern a(_,"b") such that Calls*(p, "C")  such that Uses(p, v) Calls(p,p1) and Next(c,_)
+SyntaxError
+5000
+108- Select syn 4 clause (such that x3, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s1 such that Follows*(s,s1) pattern a(_,_) such that Follows*(s,s1) such that Next(s,s1) and Uses(s, "b")
+4,6
+5000
+109- Select tuples 4 clause (such that x3, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select <s, s1> such that Follows*(s,s1) pattern a(_,_) such that Follows*(s,s1) such that Next(s,s1) and Uses(s, "b")
+2 6,3 4
+5000
+110- Select syn 4 clause (such that x3, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select v such that Parent*(c,_) such that Next(2,_)  such that Modifies(c, v) pattern w(v,_) and patterns a (_,_)
+SyntaxError
+5000
+111- Select syn 4 clause (such that x3, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Next(c, _) pattern ifs(_,_,_) such that Next(2,_) such that Modifies(p,"g") and Next(_,_)
+none
+5000
+112- Select syn 4 clause (such that x3, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a pattern a("z", _"42"_) such that Next(_,s) such that Follows(a,s) such that Parent*(w,_) and Modifies(a, "z")
+4
+5000
+113- Select syn 4 clause (such that x3, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN pattern a("z", _"42"_) such that Next(_,s) such that Follows(a,s) such that Parent*(w,_) and Modifies(a, "z")
+TRUE
+5000
+114- Select syn 4 clause (such that x2, and x2)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Modifies(s, v) such that Parent(s, s1) and Follows*(s, c) and Uses(s, "b")
+2
+5000
+115- Select syn 4 clause (such that x2, and x2)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(s, p) and Next(p, _) and Uses(p,_) such that Modifies(p,_)
+SemanticError
+5000
+116- Select syn 4 clause (such that x2, and x2)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows*(a, a1) and Uses(a, v) and Parent(s, a) such that Next(a,_)
+3
+5000
+117- Select syn 4 clause (such that x2, and x2)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Follows*(c, 14) and Next(c, _) and Calls*(c, p) such that Calls(_,p)
+SemanticError
+5000
+118- Select syn 4 clause (such that x2, and x2)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Follows*(c, 14) and Next(c, _) and Calls*(c, p) such that Calls(_,p)
+SemanticError
+5000
+119- Select syn 4 clause (such that x2, and x2)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w such that Parent*(w,_) and Uses(w, "a") and Modifies(w, "z") such that Follows(w, _)
+2
+5000
+120- Select tuples 4 clause (such that x2, and x2)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select <w, p> such that Parent*(w,_) and Uses(w, "a") and Modifies(w, "z") such that Follows(w, _)
+2 A,2 B,2 C
+5000
+121- Select syn 4 clause (such that x2, and x2)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r such that Parent(w, r) and Calls(p,_) and Next(_,n) such that Modifies(r, _)
+SemanticError
+5000
+122- Select syn 4 clause (such that x2, and x2)unrelated
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Next(s,_) and Follows*(_,13) and Calls(s,_) such that Parent*(s,_)
+SemanticError
+5000
+123- Select syn 4 clause (such that x2, and x2) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s pattern a("g",_) pattern a(_, _"b"_) such that Modifies(s, v) such that Parent(s, s1) and Follows*(s, c) and Uses(s, "b")
+none
+5000
+124- Select syn 4 clause (such that x2, and x2) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(s, p) and Next(p, _) and Uses(p,_) such that Modifies(p,_)  pattern w(_,_)
+SemanticError
+5000
+125- Select syn 4 clause (such that x2, and x2) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Next(s, p) and Next(p, _) and Uses(p,_) pattern w(_,_) such that Modifies(p,_)
+SemanticError
+5000
+126- Select syn 4 clause (such that x2, and x2) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows*(a, a1) and Uses(a, v) and Parent(w, a) such that Next(a,_) pattern a1("z", _"c - z"_)
+none
+5000
+127- Select syn 4 clause (such that x2, and x2)+ pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Follows*(c, 14) and Next(c, _) and Calls*(c, p) pattern a1(_,_) such that Calls(_,p)
+SemanticError
+5000
+128- Select syn 4 clause (such that x2, and x2)+ pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w pattern w("x", _) such that Parent*(w,_) and Uses(w, "a") and Modifies(w, "z") such that Follows(w, _)
+2
+5000
+130- Select syn 4 clause (such that x2, and x2) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Next(s,_) and Follows*(_,13) and Calls(s,_) pattern ifs(_,_,_) such that Parent*(s,_)
+SemanticError
+5000
+131- Select syn 4 clause (such that , and x3)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Modifies(s, v) and Parent(s, s1) and Follows*(s, c) and Uses(s, "b")
+2
+5000
+132- Select syn 4 clause (such that , and x3)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(s, p) and Next(p, _) and Uses(p,_) and Modifies(p,_)
+SemanticError
+5000
+133- Select syn 4 clause (such that , and x3)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows*(a, a1) and Uses(a, v) and Parent(w, a) and Next(a,_)
+3
+5000
+134- Select syn 4 clause (such that , and x3)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Follows*(c, 14) and Next(c, _) and Calls*(c, p) and Calls(_,p)
+SemanticError
+5000
+135- Select syn 4 clause (such that , and x3)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w such that Parent*(w,_) and Uses(w, "a") and Modifies(w, "z") and Follows(w, _)
+2
+5000
+136- Select syn 4 clause (such that , and x3)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r such that Parent(w, r) and Calls(p,_) and Next(_,n) and Modifies(r, _)
+SemanticError
+5000
+137- Select syn 4 clause (such that , and x3)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Next(s,_) and Follows*(_,13) and Calls(s,_) and Parent*(s,_)
+SemanticError
+5000
+138- Select syn 4 clause (such that , and x3)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Next(s,_) and Follows*(_,13) and Calls(s,_) and Parent*(s,_)
+SemanticError
+5000
+139- Select syn 4 clause (such that , and x3) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s pattern a("g",_) pattern a(_, _"b"_) such that Modifies(s, v) and Parent(s, s1) and Follows*(s, c) and Uses(s, "b")
+none
+5000
+140- Select syn 4 clause (such that , and x3) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p pattern w(_,_) such that Next(s, p) and Next(p, _) and Uses(p,_) and Modifies(p,_)
+SemanticError
+5000
+141- Select syn 4 clause (such that , and x3) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows*(a, a1) and Uses(a, v) and Parent(s, _) and Next(a,_) pattern a1("z", _"c - z"_)
+none
+5000
+142- Select syn 4 clause (such that , and x3) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Follows*(a, a1) and Uses(a, v) and Parent(s, _) and Next(a,_) pattern a1("z", _"c - z"_)
+FALSE
+5000
+143- Select syn 4 clause (such that , and x3)+ pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Follows*(c, 14) and Next(c, _) and Calls*(c, p) and Calls(_,p) pattern a1(_,_)
+SemanticError
+5000
+144- Select syn 4 clause (such that , and x3) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w such that Parent*(w,_) pattern w("x", _) and Uses(w, "a") and Modifies(w, "z") and Follows(w, _)
+SemanticError
+5000
+145- Select syn 4 clause (such that , and x3) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w pattern w("x", _) such that Parent*(w,_) and Uses(w, "a") and Modifies(w, "z") and Follows(w, _)
+2
+5000
+148- Select syn 4 clause (such that , and x3) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Next(s,_) and Follows*(_,13) and Calls(s,_) pattern ifs(_,_,_) and Parent*(s,_)
+SyntaxError
+5000
+149- Select syn 5 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Modifies(s,_) such that Follows(s,_) such that Uses(s,_) such that Next(s,_) such that Parent*(_, s)
+3
+5000
+150- Select syn 5 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Modifies(s,_) such that Follows(s,_) such that Uses(s,_) such that Next(s,_) such that Parent*(_, s)
+TRUE
+5000
+151- Select syn 5 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Parent*(pr,_) such that Calls(p, "C") such that Uses(pr, _) such that Follows*(_,10) such that Next(_,n)
+SemanticError
+5000
+152- Select syn 5 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Uses(a, "b") such that Next(a, _) such that Follows(a1, a) such that Next(a,_) such that Next(w,_)
+5
+5000
+153- Select syn 5 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select const such that Next(5,_) such that Calls*("B",_) such that Follows(s, _) such that Modifies(r, v) such that Follows*(ifs,_)
+none
+5000
+154- Select syn 5 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Calls*(p,_) such that Calls(p,_) such that Calls(_,p) such that Calls*(_,p) such that Uses(p, v)
+B
+5000
+155- Select syn 5 clause (such that)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r such that Modifies(r, "r") such that Next(r,_) such that Parent(s, r) such that Follows(w, a) such that Parent*(ifs,_)
+none
+5000
+156- Select syn 5 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Follows(s,_) such that Uses(s,_) such that Uses(p, s) such that Next(s,_) pattern a("z", _"b/c"_) such that Parent*(_, s)
+SemanticError
+5000
+157- Select tuple 5 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select <s, a> such that Follows(s,_) such that Uses(s,_) such that Uses(p, s) such that Next(s,_) pattern a("z", _"b/c"_) such that Parent*(_, s)
+SemanticError
+5000
+158- Select syn 5 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr pattern a1("x", "b") such that Parent*(pr,_) such that Next(n, 5) such that Calls(p, "A") such that Uses(pr, _) such that Next(_,n)
+SemanticError
+5000
+159- Select syn 5 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Uses(a, "b") pattern a("z", _"a * b / ( c - a ) / b / c - z"_) such that Parent*(w,_) such that Next(a, _) such that Follows(a1, a) such that Next(w,_)
+none
+5000
+160- Select syn 5 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select const such that Follows*(_,r) such that Next(5,_) such that Calls*("B",_) such that Modifies(r, v) pattern w(_,_) such that Follows*(ifs,_)
+none
+5000
+161- Select syn 5 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Calls*(p,_) pattern ifs(_, "x",_) such that Next(p,_) such that Calls(p,_) such that Calls(_,p) such that Uses(p, v)
+SyntaxError
+5000
+162- Select syn 5 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r such that Modifies(r, "r") pattern a("k", _) such that Parent(s, r) such that Uses(s, _) such that Follows(w, a) such that Parent*(ifs,_)
+none
+5000
+163- Select syn 5 clause (such that) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select BOOLEAN such that Modifies(r, "r") pattern a("k", _) such that Parent(s, r) such that Uses(s, _) such that Follows(w, a) such that Parent*(ifs,_)
+FALSE
+5000
+164- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows(a, r) such that Modifies(r, v) and Modifies (p, v) such that Parent*(_, a) and Uses(a,v)
+none
+5000
+165- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p, p1; 
+Select v such that Calls*(p, "C") such that Uses(p, v) and Next(p, _) such that Calls(p, p1) and Next(c,_)
+SemanticError
+5000
+166- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s1 such that Parent(s1, a) such that Follows*(s,s1) such that Next(s,s1) and Uses(s, "b") such that Calls*(ifs,_)
+SemanticError
+5000
+167- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select v such that Parent*(c,_) such that Next(2,_) such that Modifies(c, v) and Uses(a,v) such that Follows(a, _)
+none
+5000
+168- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Next(c, _) such that Next(2,_) such that Modifies(p,"g") and Next(_,_) and Uses(w, v)
+6
+5000
+169- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Next(_,s) such that Follows(a,s) such that Parent*(w,_) and Modifies(a, "z") and Uses(a, _)
+3
+5000
+170- Select syn 5 clause (such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows(a, r) such that Modifies(r, v) and Modifies (p, v) Parent*(_,a) pattern a1("g",_"x"_) and Uses(a,v)
+SyntaxError
+5000
+171- Select syn 5 clause (such that, and)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p, p1; 
+Select v pattern a(_,"b") such that Calls*(p, "C")  such that Uses(p, v) and Next(p, _) such that Calls(p,p1) and Next(c,_)
+SemanticError
+5000
+172- Select syn 5 clause (such that, and)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s1 such that Follows*(s,s1) such that pattern a(_,_) such that Follows(s,_) such that Next(s,s1) and Uses(s, "b") such that Calls*(ifs,_)
+SyntaxError
+5000
+173- Select syn 5 clause (such that, and)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select v such that Parent*(w,_) such that Next(2,_) pattern w(_,_) such that Modifies(c, v) and Uses(a,v) such that Follows(a, _)
+x
+5000
+174- Select syn 5 clause (such that, and)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Next(c, _) pattern ifs(v,_,_) such that Next(2,_) such that Modifies(p,"g") and Next(_,_) and Uses(w, v)
+none
+5000
+175- Select syn 5 clause (such that, and)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a pattern a("z", _"42"_) such that Next(_,s) such that Follows(a,s) such that Parent*(w,_) and Modifies(a, "z") and Uses(a, _)
+none
+5000
+176- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s such that Modifies(s, v) such that Parent(s, s1) and Follows*(s, c) such that Next(s, _) and Uses(s, "b")
+2
+5000
+177- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p such that Next(s, p) and Next(p, _) and Uses(p,_) such that Modifies(p,_) and Calls(p,_)
+SemanticError
+5000
+178- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows*(a, a1) and Uses(a, v) and Parent(s, _) such that Next(a,_) such that Parent*(w,_)
+12,3
+5000
+179- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Follows*(c, 14) and Next(c, _) and Calls*(c, p) such that Calls(_,p) and Uses(c, v)
+SemanticError
+5000
+180- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w such that Parent*(w,_) and Uses(w, "a") and Modifies(w, "z") such that Follows(w, _) such that Next(_,w)
+2
+5000
+181- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r such that Parent(s, _) and Calls(p,_) and Next(_,n) such that Modifies(r, _) and Follows*(ifs,_)
+SemanticError
+5000
+182- Select syn 5 clause (such that, and)
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Next(s,_) and Follows*(_,13) and Calls(s,_) such that Parent*(s,_) and Parent*(w, s)
+SemanticError
+5000
+183- Select syn 5 clause (such that, and)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select s pattern a("g",_) pattern a(_, "b") such that Modifies(s, v) such that Parent(s, s1) and Follows*(s, c) such that Next(s, _) and Uses(s, "b")
+none
+5000
+184- Select syn 5 clause (such that, and)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select p pattern w(_,_) such that Next(s, p) and Next(p, _) and Uses(p,_) such that Modifies(p,_) and Calls(p,_)
+SemanticError
+5000
+185- Select syn 5 clause (such that, and)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select a such that Follows*(a, a1) and Uses(a, v) and Parent(s, _) such that Next(a,_) pattern a1("z", _"c - z"_) such that Parent*(w,a)
+none
+5000
+186- Select syn 5 clause (such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select c such that Follows*(c, 14) and Next(c, _) pattern a1(_,_) and Calls*(c, p) such that Calls(_,p) and Uses(c, v)
+SyntaxError
+5000
+187- Select syn 5 clause (such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select w such that Parent*(w,_) and Uses(w, "a") and Modifies(w, "z") such that Follows(w, _) such that Next(_,w) pattern w("x", _)
+2
+5000
+188- Select syn 5 clause (such that, and) + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select r pattern a("z", _"a"_) such that Parent(s, _) and Calls(p,_) and Next(_,n) such that Modifies(r, _)  and Follows*(ifs,_)
+SemanticError
+5000
+189- Select syn 5 clause (such that, and)  + pattern
+stmt s, s1; assign a, a1; print pr; read r; call c, c1; constant const; while w; if ifs; variable v; procedure p; 
+Select pr such that Next(s,_) and Follows*(_,13) and Calls(s,_) pattern ifs(_,_,_) such that Parent*(s,_) and Parent*(w, s)
+SemanticError
+5000

@@ -1,0 +1,50 @@
+procedure A {
+    while(A==B) {
+        if (C==D) then {
+            call B;
+        } else {
+            call F;
+        }
+    }
+}
+
+procedure B {
+    print D;
+    read E;
+    C = B + A;
+    call C;
+}
+
+procedure C {
+    if (F==E) then {
+        F = A;
+    } else {
+        while (E == C) {
+            call D;
+        }
+    }
+}
+
+procedure D {
+    call E;
+    call E;
+    call E;
+    call E;
+}
+
+procedure E {
+    call F;
+}
+
+procedure F {
+  D = E * A + B - C;
+  read F;
+  print E;
+  while ( D == B) {
+    if (C ==B) then {
+        read A;
+    } else {
+        print F;
+    }
+  }
+}

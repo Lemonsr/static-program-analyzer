@@ -1,0 +1,510 @@
+Select synonym, calls wildcard wildcard
+stmt s1;
+Select s1 such that Calls(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,3,4,5,6,7,8,9,25,26,27,28,29,30,31,32,33
+5000
+Select synonym, calls wildcard synonym
+procedure p1,p2;
+Select p2 such that Calls(_,p2)
+B,C,D,E,F
+5000
+Select synonym, calls wildcard identifier
+procedure p;
+Select p such that Calls(_,"F")
+A,B,C,D,E,F
+5000
+Select synonym, calls synonym wildcard
+procedure p1;
+Select p1 such that Calls(p1, _)
+A,B,C,D,E
+5000
+Select synonym, calls synonym synonym
+procedure p1,p2;
+Select p1 such that Calls(p1, p2)
+B,C,E,A,D
+5000
+Select synonym, calls synonym identifier1
+procedure p1;
+Select p1 such that Calls(p1, "F")
+E,D
+5000
+Select synonym, calls synonym identifier2
+procedure p1;
+Select p1 such that Calls(p1, "E")
+C,D
+500
+Select synonym, calls synonym identifier3
+procedure p1;
+Select p1 such that Calls(p1, "D")
+B
+5000
+Select synonym, calls synonym identifier4
+procedure p1;
+Select p1 such that Calls(p1, "C")
+A
+5000
+Select synonym, calls synonym identifier5
+procedure p1;
+Select p1 such that Calls(p1, "B")
+A,C
+5000
+Select synonym, calls synonym identifier6
+procedure p1;
+Select p1 such that Calls(p1, "A")
+none
+5000
+Select synonym, calls identifier1 wildcard
+procedure p1;
+Select p1 such that Calls("A", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls identifier2 wildcard
+procedure p1;
+Select p1 such that Calls("B", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls identifier3 wildcard
+procedure p1;
+Select p1 such that Calls("C", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls identifier4 wildcard
+procedure p1;
+Select p1 such that Calls("D", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls identifier5 wildcard
+procedure p1;
+Select p1 such that Calls("E", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls identifier6 wildcard
+procedure p1;
+Select p1 such that Calls("F", _)
+none
+5000
+Select synonym, calls identifier1 synonym
+procedure p1;
+Select p1 such that Calls("A", p1)
+B,C
+5000
+Select synonym, calls identifier2 synonym
+procedure p1;
+Select p1 such that Calls("B", p1)
+D
+5000
+Select synonym, calls identifier3 synonym
+procedure p1;
+Select p1 such that Calls("C", p1)
+B,E
+5000
+Select synonym, calls identifier4 synonym
+procedure p1;
+Select p1 such that Calls("D", p1)
+F,E
+5000
+Select synonym, calls identifier5 synonym
+procedure p1;
+Select p1 such that Calls("E", p1)
+F
+5000
+Select synonym, calls identifier6 synonym
+procedure p1;
+Select p1 such that Calls("F", p1)
+none
+5000
+Select synonym, calls identifier identifier1
+stmt s1, s2;
+Select s1 such that Calls("A", "B")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,4,5,6,7,8,9
+5000
+Select synonym, calls identifier identifier2
+stmt s1, s2;
+Select s1 such that Calls("B", "C")
+none
+5000
+Select synonym, calls identifier identifier3
+stmt s1, s2;
+Select s1 such that Calls("C", "D")
+none
+5000
+Select synonym, calls identifier identifier4
+stmt s1, s2;
+Select s1 such that Calls("D", "E")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,4,5,6,7,8,9
+5000
+Select synonym, calls identifier identifier5
+stmt s1, s2;
+Select s1 such that Calls("E", "F")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,4,5,6,7,8,9
+5000
+Select BOOLEAN, calls identifier identifier1
+
+Select BOOLEAN such that Calls("A", "B")
+TRUE
+500
+Select BOOLEAN, calls identifier identifier2
+
+Select BOOLEAN such that Calls("B", "C")
+FALSE
+5000
+Select BOOLEAN, calls identifier identifier3
+
+Select BOOLEAN such that Calls("C", "D")
+FALSE
+5000
+Select BOOLEAN, calls identifier identifier4
+
+Select BOOLEAN such that Calls("D", "E")
+TRUE
+5000
+Select BOOLEAN, calls identifier identifier5
+
+Select BOOLEAN such that Calls("E", "F")
+TRUE
+5000
+Select tuple, calls wildcard wildcard
+variable v; assign a;
+Select <a,v.varName> such that Calls(_,_)
+1 A,1 B,1 C,1 D,1 E,1 F,1 a,1 adal,1 ano,1 asdkl,1 b,1 dal,1 daln,1 dan,1 danl,1 dasl,1 dnla,1 fano,1 isi2,1 lfann,1 mal33,1 ndal,1 nfla,1 x,1 y,12 A,12 B,12 C,12 D,12 E,12 F,12 a,12 adal,12 ano,12 asdkl,12 b,12 dal,12 daln,12 dan,12 danl,12 dasl,12 dnla,12 fano,12 isi2,12 lfann,12 mal33,12 ndal,12 nfla,12 x,12 y,17 A,17 B,17 C,17 D,17 E,17 F,17 a,17 adal,17 ano,17 asdkl,17 b,17 dal,17 daln,17 dan,17 danl,17 dasl,17 dnla,17 fano,17 isi2,17 lfann,17 mal33,17 ndal,17 nfla,17 x,17 y,33 A,33 B,33 C,33 D,33 E,33 F,33 a,33 adal,33 ano,33 asdkl,33 b,33 dal,33 daln,33 dan,33 danl,33 dasl,33 dnla,33 fano,33 isi2,33 lfann,33 mal33,33 ndal,33 nfla,33 x,33 y
+5000
+Select tuple, calls wildcard synonym
+assign a; constant c; procedure p1;
+Select <a.stmt#, c.value> such that Calls(_,p1)
+1 1,1 10,1 11,1 13,1 14,1 15,1 17,1 18,1 19,1 2,1 21,1 29,1 4,1 6,1 7,1 8,12 1,12 10,12 11,12 13,12 14,12 15,12 17,12 18,12 19,12 2,12 21,12 29,12 4,12 6,12 7,12 8,17 1,17 10,17 11,17 13,17 14,17 15,17 17,17 18,17 19,17 2,17 21,17 29,17 4,17 6,17 7,17 8,33 1,33 10,33 11,33 13,33 14,33 15,33 17,33 18,33 19,33 2,33 21,33 29,33 4,33 6,33 7,33 8
+5000
+Select tuple, calls wildcard identifier
+while w; if if;
+Select <w.stmt#, if.stmt#> such that Calls(_, "C")
+19 10,19 11,19 14,19 18,19 24,19 5,19 9,2 10,2 11,2 14,2 18,2 24,2 5,2 9,21 10,21 11,21 14,21 18,21 24,21 5,21 9,23 10,23 11,23 14,23 18,23 24,23 5,23 9,27 10,27 11,27 14,27 18,27 24,27 5,27 9,28 10,28 11,28 14,28 18,28 24,28 5,28 9,29 10,29 11,29 14,29 18,29 24,29 5,29 9,3 10,3 11,3 14,3 18,3 24,3 5,3 9,30 10,30 11,30 14,30 18,30 24,30 5,30 9,31 10,31 11,31 14,31 18,31 24,31 5,31 9,4 10,4 11,4 14,4 18,4 24,4 5,4 9
+5000
+Select tuple, calls synonym wildcard
+assign a; read r; procedure p1;
+Select <a.stmt#, r.varName> such that Calls(p1, _)
+1 D,12 D,17 D,33 D
+5000
+Select tuple, calls synonym synonym
+procedure p1, p2;
+Select <p1.procName, p2.procName> such that Calls(p1, p2)
+A B,A C,B D,C B,C E,D E,D F,E F
+5000
+Select tuple, calls synonym identifier
+while w; variable v; procedure p1;
+Select <p1.procName, w.stmt#, v.varName> such that Calls(p1, "C")
+A 19 A,A 19 B,A 19 C,A 19 D,A 19 E,A 19 F,A 19 a,A 19 adal,A 19 ano,A 19 asdkl,A 19 b,A 19 dal,A 19 daln,A 19 dan,A 19 danl,A 19 dasl,A 19 dnla,A 19 fano,A 19 isi2,A 19 lfann,A 19 mal33,A 19 ndal,A 19 nfla,A 19 x,A 19 y,A 2 A,A 2 B,A 2 C,A 2 D,A 2 E,A 2 F,A 2 a,A 2 adal,A 2 ano,A 2 asdkl,A 2 b,A 2 dal,A 2 daln,A 2 dan,A 2 danl,A 2 dasl,A 2 dnla,A 2 fano,A 2 isi2,A 2 lfann,A 2 mal33,A 2 ndal,A 2 nfla,A 2 x,A 2 y,A 21 A,A 21 B,A 21 C,A 21 D,A 21 E,A 21 F,A 21 a,A 21 adal,A 21 ano,A 21 asdkl,A 21 b,A 21 dal,A 21 daln,A 21 dan,A 21 danl,A 21 dasl,A 21 dnla,A 21 fano,A 21 isi2,A 21 lfann,A 21 mal33,A 21 ndal,A 21 nfla,A 21 x,A 21 y,A 23 A,A 23 B,A 23 C,A 23 D,A 23 E,A 23 F,A 23 a,A 23 adal,A 23 ano,A 23 asdkl,A 23 b,A 23 dal,A 23 daln,A 23 dan,A 23 danl,A 23 dasl,A 23 dnla,A 23 fano,A 23 isi2,A 23 lfann,A 23 mal33,A 23 ndal,A 23 nfla,A 23 x,A 23 y,A 27 A,A 27 B,A 27 C,A 27 D,A 27 E,A 27 F,A 27 a,A 27 adal,A 27 ano,A 27 asdkl,A 27 b,A 27 dal,A 27 daln,A 27 dan,A 27 danl,A 27 dasl,A 27 dnla,A 27 fano,A 27 isi2,A 27 lfann,A 27 mal33,A 27 ndal,A 27 nfla,A 27 x,A 27 y,A 28 A,A 28 B,A 28 C,A 28 D,A 28 E,A 28 F,A 28 a,A 28 adal,A 28 ano,A 28 asdkl,A 28 b,A 28 dal,A 28 daln,A 28 dan,A 28 danl,A 28 dasl,A 28 dnla,A 28 fano,A 28 isi2,A 28 lfann,A 28 mal33,A 28 ndal,A 28 nfla,A 28 x,A 28 y,A 29 A,A 29 B,A 29 C,A 29 D,A 29 E,A 29 F,A 29 a,A 29 adal,A 29 ano,A 29 asdkl,A 29 b,A 29 dal,A 29 daln,A 29 dan,A 29 danl,A 29 dasl,A 29 dnla,A 29 fano,A 29 isi2,A 29 lfann,A 29 mal33,A 29 ndal,A 29 nfla,A 29 x,A 29 y,A 3 A,A 3 B,A 3 C,A 3 D,A 3 E,A 3 F,A 3 a,A 3 adal,A 3 ano,A 3 asdkl,A 3 b,A 3 dal,A 3 daln,A 3 dan,A 3 danl,A 3 dasl,A 3 dnla,A 3 fano,A 3 isi2,A 3 lfann,A 3 mal33,A 3 ndal,A 3 nfla,A 3 x,A 3 y,A 30 A,A 30 B,A 30 C,A 30 D,A 30 E,A 30 F,A 30 a,A 30 adal,A 30 ano,A 30 asdkl,A 30 b,A 30 dal,A 30 daln,A 30 dan,A 30 danl,A 30 dasl,A 30 dnla,A 30 fano,A 30 isi2,A 30 lfann,A 30 mal33,A 30 ndal,A 30 nfla,A 30 x,A 30 y,A 31 A,A 31 B,A 31 C,A 31 D,A 31 E,A 31 F,A 31 a,A 31 adal,A 31 ano,A 31 asdkl,A 31 b,A 31 dal,A 31 daln,A 31 dan,A 31 danl,A 31 dasl,A 31 dnla,A 31 fano,A 31 isi2,A 31 lfann,A 31 mal33,A 31 ndal,A 31 nfla,A 31 x,A 31 y,A 4 A,A 4 B,A 4 C,A 4 D,A 4 E,A 4 F,A 4 a,A 4 adal,A 4 ano,A 4 asdkl,A 4 b,A 4 dal,A 4 daln,A 4 dan,A 4 danl,A 4 dasl,A 4 dnla,A 4 fano,A 4 isi2,A 4 lfann,A 4 mal33,A 4 ndal,A 4 nfla,A 4 x,A 4 y
+5000
+Select tuple, calls identifier wildcard
+if if; constant c; procedure p1;
+Select <p1.procName, if.stmt#, c.value> such that Calls(p1, _)
+A 10 1,A 10 10,A 10 11,A 10 13,A 10 14,A 10 15,A 10 17,A 10 18,A 10 19,A 10 2,A 10 21,A 10 29,A 10 4,A 10 6,A 10 7,A 10 8,A 11 1,A 11 10,A 11 11,A 11 13,A 11 14,A 11 15,A 11 17,A 11 18,A 11 19,A 11 2,A 11 21,A 11 29,A 11 4,A 11 6,A 11 7,A 11 8,A 14 1,A 14 10,A 14 11,A 14 13,A 14 14,A 14 15,A 14 17,A 14 18,A 14 19,A 14 2,A 14 21,A 14 29,A 14 4,A 14 6,A 14 7,A 14 8,A 18 1,A 18 10,A 18 11,A 18 13,A 18 14,A 18 15,A 18 17,A 18 18,A 18 19,A 18 2,A 18 21,A 18 29,A 18 4,A 18 6,A 18 7,A 18 8,A 24 1,A 24 10,A 24 11,A 24 13,A 24 14,A 24 15,A 24 17,A 24 18,A 24 19,A 24 2,A 24 21,A 24 29,A 24 4,A 24 6,A 24 7,A 24 8,A 5 1,A 5 10,A 5 11,A 5 13,A 5 14,A 5 15,A 5 17,A 5 18,A 5 19,A 5 2,A 5 21,A 5 29,A 5 4,A 5 6,A 5 7,A 5 8,A 9 1,A 9 10,A 9 11,A 9 13,A 9 14,A 9 15,A 9 17,A 9 18,A 9 19,A 9 2,A 9 21,A 9 29,A 9 4,A 9 6,A 9 7,A 9 8,B 10 1,B 10 10,B 10 11,B 10 13,B 10 14,B 10 15,B 10 17,B 10 18,B 10 19,B 10 2,B 10 21,B 10 29,B 10 4,B 10 6,B 10 7,B 10 8,B 11 1,B 11 10,B 11 11,B 11 13,B 11 14,B 11 15,B 11 17,B 11 18,B 11 19,B 11 2,B 11 21,B 11 29,B 11 4,B 11 6,B 11 7,B 11 8,B 14 1,B 14 10,B 14 11,B 14 13,B 14 14,B 14 15,B 14 17,B 14 18,B 14 19,B 14 2,B 14 21,B 14 29,B 14 4,B 14 6,B 14 7,B 14 8,B 18 1,B 18 10,B 18 11,B 18 13,B 18 14,B 18 15,B 18 17,B 18 18,B 18 19,B 18 2,B 18 21,B 18 29,B 18 4,B 18 6,B 18 7,B 18 8,B 24 1,B 24 10,B 24 11,B 24 13,B 24 14,B 24 15,B 24 17,B 24 18,B 24 19,B 24 2,B 24 21,B 24 29,B 24 4,B 24 6,B 24 7,B 24 8,B 5 1,B 5 10,B 5 11,B 5 13,B 5 14,B 5 15,B 5 17,B 5 18,B 5 19,B 5 2,B 5 21,B 5 29,B 5 4,B 5 6,B 5 7,B 5 8,B 9 1,B 9 10,B 9 11,B 9 13,B 9 14,B 9 15,B 9 17,B 9 18,B 9 19,B 9 2,B 9 21,B 9 29,B 9 4,B 9 6,B 9 7,B 9 8,C 10 1,C 10 10,C 10 11,C 10 13,C 10 14,C 10 15,C 10 17,C 10 18,C 10 19,C 10 2,C 10 21,C 10 29,C 10 4,C 10 6,C 10 7,C 10 8,C 11 1,C 11 10,C 11 11,C 11 13,C 11 14,C 11 15,C 11 17,C 11 18,C 11 19,C 11 2,C 11 21,C 11 29,C 11 4,C 11 6,C 11 7,C 11 8,C 14 1,C 14 10,C 14 11,C 14 13,C 14 14,C 14 15,C 14 17,C 14 18,C 14 19,C 14 2,C 14 21,C 14 29,C 14 4,C 14 6,C 14 7,C 14 8,C 18 1,C 18 10,C 18 11,C 18 13,C 18 14,C 18 15,C 18 17,C 18 18,C 18 19,C 18 2,C 18 21,C 18 29,C 18 4,C 18 6,C 18 7,C 18 8,C 24 1,C 24 10,C 24 11,C 24 13,C 24 14,C 24 15,C 24 17,C 24 18,C 24 19,C 24 2,C 24 21,C 24 29,C 24 4,C 24 6,C 24 7,C 24 8,C 5 1,C 5 10,C 5 11,C 5 13,C 5 14,C 5 15,C 5 17,C 5 18,C 5 19,C 5 2,C 5 21,C 5 29,C 5 4,C 5 6,C 5 7,C 5 8,C 9 1,C 9 10,C 9 11,C 9 13,C 9 14,C 9 15,C 9 17,C 9 18,C 9 19,C 9 2,C 9 21,C 9 29,C 9 4,C 9 6,C 9 7,C 9 8,D 10 1,D 10 10,D 10 11,D 10 13,D 10 14,D 10 15,D 10 17,D 10 18,D 10 19,D 10 2,D 10 21,D 10 29,D 10 4,D 10 6,D 10 7,D 10 8,D 11 1,D 11 10,D 11 11,D 11 13,D 11 14,D 11 15,D 11 17,D 11 18,D 11 19,D 11 2,D 11 21,D 11 29,D 11 4,D 11 6,D 11 7,D 11 8,D 14 1,D 14 10,D 14 11,D 14 13,D 14 14,D 14 15,D 14 17,D 14 18,D 14 19,D 14 2,D 14 21,D 14 29,D 14 4,D 14 6,D 14 7,D 14 8,D 18 1,D 18 10,D 18 11,D 18 13,D 18 14,D 18 15,D 18 17,D 18 18,D 18 19,D 18 2,D 18 21,D 18 29,D 18 4,D 18 6,D 18 7,D 18 8,D 24 1,D 24 10,D 24 11,D 24 13,D 24 14,D 24 15,D 24 17,D 24 18,D 24 19,D 24 2,D 24 21,D 24 29,D 24 4,D 24 6,D 24 7,D 24 8,D 5 1,D 5 10,D 5 11,D 5 13,D 5 14,D 5 15,D 5 17,D 5 18,D 5 19,D 5 2,D 5 21,D 5 29,D 5 4,D 5 6,D 5 7,D 5 8,D 9 1,D 9 10,D 9 11,D 9 13,D 9 14,D 9 15,D 9 17,D 9 18,D 9 19,D 9 2,D 9 21,D 9 29,D 9 4,D 9 6,D 9 7,D 9 8,E 10 1,E 10 10,E 10 11,E 10 13,E 10 14,E 10 15,E 10 17,E 10 18,E 10 19,E 10 2,E 10 21,E 10 29,E 10 4,E 10 6,E 10 7,E 10 8,E 11 1,E 11 10,E 11 11,E 11 13,E 11 14,E 11 15,E 11 17,E 11 18,E 11 19,E 11 2,E 11 21,E 11 29,E 11 4,E 11 6,E 11 7,E 11 8,E 14 1,E 14 10,E 14 11,E 14 13,E 14 14,E 14 15,E 14 17,E 14 18,E 14 19,E 14 2,E 14 21,E 14 29,E 14 4,E 14 6,E 14 7,E 14 8,E 18 1,E 18 10,E 18 11,E 18 13,E 18 14,E 18 15,E 18 17,E 18 18,E 18 19,E 18 2,E 18 21,E 18 29,E 18 4,E 18 6,E 18 7,E 18 8,E 24 1,E 24 10,E 24 11,E 24 13,E 24 14,E 24 15,E 24 17,E 24 18,E 24 19,E 24 2,E 24 21,E 24 29,E 24 4,E 24 6,E 24 7,E 24 8,E 5 1,E 5 10,E 5 11,E 5 13,E 5 14,E 5 15,E 5 17,E 5 18,E 5 19,E 5 2,E 5 21,E 5 29,E 5 4,E 5 6,E 5 7,E 5 8,E 9 1,E 9 10,E 9 11,E 9 13,E 9 14,E 9 15,E 9 17,E 9 18,E 9 19,E 9 2,E 9 21,E 9 29,E 9 4,E 9 6,E 9 7,E 9 8
+5000
+Select tuple, calls identifier synonym
+call c; procedure p1;
+Select <p1.procName, c.procName> such that Calls("A", p1)
+C B,C C,C D,C E,C F,B B,B C,B D,B E,B F
+5000
+Select tuple, calls identifier identifier
+read r; print p;
+Select <p.varName, r.varName> such that Calls("A", "B")
+A D,B D
+5000
+Select with, calls wildcard wildcard
+print p; procedure pr; read r;
+Select pr such that Calls(_,_) with p.varName = r.varName
+none
+5000
+Select with, calls wildcard synonym
+print p; procedure pr;
+Select pr such that Calls(_,pr) with pr.procName = p.varName
+B
+5000
+Select with, calls wildcard identifier
+read r; procedure pr; print p;
+Select pr such that Calls(_,"B") with r.varName = p.varName
+none
+5000
+Select with, calls synonym wildcard
+procedure pr; variable v; constant c;
+Select pr such that Calls(pr,_) with c.value = v.varName
+SemanticError
+5000
+Select with, calls synonym synonym
+procedure pr1, pr2; print p; read r;
+Select pr2 such that Calls(pr1,pr2) with pr2.procName = p.varName with p1.varName = r.varName
+SemanticError
+5000
+Select with, calls synonym identifier
+procedure pr1; print p; call c;
+Select pr1 such that Calls(pr1, "F") with p.varName = c.procName
+E,D
+5000
+Select with, calls identifier wildcard
+print p; read r;
+Select r such that Calls("A", _) with r.varName = p.varName
+none
+5000
+Select with, calls identifier synonym
+procedure pr; print p; read r;
+Select r such that Calls("A", pr) with p.varName = r.varName
+none
+5000
+Select with, calls identifier identifier
+print p; read r; call c;
+Select c such that Calls("A", "B") with p.varName = r.varName
+none
+5000
+Select synonym, calls* wildcard wildcard
+stmt s1;
+Select s1 such that Calls*(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,3,4,5,6,7,8,9,25,26,27,28,29,30,31,32,33
+5000
+Select synonym, calls* wildcard synonym
+procedure p1,p2;
+Select p2 such that Calls*(_,p2)
+B,C,D,E,F
+5000
+Select synonym, calls* wildcard identifier
+procedure p;
+Select p such that Calls*(_,"F")
+A,B,C,D,E,F
+5000
+Select synonym, calls* synonym wildcard
+procedure p1;
+Select p1 such that Calls*(p1, _)
+A,B,C,D,E
+5000
+Select synonym, calls* synonym synonym
+procedure p1,p2;
+Select p1 such that Calls*(p1, p2)
+A,B,C,D,E
+5000
+Select synonym, calls* synonym identifier1
+procedure p1;
+Select p1 such that Calls*(p1, "A")
+none
+5000
+Select synonym, calls* synonym identifier2
+procedure p1;
+Select p1 such that Calls*(p1, "B")
+A,C
+5000
+Select synonym, calls* synonym identifier3
+procedure p1;
+Select p1 such that Calls*(p1, "C")
+A
+5000
+Select synonym, calls* synonym identifier4
+procedure p1;
+Select p1 such that Calls*(p1, "D")
+B,A,C
+500
+Select synonym, calls* synonym identifier5
+procedure p1;
+Select p1 such that Calls*(p1, "E")
+C,D,A,B
+5000
+Select synonym, calls* synonym identifier6
+procedure p1;
+Select p1 such that Calls*(p1, "F")
+D,E,A,B,C
+5000
+Select synonym, calls* identifier1 wildcard
+procedure p1;
+Select p1 such that Calls*("A", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls* identifier2 wildcard
+procedure p1;
+Select p1 such that Calls*("B", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls* identifier3 wildcard
+procedure p1;
+Select p1 such that Calls*("C", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls* identifier4 wildcard
+procedure p1;
+Select p1 such that Calls*("D", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls* identifier5 wildcard
+procedure p1;
+Select p1 such that Calls*("E", _)
+A,B,C,D,E,F
+5000
+Select synonym, calls* identifier6 wildcard
+procedure p1;
+Select p1 such that Calls*("F", _)
+none
+5000
+Select synonym, calls* identifier1 synonym
+procedure p1;
+Select p1 such that Calls*("A", p1)
+B,C,D,E,F
+5000
+Select synonym, calls* identifier2 synonym
+procedure p1;
+Select p1 such that Calls*("B", p1)
+D,E,F
+5000
+Select synonym, calls* identifier3 synonym
+procedure p1;
+Select p1 such that Calls*("C", p1)
+D,E,F,B
+5000
+Select synonym, calls* identifier4 synonym
+procedure p1;
+Select p1 such that Calls*("D", p1)
+E,F
+5000
+Select synonym, calls* identifier5 synonym
+procedure p1;
+Select p1 such that Calls*("E", p1)
+F
+5000
+Select synonym, calls* identifier6 synonym
+procedure p1;
+Select p1 such that Calls*("F", p1)
+none
+5000
+Select synonym, calls* identifier identifier1
+stmt s1, s2;
+Select s1 such that Calls*("A", "B")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,3,4,5,6,7,8,9,25,26,27,28,29,30,31,32,33
+5000
+Select synonym, calls* identifier identifier2
+stmt s1, s2;
+Select s1 such that Calls*("B", "C")
+none
+5000
+Select synonym, calls* identifier identifier3
+stmt s1, s2;
+Select s1 such that Calls*("C", "D")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,3,4,5,6,7,8,9,25,26,27,28,29,30,31,32,33
+5000
+Select synonym, calls* identifier identifier4
+stmt s1, s2;
+Select s1 such that Calls*("D", "E")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,3,4,5,6,7,8,9,25,26,27,28,29,30,31,32,33
+5000
+Select synonym, calls* identifier identifier5
+stmt s1, s2;
+Select s1 such that Calls*("E", "F")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,3,4,5,6,7,8,9,25,26,27,28,29,30,31,32,33
+5000
+Select BOOLEAN, calls* identifier identifier1
+
+Select BOOLEAN such that Calls*("A", "B")
+TRUE
+5000
+Select BOOLEAN, calls* identifier identifier2
+
+Select BOOLEAN such that Calls*("B", "C")
+FALSE
+5000
+Select BOOLEAN, calls* identifier identifier3
+
+Select BOOLEAN such that Calls*("C", "D")
+TRUE
+5000
+Select BOOLEAN, calls* identifier identifier4
+
+Select BOOLEAN such that Calls*("D", "E")
+TRUE
+5000
+Select BOOLEAN, calls* identifier identifier5
+
+Select BOOLEAN such that Calls*("E", "F")
+TRUE
+5000
+Select tuple, calls* wildcard wildcard
+variable v; assign a;
+Select <a,v.varName> such that Calls*(_,_)
+1 A,1 B,1 C,1 D,1 E,1 F,1 a,1 adal,1 ano,1 asdkl,1 b,1 dal,1 daln,1 dan,1 danl,1 dasl,1 dnla,1 fano,1 isi2,1 lfann,1 mal33,1 ndal,1 nfla,1 x,1 y,12 A,12 B,12 C,12 D,12 E,12 F,12 a,12 adal,12 ano,12 asdkl,12 b,12 dal,12 daln,12 dan,12 danl,12 dasl,12 dnla,12 fano,12 isi2,12 lfann,12 mal33,12 ndal,12 nfla,12 x,12 y,17 A,17 B,17 C,17 D,17 E,17 F,17 a,17 adal,17 ano,17 asdkl,17 b,17 dal,17 daln,17 dan,17 danl,17 dasl,17 dnla,17 fano,17 isi2,17 lfann,17 mal33,17 ndal,17 nfla,17 x,17 y,33 A,33 B,33 C,33 D,33 E,33 F,33 a,33 adal,33 ano,33 asdkl,33 b,33 dal,33 daln,33 dan,33 danl,33 dasl,33 dnla,33 fano,33 isi2,33 lfann,33 mal33,33 ndal,33 nfla,33 x,33 y
+5000
+Select tuple, calls* wildcard synonym
+assign a; constant c; procedure p1;
+Select <a.stmt#, c.value> such that Calls*(_,p1)
+1 1,1 10,1 11,1 13,1 14,1 15,1 17,1 18,1 19,1 2,1 21,1 29,1 4,1 6,1 7,1 8,12 1,12 10,12 11,12 13,12 14,12 15,12 17,12 18,12 19,12 2,12 21,12 29,12 4,12 6,12 7,12 8,17 1,17 10,17 11,17 13,17 14,17 15,17 17,17 18,17 19,17 2,17 21,17 29,17 4,17 6,17 7,17 8,33 1,33 10,33 11,33 13,33 14,33 15,33 17,33 18,33 19,33 2,33 21,33 29,33 4,33 6,33 7,33 8
+5000
+Select tuple, calls* wildcard identifier
+while w;read r;
+Select <w.stmt#, r.varName> such that Calls*(_, "C")
+19 D,2 D,21 D,23 D,27 D,28 D,29 D,3 D,30 D,31 D,4 D
+5000
+Select tuple, calls* synonym wildcard
+assign a; read r; procedure p1;
+Select <a.stmt#, r.varName> such that Calls*(p1, _)
+1 D,12 D,17 D,33 D
+5000
+Select tuple, calls* synonym synonym
+procedure p1, p2;
+Select <p1.procName, p2.procName> such that Calls*(p1, p2)
+A B,A C,A D,A E,A F,B D,B E,B F,C B,C D,C E,C F,D E,D F,E F
+5000
+Select tuple, calls* synonym identifier
+while w; if if; procedure p1;
+Select <p1.procName, w.stmt#, if.stmt#> such that Calls*(p1, "C")
+A 19 10,A 19 11,A 19 14,A 19 18,A 19 24,A 19 5,A 19 9,A 2 10,A 2 11,A 2 14,A 2 18,A 2 24,A 2 5,A 2 9,A 21 10,A 21 11,A 21 14,A 21 18,A 21 24,A 21 5,A 21 9,A 23 10,A 23 11,A 23 14,A 23 18,A 23 24,A 23 5,A 23 9,A 27 10,A 27 11,A 27 14,A 27 18,A 27 24,A 27 5,A 27 9,A 28 10,A 28 11,A 28 14,A 28 18,A 28 24,A 28 5,A 28 9,A 29 10,A 29 11,A 29 14,A 29 18,A 29 24,A 29 5,A 29 9,A 3 10,A 3 11,A 3 14,A 3 18,A 3 24,A 3 5,A 3 9,A 30 10,A 30 11,A 30 14,A 30 18,A 30 24,A 30 5,A 30 9,A 31 10,A 31 11,A 31 14,A 31 18,A 31 24,A 31 5,A 31 9,A 4 10,A 4 11,A 4 14,A 4 18,A 4 24,A 4 5,A 4 9
+5000
+Select tuple, calls* identifier wildcard
+if if; variable v; procedure p1;
+Select <p1.procName, if.stmt#, v.varName> such that Calls*(p1, _)
+A 10 A,A 10 B,A 10 C,A 10 D,A 10 E,A 10 F,A 10 a,A 10 adal,A 10 ano,A 10 asdkl,A 10 b,A 10 dal,A 10 daln,A 10 dan,A 10 danl,A 10 dasl,A 10 dnla,A 10 fano,A 10 isi2,A 10 lfann,A 10 mal33,A 10 ndal,A 10 nfla,A 10 x,A 10 y,A 11 A,A 11 B,A 11 C,A 11 D,A 11 E,A 11 F,A 11 a,A 11 adal,A 11 ano,A 11 asdkl,A 11 b,A 11 dal,A 11 daln,A 11 dan,A 11 danl,A 11 dasl,A 11 dnla,A 11 fano,A 11 isi2,A 11 lfann,A 11 mal33,A 11 ndal,A 11 nfla,A 11 x,A 11 y,A 14 A,A 14 B,A 14 C,A 14 D,A 14 E,A 14 F,A 14 a,A 14 adal,A 14 ano,A 14 asdkl,A 14 b,A 14 dal,A 14 daln,A 14 dan,A 14 danl,A 14 dasl,A 14 dnla,A 14 fano,A 14 isi2,A 14 lfann,A 14 mal33,A 14 ndal,A 14 nfla,A 14 x,A 14 y,A 18 A,A 18 B,A 18 C,A 18 D,A 18 E,A 18 F,A 18 a,A 18 adal,A 18 ano,A 18 asdkl,A 18 b,A 18 dal,A 18 daln,A 18 dan,A 18 danl,A 18 dasl,A 18 dnla,A 18 fano,A 18 isi2,A 18 lfann,A 18 mal33,A 18 ndal,A 18 nfla,A 18 x,A 18 y,A 24 A,A 24 B,A 24 C,A 24 D,A 24 E,A 24 F,A 24 a,A 24 adal,A 24 ano,A 24 asdkl,A 24 b,A 24 dal,A 24 daln,A 24 dan,A 24 danl,A 24 dasl,A 24 dnla,A 24 fano,A 24 isi2,A 24 lfann,A 24 mal33,A 24 ndal,A 24 nfla,A 24 x,A 24 y,A 5 A,A 5 B,A 5 C,A 5 D,A 5 E,A 5 F,A 5 a,A 5 adal,A 5 ano,A 5 asdkl,A 5 b,A 5 dal,A 5 daln,A 5 dan,A 5 danl,A 5 dasl,A 5 dnla,A 5 fano,A 5 isi2,A 5 lfann,A 5 mal33,A 5 ndal,A 5 nfla,A 5 x,A 5 y,A 9 A,A 9 B,A 9 C,A 9 D,A 9 E,A 9 F,A 9 a,A 9 adal,A 9 ano,A 9 asdkl,A 9 b,A 9 dal,A 9 daln,A 9 dan,A 9 danl,A 9 dasl,A 9 dnla,A 9 fano,A 9 isi2,A 9 lfann,A 9 mal33,A 9 ndal,A 9 nfla,A 9 x,A 9 y,B 10 A,B 10 B,B 10 C,B 10 D,B 10 E,B 10 F,B 10 a,B 10 adal,B 10 ano,B 10 asdkl,B 10 b,B 10 dal,B 10 daln,B 10 dan,B 10 danl,B 10 dasl,B 10 dnla,B 10 fano,B 10 isi2,B 10 lfann,B 10 mal33,B 10 ndal,B 10 nfla,B 10 x,B 10 y,B 11 A,B 11 B,B 11 C,B 11 D,B 11 E,B 11 F,B 11 a,B 11 adal,B 11 ano,B 11 asdkl,B 11 b,B 11 dal,B 11 daln,B 11 dan,B 11 danl,B 11 dasl,B 11 dnla,B 11 fano,B 11 isi2,B 11 lfann,B 11 mal33,B 11 ndal,B 11 nfla,B 11 x,B 11 y,B 14 A,B 14 B,B 14 C,B 14 D,B 14 E,B 14 F,B 14 a,B 14 adal,B 14 ano,B 14 asdkl,B 14 b,B 14 dal,B 14 daln,B 14 dan,B 14 danl,B 14 dasl,B 14 dnla,B 14 fano,B 14 isi2,B 14 lfann,B 14 mal33,B 14 ndal,B 14 nfla,B 14 x,B 14 y,B 18 A,B 18 B,B 18 C,B 18 D,B 18 E,B 18 F,B 18 a,B 18 adal,B 18 ano,B 18 asdkl,B 18 b,B 18 dal,B 18 daln,B 18 dan,B 18 danl,B 18 dasl,B 18 dnla,B 18 fano,B 18 isi2,B 18 lfann,B 18 mal33,B 18 ndal,B 18 nfla,B 18 x,B 18 y,B 24 A,B 24 B,B 24 C,B 24 D,B 24 E,B 24 F,B 24 a,B 24 adal,B 24 ano,B 24 asdkl,B 24 b,B 24 dal,B 24 daln,B 24 dan,B 24 danl,B 24 dasl,B 24 dnla,B 24 fano,B 24 isi2,B 24 lfann,B 24 mal33,B 24 ndal,B 24 nfla,B 24 x,B 24 y,B 5 A,B 5 B,B 5 C,B 5 D,B 5 E,B 5 F,B 5 a,B 5 adal,B 5 ano,B 5 asdkl,B 5 b,B 5 dal,B 5 daln,B 5 dan,B 5 danl,B 5 dasl,B 5 dnla,B 5 fano,B 5 isi2,B 5 lfann,B 5 mal33,B 5 ndal,B 5 nfla,B 5 x,B 5 y,B 9 A,B 9 B,B 9 C,B 9 D,B 9 E,B 9 F,B 9 a,B 9 adal,B 9 ano,B 9 asdkl,B 9 b,B 9 dal,B 9 daln,B 9 dan,B 9 danl,B 9 dasl,B 9 dnla,B 9 fano,B 9 isi2,B 9 lfann,B 9 mal33,B 9 ndal,B 9 nfla,B 9 x,B 9 y,C 10 A,C 10 B,C 10 C,C 10 D,C 10 E,C 10 F,C 10 a,C 10 adal,C 10 ano,C 10 asdkl,C 10 b,C 10 dal,C 10 daln,C 10 dan,C 10 danl,C 10 dasl,C 10 dnla,C 10 fano,C 10 isi2,C 10 lfann,C 10 mal33,C 10 ndal,C 10 nfla,C 10 x,C 10 y,C 11 A,C 11 B,C 11 C,C 11 D,C 11 E,C 11 F,C 11 a,C 11 adal,C 11 ano,C 11 asdkl,C 11 b,C 11 dal,C 11 daln,C 11 dan,C 11 danl,C 11 dasl,C 11 dnla,C 11 fano,C 11 isi2,C 11 lfann,C 11 mal33,C 11 ndal,C 11 nfla,C 11 x,C 11 y,C 14 A,C 14 B,C 14 C,C 14 D,C 14 E,C 14 F,C 14 a,C 14 adal,C 14 ano,C 14 asdkl,C 14 b,C 14 dal,C 14 daln,C 14 dan,C 14 danl,C 14 dasl,C 14 dnla,C 14 fano,C 14 isi2,C 14 lfann,C 14 mal33,C 14 ndal,C 14 nfla,C 14 x,C 14 y,C 18 A,C 18 B,C 18 C,C 18 D,C 18 E,C 18 F,C 18 a,C 18 adal,C 18 ano,C 18 asdkl,C 18 b,C 18 dal,C 18 daln,C 18 dan,C 18 danl,C 18 dasl,C 18 dnla,C 18 fano,C 18 isi2,C 18 lfann,C 18 mal33,C 18 ndal,C 18 nfla,C 18 x,C 18 y,C 24 A,C 24 B,C 24 C,C 24 D,C 24 E,C 24 F,C 24 a,C 24 adal,C 24 ano,C 24 asdkl,C 24 b,C 24 dal,C 24 daln,C 24 dan,C 24 danl,C 24 dasl,C 24 dnla,C 24 fano,C 24 isi2,C 24 lfann,C 24 mal33,C 24 ndal,C 24 nfla,C 24 x,C 24 y,C 5 A,C 5 B,C 5 C,C 5 D,C 5 E,C 5 F,C 5 a,C 5 adal,C 5 ano,C 5 asdkl,C 5 b,C 5 dal,C 5 daln,C 5 dan,C 5 danl,C 5 dasl,C 5 dnla,C 5 fano,C 5 isi2,C 5 lfann,C 5 mal33,C 5 ndal,C 5 nfla,C 5 x,C 5 y,C 9 A,C 9 B,C 9 C,C 9 D,C 9 E,C 9 F,C 9 a,C 9 adal,C 9 ano,C 9 asdkl,C 9 b,C 9 dal,C 9 daln,C 9 dan,C 9 danl,C 9 dasl,C 9 dnla,C 9 fano,C 9 isi2,C 9 lfann,C 9 mal33,C 9 ndal,C 9 nfla,C 9 x,C 9 y,D 10 A,D 10 B,D 10 C,D 10 D,D 10 E,D 10 F,D 10 a,D 10 adal,D 10 ano,D 10 asdkl,D 10 b,D 10 dal,D 10 daln,D 10 dan,D 10 danl,D 10 dasl,D 10 dnla,D 10 fano,D 10 isi2,D 10 lfann,D 10 mal33,D 10 ndal,D 10 nfla,D 10 x,D 10 y,D 11 A,D 11 B,D 11 C,D 11 D,D 11 E,D 11 F,D 11 a,D 11 adal,D 11 ano,D 11 asdkl,D 11 b,D 11 dal,D 11 daln,D 11 dan,D 11 danl,D 11 dasl,D 11 dnla,D 11 fano,D 11 isi2,D 11 lfann,D 11 mal33,D 11 ndal,D 11 nfla,D 11 x,D 11 y,D 14 A,D 14 B,D 14 C,D 14 D,D 14 E,D 14 F,D 14 a,D 14 adal,D 14 ano,D 14 asdkl,D 14 b,D 14 dal,D 14 daln,D 14 dan,D 14 danl,D 14 dasl,D 14 dnla,D 14 fano,D 14 isi2,D 14 lfann,D 14 mal33,D 14 ndal,D 14 nfla,D 14 x,D 14 y,D 18 A,D 18 B,D 18 C,D 18 D,D 18 E,D 18 F,D 18 a,D 18 adal,D 18 ano,D 18 asdkl,D 18 b,D 18 dal,D 18 daln,D 18 dan,D 18 danl,D 18 dasl,D 18 dnla,D 18 fano,D 18 isi2,D 18 lfann,D 18 mal33,D 18 ndal,D 18 nfla,D 18 x,D 18 y,D 24 A,D 24 B,D 24 C,D 24 D,D 24 E,D 24 F,D 24 a,D 24 adal,D 24 ano,D 24 asdkl,D 24 b,D 24 dal,D 24 daln,D 24 dan,D 24 danl,D 24 dasl,D 24 dnla,D 24 fano,D 24 isi2,D 24 lfann,D 24 mal33,D 24 ndal,D 24 nfla,D 24 x,D 24 y,D 5 A,D 5 B,D 5 C,D 5 D,D 5 E,D 5 F,D 5 a,D 5 adal,D 5 ano,D 5 asdkl,D 5 b,D 5 dal,D 5 daln,D 5 dan,D 5 danl,D 5 dasl,D 5 dnla,D 5 fano,D 5 isi2,D 5 lfann,D 5 mal33,D 5 ndal,D 5 nfla,D 5 x,D 5 y,D 9 A,D 9 B,D 9 C,D 9 D,D 9 E,D 9 F,D 9 a,D 9 adal,D 9 ano,D 9 asdkl,D 9 b,D 9 dal,D 9 daln,D 9 dan,D 9 danl,D 9 dasl,D 9 dnla,D 9 fano,D 9 isi2,D 9 lfann,D 9 mal33,D 9 ndal,D 9 nfla,D 9 x,D 9 y,E 10 A,E 10 B,E 10 C,E 10 D,E 10 E,E 10 F,E 10 a,E 10 adal,E 10 ano,E 10 asdkl,E 10 b,E 10 dal,E 10 daln,E 10 dan,E 10 danl,E 10 dasl,E 10 dnla,E 10 fano,E 10 isi2,E 10 lfann,E 10 mal33,E 10 ndal,E 10 nfla,E 10 x,E 10 y,E 11 A,E 11 B,E 11 C,E 11 D,E 11 E,E 11 F,E 11 a,E 11 adal,E 11 ano,E 11 asdkl,E 11 b,E 11 dal,E 11 daln,E 11 dan,E 11 danl,E 11 dasl,E 11 dnla,E 11 fano,E 11 isi2,E 11 lfann,E 11 mal33,E 11 ndal,E 11 nfla,E 11 x,E 11 y,E 14 A,E 14 B,E 14 C,E 14 D,E 14 E,E 14 F,E 14 a,E 14 adal,E 14 ano,E 14 asdkl,E 14 b,E 14 dal,E 14 daln,E 14 dan,E 14 danl,E 14 dasl,E 14 dnla,E 14 fano,E 14 isi2,E 14 lfann,E 14 mal33,E 14 ndal,E 14 nfla,E 14 x,E 14 y,E 18 A,E 18 B,E 18 C,E 18 D,E 18 E,E 18 F,E 18 a,E 18 adal,E 18 ano,E 18 asdkl,E 18 b,E 18 dal,E 18 daln,E 18 dan,E 18 danl,E 18 dasl,E 18 dnla,E 18 fano,E 18 isi2,E 18 lfann,E 18 mal33,E 18 ndal,E 18 nfla,E 18 x,E 18 y,E 24 A,E 24 B,E 24 C,E 24 D,E 24 E,E 24 F,E 24 a,E 24 adal,E 24 ano,E 24 asdkl,E 24 b,E 24 dal,E 24 daln,E 24 dan,E 24 danl,E 24 dasl,E 24 dnla,E 24 fano,E 24 isi2,E 24 lfann,E 24 mal33,E 24 ndal,E 24 nfla,E 24 x,E 24 y,E 5 A,E 5 B,E 5 C,E 5 D,E 5 E,E 5 F,E 5 a,E 5 adal,E 5 ano,E 5 asdkl,E 5 b,E 5 dal,E 5 daln,E 5 dan,E 5 danl,E 5 dasl,E 5 dnla,E 5 fano,E 5 isi2,E 5 lfann,E 5 mal33,E 5 ndal,E 5 nfla,E 5 x,E 5 y,E 9 A,E 9 B,E 9 C,E 9 D,E 9 E,E 9 F,E 9 a,E 9 adal,E 9 ano,E 9 asdkl,E 9 b,E 9 dal,E 9 daln,E 9 dan,E 9 danl,E 9 dasl,E 9 dnla,E 9 fano,E 9 isi2,E 9 lfann,E 9 mal33,E 9 ndal,E 9 nfla,E 9 x,E 9 y
+5000
+Select tuple, calls* identifier synonym
+call c; procedure p1;
+Select <p1.procName, c.procName> such that Calls*("A", p1)
+B B,B C,B D,B E,B F,C B,C C,C D,C E,C F,D B,D C,D D,D E,D F,E B,E C,E D,E E,E F,F B,F C,F D,F E,F F
+5000
+Select tuple, calls* identifier identifier
+read r; print p;
+Select <p.varName, r.varName> such that Calls*("A", "B")
+A D,B D
+5000
+Select with, calls* wildcard wildcard
+print p; procedure pr; read r;
+Select pr such that Calls*(_,_) with p.varName = r.varName
+none
+5000
+Select with, calls* wildcard synonym
+print p; procedure pr;
+Select pr such that Calls*(_,pr) with pr.procName = p.varName
+B
+5000
+Select with, calls* wildcard identifier
+read r; procedure pr;
+Select pr such that Calls*(_,"F") with r.varName = pr.procName
+D
+5000
+Select with, calls* synonym wildcard
+procedure pr; variable v; constant c;
+Select pr such that Calls*(pr,_) with c.value = v.varName
+SemanticError
+5000
+Select with, calls* synonym synonym
+procedure pr1, pr2; print p; read r;
+Select pr2 such that Calls*(pr1,pr2) with pr2.procName = p.varName with pr1.procName = r.varName
+none
+5000
+Select with, calls* synonym identifier
+procedure pr1; print p; call c;
+Select pr1 such that Calls*(pr1, "F") with p.varName = c.procName
+A,B,C,D,E
+5000
+Select with, calls* identifier wildcard
+read r; call c;
+Select r such that Calls*("A", _) with r.varName = c.procName
+16
+5000
+Select with, calls* identifier synonym
+procedure pr; print p; read r;
+Select r such that Calls*("A", pr) with p.varName = r.varName
+none
+5000
+Select with, calls* identifier identifier
+print p; read r; call c;
+Select c such that Calls*("A", "B") with p.varName = r.varName
+none
+5000

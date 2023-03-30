@@ -1,0 +1,75 @@
+procedure A {
+    C = B * A / 2;
+    while (x == y) {
+        while (y == x) {
+            while (a == b) {
+                if (ano == 4) then {
+                    call B;
+                } else {
+                    call C;
+                }
+            }
+        }
+    }
+    print B;
+}
+
+procedure B {
+    if (dasl >= 2) then {
+        if (8 <= mal33) then {
+            if ( ndal > 6) then {
+                A = B * C;
+            } else {
+                call D;
+            }
+        } else {
+            if ((lfann >= 10) && (dnla != dal)) then {
+                print A;
+            } else {
+                read D;
+            }
+        }
+    } else {
+        F = 1 + 2 + 10 + 11 / F;
+    }
+}
+
+procedure C {
+    if(asdkl != 7) then {
+        while (nfla != 11) {
+            call B;
+        }
+    } else {
+        while (isi2 != 13) {
+            call E;
+        }
+    }
+}
+
+procedure D {
+    while (daln != 14) {
+        if (danl != 15) then {
+            call E;
+        } else {
+            call F;
+        }
+    }
+}
+
+procedure E {
+    while (adal != 18) {
+        while (dan >= 21) {
+            while (fano <= 29){
+                while (17 > 18) {
+                    while (18 < 19) {
+                        call F;
+                    }
+                }
+            }
+        }
+    }
+}
+
+procedure F {
+    A = B * C + D / E % F;
+}

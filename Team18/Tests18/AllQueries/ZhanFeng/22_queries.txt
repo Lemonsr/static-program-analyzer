@@ -1,0 +1,1120 @@
+1- Uses(synonym, _)
+stmt s;
+Select s such that Uses(s,_)
+10,11,12,13,14,15,16,18,20,21,23,24,25,26,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,44,46,47,48,49,5,50,52,53,54,55,56,57,58,59,6,61,64,66,7,70,8,9
+5000
+2- Uses(synonym, _)
+read r;
+Select r such that Uses(r,_)
+SemanticError
+5000
+3- Uses(synonym, _)
+assign a;
+Select a such that Uses(a,_)
+11,13,14,15,16,25,35,41,42,46,48,5,50,52,55,58,59,7,9
+5000
+4- Uses(synonym, _)
+while w;
+Select w such that Uses(w,_)
+26,30,32,4,40,44,47,49,54,6
+5000
+5- Uses(synonym, _)
+if ifs;
+Select ifs such that Uses(ifs,_)
+10,18,20,38,39,61,64,66,8,29
+5000
+6- Uses(synonym, _)
+call c;
+Select c such that Uses(c,_)
+21,28,3,36,23,31,56
+5000
+7- Uses(synonym, _)
+procedure p;
+Select p such that Uses(p,_)
+first,fourth,second,square,third, fifth
+5000
+8- Uses(syn,_)
+constant const;
+Select const such that Uses(const,_)
+SemanticError
+5000
+10- Uses(synonym, _)
+stmt s; assign a;
+Select a such that Uses(s,_)
+1,11,13,14,15,16,19,25,27,35,41,42,43,45,46,48,5,50,51,52,55,58,59,62,63,65,67,68,69,7,71,9
+5000
+11- Uses(synonym, _)
+stmt s; print pr;
+Select s such that Uses(pr,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+12- Uses(synonym, _)
+stmt s; read r;
+Select s such that Uses(r,_)
+SemanticError
+5000
+13- Uses(synonym, _)
+stmt s; assign a;
+Select s such that Uses(a,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+14- Uses(synonym, _)
+stmt s; while w;
+Select s such that Uses(w,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+15- Uses(synonym, _)
+stmt s; if ifs;
+Select s such that Uses(ifs,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+16- Uses(synonym, _)
+stmt s; call c;
+Select s such that Uses(c,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+17- Uses(synonym, _)
+stmt s; procedure p;
+Select s such that Uses(p,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+18- Uses(syn,_)
+stmt s; constant const;
+Select s such that Uses(const,_)
+SemanticError
+5000
+20- Uses(synonym, v)
+stmt s; variable v;
+Select v such that Uses(s,v)
+a,a1,abc,ads,ai,b,b1,breadth,c,cat,chicken,child,cow,d,donkey,e,f,fa8,fa9fa,height,horse,left,length,leo,m,moose,o,p,parent,power,q,right,snail,trip,word,x,y,z,zebra
+5000
+21- Uses(synonym, v)
+read r; variable v;
+Select v such that Uses(r,v)
+SemanticError
+5000
+22- Uses(synonym, v)
+assign a; variable v;
+Select v such that Uses(a,v)
+a,abc,b,c,cat,d,e,f,moose,o,power,q,right,snail,x,y,z
+5000
+23- Uses(synonym, v)
+while w; variable v;
+Select v such that Uses(w,v)
+a,a1,b,b1,c,cat,chicken,cow,d,donkey,e,f,horse,m,moose,o,p,power,q,snail,trip,word,x,y,z,zebra
+5000
+24- Uses(synonym, v)
+if ifs; variable v;
+Select v such that Uses(ifs,v)
+a,ads,ai,b,breadth,c,cat,chicken,child,cow,d,donkey,e,f,fa8,fa9fa,height,horse,left,length,moose,parent,power,right,snail,trip,word,x,y,z
+5000
+25- Uses(synonym, v)
+call c; variable v;
+Select v such that Uses(c,v)
+b,c,cat,chicken,child,cow,d,donkey,e,f,horse,leo,moose,parent,power,snail,trip,word,x,y,z
+5000
+26- Uses(synonym, v)
+procedure p; variable v;
+Select v such that Uses(p,v)
+a,a1,abc,ads,ai,b,b1,breadth,c,cat,chicken,child,cow,d,donkey,e,f,fa8,fa9fa,height,horse,left,length,leo,m,moose,o,p,parent,power,q,right,snail,trip,word,x,y,z,zebra
+5000
+27- Uses(syn,v)
+constant const; variable v;
+Select v such that Uses(const,v)
+SemanticError
+5000
+29- Uses (stmtNo,_)
+call c; assign a;
+Select c such that Uses(5,_)
+21,23,28,3,31,36,56
+5000
+30- Uses (stmtNo,_)
+stmt s; assign a;
+Select s such that Uses(7,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+31- Uses (stmtNo,_)
+read r; assign a;
+Select r such that Uses(10,_)
+17,2,22,60
+5000
+32- Uses (stmtNo,_)
+constant c; assign a;
+Select c such that Uses(20,_)
+0,1,10,1234,1337,2,23,24134,3,322,44,5,89,9
+5000
+33- Uses (stmtNo,_)
+stmt s; assign a;
+Select s such that Uses(999,_)
+none
+5000
+34- Uses (stmtNo,syn)
+constant c; assign a; variable v;
+Select v such that Uses(5,v)
+q
+5000
+35- Uses (stmtNo,syn)
+stmt s; assign a; variable v;
+Select v such that Uses(7,v)
+o
+5000
+36- Uses (stmtNo,syn)
+read r; assign a; variable v;
+Select v such that Uses(10,v)
+a,ads,ai,fa8,fa9fa
+5000
+37- Uses (stmtNo,syn)
+read r; assign a; variable v;
+Select v such that Uses(999,v)
+none
+5000
+38- Uses(synonym, IDENT)
+stmt s; variable v;
+Select s such that Uses(s,"power")
+18,20,21,26,28,3,54,55
+5000
+39- Uses(synonym, IDENT)
+stmt s; read r; variable v;
+Select s such that Uses(r, "code")
+SemanticError
+5000
+40- Uses(synonym, IDENT)
+stmt s; assign a; variable v;
+Select s such that Uses(a, "snail")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+41- Uses(synonym, IDENT)
+stmt s; while w; variable v;
+Select s such that Uses(w,"trip")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+42- Uses(synonym, IDENT)
+stmt s; if ifs; variable v;
+Select s such that Uses(ifs,"x")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+43- Uses(synonym, IDENT)
+stmt s; call c; variable v;
+Select s such that Uses(c,"fifth")
+none
+5000
+44- Uses(synonym, IDENT)
+stmt s; procedure p; variable v;
+Select p such that Uses(p,"length")
+square
+5000
+45- Uses(syn,IDENT)
+stmt s; constant const; variable v;
+Select s such that Uses(const,"4")
+SyntaxError
+5000
+47- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select r such that Uses(s,v)
+17,2,22,60
+5000
+48- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select a such that Uses(r,v)
+SemanticError
+5000
+49- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select w such that Uses(a,v)
+26,30,32,4,40,44,47,49,54,6
+5000
+50- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select ifs such that Uses(w,v)
+10,18,20,29,38,39,61,64,66,8
+5000
+51- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select c such that Uses(ifs,v)
+21,23,28,3,31,36,56
+5000
+52- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select p such that Uses(c,v)
+extra,fifth,first,fourth,second,square,third
+5000
+53- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select const such that Uses(p,v)
+0,1,10,1234,1337,2,23,24134,3,322,44,5,89,9
+5000
+54- Uses(syn,v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select pl such that Uses(const,v)
+SemanticError
+5000
+56- Uses(proc, _)
+procedure p, q;
+Select p such that Uses(p,_)
+fifth,first,fourth,second,square,third
+5000
+57- Uses(proc,_)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select r such that Uses(p,_)
+17,2,22,60
+5000
+58- Uses(proc, _)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select a such that Uses(p,_)
+1,11,13,14,15,16,19,25,27,35,41,42,43,45,46,48,5,50,51,52,55,58,59,62,63,65,67,68,69,7,71,9
+5000
+59- Uses(proc, _)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select w such that Uses(p,_)
+26,30,32,4,40,44,47,49,54,6
+5000
+60- Uses(proc, _)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select ifs such that Uses(p,_)
+10,18,20,29,38,39,61,64,66,8
+5000
+61- Uses(proc, _)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select c such that Uses(p,_)
+21,23,28,3,31,36,56
+5000
+62- Uses(proc, _)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select const such that Uses(p,_)
+0,1,10,1234,1337,2,23,24134,3,322,44,5,89,9
+5000
+64- Uses(proc,_)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select s such that Uses(p,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+65- Uses(proc, v)
+procedure p, q; variable v;
+Select p such that Uses(p,v)
+fifth,first,fourth,second,square,third
+5000
+66- //Uses(proc,v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select r such that Uses(p,v)
+17,2,22,60
+5000
+67- Uses(proc, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select a such that Uses(p,v)
+1,11,13,14,15,16,19,25,27,35,41,42,43,45,46,48,5,50,51,52,55,58,59,62,63,65,67,68,69,7,71,9
+5000
+68- Uses(proc, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select w such that Uses(p,v)
+26,30,32,4,40,44,47,49,54,6
+5000
+69- Uses(proc, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select ifs such that Uses(p,v)
+10,18,20,29,38,39,61,64,66,8
+5000
+70- Uses(proc, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select c such that Uses(p,v)
+21,23,28,3,31,36,56
+5000
+71- Uses(proc, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select const such that Uses(p,v)
+0,1,10,1234,1337,2,23,24134,3,322,44,5,89,9
+5000
+73- Uses(proc,v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select s such that Uses(p,v)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+74- Uses(proc, ident)
+procedure p;
+Select p such that Uses(p,"horse")
+first,second
+5000
+75- Uses(proc, ident)
+procedure p; stmt s;
+Select s such that Uses(p,"word")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+76- Uses(proc, ident)
+procedure p; assign a;
+Select a such that Uses(p,"height")
+1,11,13,14,15,16,19,25,27,35,41,42,43,45,46,48,5,50,51,52,55,58,59,62,63,65,67,68,69,7,71,9
+5000
+77- Uses(proc, ident)
+procedure p; while w;
+Select w such that Uses(p,"abc")
+26,30,32,4,40,44,47,49,54,6
+5000
+78- Uses(proc, ident)
+procedure p; call c;
+Select c such that Uses(p,"C")
+none
+5000
+80- Uses(proc, ident)
+procedure p; constant const;
+Select const such that Uses(p,"parent")
+0,1,10,1234,1337,2,23,24134,3,322,44,5,89,9
+5000
+81- Uses(proc_name, ident)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select s such that Uses("second","donkey")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+82- Uses(proc_name, ident)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select a such that Uses("fifth","fourth")
+none
+5000
+83- Uses(proc_name, ident)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select c such that Uses("first","right")
+21,23,28,3,31,36,56
+5000
+84- Uses(proc_name, ident)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select r such that Uses("square","code")
+none
+5000
+85- Uses(proc_name, ident)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select w such that Uses("third","z")
+26,30,32,4,40,44,47,49,54,6
+5000
+86- Uses(proc_name, ident)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select s such that Uses("second","horse")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+87- Uses(synonym, _) BOOLEAN
+stmt s;
+Select BOOLEAN such that Uses(s,_)
+TRUE
+5000
+88- Uses(synonym, _) BOOLEAN
+read r;
+Select BOOLEAN such that Uses(r,_)
+SemanticError
+5000
+89- Uses(synonym, _) BOOLEAN
+assign a;
+Select BOOLEAN such that Uses(a,_)
+TRUE
+5000
+90- Uses(synonym, _) BOOLEAN
+while w;
+Select BOOLEAN such that Uses(w,_)
+TRUE
+5000
+91- Uses(synonym, _) BOOLEAN
+if ifs;
+Select BOOLEAN such that Uses(ifs,_)
+TRUE
+5000
+92- Uses(synonym, _) BOOLEAN
+call c;
+Select BOOLEAN such that Uses(c,_)
+TRUE
+5000
+93- Uses(synonym, _) BOOLEAN
+procedure p;
+Select BOOLEAN such that Uses(p,_)
+TRUE
+5000
+94- Uses(syn,_) BOOLEAN
+constant const;
+Select BOOLEAN such that Uses(const,_)
+SemanticError
+5000
+96- Uses(synonym, _) BOOLEAN
+stmt s; print pr;
+Select BOOLEAN such that Uses(pr,_)
+TRUE
+5000
+97- Uses(synonym, v) BOOLEAN
+stmt s; variable v;
+Select BOOLEAN such that Uses(s,v)
+TRUE
+5000
+98- Uses(synonym, v) BOOLEAN
+read r; variable v;
+Select BOOLEAN such that Uses(r,v)
+SemanticError
+5000
+99- Uses(synonym, v) BOOLEAN
+assign a; variable v;
+Select BOOLEAN such that Uses(a,v)
+TRUE
+5000
+100- Uses(synonym, v) BOOLEAN
+while w; variable v;
+Select BOOLEAN such that Uses(w,v)
+TRUE
+5000
+101- Uses(synonym, v) BOOLEAN
+if ifs; variable v;
+Select BOOLEAN such that Uses(ifs,v)
+TRUE
+5000
+102- Uses(synonym, v) BOOLEAN
+call c; variable v;
+Select BOOLEAN such that Uses(c,v)
+TRUE
+5000
+103- Uses(synonym, v) BOOLEAN
+procedure p; variable v;
+Select BOOLEAN such that Uses(p,v)
+TRUE
+5000
+104- Uses(syn,v) BOOLEAN
+constant const; variable v;
+Select BOOLEAN such that Uses(const,v)
+SemanticError
+5000
+106- Uses (stmtNo,_) BOOLEAN
+call c; assign a;
+Select BOOLEAN such that Uses(11,_)
+TRUE
+5000
+107- Uses (stmtNo,_) BOOLEAN
+stmt s; assign a;
+Select BOOLEAN such that Uses(19,_)
+FALSE
+5000
+108- Uses (stmtNo,_) BOOLEAN
+read r; assign a;
+Select BOOLEAN such that Uses(27,_)
+FALSE
+5000
+109- Uses (stmtNo,_) BOOLEAN
+constant c; assign a;
+Select BOOLEAN such that Uses(68,_)
+FALSE
+5000
+110- Uses (stmtNo,_) BOOLEAN
+stmt s; assign a;
+Select BOOLEAN such that Uses(999,_)
+FALSE
+5000
+111- Uses (stmtNo,syn) BOOLEAN
+constant c; assign a; variable v;
+Select BOOLEAN such that Uses(5,v)
+TRUE
+5000
+112- Uses (stmtNo,syn) BOOLEAN
+stmt s; assign a; variable v;
+Select BOOLEAN such that Uses(42,v)
+TRUE
+5000
+113- Uses (stmtNo,syn) BOOLEAN
+read r; assign a; variable v;
+Select BOOLEAN such that Uses(53,v)
+TRUE
+5000
+114- Uses (stmtNo,syn) BOOLEAN
+read r; assign a; variable v;
+Select BOOLEAN such that Uses(999,v)
+FALSE
+5000
+115- Uses(synonym, IDENT) BOOLEAN
+stmt s; variable v;
+Select BOOLEAN such that Uses(s,"leo")
+TRUE
+5000
+116- Uses(synonym, IDENT) BOOLEAN
+stmt s; read r; variable v;
+Select BOOLEAN such that Uses(r,"cow")
+SemanticError
+5000
+117- Uses(synonym, IDENT) BOOLEAN
+stmt s; assign a; variable v;
+Select BOOLEAN such that Uses(a,"x")
+TRUE
+5000
+118- Uses(synonym, IDENT) BOOLEAN
+stmt s; while w; variable v;
+Select BOOLEAN such that Uses(w,"trip")
+TRUE
+5000
+119- Uses(synonym, IDENT) BOOLEAN
+stmt s; if ifs; variable v;
+Select BOOLEAN such that Uses(ifs,"horse")
+TRUE
+5000
+120- Uses(synonym, IDENT) BOOLEAN
+stmt s; call c; variable v;
+Select BOOLEAN such that Uses(c,"fifth")
+FALSE
+5000
+121- Uses(synonym, IDENT) BOOLEAN
+stmt s; procedure p; variable v;
+Select BOOLEAN such that Uses(p,"breath")
+FALSE
+5000
+122- Uses(syn,IDENT) BOOLEAN
+stmt s; constant const; variable v;
+Select BOOLEAN such that Uses(const,4)
+SyntaxError
+5000
+124- Uses(synonym, v) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses(s,v)
+TRUE
+5000
+125- Uses(synonym, v) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses(r,v)
+SemanticError
+5000
+126- Uses(synonym, v) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses(a,v)
+TRUE
+5000
+127- Uses(synonym, v) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses(w,v)
+TRUE
+5000
+128- Uses(synonym, v) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses(ifs,v)
+TRUE
+5000
+129- Uses(synonym, v) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses(c,v)
+TRUE
+5000
+130- Uses(synonym, v) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses(p,v)
+TRUE
+5000
+131- Uses(syn,v) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses(const,v)
+SemanticError
+5000
+133- Uses(proc,_) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses(p,_)
+TRUE
+5000
+134- Uses(proc, ident) BOOLEAN
+procedure p;
+Select BOOLEAN such that Uses(p,"cat")
+TRUE
+5000
+135- Uses(proc, ident) BOOLEAN
+procedure p; stmt s;
+Select BOOLEAN such that Uses(p,"ads")
+TRUE
+5000
+136- Uses(proc, ident) BOOLEAN
+procedure p; assign a;
+Select BOOLEAN such that Uses(p,"ai")
+TRUE
+5000
+137- Uses(proc, ident) BOOLEAN
+procedure p; while w;
+Select BOOLEAN such that Uses(p,"k")
+FALSE
+5000
+138- Uses(proc, ident) BOOLEAN
+procedure p; call c;
+Select BOOLEAN such that Uses(p,"fourth")
+FALSE
+5000
+139- Uses(proc, ident) BOOLEAN
+procedure p; 
+Select BOOLEAN such that Uses(p,"extra")
+FALSE
+5000
+140- Uses(proc, ident) BOOLEAN
+procedure p; constant const;
+Select BOOLEAN such that Uses(p,"moose")
+TRUE
+5000
+141- Uses(proc_name, ident) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses("second","child")
+TRUE
+5000
+142- Uses(proc_name, ident) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses("third","leo")
+TRUE
+5000
+143- Uses(proc_name, ident) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses("fourth","trip")
+TRUE
+5000
+144- Uses(proc_name, ident) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses("extra","derp")
+FALSE
+5000
+145- Uses(proc_name, ident) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses("second","chicken")
+TRUE
+5000
+146- Uses(proc_name, ident) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses("first","second")
+FALSE
+5000
+147- Uses(proc_name, ident) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses("second","parent")
+TRUE
+5000
+148- Uses(proc_name, ident) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses("fifth","word")
+TRUE
+5000
+149- Uses(proc_name, ident) BOOLEAN
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select BOOLEAN such that Uses("third","y")
+TRUE
+5000
+150- Uses (syn, _ ) with ... = procName
+stmt s; procedure p;
+Select s such that Uses(s,_) with "first" = p.procName
+10,11,12,13,14,15,16,18,20,21,23,24,25,26,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,44,46,47,48,49,5,50,52,53,54,55,56,57,58,59,6,61,64,66,7,70,8,9
+5000
+151- Uses (undecal syn, _ ) with .. = procName
+procedure p; variable v;
+Select v such that Uses(a, _) with p.procName = "second"
+SemanticError
+5000
+152- Uses (syn, v ) with .. = procName
+procedure p; variable v;
+Select v with p.procName = "third" such that Uses(p, v)
+leo,x,y,z
+5000
+153- Uses (int,_) with .. = procName
+procedure p; variable v;
+Select v such that Uses(13, _) with p.procName = "first"
+a,a1,abc,ads,ai,b,b1,breadth,c,cat,chicken,child,code,cow,d,derp,donkey,e,f,fa8,fa9fa,height,horse,k,left,length,leo,m,moose,n,o,p,parent,power,q,right,snail,trip,word,x,y,z,zebra
+5000
+154- Uses (int, _ ) with ...  = procName
+procedure p; stmt s;
+Select s such that Uses (999, _) with p.procName = "extra"
+none
+5000
+155- Uses (int, syn) with ...  = procName
+procedure p; variable v;
+Select v with p.procName = "third" such that Uses(45,v)
+none
+5000
+156- Uses (int, syn) with ... = procName
+procedure p; variable v;
+Select v such that Uses(999,v) with p.procName = "fifth"
+none
+5000
+157- Uses (syn, IDENT) with ... = procName
+procedure p; variable v;
+Select v  with p.procName = "square" such that Uses(v, "height")
+SemanticError
+5000
+158- Uses (syn, syn) with ... = procName
+procedure p; variable v;
+Select v such that Uses(ab, v) with p.procName = "second"
+SemanticError
+5000
+159- Uses (proc, _) with ... = procName
+procedure p; variable v;
+Select p such that Uses(p, _) with p.procName = "square"
+square
+5000
+160- Uses (proc, _) with ... = procName
+procedure p; variable v;
+Select c with p.procName = "fourth" such that Uses(p, _)
+SemanticError
+5000
+161- Uses (proc, syn) with ... = procName
+procedure p; variable v;
+Select a such that Uses(p, v) with p.procName = "extra"
+SemanticError
+5000
+162- Uses (proc, IDENT) with ... = procName
+procedure p; variable v;
+Select v such that Uses(p,v) with p.procName = "fourth"
+b,c,d,e,f,power,snail,trip,word
+5000
+163- Uses(proc, IDENT) with .. = procName
+procedure p; variable v; stmt s;
+Select s such that Uses("first" , "abc") with p.procName  = "first"
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+164- Uses (syn, _ ) with ... = undeclared procName
+stmt s; procedure p;
+Select s such that Uses(s,_) with "extra" = p.procName
+10,11,12,13,14,15,16,18,20,21,23,24,25,26,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,44,46,47,48,49,5,50,52,53,54,55,56,57,58,59,6,61,64,66,7,70,8,9
+5000
+165- Uses (undecal syn, _ ) with .. = undeclared procName
+procedure p; variable v;
+Select v such that Uses(a, _) with p.procName = "G"
+SemanticError
+5000
+166- Uses (syn, v ) with .. = undeclared procName
+procedure p; variable v;
+Select v such that Uses(p, v) with p.procName = "Hello"
+none
+5000
+167- Uses (int,_) with .. = undeclared procName
+procedure p; variable v;
+Select v such that Uses(13, _) with p.procName = "Test"
+none
+5000
+168- Uses (int, _ ) with ...  = undeclared procName
+procedure p; stmt s;
+Select s such that Uses (999, _) with p.procName = "J"
+none
+5000
+169- Uses (int, syn) with ...  = undeclared procName
+procedure p; variable v;
+Select v such that Uses(13,v) with p.procName = "JK"
+none
+5000
+170- Uses (int, syn) with ...  = undeclared  procName
+procedure p; variable v;
+Select v such that Uses(999,v) with p.procName = "L"
+none
+5000
+171- Uses (syn, IDENT) with ... = procName
+procedure p; variable v;
+Select v such that Uses(v, "x") with p.procName = "M"
+SemanticError
+5000
+172- Uses (syn, syn) with ... = undeclared procName
+procedure p; variable v;
+Select v such that Uses(ab, v) with p.procName = "N"
+SemanticError
+5000
+173- Uses (proc, _) with ...  = undeclared procName
+procedure p; variable v;
+Select p such that Uses(p, _) with p.procName = "O"
+none
+5000
+174- Uses (proc, _) with .. = undeclared procName
+procedure p; variable v;
+Select c such that Uses(p, _) with p.procName = "P"
+SemanticError
+5000
+175- Uses (proc, syn) with ...  = undeclared procName
+procedure p; variable v;
+Select a such that Uses(p, v) with p.procName = "Q"
+SemanticError
+5000
+176- Uses (proc, IDENT) with ... = undeclared procName
+procedure p; variable v;
+Select v such that Uses(p, "x") with p.procName = "R"
+none
+5000
+177- Uses(proc, IDENT) with ... = undeclared procName
+procedure p; variable v; stmt s;
+Select s with p.procName  = "S" such that Uses("A" , "z")
+none
+5000
+178- Uses (syn, _ ) with ... = procName
+stmt s; procedure p; call c;
+Select c such that Uses(s,_) with "square" = p.procName
+21,23,28,3,31,36,56
+5000
+179- Uses (syn, _ ) with ... = procName
+stmt s; procedure p; call c;
+Select c such that Uses(c,_) with "fourth" = p.procName
+21,23,28,3,31,36,56
+5000
+180- Uses (syn, _ ) with ... = invalid procName
+stmt s; procedure p; call c;
+Select c such that Uses(s,_) with "D" = p.procName
+none
+5000
+181- Uses (syn, _ ) with .. = invalid procName
+stmt s; procedure p; call c;
+Select c such that Uses(c,_) with "G" = p.procName
+none
+5000
+182- Uses (syn, _ ) with ... = procName
+stmt s; call c;
+Select c such that Uses(s,_) with "fifth" = p.procName
+SemanticError
+5000
+183- Uses (syn, _ ) with procName
+stmt s; procedure p; call c;
+Select c such that Uses(c,_) with c.procName = "second"
+3
+5000
+184- c.procName Uses (syn, _ ) with procName
+stmt s; procedure p; call c;
+Select c.procName such that Uses(c,_) with "square" = c.procName
+none
+5000
+185- c.stmt# Uses (syn, _ ) with = procName
+stmt s; procedure p; call c;
+Select c.stmt# such that Uses(c,_) with  "third" = c.procName
+36
+5000
+186- c.stmt# Uses with = procName
+stmt s; procedure p; call c;
+Select c.stmt# such that Uses(s,"parent") with  c.procName = "second"
+3
+5000
+187- c.stmt# Uses with = procName
+stmt s; procedure p; call c; variable v;
+Select c.stmt# such that Uses(27,v) with  "second" = c.procName
+none
+5000
+188- c.stmt# Uses with = procName
+stmt s; procedure p; call c; variable v;
+Select c.stmt# such that Uses(52,v) with  c.procName = "third"
+36
+5000
+189- c.stmt# Uses  with = procName
+stmt s; procedure p; call c; variable v;
+Select c.stmt# such that Uses(55,v) with  c.procName = "fourth"
+21,28
+5000
+190- syn Uses  with = syn.varName
+stmt s; procedure p; call c; variable v; print pr; while w;
+Select pr such that Uses(w,"y") with  pr.varName = "third"
+none
+5000
+191- syn Uses  with = syn.varName
+stmt s; procedure p; call c; variable v; print pr; while w; read r;
+Select r such that Uses(s,v) with "child" = r.varName
+22
+5000
+192- syn.stmt# Uses  with = syn.varName
+stmt s; procedure p; call c; variable v; print pr; while w;
+Select pr.stmt# such that Uses(w,"x") with  pr.varName = "leo"
+53
+5000
+193- syn.stmt# Uses  with = syn.varName
+stmt s; procedure p; call c; variable v; print pr; while w; read r;
+Select r.stmt# such that Uses(s,v) with "a" = r.varName
+2
+5000
+194- syn Uses  with = syn.stmt#
+stmt s; procedure p; call c; variable v; print pr; while w; assign a;
+Select a such that Uses("z",v) with a.stmt# = 3
+none
+5000
+195- syn.stmt# Uses  with = syn.stmt#
+stmt s; procedure p; call c; variable v; print pr; while w; read r; assign a;
+Select a such that Uses(a,v) with 14 = a.stmt#
+14
+5000
+196- const Uses  with = const.value
+stmt s; procedure p; call c; variable v; print pr; while w; assign a; constant co;
+Select co such that Uses("second",v) with co.value = 10
+10
+5000
+197- const Uses  with = const.value
+stmt s; procedure p; call c; variable v; print pr; while w; read r; assign a; constant co;
+Select co such that Uses(a,v) with 1 = co.value
+1
+5000
+198- 1 - Uses(synonym, _)
+stmt s; variable v;
+Select <s,v> such that Uses(s,_)
+10 a,10 a1,10 abc,10 ads,10 ai,10 b,10 b1,10 breadth,10 c,10 cat,10 chicken,10 child,10 code,10 cow,10 d,10 derp,10 donkey,10 e,10 f,10 fa8,10 fa9fa,10 height,10 horse,10 k,10 left,10 length,10 leo,10 m,10 moose,10 n,10 o,10 p,10 parent,10 power,10 q,10 right,10 snail,10 trip,10 word,10 x,10 y,10 z,10 zebra,11 a,11 a1,11 abc,11 ads,11 ai,11 b,11 b1,11 breadth,11 c,11 cat,11 chicken,11 child,11 code,11 cow,11 d,11 derp,11 donkey,11 e,11 f,11 fa8,11 fa9fa,11 height,11 horse,11 k,11 left,11 length,11 leo,11 m,11 moose,11 n,11 o,11 p,11 parent,11 power,11 q,11 right,11 snail,11 trip,11 word,11 x,11 y,11 z,11 zebra,12 a,12 a1,12 abc,12 ads,12 ai,12 b,12 b1,12 breadth,12 c,12 cat,12 chicken,12 child,12 code,12 cow,12 d,12 derp,12 donkey,12 e,12 f,12 fa8,12 fa9fa,12 height,12 horse,12 k,12 left,12 length,12 leo,12 m,12 moose,12 n,12 o,12 p,12 parent,12 power,12 q,12 right,12 snail,12 trip,12 word,12 x,12 y,12 z,12 zebra,13 a,13 a1,13 abc,13 ads,13 ai,13 b,13 b1,13 breadth,13 c,13 cat,13 chicken,13 child,13 code,13 cow,13 d,13 derp,13 donkey,13 e,13 f,13 fa8,13 fa9fa,13 height,13 horse,13 k,13 left,13 length,13 leo,13 m,13 moose,13 n,13 o,13 p,13 parent,13 power,13 q,13 right,13 snail,13 trip,13 word,13 x,13 y,13 z,13 zebra,14 a,14 a1,14 abc,14 ads,14 ai,14 b,14 b1,14 breadth,14 c,14 cat,14 chicken,14 child,14 code,14 cow,14 d,14 derp,14 donkey,14 e,14 f,14 fa8,14 fa9fa,14 height,14 horse,14 k,14 left,14 length,14 leo,14 m,14 moose,14 n,14 o,14 p,14 parent,14 power,14 q,14 right,14 snail,14 trip,14 word,14 x,14 y,14 z,14 zebra,15 a,15 a1,15 abc,15 ads,15 ai,15 b,15 b1,15 breadth,15 c,15 cat,15 chicken,15 child,15 code,15 cow,15 d,15 derp,15 donkey,15 e,15 f,15 fa8,15 fa9fa,15 height,15 horse,15 k,15 left,15 length,15 leo,15 m,15 moose,15 n,15 o,15 p,15 parent,15 power,15 q,15 right,15 snail,15 trip,15 word,15 x,15 y,15 z,15 zebra,16 a,16 a1,16 abc,16 ads,16 ai,16 b,16 b1,16 breadth,16 c,16 cat,16 chicken,16 child,16 code,16 cow,16 d,16 derp,16 donkey,16 e,16 f,16 fa8,16 fa9fa,16 height,16 horse,16 k,16 left,16 length,16 leo,16 m,16 moose,16 n,16 o,16 p,16 parent,16 power,16 q,16 right,16 snail,16 trip,16 word,16 x,16 y,16 z,16 zebra,18 a,18 a1,18 abc,18 ads,18 ai,18 b,18 b1,18 breadth,18 c,18 cat,18 chicken,18 child,18 code,18 cow,18 d,18 derp,18 donkey,18 e,18 f,18 fa8,18 fa9fa,18 height,18 horse,18 k,18 left,18 length,18 leo,18 m,18 moose,18 n,18 o,18 p,18 parent,18 power,18 q,18 right,18 snail,18 trip,18 word,18 x,18 y,18 z,18 zebra,20 a,20 a1,20 abc,20 ads,20 ai,20 b,20 b1,20 breadth,20 c,20 cat,20 chicken,20 child,20 code,20 cow,20 d,20 derp,20 donkey,20 e,20 f,20 fa8,20 fa9fa,20 height,20 horse,20 k,20 left,20 length,20 leo,20 m,20 moose,20 n,20 o,20 p,20 parent,20 power,20 q,20 right,20 snail,20 trip,20 word,20 x,20 y,20 z,20 zebra,21 a,21 a1,21 abc,21 ads,21 ai,21 b,21 b1,21 breadth,21 c,21 cat,21 chicken,21 child,21 code,21 cow,21 d,21 derp,21 donkey,21 e,21 f,21 fa8,21 fa9fa,21 height,21 horse,21 k,21 left,21 length,21 leo,21 m,21 moose,21 n,21 o,21 p,21 parent,21 power,21 q,21 right,21 snail,21 trip,21 word,21 x,21 y,21 z,21 zebra,23 a,23 a1,23 abc,23 ads,23 ai,23 b,23 b1,23 breadth,23 c,23 cat,23 chicken,23 child,23 code,23 cow,23 d,23 derp,23 donkey,23 e,23 f,23 fa8,23 fa9fa,23 height,23 horse,23 k,23 left,23 length,23 leo,23 m,23 moose,23 n,23 o,23 p,23 parent,23 power,23 q,23 right,23 snail,23 trip,23 word,23 x,23 y,23 z,23 zebra,24 a,24 a1,24 abc,24 ads,24 ai,24 b,24 b1,24 breadth,24 c,24 cat,24 chicken,24 child,24 code,24 cow,24 d,24 derp,24 donkey,24 e,24 f,24 fa8,24 fa9fa,24 height,24 horse,24 k,24 left,24 length,24 leo,24 m,24 moose,24 n,24 o,24 p,24 parent,24 power,24 q,24 right,24 snail,24 trip,24 word,24 x,24 y,24 z,24 zebra,25 a,25 a1,25 abc,25 ads,25 ai,25 b,25 b1,25 breadth,25 c,25 cat,25 chicken,25 child,25 code,25 cow,25 d,25 derp,25 donkey,25 e,25 f,25 fa8,25 fa9fa,25 height,25 horse,25 k,25 left,25 length,25 leo,25 m,25 moose,25 n,25 o,25 p,25 parent,25 power,25 q,25 right,25 snail,25 trip,25 word,25 x,25 y,25 z,25 zebra,26 a,26 a1,26 abc,26 ads,26 ai,26 b,26 b1,26 breadth,26 c,26 cat,26 chicken,26 child,26 code,26 cow,26 d,26 derp,26 donkey,26 e,26 f,26 fa8,26 fa9fa,26 height,26 horse,26 k,26 left,26 length,26 leo,26 m,26 moose,26 n,26 o,26 p,26 parent,26 power,26 q,26 right,26 snail,26 trip,26 word,26 x,26 y,26 z,26 zebra,28 a,28 a1,28 abc,28 ads,28 ai,28 b,28 b1,28 breadth,28 c,28 cat,28 chicken,28 child,28 code,28 cow,28 d,28 derp,28 donkey,28 e,28 f,28 fa8,28 fa9fa,28 height,28 horse,28 k,28 left,28 length,28 leo,28 m,28 moose,28 n,28 o,28 p,28 parent,28 power,28 q,28 right,28 snail,28 trip,28 word,28 x,28 y,28 z,28 zebra,29 a,29 a1,29 abc,29 ads,29 ai,29 b,29 b1,29 breadth,29 c,29 cat,29 chicken,29 child,29 code,29 cow,29 d,29 derp,29 donkey,29 e,29 f,29 fa8,29 fa9fa,29 height,29 horse,29 k,29 left,29 length,29 leo,29 m,29 moose,29 n,29 o,29 p,29 parent,29 power,29 q,29 right,29 snail,29 trip,29 word,29 x,29 y,29 z,29 zebra,3 a,3 a1,3 abc,3 ads,3 ai,3 b,3 b1,3 breadth,3 c,3 cat,3 chicken,3 child,3 code,3 cow,3 d,3 derp,3 donkey,3 e,3 f,3 fa8,3 fa9fa,3 height,3 horse,3 k,3 left,3 length,3 leo,3 m,3 moose,3 n,3 o,3 p,3 parent,3 power,3 q,3 right,3 snail,3 trip,3 word,3 x,3 y,3 z,3 zebra,30 a,30 a1,30 abc,30 ads,30 ai,30 b,30 b1,30 breadth,30 c,30 cat,30 chicken,30 child,30 code,30 cow,30 d,30 derp,30 donkey,30 e,30 f,30 fa8,30 fa9fa,30 height,30 horse,30 k,30 left,30 length,30 leo,30 m,30 moose,30 n,30 o,30 p,30 parent,30 power,30 q,30 right,30 snail,30 trip,30 word,30 x,30 y,30 z,30 zebra,31 a,31 a1,31 abc,31 ads,31 ai,31 b,31 b1,31 breadth,31 c,31 cat,31 chicken,31 child,31 code,31 cow,31 d,31 derp,31 donkey,31 e,31 f,31 fa8,31 fa9fa,31 height,31 horse,31 k,31 left,31 length,31 leo,31 m,31 moose,31 n,31 o,31 p,31 parent,31 power,31 q,31 right,31 snail,31 trip,31 word,31 x,31 y,31 z,31 zebra,32 a,32 a1,32 abc,32 ads,32 ai,32 b,32 b1,32 breadth,32 c,32 cat,32 chicken,32 child,32 code,32 cow,32 d,32 derp,32 donkey,32 e,32 f,32 fa8,32 fa9fa,32 height,32 horse,32 k,32 left,32 length,32 leo,32 m,32 moose,32 n,32 o,32 p,32 parent,32 power,32 q,32 right,32 snail,32 trip,32 word,32 x,32 y,32 z,32 zebra,33 a,33 a1,33 abc,33 ads,33 ai,33 b,33 b1,33 breadth,33 c,33 cat,33 chicken,33 child,33 code,33 cow,33 d,33 derp,33 donkey,33 e,33 f,33 fa8,33 fa9fa,33 height,33 horse,33 k,33 left,33 length,33 leo,33 m,33 moose,33 n,33 o,33 p,33 parent,33 power,33 q,33 right,33 snail,33 trip,33 word,33 x,33 y,33 z,33 zebra,34 a,34 a1,34 abc,34 ads,34 ai,34 b,34 b1,34 breadth,34 c,34 cat,34 chicken,34 child,34 code,34 cow,34 d,34 derp,34 donkey,34 e,34 f,34 fa8,34 fa9fa,34 height,34 horse,34 k,34 left,34 length,34 leo,34 m,34 moose,34 n,34 o,34 p,34 parent,34 power,34 q,34 right,34 snail,34 trip,34 word,34 x,34 y,34 z,34 zebra,35 a,35 a1,35 abc,35 ads,35 ai,35 b,35 b1,35 breadth,35 c,35 cat,35 chicken,35 child,35 code,35 cow,35 d,35 derp,35 donkey,35 e,35 f,35 fa8,35 fa9fa,35 height,35 horse,35 k,35 left,35 length,35 leo,35 m,35 moose,35 n,35 o,35 p,35 parent,35 power,35 q,35 right,35 snail,35 trip,35 word,35 x,35 y,35 z,35 zebra,36 a,36 a1,36 abc,36 ads,36 ai,36 b,36 b1,36 breadth,36 c,36 cat,36 chicken,36 child,36 code,36 cow,36 d,36 derp,36 donkey,36 e,36 f,36 fa8,36 fa9fa,36 height,36 horse,36 k,36 left,36 length,36 leo,36 m,36 moose,36 n,36 o,36 p,36 parent,36 power,36 q,36 right,36 snail,36 trip,36 word,36 x,36 y,36 z,36 zebra,37 a,37 a1,37 abc,37 ads,37 ai,37 b,37 b1,37 breadth,37 c,37 cat,37 chicken,37 child,37 code,37 cow,37 d,37 derp,37 donkey,37 e,37 f,37 fa8,37 fa9fa,37 height,37 horse,37 k,37 left,37 length,37 leo,37 m,37 moose,37 n,37 o,37 p,37 parent,37 power,37 q,37 right,37 snail,37 trip,37 word,37 x,37 y,37 z,37 zebra,38 a,38 a1,38 abc,38 ads,38 ai,38 b,38 b1,38 breadth,38 c,38 cat,38 chicken,38 child,38 code,38 cow,38 d,38 derp,38 donkey,38 e,38 f,38 fa8,38 fa9fa,38 height,38 horse,38 k,38 left,38 length,38 leo,38 m,38 moose,38 n,38 o,38 p,38 parent,38 power,38 q,38 right,38 snail,38 trip,38 word,38 x,38 y,38 z,38 zebra,39 a,39 a1,39 abc,39 ads,39 ai,39 b,39 b1,39 breadth,39 c,39 cat,39 chicken,39 child,39 code,39 cow,39 d,39 derp,39 donkey,39 e,39 f,39 fa8,39 fa9fa,39 height,39 horse,39 k,39 left,39 length,39 leo,39 m,39 moose,39 n,39 o,39 p,39 parent,39 power,39 q,39 right,39 snail,39 trip,39 word,39 x,39 y,39 z,39 zebra,4 a,4 a1,4 abc,4 ads,4 ai,4 b,4 b1,4 breadth,4 c,4 cat,4 chicken,4 child,4 code,4 cow,4 d,4 derp,4 donkey,4 e,4 f,4 fa8,4 fa9fa,4 height,4 horse,4 k,4 left,4 length,4 leo,4 m,4 moose,4 n,4 o,4 p,4 parent,4 power,4 q,4 right,4 snail,4 trip,4 word,4 x,4 y,4 z,4 zebra,40 a,40 a1,40 abc,40 ads,40 ai,40 b,40 b1,40 breadth,40 c,40 cat,40 chicken,40 child,40 code,40 cow,40 d,40 derp,40 donkey,40 e,40 f,40 fa8,40 fa9fa,40 height,40 horse,40 k,40 left,40 length,40 leo,40 m,40 moose,40 n,40 o,40 p,40 parent,40 power,40 q,40 right,40 snail,40 trip,40 word,40 x,40 y,40 z,40 zebra,41 a,41 a1,41 abc,41 ads,41 ai,41 b,41 b1,41 breadth,41 c,41 cat,41 chicken,41 child,41 code,41 cow,41 d,41 derp,41 donkey,41 e,41 f,41 fa8,41 fa9fa,41 height,41 horse,41 k,41 left,41 length,41 leo,41 m,41 moose,41 n,41 o,41 p,41 parent,41 power,41 q,41 right,41 snail,41 trip,41 word,41 x,41 y,41 z,41 zebra,42 a,42 a1,42 abc,42 ads,42 ai,42 b,42 b1,42 breadth,42 c,42 cat,42 chicken,42 child,42 code,42 cow,42 d,42 derp,42 donkey,42 e,42 f,42 fa8,42 fa9fa,42 height,42 horse,42 k,42 left,42 length,42 leo,42 m,42 moose,42 n,42 o,42 p,42 parent,42 power,42 q,42 right,42 snail,42 trip,42 word,42 x,42 y,42 z,42 zebra,44 a,44 a1,44 abc,44 ads,44 ai,44 b,44 b1,44 breadth,44 c,44 cat,44 chicken,44 child,44 code,44 cow,44 d,44 derp,44 donkey,44 e,44 f,44 fa8,44 fa9fa,44 height,44 horse,44 k,44 left,44 length,44 leo,44 m,44 moose,44 n,44 o,44 p,44 parent,44 power,44 q,44 right,44 snail,44 trip,44 word,44 x,44 y,44 z,44 zebra,46 a,46 a1,46 abc,46 ads,46 ai,46 b,46 b1,46 breadth,46 c,46 cat,46 chicken,46 child,46 code,46 cow,46 d,46 derp,46 donkey,46 e,46 f,46 fa8,46 fa9fa,46 height,46 horse,46 k,46 left,46 length,46 leo,46 m,46 moose,46 n,46 o,46 p,46 parent,46 power,46 q,46 right,46 snail,46 trip,46 word,46 x,46 y,46 z,46 zebra,47 a,47 a1,47 abc,47 ads,47 ai,47 b,47 b1,47 breadth,47 c,47 cat,47 chicken,47 child,47 code,47 cow,47 d,47 derp,47 donkey,47 e,47 f,47 fa8,47 fa9fa,47 height,47 horse,47 k,47 left,47 length,47 leo,47 m,47 moose,47 n,47 o,47 p,47 parent,47 power,47 q,47 right,47 snail,47 trip,47 word,47 x,47 y,47 z,47 zebra,48 a,48 a1,48 abc,48 ads,48 ai,48 b,48 b1,48 breadth,48 c,48 cat,48 chicken,48 child,48 code,48 cow,48 d,48 derp,48 donkey,48 e,48 f,48 fa8,48 fa9fa,48 height,48 horse,48 k,48 left,48 length,48 leo,48 m,48 moose,48 n,48 o,48 p,48 parent,48 power,48 q,48 right,48 snail,48 trip,48 word,48 x,48 y,48 z,48 zebra,49 a,49 a1,49 abc,49 ads,49 ai,49 b,49 b1,49 breadth,49 c,49 cat,49 chicken,49 child,49 code,49 cow,49 d,49 derp,49 donkey,49 e,49 f,49 fa8,49 fa9fa,49 height,49 horse,49 k,49 left,49 length,49 leo,49 m,49 moose,49 n,49 o,49 p,49 parent,49 power,49 q,49 right,49 snail,49 trip,49 word,49 x,49 y,49 z,49 zebra,5 a,5 a1,5 abc,5 ads,5 ai,5 b,5 b1,5 breadth,5 c,5 cat,5 chicken,5 child,5 code,5 cow,5 d,5 derp,5 donkey,5 e,5 f,5 fa8,5 fa9fa,5 height,5 horse,5 k,5 left,5 length,5 leo,5 m,5 moose,5 n,5 o,5 p,5 parent,5 power,5 q,5 right,5 snail,5 trip,5 word,5 x,5 y,5 z,5 zebra,50 a,50 a1,50 abc,50 ads,50 ai,50 b,50 b1,50 breadth,50 c,50 cat,50 chicken,50 child,50 code,50 cow,50 d,50 derp,50 donkey,50 e,50 f,50 fa8,50 fa9fa,50 height,50 horse,50 k,50 left,50 length,50 leo,50 m,50 moose,50 n,50 o,50 p,50 parent,50 power,50 q,50 right,50 snail,50 trip,50 word,50 x,50 y,50 z,50 zebra,52 a,52 a1,52 abc,52 ads,52 ai,52 b,52 b1,52 breadth,52 c,52 cat,52 chicken,52 child,52 code,52 cow,52 d,52 derp,52 donkey,52 e,52 f,52 fa8,52 fa9fa,52 height,52 horse,52 k,52 left,52 length,52 leo,52 m,52 moose,52 n,52 o,52 p,52 parent,52 power,52 q,52 right,52 snail,52 trip,52 word,52 x,52 y,52 z,52 zebra,53 a,53 a1,53 abc,53 ads,53 ai,53 b,53 b1,53 breadth,53 c,53 cat,53 chicken,53 child,53 code,53 cow,53 d,53 derp,53 donkey,53 e,53 f,53 fa8,53 fa9fa,53 height,53 horse,53 k,53 left,53 length,53 leo,53 m,53 moose,53 n,53 o,53 p,53 parent,53 power,53 q,53 right,53 snail,53 trip,53 word,53 x,53 y,53 z,53 zebra,54 a,54 a1,54 abc,54 ads,54 ai,54 b,54 b1,54 breadth,54 c,54 cat,54 chicken,54 child,54 code,54 cow,54 d,54 derp,54 donkey,54 e,54 f,54 fa8,54 fa9fa,54 height,54 horse,54 k,54 left,54 length,54 leo,54 m,54 moose,54 n,54 o,54 p,54 parent,54 power,54 q,54 right,54 snail,54 trip,54 word,54 x,54 y,54 z,54 zebra,55 a,55 a1,55 abc,55 ads,55 ai,55 b,55 b1,55 breadth,55 c,55 cat,55 chicken,55 child,55 code,55 cow,55 d,55 derp,55 donkey,55 e,55 f,55 fa8,55 fa9fa,55 height,55 horse,55 k,55 left,55 length,55 leo,55 m,55 moose,55 n,55 o,55 p,55 parent,55 power,55 q,55 right,55 snail,55 trip,55 word,55 x,55 y,55 z,55 zebra,56 a,56 a1,56 abc,56 ads,56 ai,56 b,56 b1,56 breadth,56 c,56 cat,56 chicken,56 child,56 code,56 cow,56 d,56 derp,56 donkey,56 e,56 f,56 fa8,56 fa9fa,56 height,56 horse,56 k,56 left,56 length,56 leo,56 m,56 moose,56 n,56 o,56 p,56 parent,56 power,56 q,56 right,56 snail,56 trip,56 word,56 x,56 y,56 z,56 zebra,57 a,57 a1,57 abc,57 ads,57 ai,57 b,57 b1,57 breadth,57 c,57 cat,57 chicken,57 child,57 code,57 cow,57 d,57 derp,57 donkey,57 e,57 f,57 fa8,57 fa9fa,57 height,57 horse,57 k,57 left,57 length,57 leo,57 m,57 moose,57 n,57 o,57 p,57 parent,57 power,57 q,57 right,57 snail,57 trip,57 word,57 x,57 y,57 z,57 zebra,58 a,58 a1,58 abc,58 ads,58 ai,58 b,58 b1,58 breadth,58 c,58 cat,58 chicken,58 child,58 code,58 cow,58 d,58 derp,58 donkey,58 e,58 f,58 fa8,58 fa9fa,58 height,58 horse,58 k,58 left,58 length,58 leo,58 m,58 moose,58 n,58 o,58 p,58 parent,58 power,58 q,58 right,58 snail,58 trip,58 word,58 x,58 y,58 z,58 zebra,59 a,59 a1,59 abc,59 ads,59 ai,59 b,59 b1,59 breadth,59 c,59 cat,59 chicken,59 child,59 code,59 cow,59 d,59 derp,59 donkey,59 e,59 f,59 fa8,59 fa9fa,59 height,59 horse,59 k,59 left,59 length,59 leo,59 m,59 moose,59 n,59 o,59 p,59 parent,59 power,59 q,59 right,59 snail,59 trip,59 word,59 x,59 y,59 z,59 zebra,6 a,6 a1,6 abc,6 ads,6 ai,6 b,6 b1,6 breadth,6 c,6 cat,6 chicken,6 child,6 code,6 cow,6 d,6 derp,6 donkey,6 e,6 f,6 fa8,6 fa9fa,6 height,6 horse,6 k,6 left,6 length,6 leo,6 m,6 moose,6 n,6 o,6 p,6 parent,6 power,6 q,6 right,6 snail,6 trip,6 word,6 x,6 y,6 z,6 zebra,61 a,61 a1,61 abc,61 ads,61 ai,61 b,61 b1,61 breadth,61 c,61 cat,61 chicken,61 child,61 code,61 cow,61 d,61 derp,61 donkey,61 e,61 f,61 fa8,61 fa9fa,61 height,61 horse,61 k,61 left,61 length,61 leo,61 m,61 moose,61 n,61 o,61 p,61 parent,61 power,61 q,61 right,61 snail,61 trip,61 word,61 x,61 y,61 z,61 zebra,64 a,64 a1,64 abc,64 ads,64 ai,64 b,64 b1,64 breadth,64 c,64 cat,64 chicken,64 child,64 code,64 cow,64 d,64 derp,64 donkey,64 e,64 f,64 fa8,64 fa9fa,64 height,64 horse,64 k,64 left,64 length,64 leo,64 m,64 moose,64 n,64 o,64 p,64 parent,64 power,64 q,64 right,64 snail,64 trip,64 word,64 x,64 y,64 z,64 zebra,66 a,66 a1,66 abc,66 ads,66 ai,66 b,66 b1,66 breadth,66 c,66 cat,66 chicken,66 child,66 code,66 cow,66 d,66 derp,66 donkey,66 e,66 f,66 fa8,66 fa9fa,66 height,66 horse,66 k,66 left,66 length,66 leo,66 m,66 moose,66 n,66 o,66 p,66 parent,66 power,66 q,66 right,66 snail,66 trip,66 word,66 x,66 y,66 z,66 zebra,7 a,7 a1,7 abc,7 ads,7 ai,7 b,7 b1,7 breadth,7 c,7 cat,7 chicken,7 child,7 code,7 cow,7 d,7 derp,7 donkey,7 e,7 f,7 fa8,7 fa9fa,7 height,7 horse,7 k,7 left,7 length,7 leo,7 m,7 moose,7 n,7 o,7 p,7 parent,7 power,7 q,7 right,7 snail,7 trip,7 word,7 x,7 y,7 z,7 zebra,70 a,70 a1,70 abc,70 ads,70 ai,70 b,70 b1,70 breadth,70 c,70 cat,70 chicken,70 child,70 code,70 cow,70 d,70 derp,70 donkey,70 e,70 f,70 fa8,70 fa9fa,70 height,70 horse,70 k,70 left,70 length,70 leo,70 m,70 moose,70 n,70 o,70 p,70 parent,70 power,70 q,70 right,70 snail,70 trip,70 word,70 x,70 y,70 z,70 zebra,8 a,8 a1,8 abc,8 ads,8 ai,8 b,8 b1,8 breadth,8 c,8 cat,8 chicken,8 child,8 code,8 cow,8 d,8 derp,8 donkey,8 e,8 f,8 fa8,8 fa9fa,8 height,8 horse,8 k,8 left,8 length,8 leo,8 m,8 moose,8 n,8 o,8 p,8 parent,8 power,8 q,8 right,8 snail,8 trip,8 word,8 x,8 y,8 z,8 zebra,9 a,9 a1,9 abc,9 ads,9 ai,9 b,9 b1,9 breadth,9 c,9 cat,9 chicken,9 child,9 code,9 cow,9 d,9 derp,9 donkey,9 e,9 f,9 fa8,9 fa9fa,9 height,9 horse,9 k,9 left,9 length,9 leo,9 m,9 moose,9 n,9 o,9 p,9 parent,9 power,9 q,9 right,9 snail,9 trip,9 word,9 x,9 y,9 z,9 zebra
+5000
+199- Uses(synonym, _)
+read r; call c;
+Select <r,c> such that Uses(r,_)
+SemanticError
+5000
+200- Uses(synonym, _)
+while w; procedure p; if ifs;
+Select <w, p, ifs> such that Uses(w,_)
+26 extra 10,26 extra 18,26 extra 20,26 extra 29,26 extra 38,26 extra 39,26 extra 61,26 extra 64,26 extra 66,26 extra 8,26 fifth 10,26 fifth 18,26 fifth 20,26 fifth 29,26 fifth 38,26 fifth 39,26 fifth 61,26 fifth 64,26 fifth 66,26 fifth 8,26 first 10,26 first 18,26 first 20,26 first 29,26 first 38,26 first 39,26 first 61,26 first 64,26 first 66,26 first 8,26 fourth 10,26 fourth 18,26 fourth 20,26 fourth 29,26 fourth 38,26 fourth 39,26 fourth 61,26 fourth 64,26 fourth 66,26 fourth 8,26 second 10,26 second 18,26 second 20,26 second 29,26 second 38,26 second 39,26 second 61,26 second 64,26 second 66,26 second 8,26 square 10,26 square 18,26 square 20,26 square 29,26 square 38,26 square 39,26 square 61,26 square 64,26 square 66,26 square 8,26 third 10,26 third 18,26 third 20,26 third 29,26 third 38,26 third 39,26 third 61,26 third 64,26 third 66,26 third 8,30 extra 10,30 extra 18,30 extra 20,30 extra 29,30 extra 38,30 extra 39,30 extra 61,30 extra 64,30 extra 66,30 extra 8,30 fifth 10,30 fifth 18,30 fifth 20,30 fifth 29,30 fifth 38,30 fifth 39,30 fifth 61,30 fifth 64,30 fifth 66,30 fifth 8,30 first 10,30 first 18,30 first 20,30 first 29,30 first 38,30 first 39,30 first 61,30 first 64,30 first 66,30 first 8,30 fourth 10,30 fourth 18,30 fourth 20,30 fourth 29,30 fourth 38,30 fourth 39,30 fourth 61,30 fourth 64,30 fourth 66,30 fourth 8,30 second 10,30 second 18,30 second 20,30 second 29,30 second 38,30 second 39,30 second 61,30 second 64,30 second 66,30 second 8,30 square 10,30 square 18,30 square 20,30 square 29,30 square 38,30 square 39,30 square 61,30 square 64,30 square 66,30 square 8,30 third 10,30 third 18,30 third 20,30 third 29,30 third 38,30 third 39,30 third 61,30 third 64,30 third 66,30 third 8,32 extra 10,32 extra 18,32 extra 20,32 extra 29,32 extra 38,32 extra 39,32 extra 61,32 extra 64,32 extra 66,32 extra 8,32 fifth 10,32 fifth 18,32 fifth 20,32 fifth 29,32 fifth 38,32 fifth 39,32 fifth 61,32 fifth 64,32 fifth 66,32 fifth 8,32 first 10,32 first 18,32 first 20,32 first 29,32 first 38,32 first 39,32 first 61,32 first 64,32 first 66,32 first 8,32 fourth 10,32 fourth 18,32 fourth 20,32 fourth 29,32 fourth 38,32 fourth 39,32 fourth 61,32 fourth 64,32 fourth 66,32 fourth 8,32 second 10,32 second 18,32 second 20,32 second 29,32 second 38,32 second 39,32 second 61,32 second 64,32 second 66,32 second 8,32 square 10,32 square 18,32 square 20,32 square 29,32 square 38,32 square 39,32 square 61,32 square 64,32 square 66,32 square 8,32 third 10,32 third 18,32 third 20,32 third 29,32 third 38,32 third 39,32 third 61,32 third 64,32 third 66,32 third 8,4 extra 10,4 extra 18,4 extra 20,4 extra 29,4 extra 38,4 extra 39,4 extra 61,4 extra 64,4 extra 66,4 extra 8,4 fifth 10,4 fifth 18,4 fifth 20,4 fifth 29,4 fifth 38,4 fifth 39,4 fifth 61,4 fifth 64,4 fifth 66,4 fifth 8,4 first 10,4 first 18,4 first 20,4 first 29,4 first 38,4 first 39,4 first 61,4 first 64,4 first 66,4 first 8,4 fourth 10,4 fourth 18,4 fourth 20,4 fourth 29,4 fourth 38,4 fourth 39,4 fourth 61,4 fourth 64,4 fourth 66,4 fourth 8,4 second 10,4 second 18,4 second 20,4 second 29,4 second 38,4 second 39,4 second 61,4 second 64,4 second 66,4 second 8,4 square 10,4 square 18,4 square 20,4 square 29,4 square 38,4 square 39,4 square 61,4 square 64,4 square 66,4 square 8,4 third 10,4 third 18,4 third 20,4 third 29,4 third 38,4 third 39,4 third 61,4 third 64,4 third 66,4 third 8,40 extra 10,40 extra 18,40 extra 20,40 extra 29,40 extra 38,40 extra 39,40 extra 61,40 extra 64,40 extra 66,40 extra 8,40 fifth 10,40 fifth 18,40 fifth 20,40 fifth 29,40 fifth 38,40 fifth 39,40 fifth 61,40 fifth 64,40 fifth 66,40 fifth 8,40 first 10,40 first 18,40 first 20,40 first 29,40 first 38,40 first 39,40 first 61,40 first 64,40 first 66,40 first 8,40 fourth 10,40 fourth 18,40 fourth 20,40 fourth 29,40 fourth 38,40 fourth 39,40 fourth 61,40 fourth 64,40 fourth 66,40 fourth 8,40 second 10,40 second 18,40 second 20,40 second 29,40 second 38,40 second 39,40 second 61,40 second 64,40 second 66,40 second 8,40 square 10,40 square 18,40 square 20,40 square 29,40 square 38,40 square 39,40 square 61,40 square 64,40 square 66,40 square 8,40 third 10,40 third 18,40 third 20,40 third 29,40 third 38,40 third 39,40 third 61,40 third 64,40 third 66,40 third 8,44 extra 10,44 extra 18,44 extra 20,44 extra 29,44 extra 38,44 extra 39,44 extra 61,44 extra 64,44 extra 66,44 extra 8,44 fifth 10,44 fifth 18,44 fifth 20,44 fifth 29,44 fifth 38,44 fifth 39,44 fifth 61,44 fifth 64,44 fifth 66,44 fifth 8,44 first 10,44 first 18,44 first 20,44 first 29,44 first 38,44 first 39,44 first 61,44 first 64,44 first 66,44 first 8,44 fourth 10,44 fourth 18,44 fourth 20,44 fourth 29,44 fourth 38,44 fourth 39,44 fourth 61,44 fourth 64,44 fourth 66,44 fourth 8,44 second 10,44 second 18,44 second 20,44 second 29,44 second 38,44 second 39,44 second 61,44 second 64,44 second 66,44 second 8,44 square 10,44 square 18,44 square 20,44 square 29,44 square 38,44 square 39,44 square 61,44 square 64,44 square 66,44 square 8,44 third 10,44 third 18,44 third 20,44 third 29,44 third 38,44 third 39,44 third 61,44 third 64,44 third 66,44 third 8,47 extra 10,47 extra 18,47 extra 20,47 extra 29,47 extra 38,47 extra 39,47 extra 61,47 extra 64,47 extra 66,47 extra 8,47 fifth 10,47 fifth 18,47 fifth 20,47 fifth 29,47 fifth 38,47 fifth 39,47 fifth 61,47 fifth 64,47 fifth 66,47 fifth 8,47 first 10,47 first 18,47 first 20,47 first 29,47 first 38,47 first 39,47 first 61,47 first 64,47 first 66,47 first 8,47 fourth 10,47 fourth 18,47 fourth 20,47 fourth 29,47 fourth 38,47 fourth 39,47 fourth 61,47 fourth 64,47 fourth 66,47 fourth 8,47 second 10,47 second 18,47 second 20,47 second 29,47 second 38,47 second 39,47 second 61,47 second 64,47 second 66,47 second 8,47 square 10,47 square 18,47 square 20,47 square 29,47 square 38,47 square 39,47 square 61,47 square 64,47 square 66,47 square 8,47 third 10,47 third 18,47 third 20,47 third 29,47 third 38,47 third 39,47 third 61,47 third 64,47 third 66,47 third 8,49 extra 10,49 extra 18,49 extra 20,49 extra 29,49 extra 38,49 extra 39,49 extra 61,49 extra 64,49 extra 66,49 extra 8,49 fifth 10,49 fifth 18,49 fifth 20,49 fifth 29,49 fifth 38,49 fifth 39,49 fifth 61,49 fifth 64,49 fifth 66,49 fifth 8,49 first 10,49 first 18,49 first 20,49 first 29,49 first 38,49 first 39,49 first 61,49 first 64,49 first 66,49 first 8,49 fourth 10,49 fourth 18,49 fourth 20,49 fourth 29,49 fourth 38,49 fourth 39,49 fourth 61,49 fourth 64,49 fourth 66,49 fourth 8,49 second 10,49 second 18,49 second 20,49 second 29,49 second 38,49 second 39,49 second 61,49 second 64,49 second 66,49 second 8,49 square 10,49 square 18,49 square 20,49 square 29,49 square 38,49 square 39,49 square 61,49 square 64,49 square 66,49 square 8,49 third 10,49 third 18,49 third 20,49 third 29,49 third 38,49 third 39,49 third 61,49 third 64,49 third 66,49 third 8,54 extra 10,54 extra 18,54 extra 20,54 extra 29,54 extra 38,54 extra 39,54 extra 61,54 extra 64,54 extra 66,54 extra 8,54 fifth 10,54 fifth 18,54 fifth 20,54 fifth 29,54 fifth 38,54 fifth 39,54 fifth 61,54 fifth 64,54 fifth 66,54 fifth 8,54 first 10,54 first 18,54 first 20,54 first 29,54 first 38,54 first 39,54 first 61,54 first 64,54 first 66,54 first 8,54 fourth 10,54 fourth 18,54 fourth 20,54 fourth 29,54 fourth 38,54 fourth 39,54 fourth 61,54 fourth 64,54 fourth 66,54 fourth 8,54 second 10,54 second 18,54 second 20,54 second 29,54 second 38,54 second 39,54 second 61,54 second 64,54 second 66,54 second 8,54 square 10,54 square 18,54 square 20,54 square 29,54 square 38,54 square 39,54 square 61,54 square 64,54 square 66,54 square 8,54 third 10,54 third 18,54 third 20,54 third 29,54 third 38,54 third 39,54 third 61,54 third 64,54 third 66,54 third 8,6 extra 10,6 extra 18,6 extra 20,6 extra 29,6 extra 38,6 extra 39,6 extra 61,6 extra 64,6 extra 66,6 extra 8,6 fifth 10,6 fifth 18,6 fifth 20,6 fifth 29,6 fifth 38,6 fifth 39,6 fifth 61,6 fifth 64,6 fifth 66,6 fifth 8,6 first 10,6 first 18,6 first 20,6 first 29,6 first 38,6 first 39,6 first 61,6 first 64,6 first 66,6 first 8,6 fourth 10,6 fourth 18,6 fourth 20,6 fourth 29,6 fourth 38,6 fourth 39,6 fourth 61,6 fourth 64,6 fourth 66,6 fourth 8,6 second 10,6 second 18,6 second 20,6 second 29,6 second 38,6 second 39,6 second 61,6 second 64,6 second 66,6 second 8,6 square 10,6 square 18,6 square 20,6 square 29,6 square 38,6 square 39,6 square 61,6 square 64,6 square 66,6 square 8,6 third 10,6 third 18,6 third 20,6 third 29,6 third 38,6 third 39,6 third 61,6 third 64,6 third 66,6 third 8
+5000
+201- Uses(synonym, _)
+procedure p; stmt s;
+Select <p,s> such that Uses(p,_)
+fifth 1,fifth 10,fifth 11,fifth 12,fifth 13,fifth 14,fifth 15,fifth 16,fifth 17,fifth 18,fifth 19,fifth 2,fifth 20,fifth 21,fifth 22,fifth 23,fifth 24,fifth 25,fifth 26,fifth 27,fifth 28,fifth 29,fifth 3,fifth 30,fifth 31,fifth 32,fifth 33,fifth 34,fifth 35,fifth 36,fifth 37,fifth 38,fifth 39,fifth 4,fifth 40,fifth 41,fifth 42,fifth 43,fifth 44,fifth 45,fifth 46,fifth 47,fifth 48,fifth 49,fifth 5,fifth 50,fifth 51,fifth 52,fifth 53,fifth 54,fifth 55,fifth 56,fifth 57,fifth 58,fifth 59,fifth 6,fifth 60,fifth 61,fifth 62,fifth 63,fifth 64,fifth 65,fifth 66,fifth 67,fifth 68,fifth 69,fifth 7,fifth 70,fifth 71,fifth 8,fifth 9,first 1,first 10,first 11,first 12,first 13,first 14,first 15,first 16,first 17,first 18,first 19,first 2,first 20,first 21,first 22,first 23,first 24,first 25,first 26,first 27,first 28,first 29,first 3,first 30,first 31,first 32,first 33,first 34,first 35,first 36,first 37,first 38,first 39,first 4,first 40,first 41,first 42,first 43,first 44,first 45,first 46,first 47,first 48,first 49,first 5,first 50,first 51,first 52,first 53,first 54,first 55,first 56,first 57,first 58,first 59,first 6,first 60,first 61,first 62,first 63,first 64,first 65,first 66,first 67,first 68,first 69,first 7,first 70,first 71,first 8,first 9,fourth 1,fourth 10,fourth 11,fourth 12,fourth 13,fourth 14,fourth 15,fourth 16,fourth 17,fourth 18,fourth 19,fourth 2,fourth 20,fourth 21,fourth 22,fourth 23,fourth 24,fourth 25,fourth 26,fourth 27,fourth 28,fourth 29,fourth 3,fourth 30,fourth 31,fourth 32,fourth 33,fourth 34,fourth 35,fourth 36,fourth 37,fourth 38,fourth 39,fourth 4,fourth 40,fourth 41,fourth 42,fourth 43,fourth 44,fourth 45,fourth 46,fourth 47,fourth 48,fourth 49,fourth 5,fourth 50,fourth 51,fourth 52,fourth 53,fourth 54,fourth 55,fourth 56,fourth 57,fourth 58,fourth 59,fourth 6,fourth 60,fourth 61,fourth 62,fourth 63,fourth 64,fourth 65,fourth 66,fourth 67,fourth 68,fourth 69,fourth 7,fourth 70,fourth 71,fourth 8,fourth 9,second 1,second 10,second 11,second 12,second 13,second 14,second 15,second 16,second 17,second 18,second 19,second 2,second 20,second 21,second 22,second 23,second 24,second 25,second 26,second 27,second 28,second 29,second 3,second 30,second 31,second 32,second 33,second 34,second 35,second 36,second 37,second 38,second 39,second 4,second 40,second 41,second 42,second 43,second 44,second 45,second 46,second 47,second 48,second 49,second 5,second 50,second 51,second 52,second 53,second 54,second 55,second 56,second 57,second 58,second 59,second 6,second 60,second 61,second 62,second 63,second 64,second 65,second 66,second 67,second 68,second 69,second 7,second 70,second 71,second 8,second 9,square 1,square 10,square 11,square 12,square 13,square 14,square 15,square 16,square 17,square 18,square 19,square 2,square 20,square 21,square 22,square 23,square 24,square 25,square 26,square 27,square 28,square 29,square 3,square 30,square 31,square 32,square 33,square 34,square 35,square 36,square 37,square 38,square 39,square 4,square 40,square 41,square 42,square 43,square 44,square 45,square 46,square 47,square 48,square 49,square 5,square 50,square 51,square 52,square 53,square 54,square 55,square 56,square 57,square 58,square 59,square 6,square 60,square 61,square 62,square 63,square 64,square 65,square 66,square 67,square 68,square 69,square 7,square 70,square 71,square 8,square 9,third 1,third 10,third 11,third 12,third 13,third 14,third 15,third 16,third 17,third 18,third 19,third 2,third 20,third 21,third 22,third 23,third 24,third 25,third 26,third 27,third 28,third 29,third 3,third 30,third 31,third 32,third 33,third 34,third 35,third 36,third 37,third 38,third 39,third 4,third 40,third 41,third 42,third 43,third 44,third 45,third 46,third 47,third 48,third 49,third 5,third 50,third 51,third 52,third 53,third 54,third 55,third 56,third 57,third 58,third 59,third 6,third 60,third 61,third 62,third 63,third 64,third 65,third 66,third 67,third 68,third 69,third 7,third 70,third 71,third 8,third 9
+5000
+202- Uses(syn,_)
+constant const; while w;
+Select <const, w> such that Uses(const,_)
+SemanticError
+5000
+203- Uses(synonym, v)
+stmt s; variable v;
+Select <v,s> such that Uses(s,v)
+a 10,a 11,a 16,a 6,a 8,a1 4,abc 15,abc 16,ads 10,ads 8,ai 10,ai 12,ai 8,b 13,b 14,b 15,b 16,b 18,b 20,b 21,b 26,b 28,b 3,b 58,b 59,b 8,b1 4,breadth 61,breadth 70,c 14,c 15,c 16,c 18,c 20,c 21,c 26,c 28,c 3,c 58,c 59,cat 18,cat 25,cat 26,cat 3,chicken 18,chicken 26,chicken 29,chicken 3,chicken 30,child 18,child 20,child 3,cow 18,cow 26,cow 3,d 14,d 15,d 16,d 18,d 20,d 21,d 26,d 28,d 3,d 59,donkey 18,donkey 26,donkey 29,donkey 3,donkey 30,donkey 32,donkey 33,donkey 34,e 15,e 16,e 18,e 20,e 21,e 26,e 28,e 3,e 59,f 18,f 20,f 21,f 26,f 28,f 3,f 59,fa8 10,fa8 8,fa9fa 10,fa9fa 8,height 61,height 64,horse 18,horse 26,horse 29,horse 3,horse 30,horse 6,left 8,length 61,length 64,length 66,leo 3,leo 36,leo 53,m 6,moose 18,moose 26,moose 29,moose 3,moose 35,o 6,o 7,p 6,parent 18,parent 20,parent 24,parent 3,power 18,power 20,power 21,power 26,power 28,power 3,power 54,power 55,q 16,q 4,q 5,right 8,right 9,snail 18,snail 20,snail 21,snail 26,snail 28,snail 3,snail 57,snail 58,trip 18,trip 20,trip 21,trip 26,trip 28,trip 3,trip 54,word 18,word 20,word 21,word 23,word 26,word 28,word 29,word 3,word 30,word 31,word 37,word 54,word 56,x 3,x 36,x 38,x 39,x 40,x 41,x 44,x 46,x 47,x 48,x 52,y 3,y 36,y 38,y 39,y 40,y 41,y 42,y 47,y 49,y 50,y 52,z 3,z 36,z 38,z 39,z 40,z 42,zebra 6
+5000
+204- Uses(synonym, v)
+read r; variable v;
+Select <r,v> such that Uses(r,v)
+SemanticError
+5000
+205- Uses(synonym, v)
+assign a; variable v;
+Select <a,v> such that Uses(a,v)
+11 a,13 b,14 b,14 c,14 d,15 abc,15 b,15 c,15 d,15 e,16 a,16 abc,16 b,16 c,16 d,16 e,16 q,25 cat,35 moose,41 x,41 y,42 y,42 z,46 x,48 x,5 q,50 y,52 x,52 y,55 power,58 b,58 c,58 snail,59 b,59 c,59 d,59 e,59 f,7 o,9 right
+5000
+206- Uses(synonym, v)
+while w; variable v;
+Select <w,v> such that Uses(w,v)
+26 b,26 c,26 cat,26 chicken,26 cow,26 d,26 donkey,26 e,26 f,26 horse,26 moose,26 power,26 snail,26 trip,26 word,30 chicken,30 donkey,30 horse,30 word,32 donkey,4 a1,4 b1,4 q,40 x,40 y,40 z,44 x,47 x,47 y,49 y,54 power,54 trip,54 word,6 a,6 horse,6 m,6 o,6 p,6 zebra
+5000
+207- Uses(synonym, v)
+if ifs; variable v;
+Select <ifs,v> such that Uses(ifs,v)
+10 a,10 ads,10 ai,10 fa8,10 fa9fa,18 b,18 c,18 cat,18 chicken,18 child,18 cow,18 d,18 donkey,18 e,18 f,18 horse,18 moose,18 parent,18 power,18 snail,18 trip,18 word,20 b,20 c,20 child,20 d,20 e,20 f,20 parent,20 power,20 snail,20 trip,20 word,29 chicken,29 donkey,29 horse,29 moose,29 word,38 x,38 y,38 z,39 x,39 y,39 z,61 breadth,61 height,61 length,64 height,64 length,66 length,8 a,8 ads,8 ai,8 b,8 fa8,8 fa9fa,8 left,8 right
+5000
+208- Uses(synonym, v)
+call c; variable v;
+Select <c,v> such that Uses(c,v)
+21 b,21 c,21 d,21 e,21 f,21 power,21 snail,21 trip,21 word,23 word,28 b,28 c,28 d,28 e,28 f,28 power,28 snail,28 trip,28 word,3 b,3 c,3 cat,3 chicken,3 child,3 cow,3 d,3 donkey,3 e,3 f,3 horse,3 leo,3 moose,3 parent,3 power,3 snail,3 trip,3 word,3 x,3 y,3 z,31 word,36 leo,36 x,36 y,36 z,56 word
+5000
+209- Uses(synonym, v)
+procedure p; variable v;
+Select <p,v> such that Uses(p,v)
+fifth word,first a,first a1,first abc,first ads,first ai,first b,first b1,first c,first cat,first chicken,first child,first cow,first d,first donkey,first e,first f,first fa8,first fa9fa,first horse,first left,first leo,first m,first moose,first o,first p,first parent,first power,first q,first right,first snail,first trip,first word,first x,first y,first z,first zebra,fourth b,fourth c,fourth d,fourth e,fourth f,fourth power,fourth snail,fourth trip,fourth word,second b,second c,second cat,second chicken,second child,second cow,second d,second donkey,second e,second f,second horse,second leo,second moose,second parent,second power,second snail,second trip,second word,second x,second y,second z,square breadth,square height,square length,third leo,third x,third y,third z
+5000
+210- Uses(syn,v)
+constant const; variable v;
+Select <const,v> such that Uses(const,v)
+SemanticError
+5000
+212- Uses (stmtNo,_)
+call c; assign a;
+Select <c,a> such that Uses(71,_)
+none
+5000
+213- Uses (stmtNo,_)
+read r; assign a;
+Select <r,a> such that Uses(67,_)
+none
+5000
+214- Uses (stmtNo,_)
+constant c; assign a;
+Select <c.value, a.stmt#> such that Uses(20,_)
+0 1,0 11,0 13,0 14,0 15,0 16,0 19,0 25,0 27,0 35,0 41,0 42,0 43,0 45,0 46,0 48,0 5,0 50,0 51,0 52,0 55,0 58,0 59,0 62,0 63,0 65,0 67,0 68,0 69,0 7,0 71,0 9,1 1,1 11,1 13,1 14,1 15,1 16,1 19,1 25,1 27,1 35,1 41,1 42,1 43,1 45,1 46,1 48,1 5,1 50,1 51,1 52,1 55,1 58,1 59,1 62,1 63,1 65,1 67,1 68,1 69,1 7,1 71,1 9,10 1,10 11,10 13,10 14,10 15,10 16,10 19,10 25,10 27,10 35,10 41,10 42,10 43,10 45,10 46,10 48,10 5,10 50,10 51,10 52,10 55,10 58,10 59,10 62,10 63,10 65,10 67,10 68,10 69,10 7,10 71,10 9,1234 1,1234 11,1234 13,1234 14,1234 15,1234 16,1234 19,1234 25,1234 27,1234 35,1234 41,1234 42,1234 43,1234 45,1234 46,1234 48,1234 5,1234 50,1234 51,1234 52,1234 55,1234 58,1234 59,1234 62,1234 63,1234 65,1234 67,1234 68,1234 69,1234 7,1234 71,1234 9,1337 1,1337 11,1337 13,1337 14,1337 15,1337 16,1337 19,1337 25,1337 27,1337 35,1337 41,1337 42,1337 43,1337 45,1337 46,1337 48,1337 5,1337 50,1337 51,1337 52,1337 55,1337 58,1337 59,1337 62,1337 63,1337 65,1337 67,1337 68,1337 69,1337 7,1337 71,1337 9,2 1,2 11,2 13,2 14,2 15,2 16,2 19,2 25,2 27,2 35,2 41,2 42,2 43,2 45,2 46,2 48,2 5,2 50,2 51,2 52,2 55,2 58,2 59,2 62,2 63,2 65,2 67,2 68,2 69,2 7,2 71,2 9,23 1,23 11,23 13,23 14,23 15,23 16,23 19,23 25,23 27,23 35,23 41,23 42,23 43,23 45,23 46,23 48,23 5,23 50,23 51,23 52,23 55,23 58,23 59,23 62,23 63,23 65,23 67,23 68,23 69,23 7,23 71,23 9,24134 1,24134 11,24134 13,24134 14,24134 15,24134 16,24134 19,24134 25,24134 27,24134 35,24134 41,24134 42,24134 43,24134 45,24134 46,24134 48,24134 5,24134 50,24134 51,24134 52,24134 55,24134 58,24134 59,24134 62,24134 63,24134 65,24134 67,24134 68,24134 69,24134 7,24134 71,24134 9,3 1,3 11,3 13,3 14,3 15,3 16,3 19,3 25,3 27,3 35,3 41,3 42,3 43,3 45,3 46,3 48,3 5,3 50,3 51,3 52,3 55,3 58,3 59,3 62,3 63,3 65,3 67,3 68,3 69,3 7,3 71,3 9,322 1,322 11,322 13,322 14,322 15,322 16,322 19,322 25,322 27,322 35,322 41,322 42,322 43,322 45,322 46,322 48,322 5,322 50,322 51,322 52,322 55,322 58,322 59,322 62,322 63,322 65,322 67,322 68,322 69,322 7,322 71,322 9,44 1,44 11,44 13,44 14,44 15,44 16,44 19,44 25,44 27,44 35,44 41,44 42,44 43,44 45,44 46,44 48,44 5,44 50,44 51,44 52,44 55,44 58,44 59,44 62,44 63,44 65,44 67,44 68,44 69,44 7,44 71,44 9,5 1,5 11,5 13,5 14,5 15,5 16,5 19,5 25,5 27,5 35,5 41,5 42,5 43,5 45,5 46,5 48,5 5,5 50,5 51,5 52,5 55,5 58,5 59,5 62,5 63,5 65,5 67,5 68,5 69,5 7,5 71,5 9,89 1,89 11,89 13,89 14,89 15,89 16,89 19,89 25,89 27,89 35,89 41,89 42,89 43,89 45,89 46,89 48,89 5,89 50,89 51,89 52,89 55,89 58,89 59,89 62,89 63,89 65,89 67,89 68,89 69,89 7,89 71,89 9,9 1,9 11,9 13,9 14,9 15,9 16,9 19,9 25,9 27,9 35,9 41,9 42,9 43,9 45,9 46,9 48,9 5,9 50,9 51,9 52,9 55,9 58,9 59,9 62,9 63,9 65,9 67,9 68,9 69,9 7,9 71,9 9
+5000
+215- Uses (stmtNo,syn)
+constant c; assign a; variable v;
+Select <v.varName, a.stmt#, c.value> such that Uses(5,v)
+q 1 0,q 1 1,q 1 10,q 1 1234,q 1 1337,q 1 2,q 1 23,q 1 24134,q 1 3,q 1 322,q 1 44,q 1 5,q 1 89,q 1 9,q 11 0,q 11 1,q 11 10,q 11 1234,q 11 1337,q 11 2,q 11 23,q 11 24134,q 11 3,q 11 322,q 11 44,q 11 5,q 11 89,q 11 9,q 13 0,q 13 1,q 13 10,q 13 1234,q 13 1337,q 13 2,q 13 23,q 13 24134,q 13 3,q 13 322,q 13 44,q 13 5,q 13 89,q 13 9,q 14 0,q 14 1,q 14 10,q 14 1234,q 14 1337,q 14 2,q 14 23,q 14 24134,q 14 3,q 14 322,q 14 44,q 14 5,q 14 89,q 14 9,q 15 0,q 15 1,q 15 10,q 15 1234,q 15 1337,q 15 2,q 15 23,q 15 24134,q 15 3,q 15 322,q 15 44,q 15 5,q 15 89,q 15 9,q 16 0,q 16 1,q 16 10,q 16 1234,q 16 1337,q 16 2,q 16 23,q 16 24134,q 16 3,q 16 322,q 16 44,q 16 5,q 16 89,q 16 9,q 19 0,q 19 1,q 19 10,q 19 1234,q 19 1337,q 19 2,q 19 23,q 19 24134,q 19 3,q 19 322,q 19 44,q 19 5,q 19 89,q 19 9,q 25 0,q 25 1,q 25 10,q 25 1234,q 25 1337,q 25 2,q 25 23,q 25 24134,q 25 3,q 25 322,q 25 44,q 25 5,q 25 89,q 25 9,q 27 0,q 27 1,q 27 10,q 27 1234,q 27 1337,q 27 2,q 27 23,q 27 24134,q 27 3,q 27 322,q 27 44,q 27 5,q 27 89,q 27 9,q 35 0,q 35 1,q 35 10,q 35 1234,q 35 1337,q 35 2,q 35 23,q 35 24134,q 35 3,q 35 322,q 35 44,q 35 5,q 35 89,q 35 9,q 41 0,q 41 1,q 41 10,q 41 1234,q 41 1337,q 41 2,q 41 23,q 41 24134,q 41 3,q 41 322,q 41 44,q 41 5,q 41 89,q 41 9,q 42 0,q 42 1,q 42 10,q 42 1234,q 42 1337,q 42 2,q 42 23,q 42 24134,q 42 3,q 42 322,q 42 44,q 42 5,q 42 89,q 42 9,q 43 0,q 43 1,q 43 10,q 43 1234,q 43 1337,q 43 2,q 43 23,q 43 24134,q 43 3,q 43 322,q 43 44,q 43 5,q 43 89,q 43 9,q 45 0,q 45 1,q 45 10,q 45 1234,q 45 1337,q 45 2,q 45 23,q 45 24134,q 45 3,q 45 322,q 45 44,q 45 5,q 45 89,q 45 9,q 46 0,q 46 1,q 46 10,q 46 1234,q 46 1337,q 46 2,q 46 23,q 46 24134,q 46 3,q 46 322,q 46 44,q 46 5,q 46 89,q 46 9,q 48 0,q 48 1,q 48 10,q 48 1234,q 48 1337,q 48 2,q 48 23,q 48 24134,q 48 3,q 48 322,q 48 44,q 48 5,q 48 89,q 48 9,q 5 0,q 5 1,q 5 10,q 5 1234,q 5 1337,q 5 2,q 5 23,q 5 24134,q 5 3,q 5 322,q 5 44,q 5 5,q 5 89,q 5 9,q 50 0,q 50 1,q 50 10,q 50 1234,q 50 1337,q 50 2,q 50 23,q 50 24134,q 50 3,q 50 322,q 50 44,q 50 5,q 50 89,q 50 9,q 51 0,q 51 1,q 51 10,q 51 1234,q 51 1337,q 51 2,q 51 23,q 51 24134,q 51 3,q 51 322,q 51 44,q 51 5,q 51 89,q 51 9,q 52 0,q 52 1,q 52 10,q 52 1234,q 52 1337,q 52 2,q 52 23,q 52 24134,q 52 3,q 52 322,q 52 44,q 52 5,q 52 89,q 52 9,q 55 0,q 55 1,q 55 10,q 55 1234,q 55 1337,q 55 2,q 55 23,q 55 24134,q 55 3,q 55 322,q 55 44,q 55 5,q 55 89,q 55 9,q 58 0,q 58 1,q 58 10,q 58 1234,q 58 1337,q 58 2,q 58 23,q 58 24134,q 58 3,q 58 322,q 58 44,q 58 5,q 58 89,q 58 9,q 59 0,q 59 1,q 59 10,q 59 1234,q 59 1337,q 59 2,q 59 23,q 59 24134,q 59 3,q 59 322,q 59 44,q 59 5,q 59 89,q 59 9,q 62 0,q 62 1,q 62 10,q 62 1234,q 62 1337,q 62 2,q 62 23,q 62 24134,q 62 3,q 62 322,q 62 44,q 62 5,q 62 89,q 62 9,q 63 0,q 63 1,q 63 10,q 63 1234,q 63 1337,q 63 2,q 63 23,q 63 24134,q 63 3,q 63 322,q 63 44,q 63 5,q 63 89,q 63 9,q 65 0,q 65 1,q 65 10,q 65 1234,q 65 1337,q 65 2,q 65 23,q 65 24134,q 65 3,q 65 322,q 65 44,q 65 5,q 65 89,q 65 9,q 67 0,q 67 1,q 67 10,q 67 1234,q 67 1337,q 67 2,q 67 23,q 67 24134,q 67 3,q 67 322,q 67 44,q 67 5,q 67 89,q 67 9,q 68 0,q 68 1,q 68 10,q 68 1234,q 68 1337,q 68 2,q 68 23,q 68 24134,q 68 3,q 68 322,q 68 44,q 68 5,q 68 89,q 68 9,q 69 0,q 69 1,q 69 10,q 69 1234,q 69 1337,q 69 2,q 69 23,q 69 24134,q 69 3,q 69 322,q 69 44,q 69 5,q 69 89,q 69 9,q 7 0,q 7 1,q 7 10,q 7 1234,q 7 1337,q 7 2,q 7 23,q 7 24134,q 7 3,q 7 322,q 7 44,q 7 5,q 7 89,q 7 9,q 71 0,q 71 1,q 71 10,q 71 1234,q 71 1337,q 71 2,q 71 23,q 71 24134,q 71 3,q 71 322,q 71 44,q 71 5,q 71 89,q 71 9,q 9 0,q 9 1,q 9 10,q 9 1234,q 9 1337,q 9 2,q 9 23,q 9 24134,q 9 3,q 9 322,q 9 44,q 9 5,q 9 89,q 9 9
+5000
+216- Uses (stmtNo,syn)
+stmt s; assign a; variable v; procedure p;
+Select <p.procName, v.varName, a> such that Uses(7,v)
+extra o 1,extra o 11,extra o 13,extra o 14,extra o 15,extra o 16,extra o 19,extra o 25,extra o 27,extra o 35,extra o 41,extra o 42,extra o 43,extra o 45,extra o 46,extra o 48,extra o 5,extra o 50,extra o 51,extra o 52,extra o 55,extra o 58,extra o 59,extra o 62,extra o 63,extra o 65,extra o 67,extra o 68,extra o 69,extra o 7,extra o 71,extra o 9,fifth o 1,fifth o 11,fifth o 13,fifth o 14,fifth o 15,fifth o 16,fifth o 19,fifth o 25,fifth o 27,fifth o 35,fifth o 41,fifth o 42,fifth o 43,fifth o 45,fifth o 46,fifth o 48,fifth o 5,fifth o 50,fifth o 51,fifth o 52,fifth o 55,fifth o 58,fifth o 59,fifth o 62,fifth o 63,fifth o 65,fifth o 67,fifth o 68,fifth o 69,fifth o 7,fifth o 71,fifth o 9,first o 1,first o 11,first o 13,first o 14,first o 15,first o 16,first o 19,first o 25,first o 27,first o 35,first o 41,first o 42,first o 43,first o 45,first o 46,first o 48,first o 5,first o 50,first o 51,first o 52,first o 55,first o 58,first o 59,first o 62,first o 63,first o 65,first o 67,first o 68,first o 69,first o 7,first o 71,first o 9,fourth o 1,fourth o 11,fourth o 13,fourth o 14,fourth o 15,fourth o 16,fourth o 19,fourth o 25,fourth o 27,fourth o 35,fourth o 41,fourth o 42,fourth o 43,fourth o 45,fourth o 46,fourth o 48,fourth o 5,fourth o 50,fourth o 51,fourth o 52,fourth o 55,fourth o 58,fourth o 59,fourth o 62,fourth o 63,fourth o 65,fourth o 67,fourth o 68,fourth o 69,fourth o 7,fourth o 71,fourth o 9,second o 1,second o 11,second o 13,second o 14,second o 15,second o 16,second o 19,second o 25,second o 27,second o 35,second o 41,second o 42,second o 43,second o 45,second o 46,second o 48,second o 5,second o 50,second o 51,second o 52,second o 55,second o 58,second o 59,second o 62,second o 63,second o 65,second o 67,second o 68,second o 69,second o 7,second o 71,second o 9,square o 1,square o 11,square o 13,square o 14,square o 15,square o 16,square o 19,square o 25,square o 27,square o 35,square o 41,square o 42,square o 43,square o 45,square o 46,square o 48,square o 5,square o 50,square o 51,square o 52,square o 55,square o 58,square o 59,square o 62,square o 63,square o 65,square o 67,square o 68,square o 69,square o 7,square o 71,square o 9,third o 1,third o 11,third o 13,third o 14,third o 15,third o 16,third o 19,third o 25,third o 27,third o 35,third o 41,third o 42,third o 43,third o 45,third o 46,third o 48,third o 5,third o 50,third o 51,third o 52,third o 55,third o 58,third o 59,third o 62,third o 63,third o 65,third o 67,third o 68,third o 69,third o 7,third o 71,third o 9
+5000
+217- Uses (stmtNo,syn)
+read r; assign a; variable v;
+Select <v.varName, r> such that Uses(10,v)
+a 17,a 2,a 22,a 60,ads 17,ads 2,ads 22,ads 60,ai 17,ai 2,ai 22,ai 60,fa8 17,fa8 2,fa8 22,fa8 60,fa9fa 17,fa9fa 2,fa9fa 22,fa9fa 60
+5000
+218- Uses (stmtNo,syn)
+read r; assign a; variable v;
+Select v such that Uses(999,v)
+none
+5000
+219- Uses(synonym, IDENT)
+stmt s; variable v;
+Select <s.stmt#,v.varName> such that Uses(s,"third")
+none
+5000
+220- Uses(synonym, IDENT)
+stmt s; read r; variable v;
+Select <r.varName, s.stmt#> such that Uses(r,"cow")
+SemanticError
+5000
+221- Uses(synonym, IDENT)
+stmt s; assign a; variable v;
+Select <s,a.stmt#> such that Uses(a,"x")
+1 41,1 46,1 48,1 52,10 41,10 46,10 48,10 52,11 41,11 46,11 48,11 52,12 41,12 46,12 48,12 52,13 41,13 46,13 48,13 52,14 41,14 46,14 48,14 52,15 41,15 46,15 48,15 52,16 41,16 46,16 48,16 52,17 41,17 46,17 48,17 52,18 41,18 46,18 48,18 52,19 41,19 46,19 48,19 52,2 41,2 46,2 48,2 52,20 41,20 46,20 48,20 52,21 41,21 46,21 48,21 52,22 41,22 46,22 48,22 52,23 41,23 46,23 48,23 52,24 41,24 46,24 48,24 52,25 41,25 46,25 48,25 52,26 41,26 46,26 48,26 52,27 41,27 46,27 48,27 52,28 41,28 46,28 48,28 52,29 41,29 46,29 48,29 52,3 41,3 46,3 48,3 52,30 41,30 46,30 48,30 52,31 41,31 46,31 48,31 52,32 41,32 46,32 48,32 52,33 41,33 46,33 48,33 52,34 41,34 46,34 48,34 52,35 41,35 46,35 48,35 52,36 41,36 46,36 48,36 52,37 41,37 46,37 48,37 52,38 41,38 46,38 48,38 52,39 41,39 46,39 48,39 52,4 41,4 46,4 48,4 52,40 41,40 46,40 48,40 52,41 41,41 46,41 48,41 52,42 41,42 46,42 48,42 52,43 41,43 46,43 48,43 52,44 41,44 46,44 48,44 52,45 41,45 46,45 48,45 52,46 41,46 46,46 48,46 52,47 41,47 46,47 48,47 52,48 41,48 46,48 48,48 52,49 41,49 46,49 48,49 52,5 41,5 46,5 48,5 52,50 41,50 46,50 48,50 52,51 41,51 46,51 48,51 52,52 41,52 46,52 48,52 52,53 41,53 46,53 48,53 52,54 41,54 46,54 48,54 52,55 41,55 46,55 48,55 52,56 41,56 46,56 48,56 52,57 41,57 46,57 48,57 52,58 41,58 46,58 48,58 52,59 41,59 46,59 48,59 52,6 41,6 46,6 48,6 52,60 41,60 46,60 48,60 52,61 41,61 46,61 48,61 52,62 41,62 46,62 48,62 52,63 41,63 46,63 48,63 52,64 41,64 46,64 48,64 52,65 41,65 46,65 48,65 52,66 41,66 46,66 48,66 52,67 41,67 46,67 48,67 52,68 41,68 46,68 48,68 52,69 41,69 46,69 48,69 52,7 41,7 46,7 48,7 52,70 41,70 46,70 48,70 52,71 41,71 46,71 48,71 52,8 41,8 46,8 48,8 52,9 41,9 46,9 48,9 52
+5000
+222- Uses(synonym, IDENT)
+stmt s; while w; variable v;
+Select <w.stmt#, v.varName> such that Uses(w,"y")
+40 a,40 a1,40 abc,40 ads,40 ai,40 b,40 b1,40 breadth,40 c,40 cat,40 chicken,40 child,40 code,40 cow,40 d,40 derp,40 donkey,40 e,40 f,40 fa8,40 fa9fa,40 height,40 horse,40 k,40 left,40 length,40 leo,40 m,40 moose,40 n,40 o,40 p,40 parent,40 power,40 q,40 right,40 snail,40 trip,40 word,40 x,40 y,40 z,40 zebra,47 a,47 a1,47 abc,47 ads,47 ai,47 b,47 b1,47 breadth,47 c,47 cat,47 chicken,47 child,47 code,47 cow,47 d,47 derp,47 donkey,47 e,47 f,47 fa8,47 fa9fa,47 height,47 horse,47 k,47 left,47 length,47 leo,47 m,47 moose,47 n,47 o,47 p,47 parent,47 power,47 q,47 right,47 snail,47 trip,47 word,47 x,47 y,47 z,47 zebra,49 a,49 a1,49 abc,49 ads,49 ai,49 b,49 b1,49 breadth,49 c,49 cat,49 chicken,49 child,49 code,49 cow,49 d,49 derp,49 donkey,49 e,49 f,49 fa8,49 fa9fa,49 height,49 horse,49 k,49 left,49 length,49 leo,49 m,49 moose,49 n,49 o,49 p,49 parent,49 power,49 q,49 right,49 snail,49 trip,49 word,49 x,49 y,49 z,49 zebra
+5000
+223- Uses(synonym, IDENT)
+stmt s; if ifs; variable v;
+Select <ifs.stmt#, v> such that Uses(ifs,"chicken")
+18 a,18 a1,18 abc,18 ads,18 ai,18 b,18 b1,18 breadth,18 c,18 cat,18 chicken,18 child,18 code,18 cow,18 d,18 derp,18 donkey,18 e,18 f,18 fa8,18 fa9fa,18 height,18 horse,18 k,18 left,18 length,18 leo,18 m,18 moose,18 n,18 o,18 p,18 parent,18 power,18 q,18 right,18 snail,18 trip,18 word,18 x,18 y,18 z,18 zebra,29 a,29 a1,29 abc,29 ads,29 ai,29 b,29 b1,29 breadth,29 c,29 cat,29 chicken,29 child,29 code,29 cow,29 d,29 derp,29 donkey,29 e,29 f,29 fa8,29 fa9fa,29 height,29 horse,29 k,29 left,29 length,29 leo,29 m,29 moose,29 n,29 o,29 p,29 parent,29 power,29 q,29 right,29 snail,29 trip,29 word,29 x,29 y,29 z,29 zebra
+5000
+224- Uses(synonym, IDENT)
+stmt s; call c; variable v;
+Select <c.procName, v.varName , s> such that Uses(c,"first")
+none
+5000
+225- Uses(synonym, IDENT)
+stmt s; procedure p; variable v;
+Select <p.procName, v.varName, s.stmt#> such that Uses(p,"third")
+none
+5000
+226- Uses(syn,IDENT)
+stmt s; constant const; variable v;
+Select <const.value, v.varName, s.stmt#> such that Uses(const,"4")
+SyntaxError
+5000
+228- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select <w, a.stmt#> such that Uses(r,v)
+SemanticError
+5000
+229- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select <c.procName, v> such that Uses(a,v)
+fifth a,fifth abc,fifth b,fifth c,fifth cat,fifth d,fifth e,fifth f,fifth moose,fifth o,fifth power,fifth q,fifth right,fifth snail,fifth x,fifth y,fifth z,fourth a,fourth abc,fourth b,fourth c,fourth cat,fourth d,fourth e,fourth f,fourth moose,fourth o,fourth power,fourth q,fourth right,fourth snail,fourth x,fourth y,fourth z,second a,second abc,second b,second c,second cat,second d,second e,second f,second moose,second o,second power,second q,second right,second snail,second x,second y,second z,third a,third abc,third b,third c,third cat,third d,third e,third f,third moose,third o,third power,third q,third right,third snail,third x,third y,third z
+5000
+230- Uses(synonym, v)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select <ifs, c> such that Uses(w,v)
+10 21,10 23,10 28,10 3,10 31,10 36,10 56,18 21,18 23,18 28,18 3,18 31,18 36,18 56,20 21,20 23,20 28,20 3,20 31,20 36,20 56,29 21,29 23,29 28,29 3,29 31,29 36,29 56,38 21,38 23,38 28,38 3,38 31,38 36,38 56,39 21,39 23,39 28,39 3,39 31,39 36,39 56,61 21,61 23,61 28,61 3,61 31,61 36,61 56,64 21,64 23,64 28,64 3,64 31,64 36,64 56,66 21,66 23,66 28,66 3,66 31,66 36,66 56,8 21,8 23,8 28,8 3,8 31,8 36,8 56
+5000
+231- Uses(proc, _)
+procedure p, q;
+Select <p.procName, q.procName> such that Uses(p,_)
+fifth extra,fifth fifth,fifth first,fifth fourth,fifth second,fifth square,fifth third,first extra,first fifth,first first,first fourth,first second,first square,first third,fourth extra,fourth fifth,fourth first,fourth fourth,fourth second,fourth square,fourth third,second extra,second fifth,second first,second fourth,second second,second square,second third,square extra,square fifth,square first,square fourth,square second,square square,square third,third extra,third fifth,third first,third fourth,third second,third square,third third
+5000
+232- Uses(proc, v)
+procedure p, q; variable v;
+Select <p, v.varName> such that Uses(p,v)
+fifth word,first a,first a1,first abc,first ads,first ai,first b,first b1,first c,first cat,first chicken,first child,first cow,first d,first donkey,first e,first f,first fa8,first fa9fa,first horse,first left,first leo,first m,first moose,first o,first p,first parent,first power,first q,first right,first snail,first trip,first word,first x,first y,first z,first zebra,fourth b,fourth c,fourth d,fourth e,fourth f,fourth power,fourth snail,fourth trip,fourth word,second b,second c,second cat,second chicken,second child,second cow,second d,second donkey,second e,second f,second horse,second leo,second moose,second parent,second power,second snail,second trip,second word,second x,second y,second z,square breadth,square height,square length,third leo,third x,third y,third z
+5000
+233- Uses(proc, ident)
+procedure p;
+Select <p> such that Uses(p,"square")
+none
+5000
+234- Uses(proc, ident)
+procedure p; stmt s;
+Select <s, p.procName> such that Uses(p,"derp")
+none
+5000
+235- Uses(proc, ident)
+procedure p; assign a;
+Select <a, p> such that Uses(p,"h")
+none
+5000
+236- Uses(proc_name, ident)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select <v, s> such that Uses("second","donkey")
+a 1,a 10,a 11,a 12,a 13,a 14,a 15,a 16,a 17,a 18,a 19,a 2,a 20,a 21,a 22,a 23,a 24,a 25,a 26,a 27,a 28,a 29,a 3,a 30,a 31,a 32,a 33,a 34,a 35,a 36,a 37,a 38,a 39,a 4,a 40,a 41,a 42,a 43,a 44,a 45,a 46,a 47,a 48,a 49,a 5,a 50,a 51,a 52,a 53,a 54,a 55,a 56,a 57,a 58,a 59,a 6,a 60,a 61,a 62,a 63,a 64,a 65,a 66,a 67,a 68,a 69,a 7,a 70,a 71,a 8,a 9,a1 1,a1 10,a1 11,a1 12,a1 13,a1 14,a1 15,a1 16,a1 17,a1 18,a1 19,a1 2,a1 20,a1 21,a1 22,a1 23,a1 24,a1 25,a1 26,a1 27,a1 28,a1 29,a1 3,a1 30,a1 31,a1 32,a1 33,a1 34,a1 35,a1 36,a1 37,a1 38,a1 39,a1 4,a1 40,a1 41,a1 42,a1 43,a1 44,a1 45,a1 46,a1 47,a1 48,a1 49,a1 5,a1 50,a1 51,a1 52,a1 53,a1 54,a1 55,a1 56,a1 57,a1 58,a1 59,a1 6,a1 60,a1 61,a1 62,a1 63,a1 64,a1 65,a1 66,a1 67,a1 68,a1 69,a1 7,a1 70,a1 71,a1 8,a1 9,abc 1,abc 10,abc 11,abc 12,abc 13,abc 14,abc 15,abc 16,abc 17,abc 18,abc 19,abc 2,abc 20,abc 21,abc 22,abc 23,abc 24,abc 25,abc 26,abc 27,abc 28,abc 29,abc 3,abc 30,abc 31,abc 32,abc 33,abc 34,abc 35,abc 36,abc 37,abc 38,abc 39,abc 4,abc 40,abc 41,abc 42,abc 43,abc 44,abc 45,abc 46,abc 47,abc 48,abc 49,abc 5,abc 50,abc 51,abc 52,abc 53,abc 54,abc 55,abc 56,abc 57,abc 58,abc 59,abc 6,abc 60,abc 61,abc 62,abc 63,abc 64,abc 65,abc 66,abc 67,abc 68,abc 69,abc 7,abc 70,abc 71,abc 8,abc 9,ads 1,ads 10,ads 11,ads 12,ads 13,ads 14,ads 15,ads 16,ads 17,ads 18,ads 19,ads 2,ads 20,ads 21,ads 22,ads 23,ads 24,ads 25,ads 26,ads 27,ads 28,ads 29,ads 3,ads 30,ads 31,ads 32,ads 33,ads 34,ads 35,ads 36,ads 37,ads 38,ads 39,ads 4,ads 40,ads 41,ads 42,ads 43,ads 44,ads 45,ads 46,ads 47,ads 48,ads 49,ads 5,ads 50,ads 51,ads 52,ads 53,ads 54,ads 55,ads 56,ads 57,ads 58,ads 59,ads 6,ads 60,ads 61,ads 62,ads 63,ads 64,ads 65,ads 66,ads 67,ads 68,ads 69,ads 7,ads 70,ads 71,ads 8,ads 9,ai 1,ai 10,ai 11,ai 12,ai 13,ai 14,ai 15,ai 16,ai 17,ai 18,ai 19,ai 2,ai 20,ai 21,ai 22,ai 23,ai 24,ai 25,ai 26,ai 27,ai 28,ai 29,ai 3,ai 30,ai 31,ai 32,ai 33,ai 34,ai 35,ai 36,ai 37,ai 38,ai 39,ai 4,ai 40,ai 41,ai 42,ai 43,ai 44,ai 45,ai 46,ai 47,ai 48,ai 49,ai 5,ai 50,ai 51,ai 52,ai 53,ai 54,ai 55,ai 56,ai 57,ai 58,ai 59,ai 6,ai 60,ai 61,ai 62,ai 63,ai 64,ai 65,ai 66,ai 67,ai 68,ai 69,ai 7,ai 70,ai 71,ai 8,ai 9,b 1,b 10,b 11,b 12,b 13,b 14,b 15,b 16,b 17,b 18,b 19,b 2,b 20,b 21,b 22,b 23,b 24,b 25,b 26,b 27,b 28,b 29,b 3,b 30,b 31,b 32,b 33,b 34,b 35,b 36,b 37,b 38,b 39,b 4,b 40,b 41,b 42,b 43,b 44,b 45,b 46,b 47,b 48,b 49,b 5,b 50,b 51,b 52,b 53,b 54,b 55,b 56,b 57,b 58,b 59,b 6,b 60,b 61,b 62,b 63,b 64,b 65,b 66,b 67,b 68,b 69,b 7,b 70,b 71,b 8,b 9,b1 1,b1 10,b1 11,b1 12,b1 13,b1 14,b1 15,b1 16,b1 17,b1 18,b1 19,b1 2,b1 20,b1 21,b1 22,b1 23,b1 24,b1 25,b1 26,b1 27,b1 28,b1 29,b1 3,b1 30,b1 31,b1 32,b1 33,b1 34,b1 35,b1 36,b1 37,b1 38,b1 39,b1 4,b1 40,b1 41,b1 42,b1 43,b1 44,b1 45,b1 46,b1 47,b1 48,b1 49,b1 5,b1 50,b1 51,b1 52,b1 53,b1 54,b1 55,b1 56,b1 57,b1 58,b1 59,b1 6,b1 60,b1 61,b1 62,b1 63,b1 64,b1 65,b1 66,b1 67,b1 68,b1 69,b1 7,b1 70,b1 71,b1 8,b1 9,breadth 1,breadth 10,breadth 11,breadth 12,breadth 13,breadth 14,breadth 15,breadth 16,breadth 17,breadth 18,breadth 19,breadth 2,breadth 20,breadth 21,breadth 22,breadth 23,breadth 24,breadth 25,breadth 26,breadth 27,breadth 28,breadth 29,breadth 3,breadth 30,breadth 31,breadth 32,breadth 33,breadth 34,breadth 35,breadth 36,breadth 37,breadth 38,breadth 39,breadth 4,breadth 40,breadth 41,breadth 42,breadth 43,breadth 44,breadth 45,breadth 46,breadth 47,breadth 48,breadth 49,breadth 5,breadth 50,breadth 51,breadth 52,breadth 53,breadth 54,breadth 55,breadth 56,breadth 57,breadth 58,breadth 59,breadth 6,breadth 60,breadth 61,breadth 62,breadth 63,breadth 64,breadth 65,breadth 66,breadth 67,breadth 68,breadth 69,breadth 7,breadth 70,breadth 71,breadth 8,breadth 9,c 1,c 10,c 11,c 12,c 13,c 14,c 15,c 16,c 17,c 18,c 19,c 2,c 20,c 21,c 22,c 23,c 24,c 25,c 26,c 27,c 28,c 29,c 3,c 30,c 31,c 32,c 33,c 34,c 35,c 36,c 37,c 38,c 39,c 4,c 40,c 41,c 42,c 43,c 44,c 45,c 46,c 47,c 48,c 49,c 5,c 50,c 51,c 52,c 53,c 54,c 55,c 56,c 57,c 58,c 59,c 6,c 60,c 61,c 62,c 63,c 64,c 65,c 66,c 67,c 68,c 69,c 7,c 70,c 71,c 8,c 9,cat 1,cat 10,cat 11,cat 12,cat 13,cat 14,cat 15,cat 16,cat 17,cat 18,cat 19,cat 2,cat 20,cat 21,cat 22,cat 23,cat 24,cat 25,cat 26,cat 27,cat 28,cat 29,cat 3,cat 30,cat 31,cat 32,cat 33,cat 34,cat 35,cat 36,cat 37,cat 38,cat 39,cat 4,cat 40,cat 41,cat 42,cat 43,cat 44,cat 45,cat 46,cat 47,cat 48,cat 49,cat 5,cat 50,cat 51,cat 52,cat 53,cat 54,cat 55,cat 56,cat 57,cat 58,cat 59,cat 6,cat 60,cat 61,cat 62,cat 63,cat 64,cat 65,cat 66,cat 67,cat 68,cat 69,cat 7,cat 70,cat 71,cat 8,cat 9,chicken 1,chicken 10,chicken 11,chicken 12,chicken 13,chicken 14,chicken 15,chicken 16,chicken 17,chicken 18,chicken 19,chicken 2,chicken 20,chicken 21,chicken 22,chicken 23,chicken 24,chicken 25,chicken 26,chicken 27,chicken 28,chicken 29,chicken 3,chicken 30,chicken 31,chicken 32,chicken 33,chicken 34,chicken 35,chicken 36,chicken 37,chicken 38,chicken 39,chicken 4,chicken 40,chicken 41,chicken 42,chicken 43,chicken 44,chicken 45,chicken 46,chicken 47,chicken 48,chicken 49,chicken 5,chicken 50,chicken 51,chicken 52,chicken 53,chicken 54,chicken 55,chicken 56,chicken 57,chicken 58,chicken 59,chicken 6,chicken 60,chicken 61,chicken 62,chicken 63,chicken 64,chicken 65,chicken 66,chicken 67,chicken 68,chicken 69,chicken 7,chicken 70,chicken 71,chicken 8,chicken 9,child 1,child 10,child 11,child 12,child 13,child 14,child 15,child 16,child 17,child 18,child 19,child 2,child 20,child 21,child 22,child 23,child 24,child 25,child 26,child 27,child 28,child 29,child 3,child 30,child 31,child 32,child 33,child 34,child 35,child 36,child 37,child 38,child 39,child 4,child 40,child 41,child 42,child 43,child 44,child 45,child 46,child 47,child 48,child 49,child 5,child 50,child 51,child 52,child 53,child 54,child 55,child 56,child 57,child 58,child 59,child 6,child 60,child 61,child 62,child 63,child 64,child 65,child 66,child 67,child 68,child 69,child 7,child 70,child 71,child 8,child 9,code 1,code 10,code 11,code 12,code 13,code 14,code 15,code 16,code 17,code 18,code 19,code 2,code 20,code 21,code 22,code 23,code 24,code 25,code 26,code 27,code 28,code 29,code 3,code 30,code 31,code 32,code 33,code 34,code 35,code 36,code 37,code 38,code 39,code 4,code 40,code 41,code 42,code 43,code 44,code 45,code 46,code 47,code 48,code 49,code 5,code 50,code 51,code 52,code 53,code 54,code 55,code 56,code 57,code 58,code 59,code 6,code 60,code 61,code 62,code 63,code 64,code 65,code 66,code 67,code 68,code 69,code 7,code 70,code 71,code 8,code 9,cow 1,cow 10,cow 11,cow 12,cow 13,cow 14,cow 15,cow 16,cow 17,cow 18,cow 19,cow 2,cow 20,cow 21,cow 22,cow 23,cow 24,cow 25,cow 26,cow 27,cow 28,cow 29,cow 3,cow 30,cow 31,cow 32,cow 33,cow 34,cow 35,cow 36,cow 37,cow 38,cow 39,cow 4,cow 40,cow 41,cow 42,cow 43,cow 44,cow 45,cow 46,cow 47,cow 48,cow 49,cow 5,cow 50,cow 51,cow 52,cow 53,cow 54,cow 55,cow 56,cow 57,cow 58,cow 59,cow 6,cow 60,cow 61,cow 62,cow 63,cow 64,cow 65,cow 66,cow 67,cow 68,cow 69,cow 7,cow 70,cow 71,cow 8,cow 9,d 1,d 10,d 11,d 12,d 13,d 14,d 15,d 16,d 17,d 18,d 19,d 2,d 20,d 21,d 22,d 23,d 24,d 25,d 26,d 27,d 28,d 29,d 3,d 30,d 31,d 32,d 33,d 34,d 35,d 36,d 37,d 38,d 39,d 4,d 40,d 41,d 42,d 43,d 44,d 45,d 46,d 47,d 48,d 49,d 5,d 50,d 51,d 52,d 53,d 54,d 55,d 56,d 57,d 58,d 59,d 6,d 60,d 61,d 62,d 63,d 64,d 65,d 66,d 67,d 68,d 69,d 7,d 70,d 71,d 8,d 9,derp 1,derp 10,derp 11,derp 12,derp 13,derp 14,derp 15,derp 16,derp 17,derp 18,derp 19,derp 2,derp 20,derp 21,derp 22,derp 23,derp 24,derp 25,derp 26,derp 27,derp 28,derp 29,derp 3,derp 30,derp 31,derp 32,derp 33,derp 34,derp 35,derp 36,derp 37,derp 38,derp 39,derp 4,derp 40,derp 41,derp 42,derp 43,derp 44,derp 45,derp 46,derp 47,derp 48,derp 49,derp 5,derp 50,derp 51,derp 52,derp 53,derp 54,derp 55,derp 56,derp 57,derp 58,derp 59,derp 6,derp 60,derp 61,derp 62,derp 63,derp 64,derp 65,derp 66,derp 67,derp 68,derp 69,derp 7,derp 70,derp 71,derp 8,derp 9,donkey 1,donkey 10,donkey 11,donkey 12,donkey 13,donkey 14,donkey 15,donkey 16,donkey 17,donkey 18,donkey 19,donkey 2,donkey 20,donkey 21,donkey 22,donkey 23,donkey 24,donkey 25,donkey 26,donkey 27,donkey 28,donkey 29,donkey 3,donkey 30,donkey 31,donkey 32,donkey 33,donkey 34,donkey 35,donkey 36,donkey 37,donkey 38,donkey 39,donkey 4,donkey 40,donkey 41,donkey 42,donkey 43,donkey 44,donkey 45,donkey 46,donkey 47,donkey 48,donkey 49,donkey 5,donkey 50,donkey 51,donkey 52,donkey 53,donkey 54,donkey 55,donkey 56,donkey 57,donkey 58,donkey 59,donkey 6,donkey 60,donkey 61,donkey 62,donkey 63,donkey 64,donkey 65,donkey 66,donkey 67,donkey 68,donkey 69,donkey 7,donkey 70,donkey 71,donkey 8,donkey 9,e 1,e 10,e 11,e 12,e 13,e 14,e 15,e 16,e 17,e 18,e 19,e 2,e 20,e 21,e 22,e 23,e 24,e 25,e 26,e 27,e 28,e 29,e 3,e 30,e 31,e 32,e 33,e 34,e 35,e 36,e 37,e 38,e 39,e 4,e 40,e 41,e 42,e 43,e 44,e 45,e 46,e 47,e 48,e 49,e 5,e 50,e 51,e 52,e 53,e 54,e 55,e 56,e 57,e 58,e 59,e 6,e 60,e 61,e 62,e 63,e 64,e 65,e 66,e 67,e 68,e 69,e 7,e 70,e 71,e 8,e 9,f 1,f 10,f 11,f 12,f 13,f 14,f 15,f 16,f 17,f 18,f 19,f 2,f 20,f 21,f 22,f 23,f 24,f 25,f 26,f 27,f 28,f 29,f 3,f 30,f 31,f 32,f 33,f 34,f 35,f 36,f 37,f 38,f 39,f 4,f 40,f 41,f 42,f 43,f 44,f 45,f 46,f 47,f 48,f 49,f 5,f 50,f 51,f 52,f 53,f 54,f 55,f 56,f 57,f 58,f 59,f 6,f 60,f 61,f 62,f 63,f 64,f 65,f 66,f 67,f 68,f 69,f 7,f 70,f 71,f 8,f 9,fa8 1,fa8 10,fa8 11,fa8 12,fa8 13,fa8 14,fa8 15,fa8 16,fa8 17,fa8 18,fa8 19,fa8 2,fa8 20,fa8 21,fa8 22,fa8 23,fa8 24,fa8 25,fa8 26,fa8 27,fa8 28,fa8 29,fa8 3,fa8 30,fa8 31,fa8 32,fa8 33,fa8 34,fa8 35,fa8 36,fa8 37,fa8 38,fa8 39,fa8 4,fa8 40,fa8 41,fa8 42,fa8 43,fa8 44,fa8 45,fa8 46,fa8 47,fa8 48,fa8 49,fa8 5,fa8 50,fa8 51,fa8 52,fa8 53,fa8 54,fa8 55,fa8 56,fa8 57,fa8 58,fa8 59,fa8 6,fa8 60,fa8 61,fa8 62,fa8 63,fa8 64,fa8 65,fa8 66,fa8 67,fa8 68,fa8 69,fa8 7,fa8 70,fa8 71,fa8 8,fa8 9,fa9fa 1,fa9fa 10,fa9fa 11,fa9fa 12,fa9fa 13,fa9fa 14,fa9fa 15,fa9fa 16,fa9fa 17,fa9fa 18,fa9fa 19,fa9fa 2,fa9fa 20,fa9fa 21,fa9fa 22,fa9fa 23,fa9fa 24,fa9fa 25,fa9fa 26,fa9fa 27,fa9fa 28,fa9fa 29,fa9fa 3,fa9fa 30,fa9fa 31,fa9fa 32,fa9fa 33,fa9fa 34,fa9fa 35,fa9fa 36,fa9fa 37,fa9fa 38,fa9fa 39,fa9fa 4,fa9fa 40,fa9fa 41,fa9fa 42,fa9fa 43,fa9fa 44,fa9fa 45,fa9fa 46,fa9fa 47,fa9fa 48,fa9fa 49,fa9fa 5,fa9fa 50,fa9fa 51,fa9fa 52,fa9fa 53,fa9fa 54,fa9fa 55,fa9fa 56,fa9fa 57,fa9fa 58,fa9fa 59,fa9fa 6,fa9fa 60,fa9fa 61,fa9fa 62,fa9fa 63,fa9fa 64,fa9fa 65,fa9fa 66,fa9fa 67,fa9fa 68,fa9fa 69,fa9fa 7,fa9fa 70,fa9fa 71,fa9fa 8,fa9fa 9,height 1,height 10,height 11,height 12,height 13,height 14,height 15,height 16,height 17,height 18,height 19,height 2,height 20,height 21,height 22,height 23,height 24,height 25,height 26,height 27,height 28,height 29,height 3,height 30,height 31,height 32,height 33,height 34,height 35,height 36,height 37,height 38,height 39,height 4,height 40,height 41,height 42,height 43,height 44,height 45,height 46,height 47,height 48,height 49,height 5,height 50,height 51,height 52,height 53,height 54,height 55,height 56,height 57,height 58,height 59,height 6,height 60,height 61,height 62,height 63,height 64,height 65,height 66,height 67,height 68,height 69,height 7,height 70,height 71,height 8,height 9,horse 1,horse 10,horse 11,horse 12,horse 13,horse 14,horse 15,horse 16,horse 17,horse 18,horse 19,horse 2,horse 20,horse 21,horse 22,horse 23,horse 24,horse 25,horse 26,horse 27,horse 28,horse 29,horse 3,horse 30,horse 31,horse 32,horse 33,horse 34,horse 35,horse 36,horse 37,horse 38,horse 39,horse 4,horse 40,horse 41,horse 42,horse 43,horse 44,horse 45,horse 46,horse 47,horse 48,horse 49,horse 5,horse 50,horse 51,horse 52,horse 53,horse 54,horse 55,horse 56,horse 57,horse 58,horse 59,horse 6,horse 60,horse 61,horse 62,horse 63,horse 64,horse 65,horse 66,horse 67,horse 68,horse 69,horse 7,horse 70,horse 71,horse 8,horse 9,k 1,k 10,k 11,k 12,k 13,k 14,k 15,k 16,k 17,k 18,k 19,k 2,k 20,k 21,k 22,k 23,k 24,k 25,k 26,k 27,k 28,k 29,k 3,k 30,k 31,k 32,k 33,k 34,k 35,k 36,k 37,k 38,k 39,k 4,k 40,k 41,k 42,k 43,k 44,k 45,k 46,k 47,k 48,k 49,k 5,k 50,k 51,k 52,k 53,k 54,k 55,k 56,k 57,k 58,k 59,k 6,k 60,k 61,k 62,k 63,k 64,k 65,k 66,k 67,k 68,k 69,k 7,k 70,k 71,k 8,k 9,left 1,left 10,left 11,left 12,left 13,left 14,left 15,left 16,left 17,left 18,left 19,left 2,left 20,left 21,left 22,left 23,left 24,left 25,left 26,left 27,left 28,left 29,left 3,left 30,left 31,left 32,left 33,left 34,left 35,left 36,left 37,left 38,left 39,left 4,left 40,left 41,left 42,left 43,left 44,left 45,left 46,left 47,left 48,left 49,left 5,left 50,left 51,left 52,left 53,left 54,left 55,left 56,left 57,left 58,left 59,left 6,left 60,left 61,left 62,left 63,left 64,left 65,left 66,left 67,left 68,left 69,left 7,left 70,left 71,left 8,left 9,length 1,length 10,length 11,length 12,length 13,length 14,length 15,length 16,length 17,length 18,length 19,length 2,length 20,length 21,length 22,length 23,length 24,length 25,length 26,length 27,length 28,length 29,length 3,length 30,length 31,length 32,length 33,length 34,length 35,length 36,length 37,length 38,length 39,length 4,length 40,length 41,length 42,length 43,length 44,length 45,length 46,length 47,length 48,length 49,length 5,length 50,length 51,length 52,length 53,length 54,length 55,length 56,length 57,length 58,length 59,length 6,length 60,length 61,length 62,length 63,length 64,length 65,length 66,length 67,length 68,length 69,length 7,length 70,length 71,length 8,length 9,leo 1,leo 10,leo 11,leo 12,leo 13,leo 14,leo 15,leo 16,leo 17,leo 18,leo 19,leo 2,leo 20,leo 21,leo 22,leo 23,leo 24,leo 25,leo 26,leo 27,leo 28,leo 29,leo 3,leo 30,leo 31,leo 32,leo 33,leo 34,leo 35,leo 36,leo 37,leo 38,leo 39,leo 4,leo 40,leo 41,leo 42,leo 43,leo 44,leo 45,leo 46,leo 47,leo 48,leo 49,leo 5,leo 50,leo 51,leo 52,leo 53,leo 54,leo 55,leo 56,leo 57,leo 58,leo 59,leo 6,leo 60,leo 61,leo 62,leo 63,leo 64,leo 65,leo 66,leo 67,leo 68,leo 69,leo 7,leo 70,leo 71,leo 8,leo 9,m 1,m 10,m 11,m 12,m 13,m 14,m 15,m 16,m 17,m 18,m 19,m 2,m 20,m 21,m 22,m 23,m 24,m 25,m 26,m 27,m 28,m 29,m 3,m 30,m 31,m 32,m 33,m 34,m 35,m 36,m 37,m 38,m 39,m 4,m 40,m 41,m 42,m 43,m 44,m 45,m 46,m 47,m 48,m 49,m 5,m 50,m 51,m 52,m 53,m 54,m 55,m 56,m 57,m 58,m 59,m 6,m 60,m 61,m 62,m 63,m 64,m 65,m 66,m 67,m 68,m 69,m 7,m 70,m 71,m 8,m 9,moose 1,moose 10,moose 11,moose 12,moose 13,moose 14,moose 15,moose 16,moose 17,moose 18,moose 19,moose 2,moose 20,moose 21,moose 22,moose 23,moose 24,moose 25,moose 26,moose 27,moose 28,moose 29,moose 3,moose 30,moose 31,moose 32,moose 33,moose 34,moose 35,moose 36,moose 37,moose 38,moose 39,moose 4,moose 40,moose 41,moose 42,moose 43,moose 44,moose 45,moose 46,moose 47,moose 48,moose 49,moose 5,moose 50,moose 51,moose 52,moose 53,moose 54,moose 55,moose 56,moose 57,moose 58,moose 59,moose 6,moose 60,moose 61,moose 62,moose 63,moose 64,moose 65,moose 66,moose 67,moose 68,moose 69,moose 7,moose 70,moose 71,moose 8,moose 9,n 1,n 10,n 11,n 12,n 13,n 14,n 15,n 16,n 17,n 18,n 19,n 2,n 20,n 21,n 22,n 23,n 24,n 25,n 26,n 27,n 28,n 29,n 3,n 30,n 31,n 32,n 33,n 34,n 35,n 36,n 37,n 38,n 39,n 4,n 40,n 41,n 42,n 43,n 44,n 45,n 46,n 47,n 48,n 49,n 5,n 50,n 51,n 52,n 53,n 54,n 55,n 56,n 57,n 58,n 59,n 6,n 60,n 61,n 62,n 63,n 64,n 65,n 66,n 67,n 68,n 69,n 7,n 70,n 71,n 8,n 9,o 1,o 10,o 11,o 12,o 13,o 14,o 15,o 16,o 17,o 18,o 19,o 2,o 20,o 21,o 22,o 23,o 24,o 25,o 26,o 27,o 28,o 29,o 3,o 30,o 31,o 32,o 33,o 34,o 35,o 36,o 37,o 38,o 39,o 4,o 40,o 41,o 42,o 43,o 44,o 45,o 46,o 47,o 48,o 49,o 5,o 50,o 51,o 52,o 53,o 54,o 55,o 56,o 57,o 58,o 59,o 6,o 60,o 61,o 62,o 63,o 64,o 65,o 66,o 67,o 68,o 69,o 7,o 70,o 71,o 8,o 9,p 1,p 10,p 11,p 12,p 13,p 14,p 15,p 16,p 17,p 18,p 19,p 2,p 20,p 21,p 22,p 23,p 24,p 25,p 26,p 27,p 28,p 29,p 3,p 30,p 31,p 32,p 33,p 34,p 35,p 36,p 37,p 38,p 39,p 4,p 40,p 41,p 42,p 43,p 44,p 45,p 46,p 47,p 48,p 49,p 5,p 50,p 51,p 52,p 53,p 54,p 55,p 56,p 57,p 58,p 59,p 6,p 60,p 61,p 62,p 63,p 64,p 65,p 66,p 67,p 68,p 69,p 7,p 70,p 71,p 8,p 9,parent 1,parent 10,parent 11,parent 12,parent 13,parent 14,parent 15,parent 16,parent 17,parent 18,parent 19,parent 2,parent 20,parent 21,parent 22,parent 23,parent 24,parent 25,parent 26,parent 27,parent 28,parent 29,parent 3,parent 30,parent 31,parent 32,parent 33,parent 34,parent 35,parent 36,parent 37,parent 38,parent 39,parent 4,parent 40,parent 41,parent 42,parent 43,parent 44,parent 45,parent 46,parent 47,parent 48,parent 49,parent 5,parent 50,parent 51,parent 52,parent 53,parent 54,parent 55,parent 56,parent 57,parent 58,parent 59,parent 6,parent 60,parent 61,parent 62,parent 63,parent 64,parent 65,parent 66,parent 67,parent 68,parent 69,parent 7,parent 70,parent 71,parent 8,parent 9,power 1,power 10,power 11,power 12,power 13,power 14,power 15,power 16,power 17,power 18,power 19,power 2,power 20,power 21,power 22,power 23,power 24,power 25,power 26,power 27,power 28,power 29,power 3,power 30,power 31,power 32,power 33,power 34,power 35,power 36,power 37,power 38,power 39,power 4,power 40,power 41,power 42,power 43,power 44,power 45,power 46,power 47,power 48,power 49,power 5,power 50,power 51,power 52,power 53,power 54,power 55,power 56,power 57,power 58,power 59,power 6,power 60,power 61,power 62,power 63,power 64,power 65,power 66,power 67,power 68,power 69,power 7,power 70,power 71,power 8,power 9,q 1,q 10,q 11,q 12,q 13,q 14,q 15,q 16,q 17,q 18,q 19,q 2,q 20,q 21,q 22,q 23,q 24,q 25,q 26,q 27,q 28,q 29,q 3,q 30,q 31,q 32,q 33,q 34,q 35,q 36,q 37,q 38,q 39,q 4,q 40,q 41,q 42,q 43,q 44,q 45,q 46,q 47,q 48,q 49,q 5,q 50,q 51,q 52,q 53,q 54,q 55,q 56,q 57,q 58,q 59,q 6,q 60,q 61,q 62,q 63,q 64,q 65,q 66,q 67,q 68,q 69,q 7,q 70,q 71,q 8,q 9,right 1,right 10,right 11,right 12,right 13,right 14,right 15,right 16,right 17,right 18,right 19,right 2,right 20,right 21,right 22,right 23,right 24,right 25,right 26,right 27,right 28,right 29,right 3,right 30,right 31,right 32,right 33,right 34,right 35,right 36,right 37,right 38,right 39,right 4,right 40,right 41,right 42,right 43,right 44,right 45,right 46,right 47,right 48,right 49,right 5,right 50,right 51,right 52,right 53,right 54,right 55,right 56,right 57,right 58,right 59,right 6,right 60,right 61,right 62,right 63,right 64,right 65,right 66,right 67,right 68,right 69,right 7,right 70,right 71,right 8,right 9,snail 1,snail 10,snail 11,snail 12,snail 13,snail 14,snail 15,snail 16,snail 17,snail 18,snail 19,snail 2,snail 20,snail 21,snail 22,snail 23,snail 24,snail 25,snail 26,snail 27,snail 28,snail 29,snail 3,snail 30,snail 31,snail 32,snail 33,snail 34,snail 35,snail 36,snail 37,snail 38,snail 39,snail 4,snail 40,snail 41,snail 42,snail 43,snail 44,snail 45,snail 46,snail 47,snail 48,snail 49,snail 5,snail 50,snail 51,snail 52,snail 53,snail 54,snail 55,snail 56,snail 57,snail 58,snail 59,snail 6,snail 60,snail 61,snail 62,snail 63,snail 64,snail 65,snail 66,snail 67,snail 68,snail 69,snail 7,snail 70,snail 71,snail 8,snail 9,trip 1,trip 10,trip 11,trip 12,trip 13,trip 14,trip 15,trip 16,trip 17,trip 18,trip 19,trip 2,trip 20,trip 21,trip 22,trip 23,trip 24,trip 25,trip 26,trip 27,trip 28,trip 29,trip 3,trip 30,trip 31,trip 32,trip 33,trip 34,trip 35,trip 36,trip 37,trip 38,trip 39,trip 4,trip 40,trip 41,trip 42,trip 43,trip 44,trip 45,trip 46,trip 47,trip 48,trip 49,trip 5,trip 50,trip 51,trip 52,trip 53,trip 54,trip 55,trip 56,trip 57,trip 58,trip 59,trip 6,trip 60,trip 61,trip 62,trip 63,trip 64,trip 65,trip 66,trip 67,trip 68,trip 69,trip 7,trip 70,trip 71,trip 8,trip 9,word 1,word 10,word 11,word 12,word 13,word 14,word 15,word 16,word 17,word 18,word 19,word 2,word 20,word 21,word 22,word 23,word 24,word 25,word 26,word 27,word 28,word 29,word 3,word 30,word 31,word 32,word 33,word 34,word 35,word 36,word 37,word 38,word 39,word 4,word 40,word 41,word 42,word 43,word 44,word 45,word 46,word 47,word 48,word 49,word 5,word 50,word 51,word 52,word 53,word 54,word 55,word 56,word 57,word 58,word 59,word 6,word 60,word 61,word 62,word 63,word 64,word 65,word 66,word 67,word 68,word 69,word 7,word 70,word 71,word 8,word 9,x 1,x 10,x 11,x 12,x 13,x 14,x 15,x 16,x 17,x 18,x 19,x 2,x 20,x 21,x 22,x 23,x 24,x 25,x 26,x 27,x 28,x 29,x 3,x 30,x 31,x 32,x 33,x 34,x 35,x 36,x 37,x 38,x 39,x 4,x 40,x 41,x 42,x 43,x 44,x 45,x 46,x 47,x 48,x 49,x 5,x 50,x 51,x 52,x 53,x 54,x 55,x 56,x 57,x 58,x 59,x 6,x 60,x 61,x 62,x 63,x 64,x 65,x 66,x 67,x 68,x 69,x 7,x 70,x 71,x 8,x 9,y 1,y 10,y 11,y 12,y 13,y 14,y 15,y 16,y 17,y 18,y 19,y 2,y 20,y 21,y 22,y 23,y 24,y 25,y 26,y 27,y 28,y 29,y 3,y 30,y 31,y 32,y 33,y 34,y 35,y 36,y 37,y 38,y 39,y 4,y 40,y 41,y 42,y 43,y 44,y 45,y 46,y 47,y 48,y 49,y 5,y 50,y 51,y 52,y 53,y 54,y 55,y 56,y 57,y 58,y 59,y 6,y 60,y 61,y 62,y 63,y 64,y 65,y 66,y 67,y 68,y 69,y 7,y 70,y 71,y 8,y 9,z 1,z 10,z 11,z 12,z 13,z 14,z 15,z 16,z 17,z 18,z 19,z 2,z 20,z 21,z 22,z 23,z 24,z 25,z 26,z 27,z 28,z 29,z 3,z 30,z 31,z 32,z 33,z 34,z 35,z 36,z 37,z 38,z 39,z 4,z 40,z 41,z 42,z 43,z 44,z 45,z 46,z 47,z 48,z 49,z 5,z 50,z 51,z 52,z 53,z 54,z 55,z 56,z 57,z 58,z 59,z 6,z 60,z 61,z 62,z 63,z 64,z 65,z 66,z 67,z 68,z 69,z 7,z 70,z 71,z 8,z 9,zebra 1,zebra 10,zebra 11,zebra 12,zebra 13,zebra 14,zebra 15,zebra 16,zebra 17,zebra 18,zebra 19,zebra 2,zebra 20,zebra 21,zebra 22,zebra 23,zebra 24,zebra 25,zebra 26,zebra 27,zebra 28,zebra 29,zebra 3,zebra 30,zebra 31,zebra 32,zebra 33,zebra 34,zebra 35,zebra 36,zebra 37,zebra 38,zebra 39,zebra 4,zebra 40,zebra 41,zebra 42,zebra 43,zebra 44,zebra 45,zebra 46,zebra 47,zebra 48,zebra 49,zebra 5,zebra 50,zebra 51,zebra 52,zebra 53,zebra 54,zebra 55,zebra 56,zebra 57,zebra 58,zebra 59,zebra 6,zebra 60,zebra 61,zebra 62,zebra 63,zebra 64,zebra 65,zebra 66,zebra 67,zebra 68,zebra 69,zebra 7,zebra 70,zebra 71,zebra 8,zebra 9
+5000
+237- Uses(proc_name, ident)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select <a, v.varName> such that Uses("extra","first")
+none
+5000
+238- Uses(proc_name, ident)
+stmt s; variable v; assign a; call c; read r; procedure p; while w; if ifs; constant const;
+Select <c.procName, v.varName> such that Uses("third","k")
+none
+5000
