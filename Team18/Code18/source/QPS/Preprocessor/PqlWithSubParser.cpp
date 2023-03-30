@@ -3,21 +3,23 @@
 #include <optional>
 #include <string>
 
+#include "Literal.h"
+
 std::optional<spa::WithArgument> spa::PqlWithSubParser::parseArgument(Stream<Token>& tokens,
                                                                       ParsedQuery& query) {
   std::optional<std::string> attribOpt = attributeParser.parse(tokens, query);
   if (attribOpt) {
     return { WithArgument(attribOpt.value()) };
   }
-  if (tokens.match({ { TOKEN_INTEGER, ""} })) {
+  if (tokens.match({ { TOKEN_INTEGER, EMPTY_LITERAL} })) {
     WithArgument arg(QpsValue(std::stoi(tokens[0].getValue())));
     tokens.seek(1);
     return { arg };
   }
   bool matchResult = tokens.match({
-    {TOKEN_DOUBLE_QUOTES, "\""},
-    {TOKEN_NAME, ""},
-    {TOKEN_DOUBLE_QUOTES, "\""}
+    {TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL},
+    {TOKEN_NAME, EMPTY_LITERAL},
+    {TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL}
   });
   if (matchResult) {
     WithArgument arg(QpsValue(tokens[1].getValue()));
@@ -32,7 +34,7 @@ spa::PqlParseStatus spa::PqlWithSubParser::parse(Stream<Token>& tokens, ParsedQu
   if (!firstOpt.has_value()) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
-  if (!tokens.match({ { TOKEN_EQUAL, "="} })) {
+  if (!tokens.match({ { TOKEN_EQUAL, EQUAL_LITERAL} })) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);

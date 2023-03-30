@@ -1,6 +1,7 @@
 #include "PqlAttributeParser.h"
 
 #include "PqlAttributes.h"
+#include "Literal.h"
 
 bool spa::PqlAttributeParser::attributeExists(DesignEntityType entityType, const std::string& attribute) {
   auto& v = pqlAttributesMap[entityType];
@@ -18,7 +19,7 @@ std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>
   std::string attribute = tokens[2].getValue();
   bool hasHash = tokens.remaining() >= 4 && tokens[3].getType() == TOKEN_HASH;
   if (hasHash) {
-    attribute.append("#");
+    attribute.append(HASH_LITERAL);
   }
   if (!attributeExists(entityType, attribute)) {
     return {};
@@ -29,14 +30,14 @@ std::optional<std::string> spa::PqlAttributeParser::parseAttribute(Stream<Token>
   }
   query.addUsedDeclaration(synonym, entityType);
   query.addSelectWithDeclaration(synonym, entityType);
-  return { synonym.append(".").append(attribute) };
+  return { synonym.append(FULL_STOP_LITERAL).append(attribute) };
 }
 
 std::optional<std::string> spa::PqlAttributeParser::parse(Stream<Token>& tokens, ParsedQuery& query) {
   bool matchStatus = tokens.match({
-    { TOKEN_NAME, "" },
-    { TOKEN_FULL_STOP, "."},
-    { TOKEN_NAME, ""}
+    { TOKEN_NAME, EMPTY_LITERAL },
+    { TOKEN_FULL_STOP, FULL_STOP_LITERAL },
+    { TOKEN_NAME, EMPTY_LITERAL }
   });
   if (!matchStatus) {
     return {};

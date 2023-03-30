@@ -83,9 +83,14 @@ const std::string NEXT_STAR_LITERAL = "Next*";
 const std::string AFFECTS_LITERAL = "Affects";
 const std::string AFFECTS_STAR_LITERAL = "Affects*";
 
+// BOOLEAN LITERALS
+const std::string FALSE_LITERAL = "FALSE";
+const std::string TRUE_LITERAL = "TRUE";
+
+
 // CFG LITERALS
 const int DUMMY_NODE_VAL = -1;
 
 // OTHER LITERALS
-const std::string ZERO_LITERAL = "0";
+const char ZERO_LITERAL = '0';
 const std::string SPACE_LITERAL = " ";

@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "Literal.h"
+
 spa::PqlParseStatus spa::PqlSelectParser::parseSynonymOrAttribute(bool parseBoolean,
                                                                   Stream<Token>& tokens,
                                                                   ParsedQuery& query) {
@@ -18,7 +20,7 @@ spa::PqlParseStatus spa::PqlSelectParser::parseSynonymOrAttribute(bool parseBool
   tokens.seek(1);
 
   DesignEntityType entityType = query.getDeclarationType(synonym);
-  if (parseBoolean && synonym == "BOOLEAN" && entityType == UNKNOWN) {
+  if (parseBoolean && synonym == BOOLEAN_LITERAL && entityType == UNKNOWN) {
     query.setSelectClauseType(SelectClauseType::SELECT_BOOLEAN);
     return PQL_PARSE_SUCCESS;
   }
@@ -49,13 +51,13 @@ spa::PqlParseStatus spa::PqlSelectParser::parseTuple(Stream<Token>& tokens, Pars
 
 spa::PqlParseStatus spa::PqlSelectParser::parse(Stream<Token>& tokens, ParsedQuery& query) {
   bool matchStatus = tokens.match({
-    { TOKEN_NAME, "Select"}
+    { TOKEN_NAME, SELECT_LITERAL}
   });
   if (!matchStatus) {
     return PQL_PARSE_MISMATCH;
   }
   tokens.seek(1);
-  if (tokens.match({ { TOKEN_COND_LT, "<"} })) {
+  if (tokens.match({ { TOKEN_COND_LT, COND_LT_LITERAL} })) {
     return parseTuple(tokens, query);
   }
   return parseSynonymOrAttribute(true, tokens, query);

@@ -7,11 +7,12 @@
 
 #include "ParsedQuery.h"
 #include "Token.h"
+#include "Literal.h"
 
 spa::PqlParseStatus spa::PqlPatternParser::parse(Stream<Token>& tokens,
                                                  ParsedQuery& query) {
   bool matchResult = tokens.match({
-    { spa::TOKEN_NAME, "pattern"}
+    { spa::TOKEN_NAME, PATTERN_LITERAL}
   });
   if (!matchResult) {
     return PQL_PARSE_MISMATCH;

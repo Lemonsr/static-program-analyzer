@@ -13,10 +13,10 @@ spa::QpsResult spa::QPS::evaluate(std::string query, PKBManager& pkbManager) {
   std::pair<PqlParseStatus, ParsedQuery> parseResult = preprocessor.preprocess(query);
   QpsResult result;
   if (parseResult.first == PQL_PARSE_SYNTAX_ERROR) {
-    result.setErrorMessage("SyntaxError");
+    result.setErrorMessage(SYNTAX_ERROR_LITERAL);
     return result;
   } else if (parseResult.first == PQL_PARSE_SEMANTIC_ERROR) {
-    result.setErrorMessage("SemanticError");
+    result.setErrorMessage(SEMANTIC_ERROR_LITERAL);
     return result;
   }
 

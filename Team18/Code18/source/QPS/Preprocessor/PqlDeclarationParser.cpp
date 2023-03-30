@@ -1,5 +1,6 @@
 #include "PqlDeclarationParser.h"
 #include "DesignEntity.h"
+#include "Literal.h"
 
 #include <cstdint>
 #include <string>
@@ -7,16 +8,16 @@
 #include <vector>
 
 const std::unordered_map<std::string, spa::DesignEntityType> entityTypesMap {
-  {"procedure", spa::PROCEDURE},
-  {"stmt", spa::STMT},
-  {"read", spa::READ},
-  {"print", spa::PRINT},
-  {"assign", spa::ASSIGN},
-  {"call", spa::CALL},
-  {"while", spa::WHILE},
-  {"if", spa::IF},
-  {"variable", spa::VARIABLE},
-  {"constant", spa::CONSTANT}
+  {PROCEDURE_LITERAL, spa::PROCEDURE},
+  {STMT_LITERAL, spa::STMT},
+  {READ_LITERAL, spa::READ},
+  {PRINT_LITERAL, spa::PRINT},
+  {ASSIGN_LITERAL, spa::ASSIGN},
+  {CALL_LITERAL, spa::CALL},
+  {WHILE_LITERAL, spa::WHILE},
+  {IF_LITERAL, spa::IF},
+  {VARIABLE_LITERAL, spa::VARIABLE},
+  {CONSTANT_LITERAL, spa::CONSTANT}
 };
 
 spa::PqlParseStatus spa::PqlDeclarationParser::addDeclarations(
