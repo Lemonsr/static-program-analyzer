@@ -7,23 +7,6 @@
 #include <utility>
 #include <unordered_set>
 
-bool spa::CFGStorage::popDummyNode(int lineNumber, RelationshipStorage& relationshipStorage) {
-  if (lineNumber == DUMMY_NODE_VAL) {
-    return true;
-  }
-  CFGNode& dummyNode = cfgNodeTable[DUMMY_NODE_VAL];
-  bool isAddEdge = true;
-
-  for (auto& incomingNode : dummyNode.getIncomingEdges()) {
-    isAddEdge = isAddEdge && addEdge(incomingNode->getLineNumber(), lineNumber, relationshipStorage);
-  }
-  for (auto& node : dummyNode.getIncomingEdges()) {
-    node->removeOutgoingEdge(&dummyNode);
-  }
-  cfgNodeTable[DUMMY_NODE_VAL] = CFGNode();
-  return isAddEdge;
-}
-
 bool spa::CFGStorage::addCfgNode(int lineNumber, spa::CFGNode cfgNode) {
   if (cfgNodeTable.find(lineNumber) != cfgNodeTable.end()) {
     return false;
@@ -41,10 +24,6 @@ bool spa::CFGStorage::addCfgEndNode(int lineNumber) {
 }
 
 bool spa::CFGStorage::addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage) {
-  if (lineNumberOne == DUMMY_NODE_VAL) {
-    popDummyNode(lineNumberTwo, relationshipStorage);
-    return true;
-  }
   CFGNode& nodeOne = cfgNodeTable[lineNumberOne];
   CFGNode& nodeTwo = cfgNodeTable[lineNumberTwo];
   nodeOne.addOutgoingEdge(&nodeTwo);

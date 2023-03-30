@@ -16,8 +16,6 @@ class CFGStorage {
   std::unordered_map<int, spa::CFGNode> cfgNodeTable;
   std::unordered_set<int> cfgEndNodes;
 
-  bool popDummyNode(int lineNumber, RelationshipStorage& relationshipStorage);
-
  public:
   bool addCfgNode(int lineNumber, spa::CFGNode cfgNode);
   bool addCfgEndNode(int lineNumber);
