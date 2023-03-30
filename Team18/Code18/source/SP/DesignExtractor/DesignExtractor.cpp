@@ -238,14 +238,14 @@ void spa::DesignExtractor::extractUsesAndModifiesProc() {
   for (auto& procedure : procedureList) {
     std::string procName = procedure->getProcedureVarToken().getValue();
     std::vector<std::pair<std::string, std::string>> childrenProc = getResFromPkbHelper(procName,
-      "p",
+      PROC_SYNONYM_LITERAL,
       PROCEDURE, CALLS_STAR);
     for (auto& childProc : childrenProc) {
       std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(
-        childProc.second, "v",
+        childProc.second, VARIABLE_SYNONYM_LITERAL,
         VARIABLE, USES);
       std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(
-        childProc.second, "v",
+        childProc.second, VARIABLE_SYNONYM_LITERAL,
         VARIABLE, MODIFIES);
       addUsesModifies(procName, varUses, varModifies);
     }
@@ -258,10 +258,11 @@ void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
     QueryResult queryResult = pkbManager.getCallsContainerParent(procName);
     std::vector<int> ifWhileParents = queryResult.getLineNumbers();
 
-    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(procName, "v",
+    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(procName,
+      VARIABLE_SYNONYM_LITERAL,
       VARIABLE, USES);
     std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(procName,
-      "v",
+      VARIABLE_SYNONYM_LITERAL,
       VARIABLE, MODIFIES);
     for (auto& parent : ifWhileParents) {
       addUsesModifies(std::to_string(parent), varUses, varModifies, false);
@@ -275,10 +276,11 @@ void spa::DesignExtractor::extractCallsModifiesAndUses() {
     getLineNumberNamePairs();
 
   for (auto& pair : callLineNamePairs) {
-    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(pair.second, "v",
+    std::vector<std::pair<std::string, std::string>> varUses = getResFromPkbHelper(pair.second,
+      VARIABLE_SYNONYM_LITERAL,
       VARIABLE, USES);
     std::vector<std::pair<std::string, std::string>> varModifies = getResFromPkbHelper(pair.second,
-      "v",
+      VARIABLE_SYNONYM_LITERAL,
       VARIABLE, MODIFIES);
     addUsesModifies(std::to_string(pair.first), varUses, varModifies, true);
   }
