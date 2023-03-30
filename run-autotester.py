@@ -2,7 +2,7 @@ import subprocess
 import sys
 import os
 
-ignored_list = ["Sample_queries.txt","Sample_source.txt","SystemTest"]
+ignored_list = ["Sample_queries.txt","Sample_source.txt"]
 unique_txt_counter = {}
 autotester_path = '.\\Team18\\Code18\\Release\\AutoTester.exe'
 test_path = '.\\Team18\\Tests18'

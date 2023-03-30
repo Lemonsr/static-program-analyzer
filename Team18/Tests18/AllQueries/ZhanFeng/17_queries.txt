@@ -1,0 +1,330 @@
+// Parent(_,_)
+stmt s;
+Select s such that Parent(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,3,4,5,6,7,8,9
+5000
+// Parent(_, synonym)
+variable v; print pr;
+Select v such that Parent(_,pr)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Parent(_, int)
+read r;
+Select r such that Parent(_,9)
+9,16
+5000
+// Parent(synonym, _)
+if i;
+Select i such that Parent(i,_)
+10,13,2
+5000
+// Parent(synonym, synonym)
+if i; read r;
+Select i such that Parent(i,r)
+13
+5000
+// Parent(synonym, int)
+if i; constant c;
+Select c such that Parent(i,10)
+none
+5000
+// Parent(int, _)
+while w;
+Select w such that Parent(2,_)
+5,7
+5000
+// Parent(int, synonym)
+assign a;
+Select a such that Parent(2,a)
+17,18,19,4
+5000
+// Parent(int, int)
+assign a;
+Select a such that Parent(2,4)
+1,11,12,14,17,18,19,20,4,6
+5000
+// ParentStar(_,_)
+assign a;
+Select a such that Parent*(_,_)
+1,11,12,14,17,18,19,20,4,6
+5000
+// ParentStar(_, synonym)
+read re;
+Select re such that Parent*(_,re)
+16,9
+5000
+// ParentStar(_, int)
+print p;
+Select p such that Parent*(_,12)
+3,8,15
+5000
+// ParentStar(synonym, _)
+stmt s;
+Select s such that Parent*(_,5)
+1,10,11,12,13,14,15,16,17,18,19,2,20,3,4,5,6,7,8,9
+5000
+// ParentStar(synonym, synonym)
+if ifs; assign a;
+Select a such that Parent*(ifs,a)
+11,12,14,17,18,19,4,6
+5000
+// ParentStar(synonym, int)
+while w;
+Select w such that Parent*(w,14)
+none
+5000
+// ParentStar(int, _)
+assign a;
+Select a such that Parent*(2,a)
+11,12,14,17,18,19,4,6
+5000
+// ParentStar(int, synonym)
+read re;
+Select re such that Parent*(2,re)
+16,9
+5000
+// ParentStar(int, int)
+if ifs;
+Select ifs such that Parent*(2, 8)
+2,10,13
+5000
+// Parent(_,_) + Pattern
+print p; variable v; assign a;
+Select p such that Parent(_,_) pattern a(_,_)
+15,3,8
+5000
+// Parent(_,_) + Pattern
+assign a; variable v;
+Select a such that Parent(_,_) pattern a(_,_"b"_)
+1,12,17,18,4,6
+5000
+// Parent(_,_) + Pattern
+assign a; while w;
+Select w such that Parent(_,_) pattern a(_,_"w"_)
+none
+5000
+// Parent(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Parent(_,_) pattern a(v,_)
+ada,x,y,z
+5000
+// Parent(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Parent(_,_) pattern a(v,_"x"_)
+y
+5000
+// Parent(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Parent(_,_) pattern a("x",_)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Parent(_,_) + Pattern
+assign a; variable v; while w;
+Select a such that Parent(_,_) pattern a("x",_"c"_)
+18,6
+5000
+// Parent(_,syn) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Parent(_,r) pattern a(_,_)
+15,3,8
+5000
+// Parent(_,syn) + Pattern
+assign a; while w; stmt s;
+Select s such that Parent(_,s) pattern a(_,_"w"_)
+none
+5000
+// Parent(_,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Parent(_,ifs) pattern a(v,_)
+10,13
+5000
+// Parent(_,syn) + Pattern
+assign a; variable v; while w;
+Select a such that Parent(_,a) pattern a(v,_"x"_)
+14
+5000
+// Parent(_,syn) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Parent(_,pri) pattern a("x",_)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Parent(_,syn) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Parent(_,a) pattern a("x",_"c"_)
+18,6
+5000
+// Parent(_,int) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Parent(_,4) pattern a(_,_)
+15,3,8
+5000
+// Parent(_,int) + Pattern
+assign a; while w; stmt s;
+Select s such that Parent(_,6) pattern a(_,_"w"_)
+none
+5000
+// Parent(_,int) + Pattern
+assign a; variable v; while w; if ifs
+Select ifs such that Parent(_,1) pattern a(v,_)
+SyntaxError
+5000
+// Parent(_,int) + Pattern
+assign a; variable v; while w;
+Select a such that Parent(_,1) pattern a(v,_"x"_)
+none
+5000
+// Parent(_,int) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Parent(_,10) pattern a("x",_)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Parent(_,int) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Parent(_,30) pattern a("x",_"c"_)
+none
+5000
+// Parent(syn,_) + Pattern
+print p; variable v; assign a; read r;
+Select a such that Parent(a,_) pattern a(_,_)
+none
+5000
+// Parent(syn,_) + Pattern
+assign a; while w; stmt s;
+Select s such that Parent(s,_) pattern a(_,_"w"_)
+none
+5000
+// Parent(syn,_) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Parent(ifs,_) pattern a(v,_)
+10,13,2
+5000
+// Parent(syn,_) + Pattern
+assign a; variable v; while w; procedure p;
+Select p such that Parent(w,_) pattern a(v,_"x"_)
+Q
+5000
+// Parent(syn,_) + Pattern
+assign a; variable v; while w; read r;
+Select r such that Parent(r,_) pattern a("x",_)
+none
+5000
+// Parent(syn,_) + Pattern
+assign a; variable v; while w; constant c;
+Select c such that Parent(w,_) pattern a("x",_"c"_)
+0,1,10,2,23,3,42,89
+5000
+// Parent(syn,syn) + Pattern
+print p; variable v; assign a; read r;
+Select a such that Parent(a,p) pattern a(_,_)
+none
+5000
+// Parent(syn,syn) + Pattern
+assign a; while w; stmt s;
+Select s such that Parent(s,w) pattern a(_,_"w"_)
+none
+5000
+// Parent(syn,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Parent(ifs,a) pattern a(v,_)
+10,13,2
+5000
+// Parent(syn,syn) + Pattern
+assign a; variable v; while w; procedure p;
+Select a such that Parent(a,s) pattern a(v,_"x"_)
+SemanticError
+5000
+// Parent(syn,syn) + Pattern
+assign a; variable v; while w; read r; read r2;
+Select r2 such that Parent(r,r2) pattern a("x",_)
+none
+5000
+// Parent(syn,syn) + Pattern
+assign a; variable v; while w; constant c; stmt s;
+Select a such that Parent(s,a) pattern a("x",_"c"_)
+18,6
+5000
+// ParentStar(_,_) + Pattern
+assign a;
+Select a such that Parent*(_,_) pattern a(_,_)
+1,11,12,14,17,18,19,20,4,6
+5000
+// ParentStar(_, synonym) + Pattern
+read re; assign a;
+Select re such that Parent*(_,re) pattern a(_,_"b"_)
+16,9
+5000
+// ParentStar(_, int) + Pattern
+print p; assign a;
+Select p such that Parent*(_,12) pattern a(_,_"w"_)
+none
+5000
+// ParentStar(synonym, _) + Pattern
+stmt s; assign a; variable v;
+Select s such that Parent*(_,5) pattern a(v,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,3,4,5,6,7,8,9
+5000
+// ParentStar(synonym, synonym) + Pattern
+if ifs; assign a; variable v;
+Select a such that Parent*(ifs,a) pattern a(v,_"x"_)
+14
+5000
+// ParentStar(synonym, int) + Pattern
+while w; assign a;
+Select w such that Parent*(w,14) pattern a("x",_)
+none
+5000
+// ParentStar(int, _) + Pattern
+assign a;
+Select a such that Parent*(2,a) pattern a("x",_"c"_)
+18,6
+5000
+// ParentStar(int, synonym) + Pattern
+read re; assign a;
+Select re such that Parent*(2,re) pattern a(_,_)
+16,9
+5000
+// ParentStar(int, int) + Pattern
+if ifs; assign a;
+Select ifs such that Parent*(2, 8) pattern a(_,_"w"_)
+none
+5000
+// Parent + while pattern
+stmt s, s1; assign a; call c;  if ifs; while w;
+Select w.stmt# such that Parent*(_,w) pattern w("b",_)
+5
+5000
+// Parent +if + while pattern
+stmt s, s1; assign a; call c;  if ifs; while w;
+Select ifs such that Parent*(ifs,w) pattern w("b",_) pattern ifs(_,_,_)
+2
+5000
+// Parent +if + while pattern
+stmt s, s1; assign a; call c;  if ifs; while w;
+Select w.stmt# such that Parent*(w,ifs) pattern w("fa9fa",_) pattern ifs("cha",_,_)
+7
+5000
+// Parent + with
+stmt s, s1; assign a; call c;  if ifs;
+Select s such that Parent(s,_) with s1.stmt# = s.stmt#
+2,5,7,10,13
+5000
+// Parent + with
+stmt s, s1; assign a; call c;  if ifs;
+Select ifs such that Parent*(ifs,_) with ifs.stmt# = s.stmt#
+2,10,13
+5000
+// Parent + with
+stmt s, s1; assign a;  if ifs; const c;
+Select c.value such that Parent(ifs,_) with ifs.stmt# = c.value
+SyntaxError
+5000
+// Parent + with
+stmt s, s1; assign a;  if ifs; variable var;
+Select <ifs, var> such that Parent*(ifs,_) with ifs.stmt# = s.stmt#
+10 R,10 a,10 ada,10 ads,10 answer,10 b,10 c,10 cha,10 fa8,10 fa9fa,10 mdal231,10 x,10 y,10 z,13 R,13 a,13 ada,13 ads,13 answer,13 b,13 c,13 cha,13 fa8,13 fa9fa,13 mdal231,13 x,13 y,13 z,2 R,2 a,2 ada,2 ads,2 answer,2 b,2 c,2 cha,2 fa8,2 fa9fa,2 mdal231,2 x,2 y,2 z
+5000
+// Parent + with
+stmt s, s1; assign a;  if ifs; print p;
+Select <p.varName, ifs> such that Parent*(ifs,p) with ifs.stmt# = s.stmt#
+ads 2,answer 2,x 13,x 2
+5000

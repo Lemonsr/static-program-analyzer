@@ -1,0 +1,65 @@
+// Select tuples <followed stmt, all if>, follows
+stmt s; if ifs;
+Select <s, ifs> such that Follows(4, s)
+none
+5000
+// Select tuples <all stmt, prev stmt>, next
+stmt s, s1;
+Select <s, s1> such that Next(s1, 10)
+1 9,10 9,11 9,12 9,13 9,14 9,2 9,3 9,4 9,5 9,6 9,7 9,8 9,9 9
+5000
+// Select tuples <proc1, proc2>
+procedure p1, p2;
+Select <p1, p2>
+A A,A B,A C,B A,B B,B C,C A,C B,C C
+5000
+// Select tuples <proc, proc, proc>
+procedure p;
+Select <p, p, p>
+A A A,B B B,C C C
+5000
+// Select tuples <stmt, call, print>, 3 relations
+stmt s1; call c; print pr;
+Select <s1, c, pr> such that Parent(s1, 4) and Follows(2, c) and Follows(9, pr)
+2 6 10
+5000
+// Select tuples <stmt, call, print>, 3 relations
+stmt s1; call c; print pr;
+Select <s1, c, pr> such that Parent*(s1, 5) and Follows(2, c) and Follows(9, pr)
+2 6 10
+5000
+// Select tuples <while, stmt>, next
+while w; stmt s;
+Select <w, s> such that Next(13, s)
+2 14
+5000
+// Select tuples <while, if>, parent
+while w; if ifs; stmt s;
+Select <w, ifs> such that Parent(s, 12)
+none
+5000
+// Select tuples <proc, ifs>
+if ifs; procedure p;
+Select <p, ifs>
+none
+5000
+// Select tuples <while, boolean>
+while w;
+Select <w, BOOLEAN>
+SemanticError
+5000
+// Select tuples <stmt, assign> false relation
+stmt s; assign a; print p;
+Select <s, a, p> such that Next(10, 11) and Follows(s, 6) and Parent(s, 3)
+2 1 10,2 1 14,2 12 10,2 12 14,2 13 10,2 13 14,2 3 10,2 3 14,2 4 10,2 4 14,2 5 10,2 5 14,2 8 10,2 8 14,2 9 10,2 9 14
+5000
+// Select tuples <assign, variable> false pattern
+stmt s; variable v; procedure p; assign a;
+Select <a, s, v> pattern a ("C", _)
+none
+5000
+// Select tuples <stmt, assign, print> undeclared syn
+stmt s; while w; print pr;
+Select <s, a, pr> such that Next(9, pr) and Follows(s, 12) and Parent(w, 4)
+SemanticError
+5000

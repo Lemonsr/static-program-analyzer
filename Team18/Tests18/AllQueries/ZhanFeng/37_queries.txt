@@ -1,0 +1,215 @@
+1 - Select synonym, calls wildcard wildcard
+stmt s;
+Select s such that Calls(_, _)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+2 - Select synonym, calls wildcard synonym
+assign a; procedure p;
+Select a such that Calls(_, p)
+1,11,13,14,15,16,19,25,27,35,41,42,43,45,46,48,5,50,51,52,55,58,59,62,63,65,67,68,69,7,71,9
+5000
+2 - Select boolean, calls wildcard, entref
+stmt s;
+Select BOOLEAN such that Calls(_, "fifth")
+TRUE
+5000
+3 -  Select synonym, calls wildcard entref
+print p;
+Select p such that Calls(_, "leo")
+none
+5000
+4 - Select synonym, calls wildcard entref
+stmt s;
+Select s such that Calls(_, "second")
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+5 - Select synonym, calls synonym, wildcard
+constant const; procedure p;
+Select const such that Calls(p, _)
+0,1,10,1234,1337,2,23,24134,3,322,44,5,89,9
+5000
+6 - Select synonym, calls synonym, synonym
+while w; procedure p1, p2;
+Select w such that Calls(p1, p2)
+26,30,32,4,40,44,47,49,54,6
+5000
+7 - Select synonym, calls synonym, entref
+if ifs; procedure p;
+Select ifs such that Calls(p, "fourth")
+10,18,20,29,38,39,61,64,66,8
+5000
+8 - Select synonym, calls synonym, synonym
+stmt s; procedure p;
+Select s such that Calls(p, p)
+none
+5000
+9 - Select synonym, calls, synonym, entref
+if ifs; procedure p;
+Select ifs such that Calls(p, "_")
+SyntaxError
+5000
+10 - select syn, calls entref, wildcard
+call c;
+Select c such that Calls("fourth", _)
+21,23,28,3,31,36,56
+5000
+11 - select syn, calls entref, syn
+constant const; procedure p;
+Select const such that Calls("third", p)
+none
+5000
+12 - select syn, calls entref, entref
+procedure p;
+Select p such that Calls("second", "fourth")
+extra,fifth,first,fourth,second,square,third
+5000
+13 - select syn, calls entref, wildcard
+call c;
+Select c such that Calls("second", _)
+21,23,28,3,31,36,56
+5000
+14 - select syn, calls entref, wildcard
+call c;
+Select c such that Calls("sixth", _)
+none
+5000
+15 -select syn, calls entref, syn
+constant const; procedure p;
+Select const such that Calls("square", p)
+none
+5000
+16 - select syn, calls entref, syn
+constant const; procedure p;
+Select const such that Calls("first", p)
+0,1,10,1234,1337,2,23,24134,3,322,44,5,89,9
+5000
+17 - select syn, calls entref, entref
+procedure p;
+Select p such that Calls("first", "first")
+none
+5000
+18 - select syn, calls entref, entref
+procedure p;
+Select p such that Calls("first", "fourth")
+none
+5000
+19 - select syn, calls wildcard, syn
+procedure p;
+Select p such that Calls(_, p)
+fifth,fourth,second,third
+5000
+20 - select syn, calls wildcard, syn
+procedure p;
+Select p such that Calls(p, _)
+first,fourth,second
+5000
+21 - select tuple, calls syn, syn
+procedure p1, p2; read r;
+Select <p1, r> such that Calls(p1, p2)
+first 17,first 2,first 22,first 60,fourth 17,fourth 2,fourth 22,fourth 60,second 17,second 2,second 22,second 60
+5000
+22 - select tuple, calls syn, entref
+procedure p; assign a;
+Select <a, p> such that Calls(p, "fourth")
+1 second,11 second,13 second,14 second,15 second,16 second,19 second,25 second,27 second,35 second,41 second,42 second,43 second,45 second,46 second,48 second,5 second,50 second,51 second,52 second,55 second,58 second,59 second,62 second,63 second,65 second,67 second,68 second,69 second,7 second,71 second,9 second
+5000
+23 - select syn, calls entref, syn
+procedure p;
+Select p such that Calls("third", p)
+none
+5000
+24 -  select syn, calls entref, syn
+procedure p;
+Select p such that Calls("BOOLEAN", p)
+none
+5000
+25 - select syn, calls entref, syn
+procedure p;
+Select p such that Calls("d", p)
+none
+5000
+26 - select syn, calls wildcard wildcard
+stmt s;
+Select s such that Calls*(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,8,9
+5000
+27 - select syn, calls wildcard, syn
+assign a; procedure p;
+Select a such that Calls*(_,p)
+1,11,13,14,15,16,19,25,27,35,41,42,43,45,46,48,5,50,51,52,55,58,59,62,63,65,67,68,69,7,71,9
+5000
+28 - select boolean, calls wildcard, enref
+stmt s;
+Select BOOLEAN such that Calls*(_, "third")
+TRUE
+5000
+29 - select syn calls wildcard, entref
+read r;
+Select r such that Calls*(_, "leo")
+none
+5000
+30 - select bool calls syn, wildcard
+procedure p;
+Select BOOLEAN such that Calls*(p, _)
+TRUE
+5000
+31 - select syn calls syn syn
+while w; procedure p1, p2;
+Select w such that Calls*(p1, p2)
+26,30,32,4,40,44,47,49,54,6
+5000
+32 - select syn, calls syn, entref
+if ifs; procedure p;
+Select ifs such that Calls*(p, "fourth")
+10,18,20,29,38,39,61,64,66,8
+5000
+33 - select syn calls syn syn
+stmt s; procedure p;
+Select s such that Calls*(p, p)
+none
+5000
+34 - select syn calls entref wildcard
+call c;
+Select c such that Calls*("fourth", _)
+3,21,23,28,31,36,56
+5000
+35 -select tuple calls entref syn
+call c; constant const; procedure p;
+Select <c, const> such that Calls*("second", p)
+21 0,21 1,21 10,21 1234,21 1337,21 2,21 23,21 24134,21 3,21 322,21 44,21 5,21 89,21 9,23 0,23 1,23 10,23 1234,23 1337,23 2,23 23,23 24134,23 3,23 322,23 44,23 5,23 89,23 9,28 0,28 1,28 10,28 1234,28 1337,28 2,28 23,28 24134,28 3,28 322,28 44,28 5,28 89,28 9,3 0,3 1,3 10,3 1234,3 1337,3 2,3 23,3 24134,3 3,3 322,3 44,3 5,3 89,3 9,31 0,31 1,31 10,31 1234,31 1337,31 2,31 23,31 24134,31 3,31 322,31 44,31 5,31 89,31 9,36 0,36 1,36 10,36 1234,36 1337,36 2,36 23,36 24134,36 3,36 322,36 44,36 5,36 89,36 9,56 0,56 1,56 10,56 1234,56 1337,56 2,56 23,56 24134,56 3,56 322,56 44,56 5,56 89,56 9
+5000
+36 - select syn calls entref entref
+procedure p;
+Select p such that Calls*("first", "fifth")
+extra,fifth,first,fourth,second,square,third
+5000
+37 - select syn calls entref wildcard
+call c;
+Select c such that Calls*("C", _)
+none
+5000
+38 - select syn calls wildcard, syn
+procedure p;
+Select p such that Calls*(_, p)
+fifth,fourth,second,third
+5000
+39 - select syn calls wildcard, syn
+procedure p;
+Select p such that Calls*(p, _)
+first,fourth,second
+5000
+40 - select tuple calls syn syn
+procedure p1, p2;
+Select <p1, p1, p1> such that Calls*(p1, p2)
+first first first,fourth fourth fourth,second second second
+5000
+41 - select tuple calls syn syn
+procedure p1, p2;
+Select <p1, p2> such that Calls*(p1, p2)
+first fifth,first fourth,first second,first third,fourth fifth,second fifth,second fourth,second third
+5000
+42 - select syn calls entref syn
+procedure p;
+Select p such that Calls*("a", p)
+none
+5000

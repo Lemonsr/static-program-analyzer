@@ -1,0 +1,2095 @@
+// Follows(_,_)
+stmt s;
+Select s such that Follows(_,_)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+5000
+// Follows(_,stmt s)
+stmt s;
+Select s such that Follows(_,s)
+2, 5, 13, 16, 17, 18, 19, 7, 9, 10, 20
+5000
+// Follows(_,read r)
+read r;
+Select r such that Follows(_,r)
+9, 16
+5000
+// Follows(_,print p)
+print p;
+Select p such that Follows(_,p)
+none
+5000
+// Follows(_,while w)
+while w;
+Select w such that Follows(_,w)
+5, 7
+5000
+// Follows(_,if if)
+if if;
+Select if such that Follows(_,if)
+2, 10, 13
+5000
+// Follows(_,assign a)
+assign a;
+Select a such that Follows(_,a)
+17, 18, 19, 20
+5000
+// Follows(_, 1)
+stmt s;
+Select s such that Follows(_, 1)
+none
+5000
+// Follows(_, 2)
+read r;
+Select r such that Follows(_, 2)
+9, 16
+5000
+// Follows(_, 3)
+print p;
+Select p such that Follows(_, 3)
+none
+5000
+// Follows(_, 4)
+while w;
+Select w such that Follows(_, 4)
+none
+5000
+// Follows(_, 5)
+if if;
+Select if such that Follows(_, 5)
+2, 10, 13
+5000
+// Follows(_, 6)
+assign a;
+Select a such that Follows(_, 6)
+none
+5000
+// Follows(_, 7)
+variable v;
+Select v such that Follows(_, 7)
+z, a, b, c, answer, x, ads, fa8, fa9fa, y, cha, mdal231, ada, R
+5000
+// Follows(_, 8)
+constant c;
+Select c such that Follows(_, 8)
+none
+5000
+// Follows(_, 9)
+procedure p;
+Select p such that Follows(_, 9)
+Q
+5000
+// Follows(_, 10)
+stmt s;
+Select s such that Follows(_, 10)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+// Follows(_, 11)
+stmt s;
+Select s such that Follows(_, 11)
+none
+5000
+// Follows(_, 12)
+stmt s;
+Select s such that Follows(_, 12)
+none
+5000
+// Follows(_, 13)
+stmt s;
+Select s such that Follows(_, 13)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+// Follows(_, 14)
+stmt s;
+Select s such that Follows(_, 14)
+none
+5000
+// Follows(_, 15)
+constant c;
+Select s such that Follows(_, 15)
+SemanticError
+5000
+// Follows(_, 16)
+variable v;
+Select v such that Follows(_, 16)
+z, a, b, c, answer, x, ads, fa8, fa9fa, y, cha, mdal231, ada, R
+5000
+// Follows(_, 17)
+stmt s;
+Select s such that Follows(_, 17)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+// Follows(_, 18)
+stmt s;
+Select s such that Follows(_, 18)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+// Follows(_, 19)
+constant c;
+Select c such that Follows(_, 19)
+3, 0, 2, 23, 89, 10, 1, 42
+5000
+// Follows(_, 20)
+variable v;
+Select v such that Follows(_, 20)
+z, a, b, c, answer, x, ads, fa8, fa9fa, y, cha, mdal231, ada, R
+5000
+// Follows(stmt s, _)
+stmt s;
+Select s such that Follows(s,_)
+1, 2, 4, 5, 6, 8, 9, 13, 15, 17, 18
+5000
+// Follows(read r, _)
+read r;
+Select r such that Follows(r,_)
+9
+5000
+// Follows(print p, _)
+print p;
+Select p such that Follows(p,_)
+8, 15
+5000
+// Follows(while w, _)
+while w;
+Select w such that Follows(w,_)
+5
+5000
+// Follows(if if, _)
+if if;
+Select if such that Follows(if,_)
+2, 13
+5000
+// Follows(assign a, _)
+assign a;
+Select a such that Follows(a,_)
+1, 4, 6, 17, 18
+5000
+// Follows(variable v, _)
+variable v;
+Select v such that Follows(v,_)
+SemanticError
+5000
+// Follows(constant c, _)
+constant c;
+Select c such that Follows(c,_)
+SemanticError
+5000
+// Follows(procedure pro, _)
+procedure pro;
+Select pro such that Follows(pro,_)
+SemanticError
+5000
+// Follows(stmt s,stmt s)
+stmt s;
+Select s such that Follows(s,s)
+none
+5000
+// Follows(stmt s,stmt s2)
+stmt s,s2;
+Select s such that Follows(s,s2)
+1, 2, 4, 5, 6, 8, 9, 13, 15, 17, 18
+5000
+// Follows(stmt s,read r)
+stmt s; read r;
+Select s such that Follows(s,r)
+8, 15
+5000
+// Follows(stmt s,print p)
+stmt s; print p;
+Select s such that Follows(s,p)
+none
+5000
+// Follows(stmt s,while w)
+stmt s; while w;
+Select s such that Follows(s,w)
+4, 6
+5000
+// Follows(stmt s,if if)
+stmt s; if if;
+Select if such that Follows(s,if)
+2, 10, 13
+5000
+// Follows(stmt s,assign a)
+stmt s; assign a;
+Select s such that Follows(s,a)
+2, 13, 17, 18
+5000
+// Follows(read r,stmt s)
+read r; stmt s;
+Select r such that Follows(r,s)
+9
+5000
+// Follows(read r,read r)
+read r;
+Select r such that Follows(r,r)
+none
+5000
+// Follows(read r,read r2)
+read r,r2;
+Select r such that Follows(r,r2)
+none
+5000
+// Follows(read r,print p)
+read r; print p;
+Select r such that Follows(r,p)
+none
+5000
+// Follows(read r,while w)
+read r; while w;
+Select r such that Follows(r,w)
+none
+5000
+// Follows(read r,if if)
+read r; if if;
+Select r such that Follows(r,if)
+9
+5000
+// Follows(read r,assign a)
+read r; assign a;
+Select r such that Follows(r,a)
+none
+5000
+// Follows(print p,stmt s)
+print p; stmt s;
+Select p such that Follows(p,s)
+8, 15
+5000
+// Follows(print p,read r)
+print p; read r;
+Select p such that Follows(p,r)
+8, 15
+5000
+// Follows(print p,print p2)
+print p,p2;
+Select p such that Follows(p,p2)
+none
+5000
+// Follows(print p,print p)
+print p;
+Select p such that Follows(p,p)
+none
+5000
+// Follows(print p,while w)
+print p; while w;
+Select p such that Follows(p,w)
+none
+5000
+// Follows(print p,if if)
+print p; if if;
+Select p such that Follows(p,if)
+none
+5000
+// Follows(print p,assign a)
+print p; assign a;
+Select p such that Follows(p,a)
+none
+5000
+// Follows(while w,stmt s)
+while w; stmt s;
+Select w such that Follows(w,s)
+5
+5000
+// Follows(while w,read r)
+while w; read r;
+Select w such that Follows(w,r)
+none
+5000
+// Follows(while w,print p)
+while w; print p;
+Select w such that Follows(w,p)
+none
+5000
+// Follows(while w,while w)
+while w;
+Select w such that Follows(w,w)
+none
+5000
+// Follows(while w,while w2)
+while w; while w2;
+Select w such that Follows(w,w2)
+none
+5000
+// Follows(while w,if if)
+while w; if if;
+Select w such that Follows(w,if)
+5
+5000
+// Follows(while w,assign a)
+while w; assign a;
+Select w such that Follows(w,a)
+none
+5000
+// Follows(if if,stmt s)
+if if; stmt s;
+Select if such that Follows(if,s)
+2, 13
+5000
+// Follows(if if,read r)
+if if; read r;
+Select if such that Follows(if,r)
+none
+5000
+// Follows(if if,print p)
+if if; print p;
+Select if such that Follows(if,p)
+none
+5000
+// Follows(if if,while w)
+if if; while w;
+Select if such that Follows(if,w)
+none
+5000
+// Follows(if if,if if)
+if if;
+Select if such that Follows(if,if)
+none
+5000
+// Follows(if if,if if2)
+if if,if2;
+Select if such that Follows(if,if2)
+none
+5000
+// Follows(if if,assign a)
+if if; assign a;
+Select if such that Follows(if,a)
+2, 13
+5000
+// Follows(assign a,stmt s)
+assign a; stmt s;
+Select a such that Follows(a,s)
+1,4,6,17,18
+5000
+// Follows(assign a,read r)
+assign a; read r;
+Select a such that Follows(a,r)
+none
+5000
+// Follows(assign a,print p)
+assign a; print p;
+Select a such that Follows(a,p)
+none
+5000
+// Follows(assign a,while w)
+assign a; while w;
+Select a such that Follows(a,w)
+4, 6
+5000
+// Follows(assign a,if if)
+assign a; if if;
+Select a such that Follows(a,if)
+1
+5000
+// Follows(assign a,assign a)
+assign a;
+Select a such that Follows(a,a)
+none
+5000
+// Follows(assign a,assign a2)
+assign a,a2;
+Select a such that Follows(a,a2)
+17,18
+5000
+// Follows(stmt s, 20)
+stmt s;
+Select s such that Follows(s,20)
+2
+5000
+// Follows(read r, 20)
+read r;
+Select r such that Follows(r,20)
+none
+5000
+// Follows(print p, 20)
+print p;
+Select p such that Follows(p,20)
+none
+5000
+// Follows(while w, 20)
+while w;
+Select w such that Follows(w,20)
+none
+5000
+// Follows(if if, 20)
+if if;
+Select if such that Follows(if,20)
+2
+5000
+// Follows(assign a, 20)
+assign a;
+Select a such that Follows(a,20)
+none
+5000
+// Follows(1, _)
+stmt s;
+Select s such that Follows(1,_)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+5000
+// Follows(10, _)
+read r;
+Select s such that Follows(10,_)
+SemanticError
+5000
+// Follows(1,stmt s)
+stmt s;
+Select s such that Follows(1,s)
+2
+5000
+// Follows(1,read r)
+read r;
+Select r such that Follows(1,r)
+none
+5000
+// Follows(1,print p)
+print p;
+Select p such that Follows(1,p)
+none
+5000
+// Follows(1,while w)
+while w;
+Select w such that Follows(1,w)
+none
+5000
+// Follows(1,if if)
+if if;
+Select if such that Follows(1,if)
+2
+5000
+// Follows(1,assign a)
+assign a;
+Select a such that Follows(1,a)
+none
+5000
+// Follows(int, int)
+stmt s;
+Select s such that Follows(1,2)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+5000
+// Follows(int, int)
+while w;
+Select w such that Follows(10,11)
+none
+5000
+// Follows(int, int)
+print p;
+Select p such that Follows(9,8)
+none
+5000
+// FollowsStar(_,_)
+stmt s;
+Select s such that Follows*(_,_)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+5000
+// FollowsStar(_,stmt s)
+stmt s;
+Select s such that Follows*(_,s)
+2,20,5,7,9,10,13,16,17,18,19
+5000
+// FollowsStar(_,read r)
+read r;
+Select r such that Follows*(_,r)
+9,16
+5000
+// FollowsStar(_,print p)
+print p
+Select p such that Follows*(_,p)
+SyntaxError
+5000
+// FollowsStar(_,while w)
+while w;
+Select w such that Follows*(_,w)
+5,7
+5000
+// FollowsStar(_,if if)
+if if;
+Select if such that Follows*(_,if)
+2,10,13
+5000
+// FollowsStar(_,assign a)
+assign a;
+Select a such that Follows*(_,a)
+17,18,19,20
+5000
+// FollowsStar(_, 10)
+stmt s;
+Select s such that Follows*(_,10)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+5000
+// FollowsStar(stmt s, _)
+stmt s;
+Select s such that Follows*(s,_)
+1,2,4,5,6,8,9,13,15,17,18,
+5000
+// FollowsStar(read r, _)
+read r;
+Select r such that Follows*(r,_)
+9
+5000
+// FollowsStar(print p, _)
+print p;
+Select p such that Follows*(p,_)
+8,15
+5000
+// FollowsStar(while w, _)
+while w;
+Select w such that Follows*(w,_)
+5
+5000
+// FollowsStar(if if, _)
+if if;
+Select if such that Follows*(if,_)
+2,13
+5000
+// FollowsStar(assign a, _)
+assign a;
+Select a such that Follows*(a,_)
+1,4,6,17,18
+5000
+// FollowsStar(synonym, synonym)
+stmt s, s2;
+Select s such that Follows*(s,s2)
+1,2,4,5,6,8,9,13,15,17,18
+5000
+// FollowsStar(stmt s,stmt s)
+stmt s;
+Select s such that Follows*(s,s)
+none
+5000
+// FollowsStar(stmt s,stmt s2)
+stmt s,s2;
+Select s such that Follows*(s,s2)
+1,2,4,5,6,8,9,13,15,17,18
+5000
+// FollowsStar(stmt s,read r)
+stmt s; read r;
+Select s such that Follows*(s,r)
+8,15
+5000
+// FollowsStar(stmt s,print p)
+stmt s; print p;
+Select s such that Follows*(s,p)
+none
+5000
+// FollowsStar(stmt s,while w)
+stmt s; while w;
+Select s such that Follows*(s,w)
+4,6
+5000
+// FollowsStar(stmt s,if if)
+stmt s; if if;
+Select if such that Follows*(s,if)
+2,10,13
+5000
+// FollowsStar(stmt s,assign a)
+stmt s; assign a;
+Select s such that Follows*(s,a)
+1,2,4,5,13,17,18
+5000
+// FollowsStar(read r,stmt s)
+read r; stmt s;
+Select r such that Follows*(r,s)
+9
+5000
+// FollowsStar(read r,read r)
+read r;
+Select r such that Follows*(r,r)
+none
+5000
+// FollowsStar(read r,read r2)
+read r,r2;
+Select r such that Follows*(r,r2)
+none
+5000
+// FollowsStar(read r,print p)
+read r; print p;
+Select r such that Follows*(r,p)
+none
+5000
+// FollowsStar(read r,while w)
+read r; while w;
+Select r such that Follows*(r,w)
+none
+5000
+// FollowsStar(read r,if if)
+read r; if if;
+Select r such that Follows*(r,if)
+9
+5000
+// FollowsStar(read r,assign a)
+read r; assign a;
+Select r such that Follows*(r,a)
+none
+5000
+// FollowsStar(print p,stmt s)
+print p; stmt s;
+Select p such that Follows*(p,s)
+8,15
+5000
+// FollowsStar(print p,read r)
+print p; read r;
+Select p such that Follows*(p,r)
+8, 15
+5000
+// FollowsStar(print p,print p2)
+print p,p2;
+Select p such that Follows*(p,p2)
+none
+5000
+// FollowsStar(print p,print p)
+print p;
+Select p such that Follows*(p,p)
+none
+5000
+// FollowsStar(print p,while w)
+print p; while w;
+Select p such that Follows*(p,w)
+none
+5000
+// FollowsStar(print p,if if)
+print p; if if;
+Select p such that Follows*(p,if)
+8
+5000
+// FollowsStar(print p,assign a)
+print p; assign a;
+Select p such that Follows*(p,a)
+none
+5000
+// FollowsStar(while w,stmt s)
+while w; stmt s;
+Select w such that Follows*(w,s)
+5
+5000
+// FollowsStar(while w,read r)
+while w; read r;
+Select w such that Follows*(w,r)
+none
+5000
+// FollowsStar(while w,print p)
+while w; print p;
+Select w such that Follows*(w,p)
+none
+5000
+// FollowsStar(while w,while w)
+while w;
+Select w such that Follows*(w,w)
+none
+5000
+// FollowsStar(while w,while w2)
+while w; while w2;
+Select w such that Follows*(w,w2)
+none
+5000
+// FollowsStar(while w,if if)
+while w; if if;
+Select w such that Follows*(w,if)
+5
+5000
+// FollowsStar(while w,assign a)
+while w; assign a;
+Select w such that Follows*(w,a)
+5
+5000
+// FollowsStar(if if,stmt s)
+if if; stmt s;
+Select if such that Follows*(if,s)
+2, 13
+5000
+// FollowsStar(if if,read r)
+if if; read r;
+Select if such that Follows*(if,r)
+none
+5000
+// FollowsStar(if if,print p)
+if if; print p;
+Select if such that Follows*(if,p)
+none
+5000
+// FollowsStar(if if,while w)
+if if; while w;
+Select if such that Follows*(if,w)
+none
+5000
+// FollowsStar(if if,if if)
+if if;
+Select if such that Follows*(if,if)
+none
+5000
+// FollowsStar(if if,if if2)
+if if,if2;
+Select if such that Follows*(if,if2)
+none
+5000
+// FollowsStar(if if,assign a)
+if if; assign a;
+Select if such that Follows*(if,a)
+2, 13
+5000
+// FollowsStar(assign a,stmt s)
+assign a; stmt s;
+Select a such that Follows*(a,s)
+1, 4, 6, 17, 18
+5000
+// FollowsStar(assign a,read r)
+assign a; read r;
+Select a such that Follows*(a,r)
+none
+5000
+// FollowsStar(assign a,print p)
+assign a; print p;
+Select a such that Follows*(a,p)
+none
+5000
+// FollowsStar(assign a,while w)
+assign a; while w;
+Select a such that Follows*(a,w)
+4, 6
+5000
+// FollowsStar(assign a,if if)
+assign a; if if;
+Select a such that Follows*(a,if)
+1, 4
+5000
+// FollowsStar(assign a,assign a)
+assign a;
+Select a such that Follows*(a,a)
+none
+5000
+// FollowsStar(assign a,assign a2)
+assign a,a2;
+Select a such that Follows*(a,a2)
+1, 4, 17, 18
+5000
+// FollowsStar(stmt s, 17)
+stmt s;
+Select s such that Follows*(s,17)
+13, 5, 4
+5000
+// FollowsStar(read r, 17)
+read r;
+Select r such that Follows*(r,17)
+none
+5000
+// FollowsStar(print p, 17)
+print p;
+Select p such that Follows*(p,17)
+none
+5000
+// FollowsStar(while w, 17)
+while w;
+Select w such that Follows*(w,17)
+5
+5000
+// FollowsStar(if if, 17)
+if if;
+Select if such that Follows*(if,17)
+13
+5000
+// FollowsStar(assign a, 17)
+assign a;
+Select a such that Follows*(a,17)
+4
+5000
+// FollowsStar(int, _)
+stmt s;
+Select s such that Follows*(5,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+// FollowsStar(1,stmt s)
+stmt s;
+Select s such that Follows*(1,s)
+2, 20
+5000
+// FollowsStar(1,read r)
+read r;
+Select r such that Follows*(1,r)
+none
+5000
+// FollowsStar(1,print p)
+print p;
+Select p such that Follows*(1,p)
+none
+5000
+// FollowsStar(1,while w)
+while w;
+Select w such that Follows*(1,w)
+none
+5000
+// FollowsStar(1,if if)
+if if;
+Select if such that Follows*(1,if)
+2
+5000
+// FollowsStar(1,assign a)
+assign a;
+Select a such that Follows*(1,a)
+20
+5000
+// FollowsStar(int, int)
+stmt s;
+Select s such that Follows*(6,10)
+none
+5000
+// Parent(_,_)
+stmt s;
+Select s such that Parent(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,3,4,5,6,7,8,9
+5000
+// Parent(_, synonym)
+variable v; print pr;
+Select v such that Parent(_,pr)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Parent(_, int)
+read r;
+Select r such that Parent(_,9)
+9,16
+5000
+// Parent(synonym, _)
+if i;
+Select i such that Parent(i,_)
+10,13,2
+5000
+// Parent(synonym, synonym)
+if i; read r;
+Select i such that Parent(i,r)
+13
+5000
+// Parent(synonym, int)
+if i; constant c;
+Select c such that Parent(i,10)
+none
+5000
+// Parent(int, _)
+while w;
+Select w such that Parent(2,_)
+5,7
+5000
+// Parent(int, synonym)
+assign a;
+Select a such that Parent(2,a)
+17,18,19,4
+5000
+// Parent(int, int)
+assign a;
+Select a such that Parent(2,4)
+1,11,12,14,17,18,19,20,4,6
+5000
+// ParentStar(_,_)
+assign a;
+Select a such that Parent*(_,_)
+1,11,12,14,17,18,19,20,4,6
+5000
+// ParentStar(_, synonym)
+read re;
+Select re such that Parent*(_,re)
+16,9
+5000
+// ParentStar(_, int)
+print p;
+Select p such that Parent*(_,12)
+3,8,15
+5000
+// ParentStar(synonym, _)
+stmt s;
+Select s such that Parent*(_,5)
+1,10,11,12,13,14,15,16,17,18,19,2,20,3,4,5,6,7,8,9
+5000
+// ParentStar(synonym, synonym)
+if ifs; assign a;
+Select a such that Parent*(ifs,a)
+11,12,14,17,18,19,4,6
+5000
+// ParentStar(synonym, int)
+while w;
+Select w such that Parent*(w,14)
+none
+5000
+// ParentStar(int, _)
+assign a;
+Select a such that Parent*(2,a)
+11,12,14,17,18,19,4,6
+5000
+// ParentStar(int, synonym)
+read re;
+Select re such that Parent*(2,re)
+16,9
+5000
+// ParentStar(int, int)
+if ifs;
+Select ifs such that Parent*(2, 8)
+2,10,13
+5000
+// Uses(synonym, _)
+if ifs; assign a;
+Select ifs such that Uses(a,_)
+2,10,13
+5000
+// Uses(synonym, synonym)
+if ifs; variable v;
+Select ifs such that Uses(ifs,v)
+2,10,13
+5000
+// Uses(synonym, ident)
+if ifs; assign a;
+Select a such that Uses(ifs,"b")
+1,11,12,14,17,18,19,20,4,6
+5000
+// Uses(int, _)
+constant c; assign a;
+Select c such that Uses(5,_)
+0,1,10,2,23,3,42,89
+5000
+// Uses(int, synonym)
+print pr; assign a;
+Select pr such that Uses(3,_)
+15,3,8
+5000
+// Uses(int, ident)
+stmt s;
+Select s such that Uses(s,"y")
+10,19,2,5,7
+5000
+// Modifies(synonym, _)
+read re;
+Select re such that Modifies(re,_)
+9,16
+5000
+// Modifies(synonym, synonym)
+variable v; while w;
+Select v such that Modifies(w,v)
+ada,fa8,x
+5000
+// Modifies(synonym, ident)
+variable v; if ifs;
+Select ifs such that Modifies(ifs,"z")
+2
+5000
+// Modifies(int, _)
+assign a; if ifs;
+Select a such that Modifies(10,_)
+1,11,12,14,17,18,19,20,4,6
+5000
+// Modifies(int, synonym)
+variable v; assign a;
+Select v such that Modifies(a,v)
+ada,x,y,z
+5000
+// Modifies(int, ident)
+variable v; if ifs;
+Select ifs such that Modifies(6,"x")
+2,10,13
+5000
+// Pattern(_,_)
+variable v; if ifs; assign a;
+Select ifs pattern a(_,_)
+2,10,13
+5000
+// Pattern(_,factor)
+read r; assign a;
+Select r pattern a(_,_"z"_)
+9,16
+5000
+// Pattern(synonym,_)
+assign a; variable v;
+Select v pattern a(v,_)
+ada,x,y,z
+5000
+// Pattern(synonym,factor)
+assign a; variable v;
+Select v pattern a(v,_"z"_)
+x,z
+5000
+// Pattern(synonym,factor)
+assign a; variable v;
+Select a pattern a(v,_"c"_)
+4,6,18
+5000
+// Pattern(synonym,factor)
+assign a; variable v;
+Select v pattern a(v,_"y"_)
+z
+5000
+// Pattern(ident,_)
+assign a; variable v;
+Select a pattern a("x",_)
+6,12,18
+5000
+// Pattern(ident,_)
+assign a; variable v;
+Select a pattern a("y",_)
+14,20
+5000
+// Pattern(ident, factor)
+assign a; variable v;
+Select a pattern a("x",_"c"_)
+6,18
+5000
+// Pattern(ident, factor)
+assign a; variable v;
+Select a pattern a("z",_"z"_)
+4
+5000
+// Pattern(ident, factor)
+assign a; variable v;
+Select a pattern a("z",_"3"_)
+1,17,19
+5000
+// Follows(_,_) + Pattern
+print p; variable v; assign a;
+Select p such that Follows(_,_) pattern a(_,_)
+3,8,15
+5000
+// Follows(_,_) + Pattern
+assign a; variable v;
+Select a such that Follows(_,_) pattern a(_,_"b"_)
+1,12,17,18,4,6
+5000
+// Follows(_,_) + Pattern
+assign a; while w;
+Select w such that Follows(_,_) pattern a(_,_"w"_)
+none
+5000
+// Follows(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Follows(_,_) pattern a(v,_)
+ada,x,y,z
+5000
+// Follows(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Follows(_,_) pattern a(v,_"x"_)
+y
+5000
+// Follows(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Follows(_,_) pattern a("x",_)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Follows(_,_) + Pattern
+assign a; variable v; while w;
+Select a such that Follows(_,_) pattern a("x",_"c"_)
+6,18
+5000
+// Follows(_,syn) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Follows(_,r) pattern a(_,_)
+3,8,15
+5000
+// Follows(_,syn) + Pattern
+assign a; while w; stmt s;
+Select s such that Follows(_,s) pattern a(_,_"w"_)
+none
+5000
+// Follows(_,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Follows(_,ifs) pattern a(v,_)
+10,13,2
+5000
+// Follows(_,syn) + Pattern
+assign a; variable v; while w;
+Select a such that Follows(_,a) pattern a(v,_"x"_)
+none
+5000
+// Follows(_,syn) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Follows(_,pri) pattern a("x",_)
+none
+5000
+// Follows(_,syn) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Follows(_,a) pattern a("x",_"c"_)
+18
+5000
+// Follows(_,int) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Follows(_,4) pattern a(_,_)
+none
+5000
+// Follows(_,int) + Pattern
+assign a; while w; stmt s;
+Select s such that Follows(_,6) pattern a(_,_"w"_)
+none
+5000
+// Follows(_,int) + Pattern
+assign a; variable v; while w; if ifs
+Select ifs such that Follows(_,1) pattern a(v,_)
+SyntaxError
+5000
+// Follows(_,int) + Pattern
+assign a; variable v; while w;
+Select a such that Follows(_,1) pattern a(v,_"x"_)
+none
+5000
+// Follows(_,int) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Follows(_,10) pattern a("x",_)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Follows(_,int) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Follows(_,30) pattern a("x",_"c"_)
+none
+5000
+// Follows(syn,_) + Pattern
+print p; variable v; assign a; read r;
+Select a such that Follows(a,_) pattern a(_,_)
+1,17,18,4,6
+5000
+// Follows(syn,_) + Pattern
+assign a; while w; stmt s;
+Select s such that Follows(s,_) pattern a(_,_"w"_)
+none
+5000
+// Follows(syn,_) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Follows(ifs,_) pattern a(v,_)
+2,13
+5000
+// Follows(syn,_) + Pattern
+assign a; variable v; while w; procedure p;
+Select p such that Follows(w,_) pattern a(v,_"x"_)
+Q
+5000
+// Follows(syn,_) + Pattern
+assign a; variable v; while w; read r;
+Select r such that Follows(r,_) pattern a("x",_)
+9
+5000
+// Follows(syn,_) + Pattern
+assign a; variable v; while w; constant c;
+Select c such that Follows(w,_) pattern a("x",_"c"_)
+0,1,10,2,23,3,42,89
+5000
+// Follows(syn,syn) + Pattern
+print p; variable v; assign a; read r;
+Select a such that Follows(a,p) pattern a(_,_)
+none
+5000
+// Follows(syn,syn) + Pattern
+assign a; while w; stmt s;
+Select s such that Follows(s,w) pattern a(_,_"w"_)
+none
+5000
+// Follows(syn,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Follows(ifs,a) pattern a(v,_)
+2,13
+5000
+// Follows(syn,syn) + Pattern
+assign a; variable v; while w; procedure p;
+Select a such that Follows(a,s) pattern a(v,_"x"_)
+SemanticError
+5000
+// Follows(syn,syn) + Pattern
+assign a; variable v; while w; read r; read r2;
+Select r2 such that Follows(r,r2) pattern a("x",_)
+none
+5000
+// Follows(syn,syn) + Pattern
+assign a; variable v; while w; constant c; stmt s;
+Select a such that Follows(s,a) pattern a("x",_"c"_)
+18
+5000
+// Parent(_,_) + Pattern
+print p; variable v; assign a;
+Select p such that Parent(_,_) pattern a(_,_)
+15,3,8
+5000
+// Parent(_,_) + Pattern
+assign a; variable v;
+Select a such that Parent(_,_) pattern a(_,_"b"_)
+1,12,17,18,4,6
+5000
+// Parent(_,_) + Pattern
+assign a; while w;
+Select w such that Parent(_,_) pattern a(_,_"w"_)
+none
+5000
+// Parent(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Parent(_,_) pattern a(v,_)
+ada,x,y,z
+5000
+// Parent(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Parent(_,_) pattern a(v,_"x"_)
+y
+5000
+// Parent(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Parent(_,_) pattern a("x",_)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Parent(_,_) + Pattern
+assign a; variable v; while w;
+Select a such that Parent(_,_) pattern a("x",_"c"_)
+18,6
+5000
+// Parent(_,syn) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Parent(_,r) pattern a(_,_)
+15,3,8
+5000
+// Parent(_,syn) + Pattern
+assign a; while w; stmt s;
+Select s such that Parent(_,s) pattern a(_,_"w"_)
+none
+5000
+// Parent(_,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Parent(_,ifs) pattern a(v,_)
+10,13
+5000
+// Parent(_,syn) + Pattern
+assign a; variable v; while w;
+Select a such that Parent(_,a) pattern a(v,_"x"_)
+14
+5000
+// Parent(_,syn) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Parent(_,pri) pattern a("x",_)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Parent(_,syn) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Parent(_,a) pattern a("x",_"c"_)
+18,6
+5000
+// Parent(_,int) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Parent(_,4) pattern a(_,_)
+15,3,8
+5000
+// Parent(_,int) + Pattern
+assign a; while w; stmt s;
+Select s such that Parent(_,6) pattern a(_,_"w"_)
+none
+5000
+// Parent(_,int) + Pattern
+assign a; variable v; while w; if ifs
+Select ifs such that Parent(_,1) pattern a(v,_)
+SyntaxError
+5000
+// Parent(_,int) + Pattern
+assign a; variable v; while w;
+Select a such that Parent(_,1) pattern a(v,_"x"_)
+none
+5000
+// Parent(_,int) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Parent(_,10) pattern a("x",_)
+R,a,ada,ads,answer,b,c,cha,fa8,fa9fa,mdal231,x,y,z
+5000
+// Parent(_,int) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Parent(_,30) pattern a("x",_"c"_)
+none
+5000
+// Parent(syn,_) + Pattern
+print p; variable v; assign a; read r;
+Select a such that Parent(a,_) pattern a(_,_)
+none
+5000
+// Parent(syn,_) + Pattern
+assign a; while w; stmt s;
+Select s such that Parent(s,_) pattern a(_,_"w"_)
+none
+5000
+// Parent(syn,_) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Parent(ifs,_) pattern a(v,_)
+10,13,2
+5000
+// Parent(syn,_) + Pattern
+assign a; variable v; while w; procedure p;
+Select p such that Parent(w,_) pattern a(v,_"x"_)
+Q
+5000
+// Parent(syn,_) + Pattern
+assign a; variable v; while w; read r;
+Select r such that Parent(r,_) pattern a("x",_)
+none
+5000
+// Parent(syn,_) + Pattern
+assign a; variable v; while w; constant c;
+Select c such that Parent(w,_) pattern a("x",_"c"_)
+0,1,10,2,23,3,42,89
+5000
+// Parent(syn,syn) + Pattern
+print p; variable v; assign a; read r;
+Select a such that Parent(a,p) pattern a(_,_)
+none
+5000
+// Parent(syn,syn) + Pattern
+assign a; while w; stmt s;
+Select s such that Parent(s,w) pattern a(_,_"w"_)
+none
+5000
+// Parent(syn,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Parent(ifs,a) pattern a(v,_)
+10,13,2
+5000
+// Parent(syn,syn) + Pattern
+assign a; variable v; while w; procedure p;
+Select a such that Parent(a,s) pattern a(v,_"x"_)
+SemanticError
+5000
+// Parent(syn,syn) + Pattern
+assign a; variable v; while w; read r; read r2;
+Select r2 such that Parent(r,r2) pattern a("x",_)
+none
+5000
+// Parent(syn,syn) + Pattern
+assign a; variable v; while w; constant c; stmt s;
+Select a such that Parent(s,a) pattern a("x",_"c"_)
+18,6
+5000
+// Uses(_,_) + Pattern
+print p; variable v; assign a;
+Select p such that Uses(_,_) pattern a(_,_)
+SemanticError
+5000
+// Uses(_,_) + Pattern
+assign a; variable v;
+Select a such that Uses(_,_) pattern a(_,_"b"_)
+SemanticError
+5000
+// Uses(_,_) + Pattern
+assign a; while w;
+Select w such that Uses(_,_) pattern a(_,_"w"_)
+SemanticError
+5000
+// Uses(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Uses(_,_) pattern a(v,_)
+SemanticError
+5000
+// Uses(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Uses(_,_) pattern a(v,_"x"_)
+SemanticError
+5000
+// Uses(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Uses(_,_) pattern a("x",_)
+SemanticError
+5000
+// Uses(_,_) + Pattern
+assign a; variable v; while w;
+Select a such that Uses(_,_) pattern a("x",_"c"_)
+SemanticError
+5000
+// Uses(_,syn) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Uses(_,v) pattern a(_,_)
+SemanticError
+5000
+// Uses(_,syn) + Pattern
+assign a; while w; stmt s;
+Select s such that Uses(_,s) pattern a(_,_"w"_)
+SemanticError
+5000
+// Uses(_,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Uses(_,v) pattern a(v,_)
+SemanticError
+5000
+// Uses(_,syn) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Uses(_,c) pattern a(v,_"x"_)
+SemanticError
+5000
+// Uses(_,syn) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Uses(_,v) pattern a("x",_)
+SemanticError
+5000
+// Uses(_,syn) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Uses(_,c) pattern a("x",_"c"_)
+SemanticError
+5000
+// Uses(_,int) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Uses(_,4) pattern a(_,_)
+SyntaxError
+5000
+// Uses(_,int) + Pattern
+assign a; while w; stmt s;
+Select s such that Uses(_,6) pattern a(_,_"w"_)
+SyntaxError
+5000
+// Uses(_,int) + Pattern
+assign a; variable v; while w; if ifs
+Select ifs such that Uses(_,1) pattern a(v,_)
+SyntaxError
+5000
+// Uses(_,int) + Pattern
+assign a; variable v; while w;
+Select a such that Uses(_,1) pattern a(v,_"x"_)
+SyntaxError
+5000
+// Uses(_,int) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Uses(_,10) pattern a("x",_)
+SyntaxError
+5000
+// Uses(_,int) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Uses(_,30) pattern a("x",_"c"_)
+SyntaxError
+5000
+// Uses(syn,_) + Pattern
+print p; variable v; assign a; read r;
+Select a such that Uses(a,_) pattern a(_,_)
+1,11,12,14,17,18,19,20,4,6
+5000
+// Uses(syn,_) + Pattern
+assign a; while w; stmt s; constant c;
+Select s such that Uses(s,_) pattern a(_,_"w"_)
+none
+5000
+// Uses(syn,_) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Uses(w,_) pattern a(v,_)
+10,13,2
+5000
+// Uses(syn,_) + Pattern
+assign a; variable v; while w; procedure p;
+Select p such that Uses(a,_) pattern a(v,_"x"_)
+Q
+5000
+// Uses(syn,_) + Pattern
+assign a; variable v; while w; read r;
+Select r such that Uses(r,_) pattern a("x",_)
+SemanticError
+5000
+// Uses(syn,_) + Pattern
+assign a; variable v; while w; constant c;
+Select c such that Uses(v,_) pattern a("x",_"c"_)
+SemanticError
+5000
+// Uses(syn,syn) + Pattern
+print p; variable v; assign a; read r; constant c;
+Select a such that Uses(a,v) pattern a(_,_)
+1,11,12,14,17,18,19,20,4,6
+5000
+// Uses(syn,syn) + Pattern
+assign a; while w; stmt s;
+Select s such that Uses(s,c) pattern a(_,_"w"_)
+SemanticError
+5000
+// Uses(syn,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Uses(ifs,v) pattern a(v,_)
+10,13,2
+5000
+// Uses(syn,syn) + Pattern
+assign a; variable v; while w; procedure p;
+Select a such that Uses(a,p) pattern a(v,_"x"_)
+SemanticError
+5000
+// Uses(syn,syn) + Pattern
+assign a; variable v; while w; read r; read r2; procedure p;
+Select r2 such that Uses(r,p) pattern a("x",_)
+SemanticError
+5000
+// Uses(syn,syn) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Uses(w,v) pattern a("x",_"c"_)
+18,6
+5000
+// Modifies(_,_) + Pattern
+print p; variable v; assign a;
+Select p such that Modifies(_,_) pattern a(_,_)
+SemanticError
+5000
+// Modifies(_,_) + Pattern
+assign a; variable v;
+Select a such that Modifies(_,_) pattern a(_,_"b"_)
+SemanticError
+5000
+// Modifies(_,_) + Pattern
+assign a; while w;
+Select w such that Modifies(_,_) pattern a(_,_"w"_)
+SemanticError
+5000
+// Modifies(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Modifies(_,_) pattern a(v,_)
+SemanticError
+5000
+// Modifies(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Modifies(_,_) pattern a(v,_"x"_)
+SemanticError
+5000
+// Modifies(_,_) + Pattern
+assign a; variable v; while w;
+Select v such that Modifies(_,_) pattern a("x",_)
+SemanticError
+5000
+// Modifies(_,_) + Pattern
+assign a; variable v; while w;
+Select a such that Modifies(_,_) pattern a("x",_"c"_)
+SemanticError
+5000
+// Modifies(_,syn) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Modifies(_,v) pattern a(_,_)
+SemanticError
+5000
+// Modifies(_,syn) + Pattern
+assign a; while w; stmt s;
+Select s such that Modifies(_,s) pattern a(_,_"w"_)
+SemanticError
+5000
+// Modifies(_,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Modifies(_,v) pattern a(v,_)
+SemanticError
+5000
+// Modifies(_,syn) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Modifies(_,c) pattern a(v,_"x"_)
+SemanticError
+5000
+// Modifies(_,syn) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Modifies(_,v) pattern a("x",_)
+SemanticError
+5000
+// Modifies(_,syn) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Modifies(_,c) pattern a("x",_"c"_)
+SemanticError
+5000
+// Modifies(_,int) + Pattern
+print p; variable v; assign a; read r;
+Select p such that Modifies(_,4) pattern a(_,_)
+SyntaxError
+5000
+// Modifies(_,int) + Pattern
+assign a; while w; stmt s;
+Select s such that Modifies(_,6) pattern a(_,_"w"_)
+SyntaxError
+5000
+// Modifies(_,int) + Pattern
+assign a; variable v; while w; if ifs
+Select ifs such that Modifies(_,1) pattern a(v,_)
+SyntaxError
+5000
+// Modifies(_,int) + Pattern
+assign a; variable v; while w;
+Select a such that Modifies(_,1) pattern a(v,_"x"_)
+SyntaxError
+5000
+// Modifies(_,int) + Pattern
+assign a; variable v; while w; print pri;
+Select v such that Modifies(_,10) pattern a("x",_)
+SyntaxError
+5000
+// Modifies(_,int) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Modifies(_,30) pattern a("x",_"c"_)
+SyntaxError
+5000
+// Modifies(syn,_) + Pattern
+print p; variable v; assign a; read r;
+Select a such that Modifies(a,_) pattern a(_,_)
+1,11,12,14,17,18,19,20,4,6
+5000
+// Modifies(syn,_) + Pattern
+assign a; while w; stmt s; constant c;
+Select s such that Modifies(w,_) pattern a(_,_"w"_)
+none
+5000
+// Modifies(syn,_) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Modifies(ifs,_) pattern a(v,_)
+10,13,2
+5000
+// Modifies(syn,_) + Pattern
+assign a; variable v; while w; procedure p;
+Select p such that Modifies(a,_) pattern a(v,_"x"_)
+Q
+5000
+// Modifies(syn,_) + Pattern
+assign a; variable v; while w; read r;
+Select r such that Modifies(r,_) pattern a("x",_)
+16,9
+5000
+// Modifies(syn,_) + Pattern
+assign a; variable v; while w; constant c;
+Select c such that Modifies(w,_) pattern a("x",_"c"_)
+0,1,10,2,23,3,42,89
+5000
+// Modifies(syn,syn) + Pattern
+print p; variable v; assign a; read r; constant c;
+Select a such that Modifies(r,v) pattern a(_,_)
+1,11,12,14,17,18,19,20,4,6
+5000
+// Modifies(syn,syn) + Pattern
+assign a; while w; stmt s; constant c;
+Select s such that Modifies(a,c) pattern a(_,_"w"_)
+SemanticError
+5000
+// Modifies(syn,syn) + Pattern
+assign a; variable v; while w; if ifs;
+Select ifs such that Modifies(ifs,v) pattern a(v,_)
+10,13,2
+5000
+//ModifiesUses(syn,syn) + Pattern
+assign a; variable v; while w; procedure p;
+Select a such that Modifies(a,v) pattern a(v,_"x"_)
+14
+5000
+// Modifies(syn,syn) + Pattern
+assign a; variable v; while w; read r; read r2; procedure p;
+Select r2 such that Modifies(r2,v) pattern a("x",_)
+16,9
+5000
+// Modifies(syn,syn) + Pattern
+assign a; variable v; while w; constant c;
+Select a such that Modifies(a,c) pattern a("x",_"c"_)
+SemanticError
+5000
+// FollowsStar(_,_) + Pattern
+stmt s; assign a;
+Select s such that Follows*(_,_) pattern a(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,3,4,5,6,7,8,9
+5000
+// FollowsStar(_,stmt s)  + Pattern
+stmt s; assign a;
+Select s such that Follows*(_,s) pattern a(_,_"b"_)
+10,13,16,17,18,19,2,20,5,7,9
+5000
+// FollowsStar(_,read r) + Pattern
+read r; assign a;
+Select r such that Follows*(_,r) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(_,print p) + Pattern
+print p assign a; variable v;
+Select p such that Follows*(_,p) pattern a(v,_)
+SyntaxError
+5000
+// FollowsStar(_,while w) + Pattern
+while w; assign a; variable v;
+Select w such that Follows*(_,w) pattern a(v,_"x"_)
+5,7
+5000
+// FollowsStar(_,if if) + Pattern
+if if; assign a;
+Select if such that Follows*(_,if) pattern a("x",_)
+10,13,2
+5000
+// FollowsStar(_,assign a) + Pattern
+assign a;
+Select a such that Follows*(_,a) pattern a("x",_"c"_)
+18
+5000
+// FollowsStar(_, 10) + Pattern
+stmt s; assign a;
+Select s such that Follows*(_,10)  pattern a(_,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,3,4,5,6,7,8,9
+5000
+// FollowsStar(stmt s, _) + Pattern
+stmt s; assign a;
+Select s such that Follows*(s,_) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(read r, _) + Pattern
+read r; assign a; variable v;
+Select r such that Follows*(r,_) pattern a(v,_)
+9
+5000
+// FollowsStar(print p, _) + Pattern
+print p; assign a; variable v;
+Select p such that Follows*(p,_) pattern a(v,_"x"_)
+15,8
+5000
+// FollowsStar(while w, _) + Pattern
+while w; assign a;
+Select w such that Follows*(w,_) pattern a("x",_)
+5
+5000
+// FollowsStar(if if, _)  + Pattern
+if if; assign a;
+Select if such that Follows*(if,_) pattern a("x",_"c"_)
+13,2
+5000
+// FollowsStar(assign a, _) + Pattern
+assign a;
+Select a such that Follows*(a,_) pattern a(_,_)
+1,17,18,4,6
+5000
+// FollowsStar(synonym, synonym) + Pattern
+stmt s, s2; assign a;
+Select s such that Follows*(s,s2) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(stmt s,stmt s)  + Pattern
+stmt s; assign a; variable v;
+Select s such that Follows*(s,s) pattern a(v,_)
+none
+5000
+// FollowsStar(stmt s,stmt s2)  + Pattern
+stmt s,s2; assign a; variable v;
+Select s such that Follows*(s,s2) pattern a(v,_"x"_)
+1,13,15,17,18,2,4,5,6,8,9
+5000
+// FollowsStar(stmt s,read r) + Pattern
+stmt s; read r; assign a;
+Select s such that Follows*(s,r) pattern a("x",_)
+8,15
+5000
+// FollowsStar(stmt s,print p) + Pattern
+stmt s; print p; assign a;
+Select s such that Follows*(s,p) pattern a("x",_"c"_)
+none
+5000
+// FollowsStar(stmt s,while w) + Pattern
+stmt s; while w; assign a;
+Select s such that Follows*(s,w) pattern a(_,_)
+4,6
+5000
+// FollowsStar(stmt s,if if) + Pattern
+stmt s; if if; assign a;
+Select if such that Follows*(s,if) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(stmt s,assign a) + Pattern
+stmt s; assign a; variable v;
+Select s such that Follows*(s,a) pattern a(v,_)
+1,13,17,18,2,4,5
+5000
+// FollowsStar(read r,stmt s) + Pattern
+read r; stmt s; assign a; variable v;
+Select r such that Follows*(r,s)  pattern a(v,_"x"_)
+9
+5000
+// FollowsStar(read r,read r) + Pattern
+read r; assign a;
+Select r such that Follows*(r,r) pattern a("x",_)
+none
+5000
+// FollowsStar(read r,read r2) + Pattern
+read r,r2; assign a;
+Select r such that Follows*(r,r2) pattern a("x",_"c"_)
+none
+5000
+// FollowsStar(read r,print p) + Pattern
+read r; print p; assign a;
+Select r such that Follows*(r,p) pattern a(_,_)
+none
+5000
+// FollowsStar(read r,while w) + Pattern
+read r; while w; assign a;
+Select r such that Follows*(r,w) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(read r,if if) + Pattern
+read r; if if; assign a; variable v;
+Select r such that Follows*(r,if) pattern a(v,_)
+9
+5000
+// FollowsStar(read r,assign a) + Pattern
+read r; assign a; variable v;
+Select r such that Follows*(r,a) a(v,_"x"_)
+SyntaxError
+5000
+// FollowsStar(print p,stmt s) + Pattern
+print p; stmt s; assign a;
+Select p such that Follows*(p,s) a(_,_"w"_)
+SyntaxError
+5000
+// FollowsStar(print p,read r) + Pattern
+print p; read r; assign a; variable v;
+Select p such that Follows*(p,r) pattern a(v,_)
+15,8
+5000
+// FollowsStar(print p,print p2) + Pattern
+print p,p2; assign a; variable v;
+Select p such that Follows*(p,p2) pattern a(v,_"x"_)
+none
+5000
+// FollowsStar(print p,print p) + Pattern
+print p; assign a;
+Select p such that Follows*(p,p) pattern a("x",_)
+none
+5000
+// FollowsStar(print p,while w) + Pattern
+print p; while w; assign a'
+Select p such that Follows*(p,w) pattern a("x",_"c"_)
+SyntaxError
+5000
+// FollowsStar(print p,if if) + Pattern
+print p; if if; assign a;
+Select p such that Follows*(p,if) pattern a(_,_)
+8
+5000
+// FollowsStar(print p,assign a) + Pattern
+print p; assign a;
+Select p such that Follows*(p,a) pattern a(_,_"b"_)
+none
+5000
+// FollowsStar(while w,stmt s) + Pattern
+while w; stmt s; assign a;
+Select w such that Follows*(w,s) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(while w,read r) + Pattern
+while w; read r; assign a;  variable v;
+Select w such that Follows*(w,r) pattern a(v,_)
+none
+5000
+// FollowsStar(while w,print p) + Pattern
+while w; print p; assign a; variable v;
+Select w such that Follows*(w,p) pattern a(v,_"x"_)
+none
+5000
+// FollowsStar(while w,while w) + Pattern
+while w; assign a;
+Select w such that Follows*(w,w) pattern a("x",_)
+none
+5000
+// FollowsStar(while w,while w2) + Pattern
+while w; while w2; assign a;
+Select w such that Follows*(w,w2) pattern a("x",_"c"_)
+none
+5000
+// FollowsStar(while w,if if) + Pattern
+while w; if if; assign a;
+Select w such that Follows*(w,if) pattern a(_,_)
+5
+5000
+// FollowsStar(while w,assign a) + Pattern
+while w; assign a;
+Select w such that Follows*(w,a) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(if if,stmt s) + Pattern
+if if; stmt s; assign a; variable v;
+Select if such that Follows*(if,s) pattern a(v,_)
+13,2
+5000
+// FollowsStar(if if,read r) + Pattern
+if if; read r; variable v; assign a;
+Select if such that Follows*(if,r) pattern a(v,_"x"_)
+none
+5000
+// FollowsStar(if if,print p) + Pattern
+if if; print p; assign a;
+Select if such that Follows*(if,p) pattern a("x",_)
+none
+5000
+// FollowsStar(if if,while w) + Pattern
+if if; while w; assign a;
+Select if such that Follows*(if,w) pattern a("x",_"c"_)
+none
+5000
+// FollowsStar(if if,if if) + Pattern
+if if; assign a;
+Select if such that Follows*(if,if) pattern a(_,_)
+none
+5000
+// FollowsStar(if if,if if2) + Pattern
+if if,if2; assign a;
+Select if such that Follows*(if,if2) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(if if,assign a) + Pattern
+if if; assign a; variable v;
+Select if such that Follows*(if,a) pattern a(v,_)
+13,2
+5000
+// FollowsStar(assign a,stmt s) + Pattern
+assign a; stmt s; variable v;
+Select a such that Follows*(a,s) pattern a(v,_"x"_)
+none
+5000
+// FollowsStar(assign a,read r) + Pattern
+assign a; read r;
+Select a such that Follows*(a,r) pattern a("x",_)
+none
+5000
+// FollowsStar(assign a,print p) + Pattern
+assign a; print p;
+Select a such that Follows*(a,p) pattern a("x",_"c"_)
+none
+5000
+// FollowsStar(assign a,while w) + Pattern
+assign a; while w;
+Select a such that Follows*(a,w) pattern a(_,_)
+4,6
+5000
+// FollowsStar(assign a,if if) + Pattern
+assign a; if if;
+Select a such that Follows*(a,if) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(assign a,assign a) + Pattern
+assign a; variable v;
+Select a such that Follows*(a,a) pattern a(v,_)
+none
+5000
+// FollowsStar(assign a,assign a2) + Pattern
+assign a,a2; variable v;
+Select a such that Follows*(a,a2) pattern a(v,_"x"_)
+none
+5000
+// FollowsStar(stmt s, 17) + Pattern
+stmt s; assign a;
+Select s such that Follows*(s,17) pattern a("x",_)
+4,5,13
+5000
+// FollowsStar(read r, 17) + Pattern
+read r; assign a;
+Select r such that Follows*(r,17) pattern a("x",_"c"_)
+none
+5000
+// FollowsStar(print p, 17) + Pattern
+print p; assign a;
+Select p such that Follows*(p,17) pattern a(_,_)
+none
+5000
+// FollowsStar(while w, 17) + Pattern
+while w; assign a;
+Select w such that Follows*(w,17) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(if if, 17) + Pattern
+if if; assign a; variable v;
+Select if such that Follows*(if,17) pattern a(v,_)
+13
+5000
+// FollowsStar(assign a, 17)  + Pattern
+assign a; variable v;
+Select a such that Follows*(a,17) pattern a(v,_"x"_)
+none
+5000
+// FollowsStar(int, _) + Pattern
+stmt s; assign a;
+Select s such that Follows*(5,_) pattern a("x",_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,3,4,5,6,7,8,9
+5000
+// FollowsStar(1,stmt s) + Pattern
+stmt s; assign a;
+Select s such that Follows*(1,s) pattern a("x",_"c"_)
+2,20
+5000
+// FollowsStar(1,read r) + Pattern
+read r; assign a;
+Select r such that Follows*(1,r) pattern a(_,_)
+none
+5000
+// FollowsStar(1,print p) + Pattern
+print p; assign a;
+Select p such that Follows*(1,p) pattern a(_,_"b"_)
+none
+5000
+// FollowsStar(1,while w) + Pattern
+while w; assign a;
+Select w such that Follows*(1,w) pattern a(_,_"w"_)
+none
+5000
+// FollowsStar(1,if if) + Pattern
+if if; assign a; variable v;
+Select if such that Follows*(1,if) pattern a(v,_)
+2
+5000
+// FollowsStar(1,assign a) + Pattern
+assign a; variable v;
+Select a such that Follows*(1,a) pattern a(v,_"x"_)
+none
+5000
+// FollowsStar(int, int) + Pattern
+stmt s; assign a;
+Select s such that Follows*(6,10) pattern a("x",_)
+none
+5000
+// ParentStar(_,_) + Pattern
+assign a;
+Select a such that Parent*(_,_) pattern a(_,_)
+1,11,12,14,17,18,19,20,4,6
+5000
+// ParentStar(_, synonym) + Pattern
+read re; assign a;
+Select re such that Parent*(_,re) pattern a(_,_"b"_)
+16,9
+5000
+// ParentStar(_, int) + Pattern
+print p; assign a;
+Select p such that Parent*(_,12) pattern a(_,_"w"_)
+none
+5000
+// ParentStar(synonym, _) + Pattern
+stmt s; assign a; variable v;
+Select s such that Parent*(_,5) pattern a(v,_)
+1,10,11,12,13,14,15,16,17,18,19,2,20,3,4,5,6,7,8,9
+5000
+// ParentStar(synonym, synonym) + Pattern
+if ifs; assign a; variable v;
+Select a such that Parent*(ifs,a) pattern a(v,_"x"_)
+14
+5000
+// ParentStar(synonym, int) + Pattern
+while w; assign a;
+Select w such that Parent*(w,14) pattern a("x",_)
+none
+5000
+// ParentStar(int, _) + Pattern
+assign a;
+Select a such that Parent*(2,a) pattern a("x",_"c"_)
+18,6
+5000
+// ParentStar(int, synonym) + Pattern
+read re; assign a;
+Select re such that Parent*(2,re) pattern a(_,_)
+16,9
+5000
+// ParentStar(int, int) + Pattern
+if ifs; assign a;
+Select ifs such that Parent*(2, 8) pattern a(_,_"w"_)
+none
+5000
+// Follows + while pattern
+stmt s, s1; assign a; call c;  if ifs; while w;
+Select w.stmt# such that Follows*(_,w) pattern w("b",_)
+5
+5000
+// Follows +if + while pattern
+stmt s, s1; assign a; call c;  if ifs; while w;
+Select ifs such that Follows*(ifs,w) pattern w("b",_) pattern ifs(_,_,_)
+none
+5000
+// Follows +if + while pattern
+stmt s, s1; assign a; call c;  if ifs; while w;
+Select w.stmt# such that Follows*(w,ifs) pattern w("fa9fa",_) pattern ifs("cha",_,_)
+none
+5000
+// Follows + with
+stmt s, s1; assign a; call c;  if ifs;
+Select s such that Follows(s,_) with s1.stmt# = s.stmt#
+1,13,15,17,18,2,4,5,6,8,9
+5000
+// Follows + with
+stmt s, s1; assign a; call c;  if ifs;
+Select ifs such that Follows*(ifs,_) with ifs.stmt# = s.stmt#
+13,2
+5000
+// Follows + with
+stmt s, s1; assign a;  if ifs; const c;
+Select c.value such that Follows(ifs,_) with ifs.stmt# = c.value
+SyntaxError
+5000
+// Follows
+stmt s, s1; assign a; read r; print pr;  if ifs;
+Select <s, a> such that Follows(a,s)
+18 17,19 18,2 1,5 4,7 6
+5000
+// Follows* + with
+stmt s, s1; assign a; read r; print pr;  if ifs;
+Select <s, ifs> such that Follows(s,_) with s1.stmt# = s.stmt#
+1 10,1 13,1 2,13 10,13 13,13 2,15 10,15 13,15 2,17 10,17 13,17 2,18 10,18 13,18 2,2 10,2 13,2 2,4 10,4 13,4 2,5 10,5 13,5 2,6 10,6 13,6 2,8 10,8 13,8 2,9 10,9 13,9 2
+5000
