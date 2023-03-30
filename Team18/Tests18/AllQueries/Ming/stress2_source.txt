@@ -1,0 +1,524 @@
+procedure ComputerStuff { USB = 1;
+    laptop = USB - 2;
+    desktop = 3 % laptop;
+    USB = desktop - laptop;
+    if (RAM == GPU) then {
+        RAM = RAM;
+        GPU = desktop - 4;
+        while (5 < 6) {
+            read USB; }
+        while (!(mouse != keyboard)) {
+            print mouse;
+            read keyboard; 
+            HDMI = GPU + RAM;
+            desktop = HDMI - DVI;
+            call SoftDrinks; 
+            keycaps = HDMI - DVI;
+            laptop = 1; 
+            USB = RAM * GPU; 
+            DVI = mouse + 3; 
+            mouse = mouse - keyboard; }
+        if (motherboard >= displayPort) then {
+            speakers = bluetooth - 5;
+            bluetooth = mouse - 4 * 3 + 2;
+            monitor = speakers / 1000 * 5 % 2;
+            desktop = monitor - monitor + bluetooth / speakers; }
+        else { mouse = keycaps; 
+            screens = monitor - desktop;
+            monitor = bluetooth - 10;
+            ComputerStuff = 10 * 5;}
+        laptop = ComputerStuff * keyboard; }
+    else { while (DVI != displayPort) {
+        while (displayPort <= laptop) {
+            while (RAM == GPU) {
+                while (10 >= 9) {
+                    while ((keyboard + 5) > mouse) {
+                        while (4 < (10 + keyboard)) {
+                            monitor = bluetooth - 20; }}}}}}
+        HDMI = 3 + 2 * 4 - mouse; }}
+procedure SoftDrinks { read coke; 
+    print pepsi; 
+    sevenUp = coke - 5; 
+    coke = pepsi + sevenUp; 
+    if (coke == pepsi) then {
+        soyaBean = coke + sevenUp;
+        chrysanthemum = chrysanthemum;
+        kickapoo = soyaBean - coke; 
+        if (chrysanthemum != kickapoo) then {
+            kickapoo = sevenUp - 10 + soyaBean;
+            lemonTea = kickapoo - 20; } 
+        else { lemonTea = kickapoo - 15; 
+            if (lemonTea == pepsi) then {
+                pepsi = lemonTea - 1;
+                coke = sevenUp - coke; } 
+            else { screens = monitor - 10 * 2;
+                if (coke == pepsi) then {
+                    if (redbull <= monsterEnergy) then {
+                        lemonTea = 10 * sevenUp; }
+                    else { minuteMaid = lemonTea + 11;
+                        coke = kickapoo - 12; }} 
+                else { chrysanthemum = soyaBean + 5; }
+                milo = 16 * 8 - coke; }}}
+    else { hundredPlus = 30;
+        horlicks = hundredPlus - 20 * coke - sevenUp; 
+        sevenUp = 2;}
+    coke = sevenUp - 5; 
+    call NorthEastLine;
+    pepsi = coke - 22; }
+procedure NorthEastLine { Hougang = Kovan - 16; 
+    Kovan = Hougang - 17;
+    while (Kovan == Hougang) {
+        Punggol = 10;
+        Kovan = Hougang - Punggol; 
+        if (Serangoon != Woodleigh) then {
+            Serangoon = Punggol % Kovan;
+            Punggol = Serangoon - 10;
+            Kovan = Serangoon - 24; }
+        else { Woodleigh = Kovan;
+            BoonKeng = PotongPasir - 15; 
+            Kovan = DhobyGhaut - BoonKeng - Woodleigh; 
+            while (Chinatown <= Outram) {
+                LittleIndia = Kovan; 
+                FarrerPark = Serangoon + 10;
+                if (LittleIndia == FarrerPark) then {
+                    ClarkeQuay = PotongPasir - 100;
+                    HarbourFront = ClarkeQuay - 15; }
+                else { HarbourFront = FarrerPark - 25; 
+                    FarrerPark = Kovan - LittleIndia; }}
+            SengKang = BuangKok * Kovan; }}    
+    BuangKok = 29; }
+procedure EastWestLine { ChangiAirport = Sengkang;
+    Simei = TanahMerah - 31; 
+    TanahMerah = 32;
+    Tampines = Simei;
+    PasirRis = Simei;
+    print Bedok;
+    read Kembangan; 
+    if (Tampines > PasirRis) then {
+        Simei = Simei + Eunos;
+        Kembangan = PayaLebar - Simei + Eunos;
+        Eunos = 33; }
+    else { Kallang = Aljunied - PayaLebar;
+        Aljunied = Kembangan;
+        Lavender = Aljunied - 35; 
+        while (Bugis == CityHall) {
+            Lavender = Outram - 23;
+            RafflesPlace = Lavender - 39;
+            TanjongPagar = RafflesPlace - Lavender; }
+        TiongBahru = Lavender - TanjongPagar; }
+    Redhill = TiongBahru - 44; 
+    Queenstown = Redhill - TiongBahru;
+    Queenstown = Commonwealth - BuonaVista; 
+    TiongBahru = Redhill / Queenstown;
+    Dover = Queenstown - Clementi + JurongEast;
+    Dover = TiongBahru - 25;
+    JurongEast = Dover - TiongBahru;
+    ChineseGarden = JurongEast - 37;
+    print Lakeside;
+    print BoonLay;
+    read Pioneer;
+    read JooKoon;
+    JooKoon = GulCircle - 41;
+    call NorthSouthLine;
+    TuasCrescent = JooKoon % TuasCrescent; } 
+procedure NorthSouthLine {  JurongEast = 2; 
+    BukitBatok = 10 - BukitGombak;
+    BukitGombak = CCK * YewTee;
+    YewTee = Kranji - Marsiling;
+    Kranji = YewTee - Woodlands;
+    while ((Marsiling < 1) && ((Woodlands < 2) && ((Admiralty < 3) && ((Sembawang < 4) || (Canberra < 5))))) {
+        Canberra = Yishun;
+        Yishun = Canberra; }    
+    if (((Yishun> 6) || (Khatib <= YCK)) || (!(AMK == Bishan))) then {
+        Braddell = Yishun;
+        Yishun = Newton - Novena;
+        call mainProcedure; }
+    else {  Orchard = Somerset; 
+        Somerset = Newton; 
+        Newton = Somerset - Novena - ToaPayoh; 
+        ToaPayoh = Somerset % Newton; }}
+procedure mainProcedure { read x;
+	x = x + 1;
+	read y;
+	y = y + 2;
+	midpoint = ( x + y ) / 2;
+	print midpoint;
+	while ( x < y ) {
+		x = x + 2;}
+	if ( midpoint < 10 ) then {
+		result = x*x + y / 2 * 5;
+		print = 5;
+		print print; }
+	else { RESULT = x*x + y / (2 * 5);
+		read Print;
+		print Print; }
+	while ( midpoint < result ) {
+		length = 5;
+		result = length * y / 2 * 5 + 3; }
+	if (midpoint < 3) then {
+		result = midpoint; }
+	else { midpoint = midpoint - 1; }
+	breadth = 5;
+	if (length == breadth) then {
+		read squareArea; }
+	else { read rectangleArea; }
+	if ((squareArea < 15) && (breadth > 5)) then {
+		read anotherBreadth;
+		volume = 19;
+		if (!(anotherBreadth > 4)) then {
+			volume = anotherBreadth * length;
+			print volume; }
+		else { volume =  25;
+			while (volume >= rectangleArea) {
+				volume = volume / 2;
+				if (volume == 5) then {
+					print procedure; }
+				else { read procedure; }}}
+		while (radius != 5) {
+			read radius;
+			diameter = radius * 2;}}
+	else { var = a + b + c;
+		var = x*x + y*y; }
+	math = 35;
+	read science;
+	while ((math <= 75) || (!(science > 60))) {
+		print stupid;
+		read english;
+		if (english != 100) then {
+			print verystupid;
+			study = study * 3 - 2 - science; }
+		else { print read;
+			study = math + study * 3 - 2;
+			while (study < 50) {
+				tuition = study * 3 - 2;
+				print tuition; }}}			
+	if ((varOnlyUsedInIfCond < 13) && (varUsedInBothIfAndWhileCond >= 12)) then {
+		x = 1; }
+    else { y = 1; }
+	while ((varOnlyUsedInWhileCond != 15) || (varUsedInBothIfAndWhileCond <= 12))  {
+		x = 1;
+		print lastPrintInStmtListVar;}
+	call notSoMain;}
+procedure notSoMain { call area57;
+	call bermudaTriangle; }
+procedure area57 { read moon;
+	read sun;
+	print Mercury;
+	print Venus;
+	read Earth;
+	print Mars;
+	if (!(Jupiter % Saturn >= Uranus)) then {
+		if (haha != Uranus) then {
+			read Pluto; }
+		else { print Pluto; }
+		read solarSystem; }
+    else { if (January >= February) then {
+		March = April - 1; }
+		else { June = May 	+ 1;}}
+	print July; 
+	while (!((AuGuSt != September9	) || (	Oc10ber <= November))) {
+		December = Christmas; }
+	print SantaIsComing;
+	while (Reindeer == Rudolph) {
+		print 	PRESENTS;	}
+	while (BoxingDay >= 	NewYearsEve) {
+		print sendPostCards; }
+	read openPresents;
+	if (thisIfDoesNotModifyAnything >= 0) then  {
+		print 	HappyNewYear; }
+	else { print PullYourEar; }
+	while (thisWhileDoesNotModifyAnything < 5) {
+		print While;	}
+	HappyBirthday = ToYou;
+	if (5 > 6) then {
+		read thisIfDoesNotUseAnything; }
+	else { read stillNotUsingAnything		; }
+	while ((7 > 8) && (9 != 10)) {
+		read thisWhileDoesNotUseAnything; }
+	print volume;
+	read math;
+	while (YouAreBornInTheZoo > 5) {
+		while (maturity < 10) {
+			print hehe;
+			call bermudaTriangle;}}}
+procedure bermudaTriangle { read thisProcedureOnlyHasOneLine;
+    call hello;}
+procedure hello { print thisProcedureOnlyModifiesStuff; }
+procedure dogs { read doberman;
+    while (germanShepherds >= goldenRetrievers) {
+        print husky;
+        call bigCats;
+        print malamute;
+        while (foxHound != spaniel) {
+            australianShepherd = bassetHound - 2; } } 
+    read akita; 
+    call smallCats; }
+procedure bigCats { print lynx;
+    if (tiger < lion) then {
+        cougar = leopard % 20;
+        cheetah = snowLeopard / 10;
+        if (tiger > jaguar) then { 
+            tiger = 20;
+            print tiger;
+        } else { jaguar = 3;
+            read jaguar; }
+    } else { call smallCats; }
+    read cloudedLeopard; }
+procedure smallCats {   bobtail = ringtail - 5; }
+procedure AsianCountries { read Singapore;
+    print Malaysia;
+    China = India - Korea;
+    call EuropeanCountries;
+    if (Myanmar != Indonesia) then {
+        SriLanka = 1; } 
+    else { Cambodia = 2; }}
+procedure EuropeanCountries { print England;
+    while (Italy == France) {
+        if (Germany != Spain) then {
+            Poland = 3; 
+            print Denmark;
+            call NorthAmericanCountries; }
+        else { Finland = 4;
+            read Norway;
+            call SouthAmericanCountries; } 
+        Russia = 5; }  
+    if (Wales > Scotland) then {
+        while (Belgium < 6) {
+            Romania = Turkey - 7; }}
+    else { while (Ireland >= Switzerland) {
+            Greece = 8; }
+    Sweden = 9; }}
+procedure NorthAmericanCountries { read USA; }
+procedure SouthAmericanCountries { print Brazil; }
+procedure CapitalCitiesEurope { Amsterdam = Athens - 1;
+    Belgrade = Amsterdam * Berlin;
+    Brussels = Belgrade % Budapest;
+    if (Belgrade < 1) then {
+        Helsinki = Brussels - 2; 
+        Dublin = Prague; }
+    else { Copenhagen = Dublin % 3; 
+        while (Amsterdam < 4) {
+            London = Copenhagen - London;}}
+    Luxembourg = Belgrade - 6;
+    while (Luxembourg != 7) {
+        Luxembourg = Madrid + 8;
+        Madrid = Luxembourg / 9;
+        if (Madrid == Monaco) then {
+            Moscow = 10 - Madrid; }
+        else {  Oslo = 11 / Luxembourg; }
+        Paris = Moscow * 12; }
+    Prague = 13 % Paris; }
+procedure one { flag = 0;
+  count = flag + 10;
+  call two;
+  flag1 = 1;
+  read one;
+  if (count == 2) then {
+    Flag = 10;
+    while (Flag    >= 0) {
+      Flag = Flag - 1;
+      call six;}}
+  else {  count = flag1 * 2 + count * 10 + count / 2;
+    flag = three/flag1 + count * 10;}}
+procedure two { read flag;
+  print flag;
+  two = 3;
+  while (two != 0) {
+    two = two - 1;
+    print two;
+    flag = two/flag1 + 10 * count + flag1 * 2;}}
+procedure three {read count;
+  read three;
+  if (count != 0) then { 
+    read Flag;
+    val = count + Flag;
+    print val;}
+  else {read count;
+    count = flag1 * flag2 + 2*count;
+    call five;}
+  while ((Flag > 0) || (count > 0)) {
+    read flag2;
+    Flag = flag2 * flag1+count*2 - Flag/flag1;
+    print Flag;}
+  call two;}
+procedure four {four = 5 * two;
+  if ((count == flag) && (count != 5)) then {
+    val1 = 10;
+    while (val1 > 0) {
+      if (val1 == 5) then {
+        val2 = val1 * count + flag/2 - Flag%4*5;
+        print val2;
+        val3 = val2 + 3 + 4; 
+        while (val2 > 0) {
+          val2 = val2 - 5;
+          print val2;}}
+      else { print val1;
+              val3 = 3 + 4 + val1;}}} 
+  else { call five;}}
+procedure five { read five;
+  print five;
+  if (five<=0) then {
+    while (three > 0) {
+      five = six * 3 + 4 * val1 + val2 + 3 +4;
+      three = three - 1;
+      call one;}
+    call two;}
+  else { while (three < 5) {
+          five = 3 * six - val1 + 3 + 4;
+          three = three + 1;
+          call six;}}
+  print five;}   
+procedure six {six = 5 * five; 
+  if ((six > 10) && (six < 20)) then {
+    one = one + two;
+    print one;}
+  else {  one = five + one + two;
+         print one;}
+  while ((three < 10) && (five > 5)) {
+    one = six * five % two;
+    print one;
+    three = 1 + three;
+    five = five - 1;}
+  call two;
+  read count;
+  var = 1 - five;
+  Var = 1 - five;
+  count1 = Flag + 1;}   
+procedure battle {read trainerA;
+  call garchomp;
+  call hydreigon;
+  time = 30;
+  while (!(time < 1)) {
+    if ((!(hydreigonHP == 0)) && (!(garchompHP == 0))) then {
+      time = time - 1;
+      scoreA = scoreB + 10 * 23 + 1 / 50 * 30;
+      scoreB = 23 * 10 + 50 / 1 * 1 / 30 + scoreA;
+      hydreigonHP = hydreigonHP - 10;
+      garchompHP = garchompHP - 10;
+      call battleground;}
+    else { time = 0; }
+    trainerAMoney = 10 + 50 / 1 + garchompHP;
+    trainerBMoney = 1 * 1 / 30 + hydreigonHP;
+    if (!(trainerBMoney == 0)) then {
+      while (capacity < 100) {
+        if (!(trainerAMoney <= 50)) then {
+          capacity = 20 * 4 + 200 + 90 * 4 + garchompHP + trainerBMoney; }
+        else { capacity = 200 + 90 * 4 + 1 / 50 + hydreigonHP + trainerAMoney;}}}
+    else { print five;}}}
+procedure garchomp {  garchompHP = 100;
+  garchomptrainer = trainerA;}
+procedure hydreigon {  hydreigonHP = 100;
+  read trainerB;
+  hydreigontrainer = trainerB;}
+procedure battleground {  read capacity;
+  print capacity;}
+procedure main { read accountNo; 
+  read pin; 
+  authenticated = 0;
+  call authenticate; 
+  if (authenticated == 1) then { 
+    read option; 
+    while (option != 0) {  
+      if (option == 1) then { 
+        read amount; 
+        call withdraw;} 
+      else { if (option == 2) then { 
+               read amount; 
+               call deposit;} 
+             else {call battleground;}}}} 
+  else { call garchomp;}} 
+procedure authenticate { if (accountNo == pin) then { 
+      authenticated = 1; 
+      balance = 500;} 
+  else { balance = 0;}} 
+procedure withdraw {if ((amount > 0) && (amount <= balance)) then { 
+      balance = balance - amount;
+      success = 1; } 
+  else {  success = 0; }} 
+procedure deposit { while (amount > 0) { 
+       balance = balance + amount;
+       success = 1; } } 
+procedure First {read x;
+  read z;
+  call Second; 
+  x = z + y - xzy / xzy + 1000 - z100 + y100;
+  read x;
+  read z;
+  call Second;
+  xzy = z + y - xzy / xzy + 1000 - z100 + y100;
+  read x;
+  read z;
+  call Second;
+  zyx = z + y - xyz / xyz + 1000 - z100 + y100;}
+procedure Second { x = 0;
+  i = 5;
+  while (i!=0) {
+    x = x + 2*y;
+    call Third;
+    i = i - 1; }
+  if (x==1) then {
+     x = x+1; } 
+  else { z = 1; }
+  z = z + x + i;
+  y = z + 2;
+  x = x * y + z; }
+procedure Third { d = e + f;
+    e = d + f;
+    f = e + d;
+    d = d + e;
+    e = f + e;
+    if ((abc < def) && (abc < def)) then {
+        d = e + f;
+        e = d + f;
+        f = e + d;
+        d = d + e;
+        e = f + e;
+    } else { d = e + f;
+        e = d + f;
+        f = e + d;
+        d = d + e;
+        e = f + e;}
+    if ((qwe < rty) && (qwe < rty)) then {
+        d = e + f;
+        e = d + f;
+        f = e + d;
+        d = d + e;
+        e = f + e;}
+    else {    d = e + f;
+        e = d + f;
+        f = e + d;
+        d = d + e;
+        e = f + e;}}
+procedure Fourth { read x;
+    e = z;
+    d = x1;
+    print z1;
+    read x;
+    f = z;
+    print x1;
+    print z1;
+    a = x;
+    read z;
+    z = z1;
+    call First; }
+procedure Nineth { a = b + c;
+    read first;
+    print First;
+    while (a < b + c) {
+        g1 = 99 - nine;
+        g2 = 9 - nine;
+        read g1;
+        print g2;}
+    call First;
+    a = b + c;
+    read second;
+    print second;
+    if (a < b + c) then {
+        g1 = 999 - nine;
+        g2 = 99 - nine;
+        read g1;
+        print g2;
+    } else { g1 = 9 - nine;
+        g2 = 999 - nine;
+        read g1;
+        print g2;}}

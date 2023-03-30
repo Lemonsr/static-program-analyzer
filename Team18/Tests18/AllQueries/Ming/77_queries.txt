@@ -1,0 +1,235 @@
+1A - Next* relationship: Invalid single quotes in right param (Syntactic err)
+variable v;
+Select v such that Next*(v, 'volume')
+SyntaxError
+5000
+1B - Next* relationship: Invalid single quotes in right param (Syntactic err)
+variable v;
+Select BOOLEAN such that Next*(v, 'volume')
+SyntaxError
+5000
+2A - Next* relationship: Invalid undeclared synonym in right param (Syntactic err)
+variable v;
+Select v such that Next*(v, volume)
+SemanticError
+5000
+2B - Next* relationship: Invalid undeclared synonym in right param (Syntactic err)
+variable v;
+Select BOOLEAN such that Next*(v, volume)
+SemanticError
+5000
+3A - Next* relationship: Invalid name in right param with name not in program (Syntactic err)
+variable v;
+Select v such that Next*(v, "thisDoesNotExist")
+SyntaxError
+5000
+3B - Next* relationship: Invalid name in right param with name not in program (Syntactic err)
+variable v;
+Select BOOLEAN such that Next*(v, "thisDoesNotExist")
+SyntaxError
+5000
+4A - Next* relationship: Invalid name in right param with name in program (Syntactic err)
+variable v;
+Select v such that Next*(v, "volume")
+SyntaxError
+5000
+4B - Next* relationship: Invalid name in right param with name in program (Syntactic err)
+variable v;
+Select BOOLEAN such that Next*(v, "volume")
+SyntaxError
+5000
+5A - Next* relationship: Invalid variable synonym in left param - Select v (Semantic err)
+variable v;
+Select v such that Next*(v, v)
+SemanticError
+5000
+5B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select BOOLEAN such that Next*(v, v)
+SemanticError
+5000
+6A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v1, v2;
+Select v1 such that Next*(v1, v2)
+SemanticError
+5000
+6B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v1, v2;
+Select v2 such that Next*(v1, v2)
+SemanticError
+5000
+6C - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v1, v2;
+Select BOOLEAN such that Next*(v1, v2)
+SemanticError
+5000
+7A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt s;
+Select v such that Next*(v, s)
+SemanticError
+5000
+7B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt s;
+Select s such that Next*(v, s)
+SemanticError
+5000
+7C- Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt s;
+Select BOOLEAN such that Next*(v, s)
+SemanticError
+5000
+8A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt n;
+Select v such that Next*(v, n)
+SemanticError
+5000
+8B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt n;
+Select n such that Next*(v, n)
+SemanticError
+5000
+8C - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; stmt n;
+Select BOOLEAN such that Next*(v, n)
+SemanticError
+5000
+9A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; print pn;
+Select v such that Next*(v, pn)
+SemanticError
+5000
+9B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; print pn;
+Select vn such that Next*(v, pn)
+SemanticError
+5000
+9C - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; print pn;
+Select BOOLEAN such that Next*(v, pn)
+SemanticError
+5000
+10A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; read re;
+Select v such that Next*(v, re)
+SemanticError
+5000
+10B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; read re;
+Select re such that Next*(v, re)
+SemanticError
+5000
+10C- Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; read re;
+Select BOOLEAN such that Next*(v, re)
+SemanticError
+5000
+11A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; if ifs;
+Select v such that Next*(v, ifs)
+SemanticError
+5000
+11B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; if ifs;
+Select ifs such that Next*(v, ifs)
+SemanticError
+5000
+11C- Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; if ifs;
+Select BOOLEAN such that Next*(v, ifs)
+SemanticError
+5000
+12A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; while w;
+Select v such that Next*(v, w)
+SemanticError
+5000
+12B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; while w;
+Select w such that Next*(v, w)
+SemanticError
+5000
+12C- Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; while w;
+Select BOOLEAN such that Next*(v, w)
+SemanticError
+5000
+13A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select v such that Next*(v, a)
+SemanticError
+5000
+13B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select a such that Next*(v, a)
+SemanticError
+5000
+13C - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; assign a;
+Select BOOLEAN such that Next*(v, a)
+SemanticError
+5000
+14A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select v such that Next*(v, 16)
+SemanticError
+5000
+14B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select BOOLEAN such that Next*(v, 16)
+SemanticError
+5000
+15A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; constant c;
+Select v such that Next*(v, c)
+SemanticError
+5000
+15B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; constant c;
+Select c such that Next*(v, c)
+SemanticError
+5000
+15B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; constant c;
+Select BOOLEAN such that Next*(v, c)
+SemanticError
+5000
+16A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; procedure p;
+Select v such that Next*(v, p)
+SemanticError
+5000
+16B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; procedure p;
+Select p such that Next*(v, p)
+SemanticError
+5000
+16C - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; procedure p;
+Select BOOLEAN such that Next*(v, p)
+SemanticError
+5000
+17A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; call cl;
+Select n such that Next*(v, cl)
+SemanticError
+5000
+17B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; call cl;
+Select v such that Next*(v, cl)
+SemanticError
+5000
+17C - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v; call cl;
+Select BOOLEAN such that Next*(v, cl)
+SemanticError
+5000
+18A - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select v such that Next*(v, _)
+SemanticError
+5000
+18B - Next* relationship: Invalid variable synonym in left param (Semantic err)
+variable v;
+Select BOOLEAN such that Next*(v, _)
+SemanticError
+5000

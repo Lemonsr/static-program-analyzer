@@ -1,0 +1,145 @@
+1A - Next* relationship: Invalid single quotes in right param (Syntactic err)
+
+Select BOOLEAN such that Next*( _ , 'volume')
+SyntaxError
+5000
+2A - Next* relationship: Invalid undeclared synonym in right param (Syntactic err)
+
+Select BOOLEAN such that Next*( _ , volume)
+SemanticError
+5000
+3A - Next* relationship: Invalid name in right param with name not in program (Syntactic err)
+
+Select BOOLEAN such that Next*( _ , "thisDoesNotExist")
+SyntaxError
+5000
+4A - Next* relationship: Invalid name in right param with name in program (Syntactic err)
+
+Select BOOLEAN such that Next*( _ , "volume")
+SyntaxError
+5000
+5A - Next* relationship: Invalid variable synonym in right param - Select v (Semantic err)
+variable v;
+Select v such that Next*( _ , v)
+SemanticError
+5000
+5B - Next* relationship: Invalid variable synonym in right param (Semantic err)
+variable v;
+Select BOOLEAN such that Next*( _ , v)
+SemanticError
+5000
+6A - Next* relationship: Select statements that are executed indirectly after anything
+stmt s;
+Select s such that Next*( _ , s)
+2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
+5000
+6B - Next* relationship: Select statements that are executed indirectly after anything
+stmt s;
+Select BOOLEAN such that Next*( _ , s)
+TRUE
+5000
+7A - Next* relationship: Select statements that are executed indirectly after anything
+stmt n;
+Select n such that Next*( _ , n)
+2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
+5000
+7B - Next* relationship: Select statements that are executed indirectly after anything
+stmt n;
+Select BOOLEAN such that Next*( _ , n)
+TRUE
+5000
+8A - Next* relationship: Select print statements that are executed indirectly after anything
+print pn;
+Select pn such that Next*( _ , pn)
+2, 12
+5000
+8B - Next* relationship: Select print statements that are executed indirectly after anything
+print pn;
+Select BOOLEAN such that Next*( _ , pn)
+TRUE
+5000
+9A - Next* relationship: Select read statements that are executed indirectly after anything
+read re;
+Select re such that Next*( _ , re)
+15
+5000
+9B - Next* relationship: Select read statements that are executed indirectly after anything
+read re;
+Select BOOLEAN such that Next*( _ , re)
+TRUE
+5000
+10A - Next* relationship: Select if statements that are executed indirectly after anything
+if ifs;
+Select ifs such that Next*( _ , ifs)
+5, 10, 18
+5000
+10B - Next* relationship: Select if statements that are executed indirectly after anything
+if ifs;
+Select BOOLEAN such that Next*( _ , ifs)
+TRUE
+5000
+11A - Next* relationship: Select while statements that are executed indirectly after anything
+while w;
+Select w such that Next*( _ , w)
+9, 19, 21
+5000
+11B - Next* relationship: Select while statements that are executed indirectly after anything
+while w;
+Select BOOLEAN such that Next*( _ , w)
+TRUE
+5000
+12A - Next* relationship: Select anything that is executed indirectly again after it is executed
+assign a;
+Select a such that Next*( _ , a)
+3, 6, 7, 11, 14, 17, 20, 22, 23
+5000
+12B - Next* relationship: Select anything that is executed indirectly again after it is executed
+assign a;
+Select BOOLEAN such that Next*( _ , a)
+TRUE
+5000
+14A - Next* relationship: Select anything that is executed indirectly before line number
+
+Select BOOLEAN such that Next*( _ , 1)
+FALSE
+5000
+14B - Next* relationship: Select anything that is executed indirectly before line number
+
+Select BOOLEAN such that Next*( _ , 16)
+TRUE
+5000
+15A - Next* relationship: Invalid constant synonym in right param (Semantic err)
+constant c;
+Select c such that Next*( _ , c)
+SemanticError
+5000
+15B - Next* relationship: Invalid constant synonym in right param (Semantic err)
+constant c;
+Select BOOLEAN such that Next*( _ , c)
+SemanticError
+5000
+16A - Next* relationship: Invalid procedure synonym in right param (Semantic err)
+procedure p;
+Select p such that Next*( _ , p)
+SemanticError
+5000
+16B - Next* relationship: Invalid procedure synonym in right param (Semantic err)
+procedure p;
+Select BOOLEAN such that Next*( _ , p)
+SemanticError
+5000
+17A - Next* relationship: Select call statements that are executed indirectly after another statement
+call cl;
+Select cl such that Next*( _ , cl)
+4, 13, 16
+5000
+17B - Next* relationship: Select call statements that are executed indirectly after another statement
+call cl;
+Select BOOLEAN such that Next*( _ , cl)
+TRUE
+5000
+18A - Next* relationship: Empty right param
+
+Select BOOLEAN such that Next*( _ , _ ) 
+TRUE
+5000
