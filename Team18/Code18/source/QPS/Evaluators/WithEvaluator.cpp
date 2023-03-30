@@ -1,4 +1,5 @@
 #include "WithEvaluator.h"
+#include "Literal.h"
 
 #include <string>
 #include <vector>
@@ -9,23 +10,21 @@ spa::WithEvaluator::WithEvaluator(WithArgument& firstArg, WithArgument& secondAr
                                                                                     secondArg(secondArg) {
 }
 
-
-
 spa::QpsResultTable spa::WithEvaluator::evaluateAttributes(PKBManager& pkbManager,
                                                            const std::string& first, const std::string& second) {
   std::vector<QpsValue> values;
   std::string attribute = first.substr(first.find('.') + 1);
-  if (attribute == "stmt#") {
+  if (attribute == STMT_NUM_ATTR_LITERAL) {
     auto result = pkbManager.getEntity(STMT);
     for (int num : result.getLineNumbers()) {
       values.push_back(QpsValue(num));
     }
-  } else if (attribute == "value") {
+  } else if (attribute == VALUE_ATTR_LITERAL) {
     auto result = pkbManager.getEntity(CONSTANT);
     for (auto& constant : result.getNames()) {
       values.push_back(QpsValue(std::stoi(constant)));
     }
-  } else if (attribute == "procName") {
+  } else if (attribute == PROC_NAME_ATTR_LITERAL) {
     auto result = pkbManager.getEntity(PROCEDURE);
     for (auto& name : result.getNames()) {
       values.push_back(QpsValue(name));

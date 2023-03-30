@@ -1,7 +1,8 @@
 #include "PqlAndParser.h"
+#include "Literal.h"
 
 spa::PqlParseStatus spa::PqlAndParser::parse(Stream<Token>& tokens, ParsedQuery& query) {
-  if (!tokens.match({ {TOKEN_NAME, "and"} })) {
+  if (!tokens.match({ {TOKEN_NAME, AND_LITERAL} })) {
     return PQL_PARSE_MISMATCH;
   }
   if (!query.hasClauses()) {

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <stdexcept>
+#include <string>
 
 #include "ParsedQuery.h"
 #include "Token.h"
@@ -12,6 +13,8 @@
 #include "PatternContainerEvaluator.h"
 #include "StmtStmtEvaluator.h"
 #include "CFGEvaluator.h"
+
+const std::string UNABLE_TO_FIND_EVALUATOR_ERROR = "Unable to find evaluator";
 
 void spa::ParsedQuery::addDeclaration(std::string synonym, DesignEntityType designEntity) {
   declarations[synonym] = designEntity;
@@ -50,10 +53,15 @@ spa::PqlClauseType spa::ParsedQuery::getLastAddedClause() {
 
 void spa::ParsedQuery::addSelectColumn(std::string selectColumn) {
   selectColumns.push_back(selectColumn);
+  selectColumnsSet.insert(selectColumn);
 }
 
 std::vector<std::string>& spa::ParsedQuery::getSelectColumns() {
   return selectColumns;
+}
+
+bool spa::ParsedQuery::hasSelectColumn(const std::string& selectColumn) {
+  return selectColumnsSet.find(selectColumn) != selectColumnsSet.end();
 }
 
 void spa::ParsedQuery::addSuchThatClause(SuchThatClause clause) {
@@ -132,7 +140,7 @@ std::unique_ptr<spa::QpsEvaluator> spa::SuchThatClause::getEvaluator() {
     return std::make_unique<CFGEvaluator>(firstArg, secondArg, designAbstraction);
   }
   default: {
-    throw std::runtime_error("Unable to find evaluator");
+    throw std::runtime_error(UNABLE_TO_FIND_EVALUATOR_ERROR);
   }
   }
 }
@@ -206,7 +214,7 @@ std::unique_ptr<spa::QpsEvaluator> spa::PatternClause::getEvaluator() {
     return std::make_unique<spa::PatternEvaluator>(synonym, firstArg, pattern);
   }
   default: {
-    throw std::runtime_error("Unable to find evaluator");
+    throw std::runtime_error(UNABLE_TO_FIND_EVALUATOR_ERROR);
   }
   }
 }

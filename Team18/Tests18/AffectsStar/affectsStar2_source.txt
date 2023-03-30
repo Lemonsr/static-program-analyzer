@@ -1,0 +1,66 @@
+procedure a {
+    read y;
+    read z;
+    x = x * x + 10;
+    y = 5;
+    z = 6;
+    q = 3;
+    f = 6;
+    r = 8 * 8 - f;
+    print x;
+    call b;
+}
+
+procedure b {
+    if ((x >= 0) && (y >=0)) then {
+        while (z != 0) {
+            a = y/x;
+            b = x * x;
+            c = y * x;
+            call c;
+            if (( x * x + y * y == 0) || ( b + c < 0)) then {
+                x = x/2;
+                y = y/2;
+                print x;
+                print y;
+                while (c!=0) {
+                    x = x + 1;
+                    read x;
+                    f = 6;
+                }
+            } else {
+                x = x - 1;
+                y = y - 1;
+                print x;
+                print y;
+                y = 6;
+                c = 10;
+            }
+        } 
+    } else {
+        x = x + 1;
+        y = y + 1;
+        z = z + 1;
+        read x;
+        read y;
+        read z;
+    }
+}
+
+procedure c {
+    q = 5;
+    que = q * q + y * y + x * x;
+    z = 6 * que;
+    x = z * 5 + 10;
+    if (x > 10) then {
+        x = x + 11;
+        q = 1 + 1;
+    } else {
+        print q;
+        print que;
+        read q;
+        read que;
+        print que;
+        x = x + 1;
+    }
+}

@@ -1,0 +1,18 @@
+procedure CapitalCitiesEurope { Amsterdam = Athens - 1;
+    Belgrade = Amsterdam * Berlin;
+    Brussels = Belgrade % Budapest;
+    if (Belgrade < 1) then {
+        Helsinki = Brussels - 2; 
+        Dublin = Prague; }
+    else { Copenhagen = Dublin % 3; 
+        while (Amsterdam < 4) {
+            London = Copenhagen - London;}}
+    Luxembourg = Belgrade - 6;
+    while (Luxembourg != 7) {
+        Luxembourg = Madrid + 8;
+        Madrid = Luxembourg / 9;
+        if (Madrid == Monaco) then {
+            Moscow = 10 - Madrid; }
+        else {  Oslo = 11 / Luxembourg; }
+        Paris = Moscow * 12; }
+    Prague = 13 % Paris; }

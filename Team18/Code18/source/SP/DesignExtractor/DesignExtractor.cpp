@@ -13,32 +13,39 @@
 #include "ProcedureStatement.h"
 #include "SpCyclicValidator.h"
 
+const std::string CYCLIC_CALL_ERROR = "Cyclic calls detected";
+const std::string CONTAINER_STMT_LINE_NUM = "-1";
+
 spa::DesignExtractor::DesignExtractor(PKBManager& pkbManager,
-                                      std::vector<std::shared_ptr<ProcedureStatement>>& procedureList) :
+                                      std::vector<std::shared_ptr<ProcedureStatement>>&
+                                      procedureList) :
   pkbManager(pkbManager), procedureList(procedureList) {
   for (auto& procedure : procedureList) {
-    auto& statements = procedure->getStatementLst();
-    for (auto& statement : statements) {
-      if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
-        auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
-        procedure->addCalledVars(callStatement->getVariableName());
-      } else if (std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
-        auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statement);
-        std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
-        for (auto& called : calledSet) {
-          procedure->addCalledVars(called);
-        }
+    buildProcCallMap(procedure);
+  }
+}
+
+void spa::DesignExtractor::buildProcCallMap(std::shared_ptr<ProcedureStatement> procedure) {
+  auto& statements = procedure->getStatementLst();
+  for (auto& statement : statements) {
+    if (std::dynamic_pointer_cast<spa::CallStatement>(statement)) {
+      auto callStatement = std::dynamic_pointer_cast<spa::CallStatement>(statement);
+      procedure->addCalledVars(callStatement->getVariableName());
+    } else if (std::dynamic_pointer_cast<spa::ContainerStatement>(statement)) {
+      auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statement);
+      std::unordered_set<std::string> calledSet = containerStatement->getProceduresCalled();
+      for (auto& called : calledSet) {
+        procedure->addCalledVars(called);
       }
     }
-    procCallMap.emplace(procedure->getProcedureVarToken().getValue(),
-      procedure->getCalledVars());
   }
+  procCallMap.emplace(procedure->getProcedureVarToken().getValue(), procedure->getCalledVars());
 }
 
 void spa::DesignExtractor::extractRelationship() {
   spa::SpCyclicValidator cyclicValidator(procCallMap);
   if (cyclicValidator.validateCyclic()) {
-    std::cerr << "Cyclic calls detected" << std::endl;
+    std::cerr << CYCLIC_CALL_ERROR << std::endl;
     exit(1);
   }
   for (auto& procedure : procedureList) {
@@ -52,14 +59,16 @@ void spa::DesignExtractor::extractRelationship() {
   extractCallsModifiesAndUses();
 }
 
-void spa::DesignExtractor::extractDesignAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList) {
+void spa::DesignExtractor::extractDesignAbstraction(
+  std::vector<std::shared_ptr<ProgramStatement>>& statementList) {
   extractFollows(statementList);
   extractFollowsStar(statementList);
   extractParentAbstraction(statementList);
   extractUsesAndModifies(statementList);
 }
 
-void spa::DesignExtractor::extractParentAbstraction(std::vector<std::shared_ptr<ProgramStatement>>& statementList) {
+void spa::DesignExtractor::extractParentAbstraction(
+  std::vector<std::shared_ptr<ProgramStatement>>& statementList) {
   for (auto& statement : statementList) {
     if (std::dynamic_pointer_cast<ContainerStatement>(statement)) {
       auto containerStatement = std::dynamic_pointer_cast<ContainerStatement>(statement);
@@ -70,13 +79,14 @@ void spa::DesignExtractor::extractParentAbstraction(std::vector<std::shared_ptr<
   }
 }
 
-void spa::DesignExtractor::extractFollows(std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
+void spa::DesignExtractor::extractFollows(
+  std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
   for (unsigned i = 0; i < statementList.size(); i++) {
     if (i + 1 != statementList.size()) {
       std::string followStmtOne = std::to_string(statementList[i]->getStatementLineNum());
       std::string followStmtTwo = std::to_string(statementList[i + 1]->getStatementLineNum());
 
-      if (followStmtOne != "-1" && followStmtTwo != "-1") {
+      if (followStmtOne != CONTAINER_STMT_LINE_NUM && followStmtTwo != CONTAINER_STMT_LINE_NUM) {
         pkbManager.addRelationship(FOLLOWS, followStmtOne, followStmtTwo);
       }
     }
@@ -87,27 +97,32 @@ void spa::DesignExtractor::extractFollows(std::vector<std::shared_ptr<spa::Progr
   }
 }
 
-void spa::DesignExtractor::extractFollowsStar(std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
+void spa::DesignExtractor::extractFollowsStar(
+  std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
   for (unsigned i = 0; i < statementList.size(); i++) {
     if (i + 1 != statementList.size()) {
       for (unsigned j = i + 1; j < statementList.size(); j++) {
         std::string followStarStmtOne = std::to_string(statementList[i]->getStatementLineNum());
         std::string followStarStmtTwo = std::to_string(statementList[j]->getStatementLineNum());
 
-        if (followStarStmtOne != "-1" && followStarStmtTwo != "-1") {
+        if (followStarStmtOne != CONTAINER_STMT_LINE_NUM && followStarStmtTwo !=
+          CONTAINER_STMT_LINE_NUM) {
           pkbManager.addRelationship(spa::FOLLOWS_STAR, followStarStmtOne, followStarStmtTwo);
         }
       }
     }
     if (std::dynamic_pointer_cast<spa::ContainerStatement>(statementList[i])) {
-      auto containerStatement = std::dynamic_pointer_cast<spa::ContainerStatement>(statementList[i]);
+      auto containerStatement = std::dynamic_pointer_cast<
+        spa::ContainerStatement>(statementList[i]);
       extractFollowsStar(containerStatement->getStatementList());
     }
   }
 }
 
-void spa::DesignExtractor::extractParent(std::shared_ptr<spa::ContainerStatement>& containerStatement) {
-  std::vector<std::shared_ptr<ProgramStatement>> statementList = containerStatement->getStatementList();
+void spa::DesignExtractor::extractParent(
+  std::shared_ptr<spa::ContainerStatement>& containerStatement) {
+  std::vector<std::shared_ptr<ProgramStatement>> statementList = containerStatement->
+    getStatementList();
   for (auto& statement : containerStatement->getStatementList()) {
     std::string parentStmtOne = std::to_string(containerStatement->getStatementLineNum());
     if (statement->getStatementLineNum() == containerStatement->getStatementLineNum()) {
@@ -120,7 +135,8 @@ void spa::DesignExtractor::extractParent(std::shared_ptr<spa::ContainerStatement
       continue;
     }
     auto innerBlockStatements = std::dynamic_pointer_cast<ContainerStatement>(statement);
-    std::vector<std::shared_ptr<ProgramStatement>> innerBlockStmtList = innerBlockStatements->getStatementList();
+    std::vector<std::shared_ptr<ProgramStatement>> innerBlockStmtList = innerBlockStatements->
+      getStatementList();
     for (auto& childStatement : innerBlockStmtList) {
       std::string parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
       pkbManager.addRelationship(PARENT, parentStmtOne, parentStmtTwo);
@@ -132,9 +148,11 @@ void spa::DesignExtractor::extractParent(std::shared_ptr<spa::ContainerStatement
   }
 }
 
-void spa::DesignExtractor::extractParentStar(std::shared_ptr<ContainerStatement>& containerStatement,
-                                             std::string ancestorLineNum) {
-  std::vector<std::shared_ptr<ProgramStatement>>& statementList = containerStatement->getStatementList();
+void spa::DesignExtractor::extractParentStar(
+  std::shared_ptr<ContainerStatement>& containerStatement,
+  std::string ancestorLineNum) {
+  std::vector<std::shared_ptr<ProgramStatement>>& statementList = containerStatement->
+    getStatementList();
   for (auto& statement : statementList) {
     std::string parentStmtOne = std::to_string(containerStatement->getStatementLineNum());
     std::string parentStmtTwo = std::to_string(statement->getStatementLineNum());
@@ -142,13 +160,14 @@ void spa::DesignExtractor::extractParentStar(std::shared_ptr<ContainerStatement>
     if (parentStmtOne == parentStmtTwo) {
       continue;
     }
-    if (parentStmtTwo != "-1") {
+    if (parentStmtTwo != CONTAINER_STMT_LINE_NUM) {
       pkbManager.addRelationship(PARENT_STAR, ancestorLineNum, parentStmtTwo);
       continue;
     }
 
     auto innerBlockStatements = std::dynamic_pointer_cast<ContainerStatement>(statement);
-    std::vector<std::shared_ptr<ProgramStatement>> innerBlockStmtList = innerBlockStatements->getStatementList();
+    std::vector<std::shared_ptr<ProgramStatement>> innerBlockStmtList = innerBlockStatements->
+      getStatementList();
 
     for (auto& childStatement : innerBlockStmtList) {
       parentStmtTwo = std::to_string(childStatement->getStatementLineNum());
@@ -165,7 +184,8 @@ void spa::DesignExtractor::extractParentStar(std::shared_ptr<ContainerStatement>
 }
 
 
-void spa::DesignExtractor::extractUsesAndModifies(std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
+void spa::DesignExtractor::extractUsesAndModifies(
+  std::vector<std::shared_ptr<spa::ProgramStatement>>& statementList) {
   CFGNode dummyStartNode = CFGNode();
   CFGNode tailNode = dummyStartNode;
   bool start = true;
@@ -275,10 +295,10 @@ std::vector<std::pair<std::string, std::string>> spa::DesignExtractor::getResFro
 }
 
 void spa::DesignExtractor::addUsesModifies(std::string relArg,
-                                                  std::vector<std::pair<std::string, std::string>>
-                                                  varUses,
-                                                  std::vector<std::pair<std::string, std::string>>
-                                                  varModifies) {
+                                           std::vector<std::pair<std::string, std::string>>
+                                           varUses,
+                                           std::vector<std::pair<std::string, std::string>>
+                                           varModifies) {
   for (auto& var : varUses) {
     pkbManager.addRelationship(USES_P, relArg, var.second);
   }
@@ -288,10 +308,10 @@ void spa::DesignExtractor::addUsesModifies(std::string relArg,
 }
 
 void spa::DesignExtractor::addUsesModifies(std::string relArg,
-                                                  std::vector<std::pair<std::string, std::string>>
-                                                  varUses,
-                                                  std::vector<std::pair<std::string, std::string>>
-                                                  varModifies, bool isCallStmt) {
+                                           std::vector<std::pair<std::string, std::string>>
+                                           varUses,
+                                           std::vector<std::pair<std::string, std::string>>
+                                           varModifies, bool isCallStmt) {
   for (auto& var : varUses) {
     if (isCallStmt) {
       QueryResult queryResult = pkbManager.getCfgNode(stoi(relArg));
@@ -322,7 +342,8 @@ void spa::DesignExtractor::addUsesModifies(std::string relArg,
   }
 }
 
-bool spa::AffectsNodeEquality::operator()(const AffectsNode& first, const AffectsNode& second) const {
+bool spa::AffectsNodeEquality::operator(
+)(const AffectsNode& first, const AffectsNode& second) const {
   return first.nodeP == second.nodeP && first.usedVariables == second.usedVariables;
 }
 
@@ -334,7 +355,7 @@ void spa::DesignExtractor::populateAffectsForNode(CFGNode* initialNode) {
   std::unordered_set<AffectsNode, AffectsNodeHash, AffectsNodeEquality> seen;
   std::queue<AffectsNode> affectsNodes;
   for (auto edge : initialNode->getIncomingEdges()) {
-    affectsNodes.push({ edge, initialNode->getUsesVariables() });
+    affectsNodes.push({edge, initialNode->getUsesVariables()});
   }
   while (!affectsNodes.empty()) {
     auto affectsNode = affectsNodes.front();
@@ -354,8 +375,8 @@ void spa::DesignExtractor::populateAffectsForNode(CFGNode* initialNode) {
       auto& modifiedVariable = *(modifiedVariables.begin());
       if (currSet.find(modifiedVariable) != currSet.end()) {
         pkbManager.addRelationship(AFFECTS,
-                                   std::to_string(node->getLineNumber()),
-                                   std::to_string(initialNode->getLineNumber()));
+          std::to_string(node->getLineNumber()),
+          std::to_string(initialNode->getLineNumber()));
       }
     }
     if (statementType != StatementType::WHILE && statementType != StatementType::IF) {
@@ -364,7 +385,7 @@ void spa::DesignExtractor::populateAffectsForNode(CFGNode* initialNode) {
       }
     }
     for (auto edge : node->getIncomingEdges()) {
-      affectsNodes.push({ edge, currSet });
+      affectsNodes.push({edge, currSet});
     }
   }
 }
@@ -394,7 +415,7 @@ void spa::DesignExtractor::populateAffects() {
 }
 
 std::unordered_map<int, std::unordered_set<int>> spa::DesignExtractor::extractNextAffectsStar(
-                                                  const std::unordered_map<int, std::unordered_set<int>>& table) {
+  const std::unordered_map<int, std::unordered_set<int>>& table) {
   std::unordered_map<int, std::unordered_set<int>> result;
   for (auto& p : table) {
     std::unordered_set<int> seen;

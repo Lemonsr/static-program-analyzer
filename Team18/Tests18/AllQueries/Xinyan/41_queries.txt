@@ -1,0 +1,240 @@
+1A - Affects relationship: Invalid single quotes in right param (Syntactic err)
+if ifs;
+Select ifs such that Affects(ifs, 'volume')
+SyntaxError
+5000
+1B - Affects relationship: Invalid single quotes in right param (Syntactic err)
+if ifs;
+Select BOOLEAN such that Affects(ifs, 'volume')
+SyntaxError
+5000
+2A - Affects relationship: Invalid undeclared synonym in right param (Syntactic err)
+if ifs;
+Select ifs such that Affects(ifs, volume)
+SemanticError
+5000
+2B - Affects relationship: Invalid undeclared synonym in right param (Syntactic err)
+if ifs;
+Select BOOLEAN such that Affects(ifs, volume)
+SemanticError
+5000
+3A - Affects relationship: Invalid name in right param with name not in program (Syntactic err)
+if ifs;
+Select ifs such that Affects(ifs, "thisDoesNotExist")
+SyntaxError
+5000
+3B - Affects relationship: Invalid name in right param with name not in program (Syntactic err)
+if ifs;
+Select BOOLEAN such that Affects(ifs, "thisDoesNotExist")
+SyntaxError
+5000
+4A - Affects relationship: Invalid name in right param with name in program (Syntactic err)
+if ifs;
+Select ifs such that Affects(ifs, "volume")
+SyntaxError
+5000
+4B - Affects relationship: Invalid name in right param with name in program (Syntactic err)
+if ifs;
+Select BOOLEAN such that Affects(ifs, "volume")
+SyntaxError
+5000
+5A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; variable v;
+Select ifs such that Affects(ifs, v)
+SemanticError
+5000
+5B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; variable v;
+Select v such that Affects(ifs, v)
+SemanticError
+5000
+5C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; variable v;
+Select BOOLEAN such that Affects(ifs, v)
+SemanticError
+5000
+6A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; stmt s;
+Select ifs such that Affects(ifs, s)
+
+5000
+6B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; stmt s;
+Select s such that Affects(ifs, s)
+
+5000
+6C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; stmt s;
+Select BOOLEAN such that Affects(ifs, s)
+FALSE
+5000
+7A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; stmt n;
+Select ifs such that Affects(ifs, n)
+
+5000
+7B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; stmt n;
+Select n such that Affects(ifs, n)
+
+5000
+7C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; stmt n;
+Select BOOLEAN such that Affects(ifs, n)
+FALSE
+5000
+8A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; print pn;
+Select ifs such that Affects(ifs, pn)
+
+5000
+8B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; print pn;
+Select pn such that Affects(ifs, pn)
+
+5000
+8C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; print pn;
+Select BOOLEAN such that Affects(ifs, pn)
+FALSE
+5000
+9A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; read re;
+Select ifs such that Affects(ifs, re)
+
+5000
+9B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; read re;
+Select re such that Affects(ifs, re)
+
+5000
+9C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; read re;
+Select BOOLEAN such that Affects(ifs, re)
+FALSE
+5000
+10A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs;
+Select ifs such that Affects(ifs, ifs)
+
+5000
+10B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs;
+Select BOOLEAN such that Affects(ifs, ifs)
+FALSE
+5000
+11A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs1, ifs2;
+Select ifs1 such that Affects(ifs1, ifs2)
+
+5000
+11B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs1, ifs2;
+Select ifs2 such that Affects(ifs1, ifs2)
+
+5000
+11C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs1, ifs2;
+Select BOOLEAN such that Affects(ifs1, ifs2)
+FALSE
+5000
+12A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; while w;
+Select ifs such that Affects(ifs, w)
+
+5000
+12B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; while w;
+Select w such that Affects(ifs, w)
+
+5000
+12C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; while w;
+Select BOOLEAN such that Affects(ifs, w)
+FALSE
+5000
+13A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; assign a;
+Select ifs such that Affects(ifs, a)
+
+5000
+13B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; assign a;
+Select a such that Affects(ifs, a)
+
+5000
+13C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; assign a;
+Select BOOLEAN such that Affects(ifs, a)
+FALSE
+5000
+14A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs;
+Select ifs such that Affects(ifs, 16)
+
+5000
+14B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs;
+Select BOOLEAN such that Affects(ifs, 16)
+FALSE
+5000
+14C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs;
+Select BOOLEAN such that Affects(ifs, 1)
+FALSE
+5000
+15A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; constant c;
+Select ifs such that Affects(ifs, c)
+SemanticError
+5000
+15B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; constant c;
+Select c such that Affects(ifs, c)
+SemanticError
+5000
+15C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; constant c;
+Select BOOLEAN such that Affects(ifs, c)
+SemanticError
+5000
+16A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; procedure p;
+Select ifs such that Affects(ifs, p)
+SemanticError
+5000
+16B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; procedure p;
+Select p such that Affects(ifs, p)
+SemanticError
+5000
+16C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; procedure p;
+Select BOOLEAN such that Affects(ifs, p)
+SemanticError
+5000
+17A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; call cl;
+Select ifs such that Affects(ifs, cl)
+
+5000
+17B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; call cl;
+Select cl such that Affects(ifs, cl)
+
+5000
+17C - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs; call cl;
+Select BOOLEAN such that Affects(ifs, cl)
+FALSE
+5000
+18A - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs;
+Select ifs such that Affects(ifs, _)
+
+5000
+18B - Affects relationship: Invalid if synonym in left param (Semantic err)
+if ifs;
+Select BOOLEAN such that Affects(ifs, _)
+FALSE
+5000

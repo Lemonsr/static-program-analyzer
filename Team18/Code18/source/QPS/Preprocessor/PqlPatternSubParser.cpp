@@ -9,24 +9,25 @@
 #include "UtilsFunction.h"
 #include "Token.h"
 #include "PqlRefTypes.h"
+#include "Literal.h"
 
 std::optional<spa::Pattern> spa::PqlPatternSubParser::parseExact(
   Stream<Token>& tokens,
   ParsedQuery& query
 ) {
-  if (!tokens.match({ { TOKEN_DOUBLE_QUOTES, "\"" } })) {
+  if (!tokens.match({ { TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL } })) {
     return {};
   }
   tokens.seek(1);
   std::vector<Token> patternTokens;
   while (tokens.remaining() > 0) {
-    if (tokens[0] == Token{ TOKEN_DOUBLE_QUOTES, "\"" }) {
+    if (tokens[0] == Token{ TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL }) {
       break;
     }
     patternTokens.push_back(tokens[0]);
     tokens.seek(1);
   }
-  if (!tokens.match({ { TOKEN_DOUBLE_QUOTES, "\"" } })) {
+  if (!tokens.match({ { TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL } })) {
     return {};
   }
   tokens.seek(1);
@@ -43,8 +44,8 @@ std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePartial(
   ParsedQuery& query
 ) {
   bool matchResult = tokens.match({
-    { TOKEN_UNDERSCORE, "_" },
-    { TOKEN_DOUBLE_QUOTES, "\"" }
+    { TOKEN_UNDERSCORE, UNDERSCORE_LITERAL },
+    { TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL }
     });
   if (!matchResult) {
     return {};
@@ -52,15 +53,15 @@ std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePartial(
   tokens.seek(2);
   std::vector<Token> patternTokens;
   while (tokens.remaining() > 0) {
-    if (tokens[0] == Token{ TOKEN_DOUBLE_QUOTES, "\"" }) {
+    if (tokens[0] == Token{ TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL }) {
       break;
     }
     patternTokens.push_back(tokens[0]);
     tokens.seek(1);
   }
   matchResult = tokens.match({
-    { TOKEN_DOUBLE_QUOTES, "\"" },
-    { TOKEN_UNDERSCORE, "_" }
+    { TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL },
+    { TOKEN_UNDERSCORE, UNDERSCORE_LITERAL }
     });
   if (!matchResult) {
     return {};
@@ -94,8 +95,8 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseOtherArgs(Stream<Token>& toke
                                                              PqlArgument& designEntity,
                                                              PqlArgument& firstArg) {
   bool matchSingleWildcard = tokens.match({
-    { TOKEN_UNDERSCORE, "_"},
-    { TOKEN_CLOSE_BRACKET, ")"},
+    { TOKEN_UNDERSCORE, UNDERSCORE_LITERAL},
+    { TOKEN_CLOSE_BRACKET, CLOSE_BRACKET_LITERAL},
     });
   if (matchSingleWildcard) {
     tokens.seek(2);
@@ -103,10 +104,10 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseOtherArgs(Stream<Token>& toke
     return PQL_PARSE_SUCCESS;
   }
   bool matchDoubleWildcard = tokens.match({
-    { TOKEN_UNDERSCORE, "_"},
-    { TOKEN_COMMA, ","},
-    { TOKEN_UNDERSCORE, "_"},
-    { TOKEN_CLOSE_BRACKET, ")"},
+    { TOKEN_UNDERSCORE, UNDERSCORE_LITERAL},
+    { TOKEN_COMMA, COMMA_LITERAL},
+    { TOKEN_UNDERSCORE, UNDERSCORE_LITERAL},
+    { TOKEN_CLOSE_BRACKET, CLOSE_BRACKET_LITERAL},
     });
   if (matchDoubleWildcard) {
     tokens.seek(4);
@@ -117,7 +118,7 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseOtherArgs(Stream<Token>& toke
   if (!patternOpt) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
-  if (!tokens.match({ {TOKEN_CLOSE_BRACKET, ")"} })) {
+  if (!tokens.match({ {TOKEN_CLOSE_BRACKET, CLOSE_BRACKET_LITERAL} })) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);
@@ -128,8 +129,8 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseOtherArgs(Stream<Token>& toke
 spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
   ParsedQuery& query) {
   bool matchResult = tokens.match({
-    { spa::TOKEN_NAME, ""},
-    { spa::TOKEN_OPEN_BRACKET, "("},
+    { spa::TOKEN_NAME, EMPTY_LITERAL},
+    { spa::TOKEN_OPEN_BRACKET, OPEN_BRACKET_LITERAL},
   });
   if (!matchResult) {
     return PQL_PARSE_SYNTAX_ERROR;
@@ -148,7 +149,7 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
   if (entityRef.find(firstArg.getType()) == entityRef.end()) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
-  if (!tokens.match({ { spa::TOKEN_COMMA, ","} })) {
+  if (!tokens.match({ { spa::TOKEN_COMMA, COMMA_LITERAL} })) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
   tokens.seek(1);

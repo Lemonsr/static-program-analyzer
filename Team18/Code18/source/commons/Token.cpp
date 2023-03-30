@@ -3,9 +3,11 @@
 #include <string>
 
 spa::Token::Token(TokenType type, std::string value) : type(type),
-                                                       value(value) {}
+                                                       value(value), index(-1) {}
 
-spa::Token::Token(TokenType type, char c) : type(type), value(1, c) {}
+spa::Token::Token(TokenType type, char c) : type(type), value(1, c), index(-1) {}
+
+spa::Token::Token(TokenType type, std::string value, int index): type(type), value(value), index(index) {}
 
 const spa::TokenType& spa::Token::getType() {
   return type;
@@ -13,6 +15,10 @@ const spa::TokenType& spa::Token::getType() {
 
 const std::string& spa::Token::getValue() {
   return value;
+}
+
+int spa::Token::getIndex() {
+  return index;
 }
 
 bool spa::operator==(const spa::Token& t1, const spa::Token& t2) {

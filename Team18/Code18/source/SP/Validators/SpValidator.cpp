@@ -2,10 +2,37 @@
 #include <unordered_set>
 #include <iostream>
 #include <vector>
+#include "literal.h"
+#include "PKB.h"
 #include "SpValidator.h"
 #include "Stream.h"
-#include "PKB.h"
 #include "UtilsFunction.h"
+
+const std::string INVALID_SRC_CODE_ERROR = "Invalid Source Code: ";
+const std::string NOT_STARTING_WITH_PROC_ERROR = "Program should start with procedure";
+const std::string NO_PROC_NAME_ERROR = "Procedure needs a PROC_NAME";
+const std::string NON_UNIQ_PROC_NAME_ERROR = "Unique PROC_NAME needed";
+const std::string PROC_NO_OPEN_BRACE_ERROR = "Procedure name needs to be followed by: '{'";
+const std::string PROC_NO_CLOSE_BRACE_ERROR = "Procedure needs to end with : '}'";
+const std::string EMPTY_STMT_ERROR = "No stmt in stmtLst";
+const std::string UNKNOWN_STMT_ERROR = "Unknown stmt";
+const std::string INCOMPLETE_STMT_ERROR = "Stmt not completed";
+const std::string INVALID_STMT_ERROR = "Invalid Stmt";
+const std::string INVALID_ASSIGN_ERROR = "Invalid assign expression";
+const std::string MISSING_SEMICOLON_ERROR = "Read, Print, Call, Assign stmt must end with ';'";
+const std::string NON_EXISTENT_PROC_CALL_ERROR = "Calling non-existing procedure";
+const std::string MISSING_WHILE_CLOSE_BRACKET_ERROR = "Missing closing ')' for WHILE after COND_EXPR";
+const std::string MISSING_WHILE_OPEN_BRACE_ERROR = "Missing '{' for WHILE after COND_EXPR";
+const std::string MISSING_WHILE_CLOSE_BRACE_ERROR = "Missing '}' for WHILE after STMTLST";
+const std::string MISSING_IF_CLOSE_BRACKET_ERROR = "Missing ')' for IF after COND_EXPR";
+const std::string MISSING_THEN_ERROR = "Missing THEN for IF";
+const std::string MISSING_THEN_OPEN_BRACE_ERROR = "Missing '{' for THEN clause";
+const std::string MISSING_THEN_CLOSE_BRACE_ERROR = "Missing '}' for THEN clause";
+const std::string MISSING_ELSE_ERROR = "Missing ELSE for IF";
+const std::string MISSING_ELSE_OPEN_BRACE_ERROR = "Missing '{' for ELSE clause";
+const std::string MISSING_ELSE_CLOSE_BRACE_ERROR = "Missing '}' for ELSE clause";
+const std::string INVALID_COND_EXPR_ERROR = "Invalid cond_expr";
+const std::string MISSING_OPEN_BRACKET_REL_ERROR = "&&|| Missing an opening '('";
 
 spa::SpValidator::SpValidator(Stream<Token> t) : tokens(t) {}
 
@@ -13,16 +40,16 @@ bool spa::SpValidator::validateGrammar() {
   try {
     while (hasRemaining()) {
       Token currToken = getToken();
-      if (currToken.getValue() != "procedure") {
-        throw std::exception("Program should start with procedure");
+      if (currToken.getValue() != PROCEDURE_LITERAL) {
+        throw std::exception(NOT_STARTING_WITH_PROC_ERROR.data());
       }
-      tokens[idx - 1] = Token(TOKEN_PROCEDURE, "procedure");
+      tokens[idx - 1] = Token(TOKEN_PROCEDURE, PROCEDURE_LITERAL);
       validateProcedure();
     }
     validateCallExists();
     return true;
   } catch (std::exception& e) {
-    std::cerr << "Invalid Source Code: ";
+    std::cerr << INVALID_SRC_CODE_ERROR;
     std::cerr << e.what() << std::endl;
     return false;
   }
@@ -57,24 +84,24 @@ void spa::SpValidator::validateProcedure() {
   TokenType currTokenType = currToken.getType();
 
   if (!hasRemaining() || currTokenType != TOKEN_NAME) {
-    throw std::exception("Procedure needs a PROC_NAME");
+    throw std::exception(NO_PROC_NAME_ERROR.data());
   }
 
   std::string currTokenValue = currToken.getValue();
   if (procNames.count(currTokenValue)) {
-    throw std::exception("Unique PROC_NAME needed");
+    throw std::exception(NON_UNIQ_PROC_NAME_ERROR.data());
   }
 
   procNames.insert(currTokenValue);
   currToken = getToken();
   if (!hasRemaining() || !UtilsFunction::isValidOpenBrace(currToken)) {
-    throw std::exception("Procedure name needs to be followed by: '{'");
+    throw std::exception(PROC_NO_OPEN_BRACE_ERROR.data());
   }
 
   validateStmtLst();
 
   if (!hasRemaining() || !UtilsFunction::isValidCloseBrace(getToken())) {
-    throw std::exception("Procedure needs to end with : '}'");
+    throw std::exception(PROC_NO_CLOSE_BRACE_ERROR.data());
   }
 }
 
@@ -90,11 +117,11 @@ void spa::SpValidator::validateStmtLst() {
     if (hasOneOrMoreStatement && tokenType == TOKEN_CLOSE_BRACE) {
       return;  // Empty proc
     } else if (!hasOneOrMoreStatement && tokenType == TOKEN_CLOSE_BRACE) {
-      throw std::exception("No stmt in stmtLst");
+      throw std::exception(EMPTY_STMT_ERROR.data());
     }
 
     if (tokenType != TOKEN_NAME) {
-      throw std::exception("Unknown stmt");
+      throw std::exception(UNKNOWN_STMT_ERROR.data());
     }
     hasOneOrMoreStatement = true;
 
@@ -104,7 +131,7 @@ void spa::SpValidator::validateStmtLst() {
 
 void spa::SpValidator::validateStmt() {
   if (!hasRemaining(1)) {
-    throw std::exception("Stmt not completed");
+    throw std::exception(INCOMPLETE_STMT_ERROR.data());
   }
 
   Token token = peekNextToken(1);
@@ -120,7 +147,7 @@ void spa::SpValidator::validateStmt() {
       validateEqual();
       break;
     default:
-      throw std::exception("Invalid Stmt");
+      throw std::exception(INVALID_STMT_ERROR.data());
   }
 }
 
@@ -139,11 +166,11 @@ void spa::SpValidator::validateEqual() {
   // Need to validate the tokensToCheck
   const bool isValidExpr = UtilsFunction::isValidExpr(tokensToCheck);
   if (!isValidExpr) {
-    throw std::exception("Invalid assign expression");
+    throw std::exception(INVALID_ASSIGN_ERROR.data());
   }
 
   if (!hasRemaining() || getToken().getType() != TOKEN_SEMICOLON) {
-    throw std::exception("Assign must end with ';'");
+    throw std::exception(MISSING_SEMICOLON_ERROR.data());
   }
 }
 
@@ -152,44 +179,44 @@ void spa::SpValidator::validateEqual() {
 void spa::SpValidator::validateReadPrintCall() {
   Token currToken = getToken();
   std::string currTokenValue = currToken.getValue();
-  if (currTokenValue == "read") {
-    tokens[idx - 1] = Token(TOKEN_READ, "read");
-  } else if (currTokenValue == "print") {
-    tokens[idx - 1] = Token(TOKEN_PRINT, "print");
-  } else if (currTokenValue == "call") {
-    tokens[idx - 1] = Token(TOKEN_CALL, "call");
+  if (currTokenValue == READ_LITERAL) {
+    tokens[idx - 1] = Token(TOKEN_READ, READ_LITERAL);
+  } else if (currTokenValue == PRINT_LITERAL) {
+    tokens[idx - 1] = Token(TOKEN_PRINT, PRINT_LITERAL);
+  } else if (currTokenValue == CALL_LITERAL) {
+    tokens[idx - 1] = Token(TOKEN_CALL, CALL_LITERAL);
     std::string callValue = peekNextToken(0).getValue();
     callNames.insert(callValue);
   } else {
-    throw std::exception("Unknown Statement");
+    throw std::exception(UNKNOWN_STMT_ERROR.data());
   }
 
   next();  // var_name
 
   // Check that stmt is closed with ;
   if (!hasRemaining() || getToken().getType() != TOKEN_SEMICOLON) {
-    throw std::exception("Read, Print stmt must end with ';'");
+    throw std::exception(MISSING_SEMICOLON_ERROR.data());
   }
 }
 
 void spa::SpValidator::validateCallExists() {
   for (const auto& callName : callNames) {
     if (procNames.count(callName) == 0) {
-      throw std::exception("Calling non-existing procedure");
+      throw std::exception(NON_EXISTENT_PROC_CALL_ERROR.data());
     }
   }
 }
 
 void spa::SpValidator::validateWhileIf() {
   std::string nextTokenValue = peekNextToken().getValue();
-  if (nextTokenValue == "if") {
+  if (nextTokenValue == IF_LITERAL) {
     tokens[idx] = Token(TOKEN_IF, nextTokenValue);
     validateIf();
-  } else if (nextTokenValue == "while") {
+  } else if (nextTokenValue == WHILE_LITERAL) {
     tokens[idx] = Token(TOKEN_WHILE, nextTokenValue);
     validateWhile();
   } else {
-    throw std::exception("Unknown stmt");
+    throw std::exception(UNKNOWN_STMT_ERROR.data());
   }
 }
 
@@ -201,17 +228,17 @@ void spa::SpValidator::validateWhile() {
   validateCondExpr();
 
   if (!hasRemaining() || !UtilsFunction::isValidCloseBracket(getToken())) {
-    throw std::exception("Missing closing ')' for WHILE after COND_EXPR");
+    throw std::exception(MISSING_WHILE_CLOSE_BRACKET_ERROR.data());
   }
 
   if (!hasRemaining() || !UtilsFunction::isValidOpenBrace(getToken())) {
-    throw std::exception("Missing '{' for WHILE after COND_EXPR");
+    throw std::exception(MISSING_WHILE_OPEN_BRACE_ERROR.data());
   }
 
   validateStmtLst();
 
   if (!hasRemaining() || !UtilsFunction::isValidCloseBrace(getToken())) {
-    throw std::exception("Missing '}' for WHILE after STMTLST");
+    throw std::exception(MISSING_WHILE_CLOSE_BRACE_ERROR.data());
   }
 }
 
@@ -222,39 +249,39 @@ void spa::SpValidator::validateIf() {
   validateCondExpr();
 
   if (!hasRemaining() || !UtilsFunction::isValidCloseBracket(getToken())) {
-    throw std::exception("Missing ')' for IF after COND_EXPR");
+    throw std::exception(MISSING_IF_CLOSE_BRACKET_ERROR.data());
   }
 
-  if (!hasRemaining() || getToken().getValue() != "then") {
-    throw std::exception("Missing THEN for IF");
+  if (!hasRemaining() || getToken().getValue() != THEN_LITERAL) {
+    throw std::exception(MISSING_THEN_ERROR.data());
   }
 
-  tokens[idx - 1] = Token(TOKEN_THEN, "then");
+  tokens[idx - 1] = Token(TOKEN_THEN, THEN_LITERAL);
 
   if (!hasRemaining() || !UtilsFunction::isValidOpenBrace(getToken())) {
-    throw std::exception("Missing '{' for THEN clause");
+    throw std::exception(MISSING_THEN_OPEN_BRACE_ERROR.data());
   }
 
   validateStmtLst();
 
   if (!hasRemaining() || !UtilsFunction::isValidCloseBrace(getToken())) {
-    throw std::exception("Missing '}' for THEN clause");
+    throw std::exception(MISSING_THEN_CLOSE_BRACE_ERROR.data());
   }
 
-  if (!hasRemaining() || getToken().getValue() != "else") {
-    throw std::exception("Missing ELSE for IF");
+  if (!hasRemaining() || getToken().getValue() != ELSE_LITERAL) {
+    throw std::exception(MISSING_ELSE_ERROR.data());
   }
 
-  tokens[idx - 1] = Token(TOKEN_ELSE, "else");
+  tokens[idx - 1] = Token(TOKEN_ELSE, ELSE_LITERAL);
 
   if (!hasRemaining() || !UtilsFunction::isValidOpenBrace(getToken())) {
-    throw std::exception("Missing '{' for ELSE clause");
+    throw std::exception(MISSING_ELSE_OPEN_BRACE_ERROR.data());
   }
 
   validateStmtLst();
 
   if (!hasRemaining() || !UtilsFunction::isValidCloseBrace(getToken())) {
-    throw std::exception("Missing '}' for ELSE clause");
+    throw std::exception(MISSING_ELSE_CLOSE_BRACE_ERROR.data());
   }
 }
 
@@ -278,7 +305,7 @@ void spa::SpValidator::validateCondExpr() {
 
   const bool isValidCondExpr = isCondExpr(tokensToCheck);
   if (!isValidCondExpr) {
-    throw std::exception("Invalid cond_expr");
+    throw std::exception(INVALID_COND_EXPR_ERROR.data());
   }
 }
 
@@ -330,7 +357,7 @@ bool spa::SpValidator::isCondExpr(std::vector<Token> tokensToCheck) {
     }
 
     if (tokensToCheck[index + 1].getType() != TOKEN_OPEN_BRACKET) {
-        throw std::exception("&&|| Missing an opening '('");
+        throw std::exception(MISSING_OPEN_BRACKET_REL_ERROR.data());
     }
 
 

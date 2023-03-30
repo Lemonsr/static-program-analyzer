@@ -5,6 +5,8 @@
 #include <unordered_set>
 #include <sstream>
 
+#include "Literal.h"
+
 std::unordered_set<spa::TokenType> spa::UtilsFunction::condExprToken = {
   TOKEN_BOOL_AND, TOKEN_BOOL_OR
 };
@@ -148,13 +150,13 @@ bool spa::UtilsFunction::isSameSynonym(PqlArgument& first, PqlArgument& second) 
 }
 
 int spa::UtilsFunction::getPrecedence(std::string op) {
-  if (op == "!") return 6;
-  if (op == "*" || op == "/" || op == "%") return 5;
-  if (op == "+" || op == "-") return 4;
-  if (op == "==" || op == "!=") return 3;
-  if (op == ">" || op == "<" || op == ">=" || op == "<=") return 2;
-  if (op == "&&") return 1;
-  if (op == "||") return 0;
+  if (op == BOOL_NOT_LITERAL) return 6;
+  if (op == MULTIPLY_LITERAL || op == DIVIDE_LITERAL|| op == MODULO_LITERAL) return 5;
+  if (op == PLUS_LITERAL || op == MINUS_LITERAL) return 4;
+  if (op == COND_EQ_LITERAL || op == COND_NEQ_LITERAL) return 3;
+  if (op == COND_GT_LITERAL || op == COND_LT_LITERAL || op == COND_GTE_LITERAL || op == COND_LTE_LITERAL) return 2;
+  if (op == BOOL_AND_LITERAL) return 1;
+  if (op == BOOL_OR_LITERAL) return 0;
   return -1;
 }
 
@@ -178,27 +180,29 @@ void spa::UtilsFunction::trimString(std::string& s) {
 
 std::string spa::UtilsFunction::infixToPostfix(std::vector<spa::Token> tokens) {
   std::unordered_set<std::string> operators = {
-    "!", "&&", "||", "*", "/", "%", "+", "-", "<", ">", "<=", ">=", "==", "!="
+    BOOL_NOT_LITERAL, BOOL_AND_LITERAL, BOOL_OR_LITERAL, MULTIPLY_LITERAL, DIVIDE_LITERAL, MODULO_LITERAL,
+    PLUS_LITERAL, MINUS_LITERAL, COND_LT_LITERAL, COND_GT_LITERAL, COND_LTE_LITERAL, COND_GTE_LITERAL,
+    COND_EQ_LITERAL, COND_NEQ_LITERAL
   };
   std::stack<std::string> operatorStack;
-  std::string postfix = "";
+  std::string postfix = EMPTY_LITERAL;
 
   for (spa::Token token : tokens) {
     std::string tokenValue = token.getValue();
     if (std::all_of(tokenValue.begin(), tokenValue.end(), ::isalnum)) {
-      postfix += tokenValue + " ";
+      postfix += tokenValue + SPACE_LITERAL;
     } else if (operators.count(tokenValue)) {
-      while (!operatorStack.empty() && operatorStack.top() != "(" &&
+      while (!operatorStack.empty() && operatorStack.top() != OPEN_BRACKET_LITERAL &&
         getPrecedence(operatorStack.top()) >= getPrecedence(tokenValue)) {
-        postfix += operatorStack.top() + " ";
+        postfix += operatorStack.top() + SPACE_LITERAL;
         operatorStack.pop();
       }
       operatorStack.push(tokenValue);
-    } else if (tokenValue == "(") {
+    } else if (tokenValue == OPEN_BRACKET_LITERAL) {
       operatorStack.push(tokenValue);
-    } else if (tokenValue == ")") {
-      while (!operatorStack.empty() && operatorStack.top() != "(") {
-        postfix += operatorStack.top() + " ";
+    } else if (tokenValue == CLOSE_BRACKET_LITERAL) {
+      while (!operatorStack.empty() && operatorStack.top() != OPEN_BRACKET_LITERAL) {
+        postfix += operatorStack.top() + SPACE_LITERAL;
         operatorStack.pop();
       }
       operatorStack.pop();
@@ -206,7 +210,7 @@ std::string spa::UtilsFunction::infixToPostfix(std::vector<spa::Token> tokens) {
   }
 
   while (!operatorStack.empty()) {
-    postfix += operatorStack.top() + " ";
+    postfix += operatorStack.top() + SPACE_LITERAL;
     operatorStack.pop();
   }
   trimString(postfix);
