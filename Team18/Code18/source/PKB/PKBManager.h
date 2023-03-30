@@ -30,7 +30,6 @@ class PKBManager {
   virtual const bool addEdge(int lineNumberOne, int lineNumberTwo) = 0;
   virtual const bool addModifiedVariable(int lineNumber, std::string varName) = 0;
   virtual const bool addUsesVariable(int lineNumber, std::string varName) = 0;
-  virtual const bool removeDummyNode() = 0;
 
   // Next*, Affects, Affects* methods
   virtual const bool populateNextStar() = 0;

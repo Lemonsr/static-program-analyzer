@@ -36,7 +36,6 @@ class QueryResult {
   const std::vector<std::pair<int, int>>& getLineNumberLineNumberPairs();
   const std::vector<std::pair<std::string, std::string>>& getNameNamePairs();
   const std::vector<spa::CFGNode*>& getCfgNodes();
-  const std::vector<int>& getCfgEndNodes();
   const bool& getIsTrue();
   const std::unordered_map<int, std::unordered_set<int>>* getIntToSetIntTable();
 

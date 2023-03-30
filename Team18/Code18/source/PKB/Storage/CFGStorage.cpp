@@ -1,5 +1,6 @@
 #include "CFGStorage.h"
 #include "PKBQueryTypes.h"
+#include "Literal.h"
 
 #include <string>
 #include <vector>
@@ -7,10 +8,10 @@
 #include <unordered_set>
 
 bool spa::CFGStorage::popDummyNode(int lineNumber, RelationshipStorage& relationshipStorage) {
-  if (lineNumber == -1) {
+  if (lineNumber == DUMMY_NODE_VAL) {
     return true;
   }
-  CFGNode& dummyNode = cfgNodeTable[-1];
+  CFGNode& dummyNode = cfgNodeTable[DUMMY_NODE_VAL];
   bool isAddEdge = true;
 
   for (auto& incomingNode : dummyNode.getIncomingEdges()) {
@@ -19,7 +20,7 @@ bool spa::CFGStorage::popDummyNode(int lineNumber, RelationshipStorage& relation
   for (auto& node : dummyNode.getIncomingEdges()) {
     node->removeOutgoingEdge(&dummyNode);
   }
-  cfgNodeTable[-1] = CFGNode();
+  cfgNodeTable[DUMMY_NODE_VAL] = CFGNode();
   return isAddEdge;
 }
 
@@ -40,7 +41,7 @@ bool spa::CFGStorage::addCfgEndNode(int lineNumber) {
 }
 
 bool spa::CFGStorage::addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage) {
-  if (lineNumberOne == -1) {
+  if (lineNumberOne == DUMMY_NODE_VAL) {
     popDummyNode(lineNumberTwo, relationshipStorage);
     return true;
   }
@@ -69,19 +70,6 @@ bool spa::CFGStorage::addUsesVariable(int lineNumber, std::string varName) {
 
   CFGNode& node = cfgNodeTable[lineNumber];
   node.addUsesVariable(varName);
-  return true;
-}
-
-bool spa::CFGStorage::removeDummyNode() {
-  if (cfgNodeTable.find(-1) == cfgNodeTable.end()) {
-    return false;
-  }
-
-  CFGNode& dummyNode = cfgNodeTable[-1];
-  for (auto& node : dummyNode.getIncomingEdges()) {
-    node->removeOutgoingEdge(&dummyNode);
-  }
-  cfgNodeTable.erase(-1);
   return true;
 }
 

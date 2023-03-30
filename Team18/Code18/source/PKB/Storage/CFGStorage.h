@@ -24,7 +24,6 @@ class CFGStorage {
   bool addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage);
   bool addModifiedVariable(int lineNumber, std::string varName);
   bool addUsesVariable(int lineNumber, std::string varName);
-  bool removeDummyNode();
 
   QueryResult getCfgNode(int lineNumber);
   QueryResult getCfgEndNodes();

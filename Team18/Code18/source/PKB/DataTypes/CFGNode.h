@@ -1,10 +1,10 @@
 #pragma once
 
-#include <string>
-#include <unordered_set>
-
 #include "PKBTypes.h"
 #include "Literal.h"
+
+#include <string>
+#include <unordered_set>
 
 namespace spa {
 class PKBManager;
