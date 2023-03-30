@@ -146,7 +146,7 @@ Select a such that Follows(a, w) and Parent*(w1,    _   )
 30 - 0 common, Follows and Parent*. Invalid spacing between * and Parent
 assign a ; if ifs     ; while w;
 Select ifs such that Follows(a, ifs) and Parent *(w, _)
-SemanticError
+SyntaxError
 5000
 31 - 1 common, Follows and uses
 assign a1, a2;
