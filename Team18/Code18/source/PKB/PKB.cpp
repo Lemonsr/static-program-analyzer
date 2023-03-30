@@ -435,10 +435,6 @@ const bool spa::PKB::addModifiedVariable(int lineNumber, std::string varName) {
   return cfgStorage.addModifiedVariable(lineNumber, varName);
 }
 
-const bool spa::PKB::removeDummyNode() {
-  return cfgStorage.removeDummyNode();
-}
-
 const bool spa::PKB::populateNextStar() {
   if (relationshipStorage.isNextStarEmpty()) {
     std::vector<std::shared_ptr<ProcedureStatement>> dummy;

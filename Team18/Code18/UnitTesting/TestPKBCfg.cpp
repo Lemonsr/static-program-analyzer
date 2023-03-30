@@ -136,25 +136,5 @@ public:
     resultNode = queryResult.getCfgNodes()[0];
     Assert::IsTrue(resultNode->getModifiedVariables().empty());
   }
-
-  TEST_METHOD(TestRemoveDummyNode) {
-    spa::CFGStorage cfgStorage;
-    spa::RelationshipStorage relationshipStorage;
-    cfgStorage.setCfgNodeTable(cfgNodeTable);
-
-    spa::CFGNode cfgNodeTest = spa::CFGNode();
-    cfgStorage.addCfgNode(-1, cfgNodeTest);
-
-    spa::QueryResult queryResult = cfgStorage.getCfgNode(-1);
-    std::vector<spa::CFGNode*> resultNodes = queryResult.getCfgNodes();
-    Assert::IsFalse(resultNodes.empty());
-
-    Assert::IsTrue(cfgStorage.removeDummyNode());
-    Assert::IsFalse(cfgStorage.removeDummyNode());
-
-    queryResult = cfgStorage.getCfgNode(-1);
-    resultNodes = queryResult.getCfgNodes();
-    Assert::IsTrue(resultNodes.empty());
-  }
 };
 }  // namespace UnitTesting

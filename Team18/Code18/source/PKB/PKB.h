@@ -73,7 +73,6 @@ class PKB : public PKBManager {
   const bool addEdge(int lineNumberOne, int lineNumberTwo);
   const bool addModifiedVariable(int lineNumber, std::string varName);
   const bool addUsesVariable(int lineNumber, std::string varName);
-  const bool removeDummyNode();
 
   const bool populateNextStar();
   const bool populateAffects();

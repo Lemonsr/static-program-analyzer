@@ -28,10 +28,6 @@ const std::vector<spa::CFGNode*>& spa::QueryResult::getCfgNodes() {
   return cfgNodes.value();
 }
 
-const std::vector<int>& spa::QueryResult::getCfgEndNodes() {
-  return cfgEndNodes.value();
-}
-
 const bool& spa::QueryResult::getIsTrue() {
   return isTrue.value();
 }
@@ -67,8 +63,7 @@ void spa::QueryResult::setIsTrue(bool isTrue) {
 }
 
 void spa::QueryResult::setNameNamePairs(std::vector<std::pair<std::string,
-                                                              std::string>>
-  nameNamePairs) {
+                                                              std::string>> nameNamePairs) {
   this->nameNamePairs = nameNamePairs;
 }
 

@@ -16,15 +16,12 @@ class CFGStorage {
   std::unordered_map<int, spa::CFGNode> cfgNodeTable;
   std::unordered_set<int> cfgEndNodes;
 
-  bool popDummyNode(int lineNumber, RelationshipStorage& relationshipStorage);
-
  public:
   bool addCfgNode(int lineNumber, spa::CFGNode cfgNode);
   bool addCfgEndNode(int lineNumber);
   bool addEdge(int lineNumberOne, int lineNumberTwo, RelationshipStorage& relationshipStorage);
   bool addModifiedVariable(int lineNumber, std::string varName);
   bool addUsesVariable(int lineNumber, std::string varName);
-  bool removeDummyNode();
 
   QueryResult getCfgNode(int lineNumber);
   QueryResult getCfgEndNodes();
