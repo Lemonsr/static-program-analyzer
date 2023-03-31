@@ -90,7 +90,7 @@ void spa::SpValidator::validateProcedure() {
     throw std::exception(NON_UNIQ_PROC_NAME_ERROR.data());
   }
 
-  procNames.insert(currTokenValue); 
+  procNames.insert(currTokenValue);
   checkValidBraces(PROC_NO_OPEN_BRACE_ERROR);
   validateStmtLst();
   checkValidBraces(PROC_NO_CLOSE_BRACE_ERROR, false);

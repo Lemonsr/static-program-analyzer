@@ -25,7 +25,7 @@ std::vector<std::shared_ptr<spa::ProcedureStatement>> spa::SpParser::parse() {
 }
 
 std::shared_ptr<spa::ProcedureStatement> spa::SpParser::processProcedure() {
-  skipCurrToken(); 
+  skipCurrToken();
   Token procedureVarToken = getCurrTokenAndAdvance();
   skipCurrToken();
   std::unordered_set<int> whileStmtParents;
