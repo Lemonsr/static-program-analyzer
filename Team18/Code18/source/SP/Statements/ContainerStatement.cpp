@@ -29,7 +29,6 @@ std::unordered_set<std::string> spa::ContainerStatement::getProceduresCalled() {
   return proceduresCalled;
 }
 
-//  Constructor for IfContainerStatement
 spa::IfContainerStatement::IfContainerStatement(std::string parentProcedureVal,
                                                 int statementLineNum,
                                                 std::vector<std::shared_ptr<ProgramStatement>>&
@@ -39,7 +38,6 @@ spa::IfContainerStatement::IfContainerStatement(std::string parentProcedureVal,
   this->statementList = statementList;
 }
 
-//  Constructor for WhileContainerStatement
 spa::WhileContainerStatement::WhileContainerStatement(std::string parentProcedureVal,
                                                       int statementLineNum,
                                                       std::vector<std::shared_ptr<ProgramStatement>>
@@ -49,7 +47,6 @@ spa::WhileContainerStatement::WhileContainerStatement(std::string parentProcedur
   this->statementList = statementList;
 }
 
-//  Constructor for IfContainerStatement
 spa::InnerBlockStatement::InnerBlockStatement(std::string parentProcedureVal,
                                               std::vector<std::shared_ptr<ProgramStatement>>
                                               statementList) {
@@ -60,41 +57,35 @@ spa::InnerBlockStatement::InnerBlockStatement(std::string parentProcedureVal,
 std::pair<spa::CFGNode, spa::CFGNode> spa::IfContainerStatement::processStatement(
   PKBManager& pkbManager) {
   std::shared_ptr<ProgramStatement> ifConditionStatement = statementList[0];
-  std::shared_ptr < ProgramStatement> thenStatement = statementList[1];
-  std::shared_ptr < ProgramStatement> elseStatement = statementList[2];
+  std::shared_ptr<ProgramStatement> thenStatement = statementList[1];
+  std::shared_ptr<ProgramStatement> elseStatement = statementList[2];
   std::pair<CFGNode, CFGNode> cfgIfConditionNode = ifConditionStatement->
     processStatement(pkbManager);
   std::pair<CFGNode, CFGNode> cfgThenInnerBlockNode = thenStatement->processStatement(pkbManager);
   std::pair<CFGNode, CFGNode> cfgElseInnerBlockNode = elseStatement->processStatement(pkbManager);
   CFGNode dummyNode = CFGNode();
-  int const dummyNodeLineNum = dummyNode.getLineNumber();
   int const cfgIfConditionNodeLineNum = cfgIfConditionNode.second.getLineNumber();
   int const cfgThenInnerBlkNodeStart = cfgThenInnerBlockNode.first.getLineNumber();
   int const cfgElseInnerBlkNodeStart = cfgElseInnerBlockNode.first.getLineNumber();
-  int const cfgThenInnerBlkNodeEnd = cfgThenInnerBlockNode.second.getLineNumber();
-  int const cfgElseInnerBlkNodeEnd = cfgElseInnerBlockNode.second.getLineNumber();
   pkbManager.addEdge(cfgIfConditionNodeLineNum, cfgThenInnerBlkNodeStart);
   pkbManager.addEdge(cfgIfConditionNodeLineNum, cfgElseInnerBlkNodeStart);
   QueryResult res = pkbManager.getCfgNode(cfgIfConditionNodeLineNum);
-  if (cfgThenInnerBlkNodeEnd == DUMMY_NODE_VAL) {
-    for (auto& incomingNode : cfgThenInnerBlockNode.second.getIncomingEdges()) {
-      QueryResult then = pkbManager.getCfgNode(incomingNode->getLineNumber());
-      dummyNode.addIncomingEdge(then.getCfgNodes()[0]);
-    }
-  } else {
-    QueryResult then = pkbManager.getCfgNode(cfgThenInnerBlkNodeEnd);
-    dummyNode.addIncomingEdge(then.getCfgNodes()[0]);
-  }
-  if (cfgElseInnerBlkNodeEnd == DUMMY_NODE_VAL) {
-    for (auto& incomingNode : cfgElseInnerBlockNode.second.getIncomingEdges()) {
+  relinkDummyNode(dummyNode, pkbManager, cfgThenInnerBlockNode.second);
+  relinkDummyNode(dummyNode, pkbManager, cfgElseInnerBlockNode.second);
+  return std::make_pair(*res.getCfgNodes()[0], dummyNode);
+}
+
+void spa::IfContainerStatement::relinkDummyNode(CFGNode& dummyNode, PKBManager& pkbManager,
+                                                CFGNode& innerBlockDummyNode) {
+  if (innerBlockDummyNode.getLineNumber() == DUMMY_NODE_VAL) {
+    for (auto& incomingNode : innerBlockDummyNode.getIncomingEdges()) {
       QueryResult e = pkbManager.getCfgNode(incomingNode->getLineNumber());
       dummyNode.addIncomingEdge(e.getCfgNodes()[0]);
     }
   } else {
-    QueryResult e = pkbManager.getCfgNode(cfgElseInnerBlkNodeEnd);
+    QueryResult e = pkbManager.getCfgNode(innerBlockDummyNode.getLineNumber());
     dummyNode.addIncomingEdge(e.getCfgNodes()[0]);
   }
-  return std::make_pair(*res.getCfgNodes()[0], dummyNode);
 }
 
 std::pair<spa::CFGNode, spa::CFGNode> spa::WhileContainerStatement::processStatement(
@@ -143,7 +134,8 @@ std::pair<spa::CFGNode, spa::CFGNode> spa::InnerBlockStatement::processStatement
     }
     prevStmtEndNode = cfgStmtNode.second;
   }
-  if (blockStmtHeadNode.getLineNumber() == DUMMY_NODE_VAL && prevStmtEndNode.getLineNumber() == DUMMY_NODE_VAL) {
+  if (blockStmtHeadNode.getLineNumber() == DUMMY_NODE_VAL && prevStmtEndNode.getLineNumber() ==
+    DUMMY_NODE_VAL) {
     return std::make_pair(CFGNode(), CFGNode());
   }
   return std::make_pair(blockStmtHeadNode, prevStmtEndNode);

@@ -20,5 +20,6 @@ class ProcedureStatement {
   std::vector<std::shared_ptr<ProgramStatement>>& getStatementLst();
   void addCalledVars(std::string);
   std::unordered_set<std::string>& getCalledVars();
+  std::string getProcTokenValue();
 };
 }  // namespace spa

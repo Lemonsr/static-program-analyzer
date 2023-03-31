@@ -13,6 +13,10 @@ spa::Token spa::ProcedureStatement::getProcedureVarToken() {
   return procedureVarToken;
 }
 
+std::string spa::ProcedureStatement::getProcTokenValue() {
+  return procedureVarToken.getValue();
+}
+
 std::vector<std::shared_ptr<spa::ProgramStatement>>& spa::ProcedureStatement::getStatementLst() {
   return statementLst;
 }

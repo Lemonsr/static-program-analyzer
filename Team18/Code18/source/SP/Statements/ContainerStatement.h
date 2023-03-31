@@ -19,6 +19,8 @@ class ContainerStatement : public ProgramStatement {
 };
 
 class IfContainerStatement : public ContainerStatement {
+ private:
+  void relinkDummyNode(CFGNode& dummyNode, PKBManager& pkbManager, CFGNode& innerBlockDummyNode);
  public:
   IfContainerStatement(std::string parentProcedureVal, int statementLineNum,
                        std::vector<std::shared_ptr<ProgramStatement>>& statementList);
