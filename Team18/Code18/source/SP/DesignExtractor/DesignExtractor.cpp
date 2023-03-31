@@ -39,7 +39,7 @@ void spa::DesignExtractor::buildProcCallMap(std::shared_ptr<ProcedureStatement> 
       }
     }
   }
-  procCallMap.emplace(procedure->getProcedureVarToken().getValue(), procedure->getCalledVars());
+  procCallMap.emplace(procedure->getProcTokenValue(), procedure->getCalledVars());
 }
 
 void spa::DesignExtractor::extractRelationship() {
@@ -49,7 +49,7 @@ void spa::DesignExtractor::extractRelationship() {
     exit(1);
   }
   for (auto& procedure : procedureList) {
-    pkbManager.addEntity(PROCEDURE, procedure->getProcedureVarToken().getValue());
+    pkbManager.addEntity(PROCEDURE, procedure->getProcTokenValue());
     auto& statementList = procedure->getStatementLst();
     extractDesignAbstraction(statementList);
   }
@@ -226,7 +226,7 @@ void spa::DesignExtractor::dfsCallsStar(std::string parent, std::string child) {
 
 void spa::DesignExtractor::extractCallsStar() {
   for (auto& procedure : procedureList) {
-    std::string currentProcedure = procedure->getProcedureVarToken().getValue();
+    std::string currentProcedure = procedure->getProcTokenValue();
     for (auto& directCall : procedure->getCalledVars()) {
       pkbManager.addRelationship(CALLS_STAR, currentProcedure, directCall);
       dfsCallsStar(currentProcedure, directCall);
@@ -236,7 +236,7 @@ void spa::DesignExtractor::extractCallsStar() {
 
 void spa::DesignExtractor::extractUsesAndModifiesProc() {
   for (auto& procedure : procedureList) {
-    std::string procName = procedure->getProcedureVarToken().getValue();
+    std::string procName = procedure->getProcTokenValue();
     std::vector<std::pair<std::string, std::string>> childrenProc = getResFromPkbHelper(procName,
       PROC_SYNONYM_LITERAL,
       PROCEDURE, CALLS_STAR);
@@ -254,7 +254,7 @@ void spa::DesignExtractor::extractUsesAndModifiesProc() {
 
 void spa::DesignExtractor::extractNestedProcUsesAndModifies() {
   for (auto& procedure : procedureList) {
-    std::string procName = procedure->getProcedureVarToken().getValue();
+    std::string procName = procedure->getProcTokenValue();
     QueryResult queryResult = pkbManager.getCallsContainerParent(procName);
     std::vector<int> ifWhileParents = queryResult.getLineNumbers();
 

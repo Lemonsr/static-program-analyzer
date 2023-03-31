@@ -88,7 +88,7 @@ TEST_CLASS(TestSpCreateCFG) {
   }
 
   void assertCFGMatch(std::unordered_set<spa::CFGNode*>& expectedNodes) {
-    for (auto expected : expectedNodes) {
+    for (spa::CFGNode* expected : expectedNodes) {
       spa::QueryResult queryResult = pkbManager->getCfgNode(expected->getLineNumber());
       std::vector<spa::CFGNode*> testNodes = queryResult.getCfgNodes();
       if (!testNodes.empty()) {

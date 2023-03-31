@@ -33,16 +33,18 @@ bool spa::SpCyclicValidator::dfsCheckCyclicCall(std::string parent,
   if (currentSeen->find(parent) != currentSeen->end()) {
     visited->emplace(parent, true);
     return true;
-  } else if (visited->find(parent) != visited->end()) {
+  }
+
+  if (visited->find(parent) != visited->end()) {
     return visited->at(parent);
-  } else {
-    currentSeen->emplace(parent);
-    auto children = validateCallMap.at(parent);
-    for (auto child : children) {
-      if (dfsCheckCyclicCall(child, currentSeen, visited)) {
-        visited->emplace(child, true);
-        return true;
-      }
+  }
+
+  currentSeen->emplace(parent);
+  auto children = validateCallMap.at(parent);
+  for (auto child : children) {
+    if (dfsCheckCyclicCall(child, currentSeen, visited)) {
+      visited->emplace(child, true);
+      return true;
     }
   }
 
