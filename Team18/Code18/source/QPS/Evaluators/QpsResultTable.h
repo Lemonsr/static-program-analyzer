@@ -46,6 +46,7 @@ class QpsResultTable {
   QpsResultRow concatenateRow(QpsResultRow& row, QpsResultRow& other);
   void cartesianProduct(QpsResultTable& result, QpsResultTable& other);
   void fillQpsRowMap(QpsRowMap& m, QpsResultTable& table, std::vector<int>& selectedColumns);
+
  public:
   std::vector<std::string> getHeaderNames();
   bool hasHeader(const std::string& header);
