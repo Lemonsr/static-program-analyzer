@@ -51,7 +51,9 @@ class QpsResultTable {
   bool hasHeader(const std::string& header);
   void addHeader(const std::string& header);
   void addHeader(PqlArgument header);
+  void addEmptyHeader();
   std::pair<int, int> getDimension();
+  void addDummyRow();
   void addRow(const QpsResultRow& row);
   QpsValueSet getColumn(std::string header);
   QpsResultTable getColumns(const std::vector<std::string>& headers);

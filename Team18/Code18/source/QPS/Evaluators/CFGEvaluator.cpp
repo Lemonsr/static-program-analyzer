@@ -47,7 +47,7 @@ spa::QpsResultTable spa::CFGEvaluator::evaluate(PKBManager& pkbManager) {
                                                   PKBQueryArg(secondArg));
   if (result.getQueryResultType() == BOOL) {
     if (result.getIsTrue()) {
-      table.addRow({ QpsValue(0), QpsValue(0) });
+      table.addDummyRow();
     }
   } else {
     bool isSameSynonym = UtilsFunction::isSameSynonym(firstArg, secondArg);

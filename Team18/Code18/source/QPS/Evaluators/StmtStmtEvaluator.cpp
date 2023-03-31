@@ -19,7 +19,7 @@ spa::QpsResultTable spa::StmtStmtEvaluator::evaluate(PKBManager& pkbManager) {
                                                   PKBQueryArg(secondArg));
   if (result.getQueryResultType() == BOOL) {
     if (result.getIsTrue()) {
-      table.addRow({ QpsValue(0), QpsValue(0) });
+      table.addDummyRow();
     }
   } else {
     for (auto& pair : result.getLineNumberLineNumberPairs()) {

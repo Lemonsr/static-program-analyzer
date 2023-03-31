@@ -51,6 +51,10 @@ std::vector<std::string> spa::QpsResultTable::getHeaderNames() {
   return result;
 }
 
+void spa::QpsResultTable::addEmptyHeader() {
+  headers.push_back("");
+}
+
 void spa::QpsResultTable::addHeader(const std::string& header) {
   if (!header.empty()) {
     headerIndexMap[header].push_back(headers.size());
@@ -71,6 +75,10 @@ bool spa::QpsResultTable::hasHeader(const std::string& header) {
 
 std::pair<int, int> spa::QpsResultTable::getDimension() {
   return { headers.size(), rows.size() };
+}
+
+void spa::QpsResultTable::addDummyRow() {
+  rows.push_back(std::vector<QpsValue>(headers.size(), QpsValue(0)));
 }
 
 void spa::QpsResultTable::addRow(const QpsResultRow& row) {

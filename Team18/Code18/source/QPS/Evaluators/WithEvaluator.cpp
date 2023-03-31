@@ -55,7 +55,7 @@ spa::QpsResultTable spa::WithEvaluator::evaluateAttributeValue(const std::string
 spa::QpsResultTable spa::WithEvaluator::evaluateValues(const QpsValue& first,
                                                        const QpsValue& second) {
   QpsResultTable result;
-  result.addHeader("");
+  result.addEmptyHeader();
   if (first == second) {
     result.addRow({ first });
   }
