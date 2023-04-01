@@ -11,12 +11,11 @@
 #include "PqlSemanticChecker.h"
 
 std::pair<spa::PqlParseStatus, spa::ParsedQuery> spa::QpsPreprocessor::preprocess(std::string query) {
-
   std::optional<Stream<Token>> tokens = tokenize(query);
   if (!tokens) {
     return { PQL_PARSE_SYNTAX_ERROR, {} };
   }
-  
+
   ParsedQuery parsedQuery;
   PqlParseStatus status = parse(tokens.value(), parsedQuery);
   if (status != PQL_PARSE_SUCCESS) {
