@@ -177,9 +177,6 @@
     <ClInclude Include="..\source\QPS\Preprocessor\PqlWithSubParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\Clause.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\PKB\Storage\CFGStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
