@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
+#include <cassert>
 
 #include "HashTuple.h"
 
@@ -82,9 +83,7 @@ void spa::QpsResultTable::addDummyRow() {
 }
 
 void spa::QpsResultTable::addRow(const QpsResultRow& row) {
-  if (row.size() != headers.size()) {
-    throw std::runtime_error("QpsResultTable addRow: row size not equal to columns");
-  }
+  assert(row.size() == headers.size());
   rows.push_back(row);
 }
 
