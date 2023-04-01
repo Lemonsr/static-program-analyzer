@@ -1,0 +1,200 @@
+1 - Assigns with rhs name
+assign a; variable v;
+Select a such that Uses(a, "x") pattern a (_, _"x"_)
+3, 9, 21, 28, 33, 43
+5000
+2 - Assigns with rhs name
+assign a; variable v;
+Select a such that Uses(a, v) pattern a (_, _"x"_)
+3, 9, 21, 28, 33, 43
+5000
+3 - Assigns with both sides
+assign a, a1; variable v;
+Select a such that Uses(a, v) pattern a1 (v, _"x"_)
+3, 7, 9, 16, 21, 26, 28, 31, 33, 38, 40, 43, 45
+5000
+4 - Vars on lhs with rhs
+assign a; variable v;
+Select v such that Uses(a, "x") pattern a (v, _"x"_)
+y, u, x, z
+5000
+5 - Vars on both sides
+assign a; variable v;
+Select v such that Uses(a, v) pattern a (v, _"x"_)
+y, u, x
+5000
+6 - Vars on lhs
+assign a; variable v;
+Select v such that Uses(a, _) pattern a (v, _)
+y, u, x, z, w
+5000
+7 - Unrelated pattern, true
+assign a, a1; variable v;
+Select a such that Uses(a, v) pattern a1 ("x", _"u"_)
+3, 7, 9, 16, 21, 26, 28, 31, 33, 38, 40, 43, 45
+5000
+8 - Unrelated pattern, false
+assign a, a1; variable v;
+Select a such that Uses(a, v) pattern a1 ("a", _"u"_)
+none
+5000
+9 - Unrelated such that, true
+assign a, a1; variable v;
+Select v such that Uses(a, "x") pattern a1 (v, _"u"_)
+y, u, x, z
+5000
+10 - Unrelated such that, true
+assign a, a1; variable v;
+Select a1 such that Uses(a, "x") pattern a1 (v, _"u"_)
+9, 16, 26, 28, 31, 33
+5000
+11 - Unrelated both, true
+assign a, a1; variable v;
+Select a1 such that Uses(a, v) pattern a (_, _"x"_)
+3, 7, 9, 16, 21, 26, 28, 31, 33, 38, 40, 43, 45
+5000
+12 - Unrelated both, false
+assign a, a1; variable v;
+Select a1 such that Uses(a, v) pattern a ("a", _"u"_)
+none
+5000
+13 - Vars of assigns non last
+assign a; variable v; print p;
+Select v such that Follows(a, _) pattern a (v, _)
+y, u, x, w
+5000
+14 - Vars of assigns non last with rhs
+assign a; variable v; print p;
+Select v such that Follows(a, _) pattern a (v, _"x"_)
+y, u, x
+5000
+15 - Assigns follows print with rhs
+assign a; variable v; print p;
+Select a such that Follows(p, a) pattern a (v, _"x"_)
+33
+5000
+16 - Prints precede assigns with rhs
+assign a; variable v; print p;
+Select p such that Follows(p, a) pattern a (v, _"x"_)
+32
+5000
+17 - Assigns follows 1 with lhs and rhs
+assign a; variable v; print p;
+Select a such that Follows(1, a) pattern a ("x", _"x"_)
+none
+5000
+18 - Vars of non-first assigns
+assign a; variable v; print p;
+Select v such that Follows(_, a) pattern a (v, _)
+y, u, x, z, w
+5000
+19 - Vars of assigns, unrel st, true
+assign a; variable v; print p;
+Select v such that Follows(_, p) pattern a (v, _)
+y, u, x, z, w
+5000
+20 - Vars of assigns non last
+assign a; variable v; print p;
+Select v such that Follows*(a, _) pattern a (v, _)
+y, u, x, w
+5000
+21 - Vars of assigns non last with rhs
+assign a; variable v; print p;
+Select v such that Follows*(a, _) pattern a (v, _"x"_)
+y, u, x
+5000
+22 - Assigns follows print with rhs
+assign a; variable v; print p;
+Select a such that Follows*(p, a) pattern a (v, _"x"_)
+33, 43
+5000
+23 - Prints precede assigns with rhs
+assign a; variable v; print p;
+Select p such that Follows*(p, a) pattern a (v, _"x"_)
+32, 41
+5000
+24 - Assigns follows 1 with lhs and rhs
+assign a; variable v; print p;
+Select a such that Follows*(1, a) pattern a ("x", _"x"_)
+none
+5000
+25 - Assigns follows 1 with rhs
+assign a; variable v; print p;
+Select a such that Follows*(1, a) pattern a (v, _"x"_)
+3, 33
+5000
+26 - Vars of non-first assigns
+assign a; variable v; print p;
+Select v such that Follows*(_, a) pattern a (v, _)
+y, u, x, z, w
+5000
+27 - Vars of non-first assigns
+assign a; variable v; print p;
+Select v such that Follows*(_, p) pattern a (v, _)
+y, u, x, z, w
+5000
+28 - Select assigns
+assign a;
+Select a
+3, 16, 7, 21, 9, 31, 26, 28, 33, 38, 40, 43, 45
+5000
+29 - Select variables
+variable v;
+Select v
+x, y, v, w, z, u
+5000
+30 - Pattern wc wc
+assign a; variable v;
+Select a pattern a (_, _)
+3, 16, 7, 21, 9, 31, 26, 28, 33, 38, 40, 43, 45
+5000
+31 - Modifies and pattern returning same
+assign a;
+Select a such that Modifies (a, "x") pattern a ("x", _)
+21, 31
+5000
+32 - Query 3 swapped
+assign a;
+Select a pattern a ("x", _) such that Modifies (a, "x")
+21, 31
+5000
+33 - 2 common synonyms a - all
+assign a; variable v;
+Select a such that Modifies (a, v) pattern a (v, _) 
+3, 26, 31, 16, 7, 21, 9, 28, 33, 38, 40, 43, 45
+5000
+34 - 2 common synonyms v
+assign a; variable v;
+Select v such that Modifies (a, v) pattern a (v, _) 
+u, w, x, y, z
+5000
+35 - Modifies none Pattern wc wc
+assign a; variable v; read r;
+Select a such that Modifies (r, "t") pattern a (_, _) 
+none
+5000
+36 - Modifies some Pattern none
+assign a; variable v; read r;
+Select a such that Modifies (a, "y") pattern a ("u", _"u"_) 
+none
+5000
+37 - More restrictive pattern
+assign a; variable v;
+Select a such that Modifies (a, "y") pattern a ("y", _"y"_) 
+3, 7
+5000
+38 - More restrictive modifies
+assign a; variable v; read r;
+Select a such that Modifies (a, "y") pattern a (_, _"u"_) 
+16
+5000
+39 - 1 common synonym v
+assign a; variable v;
+Select v such that Modifies(a, v) pattern a (v, _"u"_)
+x, u, z, y
+5000
+40 - 1 common synonym a
+assign a; variable v1, v2;
+Select v1 such that Modifies(a, v1) pattern a (v2, _"y"_)
+y, x, u, z, w
+5000
