@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
+#include <cassert>
 
 #include "HashTuple.h"
 
@@ -51,6 +52,10 @@ std::vector<std::string> spa::QpsResultTable::getHeaderNames() {
   return result;
 }
 
+void spa::QpsResultTable::addEmptyHeader() {
+  headers.push_back("");
+}
+
 void spa::QpsResultTable::addHeader(const std::string& header) {
   if (!header.empty()) {
     headerIndexMap[header].push_back(headers.size());
@@ -73,10 +78,12 @@ std::pair<int, int> spa::QpsResultTable::getDimension() {
   return { headers.size(), rows.size() };
 }
 
+void spa::QpsResultTable::addDummyRow() {
+  rows.push_back(std::vector<QpsValue>(headers.size(), QpsValue(0)));
+}
+
 void spa::QpsResultTable::addRow(const QpsResultRow& row) {
-  if (row.size() != headers.size()) {
-    throw std::runtime_error("QpsResultTable addRow: row size not equal to columns");
-  }
+  assert(row.size() == headers.size());
   rows.push_back(row);
 }
 

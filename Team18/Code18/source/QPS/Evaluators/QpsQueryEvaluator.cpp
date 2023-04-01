@@ -145,8 +145,8 @@ spa::QpsResultTable spa::TableGroup::getTable(ParsedQuery& parsedQuery) {
   }
   if (!init) {
     QpsResultTable dummy;
-    dummy.addHeader("");
-    dummy.addRow({ QpsValue(0) });
+    dummy.addEmptyHeader();
+    dummy.addDummyRow();
     return dummy;
   }
   return result;
@@ -194,8 +194,8 @@ spa::QpsResultTable spa::QpsQueryEvaluator::evaluate(PKBManager& pkbManager) {
   std::unordered_map<std::string, TableGroup> groupMap;
   std::vector<QpsResultTable> tables;
   QpsResultTable result;
-  result.addHeader("");
-  result.addRow({ QpsValue(0) });
+  result.addEmptyHeader();
+  result.addDummyRow();
 
   extractTables(tables, pkbManager);
 
