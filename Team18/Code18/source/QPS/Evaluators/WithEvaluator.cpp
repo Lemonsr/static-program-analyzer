@@ -11,7 +11,8 @@ spa::WithEvaluator::WithEvaluator(WithArgument& firstArg, WithArgument& secondAr
 }
 
 spa::QpsResultTable spa::WithEvaluator::evaluateAttributes(PKBManager& pkbManager,
-                                                           const std::string& first, const std::string& second) {
+                                                           const std::string& first,
+                                                           const std::string& second) {
   std::vector<QpsValue> values;
   std::string attribute = first.substr(first.find('.') + 1);
   if (attribute == STMT_NUM_ATTR_LITERAL) {
@@ -44,16 +45,14 @@ spa::QpsResultTable spa::WithEvaluator::evaluateAttributes(PKBManager& pkbManage
   return table;
 }
 
-spa::QpsResultTable spa::WithEvaluator::evaluateAttributeValue(const std::string& attribute,
-                                                               const QpsValue& value) {
+spa::QpsResultTable spa::WithEvaluator::evaluateAttributeValue(const std::string& attribute, const QpsValue& value) {
   QpsResultTable result;
   result.addHeader(attribute);
   result.addRow({ value });
   return result;
 }
 
-spa::QpsResultTable spa::WithEvaluator::evaluateValues(const QpsValue& first,
-                                                       const QpsValue& second) {
+spa::QpsResultTable spa::WithEvaluator::evaluateValues(const QpsValue& first, const QpsValue& second) {
   QpsResultTable result;
   result.addEmptyHeader();
   if (first == second) {

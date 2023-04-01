@@ -6,8 +6,7 @@
 #include "ParsedQuery.h"
 #include "Literal.h"
 
-spa::PqlParseStatus spa::PqlSuchThatParser::parse(Stream<Token>& tokens,
-                                                  ParsedQuery& query) {
+spa::PqlParseStatus spa::PqlSuchThatParser::parse(Stream<Token>& tokens, ParsedQuery& query) {
   bool matchResult = tokens.match({
     { spa::TOKEN_NAME, SUCH_LITERAL},
     { spa::TOKEN_NAME, THAT_LITERAL},

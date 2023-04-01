@@ -14,9 +14,7 @@ spa::QpsResultTable spa::StmtStmtEvaluator::evaluate(PKBManager& pkbManager) {
     return table;
   }
 
-  QueryResult result = pkbManager.getRelationship(designAbstraction,
-                                                  PKBQueryArg(firstArg),
-                                                  PKBQueryArg(secondArg));
+  QueryResult result = pkbManager.getRelationship(designAbstraction, PKBQueryArg(firstArg), PKBQueryArg(secondArg));
   if (result.getQueryResultType() == BOOL) {
     if (result.getIsTrue()) {
       table.addDummyRow();

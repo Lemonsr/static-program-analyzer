@@ -14,8 +14,7 @@ const std::string& spa::PqlArgument::getValue() {
   return value;
 }
 
-const std::optional<spa::DesignEntityType>&
-    spa::PqlArgument::getDesignEntity() {
+const std::optional<spa::DesignEntityType>& spa::PqlArgument::getDesignEntity() {
   return designEntity;
 }
 

@@ -18,10 +18,8 @@ class PqlQueryParser : public PqlParser {
   PqlPatternParser patternParser;
   PqlAndParser andParser;
   PqlWithParser withParser;
-  PqlParseStatus parseDeclarations(Stream<Token>& tokens,
-                                    ParsedQuery& query);
-  PqlParseStatus parseClauses(Stream<Token>& tokens,
-                              ParsedQuery& query);
+  PqlParseStatus parseDeclarations(Stream<Token>& tokens, ParsedQuery& query);
+  PqlParseStatus parseClauses(Stream<Token>& tokens, ParsedQuery& query);
  public:
   PqlParseStatus parse(Stream<Token>& tokens, ParsedQuery& query);
 };

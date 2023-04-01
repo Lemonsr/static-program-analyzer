@@ -13,8 +13,7 @@ class PqlArgument {
   std::string value;
   std::optional<DesignEntityType> designEntity;
  public:
-  PqlArgument(ArgumentType type, std::string value,
-    std::optional<DesignEntityType> designEntity);
+  PqlArgument(ArgumentType type, std::string value, std::optional<DesignEntityType> designEntity);
   const ArgumentType& getType();
   const std::string& getValue();
   const std::optional<DesignEntityType>& getDesignEntity();
