@@ -3,6 +3,7 @@
 #include <optional>
 #include <string>
 #include <unordered_map>
+#include <cassert>
 
 #include "Literal.h"
 
@@ -62,13 +63,15 @@ bool spa::PqlSemanticChecker::isValid(SuchThatClause& suchThatClause) {
 
 bool spa::PqlSemanticChecker::isValid(PatternClause& patternClause) {
   PqlArgument& firstArg = patternClause.getFirstArg();
-  ArgumentType firstArgType = firstArg.getType();
+  ArgumentType firstArgType = patternClause.getFirstArgType();
   if (firstArgType == LINE_NO) {
     return false;
   }
 
   if (firstArgType == SYNONYM) {
-    DesignEntityType deType = firstArg.getDesignEntity().value();
+    std::optional<DesignEntityType> deTypeOpt = firstArg.getDesignEntity();
+    assert(deTypeOpt.has_value());
+    DesignEntityType deType = deTypeOpt.value();
     if (deType != VARIABLE) {
       return false;
     }
@@ -113,14 +116,15 @@ bool spa::PqlSemanticChecker::checkModifiesArguments(PqlArgument& firstArg, PqlA
   }
 
   if (firstArgType == SYNONYM) {
-    DesignEntityType deType = firstArg.getDesignEntity().value();
+    std::optional<DesignEntityType> deTypeOpt = firstArg.getDesignEntity();
+    assert(deTypeOpt.has_value());
+    DesignEntityType deType = deTypeOpt.value();
     if (deType == VARIABLE || deType == PRINT || deType == CONSTANT) {
       return false;
     }
   }
 
   ArgumentType secondArgType = secondArg.getType();
-
   if (secondArgType == SYNONYM && secondArg.getDesignEntity().value() != VARIABLE) {
     return false;
   }
@@ -134,7 +138,9 @@ bool spa::PqlSemanticChecker::checkUsesArguments(PqlArgument& firstArg, PqlArgum
     return false;
   }
   if (firstArgType == SYNONYM) {
-    DesignEntityType deType = firstArg.getDesignEntity().value();
+    std::optional<DesignEntityType> deTypeOpt = firstArg.getDesignEntity();
+    assert(deTypeOpt.has_value());
+    DesignEntityType deType = deTypeOpt.value();
     if (deType == VARIABLE || deType == READ || deType == CONSTANT) {
       return false;
     }
@@ -154,7 +160,9 @@ bool spa::PqlSemanticChecker::checkStmtRefArguments(PqlArgument& firstArg, PqlAr
     ArgumentType argType = arg.getType();
 
     if (argType == SYNONYM) {
-      DesignEntityType deType = arg.getDesignEntity().value();
+      std::optional<DesignEntityType> deTypeOpt = arg.getDesignEntity();
+      assert(deTypeOpt.has_value());
+      DesignEntityType deType = deTypeOpt.value();
       if (deType == PROCEDURE || deType == VARIABLE || deType == CONSTANT) {
         return false;
       }
@@ -169,7 +177,9 @@ bool spa::PqlSemanticChecker::checkCallsArguments(PqlArgument& firstArg, PqlArgu
     ArgumentType argType = arg.getType();
 
     if (argType == SYNONYM) {
-      DesignEntityType deType = arg.getDesignEntity().value();
+      std::optional<DesignEntityType> deTypeOpt = arg.getDesignEntity();
+      assert(deTypeOpt.has_value());
+      DesignEntityType deType = deTypeOpt.value();
       if (deType != PROCEDURE) {
         return false;
       }

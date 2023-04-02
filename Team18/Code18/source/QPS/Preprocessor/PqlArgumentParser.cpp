@@ -4,10 +4,7 @@
 
 #include "Literal.h"
 
-std::optional<spa::PqlArgument> spa::PqlArgumentParser::getSynonym(
-    Stream<Token>& tokens,
-    ParsedQuery& query
-) {
+std::optional<spa::PqlArgument> spa::PqlArgumentParser::getSynonym(Stream<Token>& tokens, ParsedQuery& query) {
   if (!tokens.match({ { TOKEN_NAME, EMPTY_LITERAL} })) {
     return {};
   }
@@ -18,9 +15,7 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getSynonym(
   return { { SYNONYM, val, entityType } };
 }
 
-std::optional<spa::PqlArgument> spa::PqlArgumentParser::getWildcard(
-    Stream<Token>& tokens
-) {
+std::optional<spa::PqlArgument> spa::PqlArgumentParser::getWildcard(Stream<Token>& tokens) {
   if (!tokens.match({ { TOKEN_UNDERSCORE, UNDERSCORE_LITERAL} })) {
     return {};
   }
@@ -28,9 +23,7 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getWildcard(
   return { { WILDCARD, UNDERSCORE_LITERAL, {} } };
 }
 
-std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLineNo(
-  Stream<Token>& tokens
-) {
+std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLineNo(Stream<Token>& tokens) {
   if (!tokens.match({ { TOKEN_INTEGER, EMPTY_LITERAL} })) {
     return {};
   }
@@ -39,9 +32,7 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLineNo(
   return { { LINE_NO, val, {}}};
 }
 
-std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLiteralString(
-  Stream<Token>& tokens
-) {
+std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLiteralString(Stream<Token>& tokens) {
   bool matchResult = tokens.match({
     {TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL},
     {TOKEN_NAME, EMPTY_LITERAL},
@@ -55,10 +46,7 @@ std::optional<spa::PqlArgument> spa::PqlArgumentParser::getLiteralString(
   return { { LITERAL_STRING, val, {} } };
 }
 
-std::optional<spa::PqlArgument> spa::PqlArgumentParser::parse(
-    Stream<Token>& tokens,
-    ParsedQuery& query
-) {
+std::optional<spa::PqlArgument> spa::PqlArgumentParser::parse(Stream<Token>& tokens, ParsedQuery& query) {
   std::optional<spa::PqlArgument> sResult = getSynonym(tokens, query);
   if (sResult) {
     return sResult;

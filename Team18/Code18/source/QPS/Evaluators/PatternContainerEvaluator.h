@@ -7,11 +7,11 @@
 namespace spa {
 class PatternContainerEvaluator : public QpsEvaluator {
  private:
-    DesignEntityType entityType;
-    PqlArgument& patternSynonym;
-    PqlArgument& firstArg;
+  DesignEntityType entityType;
+  PqlArgument& patternSynonym;
+  PqlArgument& firstArg;
  public:
-    PatternContainerEvaluator(DesignEntityType entityType, PqlArgument& patternSynonym, PqlArgument& firstArg);
-    QpsResultTable evaluate(PKBManager& pkbManager);
+  PatternContainerEvaluator(DesignEntityType entityType, PqlArgument& patternSynonym, PqlArgument& firstArg);
+  QpsResultTable evaluate(PKBManager& pkbManager);
 };
 }  // namespace spa

@@ -11,10 +11,7 @@
 #include "PqlRefTypes.h"
 #include "Literal.h"
 
-std::optional<spa::Pattern> spa::PqlPatternSubParser::parseExact(
-  Stream<Token>& tokens,
-  ParsedQuery& query
-) {
+std::optional<spa::Pattern> spa::PqlPatternSubParser::parseExact(Stream<Token>& tokens, ParsedQuery& query) {
   if (!tokens.match({ { TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL } })) {
     return {};
   }
@@ -39,10 +36,7 @@ std::optional<spa::Pattern> spa::PqlPatternSubParser::parseExact(
   return { Pattern { EXACT, patternTokens } };
 }
 
-std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePartial(
-  Stream<Token>& tokens,
-  ParsedQuery& query
-) {
+std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePartial(Stream<Token>& tokens, ParsedQuery& query) {
   bool matchResult = tokens.match({
     { TOKEN_UNDERSCORE, UNDERSCORE_LITERAL },
     { TOKEN_DOUBLE_QUOTES, DOUBLE_QUOTES_LITERAL }
@@ -75,10 +69,7 @@ std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePartial(
   return { Pattern { PARTIAL, patternTokens } };
 }
 
-std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePattern(
-  Stream<Token>& tokens,
-  ParsedQuery& query
-) {
+std::optional<spa::Pattern> spa::PqlPatternSubParser::parsePattern(Stream<Token>& tokens, ParsedQuery& query) {
   std::optional<Pattern> eOptional = parseExact(tokens, query);
   if (eOptional) {
     return eOptional;
@@ -126,8 +117,7 @@ spa::PqlParseStatus spa::PqlPatternSubParser::parseOtherArgs(Stream<Token>& toke
   return PQL_PARSE_SUCCESS;
 }
 
-spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens,
-  ParsedQuery& query) {
+spa::PqlParseStatus spa::PqlPatternSubParser::parse(Stream<Token>& tokens, ParsedQuery& query) {
   bool matchResult = tokens.match({
     { spa::TOKEN_NAME, EMPTY_LITERAL},
     { spa::TOKEN_OPEN_BRACKET, OPEN_BRACKET_LITERAL},

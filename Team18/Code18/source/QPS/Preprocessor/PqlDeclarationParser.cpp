@@ -20,10 +20,9 @@ const std::unordered_map<std::string, spa::DesignEntityType> entityTypesMap {
   {CONSTANT_LITERAL, spa::CONSTANT}
 };
 
-spa::PqlParseStatus spa::PqlDeclarationParser::addDeclarations(
-    DesignEntityType type,
-    Stream<Token>& tokens,
-    ParsedQuery& query
+spa::PqlParseStatus spa::PqlDeclarationParser::addDeclarations(DesignEntityType type,
+                                                               Stream<Token>& tokens,
+                                                               ParsedQuery& query
 ) {
   while (tokens.remaining() >= 2) {
     if (tokens[0].getType() != TOKEN_NAME) {

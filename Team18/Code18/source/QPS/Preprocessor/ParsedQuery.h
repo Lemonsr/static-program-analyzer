@@ -13,7 +13,6 @@
 #include "Stream.h"
 #include "PKBQueryTypes.h"
 #include "QpsEvaluator.h"
-#include "Clause.h"
 
 namespace spa {
 enum RelationshipType {
@@ -33,7 +32,7 @@ enum RelationshipType {
   AFFECTS_STAR
 };
 
-class SuchThatClause : public Clause {
+class SuchThatClause {
  private:
   RelationshipType designAbstraction;
   PqlArgument firstArg;
@@ -55,7 +54,7 @@ class SuchThatClause : public Clause {
   friend bool operator!=(const SuchThatClause& s1, const SuchThatClause& s2);
 };
 
-class PatternClause : public Clause {
+class PatternClause {
  private:
   PqlArgument synonym;
   PqlArgument firstArg;
@@ -99,7 +98,7 @@ class WithArgument {
   friend bool operator!=(const WithArgument& first, const WithArgument& second);
 };
 
-class WithClause : public Clause {
+class WithClause {
  private:
   WithArgument firstArg;
   WithArgument secondArg;
@@ -142,25 +141,26 @@ class ParsedQuery {
   std::unordered_map<std::string, DesignEntityType> selectWithDeclarations;
 
  public:
+  void setSelectClauseType(SelectClauseType selectType);
   void addDeclaration(std::string synonym, DesignEntityType designEntity);
+  void addSelectColumn(std::string selectColumn);
+  void addSuchThatClause(SuchThatClause clause);
+  void addPatternClause(PatternClause clause);
+  void addWithClause(WithClause clause);
+  void addUsedDeclaration(std::string declaration, DesignEntityType designEntityType);
+  void addSelectWithDeclaration(std::string declaration, DesignEntityType designEntityType);
+
+  SelectClauseType getSelectClauseType();
+  std::unordered_map<std::string, DesignEntityType>& getDeclarations();
   std::unordered_map<std::string, int>& getDeclarationsCount();
   DesignEntityType getDeclarationType(std::string synonym);
-  std::unordered_map<std::string, DesignEntityType>& getDeclarations();
-  void setSelectClauseType(SelectClauseType selectType);
-  SelectClauseType getSelectClauseType();
-  PqlClauseType getLastAddedClause();
-  void addSelectColumn(std::string selectColumn);
   std::vector<std::string>& getSelectColumns();
   bool hasSelectColumn(const std::string& selectColumn);
-  void addSuchThatClause(SuchThatClause clause);
   std::vector<SuchThatClause>& getSuchThatClauses();
-  void addPatternClause(PatternClause clause);
   std::vector<PatternClause>& getPatternClauses();
-  void addWithClause(WithClause clause);
   std::vector<WithClause>& getWithClauses();
-  void addUsedDeclaration(std::string declaration, DesignEntityType designEntityType);
+  PqlClauseType getLastAddedClause();
   std::unordered_map<std::string, DesignEntityType>& getUsedDeclarations();
-  void addSelectWithDeclaration(std::string declaration, DesignEntityType designEntityType);
   std::unordered_map<std::string, DesignEntityType>& getSelectWithDeclarations();
   bool hasClauses();
 };

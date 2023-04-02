@@ -42,8 +42,8 @@ const std::unordered_map<spa::RelationshipType,
 };
 
 spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
-  Stream<Token>& tokens,
-  ParsedQuery& query) {
+                                                       Stream<Token>& tokens,
+                                                       ParsedQuery& query) {
   if (!tokens.match({ { TOKEN_OPEN_BRACKET, OPEN_BRACKET_LITERAL }})) {
     return PQL_PARSE_SYNTAX_ERROR;
   }
@@ -71,8 +71,7 @@ spa::PqlParseStatus spa::PqlSuchThatSubParser::getArgs(RelationshipType type,
   return PQL_PARSE_SUCCESS;
 }
 
-spa::PqlParseStatus spa::PqlSuchThatSubParser::parse(Stream<Token>& tokens,
-  ParsedQuery& query) {
+spa::PqlParseStatus spa::PqlSuchThatSubParser::parse(Stream<Token>& tokens, ParsedQuery& query) {
   if (!tokens.match({ { TOKEN_NAME, EMPTY_LITERAL } })) {
     return PQL_PARSE_SYNTAX_ERROR;
   }

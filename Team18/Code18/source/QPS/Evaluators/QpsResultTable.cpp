@@ -200,8 +200,7 @@ bool spa::QpsResultTable::isEmpty() {
   return rows.size() == 0;
 }
 
-spa::QpsResultTable spa::QpsResultTable::matchColumns(const std::string& first,
-                                                      const std::string& second) {
+spa::QpsResultTable spa::QpsResultTable::matchColumns(const std::string& first, const std::string& second) {
   int firstIndex = headerIndexMap[first][0];
   int secondIndex = headerIndexMap[second][0];
   QpsResultTable result;

@@ -10,13 +10,11 @@
 namespace spa {
 class PqlArgumentParser {
  private:
-  std::optional<PqlArgument> getSynonym(Stream<Token>& tokens,
-                                        ParsedQuery& query);
+  std::optional<PqlArgument> getSynonym(Stream<Token>& tokens, ParsedQuery& query);
   std::optional<PqlArgument> getWildcard(Stream<Token>& tokens);
   std::optional<PqlArgument> getLineNo(Stream<Token>& tokens);
   std::optional<PqlArgument> getLiteralString(Stream<Token>& tokens);
  public:
-  std::optional<PqlArgument> parse(Stream<Token>& tokens,
-                                    ParsedQuery& query);
+  std::optional<PqlArgument> parse(Stream<Token>& tokens, ParsedQuery& query);
 };
 }  // namespace spa
