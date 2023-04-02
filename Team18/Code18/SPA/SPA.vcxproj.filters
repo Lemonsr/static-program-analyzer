@@ -21,184 +21,184 @@
     <ClInclude Include="..\source\PKB\PKBManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\commons\Argument.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\commons\Stream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\commons\Token.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\commons\Tokenizer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\commons\UtilsFunction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\QPS\QPS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\source\SP\SP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\PatternContainerEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\PatternEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\QpsEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\QpsQueryEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\QpsResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\QpsResultTable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\QpsValue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\QueryResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\SimpleEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\ParsedQuery.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlAndParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlArgument.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlArgumentParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlAttributeParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlAttributes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlDeclarationParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlPatternParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlPatternSubParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlQueryParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlSelectParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlSemanticChecker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlSuchThatParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlSuchThatSubParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\QpsPreprocessor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\QPS\Translator\QpsTranslator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\PKB\DataTypes\DesignEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\PKB\DataTypes\PKBQueryArg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\PKB\DataTypes\PKBQueryTypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\PKB\DataTypes\PKBTypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\PKB\Storage\EntityStorage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\PKB\Storage\PatternStorage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\PKB\Storage\RelationshipStorage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\PKB\utils\HashTuple.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SP\DesignExtractor\DesignExtractor.h">
+    <ClInclude Include="..\source\commons\Include\Argument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SP\Parser\SpParser.h">
+    <ClInclude Include="..\source\commons\Include\Literal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SP\Statements\ContainerStatement.h">
+    <ClInclude Include="..\source\commons\Include\Stream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SP\Statements\NonContainerStatement.h">
+    <ClInclude Include="..\source\commons\Include\Token.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SP\Statements\ProcedureStatement.h">
+    <ClInclude Include="..\source\commons\Include\Tokenizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SP\Statements\ProgramStatement.h">
+    <ClInclude Include="..\source\commons\Include\UtilsFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SP\Validators\SpCyclicValidator.h">
+    <ClInclude Include="..\source\PKB\DataTypes\Include\CFGNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\SP\Validators\SpValidator.h">
+    <ClInclude Include="..\source\PKB\DataTypes\Include\DesignEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\PKB\DataTypes\CFGNode.h">
+    <ClInclude Include="..\source\PKB\DataTypes\Include\PKBQueryArg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlWithParser.h">
+    <ClInclude Include="..\source\PKB\DataTypes\Include\PKBQueryTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlWithSubParser.h">
+    <ClInclude Include="..\source\PKB\DataTypes\Include\PKBTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\PKB\Storage\CFGStorage.h">
+    <ClInclude Include="..\source\PKB\Storage\Include\CFGStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlRefTypes.h">
+    <ClInclude Include="..\source\PKB\Storage\Include\EntityStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\WithEvaluator.h">
+    <ClInclude Include="..\source\PKB\Storage\Include\PatternStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\CFGEvaluator.h">
+    <ClInclude Include="..\source\PKB\Storage\Include\RelationshipStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\EntityEntityEvaluator.h">
+    <ClInclude Include="..\source\QPS\Evaluators\Include\CFGEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\ModifiesUsesEvaluator.h">
+    <ClInclude Include="..\source\QPS\Evaluators\Include\EntityEntityEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\QPS\Evaluators\StmtStmtEvaluator.h">
+    <ClInclude Include="..\source\QPS\Evaluators\Include\ModifiesUsesEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\commons\Literal.h">
+    <ClInclude Include="..\source\QPS\Evaluators\Include\PatternContainerEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\PatternEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsQueryEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsResultTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsValue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QueryResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\SimpleEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\StmtStmtEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Evaluators\Include\WithEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\ParsedQuery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlAndParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlArgument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlArgumentParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlAttributeParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlAttributes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlDeclarationParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlPatternParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlPatternSubParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlQueryParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlRefTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlSelectParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlSemanticChecker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlSuchThatParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlSuchThatSubParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlWithParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlWithSubParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\QpsPreprocessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\QPS\Translator\Include\QpsTranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SP\DesignExtractor\Include\DesignExtractor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SP\Parser\Include\SpParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SP\Statements\Include\ContainerStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SP\Statements\Include\NonContainerStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SP\Statements\Include\ProcedureStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SP\Statements\Include\ProgramStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SP\Validators\Include\SpCyclicValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\SP\Validators\Include\SpValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

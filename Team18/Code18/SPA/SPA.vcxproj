@@ -11,68 +11,68 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\commons\Argument.h" />
-    <ClInclude Include="..\source\commons\Literal.h" />
-    <ClInclude Include="..\source\commons\Stream.h" />
-    <ClInclude Include="..\source\commons\Token.h" />
-    <ClInclude Include="..\source\commons\Tokenizer.h" />
-    <ClInclude Include="..\source\commons\UtilsFunction.h" />
-    <ClInclude Include="..\source\PKB\DataTypes\DesignEntity.h" />
-    <ClInclude Include="..\source\PKB\DataTypes\PKBQueryArg.h" />
-    <ClInclude Include="..\source\PKB\DataTypes\PKBQueryTypes.h" />
-    <ClInclude Include="..\source\PKB\DataTypes\PKBTypes.h" />
-    <ClInclude Include="..\source\PKB\DataTypes\CFGNode.h" />
+    <ClInclude Include="..\source\commons\Include\Argument.h" />
+    <ClInclude Include="..\source\commons\Include\Literal.h" />
+    <ClInclude Include="..\source\commons\Include\Stream.h" />
+    <ClInclude Include="..\source\commons\Include\Token.h" />
+    <ClInclude Include="..\source\commons\Include\Tokenizer.h" />
+    <ClInclude Include="..\source\commons\Include\UtilsFunction.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\Include\CFGNode.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\Include\DesignEntity.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\Include\PKBQueryArg.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\Include\PKBQueryTypes.h" />
+    <ClInclude Include="..\source\PKB\DataTypes\Include\PKBTypes.h" />
     <ClInclude Include="..\source\PKB\PKB.h" />
     <ClInclude Include="..\source\PKB\PKBManager.h" />
-    <ClInclude Include="..\source\PKB\Storage\CFGStorage.h" />
-    <ClInclude Include="..\source\PKB\Storage\EntityStorage.h" />
-    <ClInclude Include="..\source\PKB\Storage\PatternStorage.h" />
-    <ClInclude Include="..\source\PKB\Storage\RelationshipStorage.h" />
+    <ClInclude Include="..\source\PKB\Storage\Include\CFGStorage.h" />
+    <ClInclude Include="..\source\PKB\Storage\Include\EntityStorage.h" />
+    <ClInclude Include="..\source\PKB\Storage\Include\PatternStorage.h" />
+    <ClInclude Include="..\source\PKB\Storage\Include\RelationshipStorage.h" />
     <ClInclude Include="..\source\PKB\utils\HashTuple.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\CFGEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\EntityEntityEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\ModifiesUsesEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\PatternContainerEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\PatternEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\QpsEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\QpsQueryEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\QpsResult.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\QpsResultTable.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\QpsValue.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\QueryResult.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\SimpleEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\StmtStmtEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Evaluators\WithEvaluator.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\ParsedQuery.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlAndParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlArgument.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlArgumentParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlAttributeParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlAttributes.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlDeclarationParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlPatternParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlPatternSubParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlQueryParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlRefTypes.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlSelectParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlSemanticChecker.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlSuchThatParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlSuchThatSubParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlWithParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\PqlWithSubParser.h" />
-    <ClInclude Include="..\source\QPS\Preprocessor\QpsPreprocessor.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\CFGEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\EntityEntityEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\ModifiesUsesEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\PatternContainerEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\PatternEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsQueryEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsResult.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsResultTable.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QpsValue.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\QueryResult.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\SimpleEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\StmtStmtEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Evaluators\Include\WithEvaluator.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\ParsedQuery.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlAndParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlArgument.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlArgumentParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlAttributeParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlAttributes.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlDeclarationParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlPatternParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlPatternSubParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlQueryParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlRefTypes.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlSelectParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlSemanticChecker.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlSuchThatParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlSuchThatSubParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlWithParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\PqlWithSubParser.h" />
+    <ClInclude Include="..\source\QPS\Preprocessor\Include\QpsPreprocessor.h" />
     <ClInclude Include="..\source\QPS\QPS.h" />
-    <ClInclude Include="..\source\QPS\Translator\QpsTranslator.h" />
-    <ClInclude Include="..\source\SP\DesignExtractor\DesignExtractor.h" />
-    <ClInclude Include="..\source\SP\Parser\SpParser.h" />
+    <ClInclude Include="..\source\QPS\Translator\Include\QpsTranslator.h" />
+    <ClInclude Include="..\source\SP\DesignExtractor\Include\DesignExtractor.h" />
+    <ClInclude Include="..\source\SP\Parser\Include\SpParser.h" />
     <ClInclude Include="..\source\SP\SP.h" />
-    <ClInclude Include="..\source\SP\Statements\ContainerStatement.h" />
-    <ClInclude Include="..\source\SP\Statements\NonContainerStatement.h" />
-    <ClInclude Include="..\source\SP\Statements\ProcedureStatement.h" />
-    <ClInclude Include="..\source\SP\Statements\ProgramStatement.h" />
-    <ClInclude Include="..\source\SP\Validators\SpCyclicValidator.h" />
-    <ClInclude Include="..\source\SP\Validators\SpValidator.h" />
+    <ClInclude Include="..\source\SP\Statements\Include\ContainerStatement.h" />
+    <ClInclude Include="..\source\SP\Statements\Include\NonContainerStatement.h" />
+    <ClInclude Include="..\source\SP\Statements\Include\ProcedureStatement.h" />
+    <ClInclude Include="..\source\SP\Statements\Include\ProgramStatement.h" />
+    <ClInclude Include="..\source\SP\Validators\Include\SpCyclicValidator.h" />
+    <ClInclude Include="..\source\SP\Validators\Include\SpValidator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\commons\Token.cpp" />
@@ -177,7 +177,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\PKB\Storage;$(SolutionDir)source\PKB\DataTypes;$(SolutionDir)source\PKB\utils;$(SolutionDir)source\QPS;$(SolutionDir)source\QPS\Evaluators;$(SolutionDir)source\QPS\Preprocessor;$(SolutionDir)source\QPS\Translator;$(SolutionDir)source\commons;$(SolutionDir)source\SP;$(SolutionDir)source\SP\Parser;$(SolutionDir)source\SP\DesignExtractor;$(SolutionDir)source\SP\Validators;$(SolutionDir)source\SP\Statements</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source\PKB;$(SolutionDir)source\PKB\Storage;$(SolutionDir)source\PKB\Storage\Include;$(SolutionDir)source\PKB\DataTypes;$(SolutionDir)source\PKB\DataTypes\Include;$(SolutionDir)source\PKB\utils;$(SolutionDir)source\QPS;$(SolutionDir)source\QPS\Evaluators;$(SolutionDir)source\QPS\Evaluators\Include;$(SolutionDir)source\QPS\Preprocessor;$(SolutionDir)source\QPS\Preprocessor\Include;$(SolutionDir)source\QPS\Translator;$(SolutionDir)source\QPS\Translator\Include;$(SolutionDir)source\commons;$(SolutionDir)source\commons\Include;$(SolutionDir)source\SP;$(SolutionDir)source\SP\Parser;$(SolutionDir)source\SP\Parser\Include;$(SolutionDir)source\SP\DesignExtractor;$(SolutionDir)source\SP\DesignExtractor\Include;$(SolutionDir)source\SP\Validators;$(SolutionDir)source\SP\Validators\Include;$(SolutionDir)source\SP\Statements;$(SolutionDir)source\SP\Statements\Include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
