@@ -91,9 +91,9 @@ void spa::SpValidator::validateProcedure() {
   }
 
   procNames.insert(currTokenValue);
-  checkValidBraces(PROC_NO_OPEN_BRACE_ERROR);
+  checkValidOpenBraces(PROC_NO_OPEN_BRACE_ERROR);
   validateStmtLst();
-  checkValidBraces(PROC_NO_CLOSE_BRACE_ERROR, false);
+  checkValidCloseBraces(PROC_NO_CLOSE_BRACE_ERROR);
 }
 
 void spa::SpValidator::validateStmtLst() {
@@ -210,59 +210,51 @@ void spa::SpValidator::validateWhile() {
 
   validateCondExpr();
 
-  checkValidBrackets(MISSING_WHILE_CLOSE_BRACKET_ERROR, false);
+  checkValidCloseBrackets(MISSING_WHILE_CLOSE_BRACKET_ERROR);
 
-  checkValidBraces(MISSING_WHILE_OPEN_BRACE_ERROR);
+  checkValidOpenBraces(MISSING_WHILE_OPEN_BRACE_ERROR);
   validateStmtLst();
-  checkValidBraces(MISSING_WHILE_CLOSE_BRACE_ERROR, false);
+  checkValidCloseBraces(MISSING_WHILE_CLOSE_BRACE_ERROR);
 }
 
 void spa::SpValidator::validateIf() {
   next(2);
 
   validateCondExpr();
-  checkValidBrackets(MISSING_IF_CLOSE_BRACKET_ERROR, false);
+  checkValidCloseBrackets(MISSING_IF_CLOSE_BRACKET_ERROR);
 
   if (!hasRemaining() || getToken().getValue() != THEN_LITERAL) {
     throw std::exception(MISSING_THEN_ERROR.data());
   }
 
   tokens[idx - 1] = Token(TOKEN_THEN, THEN_LITERAL);
-  checkValidBraces(MISSING_THEN_OPEN_BRACE_ERROR);
+  checkValidOpenBraces(MISSING_THEN_OPEN_BRACE_ERROR);
   validateStmtLst();
-  checkValidBraces(MISSING_THEN_CLOSE_BRACE_ERROR, false);
+  checkValidCloseBraces(MISSING_THEN_CLOSE_BRACE_ERROR);
 
   if (!hasRemaining() || getToken().getValue() != ELSE_LITERAL) {
     throw std::exception(MISSING_ELSE_ERROR.data());
   }
 
   tokens[idx - 1] = Token(TOKEN_ELSE, ELSE_LITERAL);
-  checkValidBraces(MISSING_ELSE_OPEN_BRACE_ERROR);
+  checkValidOpenBraces(MISSING_ELSE_OPEN_BRACE_ERROR);
   validateStmtLst();
-  checkValidBraces(MISSING_ELSE_CLOSE_BRACE_ERROR, false);
+  checkValidCloseBraces(MISSING_ELSE_CLOSE_BRACE_ERROR);
 }
 
-void spa::SpValidator::checkValidBraces(std::string errorMessage, bool isOpenBrace) {
-  if (isOpenBrace) {
-    if (!hasRemaining() || !UtilsFunction::isValidOpenBrace(getToken())) {
-      throw std::exception(MISSING_ELSE_OPEN_BRACE_ERROR.data());
-    }
-    return;
+void spa::SpValidator::checkValidOpenBraces(std::string errorMessage) {
+  if (!hasRemaining() || !UtilsFunction::isValidOpenBrace(getToken())) {
+    throw std::exception(errorMessage.data());
   }
+}
 
+void spa::SpValidator::checkValidCloseBraces(std::string errorMessage) {
   if (!hasRemaining() || !UtilsFunction::isValidCloseBrace(getToken())) {
     throw std::exception(errorMessage.data());
   }
 }
 
-void spa::SpValidator::checkValidBrackets(std::string errorMessage, bool isOpenBracket) {
-  if (isOpenBracket) {
-    if (!hasRemaining() || !UtilsFunction::isValidOpenBracket(getToken())) {
-      throw std::exception(MISSING_ELSE_OPEN_BRACE_ERROR.data());
-    }
-    return;
-  }
-
+void spa::SpValidator::checkValidCloseBrackets(std::string errorMessage) {
   if (!hasRemaining() || !UtilsFunction::isValidCloseBracket(getToken())) {
     throw std::exception(errorMessage.data());
   }

@@ -1,0 +1,31 @@
+procedure Main {
+    a = a * a / c * c - c * c + d / b * a - a + d;
+    a = (((((((a) * (a)) / (c)) * (c)) - ((c) * (c))) + (((d) / (b)) * (a))) - (a)) + (d);
+
+    y = x * z + y + (z * z - y) + (y + (z + z));
+    y = (((x * z) + y) + ((z * z) - y)) + (y + (z + z));
+
+    c = (y - c) * (a + d) * c * z;
+    c = (((y - c) * (a + d)) * c) * z;
+
+    c = d / a * d * d + a / d * b - (b / b + a);
+    c = ((((d / a) * d) * d) + ((a / d) * b)) - ((b / b) + a);
+
+    a = y - x + (x / z * (z * (z + z) + x) / y) - x;
+    a = ((y - x) + ((x / (z * ((z * (z + z)) + x))) / y)) - x;
+
+    z = z + d * z / z + a;
+    z = z + ((d * z) / z) + a;
+
+    a = b % y % a - z % d;
+    a = ((b % y) % a) - (z % d);
+
+    c = (a + z / y) * (x % ((c - x) * z) - (d - y));
+    c = (a + z / y) * (x % ((c - x) * z) - (d - y));
+
+    e = 1 + 20 + 4;
+    e = ((1) + (20)) + 4;
+
+    e = abc + 203 * def / 124;
+    e = ((abc) + (((203) * (def)) / (124)));
+}

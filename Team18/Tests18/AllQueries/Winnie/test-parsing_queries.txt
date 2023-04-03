@@ -1,0 +1,170 @@
+1 - valid keyword synonym one line with no clauses
+stmt such;Select such
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+5000
+2 - valid keyword synonym one line with one clause
+stmt such;assign pattern;Select such such that Follows(such, pattern)
+
+1, 2, 6, 9
+5000
+3 - valid keyword synonym one line without space in clause
+stmt such;assign pattern;Select such such that Follows(such,pattern)
+
+1, 2, 6, 9
+5000
+4 - valid keyword synonym one line with one clause
+stmt such,assign,pattern;Select such such that Follows(such, pattern)
+
+1, 2, 3, 5, 6, 9
+5000
+5 - valid keyword synonym weird line break with one clause
+stmt
+such;assign pattern;Select such such that Follows(such, pattern)
+1, 2, 6, 9
+5000
+6 - valid keyword synonym with pattern bracketed
+stmt such;assign pattern;Select such pattern pattern(_,"((x))")
+
+none
+5000
+7 - valid keyword synonym two lines with no clauses
+stmt Select;
+Select Select
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+5000
+8 - valid keyword synonym two lines without space in clause
+stmt such;assign pattern;
+Select such such that Follows(such,pattern)
+1, 2, 6, 9
+5000
+9 - valid keyword synonym two lines without space before pattern
+stmt pattern; assign such;
+Select such pattern such(_, _)
+1, 2, 3, 5, 7, 8, 9, 10
+5000
+10 - valid keyword synonym two lines without space before pattern
+assign pattern; variable such;
+Select such pattern pattern(such, _)
+x, z, i, y
+5000
+11 - valid keyword synonym two lines
+stmt Follows; assign such, that; variable pattern;
+Select such such that Follows(Follows, that) pattern that (pattern, _)
+1, 2, 3, 5, 7, 8, 9, 10
+5000
+12 - invalid entity due to capitalisation
+Procedure p;
+Select p
+SyntaxError
+5000
+13 - invalid select due to non-capitalised s
+procedure p;
+select p
+SyntaxError
+5000
+14 - invalid synonym
+procedure 12abc;
+Select 12abc
+SyntaxError
+5000
+15 - invalid repeated synonym
+stmt s, s;
+Select s
+SemanticError
+5000
+16 - valid synonym with different capitalisation
+stmt s; stmt S;
+Select S
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+5000
+17 - check case sensitivity
+stmt s; assign S;
+Select s pattern S(_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+5000
+18 - invalid declaration without semicolon
+stmt s
+Select s
+SyntaxError
+5000
+19 - invalid select with semicolon
+stmt s;
+Select s;
+SyntaxError
+5000
+20 - invalid such that without space
+stmt s; assign a
+Select s suchthat Follows(s, a)
+SyntaxError
+5000
+21 - valid such that with arbitrary spaces
+stmt  s;		assign a		;
+  Select s such			   that      Follows		(  s,a)
+1, 2, 6, 9
+5000
+22 - invalid such with upper case
+stmt s; assign a;
+Select s Such that Follows(s,a)
+SyntaxError
+5000
+23 - invalid Follows with lower case
+stmt s; assign a;
+Select s such that follows(s,a)
+SyntaxError
+5000
+24 - invalid Follows* with space
+stmt s; assign a;
+Select s such that Follows *(s,a)
+SyntaxError
+5000
+25 - invalid pattern without factor
+stmt s; assign a;
+Select s pattern a(_, _""_)
+SyntaxError
+5000
+26 - invalid pattern without quotes
+stmt s; assign a;
+Select a pattern a(_, _x_)
+SyntaxError
+5000
+27 - invalid pattern without quotes and factor
+stmt s; assign a;
+Select a pattern a(_, __)
+SyntaxError
+5000
+28 - invalid pattern missing underscore
+stmt s; assign a;
+Select s pattern a(_, _"x")
+SyntaxError
+5000
+29 - invalid capitalised pattern
+stmt s; assign a;
+Select s Pattern a(_, _)
+SyntaxError
+5000
+30 - invalid pattern without syn-assign
+stmt s; assign a;
+Select s pattern (_, _)
+SyntaxError
+5000
+31 - invalid pattern with uninitialised synonym
+stmt s; assign a; variable v;
+Select s pattern a(x, _)
+SemanticError
+5000
+32 - invalid pattern with additional brackets
+stmt s; assign a; variable v;
+Select s pattern s((_,_))
+SyntaxError
+5000
+33 - invalid pattern missing second parameter
+stmt s; assign a; variable v;
+Select s pattern a("x")
+SyntaxError
+5000
+34 - invalid such that missing relation ref
+stmt s; assign a; variable v;
+Select s such that pattern a(_,_)
+SyntaxError
+5000

@@ -1,0 +1,105 @@
+1 - Select assigns
+assign as;
+Select as
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+2 - Select variables
+variable v;
+Select v
+a, b, c, d, e, x, y, z, abc, def
+5000
+3 - Select constants
+constant c;
+Select c
+1, 20, 4, 203, 124
+5000
+3 - Pattern name wc
+assign as;
+Select as pattern as ("a", _)
+1, 2, 9, 10, 13, 14
+5000
+4 - Pattern name symbol, true
+assign as;
+Select as pattern as ("a", _"z"_)
+9, 10, 13, 14
+5000
+5 - Pattern name symbol, false
+assign as;
+Select as pattern as ("a", _"l"_)
+none
+5000
+6 - Pattern var symbol, true
+assign as; variable v;
+Select as pattern as (v, _"a"_)
+1, 2, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16
+5000
+7 - Pattern var symbol, true
+assign as; variable v;
+Select v pattern as (v, _"a"_)
+a, c, z
+5000
+8 - Pattern var symbol, false
+assign as; variable v;
+Select as pattern as (v, _"0"_)
+none
+5000
+9 - Pattern var wc
+assign as; variable v;
+Select as pattern as (v, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+10 - Pattern var wc
+assign as; variable v;
+Select v pattern as (v, _)
+a, c, e, y, z
+5000
+11 - Pattern wc wc
+assign as;
+Select as pattern as (_, _)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+12 - Pattern wc symbol, true
+assign as;
+Select as pattern as (_, _"a"_)
+1, 2, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16
+5000
+13 - Pattern wc symbol, false
+assign as;
+Select as pattern as (_, _"f"_)
+none
+5000
+14 - Unrelated, true
+assign as, a1;
+Select as pattern a1 ("a", _"c"_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+15 - Unrelated, false
+assign as, a1;
+Select as pattern a1 ("z", _"c"_)
+none
+5000
+16 - Unrelated, true
+assign as; variable v, v1;
+Select v pattern as (v1, _)
+a, b, c, d, e, x, y, z, abc, def
+5000
+17 - Unrelated, false
+assign as; variable v, v1;
+Select v pattern as (v1, _"t"_)
+none
+5000
+18 - Pattern name constant
+assign as;
+Select as pattern as ("e", _"20"_)
+17, 18
+5000
+19 - Pattern var constant
+assign as; variable v;
+Select as pattern as (v, _"4"_)
+17, 18
+5000
+20 - Pattern wc constant
+assign as;
+Select as pattern as (_, _"1"_)
+17, 18
+5000
