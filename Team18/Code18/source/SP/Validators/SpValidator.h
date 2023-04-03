@@ -33,8 +33,9 @@ class SpValidator {
   void validateWhile();
   void validateIf();
   void validateCondExpr();
-  void checkValidBraces(std::string errorMessage, bool isOpenBrace = true);
-  void checkValidBrackets(std::string errorMessage, bool isOpenBracket = true);
+  void checkValidOpenBraces(std::string errorMessage);
+  void checkValidCloseBraces(std::string errorMessage);
+  void checkValidCloseBrackets(std::string errorMessage);
 
  public:
   explicit SpValidator(Stream<Token> tokens);
