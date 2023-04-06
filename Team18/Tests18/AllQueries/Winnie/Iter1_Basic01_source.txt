@@ -1,9 +1,0 @@
-procedure Megatron {
-    read x;
-    print x;
-    read xxXxx;
-    read yyYyyY;
-    print xxXxx;
-    read y;
-    x = 10 + x - xxXxx * yyYyyY;
-}

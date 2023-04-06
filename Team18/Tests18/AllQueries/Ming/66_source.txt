@@ -1,7 +1,0 @@
-procedure AfricanCountries { while (Congo != 1) {
-    if (SouthAfrica < 2) then {
-        call Antartica;
-        Guinea = 3; } 
-    else { read Mali;
-        print Senegal; }}}
-procedure Antartica { iceberg = 4; }
